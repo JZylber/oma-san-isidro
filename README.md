@@ -1,3 +1,5 @@
+# Página Web OMA San Isidro
+
 Este es un proyecto sin fines de lucro con el objetivo de modernizar la página de web de la secretaría regional adjunta buenos aires norte de la olimpíada matemática.
 
 ## Iniciando
