@@ -24,7 +24,7 @@ export default function Home() {
       <News></News>
     </section>
     <section className={styles.section}>
-      <h3> FAQ </h3>
+      <h3> Preguntas Frecuentes </h3>
       <Faq></Faq>
     </section>
     </main>

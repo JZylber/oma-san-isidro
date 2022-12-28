@@ -1,0 +1,25 @@
+.container {
+    box-sizing: border-box;
+    margin-top: 16px;
+    margin-bottom: 16px;
+
+    width: 299px;
+    height: 74px;
+
+    box-shadow: 0px 4px black;
+
+    background: #D9F6FC;
+    border: 2px solid #000000;
+    border-radius: 9px;
+
+    font-family: 'Unbounded';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 19px;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
