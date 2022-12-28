@@ -1,0 +1,52 @@
+.title {
+    position: relative;
+    height: 233px;
+    width: 306px;
+}
+
+.title h1 {
+    margin: 0%;
+
+    position: absolute;
+    width: 300px;
+    height: 80px;
+
+    font-family: 'Unbounded';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 113px;
+    line-height: 140px;
+}
+
+.title h2 {
+    margin: 0%;
+
+    position: absolute;
+    top: 104px;
+    left: 3px;
+    width: 300px;
+    height: 80px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 66px;
+    line-height: 80px;
+    letter-spacing: -0.035em;
+    text-transform: capitalize;
+}
+.title p {
+    margin: 0%;
+
+    position: absolute;
+    top: 179px;
+    left: 10px;
+    width: 293px;
+    height: 54px;
+    
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    }
