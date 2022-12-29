@@ -1,7 +1,13 @@
+@use '../../styles/shared.scss' as shared;
+
 .container {
-    border: 2px solid #000000;
+    border: 2px solid shared.$black;
     border-radius: 9px;
     text-align: left;
 
     padding: 16px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
