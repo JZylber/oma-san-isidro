@@ -1,4 +1,4 @@
-import styles from './styles/NewsItem.module.css'
+import styles from './NewsItem.module.scss'
 
 interface NewsItemProps {
     content: string

@@ -1,4 +1,4 @@
-import styles from './styles/FAQItem.module.css'
+import styles from './FAQItem.module.scss'
 
 interface FaqItemProps{
     question : string,

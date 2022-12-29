@@ -6,7 +6,7 @@
 .section {
     width: 80%;
 }
-.section h3 {
+.sectionTitle {
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 400;

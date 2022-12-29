@@ -1,5 +1,5 @@
 import FaqItem from './FaqItem'
-import styles from './styles/FAQ.module.css'
+import styles from './FAQ.module.scss'
 
 export default function Faq(){
     return(
