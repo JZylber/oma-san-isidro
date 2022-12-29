@@ -19,5 +19,9 @@
     "react-dom": "18.2.0",
     "sass": "^1.57.1",
     "typescript": "4.9.4"
+  },
+  "devDependencies": {
+    "@svgr/core": "^6.5.1",
+    "@svgr/webpack": "^6.5.1"
   }
 }

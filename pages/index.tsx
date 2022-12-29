@@ -12,16 +12,16 @@ const Home: NextPage = () => {
     <Head>
         <title>OMA San Isidro</title>
     </Head>
-    <NavBar></NavBar>
+    <NavBar/>
     <main className={styles.wrapper}>
-    <Title></Title>
+    <Title/>
     <section className={styles.section}>
       <h3 className={styles.sectionTitle}>Novedades</h3>
-      <News></News>
+      <News/>
     </section>
     <section className={styles.section}>
       <h3 className={styles.sectionTitle}>Preguntas Frecuentes</h3>
-      <Faq></Faq>
+      <Faq/>
     </section>
     </main>
     <footer>
