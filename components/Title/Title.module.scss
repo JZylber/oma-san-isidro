@@ -1,35 +1,35 @@
 @use '../../styles/shared.scss' as shared;
 
 .title {
-    margin-top: shared.$spacing * 6;
-    margin-bottom: shared.$spacing * 8;
+    margin-top: shared.$mobile-spacing * 6;
+    margin-bottom: shared.$mobile-spacing * 8;
 
     position: relative;
 
-    height: shared.$spacing * 20;
+    height: shared.$mobile-spacing * 20;
     width: auto;
     @media (min-width:1025px) {
         grid-row: 2/3;
         grid-column: 1/6 ;
-        margin-top: shared.$spacing * 4;
-        margin-bottom: shared.$spacing * 12;
-        height: shared.$spacing * 46.375;
+        margin-top: shared.$desktop-spacing * 4;
+        margin-bottom: shared.$desktop-spacing * 12;
+        height: shared.$desktop-spacing * 46.375;
     }
 }
 
 .title h1 {
 
     position: absolute;
-    top: shared.$spacing * -6;
+    top: shared.$mobile-spacing * -6;
 
     font-family: 'Unbounded';
     font-style: normal;
     font-weight: 400;
-    font-size: shared.$spacing * 14.125;
-    line-height: shared.$spacing * 17.5;
+    font-size: shared.$mobile-spacing * 14.125;
+    line-height: shared.$mobile-spacing * 17.5;
     @media (min-width:1025px) {
-        font-size: shared.$spacing * 25.875;
-        line-height: shared.$spacing * 32.125;
+        font-size: shared.$desktop-spacing * 25.875;
+        line-height: shared.$desktop-spacing * 32.125;
         top: 0;
     }
 }
@@ -39,38 +39,38 @@
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 400;
-    font-size: shared.$spacing * 8.25;
-    line-height: shared.$spacing * 10.05625;
+    font-size: shared.$mobile-spacing * 8.25;
+    line-height: shared.$mobile-spacing * 10.05625;
     letter-spacing: -0.04em;
     text-transform: capitalize;
 
     position: absolute;
-    width: 37.5 * shared.$spacing;
-    height: 10 * shared.$spacing;
-    top:  7 * shared.$spacing;
+    width: 37.5 * shared.$mobile-spacing;
+    height: 10 * shared.$mobile-spacing;
+    top:  7 * shared.$mobile-spacing;
 
     @media (min-width:1025px) {
-        font-size: shared.$spacing * 15.375;
-        line-height: shared.$spacing * 18.75;
-        top:  22.875 * shared.$spacing;
-        width: 71 * shared.$spacing;
+        font-size: shared.$desktop-spacing * 15.375;
+        line-height: shared.$desktop-spacing * 18.75;
+        top:  22.875 * shared.$desktop-spacing;
+        width: 71 * shared.$desktop-spacing;
     }
 }
 .title p {
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 400;
-    font-size: shared.$spacing * 1.625;
-    line-height: shared.$spacing * 2;
+    font-size: shared.$mobile-spacing * 1.625;
+    line-height: shared.$mobile-spacing * 2;
 
     position: absolute;
-    top:  16.375 * shared.$spacing;
-    left: 0.5*shared.$spacing;
-    width: 36.625 * shared.$spacing;
+    top:  16.375 * shared.$mobile-spacing;
+    left: 0.5*shared.$mobile-spacing;
+    width: 36.625 * shared.$mobile-spacing;
     @media (min-width:1025px) {
-        font-size: shared.$spacing * 3.125;
-        line-height: shared.$spacing * 4;
-        top:  39.625 * shared.$spacing;
+        font-size: shared.$desktop-spacing * 3.125;
+        line-height: shared.$desktop-spacing * 4;
+        top:  39.625 * shared.$desktop-spacing;
         left: 0;
         width: 100%;
     }

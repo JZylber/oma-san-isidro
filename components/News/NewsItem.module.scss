@@ -2,12 +2,12 @@
 
 .container {
     box-sizing: border-box;
-    margin-top: 2*shared.$spacing;
-    margin-bottom: 3*shared.$spacing;
+    margin-top: 2*shared.$mobile-spacing;
+    margin-bottom: 3*shared.$mobile-spacing;
 
-    height: 9.25*shared.$spacing;
+    height: 9.25*shared.$mobile-spacing;
 
-    box-shadow: 0px shared.$spacing black;
+    box-shadow: 0px shared.$mobile-spacing black;
 
     background: shared.$light-blue;
     border: 2px solid #000000;
@@ -16,8 +16,8 @@
     font-family: 'Unbounded';
     font-style: normal;
     font-weight: 500;
-    font-size: 1.875*shared.$spacing;
-    line-height: 2.375*shared.$spacing;
+    font-size: 1.875*shared.$mobile-spacing;
+    line-height: 2.375*shared.$mobile-spacing;
     text-align: center;
 
     display: flex;

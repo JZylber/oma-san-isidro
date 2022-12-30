@@ -2,20 +2,20 @@
 
 .item {
     display: block;
-    max-width: 37.5 * shared.$spacing;
+    max-width: 37.5 * shared.$mobile-spacing;
 }
 .item:not(:last-child){
-    margin-bottom: 3*shared.$spacing;
+    margin-bottom: 3*shared.$mobile-spacing;
 }
 
 .item h3{
     font-family: 'Unbounded';
     font-style: normal;
     font-weight: 500;
-    font-size: 1.875*shared.$spacing;
-    line-height: 2.375*shared.$spacing;
+    font-size: 1.875*shared.$mobile-spacing;
+    line-height: 2.375*shared.$mobile-spacing;
 
-    margin-bottom: shared.$spacing;
+    margin-bottom: shared.$mobile-spacing;
 
     display: inline-block;
 }
