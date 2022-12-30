@@ -1,0 +1,61 @@
+@use '../../styles/shared.scss' as shared;
+
+.container  {
+    width: 100%;
+
+    hr {background-color: shared.$black;
+    border-width: 1px;}
+
+    h4{
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 1.625 * shared.$mobile-spacing;
+        line-height: 2 * shared.$mobile-spacing;
+        margin-bottom: 0.625 * shared.$mobile-spacing;
+    }
+
+    p{
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 1.625 * shared.$mobile-spacing;
+        line-height: 2 * shared.$mobile-spacing;
+    }
+    .links {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 2.5 * shared.$mobile-spacing;
+        margin-bottom: 3 * shared.$mobile-spacing;
+        ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+        ul li {
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 1.625 * shared.$mobile-spacing;
+            line-height: 2 * shared.$mobile-spacing;
+            text-decoration-line: underline;
+            color: shared.$black;
+        }
+        a:link, .links a:visited {
+            color: shared.$black;
+        }
+    }
+    .credits {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 1.625 * shared.$mobile-spacing;
+        line-height: 1.75 * shared.$mobile-spacing;
+    
+        text-align: center;
+    
+        margin-top: 2 * shared.$mobile-spacing;
+        margin-bottom: 2 * shared.$mobile-spacing;
+    }
+}

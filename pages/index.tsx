@@ -6,6 +6,7 @@ import News from '../components/News/News';
 import Title from '../components/Title/Title';
 import styles from './styles/Home.module.scss'
 import MainNandu from '../img/mainÑandu.svg'
+import Footer from '../components/Footer/Footer';
 
 const Home: NextPage = () => {
   return (
@@ -25,10 +26,8 @@ const Home: NextPage = () => {
       <h3 className={styles.sectionTitle}>Preguntas Frecuentes</h3>
       <Faq/>
     </section>
+    <Footer></Footer>
     </main>
-    <footer>
-
-    </footer>
     </>
   )
 }
