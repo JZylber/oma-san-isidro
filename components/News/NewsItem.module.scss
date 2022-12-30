@@ -1,22 +1,23 @@
+@use '../../styles/shared.scss' as shared;
+
 .container {
     box-sizing: border-box;
-    margin-top: 16px;
-    margin-bottom: 16px;
+    margin-top: 2*shared.$spacing;
+    margin-bottom: 3*shared.$spacing;
 
-    width: 300px;
-    height: 74px;
+    height: 9.25*shared.$spacing;
 
-    box-shadow: 0px 4px black;
+    box-shadow: 0px shared.$spacing black;
 
-    background: #D9F6FC;
+    background: shared.$light-blue;
     border: 2px solid #000000;
     border-radius: 9px;
 
     font-family: 'Unbounded';
     font-style: normal;
     font-weight: 500;
-    font-size: 15px;
-    line-height: 19px;
+    font-size: 1.875*shared.$spacing;
+    line-height: 2.375*shared.$spacing;
     text-align: center;
 
     display: flex;

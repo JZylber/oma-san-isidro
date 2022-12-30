@@ -1,52 +1,77 @@
+@use '../../styles/shared.scss' as shared;
+
 .title {
+    margin-top: shared.$spacing * 6;
+    margin-bottom: shared.$spacing * 8;
+
     position: relative;
-    height: 233px;
-    width: 306px;
+
+    height: shared.$spacing * 20;
+    width: auto;
+    @media (min-width:1025px) {
+        grid-row: 2/3;
+        grid-column: 1/6 ;
+        margin-top: shared.$spacing * 4;
+        margin-bottom: shared.$spacing * 12;
+        height: shared.$spacing * 46.375;
+    }
 }
 
 .title h1 {
-    margin: 0%;
 
     position: absolute;
-    width: 300px;
-    height: 80px;
+    top: shared.$spacing * -6;
 
     font-family: 'Unbounded';
     font-style: normal;
     font-weight: 400;
-    font-size: 113px;
-    line-height: 140px;
+    font-size: shared.$spacing * 14.125;
+    line-height: shared.$spacing * 17.5;
+    @media (min-width:1025px) {
+        font-size: shared.$spacing * 25.875;
+        line-height: shared.$spacing * 32.125;
+        top: 0;
+    }
 }
 
 .title h2 {
-    margin: 0%;
-
-    position: absolute;
-    top: 104px;
-    left: 3px;
-    width: 300px;
-    height: 80px;
 
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 400;
-    font-size: 66px;
-    line-height: 80px;
-    letter-spacing: -0.035em;
+    font-size: shared.$spacing * 8.25;
+    line-height: shared.$spacing * 10.05625;
+    letter-spacing: -0.04em;
     text-transform: capitalize;
+
+    position: absolute;
+    width: 37.5 * shared.$spacing;
+    height: 10 * shared.$spacing;
+    top:  7 * shared.$spacing;
+
+    @media (min-width:1025px) {
+        font-size: shared.$spacing * 15.375;
+        line-height: shared.$spacing * 18.75;
+        top:  22.875 * shared.$spacing;
+        width: 71 * shared.$spacing;
+    }
 }
 .title p {
-    margin: 0%;
-
-    position: absolute;
-    top: 179px;
-    left: 10px;
-    width: 293px;
-    height: 54px;
-    
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 400;
-    font-size: 13px;
-    line-height: 16px;
+    font-size: shared.$spacing * 1.625;
+    line-height: shared.$spacing * 2;
+
+    position: absolute;
+    top:  16.375 * shared.$spacing;
+    left: 0.5*shared.$spacing;
+    width: 36.625 * shared.$spacing;
+    @media (min-width:1025px) {
+        font-size: shared.$spacing * 3.125;
+        line-height: shared.$spacing * 4;
+        top:  39.625 * shared.$spacing;
+        left: 0;
+        width: 100%;
+    }
     }

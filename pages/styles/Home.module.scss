@@ -1,38 +1,50 @@
-.section {
-    margin-left: 10%;
-    margin-right: 10%;
+@use '../../styles/shared.scss' as shared;
+
+.main {
+    background-color: shared.$white;
+    margin-left: 5.5 * shared.$spacing;
+    margin-right: 5.5 * shared.$spacing;
+
+    @media (min-width:1025px) {
+        display: grid;
+        gap: 0 2.5 * shared.$spacing;
+        grid-template-columns: repeat(10,1fr);
+        grid-template-rows: 11*shared.$spacing 63*shared.$spacing 53*shared.$spacing max-content;
+    }
 }
+
 .sectionTitle {
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 2.5 * shared.$spacing;
+    line-height: 3*shared.$spacing;
     text-align: center;
+    margin-top: 7*shared.$spacing;
 }
-
-.topSection{
-    display: flex;
-    justify-content: space-between;;
-    margin-left: 10%;
-    margin-right: 10%;
-}
-
-.titleNews{
+.newsSection{
     @media (min-width:1025px) {
-        max-width: 50%;
-        margin-left: 0;
-    } 
-
+        grid-row: 3/4;
+        grid-column: 1/6 ;
+    }
+    
 }
 
+.FAQSection{
+    @media (min-width:1025px) {
+        grid-row: 4/5;
+        grid-column: 1/-1 ;
+    }
+    
+}
 .mainImage{
-    width: 560px;
-    height: 820px;
+    height: 102.5*shared.$spacing;
     display: none;
     @media (min-width:1025px) {
         max-width: 50%;
         display: block;
         overflow: visible;
+        grid-row: 2/4;
+        grid-column: 6/-1;
     } 
 }

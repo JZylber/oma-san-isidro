@@ -5,7 +5,9 @@
     border-radius: 9px;
     text-align: left;
 
-    padding: 16px;
+    margin-top: 2*shared.$spacing;
+
+    padding:  2*shared.$spacing;
 
     display: flex;
     flex-wrap: wrap;

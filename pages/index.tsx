@@ -13,19 +13,15 @@ const Home: NextPage = () => {
     <Head>
         <title>OMA San Isidro</title>
     </Head>
+    <main className={styles.main}>
     <NavBar/>
-    <main>
-    <div className={styles.topSection}>
-      <div className={styles.titleNews}>
-        <Title/>
-        <section>
-          <h3 className={styles.sectionTitle}>Novedades</h3>
-          <News/>
-        </section>
-      </div>
-      <MainNandu className={styles.mainImage}/>
-    </div>
-    <section className={styles.section}>
+    <Title/>
+    <section className={styles.newsSection}>
+      <h3 className={styles.sectionTitle}>Novedades</h3>
+      <News/>
+    </section>
+    <MainNandu className={styles.mainImage}/>
+    <section className={styles.FAQSection}>
       <h3 className={styles.sectionTitle}>Preguntas Frecuentes</h3>
       <Faq/>
     </section>

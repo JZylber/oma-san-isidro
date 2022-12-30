@@ -1,3 +1,8 @@
 $black: #000000;
 $light-blue: #D9F6FC;
 $white: #FEFDF3;
+
+$spacing: 100vh/106;
+@media (min-width:1025px) {
+    $spacing: 100vh/180;
+}

@@ -1,5 +1,6 @@
 @use 'shared.scss' as shared;
 
-body {
-    background-color: shared.$white;
+*{
+    margin: 0;
+    padding: 0;
 }
