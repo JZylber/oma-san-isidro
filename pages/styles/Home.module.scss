@@ -1,7 +1,6 @@
 @use '../../styles/shared.scss' as shared;
 
 .main {
-    background-color: shared.$white;
     padding-left: 5.5 * shared.$mobile-spacing;
     padding-right: 5.5 * shared.$mobile-spacing;
     @media (min-width:1025px) {
@@ -16,6 +15,7 @@
 }
 
 .pageLayout {
+    background-color: shared.$white;
     @media (min-width:1025px) {
         display: grid;
         gap: 0 2.5 * shared.$desktop-spacing;
