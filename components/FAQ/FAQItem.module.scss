@@ -3,9 +3,21 @@
 .item {
     display: block;
     max-width: 37.5 * shared.$mobile-spacing;
+    @media (min-width:1025px) {
+        justify-content: flex-start;
+        box-sizing: border-box;
+        max-width: 50%;
+        padding-top: 3*shared.$desktop-spacing;
+        padding-bottom: 3*shared.$desktop-spacing;
+        padding-left: 4*shared.$desktop-spacing;
+        padding-right: 4*shared.$desktop-spacing;
+    }
 }
 .item:not(:last-child){
     margin-bottom: 3*shared.$mobile-spacing;
+    @media (min-width:1025px) {
+        margin-bottom: 0;
+    }
 }
 
 .item h3{
@@ -18,16 +30,25 @@
     margin-bottom: shared.$mobile-spacing;
 
     display: inline-block;
+    @media (min-width:1025px) {
+        font-size: 3*shared.$desktop-spacing;
+        line-height: 3.75*shared.$desktop-spacing;
+        margin-bottom: 3*shared.$desktop-spacing;
+    }
 }
 .item p {
     font-family: 'Montserrat';
     
     font-style: normal;
     font-weight: 400;
-    font-size: 13px;
-    line-height: 16px;
+    font-size: 1.625*shared.$mobile-spacing;
+    line-height: 2*shared.$mobile-spacing;
 
     margin: 0;
     display: block;
+    @media (min-width:1025px) {
+        font-size: 2.5*shared.$desktop-spacing;
+        line-height: 3.0625*shared.$desktop-spacing;
+    }
 
 }
