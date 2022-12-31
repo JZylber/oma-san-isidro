@@ -109,7 +109,7 @@ const MobileMenu= ({closeMenu} : mobileMenuProps) => {
         return(
         <div className={`${styles.item} ${item.selected ? styles.selected : ""}`}>
             <div className={styles.mainItem} onClick={() => selectMainItem(item.text)}>
-                <h4>{item.text}</h4>
+                <span>{item.text}</span>
                 <MenuArrow/>
             </div>
             <ul>

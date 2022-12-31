@@ -32,7 +32,6 @@
         justify-content: flex-start;
         .item{
             border-top: 1px solid shared.$black;
-            border-bottom: 1px solid shared.$black;
             padding-left: 5.875*shared.$mobile-spacing;
             padding-right: 5.875*shared.$mobile-spacing;
             .mainItem{
@@ -71,6 +70,9 @@
                 font-weight: 500;
                 /*text-decoration: underline;*/
             }
+        }
+        .item:last-child{
+            border-bottom: 1px solid shared.$black;
         }
         .selected{
             background-color: shared.$white;
