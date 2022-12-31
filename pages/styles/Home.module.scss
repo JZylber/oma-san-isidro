@@ -21,8 +21,8 @@
         gap: 0 2.5 * shared.$desktop-spacing;
         grid-template-columns: repeat(10,1fr);
         grid-template-rows: max-content max-content;
-        padding-left:  20 * shared.$desktop-spacing;
-        padding-right: 20 * shared.$desktop-spacing;
+        padding-left:  20 * shared.$desktopXspacing;
+        padding-right: 20 * shared.$desktopXspacing;
        
     }
 }
