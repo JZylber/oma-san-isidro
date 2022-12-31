@@ -62,11 +62,14 @@
             ul li {
                 font-family: 'Unbounded';
                 font-style: normal;
-                font-weight: 300;
+                font-weight: 100;
                 font-size: shared.$mobile-spacing * 2.5;
                 line-height: shared.$mobile-spacing * 6;
 
                 letter-spacing: -0.035em;
+            }
+            .selectedSubItem {
+                font-weight: 500;
             }
         }
         .selected{

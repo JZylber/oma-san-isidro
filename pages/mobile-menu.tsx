@@ -14,10 +14,11 @@ interface menuItem{
 
 const MobileMenu: NextPage = () => {
     const router = useRouter()
+    //Array con la información del menu
     const menuHierarchy : Array<menuItem> = [
         {text: "Inicio",link:"/",selected : false,subItems:[]},
         {text: "Oma",link:null,selected : false,subItems:[
-            {text: "Autorización",link:null,selected : false,subItems:[]},
+            {text: "Autorización",link:'/oma/autorizacion',selected : false,subItems:[]},
             {text: "Inscripción",link:null,selected : false,subItems:[]},
             {text: "Reglamento",link:null,selected : false,subItems:[]},
             {text: "Sedes",link:null,selected : false,subItems:[]},
@@ -25,7 +26,7 @@ const MobileMenu: NextPage = () => {
             {text: "Problemas",link:null,selected : false,subItems:[]}
         ]},
         {text: "Ñandú",link:null,selected : false,subItems:[
-            {text: "Autorización",link:null,selected : false,subItems:[]},
+            {text: "Autorización",link:'/nandu/autorizacion',selected : false,subItems:[]},
             {text: "Inscripción",link:null,selected : false,subItems:[]},
             {text: "Reglamento",link:null,selected : false,subItems:[]},
             {text: "Sedes",link:null,selected : false,subItems:[]},
@@ -36,6 +37,7 @@ const MobileMenu: NextPage = () => {
     ]
     const [hierarchy,setHierarchy] = useState(menuHierarchy);
 
+    //Rutina para ir al link de un item correspondiente o abrir/cerrar su submenu
     const selectMainItem = (name : string) => {
         let newHierarchy : Array<menuItem> = hierarchy.map((item) => {
             if (item.text == name){
@@ -53,7 +55,21 @@ const MobileMenu: NextPage = () => {
         })
         setHierarchy(newHierarchy);
     }
+    //Rutina para ir al link de un subitem correspondiente
+    const selectSubItem = (mainItem: string, subItem: string) => {
+        let item : menuItem | undefined = hierarchy.find((menuItem) => menuItem.text == mainItem);
+        if(item){
+            let selectedSubitem : menuItem | undefined = item.subItems.find((menuSubItem) => menuSubItem.text == subItem)
+            if(selectedSubitem){
+                if(selectedSubitem.link){
+                    router.push(selectedSubitem.link)
+                }
+            }
+        }
+        
+    } 
 
+    //Renderizado de cada item del menu
     const renderMenuItem = (item : menuItem) => {
         return(
         <div className={`${styles.item} ${item.selected ? styles.selected : ""}`}>
@@ -63,7 +79,7 @@ const MobileMenu: NextPage = () => {
             </div>
             <ul>
                 {item.subItems.map((subitem) => {
-                    return(<li>{subitem.text}</li>)
+                    return(<li className={`${subitem.selected ? styles.selectedSubItem : ""}`}  onClick={() => selectSubItem(item.text,subitem.text)}>{subitem.text}</li>)
                 })}
             </ul>
         </div>
