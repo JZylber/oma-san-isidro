@@ -1,11 +1,12 @@
 import { NextPage } from "next";
-import NavBarPage from "../../components/NavBar/Navbar";
+import NavBar from "../../components/NavBar/Navbar";
 
 const OMAAuthorization : NextPage = () => {
     return(
-        <NavBarPage>
+        <>
+        <NavBar/>
         <h1>Autorización OMA</h1>
-        </NavBarPage>)
+        </>)
 }
 
 export default OMAAuthorization
