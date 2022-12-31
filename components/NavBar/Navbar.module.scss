@@ -10,13 +10,11 @@
     padding-top: shared.$mobile-spacing * 3;
     min-height: shared.$mobile-spacing * 4;
     @media (min-width:1025px) {
-        margin-top: 0;
+        grid-row: 1/2;
+        grid-column: 1/-1;
         display: grid;
-        gap: 0 2.5 * shared.$desktop-spacing;
-        grid-template-columns: repeat(10,1fr);
-        grid-template-rows: 1fr;
-        padding-left:  20 * shared.$desktop-spacing;
-        padding-right: 20 * shared.$desktop-spacing;
+        grid-template-columns: subgrid;
+        grid-template-rows: max-content;
     } 
     
 }

@@ -1,20 +1,29 @@
 import Head from 'next/head'
 import type { NextPage } from "next";
 import Faq from '../components/FAQ/Faq';
-import NavBarPage from '../components/NavBar/Navbar';
+import NavBar from '../components/NavBar/Navbar';
 import News from '../components/News/News';
 import Title from '../components/Title/Title';
 import styles from './styles/Home.module.scss'
 import MainNandu from '../img/mainÑandu.svg'
 import Footer from '../components/Footer/Footer';
+import { useState } from 'react';
 
 const Home: NextPage = () => {
+  let [showContent,setshowContent] = useState(true);
+
+  const togglePageContent = () => {
+    setshowContent(!showContent);
+  }
+
   return (
     <>
     <Head>
         <title>OMA San Isidro</title>
     </Head>
-    <NavBarPage>
+    <div className={styles.pageLayout}>
+    <NavBar togglePageContent={togglePageContent}/>
+    {showContent && 
     <main className={styles.main}>
     <Title/>
     <section className={styles.newsSection}>
@@ -28,7 +37,8 @@ const Home: NextPage = () => {
     </section>
     <Footer></Footer>
     </main>
-    </NavBarPage>
+    }
+    </div>
     </>
   )
 }
