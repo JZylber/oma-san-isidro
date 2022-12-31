@@ -1,0 +1,82 @@
+@use '../../styles/shared.scss' as shared;
+
+.menu {
+    background-color: shared.$light-blue;
+    height: 100vh;
+    .top{
+        padding-top: 3*shared.$mobile-spacing;
+        margin-left: 5.875*shared.$mobile-spacing;
+        margin-right: 5.875*shared.$mobile-spacing;
+    }
+    h1 {
+        font-family: 'Unbounded';
+        font-style: normal;
+        font-weight: 400;
+        font-size: shared.$mobile-spacing * 14.125;
+        line-height: shared.$mobile-spacing * 17.5;
+    }
+    h2 {
+
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 400;
+        font-size: shared.$mobile-spacing * 8.25;
+        line-height: shared.$mobile-spacing * 10.05625;
+        letter-spacing: -0.04em;
+        transform: translateY(shared.$mobile-spacing * -4.5);
+    }
+    .menuItems{
+        width: 100%;
+        margin-top: 5*shared.$mobile-spacing;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        .item{
+            border-top: 1px solid shared.$black;
+            border-bottom: 1px solid shared.$black;
+            padding-left: 5.875*shared.$mobile-spacing;
+            padding-right: 5.875*shared.$mobile-spacing;
+            .mainItem{
+                font-family: 'Unbounded';
+                font-style: normal;
+                font-weight: 400;
+                font-size: shared.$mobile-spacing * 4.5;
+                line-height: shared.$mobile-spacing * 6.5;
+
+                letter-spacing: -0.035em;
+
+                padding-top: shared.$mobile-spacing * 2;
+                padding-bottom: shared.$mobile-spacing * 3;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            ul {
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                display: none;
+                padding-bottom: shared.$mobile-spacing * 3;
+            }
+            ul li {
+                font-family: 'Unbounded';
+                font-style: normal;
+                font-weight: 300;
+                font-size: shared.$mobile-spacing * 2.5;
+                line-height: shared.$mobile-spacing * 6;
+
+                letter-spacing: -0.035em;
+            }
+        }
+        .selected{
+            background-color: shared.$white;
+            ul {
+                display: block;
+            }
+            svg {
+                transform: rotate(90deg);
+            }
+        }
+    }
+}
