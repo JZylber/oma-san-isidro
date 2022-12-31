@@ -15,6 +15,8 @@
         display: grid;
         grid-template-columns: subgrid;
         grid-template-rows: max-content;
+        padding-top: shared.$desktop-spacing * 3;
+        min-height: shared.$desktop-spacing * 4;
     } 
     
 }

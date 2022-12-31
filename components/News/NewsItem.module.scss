@@ -32,6 +32,10 @@
         line-height: 3.75 *shared.$desktop-spacing;
 
         height: 10.375 *shared.$desktop-spacing;
+
+        margin-top: 2*shared.$desktop-spacing;
+        margin-bottom: 3*shared.$desktop-spacing;
+        box-shadow: 0px shared.$desktop-spacing black;
     }
     .arrow {
         display: none;
