@@ -22,5 +22,7 @@
         padding-left: 0;
         padding-right: 0;
         justify-content: flex-start;
+        margin-top: 1.5*shared.$desktop-spacing;
+        margin-bottom: 20*shared.$mobile-spacing;
     }
 }

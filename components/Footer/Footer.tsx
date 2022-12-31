@@ -4,8 +4,10 @@ import OMALogo from '../../img/logoOMA.svg';
 const Footer = () => {
     return(
         <footer className={styles.container}>
-            <h4>Secretaria Regional</h4>
-            <p>Elena Guillé</p>
+            <div className={styles.secretary}>
+                <h4>Secretaria Regional</h4>
+                <span>Elena Guillé</span>
+            </div>
             <div className={styles.links}>
             <ul>
                 <li><a href='https://www.oma.org.ar/'>Sitio principal de OMA</a></li>
@@ -13,9 +15,8 @@ const Footer = () => {
                 <li><a>Contacto</a></li>
                 <li><a>Mapa del sitio</a></li>
             </ul>
-            <OMALogo/>
+            <OMALogo className={styles.logo}/>
             </div>
-            <hr/>
             <div className={styles.credits}>
                 <p>© 2022 Joaquín Aldrey y Julián Zylber.</p>
                 <p>Todos los derechos reservados.</p>
