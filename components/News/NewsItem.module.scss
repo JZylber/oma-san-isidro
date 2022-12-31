@@ -18,9 +18,26 @@
     font-weight: 500;
     font-size: 1.875*shared.$mobile-spacing;
     line-height: 2.375*shared.$mobile-spacing;
-    text-align: center;
 
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    span {
+        width: 100%;
+    }
+
+    @media (min-width:1025px) {
+        font-size: 3 * shared.$desktop-spacing;
+        line-height: 3.75 *shared.$desktop-spacing;
+
+        height: 10.375 *shared.$desktop-spacing;
+    }
+    .arrow {
+        display: none;
+        @media (min-width:1025px) {
+            display: block;
+            transform: translateX(-3 * shared.$desktop-spacing);
+        }
+    }
 }

@@ -1,4 +1,5 @@
-import styles from './NewsItem.module.scss'
+import styles from './NewsItem.module.scss';
+import NewsArrow from '../../img/newsArrow.svg';
 
 interface NewsItemProps {
     content: string
@@ -6,6 +7,9 @@ interface NewsItemProps {
 
 export default function NewsItem(props:NewsItemProps){
     return(
-        <div className={styles.container}>{props.content}</div>
+        <div className={styles.container}>
+            <span>{props.content}</span>
+            <NewsArrow className={styles.arrow}/>
+        </div>
     )
 }
