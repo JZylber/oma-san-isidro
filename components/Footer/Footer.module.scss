@@ -2,7 +2,6 @@
 
 .container  {
     width: 100%;
-
     hr {background-color: shared.$black;
     border-width: 1px;}
 
@@ -58,4 +57,8 @@
         margin-top: 2 * shared.$mobile-spacing;
         margin-bottom: 2 * shared.$mobile-spacing;
     }
+    @media (min-width:1025px) {
+        grid-row: 5/6;
+        grid-column: 1/-1;
+    } 
 }

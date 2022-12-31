@@ -1,21 +1,23 @@
-import { NextPage } from "next";
-import X from '../img/x.svg';
-import MenuArrow from '../img/menuArrow.svg';
-import styles from './styles/mobile-menu.module.scss';
+import MenuArrow from '../../../img/menuArrow.svg';
+import styles from './mobile-menu.module.scss';
 import { useRouter } from 'next/router'
 import { useState } from "react";
 
-interface menuItem{
+type menuItem = {
     text: string,
     link: string | null,
     selected : boolean
     subItems: Array<menuItem>
 }
 
-const MobileMenu: NextPage = () => {
-    const router = useRouter()
+type mobileMenuProps = {
+    closeMenu : () => void
+}
+
+const MobileMenu= ({closeMenu} : mobileMenuProps) => {
+    const router = useRouter();
     //Array con la información del menu
-    const menuHierarchy : Array<menuItem> = [
+    let menuHierarchy : Array<menuItem> = [
         {text: "Inicio",link:"/",selected : false,subItems:[]},
         {text: "Oma",link:null,selected : false,subItems:[
             {text: "Autorización",link:'/oma/autorizacion',selected : false,subItems:[]},
@@ -35,15 +37,43 @@ const MobileMenu: NextPage = () => {
         ]},
         {text: "Internacional",link:"/",selected : false,subItems:[]},
     ]
-    const [hierarchy,setHierarchy] = useState(menuHierarchy);
+
+    //Rutina que refleja la página actual
+    const showCurrentPageSelected = (menuComponents : Array<menuItem>) => {
+        let currentRoute = router.pathname;
+        let newHierarchy : Array<menuItem> = menuComponents.map((item : menuItem) => {
+            let subitemSelected = item.subItems.find((subitem) => subitem.link == currentRoute);
+            if(subitemSelected){
+                let newItem : menuItem = {...item,selected: true};
+                newItem.subItems = newItem.subItems.map((subitem) => {
+                    if(subitem === subitemSelected){
+                        let newSubitem :  menuItem = {...subitem,selected:true};
+                        return newSubitem;
+                    } else {
+                        return subitem;
+                    }
+                })
+                return(newItem)
+            }else{
+                return item;
+            }
+        })
+        return newHierarchy;
+    }
+
+    const [hierarchy,setHierarchy] = useState(showCurrentPageSelected(menuHierarchy));
 
     //Rutina para ir al link de un item correspondiente o abrir/cerrar su submenu
     const selectMainItem = (name : string) => {
+        let currentRoute = router.pathname;
         let newHierarchy : Array<menuItem> = hierarchy.map((item) => {
             if (item.text == name){
                 if(item.link != null){
-                    router.push(item.link);
-                } 
+                    if(item.link == currentRoute){
+                        closeMenu();
+                    }else{
+                        router.push(item.link);}
+                }
                 let newItem : menuItem = item;
                 newItem.selected = !newItem.selected;
                 return(newItem);
@@ -57,12 +87,17 @@ const MobileMenu: NextPage = () => {
     }
     //Rutina para ir al link de un subitem correspondiente
     const selectSubItem = (mainItem: string, subItem: string) => {
+        let currentRoute = router.pathname;
         let item : menuItem | undefined = hierarchy.find((menuItem) => menuItem.text == mainItem);
         if(item){
             let selectedSubitem : menuItem | undefined = item.subItems.find((menuSubItem) => menuSubItem.text == subItem)
             if(selectedSubitem){
                 if(selectedSubitem.link){
-                    router.push(selectedSubitem.link)
+                    if(selectedSubitem.link == currentRoute){
+                        closeMenu();
+                    }else{
+                        router.push(selectedSubitem.link);
+                    }
                 }
             }
         }
@@ -90,7 +125,6 @@ const MobileMenu: NextPage = () => {
     return (
     <main className={styles.menu}>
         <div className={styles.top}>
-            <X onClick={() => router.back()}/>
             <h1>oma</h1>
             <h2>San Isidro</h2>
         </div>

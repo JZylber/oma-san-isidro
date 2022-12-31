@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import type { NextPage } from "next";
 import Faq from '../components/FAQ/Faq';
-import NavBar from '../components/NavBar/Navbar';
+import NavBarPage from '../components/NavBar/Navbar';
 import News from '../components/News/News';
 import Title from '../components/Title/Title';
 import styles from './styles/Home.module.scss'
@@ -14,8 +14,8 @@ const Home: NextPage = () => {
     <Head>
         <title>OMA San Isidro</title>
     </Head>
+    <NavBarPage>
     <main className={styles.main}>
-    <NavBar/>
     <Title/>
     <section className={styles.newsSection}>
       <h3 className={styles.sectionTitle}>Novedades</h3>
@@ -28,6 +28,7 @@ const Home: NextPage = () => {
     </section>
     <Footer></Footer>
     </main>
+    </NavBarPage>
     </>
   )
 }

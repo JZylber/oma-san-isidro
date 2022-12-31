@@ -1,16 +1,29 @@
 import styles from './Navbar.module.scss';
 import MenuIcon from '../../img/menuIcon.svg';
+import X from '../../img/x.svg';
 import NavBarItem from './NavBarItem';
-import Link from 'next/link';
+import { useState } from 'react';
+import MobileMenu from './MobileMenu/mobile-menu';
 
-export default function NavBar(){
+type NavProps = {
+    children: JSX.Element};
+
+export default function NavBarPage(props:NavProps){
+    let [openFullMenu,setOpenFullMenu] = useState(false);
+
+    const openCloseMenu = () => {
+        setOpenFullMenu(!openFullMenu)
+    }
     return(
-        <nav className={styles.bar}>
-            <Link href="/mobile-menu"><MenuIcon className={styles.icon}/></Link>
+        <>
+        <nav className={`${styles.bar} ${openFullMenu ? styles.fullMenu : ""}`}>
+            {openFullMenu?<X className={styles.icon} onClick={()=>openCloseMenu()}/>:<MenuIcon className={styles.icon} onClick={()=>openCloseMenu()}/>}
             <NavBarItem text='inicio' gridColumnStart={1}/>
             <NavBarItem text='oma' gridColumnStart={5}/>
             <NavBarItem text='ñandú' gridColumnStart={7}/>
             <NavBarItem text='internacional' gridColumnStart={9}/>
         </nav>
+        {openFullMenu?<MobileMenu closeMenu={openCloseMenu}/>:props.children}
+        </>
     )
 }

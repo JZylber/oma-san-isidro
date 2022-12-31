@@ -2,16 +2,16 @@
 
 .main {
     background-color: shared.$white;
-    margin-left: 5.5 * shared.$mobile-spacing;
-    margin-right: 5.5 * shared.$mobile-spacing;
+    padding-left: 5.5 * shared.$mobile-spacing;
+    padding-right: 5.5 * shared.$mobile-spacing;
 
     @media (min-width:1025px) {
         display: grid;
         gap: 0 2.5 * shared.$desktop-spacing;
         grid-template-columns: repeat(10,1fr);
-        grid-template-rows: 11*shared.$desktop-spacing 63*shared.$desktop-spacing 53*shared.$desktop-spacing max-content;
-        margin-left:  20 * shared.$desktop-spacing;
-        margin-right: 20 * shared.$desktop-spacing;
+        grid-template-rows: 11*shared.$desktop-spacing 63*shared.$desktop-spacing 53*shared.$desktop-spacing max-content max-content;
+        padding-left:  20 * shared.$desktop-spacing;
+        padding-right: 20 * shared.$desktop-spacing;
        
     }
 }

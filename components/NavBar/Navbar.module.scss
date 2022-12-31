@@ -1,22 +1,25 @@
 @use '../../styles/shared.scss' as shared;
 
 .icon {
-    margin-left: 0%;
+    padding-left: 5.5 * shared.$mobile-spacing;
     @media (min-width:1025px) {
        display: none;
     } 
 }
 .bar {
-    width: 100%;
-    margin-top: shared.$mobile-spacing * 3;
+    padding-top: shared.$mobile-spacing * 3;
     min-height: shared.$mobile-spacing * 4;
     @media (min-width:1025px) {
         margin-top: 0;
         display: grid;
-        grid-column: 1/-1;
-        grid-template-columns: subgrid;
+        gap: 0 2.5 * shared.$desktop-spacing;
+        grid-template-columns: repeat(10,1fr);
         grid-template-rows: 1fr;
+        padding-left:  20 * shared.$desktop-spacing;
+        padding-right: 20 * shared.$desktop-spacing;
     } 
     
 }
-
+.fullMenu {
+    background-color: shared.$light-blue;
+}
