@@ -9,10 +9,13 @@
         grid-row: 2/-1;
         grid-column: 1/-1;
         display: grid;
-        grid-template-columns: subgrid;
     }
-    @include shared.tablet-only{}
+    @include shared.tablet-only{
+        @include shared.tablet-columns;
+        /*Pending: tablet columns*/
+    }
     @include shared.desktop-only{
+        @include shared.desktop-columns;
         grid-template-rows: 63*shared.$desktop-spacing 53*shared.$desktop-spacing max-content max-content;
     }
 }
@@ -22,15 +25,13 @@
     @include shared.tablet-only{
         display: grid;
         column-gap: 2.5 * shared.$tabletXspacing;
-        grid-template-columns: repeat(8,1fr);
-        grid-template-rows: max-content max-content;
+        @include shared.tablet-columns;
         padding-left:  10.5 * shared.$tabletXspacing;
         padding-right: 10.5 * shared.$tabletXspacing;
     }
     @include shared.desktop-only {
         display: grid;
-        gap: 0 2.5 * shared.$desktop-spacing;
-        grid-template-columns: repeat(10,1fr);
+        @include shared.desktop-columns;
         grid-template-rows: max-content max-content;
         padding-left:  20 * shared.$desktopXspacing;
         padding-right: 20 * shared.$desktopXspacing;

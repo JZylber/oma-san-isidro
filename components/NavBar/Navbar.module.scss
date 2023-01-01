@@ -17,7 +17,7 @@
         grid-row: 1/2;
         grid-column: 1/-1;
         display: grid;
-        grid-template-columns: subgrid;
+        @include shared.tablet-columns;
         grid-template-rows: 1fr;
         padding-top: shared.$tabletYspacing * 3;
         min-height: shared.$tabletYspacing * 4;
@@ -26,7 +26,7 @@
         grid-row: 1/2;
         grid-column: 1/-1;
         display: grid;
-        grid-template-columns: subgrid;
+        @include shared.desktop-columns;
         grid-template-rows: 1fr;
         padding-top: shared.$desktop-spacing * 3;
         min-height: shared.$desktop-spacing * 4;
