@@ -54,12 +54,12 @@ $desktop-spacing: 100vmin/128;
 }
 
 /*Grids*/
-@mixin tablet-columns {
+@mixin tablet-columns($columns: 8){
     column-gap: 2.5 * $tabletXspacing;
-    grid-template-columns: repeat(8,1fr);
+    grid-template-columns: repeat($columns,1fr);
 }
 
-@mixin desktop-columns {
+@mixin desktop-columns($columns: 10) {
     gap: 0 2.5 * $desktopXspacing;
-    grid-template-columns: repeat(10,1fr);
+    grid-template-columns: repeat($columns,1fr);
 }
