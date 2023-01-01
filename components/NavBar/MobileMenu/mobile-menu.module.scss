@@ -8,23 +8,19 @@
         margin-right: 5.875*shared.$mobile-spacing;
     }
     h1 {
-        font-family: 'Unbounded';
-        font-style: normal;
-        font-weight: 400;
+        @include shared.font-unbounded(400);
         font-size: shared.$mobile-spacing * 14.125;
         line-height: shared.$mobile-spacing * 17.5;
     }
     h2 {
 
-        font-family: 'Montserrat';
-        font-style: normal;
-        font-weight: 400;
+        @include shared.font-montserrat(400);
         font-size: shared.$mobile-spacing * 8.25;
         line-height: shared.$mobile-spacing * 10.05625;
         letter-spacing: -0.04em;
         transform: translateY(shared.$mobile-spacing * -4.5);
     }
-    .menuItems{
+    .items{
         width: 100%;
         margin-top: 5*shared.$mobile-spacing;
         display: flex;
@@ -34,10 +30,8 @@
             border-top: 1px solid shared.$black;
             padding-left: 5.875*shared.$mobile-spacing;
             padding-right: 5.875*shared.$mobile-spacing;
-            .mainItem{
-                font-family: 'Unbounded';
-                font-style: normal;
-                font-weight: 400;
+            .main{
+                @include shared.font-unbounded(400);
                 font-size: shared.$mobile-spacing * 4.5;
                 line-height: shared.$mobile-spacing * 6.5;
 
@@ -58,30 +52,29 @@
                 padding-bottom: shared.$mobile-spacing * 3;
             }
             ul li {
-                font-family: 'Unbounded';
-                font-style: normal;
-                font-weight: 300;
+                @include shared.font-unbounded(300);
                 font-size: shared.$mobile-spacing * 2.5;
                 line-height: shared.$mobile-spacing * 6;
 
                 letter-spacing: -0.035em;
             }
-            .selectedSubItem {
+            .subitem_selected {
                 font-weight: 500;
                 /*text-decoration: underline;*/
             }
-        }
-        .item:last-child{
-            border-bottom: 1px solid shared.$black;
-        }
-        .selected{
-            background-color: shared.$white;
-            ul {
-                display: block;
+            &:last-child{
+                border-bottom: 1px solid shared.$black;
+            }    
+            &_selected{
+                @extend .item;
+                background-color: shared.$white;
+                ul {
+                    display: block;
+                }
+                svg {
+                    transform: rotate(90deg);
+                }
             }
-            svg {
-                transform: rotate(90deg);
-            }
-        }
+        }        
     }
 }

@@ -16,3 +16,36 @@ $desktopXspacing: 100vw/180;
 $desktopYspacing: 100vh/128;
 
 $desktop-spacing: 100vmin/128;
+
+@mixin mobile-only {
+    @media screen and (max-width:767px){
+        @content;
+    }
+}
+@mixin tablet-only {
+    @media screen and (min-width:768px) and (max-width:1023px){
+        @content;
+    }
+}
+@mixin desktop-only {
+    @media screen and (min-width:1024px){
+        @content;
+    }
+}
+@mixin not-mobile {
+    @media screen and (min-width:768px){
+        @content;
+    }
+}
+
+@mixin font-montserrat($weight) {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: $weight;
+}
+
+@mixin font-unbounded($weight) {
+    font-family: 'Unbounded';
+    font-style: normal;
+    font-weight: $weight;
+}

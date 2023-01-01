@@ -1,10 +1,10 @@
 @use '../../styles/shared.scss' as shared;
 
 .item {
-    @media screen and (max-width:767px) {
+    @include shared.mobile-only {
         display: none;
     }
-    @media screen and (min-width:768px) {
+    @include shared.not-mobile {
         grid-column-end: span 2;
         height: 100%;
         display: flex;
@@ -12,14 +12,12 @@
         align-items: center;
      }
      span {
-        font-family: 'Unbounded';
-        font-style: normal;
-        font-weight: 400;
-        @media screen and (min-width:768px) and (max-width:1023px){
+        @include shared.font-unbounded(400);
+        @include shared.tablet-only{
             font-size: 2* shared.$tablet-spacing;
             line-height: 2.5* shared.$tablet-spacing;
         }
-        @media screen and (min-width:1024px){
+        @include shared.desktop-only{
             font-size: 3* shared.$desktop-spacing;
             line-height: 3.75* shared.$desktop-spacing;
         }  

@@ -3,7 +3,7 @@
 .main {
     padding-left: 5.5 * shared.$mobile-spacing;
     padding-right: 5.5 * shared.$mobile-spacing;
-    @media (min-width:1024px) {
+    @include shared.not-mobile {
         padding-left: 0;
         padding-right: 0;
         grid-row: 2/-1;
@@ -16,15 +16,15 @@
 
 .pageLayout {
     background-color: shared.$white;
-    @media screen and (min-width:768px) and (max-width:1023px){
+    @include shared.tablet-only{
         display: grid;
         column-gap: 2.5 * shared.$tabletXspacing;
-        grid-template-columns: repeat(10,1fr);
+        grid-template-columns: repeat(8,1fr);
         grid-template-rows: max-content max-content;
         padding-left:  10.5 * shared.$tabletXspacing;
         padding-right: 10.5 * shared.$tabletXspacing;
     }
-    @media (min-width:1024px) {
+    @include shared.desktop-only {
         display: grid;
         gap: 0 2.5 * shared.$desktop-spacing;
         grid-template-columns: repeat(10,1fr);
@@ -36,22 +36,21 @@
 }
 
 .sectionTitle {
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 2.5 * shared.$mobile-spacing;
-    line-height: 3*shared.$mobile-spacing;
-    text-align: center;
-    margin-top: 7*shared.$mobile-spacing;
-    @media (min-width:1025px) {
-        margin-top: 0;
+    @include shared.font-montserrat(400);
+    @include shared.mobile-only{
+        text-align: center;
+        margin-top: 7*shared.$mobile-spacing;
+        font-size: 2.5 * shared.$mobile-spacing;
+        line-height: 3*shared.$mobile-spacing;
+    }
+    @include shared.desktop-only {  
         text-align: left;
         font-size: 2.5 * shared.$desktop-spacing;
         line-height: 3*shared.$desktop-spacing;
     }
 }
 .newsSection{
-    @media (min-width:1025px) {
+    @include shared.desktop-only {
         grid-row: 2/3;
         grid-column: 1/6 ;
     }
@@ -59,15 +58,17 @@
 }
 
 .FAQSection{
-    @media (min-width:1025px) {
+    @include shared.desktop-only {
         grid-row: 3/4;
         grid-column: 1/-1 ;
     }
     
 }
 .mainImage{
-    display: none;
-    @media (min-width:1025px) {
+    @include shared.mobile-only{
+        display: none;
+    }
+    @include shared.desktop-only {
         max-width: 50%;
         display: block;
         overflow: visible;

@@ -5,16 +5,17 @@
     border-radius: 9px;
     text-align: left;
 
-    margin-top: 2*shared.$mobile-spacing;
-    margin-bottom: 3*shared.$mobile-spacing;
-
-    padding:  2*shared.$mobile-spacing;
-
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
 
-    @media (min-width:1025px) {
+    @include shared.mobile-only{
+        margin-top: 2*shared.$mobile-spacing;
+        margin-bottom: 3*shared.$mobile-spacing;
+        padding:  2*shared.$mobile-spacing;
+    }
+
+    @include shared.desktop-only {
         padding-top: 3*shared.$desktop-spacing;
         padding-bottom: 3*shared.$desktop-spacing;
         /*padding-left: 4*shared.$desktop-spacing;

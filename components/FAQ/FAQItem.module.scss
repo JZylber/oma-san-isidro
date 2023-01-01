@@ -2,8 +2,13 @@
 
 .item {
     display: block;
-    max-width: 37.5 * shared.$mobile-spacing;
-    @media (min-width:1025px) {
+    @include shared.mobile-only{
+        max-width: 37.5 * shared.$mobile-spacing;
+        &:not(:last-child){
+            margin-bottom: 3*shared.$mobile-spacing;
+            }
+    }
+    @include shared.desktop-only {
         justify-content: flex-start;
         box-sizing: border-box;
         max-width: 50%;
@@ -12,43 +17,35 @@
         padding-left: 4*shared.$desktop-spacing;
         padding-right: 4*shared.$desktop-spacing;
     }
-}
-.item:not(:last-child){
-    margin-bottom: 3*shared.$mobile-spacing;
-    @media (min-width:1025px) {
-        margin-bottom: 0;
-    }
+    
 }
 
 .item h3{
-    font-family: 'Unbounded';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 1.875*shared.$mobile-spacing;
-    line-height: 2.375*shared.$mobile-spacing;
+    @include shared.font-unbounded(500);
+    @include shared.mobile-only{
+        font-size: 1.875*shared.$mobile-spacing;
+        line-height: 2.375*shared.$mobile-spacing;
 
-    margin-bottom: shared.$mobile-spacing;
+        margin-bottom: shared.$mobile-spacing;
 
-    display: inline-block;
-    @media (min-width:1025px) {
+        display: inline-block;
+    }
+    @include shared.desktop-only{
         font-size: 3*shared.$desktop-spacing;
         line-height: 3.75*shared.$desktop-spacing;
         margin-bottom: 3*shared.$desktop-spacing;
     }
 }
 .item p {
-    font-family: 'Montserrat';
-    
-    font-style: normal;
-    font-weight: 400;
-    font-size: 1.625*shared.$mobile-spacing;
-    line-height: 2*shared.$mobile-spacing;
-
+    @include shared.font-montserrat(400);
     margin: 0;
     display: block;
-    @media (min-width:1025px) {
+    @include shared.mobile-only{
+        font-size: 1.625*shared.$mobile-spacing;
+        line-height: 2*shared.$mobile-spacing;
+    }
+    @include shared.desktop-only {
         font-size: 2.5*shared.$desktop-spacing;
         line-height: 3.0625*shared.$desktop-spacing;
     }
-
 }

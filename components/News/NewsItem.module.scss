@@ -2,32 +2,27 @@
 
 .container {
     box-sizing: border-box;
-    margin-top: 2*shared.$mobile-spacing;
-    margin-bottom: 3*shared.$mobile-spacing;
-
-    height: 9.25*shared.$mobile-spacing;
-
-    box-shadow: 0px shared.$mobile-spacing black;
-
     background: shared.$light-blue;
     border: 2px solid #000000;
     border-radius: 9px;
-
-    font-family: 'Unbounded';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 1.875*shared.$mobile-spacing;
-    line-height: 2.375*shared.$mobile-spacing;
 
     display: flex;
     align-items: center;
     text-align: center;
 
-    span {
-        width: 100%;
-    }
+    @include shared.font-unbounded(500);
+    @include shared.mobile-only{
+        margin-top: 2*shared.$mobile-spacing;
+        margin-bottom: 3*shared.$mobile-spacing;
 
-    @media (min-width:1025px) {
+        height: 9.25*shared.$mobile-spacing;
+
+        box-shadow: 0px shared.$mobile-spacing black;
+        
+        font-size: 1.875*shared.$mobile-spacing;
+        line-height: 2.375*shared.$mobile-spacing;
+    }
+    @include shared.desktop-only {
         font-size: 3 * shared.$desktop-spacing;
         line-height: 3.75 *shared.$desktop-spacing;
 
@@ -37,9 +32,14 @@
         margin-bottom: 3*shared.$desktop-spacing;
         box-shadow: 0px shared.$desktop-spacing black;
     }
+    span {
+        width: 100%;
+    }
     .arrow {
-        display: none;
-        @media (min-width:1025px) {
+        @include shared.mobile-only{
+            display: none;
+        }
+        @include shared.not-mobile {
             display: block;
             transform: translateX(-3 * shared.$desktop-spacing);
         }
