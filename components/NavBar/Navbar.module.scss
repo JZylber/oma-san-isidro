@@ -1,0 +1,25 @@
+@use '../../styles/shared.scss' as shared;
+
+.icon {
+    padding-left: 5.5 * shared.$mobile-spacing;
+    @media (min-width:1025px) {
+       display: none;
+    } 
+}
+.bar {
+    padding-top: shared.$mobile-spacing * 3;
+    min-height: shared.$mobile-spacing * 4;
+    @media (min-width:1025px) {
+        grid-row: 1/2;
+        grid-column: 1/-1;
+        display: grid;
+        grid-template-columns: subgrid;
+        grid-template-rows: max-content;
+        padding-top: shared.$desktop-spacing * 3;
+        min-height: shared.$desktop-spacing * 4;
+    } 
+    
+}
+.fullMenu {
+    background-color: shared.$light-blue;
+}

@@ -1,0 +1,19 @@
+@use '../../styles/shared.scss' as shared;
+
+.item {
+    display: none;
+    @media (min-width:1025px) {
+        grid-column-end: span 2;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+     } 
+}
+.item span {
+    font-family: 'Unbounded';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 3* shared.$desktop-spacing;
+    line-height: 3.75* shared.$desktop-spacing;
+}

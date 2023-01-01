@@ -22,4 +22,5 @@ Como este proyecto está hecho por desarrolladores novatos de React y Next, en e
 - [Aprendé Next.js](https://nextjs.org/learn) - un tutorial interactivo de Next.js.
 - [Hosteo con Vercel](https://nextjs.org/docs/deployment) - la forma más sencilla de hostear un proyecto next.
 - [Cheatsheet de Gitflow](https://danielkummer.github.io/git-flow-cheatsheet/) - guía rápida de como usar gitflow.
+- [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) - documentación para un sistema práctico de commits. Es OBLIGATORIO usar conventional commits (tira error sino).
 

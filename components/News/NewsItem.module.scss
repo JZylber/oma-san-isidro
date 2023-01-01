@@ -1,0 +1,47 @@
+@use '../../styles/shared.scss' as shared;
+
+.container {
+    box-sizing: border-box;
+    margin-top: 2*shared.$mobile-spacing;
+    margin-bottom: 3*shared.$mobile-spacing;
+
+    height: 9.25*shared.$mobile-spacing;
+
+    box-shadow: 0px shared.$mobile-spacing black;
+
+    background: shared.$light-blue;
+    border: 2px solid #000000;
+    border-radius: 9px;
+
+    font-family: 'Unbounded';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.875*shared.$mobile-spacing;
+    line-height: 2.375*shared.$mobile-spacing;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    span {
+        width: 100%;
+    }
+
+    @media (min-width:1025px) {
+        font-size: 3 * shared.$desktop-spacing;
+        line-height: 3.75 *shared.$desktop-spacing;
+
+        height: 10.375 *shared.$desktop-spacing;
+
+        margin-top: 2*shared.$desktop-spacing;
+        margin-bottom: 3*shared.$desktop-spacing;
+        box-shadow: 0px shared.$desktop-spacing black;
+    }
+    .arrow {
+        display: none;
+        @media (min-width:1025px) {
+            display: block;
+            transform: translateX(-3 * shared.$desktop-spacing);
+        }
+    }
+}

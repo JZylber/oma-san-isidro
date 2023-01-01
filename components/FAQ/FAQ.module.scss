@@ -1,0 +1,28 @@
+@use '../../styles/shared.scss' as shared;
+
+.container {
+    border: 2px solid shared.$black;
+    border-radius: 9px;
+    text-align: left;
+
+    margin-top: 2*shared.$mobile-spacing;
+    margin-bottom: 3*shared.$mobile-spacing;
+
+    padding:  2*shared.$mobile-spacing;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    @media (min-width:1025px) {
+        padding-top: 3*shared.$desktop-spacing;
+        padding-bottom: 3*shared.$desktop-spacing;
+        /*padding-left: 4*shared.$desktop-spacing;
+        padding-right: 4*shared.$desktop-spacing;*/
+        padding-left: 0;
+        padding-right: 0;
+        justify-content: flex-start;
+        margin-top: 1.5*shared.$desktop-spacing;
+        margin-bottom: 20*shared.$desktop-spacing;
+    }
+}
