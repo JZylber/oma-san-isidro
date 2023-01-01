@@ -1,15 +1,18 @@
 @use '../../styles/shared.scss' as shared;
 
 .main {
-    padding-left: 5.5 * shared.$mobile-spacing;
-    padding-right: 5.5 * shared.$mobile-spacing;
+    @include shared.mobile-only{
+        padding-left: 5.5 * shared.$mobile-spacing;
+        padding-right: 5.5 * shared.$mobile-spacing;
+    }
     @include shared.not-mobile {
-        padding-left: 0;
-        padding-right: 0;
         grid-row: 2/-1;
         grid-column: 1/-1;
         display: grid;
         grid-template-columns: subgrid;
+    }
+    @include shared.tablet-only{}
+    @include shared.desktop-only{
         grid-template-rows: 63*shared.$desktop-spacing 53*shared.$desktop-spacing max-content max-content;
     }
 }

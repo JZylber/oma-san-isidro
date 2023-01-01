@@ -22,4 +22,10 @@
             line-height: 3.75* shared.$desktop-spacing;
         }  
     }
+    &.phantom {
+        @include shared.tablet-only{
+            display: none;
+        }
+        
+    }
 }
