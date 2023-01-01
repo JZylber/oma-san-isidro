@@ -16,12 +16,13 @@ export default function NavBar({togglePageContent}:NavProps){
         togglePageContent && togglePageContent();
     }
     return(
-        <nav className={`${styles.bar} ${openFullMenu ? styles.fullMenu : ""}`}>
+        <nav className={[styles.navbar, (openFullMenu ? "_fullMenu" : "")].join("")}>
             {openFullMenu?<X className={styles.icon} onClick={()=>openCloseMenu()}/>:<MenuIcon className={styles.icon} onClick={()=>openCloseMenu()}/>}
-            <NavBarItem text='inicio' gridColumnStart={1}/>
-            <NavBarItem text='oma' gridColumnStart={5}/>
-            <NavBarItem text='ñandú' gridColumnStart={7}/>
-            <NavBarItem text='internacional' gridColumnStart={9}/>
+            <NavBarItem text='inicio'/>
+            <NavBarItem text='' phantom={true}/>
+            <NavBarItem text='oma' />
+            <NavBarItem text='ñandú' />
+            <NavBarItem text='internacional'/>
             {openFullMenu && <MobileMenu closeMenu={openCloseMenu}/>}
         </nav>
     )

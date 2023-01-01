@@ -1,25 +1,37 @@
 @use '../../styles/shared.scss' as shared;
 
 .icon {
-    padding-left: 5.5 * shared.$mobile-spacing;
-    @media (min-width:1025px) {
+    @media screen and (max-width:767px) {
+        padding-left: 5.5 * shared.$mobile-spacing;
+     }
+    @media screen and (min-width:768px) {
        display: none;
     } 
 }
-.bar {
-    padding-top: shared.$mobile-spacing * 3;
-    min-height: shared.$mobile-spacing * 4;
-    @media (min-width:1025px) {
+.navbar {
+    @media screen and (max-width:767px) {
+        padding-top: shared.$mobile-spacing * 3;
+        min-height: shared.$mobile-spacing * 4;
+    }
+    @media screen and (min-width:768px) and (max-width:1023px){
         grid-row: 1/2;
         grid-column: 1/-1;
         display: grid;
         grid-template-columns: subgrid;
-        grid-template-rows: max-content;
+        grid-template-rows: 1fr;
+        padding-top: shared.$tabletYspacing * 3;
+        min-height: shared.$tabletYspacing * 4;
+    }
+    @media screen and (min-width:1024px) {
+        grid-row: 1/2;
+        grid-column: 1/-1;
+        display: grid;
+        grid-template-columns: subgrid;
+        grid-template-rows: 1fr;
         padding-top: shared.$desktop-spacing * 3;
         min-height: shared.$desktop-spacing * 4;
-    } 
-    
-}
-.fullMenu {
-    background-color: shared.$light-blue;
+    }
+    &_fullMenu {
+        background-color: shared.$light-blue;
+    }    
 }

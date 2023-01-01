@@ -1,19 +1,27 @@
 @use '../../styles/shared.scss' as shared;
 
 .item {
-    display: none;
-    @media (min-width:1025px) {
+    @media screen and (max-width:767px) {
+        display: none;
+    }
+    @media screen and (min-width:768px) {
         grid-column-end: span 2;
         height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
-     } 
-}
-.item span {
-    font-family: 'Unbounded';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 3* shared.$desktop-spacing;
-    line-height: 3.75* shared.$desktop-spacing;
+     }
+     span {
+        font-family: 'Unbounded';
+        font-style: normal;
+        font-weight: 400;
+        @media screen and (min-width:768px) and (max-width:1023px){
+            font-size: 2* shared.$tablet-spacing;
+            line-height: 2.5* shared.$tablet-spacing;
+        }
+        @media screen and (min-width:1024px){
+            font-size: 3* shared.$desktop-spacing;
+            line-height: 3.75* shared.$desktop-spacing;
+        }  
+    }
 }
