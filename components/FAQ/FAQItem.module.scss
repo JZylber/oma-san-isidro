@@ -8,8 +8,15 @@
             margin-bottom: 3*shared.$mobile-spacing;
             }
     }
+    @include shared.tablet-only {
+        box-sizing: border-box;
+        max-width: 50%;
+        padding-top: 2.5*shared.$tabletYspacing;
+        padding-bottom: 2.5*shared.$tabletYspacing;
+        padding-left: 2*shared.$tabletYspacing;
+        padding-right: 2*shared.$tabletYspacing;
+    }
     @include shared.desktop-only {
-        justify-content: flex-start;
         box-sizing: border-box;
         max-width: 50%;
         padding-top: 3*shared.$desktop-spacing;
