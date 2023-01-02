@@ -22,6 +22,19 @@
         font-size: 1.875*shared.$mobile-spacing;
         line-height: 2.375*shared.$mobile-spacing;
     }
+    @include shared.tablet-only{
+        margin-top: 1*shared.$tabletYspacing;
+        margin-bottom: 2*shared.$tabletYspacing;
+        box-shadow: 0px shared.$tabletYspacing black;
+
+        font-size: 1.875*shared.$tablet-max-spacing;
+        line-height: 2.5*shared.$tablet-max-spacing;
+
+        height: 8*shared.$tabletYspacing;
+        &:first-child{
+            margin-top: 2*shared.$tabletYspacing;
+        }
+    }
     @include shared.desktop-only {
         font-size: 3 * shared.$desktop-spacing;
         line-height: 3.75 *shared.$desktop-spacing;
@@ -36,10 +49,10 @@
         width: 100%;
     }
     .arrow {
-        @include shared.mobile-only{
+        @include shared.not-desktop{
             display: none;
         }
-        @include shared.not-mobile {
+        @include shared.desktop-only {
             display: block;
             transform: translateX(-3 * shared.$desktop-spacing);
         }
