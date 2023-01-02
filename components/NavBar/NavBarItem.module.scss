@@ -6,7 +6,6 @@
     }
     @include shared.not-mobile {
         grid-column-end: span 2;
-        height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;

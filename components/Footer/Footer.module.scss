@@ -2,6 +2,12 @@
 
 .footer  {
     width: 100%;
+    @include shared.tablet-only{
+        display: grid;
+        grid-column: 1/-1;
+        grid-row: 4/5;
+        @include shared.tablet-columns;
+    }
     @include shared.desktop-only {
         display: grid;
         grid-column: 1/-1;
