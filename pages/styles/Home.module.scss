@@ -1,5 +1,12 @@
 @use '../../styles/shared.scss' as shared;
 
+.wrapperLayout{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    
+}
+
 .main {
     @include shared.mobile-only{
         padding-left: 5.5 * shared.$mobile-spacing;
@@ -16,12 +23,13 @@
     }
     @include shared.desktop-only{
         @include shared.desktop-columns;
-        grid-template-rows: 63*shared.$desktop-spacing 53*shared.$desktop-spacing max-content max-content;
+        // grid-template-rows: 63*shared.$desktop-spacing 53*shared.$desktop-spacing max-content max-content;
+        grid-template-rows: max-content max-content max-content max-content;
+
     }
 }
 
 .pageLayout {
-    background-color: shared.$white;
     @include shared.tablet-only{
         display: grid;
         column-gap: 2.5 * shared.$tabletXspacing;
@@ -33,8 +41,8 @@
         display: grid;
         @include shared.desktop-columns;
         grid-template-rows: max-content max-content;
-        padding-left:  20 * shared.$desktopXspacing;
-        padding-right: 20 * shared.$desktopXspacing;
+        width: 80%;
+        max-width: 1200px;
        
     }
 }
@@ -69,13 +77,10 @@
     
 }
 .mainImage{
-    max-width: 100%;
-    max-height: 100%;
     @include shared.mobile-only{
         display: none;
     }
     @include shared.desktop-only {
-        max-width: 50%;
         display: block;
         overflow: visible;
         grid-row: 1/3;

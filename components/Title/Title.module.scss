@@ -3,10 +3,11 @@
 .title {
     position: relative;
     width: auto;
+    word-wrap: break-word;
 
     @include shared.mobile-only{
         margin-top: shared.$mobile-spacing * 6;
-        margin-bottom: shared.$mobile-spacing * 8;
+        margin-bottom: shared.$mobile-spacing * 2;
         height: shared.$mobile-spacing * 20;
     }
     
@@ -14,8 +15,8 @@
         grid-row: 1/2;
         grid-column: 1/6 ;
         margin-top: shared.$desktop-spacing * 4;
-        margin-bottom: shared.$desktop-spacing * 12;
-        height: shared.$desktop-spacing * 46.375;
+        margin-bottom: shared.$desktop-spacing;
+        height: shared.$desktopXspacing * 46.375;
     }
 }
 
@@ -29,8 +30,12 @@
         line-height: shared.$mobile-spacing * 17.5;
     }
     @include shared.desktop-only {
-        font-size: shared.$desktop-spacing * 25.875;
-        line-height: shared.$desktop-spacing * 32.125;
+        font-size: shared.$desktopXspacing * 25.875;
+        line-height: shared.$desktopXspacing * 32.125;
+    }
+    @include shared.largest{
+        font-size: (shared.$desktopXlargest/180) * 25.875;
+        line-height: (shared.$desktopXlargest/180)  * 32.125;
     }
 }
 
@@ -47,10 +52,17 @@
         top:  7 * shared.$mobile-spacing;
     }
     @include shared.desktop-only {
-        font-size: shared.$desktop-spacing * 15.375;
-        line-height: shared.$desktop-spacing * 18.75;
-        top:  22.875 * shared.$desktop-spacing;
-        width: 71 * shared.$desktop-spacing;
+        font-size: shared.$desktopXspacing * 15.375;
+        line-height: shared.$desktopXspacing * 18.75;
+        top:  22.875 * shared.$desktopXspacing;
+        width: 71 * shared.$desktopXspacing;
+    }
+
+    @include shared.largest{
+        font-size: (shared.$desktopXlargest/180)  * 15.375;
+        line-height: (shared.$desktopXlargest/180)  * 18.75;
+        top:  22.875 * (shared.$desktopXlargest/180) ;
+        width: 71 * (shared.$desktopXlargest/180) ;
     }
 }
 .title p {
@@ -64,9 +76,15 @@
         width: 36.625 * shared.$mobile-spacing;
     }
     @include shared.desktop-only {
-        font-size: shared.$desktop-spacing * 3.125;
-        line-height: shared.$desktop-spacing * 4;
-        top:  39.625 * shared.$desktop-spacing;
+        font-size: shared.$desktopXspacing * 3.125;
+        line-height: shared.$desktopXspacing * 4;
+        top:  39.625 * shared.$desktopXspacing;
         width: 100%;
+    }
+
+    @include shared.largest {
+        font-size: (shared.$desktopXlargest/180)  * 3.125;
+        line-height: (shared.$desktopXlargest/180)  * 4;
+        top:  39.625 * (shared.$desktopXlargest/180) ;
     }
     }
