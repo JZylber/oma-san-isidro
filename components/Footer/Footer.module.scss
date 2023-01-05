@@ -7,6 +7,9 @@
         grid-column: 1/-1;
         grid-row: 4/5;
         @include shared.tablet-columns;
+        grid-template-rows: 12*shared.$tabletYspacing max-content;
+        align-items: start;
+        row-gap: 6*shared.$tabletYspacing;
     }
     @include shared.desktop-only {
         display: grid;
@@ -18,6 +21,12 @@
         row-gap: 6*shared.$desktop-spacing;
     }
     &_secretary{
+        @include shared.tablet-only {
+            grid-column: 7/-1;
+            grid-row: 1/2;
+            transform: translateX(-2*shared.$desktop-spacing);
+            width: max-content;
+        }
         @include shared.desktop-only {
             grid-column: 9/-1;
             grid-row: 1/2;
