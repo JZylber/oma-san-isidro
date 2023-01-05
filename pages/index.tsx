@@ -31,7 +31,9 @@ const Home: NextPage = () => {
             <h3 className={styles.sectionTitle}>Novedades</h3>
             <News/>
           </section>
-          <MainNandu className={styles.mainImage}/>
+          <div className={styles.containerImg}>
+            <MainNandu className={styles.mainImage}/>
+          </div>
           <section className={styles.FAQSection}>
             <h3 className={styles.sectionTitle}>Preguntas Frecuentes</h3>
             <Faq/>

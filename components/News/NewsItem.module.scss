@@ -19,7 +19,7 @@
 
         box-shadow: 0px shared.$mobile-spacing black;
         
-        font-size: 1.875*shared.$mobile-spacing;
+        font-size:shared.$mobile-actionable-font-size;
         line-height: 2.375*shared.$mobile-spacing;
     }
     @include shared.tablet-only{
@@ -27,7 +27,7 @@
         margin-bottom: 2*shared.$tabletYspacing;
         box-shadow: 0px shared.$tabletYspacing black;
 
-        font-size: 1.875*shared.$tablet-max-spacing;
+        font-size: shared.$tablet-actionable-font-size;
         line-height: 2.5*shared.$tablet-max-spacing;
 
         height: 8*shared.$tabletYspacing;

@@ -36,13 +36,13 @@
         h4{
             @include shared.font-montserrat(700);
             @include shared.mobile-only{
-                font-size: 1.625 * shared.$mobile-spacing;
+                font-size: shared.$mobile-reading-font-size;
                 line-height: 2 * shared.$mobile-spacing;
                 margin-bottom: 0.625 * shared.$mobile-spacing;
 
             }
             @include shared.tablet-only{
-                font-size: 1.875 * shared.$tablet-spacing;
+                font-size: shared.$tablet-reading-font-size;
                 line-height: 2.25 * shared.$tablet-spacing;
                 margin-bottom: 0.625 * shared.$tablet-spacing;
             }
@@ -56,15 +56,15 @@
         span{
             @include shared.font-montserrat(500);
             @include shared.mobile-only{
-                font-size: 1.625 * shared.$mobile-spacing;
+                font-size: shared.$mobile-reading-font-size;
                 line-height: 2 * shared.$mobile-spacing;
             }
             @include shared.tablet-only{
-                font-size: 1.875 * shared.$tablet-spacing;
+                font-size: shared.$tablet-reading-font-size;
                 line-height: 2.25 * shared.$tablet-spacing;
             }
             @include shared.desktop-only {
-                font-size: 2.5 * shared.$desktop-spacing;
+                font-size: shared.$desktop-reading-font-size;
                 line-height: 3 * shared.$desktop-spacing;
             }
         }
@@ -116,11 +116,11 @@
             text-decoration-line: underline;
             color: shared.$black;
             @include shared.mobile-only{
-                font-size: 1.625 * shared.$mobile-spacing;
+                font-size: shared.$mobile-reading-font-size;
                 line-height: 2 * shared.$mobile-spacing;
             }
             @include shared.tablet-only{
-                font-size: 1.875 * shared.$tablet-spacing;
+                font-size: shared.$tablet-reading-font-size;
                 line-height: 2.25 * shared.$tablet-spacing;
                 margin-bottom: 0.625 * shared.$tablet-spacing;
                 padding-bottom: 2 * shared.$tablet-spacing;
@@ -148,7 +148,7 @@
         border-top: 1px solid shared.$black;
 
         @include shared.mobile-only{
-            font-size: 1.625 * shared.$mobile-spacing;
+            font-size: shared.$mobile-reading-font-size;
             line-height: 1.75 * shared.$mobile-spacing;
             padding-top: 2 * shared.$mobile-spacing;
             padding-bottom: 2 * shared.$mobile-spacing;
@@ -157,7 +157,7 @@
             grid-column: 1/-1;
             grid-row: 2/3;
 
-            font-size: 1.875 * shared.$tablet-spacing;
+            font-size: shared.$tablet-reading-font-size;
             line-height: 2.3125 * shared.$tablet-spacing;
 
             padding-top: 2 * shared.$tablet-spacing;

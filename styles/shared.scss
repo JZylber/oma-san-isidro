@@ -23,8 +23,15 @@ $desktop-spacing: 100vmin/128;
 $desktop-max-spacing: 100vmin/180;
 
 /*Typography sizes*/
+$section-title-font-size: 2rem;
+
+$mobile-actionable-font-size: 1.5rem; 
+$mobile-reading-font-size: 1.4rem;
+
+$tablet-actionable-font-size: 1.5rem;
+$tablet-reading-font-size: 1.5rem;
+
 $desktop-actionable-font-size: 2.4rem;
-$desktop-section-title-font-size: 2rem;
 $desktop-reading-font-size: 2rem;
 
 /*Unified media queries*/
