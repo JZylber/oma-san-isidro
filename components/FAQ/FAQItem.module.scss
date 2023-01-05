@@ -31,7 +31,7 @@
         display: inline-block;
     }
     @include shared.desktop-only{
-        font-size: 3*shared.$desktop-spacing;
+        font-size: shared.$desktop-actionable-font-size;
         line-height: 3.75*shared.$desktop-spacing;
         margin-bottom: 3*shared.$desktop-spacing;
     }
@@ -45,7 +45,7 @@
         line-height: 2*shared.$mobile-spacing;
     }
     @include shared.desktop-only {
-        font-size: 2.5*shared.$desktop-spacing;
+        font-size: shared.$desktop-reading-font-size;
         line-height: 3.0625*shared.$desktop-spacing;
     }
 }

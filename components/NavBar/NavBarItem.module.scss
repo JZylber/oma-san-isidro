@@ -18,7 +18,7 @@
             line-height: 2.5* shared.$tablet-spacing;
         }
         @include shared.desktop-only{
-            font-size: 3* shared.$desktop-spacing;
+            font-size:shared.$desktop-actionable-font-size;
             line-height: 3.75* shared.$desktop-spacing;
         }  
     }

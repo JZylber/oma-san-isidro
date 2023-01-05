@@ -27,7 +27,7 @@
 
             }
             @include shared.desktop-only {
-                font-size: 2.5 * shared.$desktop-spacing;
+                font-size: shared.$desktop-reading-font-size;
                 line-height: 3 * shared.$desktop-spacing;
                 margin-bottom: 1.25 * shared.$desktop-spacing;
             }
@@ -82,7 +82,7 @@
                 line-height: 2 * shared.$mobile-spacing;
             }
             @include shared.desktop-only {
-                font-size: 2.5 * shared.$desktop-spacing;
+                font-size: shared.$desktop-reading-font-size;
                 line-height: 3 * shared.$desktop-spacing;
                 padding-top: shared.$desktop-spacing;
                 padding-bottom: 2 * shared.$desktop-spacing;
@@ -113,7 +113,7 @@
             grid-column: 1/-1;
             grid-row: 2/3;
 
-            font-size: 2.5 * shared.$desktop-spacing;
+            font-size: shared.$desktop-reading-font-size;
             line-height: 3 * shared.$desktop-spacing;
 
             padding-top: 2.5 * shared.$desktop-spacing;

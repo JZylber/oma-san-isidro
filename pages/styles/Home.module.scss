@@ -57,7 +57,7 @@
     }
     @include shared.desktop-only {  
         text-align: left;
-        font-size: 2.5 * shared.$desktop-spacing;
+        font-size: shared.$desktop-section-title-font-size;
         line-height: 3*shared.$desktop-spacing;
     }
 }

@@ -19,6 +19,11 @@ $desktopXlargest: 1518px;
 
 $desktop-spacing: 100vmin/128;
 
+/*Typography sizes*/
+$desktop-actionable-font-size: 2.4rem;
+$desktop-section-title-font-size: 2rem;
+$desktop-reading-font-size: 2rem;
+
 /*Unified media queries*/
 @mixin mobile-only {
     @media screen and (max-width:767px){

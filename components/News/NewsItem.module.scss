@@ -23,7 +23,7 @@
         line-height: 2.375*shared.$mobile-spacing;
     }
     @include shared.desktop-only {
-        font-size: 3 * shared.$desktop-spacing;
+        font-size:shared.$desktop-actionable-font-size;
         line-height: 3.75 *shared.$desktop-spacing;
 
         height: 10.375 *shared.$desktop-spacing;
