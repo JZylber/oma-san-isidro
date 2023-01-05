@@ -8,8 +8,15 @@
             margin-bottom: 3*shared.$mobile-spacing;
             }
     }
+    @include shared.tablet-only {
+        box-sizing: border-box;
+        max-width: 50%;
+        padding-top: 2.5*shared.$tabletYspacing;
+        padding-bottom: 2.5*shared.$tabletYspacing;
+        padding-left: 2*shared.$tabletYspacing;
+        padding-right: 2*shared.$tabletYspacing;
+    }
     @include shared.desktop-only {
-        justify-content: flex-start;
         box-sizing: border-box;
         max-width: 50%;
         padding-top: 3*shared.$desktop-spacing;
@@ -30,6 +37,11 @@
 
         display: inline-block;
     }
+    @include shared.tablet-only{
+        font-size: 1.875*shared.$tablet-spacing;
+        line-height: 2.3125*shared.$tablet-spacing;
+        margin-bottom: 0.5*shared.$tablet-spacing;
+    }
     @include shared.desktop-only{
         font-size: shared.$desktop-actionable-font-size;
         line-height: 3.75*shared.$desktop-spacing;
@@ -43,6 +55,10 @@
     @include shared.mobile-only{
         font-size: 1.625*shared.$mobile-spacing;
         line-height: 2*shared.$mobile-spacing;
+    }
+    @include shared.tablet-only{
+        font-size: 1.875*shared.$tablet-spacing;
+        line-height: 2*shared.$tablet-spacing;
     }
     @include shared.desktop-only {
         font-size: shared.$desktop-reading-font-size;

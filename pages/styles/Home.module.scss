@@ -19,7 +19,7 @@
     }
     @include shared.tablet-only{
         @include shared.tablet-columns;
-        /*Pending: tablet columns*/
+        grid-template-rows: 39*shared.$tablet-max-spacing 39*shared.$tablet-max-spacing 49*shared.$tablet-max-spacing max-content max-content;
     }
     @include shared.desktop-only{
         @include shared.desktop-columns;
@@ -34,6 +34,7 @@
         display: grid;
         column-gap: 2.5 * shared.$tabletXspacing;
         @include shared.tablet-columns;
+        grid-template-rows: max-content max-content;
         padding-left:  10.5 * shared.$tabletXspacing;
         padding-right: 10.5 * shared.$tabletXspacing;
     }
@@ -55,6 +56,11 @@
         font-size: 2.5 * shared.$mobile-spacing;
         line-height: 3*shared.$mobile-spacing;
     }
+    @include shared.tablet-only{
+        text-align: left;
+        font-size: 2.5 * shared.$tablet-max-spacing;
+        line-height: 2.25*shared.$tablet-max-spacing;
+    }
     @include shared.desktop-only {  
         text-align: left;
         font-size: shared.$desktop-section-title-font-size;
@@ -62,27 +68,37 @@
     }
 }
 .newsSection{
+    @include shared.tablet-only{
+        
+        grid-row: 2/3;
+        grid-column: 1/5 ;
+    }
     @include shared.desktop-only {
         grid-row: 2/3;
         grid-column: 1/6 ;
     }
-    
 }
 
 .FAQSection{
-    @include shared.desktop-only {
+    @include shared.not-mobile{
         grid-row: 3/4;
         grid-column: 1/-1 ;
-    }
-    
+    }    
 }
 .mainImage{
     @include shared.mobile-only{
         display: none;
     }
-    @include shared.desktop-only {
+    @include shared.not-mobile{
         display: block;
         overflow: visible;
+    }
+    @include shared.tablet-only{
+        grid-row: 1/3;
+        grid-column: 5/-1;
+        padding-top: 11*shared.$desktop-spacing;
+    }
+    @include shared.desktop-only {
         grid-row: 1/3;
         grid-column: 6/-1;
         padding-left: 5.8*shared.$desktop-spacing;

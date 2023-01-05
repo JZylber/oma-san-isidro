@@ -6,7 +6,6 @@
     }
     @include shared.not-mobile {
         grid-column-end: span 2;
-        height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -21,5 +20,11 @@
             font-size:shared.$desktop-actionable-font-size;
             line-height: 3.75* shared.$desktop-spacing;
         }  
+    }
+    &.phantom {
+        @include shared.tablet-only{
+            display: none;
+        }
+        
     }
 }

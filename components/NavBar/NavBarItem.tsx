@@ -7,7 +7,7 @@ interface NavBarItemsProps {
 
 const NavBarItem = (props : NavBarItemsProps) => {
     return(
-    <div className={styles.item}>
+    <div className={[styles.item,props.phantom && styles.phantom].join(" ")}>
         <span>{props.text}</span>
     </div>);
 }

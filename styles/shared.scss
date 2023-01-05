@@ -6,11 +6,13 @@ $mobileXspacing: 100vw/50;
 $mobileYspacing: 100vh/106;
 
 $mobile-spacing: 100vmin/50;
+$mobile-max-spacing: 100vmax/106;
 
 $tabletXspacing: 100vw/104.25;
 $tabletYspacing: 100vh/149.25;
 
 $tablet-spacing: 100vmin/104.25;
+$tablet-max-spacing: 100vmax/149.25;
 
 $desktopXspacing: 100vw/180;
 $desktopYspacing: 100vh/128;
@@ -18,6 +20,7 @@ $desktopYspacing: 100vh/128;
 $desktopXlargest: 1518px;
 
 $desktop-spacing: 100vmin/128;
+$desktop-max-spacing: 100vmin/180;
 
 /*Typography sizes*/
 $desktop-actionable-font-size: 2.4rem;
@@ -42,6 +45,11 @@ $desktop-reading-font-size: 2rem;
 }
 @mixin not-mobile {
     @media screen and (min-width:768px){
+        @content;
+    }
+}
+@mixin not-desktop {
+    @media screen and (max-width:1023px){
         @content;
     }
 }

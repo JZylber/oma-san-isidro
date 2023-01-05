@@ -7,21 +7,24 @@
 
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-
     @include shared.mobile-only{
         margin-top: 2*shared.$mobile-spacing;
         margin-bottom: 3*shared.$mobile-spacing;
         padding:  2*shared.$mobile-spacing;
+        justify-content: space-around;
     }
-
+    @include shared.tablet-only{
+        margin-top: 2*shared.$tabletYspacing;
+        padding-top: 3.5*shared.$tabletYspacing;
+        padding-bottom: 3.5*shared.$tabletYspacing;
+        justify-content: flex-start;
+        margin-top: 2*shared.$tabletYspacing;
+    }
     @include shared.desktop-only {
         padding-top: 3*shared.$desktop-spacing;
         padding-bottom: 3*shared.$desktop-spacing;
         /*padding-left: 4*shared.$desktop-spacing;
         padding-right: 4*shared.$desktop-spacing;*/
-        padding-left: 0;
-        padding-right: 0;
         justify-content: flex-start;
         margin-top: 1.5*shared.$desktop-spacing;
         margin-bottom: 20*shared.$desktop-spacing;

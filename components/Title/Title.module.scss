@@ -10,7 +10,10 @@
         margin-bottom: shared.$mobile-spacing * 2;
         height: shared.$mobile-spacing * 20;
     }
-    
+    @include shared.tablet-only {
+        grid-row: 1/2;
+        grid-column: 1/5 ;
+    }
     @include shared.desktop-only {
         grid-row: 1/2;
         grid-column: 1/6 ;
@@ -28,6 +31,11 @@
         top: shared.$mobile-spacing * -6;
         font-size: shared.$mobile-spacing * 14.125;
         line-height: shared.$mobile-spacing * 17.5;
+    }
+    @include shared.tablet-only{
+        top: shared.$tablet-max-spacing * 5;
+        font-size: shared.$tablet-max-spacing * 15;
+        line-height: shared.$tablet-max-spacing * 18.75;   
     }
     @include shared.desktop-only {
         font-size: shared.$desktopXspacing * 25.875;
@@ -50,6 +58,12 @@
         width: 37.5 * shared.$mobile-spacing;
         height: 10 * shared.$mobile-spacing;
         top:  7 * shared.$mobile-spacing;
+    }
+    @include shared.tablet-only{
+        font-size: shared.$tablet-max-spacing * 9;
+        line-height: shared.$tablet-max-spacing * 11;
+        top:  18 * shared.$tablet-max-spacing;
+        width: max-content;
     }
     @include shared.desktop-only {
         font-size: shared.$desktopXspacing * 15.375;
@@ -74,6 +88,12 @@
         top:  16.375 * shared.$mobile-spacing;
         left: 0.5*shared.$mobile-spacing;
         width: 36.625 * shared.$mobile-spacing;
+    }
+    @include shared.tablet-only{
+        top: 28 * shared.$tablet-max-spacing;
+        font-size: shared.$tablet-max-spacing * 1.875;
+        line-height:  3*shared.$tablet-max-spacing;
+        width: fit-content;
     }
     @include shared.desktop-only {
         font-size: shared.$desktopXspacing * 3.125;
