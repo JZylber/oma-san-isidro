@@ -17,6 +17,8 @@ $tablet-max-spacing: 100vmax/149.25;
 $desktopXspacing: 100vw/180;
 $desktopYspacing: 100vh/128;
 
+$desktopXlargest: 1518px;
+
 $desktop-spacing: 100vmin/128;
 $desktop-max-spacing: 100vmin/180;
 
@@ -43,6 +45,12 @@ $desktop-max-spacing: 100vmin/180;
 }
 @mixin not-desktop {
     @media screen and (max-width:1023px){
+        @content;
+    }
+}
+
+@mixin largest {
+    @media screen and (min-width:$desktopXlargest){
         @content;
     }
 }

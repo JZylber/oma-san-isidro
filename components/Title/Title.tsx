@@ -5,7 +5,7 @@ export default function Title(){
         <div className={styles.title}>
             <h1>oma</h1>
             <h2>San Isidro</h2>
-            <p>Secretaría Regional Buenos Aires Norte de las Olimpiadas de Matemática Argentinas.</p>
+            <p>Secretaría Regional Buenos Aires Norte de <br /> las Olimpiadas de Matemática Argentinas.</p>
         </div>
     )
 }
