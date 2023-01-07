@@ -5,7 +5,7 @@
     @include shared.mobile-only{
         max-width: 37.5 * shared.$mobile-spacing;
         &:not(:last-child){
-            margin-bottom: 3*shared.$mobile-spacing;
+            margin-bottom: 2.4rem;
             }
     }
     @include shared.tablet-only {
@@ -33,7 +33,7 @@
         font-size: shared.$mobile-actionable-font-size;
         line-height: 2.375*shared.$mobile-spacing;
 
-        margin-bottom: shared.$mobile-spacing;
+        margin-bottom: 0.5rem;
 
         display: inline-block;
     }

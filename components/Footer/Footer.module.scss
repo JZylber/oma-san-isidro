@@ -38,7 +38,7 @@
             @include shared.mobile-only{
                 font-size: shared.$mobile-reading-font-size;
                 line-height: 2 * shared.$mobile-spacing;
-                margin-bottom: 0.625 * shared.$mobile-spacing;
+                margin-bottom: 0.8rem;
 
             }
             @include shared.tablet-only{
@@ -71,10 +71,11 @@
     }
     &_links {
         @include shared.mobile-only{
+            height: 9.6rem;
             display: flex;
             justify-content: space-between;
-            margin-top: 2.5 * shared.$mobile-spacing;
-            margin-bottom: 3 * shared.$mobile-spacing;
+            margin-top: 3.2rem;
+            margin-bottom: 3.2rem;
         }
         @include shared.tablet-only{
             grid-column: 1/7;
@@ -138,6 +139,7 @@
     }
     &_logo {
         @include shared.not-mobile {
+            height: 9.6rem;
             grid-column: 1/2;
             grid-row: 1/2;
         }

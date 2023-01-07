@@ -8,10 +8,6 @@
 }
 
 .main {
-    @include shared.mobile-only{
-        padding-left: 5.5 * shared.$mobile-spacing;
-        padding-right: 5.5 * shared.$mobile-spacing;
-    }
     @include shared.not-mobile {
         grid-row: 2/-1;
         grid-column: 1/-1;
@@ -30,6 +26,12 @@
 }
 
 .pageLayout {
+    @include shared.mobile-only{
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        justify-content: center;
+    }
     @include shared.tablet-only{
         display: grid;
         column-gap: 2.5 * shared.$tabletXspacing;
@@ -53,7 +55,6 @@
     @include shared.font-montserrat(400);
     @include shared.mobile-only{
         text-align: center;
-        margin-top: 7*shared.$mobile-spacing;
         line-height: 3*shared.$mobile-spacing;
     }
     @include shared.tablet-only{
@@ -66,8 +67,10 @@
     }
 }
 .newsSection{
+    @include shared.mobile-only{
+        margin-top: 4.8rem;
+    }
     @include shared.tablet-only{
-        
         grid-row: 2/3;
         grid-column: 1/5 ;
     }
@@ -78,6 +81,9 @@
 }
 
 .FAQSection{
+    @include shared.mobile-only{
+        margin-top: 4.8rem;
+    }
     @include shared.not-mobile{
         grid-row: 3/4;
         grid-column: 1/-1 ;

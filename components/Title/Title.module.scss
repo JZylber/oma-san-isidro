@@ -6,8 +6,7 @@
     word-wrap: break-word;
 
     @include shared.mobile-only{
-        margin-top: shared.$mobile-spacing * 6;
-        margin-bottom: shared.$mobile-spacing * 2;
+        margin-top: 6.4rem;
         height: shared.$mobileXspacing * 20;
     }
     @include shared.tablet-only {

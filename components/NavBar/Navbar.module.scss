@@ -2,7 +2,6 @@
 
 .icon {
     @include shared.mobile-only {
-        padding-left: 5.5 * shared.$mobile-spacing;
      }
     @include shared.not-mobile {
        display: none;
@@ -10,7 +9,7 @@
 }
 .navbar {
     @include shared.mobile-only{
-        padding-top: shared.$mobile-spacing * 3;
+        padding-top: 2.4rem;
         min-height: shared.$mobile-spacing * 4;
     }
     @include shared.tablet-only{

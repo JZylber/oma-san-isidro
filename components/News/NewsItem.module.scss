@@ -12,10 +12,10 @@
 
     @include shared.font-unbounded(500);
     @include shared.mobile-only{
-        margin-top: 2*shared.$mobile-spacing;
-        margin-bottom: 3*shared.$mobile-spacing;
+        margin-top: 1.6rem;
+        margin-bottom: 2.4rem;
 
-        height: 9.25*shared.$mobile-spacing;
+        height: 7.2rem;
 
         box-shadow: 0px shared.$mobile-spacing black;
         
