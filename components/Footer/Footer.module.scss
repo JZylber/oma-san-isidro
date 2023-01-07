@@ -7,9 +7,10 @@
         grid-column: 1/-1;
         grid-row: 4/5;
         @include shared.tablet-columns;
-        grid-template-rows: 12*shared.$tabletYspacing max-content;
+        grid-template-rows: 5.8rem max-content;
         align-items: start;
         row-gap: 6*shared.$tabletYspacing;
+        margin-top: 7.2rem;
     }
     @include shared.desktop-only {
         display: grid;
@@ -123,8 +124,7 @@
             @include shared.tablet-only{
                 font-size: shared.$tablet-reading-font-size;
                 line-height: 2.25 * shared.$tablet-spacing;
-                margin-bottom: 0.625 * shared.$tablet-spacing;
-                padding-bottom: 2 * shared.$tablet-spacing;
+                margin-bottom: 0.8rem;
             }
             @include shared.desktop-only {
                 font-size: shared.$desktop-reading-font-size;
@@ -162,8 +162,7 @@
             font-size: shared.$tablet-reading-font-size;
             line-height: 2.3125 * shared.$tablet-spacing;
 
-            padding-top: 2 * shared.$tablet-spacing;
-            padding-bottom: 2 * shared.$tablet-spacing;
+            padding: 1.6rem 0 1.6rem 0;
             text-align: left;
         }
         @include shared.desktop-only {

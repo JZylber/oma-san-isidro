@@ -13,7 +13,7 @@
      span {
         @include shared.font-unbounded(400);
         @include shared.tablet-only{
-            font-size: 2* shared.$tablet-spacing;
+            font-size: shared.$tablet-actionable-font-size;
             line-height: 2.5* shared.$tablet-spacing;
         }
         @include shared.desktop-only{

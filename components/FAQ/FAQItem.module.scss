@@ -11,10 +11,8 @@
     @include shared.tablet-only {
         box-sizing: border-box;
         max-width: 50%;
-        padding-top: 2.5*shared.$tabletYspacing;
-        padding-bottom: 2.5*shared.$tabletYspacing;
-        padding-left: 2*shared.$tabletYspacing;
-        padding-right: 2*shared.$tabletYspacing;
+
+        padding: 2rem 1rem 2rem 1rem;
     }
     @include shared.desktop-only {
         box-sizing: border-box;

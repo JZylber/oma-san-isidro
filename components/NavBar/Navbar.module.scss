@@ -18,7 +18,7 @@
         display: grid;
         @include shared.tablet-columns;
         grid-template-rows: 1fr;
-        padding-top: shared.$tabletYspacing * 3;
+        padding-top: 2.4rem;
         min-height: shared.$tabletYspacing * 4;
     }
     @include shared.desktop-only {

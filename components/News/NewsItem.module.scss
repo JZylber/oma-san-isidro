@@ -23,14 +23,13 @@
         line-height: 2.375*shared.$mobile-spacing;
     }
     @include shared.tablet-only{
-        margin-top: 1*shared.$tabletYspacing;
-        margin-bottom: 2*shared.$tabletYspacing;
+        margin-top: 1.6rem;
         box-shadow: 0px shared.$tabletYspacing black;
 
         font-size: shared.$tablet-actionable-font-size;
         line-height: 2.5*shared.$tablet-max-spacing;
 
-        height: 8*shared.$tabletYspacing;
+        height: 6.4rem;
         &:first-child{
             margin-top: 2*shared.$tabletYspacing;
         }

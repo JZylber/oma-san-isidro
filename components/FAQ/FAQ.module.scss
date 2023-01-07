@@ -14,11 +14,9 @@
         justify-content: space-around;
     }
     @include shared.tablet-only{
-        margin-top: 2*shared.$tabletYspacing;
-        padding-top: 3.5*shared.$tabletYspacing;
-        padding-bottom: 3.5*shared.$tabletYspacing;
+        margin-top: 1.6rem;
+        padding:  3.8rem 1.6rem 3.8rem 1.6rem;
         justify-content: flex-start;
-        margin-top: 2*shared.$tabletYspacing;
     }
     @include shared.desktop-only {
         padding-top: 3*shared.$desktop-spacing;
