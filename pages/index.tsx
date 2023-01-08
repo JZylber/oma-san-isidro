@@ -27,17 +27,25 @@ const Home: NextPage = () => {
         {showContent && 
         <main className={styles.main}>
           <Title/>
+
+          {/* NEWS */}
           <section className={styles.newsSection}>
             <h3 className={styles.sectionTitle}>Novedades</h3>
             <News/>
           </section>
+
+          {/* IMAGE */}
           <div className={styles.containerImg}>
             <MainNandu className={styles.mainImage}/>
           </div>
+
+          {/* FAQ */}
           <section className={styles.FAQSection}>
             <h3 className={styles.sectionTitle}>Preguntas Frecuentes</h3>
             <Faq/>
           </section>
+
+          {/* FOOTER */}
           <Footer></Footer>
         </main>
         }

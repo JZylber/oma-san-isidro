@@ -8,7 +8,7 @@ interface NewsItemProps {
 export default function NewsItem(props:NewsItemProps){
     return(
         <div className={styles.container}>
-            <span>{props.content}</span>
+            <span>{props.content} </span>
             <NewsArrow className={styles.arrow}/>
         </div>
     )

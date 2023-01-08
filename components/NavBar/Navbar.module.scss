@@ -27,8 +27,7 @@
         display: grid;
         @include shared.desktop-columns;
         grid-template-rows: 1fr;
-        padding-top: shared.$desktop-spacing * 3;
-        min-height: shared.$desktop-spacing * 4;
+        height: 8.8rem;
     }
     &_full {
         @extend .navbar;
