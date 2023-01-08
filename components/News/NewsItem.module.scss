@@ -20,14 +20,14 @@
 
         height: 7.2rem;
 
-        box-shadow: 0px 0.8rem black;
+        box-shadow: 0px 0.6rem black;
         
         font-size:shared.$mobile-actionable-font-size;
         line-height: 2.375*shared.$mobile-spacing;
     }
     @include shared.tablet-only{
         margin-top: 1.6rem;
-        box-shadow: 0px shared.$tabletYspacing black;
+        box-shadow: 0px 0.6rem black;
 
         font-size: shared.$tablet-actionable-font-size;
         line-height: 2.5*shared.$tablet-max-spacing;
@@ -45,7 +45,7 @@
 
         margin-top: 2*shared.$desktop-spacing;
         margin-bottom: 3*shared.$desktop-spacing;
-        box-shadow: 0px shared.$desktop-spacing black;
+        box-shadow: 0px 0.8rem black;
     }
     span {
         @include shared.desktop-only{
