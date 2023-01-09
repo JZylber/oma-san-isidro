@@ -17,7 +17,9 @@ export default function NavBar({togglePageContent}:NavProps){
     }
     return(
         <nav className={styles[["navbar", (openFullMenu ? "_full" : "")].join("")]}>
-            {openFullMenu?<X className={styles.icon} onClick={()=>openCloseMenu()}/>:<MenuIcon className={styles.icon} onClick={()=>openCloseMenu()}/>}
+            <div className={styles.iconWrapper}>
+                {openFullMenu?<X className={styles.icon} onClick={()=>openCloseMenu()}/>:<MenuIcon className={styles.icon} onClick={()=>openCloseMenu()}/>}
+            </div>
             <NavBarItem text='inicio'/>
             <NavBarItem text='' phantom={true}/>
             <NavBarItem text='oma' />

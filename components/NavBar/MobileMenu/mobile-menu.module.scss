@@ -4,18 +4,24 @@
     background-color: shared.$light-blue;
     min-height: 100vh;
 
+    .top{
+        margin: 0 10% 0 10%;
+    }
+
     h1 {
         @include shared.font-unbounded(400);
-        font-size: shared.$mobile-spacing * 14.125;
+        font-size: shared.$mobile-spacing * 14.925;
         line-height: shared.$mobile-spacing * 17.5;
+        transform: translateX(shared.$mobile-spacing * -1.3);
     }
     h2 {
 
         @include shared.font-montserrat(400);
-        font-size: shared.$mobile-spacing * 8.25;
+        font-size: shared.$mobile-spacing * 8.65;
         line-height: shared.$mobile-spacing * 10.05625;
         letter-spacing: -0.04em;
-        transform: translateY(shared.$mobile-spacing * -4.5);
+        transform: translateY(shared.$mobile-spacing * -4.0) translateX(shared.$mobile-spacing * -0.9);
+        white-space: nowrap;
     }
     .items{
         width: 100%;
@@ -26,6 +32,7 @@
         .item{
             border-top: 2px solid shared.$black;
             .main{
+                margin: 0 10% 0 10%;
                 @include shared.font-unbounded(400);
                 font-size: 3.6rem;
                 margin-top: 0.4rem;
@@ -40,6 +47,7 @@
                 align-items: center;
             }
             ul {
+                margin: 0 10% 0 10%;
                 list-style: none;
                 display: flex;
                 flex-direction: column;
@@ -59,7 +67,7 @@
                 /*text-decoration: underline;*/
             }
             &:last-child{
-                border-bottom: 1px solid shared.$black;
+                border-bottom: 2px solid shared.$black;
             }    
             &_selected{
                 @extend .item;

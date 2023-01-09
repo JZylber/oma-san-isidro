@@ -8,6 +8,12 @@
 }
 
 .main {
+    @include shared.mobile-only{
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
     @include shared.not-mobile {
         grid-row: 2/-1;
         grid-column: 1/-1;
@@ -31,7 +37,8 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        width: 80%;
+        align-items: center;
+        width: 100%;
     }
     @include shared.tablet-only{
         display: grid;
