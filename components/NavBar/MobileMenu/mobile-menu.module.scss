@@ -3,10 +3,7 @@
 .menu {
     background-color: shared.$light-blue;
     min-height: 100vh;
-    .top{
-        margin-left: 5.875*shared.$mobile-spacing;
-        margin-right: 5.875*shared.$mobile-spacing;
-    }
+
     h1 {
         @include shared.font-unbounded(400);
         font-size: shared.$mobile-spacing * 14.125;
@@ -22,19 +19,18 @@
     }
     .items{
         width: 100%;
-        margin-top: 5*shared.$mobile-spacing;
+        margin-top: 3.2rem;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         .item{
-            border-top: 1px solid shared.$black;
-            padding-left: 5.875*shared.$mobile-spacing;
-            padding-right: 5.875*shared.$mobile-spacing;
+            border-top: 2px solid shared.$black;
             .main{
                 @include shared.font-unbounded(400);
-                font-size: shared.$mobile-spacing * 4.5;
-                line-height: shared.$mobile-spacing * 6.5;
-
+                font-size: 3.6rem;
+                margin-top: 0.4rem;
+                
+                height: 6.4rem;
                 letter-spacing: -0.035em;
 
                 padding-top: shared.$mobile-spacing * 2;
@@ -53,7 +49,7 @@
             }
             ul li {
                 @include shared.font-unbounded(300);
-                font-size: shared.$mobile-spacing * 2.5;
+                font-size: 2rem;
                 line-height: shared.$mobile-spacing * 6;
 
                 letter-spacing: -0.035em;

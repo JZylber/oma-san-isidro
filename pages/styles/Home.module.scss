@@ -30,8 +30,8 @@
     @include shared.mobile-only{
         display: flex;
         flex-direction: column;
-        width: 80%;
         justify-content: center;
+        width: 80%;
     }
     @include shared.tablet-only{
         display: grid;

@@ -15,6 +15,7 @@ type mobileMenuProps = {
 }
 
 const MobileMenu= ({closeMenu} : mobileMenuProps) => {
+
     const router = useRouter();
     //Array con la información del menu
     let menuHierarchy : Array<menuItem> = [
