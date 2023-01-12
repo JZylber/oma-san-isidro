@@ -2,67 +2,20 @@ import MenuArrow from '../../../img/menuArrow.svg';
 import styles from './mobile-menu.module.scss';
 import { useRouter } from 'next/router'
 import { useState } from "react";
+import { menuItem, showCurrentPageSelected } from '../NavBarRouting';
 
-type menuItem = {
-    text: string,
-    link: string | null,
-    selected : boolean
-    subItems: Array<menuItem>
-}
+
 
 type mobileMenuProps = {
-    closeMenu : () => void
+    closeMenu : () => void,
+    menuHierarchy : Array<menuItem>
 }
 
-const MobileMenu= ({closeMenu} : mobileMenuProps) => {
+const MobileMenu= ({closeMenu,menuHierarchy} : mobileMenuProps) => {
 
     const router = useRouter();
-    //Array con la información del menu
-    let menuHierarchy : Array<menuItem> = [
-        {text: "Inicio",link:"/",selected : false,subItems:[]},
-        {text: "Oma",link:null,selected : false,subItems:[
-            {text: "Autorización",link:'/oma/autorizacion',selected : false,subItems:[]},
-            {text: "Inscripción",link:null,selected : false,subItems:[]},
-            {text: "Reglamento",link:null,selected : false,subItems:[]},
-            {text: "Sedes",link:null,selected : false,subItems:[]},
-            {text: "Resultados",link:null,selected : false,subItems:[]},
-            {text: "Problemas",link:null,selected : false,subItems:[]}
-        ]},
-        {text: "Ñandú",link:null,selected : false,subItems:[
-            {text: "Autorización",link:'/nandu/autorizacion',selected : false,subItems:[]},
-            {text: "Inscripción",link:null,selected : false,subItems:[]},
-            {text: "Reglamento",link:null,selected : false,subItems:[]},
-            {text: "Sedes",link:null,selected : false,subItems:[]},
-            {text: "Resultados",link:null,selected : false,subItems:[]},
-            {text: "Problemas",link:null,selected : false,subItems:[]}
-        ]},
-        {text: "Internacional",link:"/",selected : false,subItems:[]},
-    ]
-
-    //Rutina que refleja la página actual
-    const showCurrentPageSelected = (menuComponents : Array<menuItem>) => {
-        let currentRoute = router.pathname;
-        let newHierarchy : Array<menuItem> = menuComponents.map((item : menuItem) => {
-            let subitemSelected = item.subItems.find((subitem) => subitem.link == currentRoute);
-            if(subitemSelected){
-                let newItem : menuItem = {...item,selected: true};
-                newItem.subItems = newItem.subItems.map((subitem) => {
-                    if(subitem === subitemSelected){
-                        let newSubitem :  menuItem = {...subitem,selected:true};
-                        return newSubitem;
-                    } else {
-                        return subitem;
-                    }
-                })
-                return(newItem)
-            }else{
-                return item;
-            }
-        })
-        return newHierarchy;
-    }
-
-    const [hierarchy,setHierarchy] = useState(showCurrentPageSelected(menuHierarchy));
+    
+    const [hierarchy,setHierarchy] = useState(showCurrentPageSelected(menuHierarchy,router.pathname));
 
     //Rutina para ir al link de un item correspondiente o abrir/cerrar su submenu
     const selectMainItem = (name : string) => {
