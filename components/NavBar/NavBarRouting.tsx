@@ -23,7 +23,12 @@ export const showCurrentPageSelected = (menuComponents : Array<menuItem>,current
             })
             return(newItem)
         }else{
-            return item;
+            if(item.link == currentRoute){
+                let newItem = {...item,selected:true}
+                return(newItem);
+            } else {
+                return(item);
+            };
         }
     })
     return newHierarchy;

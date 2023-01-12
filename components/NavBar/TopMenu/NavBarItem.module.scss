@@ -1,6 +1,7 @@
 @use '../../../styles/shared.scss' as shared;
 
 .item {
+    position: relative;
     @include shared.mobile-only {
         display: none;
     }
@@ -27,4 +28,12 @@
         }
         
     }
+}
+.selected_bar {
+    position: absolute;
+    background: shared.$light-blue;
+    border-radius: 9px;
+    height: 8px;
+    width: 100%;
+    top: 100%;
 }

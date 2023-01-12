@@ -15,7 +15,7 @@ const MobileMenu= ({closeMenu,menuHierarchy} : mobileMenuProps) => {
 
     const router = useRouter();
     
-    const [hierarchy,setHierarchy] = useState(showCurrentPageSelected(menuHierarchy,router.pathname));
+    const [hierarchy,setHierarchy] = useState(menuHierarchy);
 
     //Rutina para ir al link de un item correspondiente o abrir/cerrar su submenu
     const selectMainItem = (name : string) => {
@@ -61,7 +61,7 @@ const MobileMenu= ({closeMenu,menuHierarchy} : mobileMenuProps) => {
     //Renderizado de cada item del menu
     const renderMenuItem = (item : menuItem) => {
         return(
-        <div className={styles[["item",(item.selected?"_selected":"")].join("")]}>
+        <div className={styles[["item",(item.selected && item.subItems.length > 0 ?"_selected":"")].join("")]}>
             <div className={styles.main} onClick={() => selectMainItem(item.text)}>
                 <span>{item.text}</span>
                 <MenuArrow/>

@@ -1,0 +1,32 @@
+@use '../../../styles/shared.scss' as shared;
+
+.submenu_bar{
+    @include shared.mobile-only{
+        display: none;
+    }
+    @include shared.not-mobile {
+        list-style-type: none;
+        display: flex;
+        justify-content: space-around;
+        background-color: shared.$light-blue;
+        border-radius: 9px;
+        margin-top: 24px;
+    }
+    &_item {
+        @include shared.font-unbounded(400);
+        display: flex;
+        align-items: center;
+        @include shared.tablet-only{
+            font-size : shared.$tablet-reading-font-size;
+            min-height: shared.$tabletYspacing * 8;
+        }
+        @include shared.desktop-only{
+            font-size : shared.$desktop-reading-font-size;
+            min-height: shared.$desktopYspacing * 8;
+        }
+        &_selected,&:hover{
+            @include shared.font-unbounded(700);
+        }
+        
+    }
+}
