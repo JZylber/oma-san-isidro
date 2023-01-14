@@ -35,38 +35,47 @@ export default function NavBar({togglePageContent}:NavProps){
     ];
     const router = useRouter();
     const [menuHierarchy,setMenuHierarchy] = useState(showCurrentPageSelected(defaultMenuHierarchy,router.pathname));
-    const [subMenuItems,setSubMenuItems] = useState<MenuHierarchy>([]);
-    const [showSubMenu,setShowSubMenu] = useState(false);
+    const showSubMenu = () => {
+        return(menuHierarchy.find((element) => element.selected && element.subItems.length > 0) != undefined)
+    }
+    const getSubitems = () => {
+        let item = menuHierarchy.find((element) => element.selected)
+        if(item){
+            return(item.subItems)
+        }else{
+            return([])
+        }
+    }
+    const selectItem = (hierarchy:MenuHierarchy,mainCategory:number,subCategory?:number) => {
+        return(hierarchy.map((item,index) => {
+            let newItem : menuItem;
+            if(index == mainCategory){
+                newItem = {...item,selected:true,subItems:item.subItems.map((subItem,subIndex) => {
+                    if(subCategory && subCategory == subIndex){
+                        return({...subItem,selected:true})
+                    }else {
+                        return({...subItem,selected:false})
+                    }
+                })}
+            } else {
+                newItem = {...item,selected:false,subItems:item.subItems.map((subItem) => {return{...subItem,selected:false}})}
+            }
+            return(newItem)
+        }))
+    }
 
     const clickMainItem = (itemName : string) => {
-        const item = menuHierarchy.find((item) => item.text == itemName);
+        const itemIndex = menuHierarchy.findIndex((item) => item.text == itemName);
+        const item = menuHierarchy[itemIndex]
         if(item){
             if(item.link){
                 router.push(item.link)
             } else {
                 item.selected = true;
-                setMenuHierarchy(menuHierarchy.map((mainMenuitem) => {
-                    if(mainMenuitem.text == item.text){
-                        return(item)
-                    } else {
-                        let newItem = {...mainMenuitem, selected:false}
-                        return(newItem)
-                    }
-                }
-                ))
-                setShowSubMenu(true);
-                setSubMenuItems(item.subItems);
+                setMenuHierarchy(selectItem(menuHierarchy,itemIndex))
             }
         }
-    }
-    useEffect(() => {
-        menuHierarchy.forEach((item) => {
-            if(item.selected && item.subItems.length > 0){
-                setShowSubMenu(true);
-                setSubMenuItems(item.subItems);      
-            }
-        })
-    }) 
+    } 
     const openCloseMenu = () => {
         setOpenFullMenu(!openFullMenu);
         togglePageContent && togglePageContent();
@@ -79,7 +88,7 @@ export default function NavBar({togglePageContent}:NavProps){
             </div>
             {openFullMenu ? <MobileMenu closeMenu={openCloseMenu} menuHierarchy={menuHierarchy}/>: <TopMenu menuHierarchy={menuHierarchy} onClick={clickMainItem}/> }
         </div>
-            {showSubMenu && <SubMenu items={subMenuItems}/>}
+            {showSubMenu() && <SubMenu items={getSubitems()}/>}
         </nav>
     )
 }

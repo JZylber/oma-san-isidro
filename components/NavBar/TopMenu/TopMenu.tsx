@@ -11,13 +11,14 @@ type topMenuProps = {
 
 const TopMenu = ({menuHierarchy,onClick} : topMenuProps) => {
     const router = useRouter();
+    const [hovered,setHovered] = useState<number>() 
 
     //Renderizado de cada item del menu
     const renderMenuItem = (item: menuItem,position:number) => {
         return(
             <>
             {position == 1 && <NavBarItem text={""} phantom={true} selected={false}/>}
-            <NavBarItem text={item.text} link={item.link} selected={item.selected} onClick={() => onClick(item.text)}/>
+            <NavBarItem text={item.text} link={item.link} selected={item.selected || position == hovered} onClick={() => onClick(item.text)}/>
             </>
         )
     }
