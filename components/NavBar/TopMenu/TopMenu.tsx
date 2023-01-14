@@ -18,7 +18,8 @@ const TopMenu = ({menuHierarchy,onClick} : topMenuProps) => {
         return(
             <>
             {position == 1 && <NavBarItem text={""} phantom={true} selected={false}/>}
-            <NavBarItem text={item.text} link={item.link} selected={item.selected || position == hovered} onClick={() => onClick(item.text)}/>
+            <NavBarItem text={item.text} link={item.link} selected={item.selected || position == hovered} onClick={() => onClick(item.text)} 
+            onMouseEnter={() => {setHovered(position)}} onMouseLeave={() => {setHovered(undefined)}} />
             </>
         )
     }

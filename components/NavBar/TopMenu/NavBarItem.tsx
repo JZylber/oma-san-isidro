@@ -6,6 +6,8 @@ interface NavBarItemsProps {
     selected: boolean,
     link?: string,
     onClick?: (link?:string) => void,
+    onMouseEnter?: () => void,
+    onMouseLeave?: () => void,
     phantom? : boolean
   }
 
@@ -14,7 +16,7 @@ const NavBarItem = (props : NavBarItemsProps) => {
         props.onClick && props.onClick(link);
     }
     return(
-    <div className={[styles.item,props.phantom && styles.phantom].join(" ")} onClick={() => goToLink(props.link)}>
+    <div className={[styles.item,props.phantom && styles.phantom].join(" ")} onClick={() => goToLink(props.link)} onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave}>
         <span>{props.text}</span>
         {props.selected && <div className={styles.selected_bar}></div>}  
     </div>);
