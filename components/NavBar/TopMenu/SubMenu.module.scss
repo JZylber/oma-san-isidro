@@ -8,9 +8,15 @@
         list-style-type: none;
         display: flex;
         justify-content: space-around;
-        background-color: shared.$light-blue;
-        border-radius: 9px;
         margin-top: 24px;
+    }
+    @include shared.tablet-only{
+        padding-left: 7.5%;
+        padding-right: 7.5%;
+    }
+    @include shared.desktop-only{
+        padding-left: 10%;
+        padding-right: 10%;
     }
     &_item {
         @include shared.font-unbounded(400);
@@ -27,6 +33,8 @@
         &_selected,&:hover{
             @include shared.font-unbounded(700);
         }
-        
+    }
+    &_separator{
+        border-left: 1px solid grey;
     }
 }

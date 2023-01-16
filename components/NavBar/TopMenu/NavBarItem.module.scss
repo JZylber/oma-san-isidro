@@ -22,6 +22,15 @@
             line-height: 3.75* shared.$desktop-spacing;
         }  
     }
+    &_selected {
+        background-color: shared.$white;
+        border-top: 2px solid shared.$black;
+        border-left: 2px solid shared.$black;
+        border-right: 2px solid shared.$black;
+        border-bottom: 2px solid shared.$white;
+        margin-bottom: -2px;
+        padding-bottom: -2px;
+    }
     &.phantom {
         @include shared.tablet-only{
             display: none;
@@ -29,11 +38,11 @@
         
     }
 }
-.selected_bar {
+/*.selected_bar {
     position: absolute;
     background: shared.$light-blue;
     border-radius: 9px;
     height: 8px;
     width: 100%;
     top: 100%;
-}
+}*/
