@@ -20,7 +20,7 @@ export default function NavBar({togglePageContent}:NavProps){
             {text: "Inscripción",link:undefined,selected : false,subItems:[]},
             {text: "Reglamento",link:undefined,selected : false,subItems:[]},
             {text: "Sedes",link:undefined,selected : false,subItems:[]},
-            {text: "Resultados",link:undefined,selected : false,subItems:[]},
+            {text: "Resultados",link:'/oma/resultados',selected : false,subItems:[]},
             {text: "Problemas",link:undefined,selected : false,subItems:[]}
         ]},
         {text: "Ñandú",link:undefined,selected : false,subItems:[
@@ -28,7 +28,7 @@ export default function NavBar({togglePageContent}:NavProps){
             {text: "Inscripción",link:undefined,selected : false,subItems:[]},
             {text: "Reglamento",link:undefined,selected : false,subItems:[]},
             {text: "Sedes",link:undefined,selected : false,subItems:[]},
-            {text: "Resultados",link:undefined,selected : false,subItems:[]},
+            {text: "Resultados",link:'/nandu/resultados',selected : false,subItems:[]},
             {text: "Problemas",link:undefined,selected : false,subItems:[]}
         ]},
         {text: "Internacional",link:"/internacional",selected : false,subItems:[]},
