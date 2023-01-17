@@ -87,7 +87,7 @@ export default function NavBar({togglePageContent}:NavProps){
             </div>
             {openFullMenu ? <MobileMenu closeMenu={openCloseMenu} menuHierarchy={menuHierarchy}/>: <TopMenu menuHierarchy={menuHierarchy} onClick={clickMainItem}/> }
         </div>
-            {showSubMenu() && <SubMenu items={getSubitems()}/>}
+            <SubMenu items={getSubitems()}/>
         </nav>
     )
 }

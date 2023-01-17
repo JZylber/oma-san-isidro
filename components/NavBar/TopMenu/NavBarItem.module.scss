@@ -10,17 +10,25 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        border-radius: 9px 9px 0px 0px;
      }
      span {
         @include shared.font-unbounded(400);
         @include shared.tablet-only{
             font-size: shared.$tablet-actionable-font-size;
-            line-height: 2.5* shared.$tablet-spacing;
+            padding-top: 1.6rem;
+            padding-bottom: 1.6rem;
+            //line-height: 2.5* shared.$tablet-spacing;
         }
         @include shared.desktop-only{
             font-size:shared.$desktop-actionable-font-size;
-            line-height: 3.75* shared.$desktop-spacing;
-        }  
+            //line-height: 3.75* shared.$desktop-spacing;
+            padding-top: 2.4rem;
+            padding-bottom: 3.2rem;
+        }
+        &:hover{
+            @include shared.font-unbounded(600);
+        }
     }
     &_selected {
         background-color: shared.$white;
@@ -30,6 +38,9 @@
         border-bottom: 2px solid shared.$white;
         margin-bottom: -2px;
         padding-bottom: -2px;
+        span{
+            @include shared.font-unbounded(600);
+        }   
     }
     &.phantom {
         @include shared.tablet-only{
