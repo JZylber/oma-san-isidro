@@ -1,0 +1,23 @@
+@use '../../styles/shared.scss' as shared;
+
+.wrapper{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+.main {
+    @include shared.tablet-only{
+        display: grid;
+        column-gap: 2.5 * shared.$tabletXspacing;
+        @include shared.tablet-columns;
+        grid-template-rows: max-content max-content;
+        width: 85%;
+    }
+    @include shared.desktop-only{
+        display: grid;
+        @include shared.desktop-columns;
+        grid-template-rows: max-content max-content;
+        width: 80%;
+        max-width: 1200px;
+    }
+}
