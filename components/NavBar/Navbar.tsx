@@ -70,10 +70,9 @@ export default function NavBar({togglePageContent}:NavProps){
         if(item){
             if(item.link){
                 router.push(item.link)
-            } else {
-                item.selected = true;
-                setMenuHierarchy(selectItem(menuHierarchy,itemIndex))
             }
+            item.selected = true;
+            setMenuHierarchy(selectItem(menuHierarchy,itemIndex))
         }
     } 
     const openCloseMenu = () => {
@@ -88,7 +87,7 @@ export default function NavBar({togglePageContent}:NavProps){
             </div>
             {openFullMenu ? <MobileMenu closeMenu={openCloseMenu} menuHierarchy={menuHierarchy}/>: <TopMenu menuHierarchy={menuHierarchy} onClick={clickMainItem}/> }
         </div>
-            {showSubMenu() && <SubMenu items={getSubitems()}/>}
+            <SubMenu items={getSubitems()}/>
         </nav>
     )
 }

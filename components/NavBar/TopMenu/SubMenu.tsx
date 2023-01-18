@@ -14,9 +14,13 @@ const SubMenu = ({items} : SubMenuProps) => {
     }
     return(
         <ul className={styles.submenu_bar}>
-            {items.map((item) => {
+            {items.map((item,position) => {
                 return(
-                <li className={[styles.submenu_bar_item,item.selected && styles.submenu_bar_item_selected].join(" ")} onClick={() => goToLink(item.link)}>{item.text}</li>)
+                <>
+                <li className={[styles.submenu_bar_item,item.selected && styles.submenu_bar_item_selected].join(" ")} onClick={() => goToLink(item.link)}>{item.text}</li>
+                {position < (items.length - 1) && <div className={styles.submenu_bar_separator}></div>}
+                </>
+                )
             })}
         </ul>
     )

@@ -16,9 +16,8 @@ const NavBarItem = (props : NavBarItemsProps) => {
         props.onClick && props.onClick(link);
     }
     return(
-    <div className={[styles.item,props.phantom && styles.phantom].join(" ")} onClick={() => goToLink(props.link)} onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave}>
-        <span>{props.text}</span>
-        {props.selected && <div className={styles.selected_bar}></div>}  
+    <div className={[styles.item,props.phantom && styles.phantom, props.selected && styles.item_selected].join(" ")} onClick={() => goToLink(props.link)} onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave}>
+        <span>{props.text}</span>  
     </div>);
 }
 export default NavBarItem

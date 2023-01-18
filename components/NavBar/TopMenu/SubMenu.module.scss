@@ -7,26 +7,42 @@
     @include shared.not-mobile {
         list-style-type: none;
         display: flex;
-        justify-content: space-around;
-        background-color: shared.$light-blue;
-        border-radius: 9px;
-        margin-top: 24px;
+        justify-content: space-between;
+        background-color: shared.$white;
+        box-sizing: border-box;
+    }
+    @include shared.tablet-only{
+        padding-left: 7.5%;
+        padding-right: 7.5%;
+        padding-top: 1.6rem;
+        padding-bottom: 1.6rem;
+        min-height: 5.6rem;
+    }
+    @include shared.desktop-only{
+        padding-left: 10%;
+        padding-right: 10%;
+        padding-top: 4.8rem;
+        padding-bottom: 4.8rem;
+        min-height: 12.8rem;
     }
     &_item {
-        @include shared.font-unbounded(400);
+        @include shared.font-montserrat(400);
         display: flex;
         align-items: center;
+        text-transform: lowercase;
         @include shared.tablet-only{
             font-size : shared.$tablet-reading-font-size;
-            min-height: shared.$tabletYspacing * 8;
+            line-height: 2.4rem;
         }
         @include shared.desktop-only{
             font-size : shared.$desktop-reading-font-size;
-            min-height: shared.$desktopYspacing * 8;
+            line-height: 2.9rem;
         }
         &_selected,&:hover{
-            @include shared.font-unbounded(700);
+            @include shared.font-montserrat(700);
         }
-        
+    }
+    &_separator{
+        border-left: 1px solid grey;
     }
 }
