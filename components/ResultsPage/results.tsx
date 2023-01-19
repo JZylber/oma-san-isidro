@@ -1,5 +1,6 @@
 import { useRouter } from "next/router"
 import { FormEventHandler, useState } from "react"
+import styles from "./results.module.scss"
 
 type ResultProps = {
     competition : string
@@ -11,12 +12,13 @@ type FilterData = {
     options? : Array<string> | Array<number>
 }
 
+
 const Results = ({competition} : ResultProps) => {
     const router = useRouter()
     const query = router.query
     const filter_input: Array<FilterData> = [
-        {name: "año",type:"select",options:[2012,2013,2014,2015,2016]},
-        {name:"instancia",type:"select",options:["intercolegial","zonal","regional"]},
+        {name: "año",type:"select",options:[2022,2023,2024]},
+        {name:"instancia",type:"select",options:["INTERCOLEGIAL","ZONAL","PROVINCIAL","REGIONAL","NACIONAL"]},
         {name:"nivel",type:"select",options:[1,2,3]},
         {name:"colegio",type:"select",options:["Colegio San Nicolás","Northlands"]},
         {name:"nombre",type:"text"},
@@ -40,31 +42,39 @@ const Results = ({competition} : ResultProps) => {
             )
         }
     }
-    const [results,setResults] = useState<string>("")
-    const getResults = async ()=> {
+    const [isLoading,setIsLoading] = useState(false)
+    const [results,setResults] = useState<Object>({})
+    const getResults = async (year : number,instance : string, type: string)=> {
         try {
-            let searchedResults = await fetch("/api/results").then((response) => response.json());
-            setResults()
-            return searchedResults
+            let searchedResults = await fetch(`/api/results?ano=${year}&instancia=${instance}&competencia=${type}`).then((response) => response.json());
+            setIsLoading(false)
+            setResults(searchedResults)
         } catch (error) {
             console.error(error);
+        }
+    }
+    const nameAsDB = (name: string) => {
+        if(name == "Ñandú"){
+            return("NANDU")
+        } else {
+            return("OMA")
         }
     }
     const searchResults : FormEventHandler<HTMLFormElement>= (event : React.SyntheticEvent) => {
         event.preventDefault();
         const target = event.target as typeof event.target & {
-            año: { value: string };
+            año: { value: number };
             instancia: { value: string };
             colegio: { value: string };
             nombre: { value: string };
             apellido: { value: string };
         };
-        
-        console.log(getResults())
+        getResults(target.año.value,target.instancia.value,nameAsDB(competition))
+        setIsLoading(true)
     }
     return(
         <>
-        <h1>Resultados {competition}</h1>
+        <h1 className={styles.title}>Resultados {competition}</h1>
         <form onSubmit={searchResults}>
             {filters.map((filter) => {
                 return(
@@ -75,7 +85,7 @@ const Results = ({competition} : ResultProps) => {
             <input type="submit" value="Buscar resultados"/>
         </form>
         <div>
-            {results}
+            {isLoading ? "Buscando resultados...": JSON.stringify(results)}
         </div>
         </>
     )
