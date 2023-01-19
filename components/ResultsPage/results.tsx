@@ -18,6 +18,7 @@ const Results = ({competition} : ResultProps) => {
     const filter_input: Array<FilterData> = [
         {name: "año",type:"select",options:[2012,2013,2014,2015,2016]},
         {name:"instancia",type:"select",options:["intercolegial","zonal","regional"]},
+        {name:"nivel",type:"select",options:[1,2,3]},
         {name:"colegio",type:"select",options:["Colegio San Nicolás","Northlands"]},
         {name:"nombre",type:"text"},
         {name:"apellido",type:"text"},
@@ -29,10 +30,10 @@ const Results = ({competition} : ResultProps) => {
     const render_input = (filter:string) => {
         const data : FilterData | undefined = filter_input.find((filterData) => filterData.name == filter)
         if(data && data.type == "text"){
-            return(<input type="text"/>)
+            return(<input id={data.name} type="text"/>)
         }else if(data && data.type == "select"){
             return(
-                <select>
+                <select id={data.name}>
                     {data.options && data.options.map((option) => {
                         return(<option value={option} selected={isAQueryOption(filter,option)}>{option}</option>)
                     })}

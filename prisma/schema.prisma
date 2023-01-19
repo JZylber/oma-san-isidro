@@ -1,0 +1,77 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum TIPO {
+  OMA
+  NANDU
+}
+
+enum INSTANCIA {
+  INTERCOLEGIAL
+  ZONAL
+  PROVINCIAL
+  REGIONAL
+  NACIONAL
+}
+
+model Participante{
+  id_participante Int @default(autoincrement()) @id
+  nombre String
+  apellido String
+  email String?
+  participaciones Participacion[]
+}
+
+model Participacion {
+  id_participacion Int @default(autoincrement()) @id
+  nivel Int
+  participante Participante @relation(fields: [id_participante], references: [id_participante])
+  id_participante Int
+  colegio Colegio @relation(fields: [id_colegio], references: [id_colegio])
+  id_colegio Int
+  rinde Rinde[]
+}
+
+model Colegio {
+  id_colegio Int @default(autoincrement()) @id
+  nombre String
+  sede String?
+  participaciones Participacion[]
+}
+
+model Competencia {
+  id_competencia Int @default(autoincrement()) @id
+  numero Int
+  ano Int
+  tipo TIPO
+  pruebas Prueba[]
+}
+
+model Prueba {
+  id_prueba Int @default(autoincrement()) @id
+  fecha DateTime
+  instancia INSTANCIA
+  competencia Competencia @relation(fields: [id_competencia],references: [id_competencia])
+  id_competencia Int
+  rinden Rinde[]
+}
+
+model Rinde {
+  id_rinde  Int @default(autoincrement()) @id
+  presente Boolean
+  aprobado Boolean
+  resultados Json
+  participacion Participacion @relation(fields: [id_participacion],references: [id_participacion])
+  id_participacion Int
+  prueba Prueba @relation(fields: [id_prueba],references: [id_prueba])
+  id_prueba Int
+}
