@@ -1,5 +1,4 @@
 import { useRouter } from "next/router"
-import { type } from "os"
 import { FormEventHandler, useState } from "react"
 
 type ResultProps = {
@@ -42,6 +41,15 @@ const Results = ({competition} : ResultProps) => {
         }
     }
     const [results,setResults] = useState<string>("")
+    const getResults = async ()=> {
+        try {
+            let searchedResults = await fetch("/api/results").then((response) => response.json());
+            setResults()
+            return searchedResults
+        } catch (error) {
+            console.error(error);
+        }
+    }
     const searchResults : FormEventHandler<HTMLFormElement>= (event : React.SyntheticEvent) => {
         event.preventDefault();
         const target = event.target as typeof event.target & {
@@ -51,7 +59,8 @@ const Results = ({competition} : ResultProps) => {
             nombre: { value: string };
             apellido: { value: string };
         };
-        setResults(`Se buscaron resultados para ${target.año.value}, ${target.instancia.value}, ${target.colegio.value}, ${target.nombre.value}, ${target.apellido.value}`)
+        
+        console.log(getResults())
     }
     return(
         <>

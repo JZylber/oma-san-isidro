@@ -39,6 +39,8 @@ model Participacion {
   colegio Colegio @relation(fields: [id_colegio], references: [id_colegio])
   id_colegio Int
   rinde Rinde[]
+  competencia Competencia @relation(fields: [id_competencia],references: [id_competencia]) 
+  id_competencia Int
 }
 
 model Colegio {
@@ -54,6 +56,7 @@ model Competencia {
   ano Int
   tipo TIPO
   pruebas Prueba[]
+  participantes Participacion[]
 }
 
 model Prueba {
