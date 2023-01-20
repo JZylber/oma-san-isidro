@@ -1,9 +1,21 @@
+@use '../../styles/shared.scss' as shared;
+
 .title {
     grid-column: 1/-1;
 }
 .form {
     grid-column: 1/-1;
+    font-size: shared.$desktop-reading-font-size
+}
+.results {
+    grid-column: 1/-1;
+    font-size: shared.$desktop-reading-font-size
 }
 .result_table {
-    grid-column: 1/-1;
+    width: 100%;
+    border-collapse: collapse;
+    tr { 
+    border: solid;
+    border-width: 1px 0;
+    }
 }

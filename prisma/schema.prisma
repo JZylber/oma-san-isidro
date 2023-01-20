@@ -37,7 +37,7 @@ model Participacion {
   participante Participante @relation(fields: [id_participante], references: [id_participante])
   id_participante Int
   colegio Colegio @relation(fields: [id_colegio], references: [id_colegio])
-  id_colegio Int
+  id_colegio Int @default(1)
   rinde Rinde[]
   competencia Competencia @relation(fields: [id_competencia],references: [id_competencia]) 
   id_competencia Int
