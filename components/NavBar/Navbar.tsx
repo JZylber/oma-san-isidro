@@ -79,15 +79,23 @@ export default function NavBar({togglePageContent}:NavProps){
         setOpenFullMenu(!openFullMenu);
         togglePageContent && togglePageContent();
     }
+
+    const isNotAtHome = () => {
+        const homeIndex: number = menuHierarchy.findIndex((item) => item.text == 'Inicio');
+        const home: menuItem = menuHierarchy[homeIndex]
+        const isAtHome: boolean = home.selected;
+        return !isAtHome;
+    }
+
     return(
         <nav className={styles.navbar}> 
-        <div className={styles[["navbar_main", (openFullMenu ? "_full" : "")].join("")]}>
-            <div className={styles.iconWrapper}>
-                {openFullMenu?<X className={styles.icon} onClick={()=>openCloseMenu()}/>:<MenuIcon className={styles.icon} onClick={()=>openCloseMenu()}/>}
+            <div className={styles[["navbar_main", (openFullMenu ? "_full" : "")].join("")]}>
+                <div className={styles.iconWrapper}>
+                    {openFullMenu?<X className={styles.icon} onClick={()=>openCloseMenu()}/>:<MenuIcon className={styles.icon} onClick={()=>openCloseMenu()}/>}
+                </div>
+                {openFullMenu ? <MobileMenu closeMenu={openCloseMenu} menuHierarchy={menuHierarchy}/>: <TopMenu menuHierarchy={menuHierarchy} onClick={clickMainItem}/> }
             </div>
-            {openFullMenu ? <MobileMenu closeMenu={openCloseMenu} menuHierarchy={menuHierarchy}/>: <TopMenu menuHierarchy={menuHierarchy} onClick={clickMainItem}/> }
-        </div>
-            <SubMenu items={getSubitems()}/>
+            {isNotAtHome() && <SubMenu items={getSubitems()}/>}
         </nav>
     )
 }
