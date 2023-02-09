@@ -13,6 +13,7 @@
         border-radius: 9px 9px 0px 0px;
      }
      span {
+        transition: all .5s;
         @include shared.font-unbounded(400);
         @include shared.tablet-only{
             font-size: shared.$tablet-actionable-font-size;
@@ -27,8 +28,10 @@
             padding-bottom: 3.2rem;
         }
         &:hover{
-            @include shared.font-unbounded(600);
-        }
+            @include shared.font-weight-transition;
+            // @include shared.font-unbounded(600);
+            font-size: shared.$desktop-actionable-font-size + 0.2rem;
+    }
     }
     &_selected {
         background-color: shared.$white;
@@ -38,9 +41,14 @@
         border-bottom: 2px solid shared.$white;
         margin-bottom: -2px;
         padding-bottom: -2px;
+        text-shadow: none;
         span{
             @include shared.font-unbounded(600);
-        }   
+            &:hover{
+                text-shadow: none;
+                font-size: shared.$desktop-actionable-font-size;
+            }
+        }
     }
     &.phantom {
         @include shared.tablet-only{

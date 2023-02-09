@@ -4,7 +4,7 @@ const getAvailableResults = async (type: string) => {
       tipo : type
     },
     select : {
-      ano : true,
+      año : true,
       pruebas : {
           select : {
               instancia: true

@@ -17,19 +17,19 @@ export default function NavBar({togglePageContent}:NavProps){
         {text: "Inicio",link:"/",selected : false,subItems:[]},
         {text: "Oma",link:undefined,selected : false,subItems:[
             {text: "Autorización",link:'/oma/autorizacion',selected : false,subItems:[]},
-            {text: "Inscripción",link:undefined,selected : false,subItems:[]},
-            {text: "Reglamento",link:undefined,selected : false,subItems:[]},
-            {text: "Sedes",link:undefined,selected : false,subItems:[]},
+            {text: "Inscripción",link:'/oma/inscripcion',selected : false,subItems:[]},
+            {text: "Reglamento",link:'/oma/reglamento',selected : false,subItems:[]},
+            {text: "Sedes",link:'/oma/sedes',selected : false,subItems:[]},
             {text: "Resultados",link:'/oma/resultados',selected : false,subItems:[]},
-            {text: "Problemas",link:undefined,selected : false,subItems:[]}
+            {text: "Problemas",link:'/oma/problemas',selected : false,subItems:[]}
         ]},
         {text: "Ñandú",link:undefined,selected : false,subItems:[
             {text: "Autorización",link:'/nandu/autorizacion',selected : false,subItems:[]},
-            {text: "Inscripción",link:undefined,selected : false,subItems:[]},
-            {text: "Reglamento",link:undefined,selected : false,subItems:[]},
-            {text: "Sedes",link:undefined,selected : false,subItems:[]},
+            {text: "Inscripción",link:'/nandu/inscripcion',selected : false,subItems:[]},
+            {text: "Reglamento",link:'/nandu/reglamento',selected : false,subItems:[]},
+            {text: "Sedes",link:'/nandu/sedes',selected : false,subItems:[]},
             {text: "Resultados",link:'/nandu/resultados',selected : false,subItems:[]},
-            {text: "Problemas",link:undefined,selected : false,subItems:[]}
+            {text: "Problemas",link:'/nandu/problemas',selected : false,subItems:[]}
         ]},
         {text: "Internacional",link:"/internacional",selected : false,subItems:[]},
     ];
@@ -79,15 +79,23 @@ export default function NavBar({togglePageContent}:NavProps){
         setOpenFullMenu(!openFullMenu);
         togglePageContent && togglePageContent();
     }
+
+    const isNotAtHome = () => {
+        const homeIndex: number = menuHierarchy.findIndex((item) => item.text == 'Inicio');
+        const home: menuItem = menuHierarchy[homeIndex]
+        const isAtHome: boolean = home.selected;
+        return !isAtHome;
+    }
+
     return(
         <nav className={styles.navbar}> 
-        <div className={styles[["navbar_main", (openFullMenu ? "_full" : "")].join("")]}>
-            <div className={styles.iconWrapper}>
-                {openFullMenu?<X className={styles.icon} onClick={()=>openCloseMenu()}/>:<MenuIcon className={styles.icon} onClick={()=>openCloseMenu()}/>}
+            <div className={styles[["navbar_main", (openFullMenu ? "_full" : "")].join("")]}>
+                <div className={styles.iconWrapper}>
+                    {openFullMenu?<X className={styles.icon} onClick={()=>openCloseMenu()}/>:<MenuIcon className={styles.icon} onClick={()=>openCloseMenu()}/>}
+                </div>
+                {openFullMenu ? <MobileMenu closeMenu={openCloseMenu} menuHierarchy={menuHierarchy}/>: <TopMenu menuHierarchy={menuHierarchy} onClick={clickMainItem}/> }
             </div>
-            {openFullMenu ? <MobileMenu closeMenu={openCloseMenu} menuHierarchy={menuHierarchy}/>: <TopMenu menuHierarchy={menuHierarchy} onClick={clickMainItem}/> }
-        </div>
-            <SubMenu items={getSubitems()}/>
+            {isNotAtHome() && <SubMenu items={getSubitems()}/>}
         </nav>
     )
 }

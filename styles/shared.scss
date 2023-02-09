@@ -91,3 +91,18 @@ $desktop-reading-font-size: 2rem;
     gap: 0 2.5 * $desktopXspacing;
     grid-template-columns: repeat($columns,1fr);
 }
+
+
+/*Animations*/
+@mixin font-weight-transition{
+    text-shadow:
+            -0.25px -0.25px 0 #000000,
+            0.25px -0.25px 0 #000000,
+            -0.25px 0.25px 0 #000000,
+            0.25px 0.25px 0 #000000;
+            -webkit-transition: all .5s;
+            -moz-transition: all .5s;
+            -o-transition: all .5s;
+            transition: all .5s;
+            cursor: pointer;
+}
