@@ -17,19 +17,19 @@ export default function NavBar({togglePageContent}:NavProps){
         {text: "Inicio",link:"/",selected : false,subItems:[]},
         {text: "Oma",link:undefined,selected : false,subItems:[
             {text: "Autorización",link:'/oma/autorizacion',selected : false,subItems:[]},
-            {text: "Inscripción",link:undefined,selected : false,subItems:[]},
-            {text: "Reglamento",link:undefined,selected : false,subItems:[]},
-            {text: "Sedes",link:undefined,selected : false,subItems:[]},
+            {text: "Inscripción",link:'/oma/inscripcion',selected : false,subItems:[]},
+            {text: "Reglamento",link:'/oma/reglamento',selected : false,subItems:[]},
+            {text: "Sedes",link:'/oma/sedes',selected : false,subItems:[]},
             {text: "Resultados",link:'/oma/resultados',selected : false,subItems:[]},
-            {text: "Problemas",link:undefined,selected : false,subItems:[]}
+            {text: "Problemas",link:'/oma/problemas',selected : false,subItems:[]}
         ]},
         {text: "Ñandú",link:undefined,selected : false,subItems:[
             {text: "Autorización",link:'/nandu/autorizacion',selected : false,subItems:[]},
-            {text: "Inscripción",link:undefined,selected : false,subItems:[]},
-            {text: "Reglamento",link:undefined,selected : false,subItems:[]},
-            {text: "Sedes",link:undefined,selected : false,subItems:[]},
+            {text: "Inscripción",link:'/nandu/inscripcion',selected : false,subItems:[]},
+            {text: "Reglamento",link:'/nandu/reglamento',selected : false,subItems:[]},
+            {text: "Sedes",link:'/nandu/sedes',selected : false,subItems:[]},
             {text: "Resultados",link:'/nandu/resultados',selected : false,subItems:[]},
-            {text: "Problemas",link:undefined,selected : false,subItems:[]}
+            {text: "Problemas",link:'/nandu/problemas',selected : false,subItems:[]}
         ]},
         {text: "Internacional",link:"/internacional",selected : false,subItems:[]},
     ];
