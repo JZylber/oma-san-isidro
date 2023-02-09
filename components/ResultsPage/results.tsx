@@ -1,39 +1,9 @@
 import { useRouter } from "next/router"
 import { FormEventHandler, useState } from "react"
 import styles from "./results.module.scss"
+import { FilterData, ResultProps, TestQueryResults } from "./resultsTypes"
 
-interface yearTests {
-    ano: number,
-    pruebas: Array<{instancia: string}>
-}
 
-type ResultProps = {
-    competition : string,
-    availableResults: Array<yearTests>
-}
-
-type FilterData = {
-    name : string,
-    type : string,
-    options? : Array<string> | Array<number>
-}
-
-interface TestQueryResults {
-    presente : boolean,
-    aprobado : boolean,
-    resultados : Array<string>,
-    participacion : {
-        nivel : number,
-        colegio: {
-            nombre: string,
-            sede: string
-        }
-        participante: {
-            nombre: string,
-            apellido : string
-        }
-    }
-}
 
 const Results = ({competition,availableResults} : ResultProps) => {
     const router = useRouter()
@@ -83,7 +53,7 @@ const Results = ({competition,availableResults} : ResultProps) => {
     }
     const nameAsDB = (name: string) => {
         if(name == "Ñandú"){
-            return("NANDU")
+            return("ÑANDÚ")
         } else {
             return("OMA")
         }

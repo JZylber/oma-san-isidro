@@ -12,7 +12,7 @@ export const getServerSideProps: GetServerSideProps= async ({ params }) => {
   };
 
 
-const OMAResults : NextPage = () => {
+const OMAResults : NextPage = (props) => {
     return(
         <div className={styles.wrapper}> 
         <main className={styles.main}>
