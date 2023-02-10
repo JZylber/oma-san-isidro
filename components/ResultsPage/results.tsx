@@ -1,23 +1,15 @@
 import { useRouter } from "next/router"
 import { FormEventHandler, useState } from "react"
+import ResultFinderForm from "./resultFinderForm"
 import styles from "./results.module.scss"
-import { FilterData, ResultProps, TestQueryResults } from "./resultsTypes"
+import { FilterData, ResultFilter, ResultProps, TestQueryResults } from "./resultsTypes"
 
 
 
 const Results = ({competition,availableResults} : ResultProps) => {
     const router = useRouter()
     const query = router.query
-    const resultYears =  availableResults.map((yearTests) => yearTests.ano);
-    const filter_input: Array<FilterData> = [
-        {name: "año",type:"select",options: resultYears},
-        {name:"instancia",type:"select",options:["INTERCOLEGIAL","ZONAL","PROVINCIAL","REGIONAL","NACIONAL"]},
-        {name:"nivel",type:"select",options:[1,2,3]},
-        {name:"colegio",type:"select",options:["Colegio San Nicolás","Northlands"]},
-        {name:"nombre",type:"text"},
-        {name:"apellido",type:"text"},
-    ]
-    const filters = filter_input.map((filterData) => filterData.name)
+
     const getQueryOption = (category:string) => {
         if(query[category] != undefined){
             return(query[category])
@@ -26,7 +18,7 @@ const Results = ({competition,availableResults} : ResultProps) => {
         }
         
     }
-    const render_input = (filter:string) => {
+    /*const render_input = (filter:string) => {
         const data : FilterData | undefined = filter_input.find((filterData) => filterData.name == filter)
         if(data && data.type == "text"){
             return(<input id={data.name} type="text"/>)
@@ -39,9 +31,16 @@ const Results = ({competition,availableResults} : ResultProps) => {
                 </select>
             )
         }
-    }
+    }*/
     const [isLoading,setIsLoading] = useState(false)
     const [results,setResults] = useState<Array<TestQueryResults>>()
+    const nameAsDB = (name: string) => {
+        if(name == "Ñandú"){
+            return("ÑANDÚ")
+        } else {
+            return("OMA")
+        }
+    }
     const getResults = async (year : number,instance : string, type: string)=> {
         try {
             let searchedResults = await fetch(`/api/results?ano=${year}&instancia=${instance}&competencia=${type}`).then((response) => response.json());
@@ -51,25 +50,22 @@ const Results = ({competition,availableResults} : ResultProps) => {
             console.error(error);
         }
     }
-    const nameAsDB = (name: string) => {
-        if(name == "Ñandú"){
-            return("ÑANDÚ")
-        } else {
-            return("OMA")
-        }
-    }
-    const searchResults : FormEventHandler<HTMLFormElement>= (event : React.SyntheticEvent) => {
-        event.preventDefault();
-        const target = event.target as typeof event.target & {
-            año: { value: number };
-            instancia: { value: string };
-            colegio: { value: string };
-            nombre: { value: string };
-            apellido: { value: string };
-        };
-        getResults(target.año.value,target.instancia.value,nameAsDB(competition))
+    const searchResults = (year : number, instance: string) => {
+        getResults(year,instance,nameAsDB(competition))
         setIsLoading(true)
     }
+    const starting_filters : ResultFilter = {nombre: undefined,apellido: undefined,colegio: undefined,nivel: undefined,aprobado: undefined}
+    const [filters,setFilters] = useState<ResultFilter>(starting_filters)
+
+    const filterElements = (result: TestQueryResults) => {
+        const name = !filters.nombre || result.participacion.participante.nombre.toLowerCase().includes(filters.nombre.toLowerCase())
+        const surname = !filters.apellido || result.participacion.participante.apellido.toLowerCase().includes(filters.apellido.toLowerCase())
+        const school = !filters.colegio || result.participacion.colegio.nombre.toLowerCase().includes(filters.colegio.toLowerCase())
+        const level = !filters.nivel || result.participacion.nivel == filters.nivel
+        const passed = filters.aprobado == undefined || result.aprobado == filters.aprobado
+        return(name && surname && school && level && passed) 
+    }
+
     const make_element = (result : TestQueryResults) => {
         const name = result.participacion.participante.nombre
         const surname = result.participacion.participante.apellido
@@ -100,6 +96,7 @@ const Results = ({competition,availableResults} : ResultProps) => {
                             <td>P1</td>
                             <td>P2</td>
                             <td>P3</td>
+                            <td>Total</td>
                             <td>Aprobado</td>
                         </tr>
                     </thead>
@@ -109,21 +106,27 @@ const Results = ({competition,availableResults} : ResultProps) => {
                 </table>)
         } else {
             return(
-                <span>Error</span>
+                <span>Elija un año e instancia y luego haga click en buscar resultados</span>
             )
         }
     }
     return(
         <>
         <h1 className={styles.title}>Resultados {competition}</h1>
-        <form className={styles.form} onSubmit={searchResults}>
-            {filters.map((filter) => {
-                return(
-                <div>
-                    <label>{filter}</label>{render_input(filter)}
-                </div>)
-            })}
-            <input type="submit" value="Buscar resultados"/>
+        <ResultFinderForm availableResults={availableResults} searchResults={searchResults}/>
+        <form>
+            <label>Nombre</label><input></input><br/>
+            <label>Apellido</label><input></input><br/>
+            <label>Colegio</label><input></input><br/>
+            <label>Nivel</label>
+                <input type="radio" id="1" name="nivel" value="1"/>
+                <label>1</label>
+                <input type="radio" id="2" name="nivel" value="2"/>
+                <label>2</label>
+                <input type="radio" id="3" name="nivel" value="3"/>
+                <label>3</label>
+                <input type="radio" id="Todos" name="nivel" value="Todos"/>
+                <label>Todos</label>
         </form>
         <div className={styles.results}>
             {isLoading ? "Buscando resultados...": make_table(results)}

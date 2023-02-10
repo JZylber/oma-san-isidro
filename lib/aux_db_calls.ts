@@ -1,7 +1,7 @@
 import prisma from "./prisma";
 
 const getAvailableResults = async (type: string) => {
-    const results = await prisma.competencia.findMany({
+    const query = await prisma.competencia.findMany({
     where : {
       tipo : type
     },
@@ -14,6 +14,7 @@ const getAvailableResults = async (type: string) => {
       }
     }
     })
+    const results = query.map((year) => {return({...year,pruebas:year.pruebas.map((prueba) => prueba.instancia)})})
     return ({results});
     };
 

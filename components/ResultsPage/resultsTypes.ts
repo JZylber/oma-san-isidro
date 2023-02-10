@@ -1,6 +1,6 @@
 export interface yearTests {
     ano: number,
-    pruebas: Array<{instancia: string}>
+    pruebas: Array<string>
 }
 
 export type ResultProps = {
@@ -30,3 +30,11 @@ export interface TestQueryResults {
         }
     }
 }
+
+export interface ResultFilter {
+    nombre?: string,
+    apellido?: string,
+    colegio?: string,
+    nivel?: number,
+    aprobado?: boolean
+} 
