@@ -1,37 +1,15 @@
 import { useRouter } from "next/router"
-import { FormEventHandler, useState } from "react"
+import {useEffect, useState } from "react"
 import ResultFinderForm from "./resultFinderForm"
 import styles from "./results.module.scss"
-import { FilterData, ResultFilter, ResultProps, TestQueryResults } from "./resultsTypes"
+import {ResultFilter, ResultProps, TestQueryResults } from "./resultsTypes"
 
 
 
 const Results = ({competition,availableResults} : ResultProps) => {
     const router = useRouter()
     const query = router.query
-
-    const getQueryOption = (category:string) => {
-        if(query[category] != undefined){
-            return(query[category])
-        }else{
-            return("")
-        }
         
-    }
-    /*const render_input = (filter:string) => {
-        const data : FilterData | undefined = filter_input.find((filterData) => filterData.name == filter)
-        if(data && data.type == "text"){
-            return(<input id={data.name} type="text"/>)
-        }else if(data && data.type == "select"){
-            return(
-                <select id={data.name} defaultValue={getQueryOption(filter)}>
-                    {data.options && data.options.map((option) => {
-                        return(<option value={option}>{option}</option>)
-                    })}
-                </select>
-            )
-        }
-    }*/
     const [isLoading,setIsLoading] = useState(false)
     const [results,setResults] = useState<Array<TestQueryResults>>()
     const nameAsDB = (name: string) => {
@@ -54,6 +32,12 @@ const Results = ({competition,availableResults} : ResultProps) => {
         getResults(year,instance,nameAsDB(competition))
         setIsLoading(true)
     }
+    useEffect(() => {
+        if(query["año"] && query["instancia"]){
+            const instance = query["instancia"] as string;
+            searchResults(Number(query["año"]),instance)
+        }
+      }, [])
     const starting_filters : ResultFilter = {nombre: undefined,apellido: undefined,colegio: undefined,nivel: undefined,aprobado: undefined}
     const [filters,setFilters] = useState<ResultFilter>(starting_filters)
 
