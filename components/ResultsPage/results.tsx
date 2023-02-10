@@ -57,7 +57,11 @@ const Results = ({competition,availableResults} : ResultProps) => {
     const starting_filters : ResultFilter = {nombre: undefined,apellido: undefined,colegio: undefined,nivel: undefined,aprobado: undefined}
     const [filters,setFilters] = useState<ResultFilter>(starting_filters)
 
-    const filterElements = (result: TestQueryResults) => {
+    const updateFilter = (category: string, newValue: undefined | string | boolean | number) => {
+        setFilters({...filters,[category]:newValue})
+    }
+
+    const isFilterCompliant = (result: TestQueryResults) => {
         const name = !filters.nombre || result.participacion.participante.nombre.toLowerCase().includes(filters.nombre.toLowerCase())
         const surname = !filters.apellido || result.participacion.participante.apellido.toLowerCase().includes(filters.apellido.toLowerCase())
         const school = !filters.colegio || result.participacion.colegio.nombre.toLowerCase().includes(filters.colegio.toLowerCase())
@@ -114,22 +118,29 @@ const Results = ({competition,availableResults} : ResultProps) => {
         <>
         <h1 className={styles.title}>Resultados {competition}</h1>
         <ResultFinderForm availableResults={availableResults} searchResults={searchResults}/>
-        <form>
-            <label>Nombre</label><input></input><br/>
-            <label>Apellido</label><input></input><br/>
-            <label>Colegio</label><input></input><br/>
+        <form className={styles.form}>
+            <label>Nombre</label><input onChange={(event) => updateFilter("nombre",event.target.value)}></input><br/>
+            <label>Apellido</label><input onChange={(event) => updateFilter("apellido",event.target.value)}></input><br/>
+            <label>Colegio</label><input onChange={(event) => updateFilter("colegio",event.target.value)} ></input><br/>
             <label>Nivel</label>
-                <input type="radio" id="1" name="nivel" value="1"/>
+                <input type="radio" id="1" name="nivel" value="1" onChange={(event) => updateFilter("nivel",Number(event.target.value))}/>
                 <label>1</label>
-                <input type="radio" id="2" name="nivel" value="2"/>
+                <input type="radio" id="2" name="nivel" value="2" onChange={(event) => updateFilter("nivel",Number(event.target.value))}/>
                 <label>2</label>
-                <input type="radio" id="3" name="nivel" value="3"/>
+                <input type="radio" id="3" name="nivel" value="3" onChange={(event) => updateFilter("nivel",Number(event.target.value))}/>
                 <label>3</label>
-                <input type="radio" id="Todos" name="nivel" value="Todos"/>
+                <input type="radio" id="Todos" name="nivel" value="Todos" onChange={(event) => updateFilter("nivel",undefined)}/>
+                <label>Todos</label><br/>
+            <label>Aprobado</label>
+                <input type="radio" id="Si" name="aprobado" value="Si" onChange={(event) => updateFilter("aprobado",true)}/>
+                <label>Sí</label>
+                <input type="radio" id="No" name="aprobado" value="No" onChange={(event) => updateFilter("aprobado",false)}/>
+                <label>No</label>
+                <input type="radio" id="Todos" name="aprobado" value="Todos" onChange={(event) => updateFilter("aprobado",undefined)}/>
                 <label>Todos</label>
         </form>
         <div className={styles.results}>
-            {isLoading ? "Buscando resultados...": make_table(results)}
+            {isLoading ? "Buscando resultados...": make_table(results?.filter(isFilterCompliant))}
         </div>
         </>
     )

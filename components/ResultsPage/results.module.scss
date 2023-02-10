@@ -3,6 +3,10 @@
 .title {
     grid-column: 1/-1;
 }
+.form {
+    grid-column: 1/-1;
+    font-size: shared.$desktop-reading-font-size
+}
 .results {
     grid-column: 1/-1;
     font-size: shared.$desktop-reading-font-size
