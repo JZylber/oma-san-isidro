@@ -28,8 +28,8 @@ const ResultFinderForm = ({availableResults,searchResults} : FormProps) => {
 
     return(
     <form className={styles.form} onSubmit={handleSubmit}>
-        <label>Año</label><select id="año" onChange={handleYearChange}>{resultYears.map((year) => {return(<option value={year}>{year}</option>)})}</select>
-        <label>Instancia</label><select id="instancia">{instances.map((instance) => {return(<option value={instance}>{instance}</option>)})}</select>
+        <label>Año</label><select id="año" onChange={handleYearChange}>{resultYears.map((year) => {return(<option value={year} key={year}>{year}</option>)})}</select>
+        <label>Instancia</label><select id="instancia">{instances.map((instance) => {return(<option value={instance} key={instance}>{instance}</option>)})}</select>
         <input type="submit" value="Buscar resultados"/>
     </form>)
 }

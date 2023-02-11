@@ -37,7 +37,7 @@ const Results = ({competition,availableResults} : ResultProps) => {
             const instance = query["instancia"] as string;
             searchResults(Number(query["año"]),instance)
         }
-      }, [])
+      }, [query,searchResults])
     const starting_filters : ResultFilter = {nombre: undefined,apellido: undefined,colegio: undefined,nivel: undefined,aprobado: undefined}
     const [filters,setFilters] = useState<ResultFilter>(starting_filters)
 
@@ -67,7 +67,7 @@ const Results = ({competition,availableResults} : ResultProps) => {
                 <td>{surname}</td>
                 <td>{school}</td>
                 <td>{level}</td>
-                {points.map((point) => <td>{point}</td>)}
+                {points.map((point,index) => <td key={index}>{point}</td>)}
                 <td>{passed?"Si":"No"}</td>
             </tr>)
     }
