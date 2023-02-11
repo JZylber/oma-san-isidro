@@ -1,32 +1,39 @@
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { MenuHierarchy, menuItem, showCurrentPageSelected } from '../NavBarRouting';
-import NavBarItem from './NavBarItem';
-import styles from './TopMenu.module.scss';
+import { useRouter } from "next/router";
+import { useState } from "react";
+import {
+  MenuHierarchy,
+  menuItem,
+  showCurrentPageSelected,
+} from "../NavBarRouting";
+import NavBarItem from "./NavBarItem";
+import styles from "./TopMenu.module.scss";
 
 type topMenuProps = {
-    menuHierarchy : MenuHierarchy,
-    onClick : (itemName: string) => void
-}
+  menuHierarchy: MenuHierarchy;
+  onClick: (itemName: string) => void;
+};
 
-const TopMenu = ({menuHierarchy,onClick} : topMenuProps) => {
-    //const [hovered,setHovered] = useState<number>() 
+const TopMenu = ({ menuHierarchy, onClick }: topMenuProps) => {
+  //const [hovered,setHovered] = useState<number>()
 
-    //Renderizado de cada item del menu
-    const renderMenuItem = (item: menuItem,position:number) => {
-        return(
-            <>
-            {position == 1 && <NavBarItem text={""} phantom={true} selected={false}/>}
-            <NavBarItem text={item.text} link={item.link} selected={item.selected} onClick={() => onClick(item.text)} />
-            </>
-        )
-    }
+  //Renderizado de cada item del menu
+  const renderMenuItem = (item: menuItem, position: number) => {
+    return (
+      <>
+        {position == 1 && (
+          <NavBarItem text={""} phantom={true} selected={false} />
+        )}
+        <NavBarItem
+          text={item.text}
+          link={item.link}
+          selected={item.selected}
+          onClick={() => onClick(item.text)}
+        />
+      </>
+    );
+  };
 
-    return(
-       <>
-       {menuHierarchy.map(renderMenuItem)}
-       </>
-    )
-}
+  return <>{menuHierarchy.map(renderMenuItem)}</>;
+};
 
-export default TopMenu
+export default TopMenu;
