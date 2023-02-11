@@ -1,4 +1,3 @@
-import { assert } from "console";
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../lib/prisma"
 
@@ -6,17 +5,19 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
     try {
     let {ano,instancia,competencia} = req.query;
     if(ano && instancia && competencia){
-        ano = Number(ano)
+        const year = Number(ano as string)
+        const instance = instancia as string
+        const type = competencia as string
         const result = await prisma.rinde.findMany(
             {   
                 where : {
                         prueba : {
                             AND : [
-                                {instancia : instancia},
+                                {instancia : instance},
                                 {competencia : {
                                     AND : [
-                                        {ano : ano},
-                                        {tipo: competencia}
+                                        {ano : year},
+                                        {tipo: type}
                                 ]}}
                             ]
                         }
