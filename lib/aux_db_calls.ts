@@ -15,6 +15,7 @@ const getAvailableResults = async (type: string) => {
     }
     })
     const results = query.map((year) => {return({...year,pruebas:year.pruebas.map((prueba) => prueba.instancia)})})
+    debugger;
     return ({results});
     };
 
