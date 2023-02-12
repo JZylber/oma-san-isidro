@@ -5,7 +5,8 @@ export interface yearTests {
 
 export type ResultProps = {
     competition : string,
-    availableResults: Array<yearTests>
+    availableResults: Array<yearTests>,
+    schools: Array<School>
 }
 
 export type FilterData = {
@@ -38,3 +39,9 @@ export interface ResultFilter {
     nivel?: number,
     aprobado?: boolean
 } 
+
+export type School = {
+    nombre : string,
+    sede?: string,
+    localidad?: string
+}

@@ -3,9 +3,9 @@ import {ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react"
 import Autosuggest from "react-autosuggest"
 import ResultFinderForm from "./resultFinderForm"
 import styles from "./results.module.scss"
-import {ResultFilter, ResultProps, TestQueryResults } from "./resultsTypes"
+import {ResultFilter, ResultProps, School, TestQueryResults } from "./resultsTypes"
 
-const Results = ({competition,availableResults} : ResultProps) => {
+const Results = ({competition,availableResults,schools} : ResultProps) => {
     const router = useRouter()
     const query = router.query
     const [isLoading,setIsLoading] = useState(false)
@@ -97,18 +97,12 @@ const Results = ({competition,availableResults} : ResultProps) => {
             )
         }
     }
-    type School = {
-        nombre : string,
-        sede?: string,
-        localidad: string
-    }
-    const schools : Array<School> = [{nombre:"San Nicolás",sede:"Olivos",localidad:"Olivos"},{nombre: "Mallinkrodt", sede: undefined, localidad: "Martinez"}]
     const getSuggestions = (value : string) => {
         const inputValue = value.trim().toLowerCase();
         const inputLength = inputValue.length;
       
         return inputLength === 0 ? [] : schools.filter(school =>
-          school.nombre.toLowerCase().replace('.','').includes(inputValue)
+          school.nombre.toLowerCase().replace('.','').normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(inputValue)
         );
       };
       const getSuggestionValue = (suggestion : School) => suggestion.nombre;
@@ -132,8 +126,8 @@ const Results = ({competition,availableResults} : ResultProps) => {
         <form className={styles.form}>
             <label>Nombre</label><input onChange={(event) => updateFilter("nombre",event.target.value)}></input><br/>
             <label>Apellido</label><input onChange={(event) => updateFilter("apellido",event.target.value)}></input><br/>
-            <Autosuggest 
-                suggestions={schools}
+            <label>Colegio</label><Autosuggest 
+                suggestions={schoolSuggestions}
                 onSuggestionsFetchRequested={onSuggestionsFetchRequested}
                 onSuggestionsClearRequested={onSuggestionsClearRequested}
                 getSuggestionValue={getSuggestionValue}
@@ -143,7 +137,7 @@ const Results = ({competition,availableResults} : ResultProps) => {
                     onChange:(_, { newValue, method }) => {
                         updateFilter("colegio",newValue);
                       }
-                }}/><br/>
+                }}/>
             <label>Nivel</label>
                 <input type="radio" id="1" name="nivel" value="1" onChange={(event) => updateFilter("nivel",Number(event.target.value))}/>
                 <label>1</label>

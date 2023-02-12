@@ -1,6 +1,6 @@
 import prisma from "./prisma";
 
-const getAvailableResults = async (type: string) => {
+export const getAvailableResults = async (type: string) => {
     const query = await prisma.competencia.findMany({
     where : {
       tipo : type
@@ -15,8 +15,17 @@ const getAvailableResults = async (type: string) => {
     }
     })
     const results = query.map((year) => {return({...year,pruebas:year.pruebas.map((prueba) => prueba.instancia)})})
-    debugger;
     return ({results});
     };
 
-export default getAvailableResults 
+export const getSchools = async () => {
+  const query = await prisma.colegio.findMany({
+  select : {
+    nombre: true,
+    sede: true,
+    localidad: true
+  }
+  })
+  const results = query
+  return ({results});
+  };
