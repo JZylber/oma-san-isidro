@@ -17,7 +17,7 @@ const TopMenu = ({menuHierarchy,onClick} : topMenuProps) => {
         return(
             <>
             {position == 1 && <NavBarItem text={""} phantom={true} selected={false}/>}
-            <NavBarItem text={item.text} link={item.link} selected={item.selected} onClick={() => onClick(item.text)} />
+            <NavBarItem text={item.text} link={item.link} selected={item.selected} onClick={() => onClick(item.text)} key={item.text}/>
             </>
         )
     }
