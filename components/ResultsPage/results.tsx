@@ -1,15 +1,13 @@
 import { useRouter } from "next/router"
-import {useEffect, useState } from "react"
+import {ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react"
+import Autosuggest from "react-autosuggest"
 import ResultFinderForm from "./resultFinderForm"
 import styles from "./results.module.scss"
 import {ResultFilter, ResultProps, TestQueryResults } from "./resultsTypes"
 
-
-
 const Results = ({competition,availableResults} : ResultProps) => {
     const router = useRouter()
     const query = router.query
-        
     const [isLoading,setIsLoading] = useState(false)
     const [results,setResults] = useState<Array<TestQueryResults>>()
     const nameAsDB = (name: string) => {
@@ -28,10 +26,11 @@ const Results = ({competition,availableResults} : ResultProps) => {
             console.error(error);
         }
     }
-    const searchResults = (year : number, instance: string) => {
+    const searchResults = useCallback((year : number, instance: string) => {
         getResults(year,instance,nameAsDB(competition))
         setIsLoading(true)
-    }
+    },[competition])
+    
     useEffect(() => {
         if(query["año"] && query["instancia"]){
             const instance = query["instancia"] as string;
@@ -98,6 +97,34 @@ const Results = ({competition,availableResults} : ResultProps) => {
             )
         }
     }
+    type School = {
+        nombre : string,
+        sede?: string,
+        localidad: string
+    }
+    const schools : Array<School> = [{nombre:"San Nicolás",sede:"Olivos",localidad:"Olivos"},{nombre: "Mallinkrodt", sede: undefined, localidad: "Martinez"}]
+    const getSuggestions = (value : string) => {
+        const inputValue = value.trim().toLowerCase();
+        const inputLength = inputValue.length;
+      
+        return inputLength === 0 ? [] : schools.filter(school =>
+          school.nombre.toLowerCase().replace('.','').includes(inputValue)
+        );
+      };
+      const getSuggestionValue = (suggestion : School) => suggestion.nombre;
+      const renderSuggestion = (suggestion : School) => (
+        <div>
+          {suggestion.nombre}
+        </div>
+      );
+    const [schoolSuggestions,setSchoolSuggestions] = useState<Array<School>>([])
+    const onSuggestionsFetchRequested = (
+        {value}:{value : string}) => {
+        setSchoolSuggestions(getSuggestions(value))
+      };
+    const onSuggestionsClearRequested = () => {
+        setSchoolSuggestions([])
+      };
     return(
         <>
         <h1 className={styles.title}>Resultados {competition}</h1>
@@ -105,7 +132,18 @@ const Results = ({competition,availableResults} : ResultProps) => {
         <form className={styles.form}>
             <label>Nombre</label><input onChange={(event) => updateFilter("nombre",event.target.value)}></input><br/>
             <label>Apellido</label><input onChange={(event) => updateFilter("apellido",event.target.value)}></input><br/>
-            <label>Colegio</label><input onChange={(event) => updateFilter("colegio",event.target.value)} ></input><br/>
+            <Autosuggest 
+                suggestions={schools}
+                onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+                onSuggestionsClearRequested={onSuggestionsClearRequested}
+                getSuggestionValue={getSuggestionValue}
+                renderSuggestion={renderSuggestion}
+                inputProps={{
+                    value: filters["colegio"] || "",
+                    onChange:(_, { newValue, method }) => {
+                        updateFilter("colegio",newValue);
+                      }
+                }}/><br/>
             <label>Nivel</label>
                 <input type="radio" id="1" name="nivel" value="1" onChange={(event) => updateFilter("nivel",Number(event.target.value))}/>
                 <label>1</label>
