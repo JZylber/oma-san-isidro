@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import NavBar from "../components/NavBar/Navbar";
+import Layout from "../components/Layout/Layout";
 
 const Internacional : NextPage = () => {
     return(
@@ -8,8 +8,9 @@ const Internacional : NextPage = () => {
         <Head>
             <title>Olimpíadas Internacionales</title>
         </Head>
-        <NavBar/>
-        <h1>Internacional</h1>
+        <Layout>
+            <h1>Internacional</h1>
+        </Layout>
         </>
         )
 }

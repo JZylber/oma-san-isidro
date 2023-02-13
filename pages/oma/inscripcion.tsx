@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import NavBar from "../../components/NavBar/Navbar";
+import Layout from "../../components/Layout/Layout";
 
 const OMAInscription : NextPage = () => {
     return(
@@ -8,8 +8,9 @@ const OMAInscription : NextPage = () => {
         <Head>
             <title>Inscripción OMA</title>
         </Head>
-        <NavBar/>
-        <h1>Inscripción OMA</h1>
+        <Layout>
+            <h1>Inscripción OMA</h1>
+        </Layout>
         </>)
 }
 

@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import NavBar from "../../components/NavBar/Navbar";
+import Layout from "../../components/Layout/Layout";
 
 const OMARules : NextPage = () => {
     return(
@@ -8,8 +8,9 @@ const OMARules : NextPage = () => {
         <Head>
             <title>Reglamento OMA</title>
         </Head>
-        <NavBar/>
-        <h1>Reglamento OMA</h1>
+        <Layout>
+            <h1>Reglamento OMA</h1>
+        </Layout>
         </>)
 }
 

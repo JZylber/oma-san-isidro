@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import NavBar from "../../components/NavBar/Navbar";
+import Layout from "../../components/Layout/Layout";
 
 const OMAAuthorization : NextPage = () => {
     return(
@@ -8,8 +8,9 @@ const OMAAuthorization : NextPage = () => {
         <Head>
             <title>Autorización OMA</title>
         </Head>
-        <NavBar/>
-        <h1>Autorización OMA</h1>
+        <Layout>
+            <h1>Autorización OMA</h1>
+        </Layout>
         </>)
 }
 

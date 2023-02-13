@@ -23,9 +23,9 @@ const TopMenu = ({menuHierarchy,onMainItemClick} : topMenuProps) => {
     }
 
     return(
-       <>
+       <div className={styles.menu_bar}>
        {menuHierarchy.map(renderMenuItem)}
-       </>
+       </div>
     )
 }
 
