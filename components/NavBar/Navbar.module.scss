@@ -43,15 +43,6 @@
       border-bottom: 2px solid;
       position: relative;
     }
-    @include shared.tablet-only {
-      display: grid;
-      @include shared.tablet-columns;
-      grid-template-rows: 1fr;
-      padding-top: 0.8rem;
-      min-height: shared.$tabletYspacing * 4;
-      padding-left: 7.5%;
-      padding-right: 7.5%;
-    }
     @include shared.desktop-only {
       display: flex;
       justify-content: center;
@@ -64,12 +55,23 @@
 }
 
 .wrapper {
-  display: grid;
-  @include shared.desktop-columns;
-  grid-template-rows: 1fr;
-  //height: 8.8rem;
-  padding-top: 1.6rem;
-  padding-left: 10%;
-  padding-right: 10%;
-  width: 1200px;
+  @include shared.desktop-only {
+    display: grid;
+    @include shared.desktop-columns;
+    grid-template-rows: 1fr;
+    //height: 8.8rem;
+    padding-top: 1.6rem;
+    padding-left: 10%;
+    padding-right: 10%;
+    width: 1200px;
+  }
+  @include shared.tablet-only {
+    display: grid;
+    @include shared.tablet-columns;
+    grid-template-rows: 1fr;
+    padding-top: 0.8rem;
+    min-height: shared.$tabletYspacing * 4;
+    padding-left: 7.5%;
+    padding-right: 7.5%;
+  }
 }

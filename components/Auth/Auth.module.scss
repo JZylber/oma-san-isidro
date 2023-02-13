@@ -1,0 +1,29 @@
+@use "../../styles/shared.scss" as shared;
+
+.main {
+  grid-column: 1 / 10;
+}
+
+.main h1 {
+  @include shared.font-unbounded(600);
+  font-size: shared.$desktop-actionable-font-size;
+  line-height: 5;
+}
+
+.container {
+  border: 2px solid black;
+  border-radius: 9px;
+}
+
+.container h3 {
+  padding: 45px 0 0 40px;
+  @include shared.font-unbounded(500);
+  font-size: shared.$desktop-actionable-font-size;
+}
+
+.items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 45px 40px 70px 40px;
+}
