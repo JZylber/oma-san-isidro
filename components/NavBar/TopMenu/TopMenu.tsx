@@ -6,10 +6,10 @@ import styles from './TopMenu.module.scss';
 
 type topMenuProps = {
     menuHierarchy : MenuHierarchy,
-    onClick : (itemName: string) => void
+    onMainItemClick : (itemName: string) => void
 }
 
-const TopMenu = ({menuHierarchy,onClick} : topMenuProps) => {
+const TopMenu = ({menuHierarchy,onMainItemClick} : topMenuProps) => {
     //const [hovered,setHovered] = useState<number>() 
 
     //Renderizado de cada item del menu
@@ -17,7 +17,7 @@ const TopMenu = ({menuHierarchy,onClick} : topMenuProps) => {
         return(
             <>
             {position == 1 && <NavBarItem text={""} phantom={true} selected={false}/>}
-            <NavBarItem text={item.text} link={item.link} selected={item.selected} onClick={() => onClick(item.text)} key={item.text}/>
+            <NavBarItem text={item.text} link={item.link} selected={item.selected} onClick={() => onMainItemClick(item.text)} />
             </>
         )
     }

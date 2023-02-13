@@ -1,7 +1,7 @@
 import styles from './Navbar.module.scss';
 import MenuIcon from '../../img/menuIcon.svg';
 import X from '../../img/x.svg';
-import { useEffect, useState } from 'react';
+import {useState } from 'react';
 import MobileMenu from './MobileMenu/mobile-menu';
 import TopMenu from './TopMenu/TopMenu';
 import { MenuHierarchy, menuItem, showCurrentPageSelected } from './NavBarRouting';
@@ -35,8 +35,13 @@ export default function NavBar({togglePageContent}:NavProps){
     ];
     const router = useRouter();
     const [menuHierarchy,setMenuHierarchy] = useState(showCurrentPageSelected(defaultMenuHierarchy,router.pathname));
-    const showSubMenu = () => {
-        return(menuHierarchy.find((element) => element.selected && element.subItems.length > 0) != undefined)
+    const selectedMainItem = () => {
+        const item = menuHierarchy.find((element) => element.selected)
+        if(item){
+            return(item.text)
+        }else {
+            return("")
+        }
     }
     const getSubitems = () => {
         let item = menuHierarchy.find((element) => element.selected)
@@ -74,7 +79,16 @@ export default function NavBar({togglePageContent}:NavProps){
             item.selected = true;
             setMenuHierarchy(selectItem(menuHierarchy,itemIndex))
         }
+    }
+    const clickSubItem = (mainItemName : string,subItemName: string) => {
+        const mainItemIndex = menuHierarchy.findIndex((item) => item.text === mainItemName);
+        const item = menuHierarchy[mainItemIndex]
+        const subItemIndex = item.subItems.findIndex((subitem) => subitem.text === subItemName)
+        const subItem = item.subItems[subItemIndex]
+        subItem.link && router.push(subItem.link);
+        setMenuHierarchy(selectItem(menuHierarchy,mainItemIndex,subItemIndex))
     } 
+
     const openCloseMenu = () => {
         setOpenFullMenu(!openFullMenu);
         togglePageContent && togglePageContent();
@@ -93,9 +107,9 @@ export default function NavBar({togglePageContent}:NavProps){
                 <div className={styles.iconWrapper}>
                     {openFullMenu?<X className={styles.icon} onClick={()=>openCloseMenu()}/>:<MenuIcon className={styles.icon} onClick={()=>openCloseMenu()}/>}
                 </div>
-                {openFullMenu ? <MobileMenu closeMenu={openCloseMenu} menuHierarchy={menuHierarchy}/>: <TopMenu menuHierarchy={menuHierarchy} onClick={clickMainItem}/> }
+                {openFullMenu ? <MobileMenu closeMenu={openCloseMenu} menuHierarchy={menuHierarchy}/>: <TopMenu menuHierarchy={menuHierarchy} onMainItemClick={clickMainItem}/> }
             </div>
-            {isNotAtHome() && <SubMenu items={getSubitems()}/>}
+            {isNotAtHome() && <SubMenu items={getSubitems()} onSubItemClick={(subItemName: string) => clickSubItem(selectedMainItem(),subItemName)}/>}
         </nav>
     )
 }

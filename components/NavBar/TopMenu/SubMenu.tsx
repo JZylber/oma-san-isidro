@@ -4,20 +4,18 @@ import styles from './SubMenu.module.scss'
 
 type SubMenuProps = {
     items: MenuHierarchy
+    onSubItemClick: (subItemName: string) => void;
 }
 
 
-const SubMenu = ({items} : SubMenuProps) => {
+const SubMenu = ({items,onSubItemClick} : SubMenuProps) => {
     const router = useRouter();
-    const goToLink = (link?:string) => {
-        link && router.push(link);
-    }
     return(
         <ul className={styles.submenu_bar}>
             {items.map((item,position) => {
                 return(
                 <>
-                <li className={[styles.submenu_bar_item,item.selected && styles.submenu_bar_item_selected].join(" ")} onClick={() => goToLink(item.link)}>{item.text}</li>
+                <li className={[styles.submenu_bar_item,item.selected && styles.submenu_bar_item_selected].join(" ")} onClick={() => onSubItemClick(item.text)}>{item.text}</li>
                 {position < (items.length - 1) && <div className={styles.submenu_bar_separator}></div>}
                 </>
                 )
