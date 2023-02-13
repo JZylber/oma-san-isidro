@@ -1,5 +1,11 @@
 @use '../../../styles/shared.scss' as shared;
 
+.wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 .submenu_bar{
     @include shared.mobile-only{
         display: none;
@@ -12,15 +18,14 @@
         box-sizing: border-box;
     }
     @include shared.tablet-only{
-        padding-left: 7.5%;
-        padding-right: 7.5%;
+        width: 85%;
         padding-top: 1.6rem;
         padding-bottom: 1.6rem;
         min-height: 5.6rem;
     }
     @include shared.desktop-only{
-        padding-left: 10%;
-        padding-right: 10%;
+        width: 80%;
+        max-width: 1200px;
         padding-top: 4.8rem;
         padding-bottom: 4.8rem;
         min-height: 12.8rem;
