@@ -1,4 +1,5 @@
 import { GetServerSideProps, NextPage } from "next";
+import Head from "next/head";
 import NavBar from "../../components/NavBar/Navbar";
 import Results from "../../components/ResultsPage/results";
 import { School, yearTests } from "../../components/ResultsPage/resultsTypes";
@@ -17,12 +18,17 @@ export const getServerSideProps: GetServerSideProps= async ({ params }) => {
 
 const OMAResults : NextPage<{results : Array<yearTests>,schools: Array<School>}> = ({results,schools}) => {
     return(
+        <>
+        <Head>
+            <title>Resultados OMA</title>
+        </Head>
         <div className={styles.wrapper}> 
         <main className={styles.main}>
         <NavBar/>
         <Results competition="OMA" availableResults={results} schools={schools}/>
         </main>
         </div>
+        </>
         )
 }
 
