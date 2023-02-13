@@ -9,9 +9,11 @@ import SubMenu from './TopMenu/SubMenu';
 import { useRouter } from 'next/router';
 
 type NavProps = {
-    togglePageContent? : () => void};
+    togglePageContent? : () => void,
+    changeRoute: (route: string) => void
+};
 
-export default function NavBar({togglePageContent}:NavProps){
+export default function NavBar({togglePageContent,changeRoute}:NavProps){
     let [openFullMenu,setOpenFullMenu] = useState(false);
     const defaultMenuHierarchy : Array<menuItem> = [
         {text: "Inicio",link:"/",selected : false,subItems:[]},
@@ -33,7 +35,7 @@ export default function NavBar({togglePageContent}:NavProps){
         ]},
         {text: "Internacional",link:"/internacional",selected : false,subItems:[]},
     ];
-    const router = useRouter();
+    const router = useRouter()
     const [menuHierarchy,setMenuHierarchy] = useState(showCurrentPageSelected(defaultMenuHierarchy,router.pathname));
     const selectedMainItem = () => {
         const item = menuHierarchy.find((element) => element.selected)
@@ -74,7 +76,7 @@ export default function NavBar({togglePageContent}:NavProps){
         const item = menuHierarchy[itemIndex]
         if(item){
             if(item.link){
-                router.push(item.link)
+                changeRoute(item.link)
             }
             item.selected = true;
             setMenuHierarchy(selectItem(menuHierarchy,itemIndex))
@@ -85,7 +87,7 @@ export default function NavBar({togglePageContent}:NavProps){
         const item = menuHierarchy[mainItemIndex]
         const subItemIndex = item.subItems.findIndex((subitem) => subitem.text === subItemName)
         const subItem = item.subItems[subItemIndex]
-        subItem.link && router.push(subItem.link);
+        subItem.link && changeRoute(subItem.link);
         setMenuHierarchy(selectItem(menuHierarchy,mainItemIndex,subItemIndex))
     } 
 

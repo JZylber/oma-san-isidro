@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import {ReactNode, useState} from "react";
 import NavBar from '../NavBar/Navbar';
 import styles from './Layout.module.scss';
@@ -8,14 +9,17 @@ const Layout = ({children}:{children : ReactNode}) => {
     const togglePageContent = () => {
         setShowChildren(!showChildren);
     }
-    const onRouteChange = () => {
+    const router = useRouter();
+    const changeRoute = (route: string) => {
         setShowChildren(false);
         setIsLoading(true);
+        router.push(route)
     }
     return(
         <div className={styles.layout}>
-        <NavBar togglePageContent={togglePageContent}/>
+        <NavBar togglePageContent={togglePageContent} changeRoute={changeRoute}/>
         {showChildren && <main className={styles.main}>{children}</main>}
+        {isLoading && <span>Cargando...</span>}
         </div>
     )
 }
