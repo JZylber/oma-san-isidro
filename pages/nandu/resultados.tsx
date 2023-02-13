@@ -8,8 +8,7 @@ import Layout from "../../components/Layout/Layout";
 
 export const getServerSideProps: GetServerSideProps= async ({ params }) => {
     const available = await getAvailableResults("ÑANDÚ");
-    const schools = await getSchools();
-    const newProps = {results: available.results,schools: schools.results}
+    const newProps = {results: available.results}
     return {
       props: newProps,
     };      
@@ -22,7 +21,7 @@ const NanduResults : NextPage<{results: Array<yearTests>,schools: Array<School>}
           <title>Resultados Ñandú</title>
         </Head>
         <Layout>
-            <Results competition="Ñandú" availableResults={results} schools={schools}/>
+            <Results competition="Ñandú" availableResults={results}/>
         </Layout>
         </>
         )

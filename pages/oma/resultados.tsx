@@ -8,22 +8,21 @@ import Layout from "../../components/Layout/Layout";
 
 export const getServerSideProps: GetServerSideProps= async ({ params }) => {
     const available = await getAvailableResults("OMA");
-    const schools = await getSchools();
-    const newProps = {results: available.results,schools: schools.results}
+    const newProps = {results: available.results}
     return {
       props: newProps,
     };     
   };
 
 
-const OMAResults : NextPage<{results : Array<yearTests>,schools: Array<School>}> = ({results,schools}) => {
+const OMAResults : NextPage<{results : Array<yearTests>}> = ({results}) => {
     return(
         <>
         <Head>
             <title>Resultados OMA</title>
         </Head>
         <Layout>
-            <Results competition="OMA" availableResults={results} schools={schools}/>
+            <Results competition="OMA" availableResults={results}/>
         </Layout>
         </>)
 }

@@ -6,7 +6,6 @@ export interface yearTests {
 export type ResultProps = {
     competition : string,
     availableResults: Array<yearTests>,
-    schools: Array<School>
 }
 
 export type FilterData = {
@@ -44,4 +43,9 @@ export type School = {
     nombre : string,
     sede?: string,
     localidad?: string
+}
+
+export interface FilterProps{
+    values : Array<string | number>,
+    category_name: string
 }
