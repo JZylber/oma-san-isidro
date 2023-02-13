@@ -1,4 +1,5 @@
 import { NextPage } from "next";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { FormEventHandler, ReactHTMLElement, useState } from "react";
 import NavBar from "../../components/NavBar/Navbar";
@@ -51,6 +52,9 @@ const NanduResults : NextPage = () => {
     }
     return(
         <>
+        <Head>
+            <title>Resultados Ñandú</title>
+        </Head>
         <NavBar/>
         <h1>Resultados Ñandú</h1>
         <form onSubmit={searchResults}>
