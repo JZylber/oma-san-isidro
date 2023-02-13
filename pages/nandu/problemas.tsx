@@ -1,11 +1,16 @@
 import { NextPage } from "next";
-import NavBar from "../../components/NavBar/Navbar";
+import Head from "next/head";
+import Layout from "../../components/Layout/Layout";
 
 const NanduProblems : NextPage = () => {
     return(
         <>
-        <NavBar/>
-        <h1>Problemas Ñandú</h1>
+        <Head>
+            <title>Problemas Ñandú</title>
+        </Head>
+        <Layout>
+            <h1>Problemas Ñandú</h1>
+        </Layout>
         </>
         )
 }

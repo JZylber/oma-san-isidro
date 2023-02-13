@@ -1,7 +1,8 @@
 import { NextPage } from "next";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { FormEventHandler, ReactHTMLElement, useState } from "react";
-import NavBar from "../../components/NavBar/Navbar";
+import Layout from "../../components/Layout/Layout";
 
 type FilterData = {
     name : string,
@@ -51,20 +52,24 @@ const NanduResults : NextPage = () => {
     }
     return(
         <>
-        <NavBar/>
-        <h1>Resultados Ñandú</h1>
-        <form onSubmit={searchResults}>
-            {filters.map((filter) => {
-                return(
-                <div>
-                    <label>{filter}</label>{render_input(filter)}
-                </div>)
-            })}
-            <input type="submit" value="Buscar resultados"/>
-        </form>
-        <div>
-            {results}
-        </div>
+        <Head>
+            <title>Resultados Ñandú</title>
+        </Head>
+        <Layout>
+            <h1>Resultados Ñandú</h1>
+            <form onSubmit={searchResults}>
+                {filters.map((filter) => {
+                    return(
+                    <div>
+                        <label>{filter}</label>{render_input(filter)}
+                    </div>)
+                })}
+                <input type="submit" value="Buscar resultados"/>
+            </form>
+            <div>
+                {results}
+            </div>
+        </Layout>
         </>
         )
 }

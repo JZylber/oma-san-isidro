@@ -1,11 +1,16 @@
 import { NextPage } from "next";
-import NavBar from "../../components/NavBar/Navbar";
+import Head from "next/head";
+import Layout from "../../components/Layout/Layout";
 
 const OMAProblems : NextPage = () => {
     return(
         <>
-        <NavBar/>
-        <h1>Problemas OMA</h1>
+        <Head>
+            <title>Problemas OMA</title>
+        </Head>
+        <Layout>
+            <h1>Problemas OMA</h1>
+        </Layout>        
         </>)
 }
 

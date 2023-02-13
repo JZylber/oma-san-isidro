@@ -43,13 +43,33 @@
       border-bottom: 2px solid;
       position: relative;
     }
-    @include shared.desktop-only {
-      display: flex;
-      justify-content: center;
-    }
-    &_full {
-      @extend .navbar_main;
-      background-color: shared.$light-blue;
+  }
+  .navbar {
+    width: 100%;
+    &_main {
+      @include shared.mobile-only {
+        padding-top: 2.4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      @include shared.not-mobile {
+        background-color: shared.$light-blue;
+        border-bottom: 2px solid;
+        position: relative;
+        display: flex;
+        justify-content: center;
+      }
+      @include shared.tablet-only {
+        padding-top: 0.8rem;
+      }
+      @include shared.desktop-only {
+        padding-top: 1.6rem;
+      }
+      &_full {
+        @extend .navbar_main;
+        background-color: shared.$light-blue;
+      }
     }
   }
 }

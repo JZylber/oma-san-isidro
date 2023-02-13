@@ -1,17 +1,17 @@
 import { NextPage } from "next";
-import NavBar from "../../components/NavBar/Navbar";
 import { Authorization } from "../../components/Auth/Auth";
-import styles from "../styles/Home.module.scss";
+import Head from "next/head";
+import Layout from "../../components/Layout/Layout";
 
 const OMAAuthorization: NextPage = () => {
   return (
     <>
-      <NavBar />
-      <div className={styles.wrapperLayout}>
-        <div className={styles.pageLayout}>
-          <Authorization />
-        </div>
-      </div>
+      <Head>
+        <title>Autorización OMA</title>
+      </Head>
+      <Layout>
+        <Authorization />
+      </Layout>
     </>
   );
 };

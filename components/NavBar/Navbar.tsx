@@ -1,7 +1,7 @@
 import styles from "./Navbar.module.scss";
 import MenuIcon from "../../img/menuIcon.svg";
 import X from "../../img/x.svg";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import MobileMenu from "./MobileMenu/mobile-menu";
 import TopMenu from "./TopMenu/TopMenu";
 import {
@@ -107,12 +107,13 @@ export default function NavBar({ togglePageContent }: NavProps) {
   const [menuHierarchy, setMenuHierarchy] = useState(
     showCurrentPageSelected(defaultMenuHierarchy, router.pathname)
   );
-  const showSubMenu = () => {
-    return (
-      menuHierarchy.find(
-        (element) => element.selected && element.subItems.length > 0
-      ) != undefined
-    );
+  const selectedMainItem = () => {
+    const item = menuHierarchy.find((element) => element.selected);
+    if (item) {
+      return item.text;
+    } else {
+      return "";
+    }
   };
   const getSubitems = () => {
     let item = menuHierarchy.find((element) => element.selected);
@@ -179,6 +180,19 @@ export default function NavBar({ togglePageContent }: NavProps) {
     return !isAtHome;
   };
 
+  const clickSubItem = (mainItemName: string, subItemName: string) => {
+    const mainItemIndex = menuHierarchy.findIndex(
+      (item) => item.text === mainItemName
+    );
+    const item = menuHierarchy[mainItemIndex];
+    const subItemIndex = item.subItems.findIndex(
+      (subitem) => subitem.text === subItemName
+    );
+    const subItem = item.subItems[subItemIndex];
+    subItem.link && router.push(subItem.link);
+    setMenuHierarchy(selectItem(menuHierarchy, mainItemIndex, subItemIndex));
+  };
+
   return (
     <nav className={styles.navbar}>
       <div
@@ -193,18 +207,23 @@ export default function NavBar({ togglePageContent }: NavProps) {
             <MenuIcon className={styles.icon} onClick={() => openCloseMenu()} />
           )}
         </div>
-        <div className={styles.wrapper}>
-          {openFullMenu ? (
-            <MobileMenu
-              closeMenu={openCloseMenu}
-              menuHierarchy={menuHierarchy}
-            />
-          ) : (
-            <TopMenu menuHierarchy={menuHierarchy} onClick={clickMainItem} />
-          )}
-        </div>
+        {openFullMenu ? (
+          <MobileMenu closeMenu={openCloseMenu} menuHierarchy={menuHierarchy} />
+        ) : (
+          <TopMenu
+            menuHierarchy={menuHierarchy}
+            onMainItemClick={clickMainItem}
+          />
+        )}
       </div>
-      {isNotAtHome() && <SubMenu items={getSubitems()} />}
+      {isNotAtHome() && (
+        <SubMenu
+          items={getSubitems()}
+          onSubItemClick={(subItemName: string) =>
+            clickSubItem(selectedMainItem(), subItemName)
+          }
+        />
+      )}
     </nav>
   );
 }

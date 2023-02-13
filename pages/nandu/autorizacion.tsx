@@ -1,11 +1,16 @@
 import { NextPage } from "next";
-import NavBar from "../../components/NavBar/Navbar";
+import Head from "next/head";
+import Layout from "../../components/Layout/Layout";
 
 const NanduAuthorization: NextPage = () => {
   return (
     <>
-      <NavBar />
-      <h1>Autorización Ñandú</h1>
+      <Head>
+        <title>Autorización Ñandú</title>
+      </Head>
+      <Layout>
+        <h1>Autorización Ñandú</h1>
+      </Layout>
     </>
   );
 };
