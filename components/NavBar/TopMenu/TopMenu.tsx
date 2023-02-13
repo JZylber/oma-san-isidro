@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { MenuHierarchy, menuItem, showCurrentPageSelected } from '../NavBarRouting';
 import NavBarItem from './NavBarItem';
 import styles from './TopMenu.module.scss';
@@ -15,10 +15,10 @@ const TopMenu = ({menuHierarchy,onMainItemClick} : topMenuProps) => {
     //Renderizado de cada item del menu
     const renderMenuItem = (item: menuItem,position:number) => {
         return(
-            <>
-            {position == 1 && <NavBarItem text={""} phantom={true} selected={false}/>}
-            <NavBarItem text={item.text} link={item.link} selected={item.selected} onClick={() => onMainItemClick(item.text)} />
-            </>
+            <Fragment key={position}>
+            {position == 1 && <NavBarItem text={""} phantom={true} selected={false} key="phantom"/>}
+            <NavBarItem text={item.text} link={item.link} selected={item.selected} onClick={() => onMainItemClick(item.text)} key={item.text} />
+            </Fragment>
         )
     }
 

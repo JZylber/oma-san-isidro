@@ -61,7 +61,7 @@ const MobileMenu= ({closeMenu,menuHierarchy} : mobileMenuProps) => {
     //Renderizado de cada item del menu
     const renderMenuItem = (item : menuItem) => {
         return(
-        <div className={styles[["item",(item.selected && item.subItems.length > 0 ?"_selected":"")].join("")]}>
+        <div className={styles[["item",(item.selected && item.subItems.length > 0 ?"_selected":"")].join("")]} key={item.text}>
             <div className={styles.main} onClick={() => selectMainItem(item.text)}>
                 <span>{item.text}</span>
                 <MenuArrow/>
