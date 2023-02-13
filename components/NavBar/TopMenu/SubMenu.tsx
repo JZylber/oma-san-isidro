@@ -11,6 +11,7 @@ type SubMenuProps = {
 const SubMenu = ({items,onSubItemClick} : SubMenuProps) => {
     const router = useRouter();
     return(
+        <div className={styles.wrapper}>
         <ul className={styles.submenu_bar}>
             {items.map((item,position) => {
                 return(
@@ -21,6 +22,7 @@ const SubMenu = ({items,onSubItemClick} : SubMenuProps) => {
                 )
             })}
         </ul>
+        </div>
     )
 }
 
