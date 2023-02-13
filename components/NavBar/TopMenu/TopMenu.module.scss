@@ -1,5 +1,20 @@
 @use '../../../styles/shared.scss' as shared;
 
 .menu_bar {
-    width: 100%;
+    @include shared.mobile-only{
+        width: 80%;
+    }
+    @include shared.tablet-only{
+        width: 85%;
+        display: grid;
+        @include shared.tablet-columns;
+        grid-template-rows: 1fr;
+    }
+    @include shared.desktop-only{
+        display: grid;
+        @include shared.desktop-columns;
+        grid-template-rows: 1fr;
+        width: 80%;
+        max-width: 1200px;
+    }
 }

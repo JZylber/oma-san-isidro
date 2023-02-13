@@ -18,51 +18,25 @@
 }
 .navbar{
     width: 100%;
-    @include shared.mobile-only{
-        min-height: shared.$mobile-spacing * 4;
-    }
-    @include shared.not-mobile{
-        grid-row: 1/2;
-        grid-column: 1/-1;
-    }
-    @include shared.tablet-only{
-        width: 117.6%;
-        margin-left: -8.82%;
-    }
-    @include shared.desktop-only{
-        width: 125%;
-        margin-left: -12.5%;
-    }
     &_main {
         @include shared.mobile-only{
             padding-top: 2.4rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            
         }
         @include shared.not-mobile{
             background-color: shared.$light-blue;
             border-bottom: 2px solid;
             position: relative;
+            display: flex;
+            justify-content: center;
         }
         @include shared.tablet-only{
-            display: grid;
-            @include shared.tablet-columns;
-            grid-template-rows: 1fr;
             padding-top: .8rem;
-            min-height: shared.$tabletYspacing * 4;
-            padding-left: 7.5%;
-            padding-right: 7.5%;
         }
         @include shared.desktop-only {
-            display: grid;
-            @include shared.desktop-columns;
-            grid-template-rows: 1fr;
-            //height: 8.8rem;
             padding-top: 1.6rem;
-            padding-left: 10%;
-            padding-right: 10%;
         }
         &_full {
             @extend .navbar_main;

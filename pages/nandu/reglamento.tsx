@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import NavBar from "../../components/NavBar/Navbar";
+import Layout from "../../components/Layout/Layout";
 
 const NanduRules : NextPage = () => {
     return(
@@ -8,8 +8,9 @@ const NanduRules : NextPage = () => {
         <Head>
             <title>Reglamento Ñandú</title>
         </Head>
-        <NavBar/>
-        <h1>Reglamento Ñandú</h1>
+        <Layout>
+            <h1>Reglamento Ñandú</h1>
+        </Layout>
         </>
         )
 }
