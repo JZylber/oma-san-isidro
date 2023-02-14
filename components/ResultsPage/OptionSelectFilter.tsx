@@ -2,7 +2,7 @@ import { ChangeEvent, ChangeEventHandler, useEffect, useState } from "react"
 import {OptionFilterProps } from "./resultsTypes"
 import styles from "./Filter.module.scss"
 
-const OptionSelectFilter = ({category_name,values,update_filter} : OptionFilterProps) => {
+const OptionSelectFilter = ({category_name,values,update_filter,includeSearchBar=false} : OptionFilterProps) => {
     const [selectedValues,setSelectedValues] = useState(values)
     const [displayedOptions, setDisplayedOptions] = useState(values)
     const [isOpen,setIsOpen] = useState(false)
@@ -34,8 +34,7 @@ const OptionSelectFilter = ({category_name,values,update_filter} : OptionFilterP
         if(target.value.length === 0){
             setDisplayedOptions(values)
         } else {
-            const stringValues = values as Array<string>
-            stringValues && setDisplayedOptions(stringValues.filter((value : string) => value.toLowerCase().replace('.','').normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(target.value)))
+            values && setDisplayedOptions(values.filter((value : string) => value.toLowerCase().replace('.','').normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(target.value)))
         }
     }
     return(
@@ -45,7 +44,7 @@ const OptionSelectFilter = ({category_name,values,update_filter} : OptionFilterP
             <div className={styles.icon} onClick={toggleFilter}></div>
         </div>
         <div className={isOpen?styles.filterOptions_open: styles.filterOptions}>
-            <input onChange={searchOptions}/>
+            {includeSearchBar && <input onChange={searchOptions}/>}
             <div className={styles.filterOptions_item}>
                 <input type="checkbox" value="all" key="all" onChange={allOptions} checked={selectedValues.length === values.length}/>
                 <label>Todos</label>

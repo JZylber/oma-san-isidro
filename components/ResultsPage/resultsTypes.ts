@@ -35,7 +35,7 @@ export interface ResultFilter {
     nombre?: string,
     apellido?: string,
     colegio: Array<string>,
-    nivel?: number,
+    nivel:  Array<string>,
     aprobado?: boolean
 } 
 
@@ -49,6 +49,7 @@ export interface OptionFilterProps{
     values : Array<string>,
     category_name: string
     update_filter: (newValue : Array<string>) => void;
+    includeSearchBar?: boolean
 }
 
 export interface TypedFilterProps{
