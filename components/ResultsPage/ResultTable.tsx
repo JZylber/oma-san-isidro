@@ -1,20 +1,22 @@
 import { useState } from "react";
-import Autosuggest from "react-autosuggest";
+import OptionSelectFilter from "./OptionSelectFilter";
 import { ResultFilter, School, TestQueryResults } from "./resultsTypes";
 import styles from "./ResultTable.module.scss"
+import TypedFilter from "./TypedFilter";
 
 const ResultTable = ({results}:{results? : Array<TestQueryResults>}) => {
-    const starting_filters : ResultFilter = {nombre: undefined,apellido: undefined,colegio: undefined,nivel: undefined,aprobado: undefined}
+    const schools : Array<string> = results ? Array.from(new Set(results.map((result) => result.participacion.colegio.nombre + (result.participacion.colegio.sede?`-${result.participacion.colegio.sede}`:"")))) : []
+    const starting_filters : ResultFilter = {nombre: undefined,apellido: undefined,colegio: schools,nivel: undefined,aprobado: undefined}
     const [filters,setFilters] = useState<ResultFilter>(starting_filters)
 
-    const updateFilter = (category: string, newValue: undefined | string | boolean | number) => {
+    const updateFilter = (category: string, newValue: undefined | string | boolean | number | Array<string>) => {
         setFilters({...filters,[category]:newValue})
     }
 
     const isFilterCompliant = (result: TestQueryResults) => {
         const name = !filters.nombre || result.participacion.participante.nombre.toLowerCase().includes(filters.nombre.toLowerCase())
         const surname = !filters.apellido || result.participacion.participante.apellido.toLowerCase().includes(filters.apellido.toLowerCase())
-        const school = !filters.colegio || result.participacion.colegio.nombre.toLowerCase().includes(filters.colegio.toLowerCase())
+        const school = filters.colegio.includes(result.participacion.colegio.nombre + (result.participacion.colegio.sede?`-${result.participacion.colegio.sede}`:""))
         const level = !filters.nivel || result.participacion.nivel == filters.nivel
         const passed = filters.aprobado == undefined || result.aprobado == filters.aprobado
         return(name && surname && school && level && passed) 
@@ -37,15 +39,17 @@ const ResultTable = ({results}:{results? : Array<TestQueryResults>}) => {
                 <td>{passed?"Si":"No"}</td>
             </tr>)
     }
+    
     const make_table = (results? : Array<TestQueryResults>) => {
         if(results){
+            
             return(
                 <table className={styles.result_table}>
                     <thead>
                         <tr>
-                            <td>Nombre</td>
-                            <td>Apellido</td>
-                            <td>Colegio</td>
+                            <td><TypedFilter category_name="Nombre" values={results.map((result) => result.participacion.participante.nombre)} update_filter={(newValue : string) => updateFilter("nombre",newValue)}/></td>
+                            <td><TypedFilter category_name="Apellido" values={results.map((result) => result.participacion.participante.apellido)} update_filter={(newValue : string) => updateFilter("apellido",newValue)}/></td>
+                            <td><OptionSelectFilter category_name="Colegio" values={schools} update_filter={(newValue : Array<string>) => updateFilter("colegio",newValue)}/></td>
                             <td>Nivel</td>
                             <td>P1</td>
                             <td>P2</td>
@@ -64,7 +68,7 @@ const ResultTable = ({results}:{results? : Array<TestQueryResults>}) => {
             )
         }
     }
-    const schools : Array<School> = [] 
+    /*
     const getSuggestions = (value : string) => {
         const inputValue = value.trim().toLowerCase();
         const inputLength = inputValue.length;
@@ -86,13 +90,13 @@ const ResultTable = ({results}:{results? : Array<TestQueryResults>}) => {
       };
     const onSuggestionsClearRequested = () => {
         setSchoolSuggestions([])
-      };
+      };*/
     return(
         <>
         <form className={styles.form}>
             <label>Nombre</label><input onChange={(event) => updateFilter("nombre",event.target.value)}></input><br/>
             <label>Apellido</label><input onChange={(event) => updateFilter("apellido",event.target.value)}></input><br/>
-            <label>Colegio</label><Autosuggest 
+            {/*<label>Colegio</label><Autosuggest 
                 suggestions={schoolSuggestions}
                 onSuggestionsFetchRequested={onSuggestionsFetchRequested}
                 onSuggestionsClearRequested={onSuggestionsClearRequested}
@@ -103,7 +107,7 @@ const ResultTable = ({results}:{results? : Array<TestQueryResults>}) => {
                     onChange:(_, { newValue, method }) => {
                         updateFilter("colegio",newValue);
                       }
-                }}/>
+                }}/>*/}
             <label>Nivel</label>
                 <input type="radio" id="1" name="nivel" value="1" onChange={(event) => updateFilter("nivel",Number(event.target.value))}/>
                 <label>1</label>

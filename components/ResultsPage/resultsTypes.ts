@@ -34,7 +34,7 @@ export interface TestQueryResults {
 export interface ResultFilter {
     nombre?: string,
     apellido?: string,
-    colegio?: string,
+    colegio: Array<string>,
     nivel?: number,
     aprobado?: boolean
 } 
@@ -45,7 +45,14 @@ export type School = {
     localidad?: string
 }
 
-export interface FilterProps{
-    values : Array<string | number>,
+export interface OptionFilterProps{
+    values : Array<string>,
     category_name: string
+    update_filter: (newValue : Array<string>) => void;
+}
+
+export interface TypedFilterProps{
+    values : Array<string>,
+    category_name: string
+    update_filter: (newValue : string) => void;
 }
