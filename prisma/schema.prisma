@@ -60,6 +60,7 @@ model Prueba {
   id_prueba Int @default(autoincrement()) @id
   fecha DateTime
   instancia INSTANCIA
+  cantidad_problemas Int @default(3)
   competencia Competencia @relation(fields: [id_competencia],references: [id_competencia])
   id_competencia Int
   rinden Rinde[]

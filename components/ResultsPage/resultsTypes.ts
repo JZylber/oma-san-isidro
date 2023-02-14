@@ -15,6 +15,9 @@ export type FilterData = {
 }
 
 export interface TestQueryResults {
+    prueba: {
+        cantidad_problemas: number
+    }
     presente : boolean,
     aprobado : boolean,
     resultados : Array<string>,

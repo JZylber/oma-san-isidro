@@ -1,6 +1,6 @@
 import { TypedFilterProps } from "./resultsTypes"
 import styles from "./Filter.module.scss"
-import { ChangeEvent, ChangeEventHandler, useEffect, useState } from "react"
+import { ChangeEvent, ChangeEventHandler, RefObject, useEffect, useRef, useState } from "react"
 
 const TypedFilter = ({category_name,values,update_filter} : TypedFilterProps) => {
     const [value,setValue] = useState("")
@@ -9,6 +9,25 @@ const TypedFilter = ({category_name,values,update_filter} : TypedFilterProps) =>
     const toggleFilter = () => {
         setIsOpen(!isOpen)
     }
+    //Close when clicked outside
+    const useOutsideAlerter = (ref : RefObject<HTMLDivElement>) => {
+        useEffect(() => {
+          const handleClickOutside = (event : MouseEvent) => {
+            const target = event.target && event.target as Node
+            if (ref.current && !ref.current.contains(target)) {
+              setIsOpen(false);
+            }
+          }
+          document.addEventListener("mousedown", handleClickOutside);
+          return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+          };
+        }, [ref]);
+      }
+    const wrapperRef = useRef<HTMLDivElement>(null);
+    useOutsideAlerter(wrapperRef);
+
+
     useEffect(() => update_filter(value),[value])
     const getSuggestions = (value : string) => {
         const inputValue = value.trim().toLowerCase();
@@ -37,7 +56,7 @@ const TypedFilter = ({category_name,values,update_filter} : TypedFilterProps) =>
             <span>{category_name}</span>
             <div className={styles.icon} onClick={toggleFilter}></div>
         </div>
-        <div className={isOpen?styles.filterOptions_open: styles.filterOptions}>
+        <div ref={wrapperRef} className={isOpen?styles.filterOptions_open: styles.filterOptions}>
             <input onChange={searchSuggestions} value={value}/>
             <ul className={styles.suggestions}>
                 {suggestions.map((suggestion,index) => renderSuggestion(suggestion,index))}

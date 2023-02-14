@@ -1,7 +1,7 @@
 import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import Results from "../../components/ResultsPage/results";
-import {School, yearTests } from "../../components/ResultsPage/resultsTypes";
+import {yearTests } from "../../components/ResultsPage/resultsTypes";
 import {getAvailableResults, getSchools} from "../../lib/aux_db_calls";
 import styles from "./resultados.module.scss"
 import Layout from "../../components/Layout/Layout";
@@ -14,7 +14,7 @@ export const getServerSideProps: GetServerSideProps= async ({ params }) => {
     };      
   };
 
-const NanduResults : NextPage<{results: Array<yearTests>,schools: Array<School>}> = ({results,schools}) => {
+const NanduResults : NextPage<{results: Array<yearTests>}> = ({results}) => {
     return(
         <>
         <Head>

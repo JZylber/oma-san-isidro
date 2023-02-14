@@ -42,7 +42,7 @@ const Results = ({competition,availableResults} : ResultProps) => {
         <>
         <h1 className={styles.title}>Resultados {competition}</h1>
         <ResultFinderForm availableResults={availableResults} searchResults={searchResults}/>
-        {isLoading ? "Buscando resultados...": <ResultTable results={results}/>}
+        {isLoading ? "Buscando resultados...": (results?<ResultTable results={results}/>:"¡Elegí un año y una instancia y hacé click en buscar resultados!")}
         </>
     )
 }

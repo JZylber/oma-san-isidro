@@ -1,6 +1,8 @@
-import { ChangeEvent, ChangeEventHandler, useEffect, useState } from "react"
+import { ChangeEvent, ChangeEventHandler, RefObject, useEffect, useRef, useState } from "react"
 import {OptionFilterProps } from "./resultsTypes"
 import styles from "./Filter.module.scss"
+
+
 
 const OptionSelectFilter = ({category_name,values,update_filter,includeSearchBar=false} : OptionFilterProps) => {
     const [selectedValues,setSelectedValues] = useState(values)
@@ -9,6 +11,25 @@ const OptionSelectFilter = ({category_name,values,update_filter,includeSearchBar
     const toggleFilter = () => {
         setIsOpen(!isOpen)
     }
+    //Close when clicked outside
+    const useOutsideAlerter = (ref : RefObject<HTMLDivElement>) => {
+        useEffect(() => {
+          const handleClickOutside = (event : MouseEvent) => {
+            const target = event.target && event.target as Node
+            if (ref.current && !ref.current.contains(target)) {
+              setIsOpen(false);
+            }
+          }
+          document.addEventListener("mousedown", handleClickOutside);
+          return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+          };
+        }, [ref]);
+      }
+    const wrapperRef = useRef<HTMLDivElement>(null);
+    useOutsideAlerter(wrapperRef);
+
+
     useEffect(() => {update_filter(selectedValues)},[selectedValues])
     const allOptions : ChangeEventHandler<HTMLInputElement> = (event : ChangeEvent) => {
         const target = event.target && event.target as HTMLInputElement
@@ -43,7 +64,7 @@ const OptionSelectFilter = ({category_name,values,update_filter,includeSearchBar
             <span>{category_name}</span>
             <div className={styles.icon} onClick={toggleFilter}></div>
         </div>
-        <div className={isOpen?styles.filterOptions_open: styles.filterOptions}>
+        <div ref={wrapperRef} className={isOpen?styles.filterOptions_open: styles.filterOptions}>
             {includeSearchBar && <input onChange={searchOptions}/>}
             <div className={styles.filterOptions_item}>
                 <input type="checkbox" value="all" key="all" onChange={allOptions} checked={selectedValues.length === values.length}/>

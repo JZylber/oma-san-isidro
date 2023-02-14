@@ -4,9 +4,10 @@ import { ResultFilter, School, TestQueryResults } from "./resultsTypes";
 import styles from "./ResultTable.module.scss"
 import TypedFilter from "./TypedFilter";
 
-const ResultTable = ({results}:{results? : Array<TestQueryResults>}) => {
-    const schools : Array<string> = results ? Array.from(new Set(results.map((result) => result.participacion.colegio.nombre + (result.participacion.colegio.sede?`-${result.participacion.colegio.sede}`:"")))) : []
-    const levels : Array<string> = results ? Array.from(new Set(results.map((result) => result.participacion.nivel.toString()))) : []
+const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
+    const schools : Array<string> = Array.from(new Set(results.map((result) => result.participacion.colegio.nombre + (result.participacion.colegio.sede?`-${result.participacion.colegio.sede}`:""))))
+    const levels : Array<string> = Array.from(new Set(results.map((result) => result.participacion.nivel.toString())))
+    const numberOfProblems = results[0].prueba.cantidad_problemas
     const starting_filters : ResultFilter = {nombre: undefined,apellido: undefined,colegio: schools,nivel: levels,aprobado: []}
     const [filters,setFilters] = useState<ResultFilter>(starting_filters)
 
@@ -36,7 +37,7 @@ const ResultTable = ({results}:{results? : Array<TestQueryResults>}) => {
                 <td>{surname}</td>
                 <td>{school}</td>
                 <td>{level}</td>
-                {points.map((point,index) => <td key={index}>{point}</td>)}
+                {numberOfProblems>0 && points.map((point,index) => <td key={index}>{point}</td>)}
                 <td>{passed?"Si":"No"}</td>
             </tr>)
     }
@@ -52,10 +53,12 @@ const ResultTable = ({results}:{results? : Array<TestQueryResults>}) => {
                             <td><TypedFilter category_name="Apellido" values={results.map((result) => result.participacion.participante.apellido)} update_filter={(newValue : string) => updateFilter("apellido",newValue)}/></td>
                             <td><OptionSelectFilter category_name="Colegio" values={schools} update_filter={(newValue : Array<string>) => updateFilter("colegio",newValue)} includeSearchBar={true}/></td>
                             <td><OptionSelectFilter category_name="Nivel" values={levels} update_filter={(newValue : Array<string>) => updateFilter("nivel",newValue)}/></td>
-                            <td>P1</td>
-                            <td>P2</td>
-                            <td>P3</td>
-                            <td>Total</td>
+                            {numberOfProblems > 0 &&
+                                <>
+                                {Array.from(new Array(numberOfProblems), (x, i) => i + 1).map((number) => <td key={number}>{`P${number}`}</td>)}
+                                <td>Total</td>
+                                </>
+                            }
                             <td><OptionSelectFilter category_name="Aprobado" values={["Si","No"]} update_filter={(newValue : Array<string>) => updateFilter("aprobado",newValue)}/></td>
                         </tr>
                     </thead>

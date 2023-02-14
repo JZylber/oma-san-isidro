@@ -24,6 +24,11 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
                         },
                 },
                 select : {
+                    prueba: {
+                        select : {
+                            cantidad_problemas: true,
+                        }
+                    },
                     presente: true,
                     aprobado: true,
                     resultados: true,
