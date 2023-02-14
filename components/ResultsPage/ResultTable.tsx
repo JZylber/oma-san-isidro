@@ -31,13 +31,14 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
         const level = result.participacion.nivel
         const points = result.resultados
         const passed = result.aprobado
+        const present = result.presente
         return(
             <tr key={index}>
                 <td>{name}</td>
                 <td>{surname}</td>
                 <td>{school}</td>
                 <td>{level}</td>
-                {numberOfProblems>0 && points.map((point,index) => <td key={index}>{point}</td>)}
+                {numberOfProblems>0 && (present ? points.map((point,index) => <td key={index}>{point}</td>): <td colSpan={numberOfProblems + 1}>Ausente</td>)}
                 <td>{passed?"Si":"No"}</td>
             </tr>)
     }
@@ -49,8 +50,8 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
                 <table className={styles.result_table}>
                     <thead>
                         <tr>
-                            <td><TypedFilter category_name="Nombre" values={results.map((result) => result.participacion.participante.nombre)} update_filter={(newValue : string) => updateFilter("nombre",newValue)}/></td>
-                            <td><TypedFilter category_name="Apellido" values={results.map((result) => result.participacion.participante.apellido)} update_filter={(newValue : string) => updateFilter("apellido",newValue)}/></td>
+                            <td><TypedFilter category_name="Nombre" values={Array.from(new Set(results.map((result) => result.participacion.participante.nombre)))} update_filter={(newValue : string) => updateFilter("nombre",newValue)}/></td>
+                            <td><TypedFilter category_name="Apellido" values={Array.from(new Set(results.map((result) => result.participacion.participante.apellido)))} update_filter={(newValue : string) => updateFilter("apellido",newValue)}/></td>
                             <td><OptionSelectFilter category_name="Colegio" values={schools} update_filter={(newValue : Array<string>) => updateFilter("colegio",newValue)} includeSearchBar={true}/></td>
                             <td><OptionSelectFilter category_name="Nivel" values={levels} update_filter={(newValue : Array<string>) => updateFilter("nivel",newValue)}/></td>
                             {numberOfProblems > 0 &&

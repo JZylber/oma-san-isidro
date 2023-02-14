@@ -42,7 +42,7 @@ const TypedFilter = ({category_name,values,update_filter} : TypedFilterProps) =>
     }
     const renderSuggestion = (suggestion : string, index: number) => {
         return(
-            <li key={index} onClick={() => selectSuggestion(suggestion)}>{suggestion}</li>
+            <li className={styles.filterOptions_item} key={index} onClick={() => selectSuggestion(suggestion)}>{suggestion}</li>
         )
     }
     const searchSuggestions : ChangeEventHandler<HTMLInputElement> = (event : ChangeEvent) => {
