@@ -2,6 +2,22 @@
 
 .item {
   @include shared.font-montserrat(300);
-  max-width: 50%;
-  font-size: shared.$desktop-reading-font-size;
+
+  @include shared.mobile-only {
+    width: 80%;
+  }
+
+  @include shared.tablet-only {
+    width: 37.5 * shared.$tabletXspacing;
+    max-width: 50%;
+    font-size: shared.$tablet-reading-font-size;
+    margin: shared.$tabletYspacing;
+  }
+
+  @include shared.desktop-only {
+    width: 50 * shared.$desktopXspacing;
+    max-width: 50%;
+    font-size: 0.85 * shared.$desktop-reading-font-size;
+    padding-bottom: 20px;
+  }
 }

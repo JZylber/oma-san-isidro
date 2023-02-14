@@ -8,7 +8,7 @@ type authProps = {
 export const AuthItem = ({ important, text }: authProps) => {
   return (
     <li className={styles.item}>
-      <b>{important}</b>
+      <b>{important} </b>
       {text}
     </li>
   );
