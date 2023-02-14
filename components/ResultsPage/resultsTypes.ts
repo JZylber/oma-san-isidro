@@ -36,7 +36,7 @@ export interface ResultFilter {
     apellido?: string,
     colegio: Array<string>,
     nivel:  Array<string>,
-    aprobado?: boolean
+    aprobado: Array<string>
 } 
 
 export type School = {

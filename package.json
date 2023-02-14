@@ -30,7 +30,6 @@
     "@types/react-autosuggest": "^10.1.6",
     "dotenv": "^16.0.3",
     "husky": "^8.0.2",
-    "prisma": "^4.10.1",
-    "react-autosuggest": "^10.1.0"
+    "prisma": "^4.10.1"
   }
 }

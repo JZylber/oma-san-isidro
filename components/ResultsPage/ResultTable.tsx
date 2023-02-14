@@ -7,7 +7,7 @@ import TypedFilter from "./TypedFilter";
 const ResultTable = ({results}:{results? : Array<TestQueryResults>}) => {
     const schools : Array<string> = results ? Array.from(new Set(results.map((result) => result.participacion.colegio.nombre + (result.participacion.colegio.sede?`-${result.participacion.colegio.sede}`:"")))) : []
     const levels : Array<string> = results ? Array.from(new Set(results.map((result) => result.participacion.nivel.toString()))) : []
-    const starting_filters : ResultFilter = {nombre: undefined,apellido: undefined,colegio: schools,nivel: levels,aprobado: undefined}
+    const starting_filters : ResultFilter = {nombre: undefined,apellido: undefined,colegio: schools,nivel: levels,aprobado: []}
     const [filters,setFilters] = useState<ResultFilter>(starting_filters)
 
     const updateFilter = (category: string, newValue: undefined | string | boolean | number | Array<string>) => {
@@ -19,7 +19,7 @@ const ResultTable = ({results}:{results? : Array<TestQueryResults>}) => {
         const surname = !filters.apellido || result.participacion.participante.apellido.toLowerCase().includes(filters.apellido.toLowerCase())
         const school = filters.colegio.includes(result.participacion.colegio.nombre + (result.participacion.colegio.sede?`-${result.participacion.colegio.sede}`:""))
         const level = filters.nivel.includes(result.participacion.nivel.toString())
-        const passed = filters.aprobado == undefined || result.aprobado == filters.aprobado
+        const passed = filters.aprobado.includes(result.aprobado?"Si":"No")
         return(name && surname && school && level && passed) 
     }
 
@@ -56,7 +56,7 @@ const ResultTable = ({results}:{results? : Array<TestQueryResults>}) => {
                             <td>P2</td>
                             <td>P3</td>
                             <td>Total</td>
-                            <td>Aprobado</td>
+                            <td><OptionSelectFilter category_name="Aprobado" values={["Si","No"]} update_filter={(newValue : Array<string>) => updateFilter("aprobado",newValue)}/></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -69,45 +69,8 @@ const ResultTable = ({results}:{results? : Array<TestQueryResults>}) => {
             )
         }
     }
-    /*
-    const getSuggestions = (value : string) => {
-        const inputValue = value.trim().toLowerCase();
-        const inputLength = inputValue.length;
-      
-        return inputLength === 0 ? [] : schools.filter(school =>
-          school.nombre.toLowerCase().replace('.','').normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(inputValue)
-        );
-      };
-      const getSuggestionValue = (suggestion : School) => suggestion.nombre;
-      const renderSuggestion = (suggestion : School) => (
-        <div>
-          {suggestion.nombre}
-        </div>
-      );
-    const [schoolSuggestions,setSchoolSuggestions] = useState<Array<School>>([])
-    const onSuggestionsFetchRequested = (
-        {value}:{value : string}) => {
-        setSchoolSuggestions(getSuggestions(value))
-      };
-    const onSuggestionsClearRequested = () => {
-        setSchoolSuggestions([])
-      };*/
     return(
         <>
-        <form className={styles.form}>
-            {/*<label>Colegio</label><Autosuggest 
-                suggestions={schoolSuggestions}
-                onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-                onSuggestionsClearRequested={onSuggestionsClearRequested}
-                getSuggestionValue={getSuggestionValue}
-                renderSuggestion={renderSuggestion}
-                inputProps={{
-                    value: filters["colegio"] || "",
-                    onChange:(_, { newValue, method }) => {
-                        updateFilter("colegio",newValue);
-                      }
-                }}/>*/}
-        </form>
         <div className={styles.results}>
             {make_table(results?.filter(isFilterCompliant))}
         </div>

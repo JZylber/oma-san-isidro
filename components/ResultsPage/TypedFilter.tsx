@@ -1,7 +1,6 @@
 import { TypedFilterProps } from "./resultsTypes"
 import styles from "./Filter.module.scss"
 import { ChangeEvent, ChangeEventHandler, useEffect, useState } from "react"
-import Autosuggest from "react-autosuggest"
 
 const TypedFilter = ({category_name,values,update_filter} : TypedFilterProps) => {
     const [value,setValue] = useState("")
