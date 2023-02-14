@@ -30,7 +30,7 @@ const OptionSelectFilter = ({category_name,values,update_filter,includeSearchBar
     useOutsideAlerter(wrapperRef);
 
 
-    useEffect(() => {update_filter(selectedValues)},[selectedValues])
+    useEffect(() => {update_filter(selectedValues)},[selectedValues,update_filter])
     const allOptions : ChangeEventHandler<HTMLInputElement> = (event : ChangeEvent) => {
         const target = event.target && event.target as HTMLInputElement
         if(!target.checked && selectedValues.length === values.length){
