@@ -1,8 +1,9 @@
 import styles from "./Auth.module.scss";
 import NewsArrow from "../../img/newsArrow.svg";
+import Warning from "../../img/warning.svg";
 import { AuthItem } from "./AuthItem";
 import { Button } from "../buttons/Button";
-
+import Footer from "../Footer/Footer";
 const specs = [
   {
     important: "Solo autorizaciones oficiales de OMA",
@@ -27,7 +28,10 @@ export const Authorization = () => {
     <div className={styles.main}>
       <h1>Autorización</h1>
       <div className={styles.container}>
-        <h3>Tener en cuenta</h3>
+        <div className={styles.title}>
+          <h3>Tener en cuenta</h3>
+          <Warning className={styles.warning} />
+        </div>
         <div className={styles.items}>
           {specs.map((spec, i) => {
             return <AuthItem key={i} {...spec} />;
@@ -44,6 +48,7 @@ export const Authorization = () => {
           nuevamente luego de unos segundos.
         </p>
       </div>
+      <Footer />
     </div>
   );
 };
