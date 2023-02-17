@@ -1,5 +1,10 @@
 @use "../../styles/shared.scss" as shared;
 
+.link{
+  text-decoration: none;
+  color: shared.$black;
+}
+
 .container {
   box-sizing: border-box;
   background: shared.$light-blue;
