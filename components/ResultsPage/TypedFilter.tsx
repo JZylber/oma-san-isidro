@@ -36,7 +36,7 @@ const TypedFilter = ({category_name,values,update_filter} : TypedFilterProps) =>
       };
     const selectSuggestion = (newValue: string) => {
         setValue(newValue);
-        update_filter(value);
+        update_filter(newValue);
         setSuggestions([]);
     }
     const renderSuggestion = (suggestion : string, index: number) => {
@@ -47,7 +47,7 @@ const TypedFilter = ({category_name,values,update_filter} : TypedFilterProps) =>
     const searchSuggestions : ChangeEventHandler<HTMLInputElement> = (event : ChangeEvent) => {
         const target = event.target && event.target as HTMLInputElement;
         setValue(target.value);
-        update_filter(value);
+        update_filter(target.value);
         setSuggestions(getSuggestions(target.value));
     }
     return(

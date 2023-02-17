@@ -33,10 +33,11 @@ const OptionSelectFilter = ({category_name,values,update_filter,includeSearchBar
         const target = event.target && event.target as HTMLInputElement
         if(!target.checked && selectedValues.length === values.length){
             setSelectedValues([])
+            update_filter([])
         } else if(target.checked){
             setSelectedValues(values)
+            update_filter(values)
         }
-        update_filter(selectedValues)
     }
     const toggleOption : ChangeEventHandler<HTMLInputElement> = (event : ChangeEvent) => {
         const target = event.target && event.target as HTMLInputElement
@@ -48,7 +49,7 @@ const OptionSelectFilter = ({category_name,values,update_filter,includeSearchBar
             newSelectedValues.push(target.value)
         }
         setSelectedValues(newSelectedValues)
-        update_filter(selectedValues)
+        update_filter(newSelectedValues)
     }
     const searchOptions : ChangeEventHandler<HTMLInputElement> = (event : ChangeEvent) => {
         const target = event.target && event.target as HTMLInputElement
