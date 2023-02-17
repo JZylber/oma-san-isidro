@@ -27,8 +27,6 @@ const TypedFilter = ({category_name,values,update_filter} : TypedFilterProps) =>
     const wrapperRef = useRef<HTMLDivElement>(null);
     useOutsideAlerter(wrapperRef);
 
-
-    useEffect(() => update_filter(value),[value])
     const getSuggestions = (value : string) => {
         const inputValue = value.trim().toLowerCase();
         const inputLength = inputValue.length;
@@ -38,7 +36,8 @@ const TypedFilter = ({category_name,values,update_filter} : TypedFilterProps) =>
       };
     const selectSuggestion = (newValue: string) => {
         setValue(newValue);
-        setSuggestions([])
+        update_filter(value);
+        setSuggestions([]);
     }
     const renderSuggestion = (suggestion : string, index: number) => {
         return(
@@ -46,9 +45,10 @@ const TypedFilter = ({category_name,values,update_filter} : TypedFilterProps) =>
         )
     }
     const searchSuggestions : ChangeEventHandler<HTMLInputElement> = (event : ChangeEvent) => {
-        const target = event.target && event.target as HTMLInputElement
-        setValue(target.value)
-        setSuggestions(getSuggestions(target.value))
+        const target = event.target && event.target as HTMLInputElement;
+        setValue(target.value);
+        update_filter(value);
+        setSuggestions(getSuggestions(target.value));
     }
     return(
     <div ref={wrapperRef} className={styles.wrapper}>
