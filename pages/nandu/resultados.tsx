@@ -1,74 +1,27 @@
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
-import { useRouter } from "next/router";
-import { FormEventHandler, ReactHTMLElement, useState } from "react";
+import Results from "../../components/ResultsPage/results";
+import {yearTests } from "../../components/ResultsPage/resultsTypes";
+import {getAvailableResults, getSchools} from "../../lib/aux_db_calls";
+import styles from "./resultados.module.scss"
 import Layout from "../../components/Layout/Layout";
 
-type FilterData = {
-    name : string,
-    type : string,
-    options?: Array<string>
-}
+export const getServerSideProps: GetServerSideProps= async ({ params }) => {
+    const available = await getAvailableResults("ÑANDÚ");
+    const newProps = {results: available.results}
+    return {
+      props: newProps,
+    };      
+  };
 
-const NanduResults : NextPage = () => {
-    const router = useRouter()
-    const query = router.query
-    const filter_input: Array<FilterData> = [
-        {name: "año",type:"select",options:["2012","2013","2014","2015","2016"]},
-        {name:"instancia",type:"select",options:["intercolegial","zonal","regional"]},
-        {name:"colegio",type:"select",options:["Colegio San Nicolás","Northlands"]},
-        {name:"nombre",type:"text"},
-        {name:"apellido",type:"text"},
-    ]
-    const filters = filter_input.map((filterData) => filterData.name)
-    const isAQueryOption = (category:string,option:string) => {
-        return(query[category] != undefined && query[category] == option)
-    }
-    const render_input = (filter:string) => {
-        const data : FilterData | undefined = filter_input.find((filterData) => filterData.name == filter)
-        if(data && data.type == "text"){
-            return(<input type="text"/>)
-        }else if(data && data.type == "select"){
-            return(
-                <select>
-                    {data.options && data.options.map((option) => {
-                        return(<option value={option} selected={isAQueryOption(filter,option)}>{option}</option>)
-                    })}
-                </select>
-            )
-        }
-    }
-    const [results,setResults] = useState<string>("")
-    const searchResults : FormEventHandler<HTMLFormElement>= (event : React.SyntheticEvent) => {
-        event.preventDefault();
-        const target = event.target as typeof event.target & {
-            año: { value: string };
-            instancia: { value: string };
-            colegio: { value: string };
-            nombre: { value: string };
-            apellido: { value: string };
-        };
-        setResults(`Se buscaron resultados para ${target.año.value}, ${target.instancia.value}, ${target.colegio.value}, ${target.nombre.value}, ${target.apellido.value}`)
-    }
+const NanduResults : NextPage<{results: Array<yearTests>}> = ({results}) => {
     return(
         <>
         <Head>
-            <title>Resultados Ñandú</title>
+          <title>Resultados Ñandú</title>
         </Head>
         <Layout>
-            <h1>Resultados Ñandú</h1>
-            <form onSubmit={searchResults}>
-                {filters.map((filter) => {
-                    return(
-                    <div>
-                        <label>{filter}</label>{render_input(filter)}
-                    </div>)
-                })}
-                <input type="submit" value="Buscar resultados"/>
-            </form>
-            <div>
-                {results}
-            </div>
+            <Results competition="Ñandú" availableResults={results}/>
         </Layout>
         </>
         )

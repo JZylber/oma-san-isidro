@@ -1,0 +1,6 @@
+@use '../../styles/shared.scss' as shared;
+
+.form {
+    grid-column: 1/-1;
+    font-size: shared.$desktop-reading-font-size
+}

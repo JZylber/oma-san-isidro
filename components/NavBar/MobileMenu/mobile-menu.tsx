@@ -61,14 +61,14 @@ const MobileMenu= ({closeMenu,menuHierarchy} : mobileMenuProps) => {
     //Renderizado de cada item del menu
     const renderMenuItem = (item : menuItem) => {
         return(
-        <div className={styles[["item",(item.selected && item.subItems.length > 0 ?"_selected":"")].join("")]}>
+        <div className={styles[["item",(item.selected && item.subItems.length > 0 ?"_selected":"")].join("")]} key={item.text}>
             <div className={styles.main} onClick={() => selectMainItem(item.text)}>
                 <span>{item.text}</span>
                 <MenuArrow/>
             </div>
             <ul>
                 {item.subItems.map((subitem) => {
-                    return(<li className={`${subitem.selected ? styles.subitem_selected : ""}`}  onClick={() => selectSubItem(item.text,subitem.text)}>{subitem.text}</li>)
+                    return(<li className={`${subitem.selected ? styles.subitem_selected : ""}`}  onClick={() => selectSubItem(item.text,subitem.text)} key={item.text + subitem.text}>{subitem.text}</li>)
                 })}
             </ul>
         </div>
