@@ -1,16 +1,15 @@
-import { useRouter } from 'next/router';
-import { Fragment, useState } from 'react';
-import { MenuHierarchy, menuItem, showCurrentPageSelected } from '../NavBarRouting';
+import { Fragment} from 'react';
+import { MenuHierarchy, menuItem} from '../NavBarRouting';
 import NavBarItem from './NavBarItem';
 import styles from './TopMenu.module.scss';
 
 type topMenuProps = {
-    menuHierarchy : MenuHierarchy,
-    onMainItemClick : (itemName: string) => void
-}
+  menuHierarchy: MenuHierarchy;
+  onMainItemClick: (itemName: string) => void;
+};
 
-const TopMenu = ({menuHierarchy,onMainItemClick} : topMenuProps) => {
-    //const [hovered,setHovered] = useState<number>() 
+const TopMenu = ({ menuHierarchy, onMainItemClick }: topMenuProps) => {
+  //const [hovered,setHovered] = useState<number>()
 
     //Renderizado de cada item del menu
     const renderMenuItem = (item: menuItem,position:number) => {
@@ -22,11 +21,9 @@ const TopMenu = ({menuHierarchy,onMainItemClick} : topMenuProps) => {
         )
     }
 
-    return(
-       <div className={styles.menu_bar}>
-       {menuHierarchy.map(renderMenuItem)}
-       </div>
-    )
-}
+  return (
+    <div className={styles.menu_bar}>{menuHierarchy.map(renderMenuItem)}</div>
+  );
+};
 
-export default TopMenu
+export default TopMenu;

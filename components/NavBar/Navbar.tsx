@@ -1,12 +1,16 @@
-import styles from './Navbar.module.scss';
-import MenuIcon from '../../img/menuIcon.svg';
-import X from '../../img/x.svg';
-import {useState } from 'react';
-import MobileMenu from './MobileMenu/mobile-menu';
-import TopMenu from './TopMenu/TopMenu';
-import { MenuHierarchy, menuItem, showCurrentPageSelected } from './NavBarRouting';
-import SubMenu from './TopMenu/SubMenu';
-import { useRouter } from 'next/router';
+import styles from "./Navbar.module.scss";
+import MenuIcon from "../../img/menuIcon.svg";
+import X from "../../img/x.svg";
+import { useState } from "react";
+import MobileMenu from "./MobileMenu/mobile-menu";
+import TopMenu from "./TopMenu/TopMenu";
+import {
+  MenuHierarchy,
+  menuItem,
+  showCurrentPageSelected,
+} from "./NavBarRouting";
+import SubMenu from "./TopMenu/SubMenu";
+import { useRouter } from "next/router";
 
 type NavProps = {
     togglePageContent? : () => void,
@@ -45,31 +49,45 @@ export default function NavBar({togglePageContent,changeRoute}:NavProps){
             return("")
         }
     }
-    const getSubitems = () => {
-        let item = menuHierarchy.find((element) => element.selected)
-        if(item){
-            return(item.subItems)
-        }else{
-            return([])
-        }
+  const getSubitems = () => {
+    let item = menuHierarchy.find((element) => element.selected);
+    if (item) {
+      return item.subItems;
+    } else {
+      return [];
     }
-    const selectItem = (hierarchy:MenuHierarchy,mainCategory:number,subCategory?:number) => {
-        return(hierarchy.map((item,index) => {
-            let newItem : menuItem;
-            if(index == mainCategory){
-                newItem = {...item,selected:true,subItems:item.subItems.map((subItem,subIndex) => {
-                    if(subCategory && subCategory == subIndex){
-                        return({...subItem,selected:true})
-                    }else {
-                        return({...subItem,selected:false})
-                    }
-                })}
+  };
+  const selectItem = (
+    hierarchy: MenuHierarchy,
+    mainCategory: number,
+    subCategory?: number
+  ) => {
+    return hierarchy.map((item, index) => {
+      let newItem: menuItem;
+      if (index == mainCategory) {
+        newItem = {
+          ...item,
+          selected: true,
+          subItems: item.subItems.map((subItem, subIndex) => {
+            if (subCategory && subCategory == subIndex) {
+              return { ...subItem, selected: true };
             } else {
-                newItem = {...item,selected:false,subItems:item.subItems.map((subItem) => {return{...subItem,selected:false}})}
+              return { ...subItem, selected: false };
             }
-            return(newItem)
-        }))
-    }
+          }),
+        };
+      } else {
+        newItem = {
+          ...item,
+          selected: false,
+          subItems: item.subItems.map((subItem) => {
+            return { ...subItem, selected: false };
+          }),
+        };
+      }
+      return newItem;
+    });
+  };
 
     const clickMainItem = (itemName : string) => {
         const itemIndex = menuHierarchy.findIndex((item) => item.text == itemName);

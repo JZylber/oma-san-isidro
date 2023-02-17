@@ -1,0 +1,130 @@
+@use "../../styles/shared.scss" as shared;
+.main {
+  grid-column: 1 / 10;
+
+  h1 {
+    @include shared.font-unbounded(600);
+
+    @include shared.mobile-only {
+      font-size: 2.4 * shared.$mobile-actionable-font-size;
+      margin-top: 4 * shared.$mobile-spacing;
+      margin-bottom: 2.5 * shared.$mobile-spacing;
+
+      &::before {
+        content: "oma";
+        display: block;
+        @include shared.font-unbounded(400);
+        font-size: 1.5 * shared.$mobile-reading-font-size;
+      }
+    }
+
+    @include shared.not-mobile {
+      font-size: 2 * shared.$desktop-actionable-font-size;
+      line-height: 2.5;
+    }
+  }
+}
+
+.container {
+  box-sizing: border-box;
+  @include shared.font-unbounded(500);
+  border: 2px solid black;
+  border-radius: 9px;
+
+  @include shared.mobile-only {
+    padding: 38px 16px 34px 16px;
+  }
+
+  h3 {
+    @include shared.mobile-only {
+      font-size: 1.3 * shared.$mobile-reading-font-size;
+      width: 100%;
+      margin-bottom: 16px;
+
+      &:after {
+        content: ":";
+      }
+    }
+
+    @include shared.not-mobile {
+      align-self: center;
+      font-size: shared.$desktop-actionable-font-size;
+    }
+  }
+}
+
+.title {
+  display: flex;
+  @include shared.tablet-only {
+    margin: 20px 0 0 20px;
+  }
+  @include shared.desktop-only {
+    margin-left: 4 * shared.$desktopXspacing;
+    margin-top: 2 * shared.$desktop-spacing;
+  }
+}
+
+.warning {
+  @include shared.mobile-only {
+    display: none;
+  }
+}
+
+.items {
+  @include shared.mobile-only {
+    padding: 0;
+  }
+
+  @include shared.not-mobile {
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 40px;
+  }
+
+  @include shared.tablet-only {
+    justify-content: space-evenly;
+    padding: 40px 0 30px 0;
+    line-height: 1.3;
+  }
+}
+
+.button {
+  @include shared.mobile-only {
+    width: 100%;
+    text-align: center;
+  }
+
+  @include shared.tablet-only {
+    width: 63.5%;
+    margin-top: 2 * shared.$tablet-spacing;
+    padding-bottom: 10 * shared.$tablet-spacing;
+  }
+
+  @include shared.desktop-only {
+    width: 47.5%;
+    margin-top: 4 * shared.$desktop-spacing;
+    padding-bottom: 10 * shared.$desktopXspacing;
+  }
+
+  p {
+    @include shared.font-montserrat(400);
+    font-size: 0.6 * shared.$desktop-reading-font-size;
+
+    @include shared.tablet-only {
+      margin-top: 2 * shared.$tablet-spacing;
+    }
+  }
+}
+
+.arrow {
+  @include shared.desktop-only {
+    rotate: 90deg;
+    padding: 5px 0 0 0;
+  }
+
+  @include shared.not-desktop {
+    display: none;
+  }
+}

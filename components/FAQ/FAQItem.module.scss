@@ -1,62 +1,61 @@
-@use '../../styles/shared.scss';
+@use "../../styles/shared.scss";
 
 .item {
-    display: block;
-    @include shared.mobile-only{
-        max-width: 37.5 * shared.$mobile-spacing;
-        &:not(:last-child){
-            margin-bottom: 2.4rem;
-            }
+  display: block;
+  @include shared.mobile-only {
+    max-width: 37.5 * shared.$mobile-spacing;
+    &:not(:last-child) {
+      margin-bottom: 2.4rem;
     }
-    @include shared.tablet-only {
-        box-sizing: border-box;
-        max-width: 50%;
+  }
+  @include shared.tablet-only {
+    box-sizing: border-box;
+    max-width: 50%;
 
-        padding: 2rem 1rem 2rem 1rem;
-    }
-    @include shared.desktop-only {
-        box-sizing: border-box;
-        max-width: 50%;
-        padding: 2.4rem 1.6rem 2.4rem 1.6rem;
-    }
-    
+    padding: 2rem 1rem 2rem 1rem;
+  }
+  @include shared.desktop-only {
+    box-sizing: border-box;
+    max-width: 50%;
+    padding: 2.4rem 1.6rem 2.4rem 1.6rem;
+  }
 }
 
-.item h3{
-    @include shared.font-unbounded(500);
-    @include shared.mobile-only{
-        font-size: shared.$mobile-actionable-font-size;
-        line-height: 2.375*shared.$mobile-spacing;
+.item h3 {
+  @include shared.font-unbounded(500);
+  @include shared.mobile-only {
+    font-size: shared.$mobile-actionable-font-size;
+    line-height: 2.375 * shared.$mobile-spacing;
 
-        margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
 
-        display: inline-block;
-    }
-    @include shared.tablet-only{
-        font-size: shared.$tablet-actionable-font-size;
-        line-height: 2.3125*shared.$tablet-spacing;
-        margin-bottom: 0.5*shared.$tablet-spacing;
-    }
-    @include shared.desktop-only{
-        font-size: shared.$desktop-actionable-font-size;
-        line-height: 3.75*shared.$desktop-spacing;
-        margin-bottom: 3*shared.$desktop-spacing;
-    }
+    display: inline-block;
+  }
+  @include shared.tablet-only {
+    font-size: shared.$tablet-actionable-font-size;
+    line-height: 2.3125 * shared.$tablet-spacing;
+    margin-bottom: 0.5 * shared.$tablet-spacing;
+  }
+  @include shared.desktop-only {
+    font-size: shared.$desktop-actionable-font-size;
+    line-height: 3.75 * shared.$desktop-spacing;
+    margin-bottom: 3 * shared.$desktop-spacing;
+  }
 }
 .item p {
-    @include shared.font-montserrat(400);
-    margin: 0;
-    display: block;
-    @include shared.mobile-only{
-        font-size: shared.$mobile-reading-font-size;
-        line-height: 1.6rem;
-    }
-    @include shared.tablet-only{
-        font-size: shared.$tablet-reading-font-size;
-        line-height: 1.6rem;
-    }
-    @include shared.desktop-only {
-        font-size: shared.$desktop-reading-font-size;
-        line-height: 2.4rem;
-    }
+  @include shared.font-montserrat(400);
+  margin: 0;
+  display: block;
+  @include shared.mobile-only {
+    font-size: shared.$mobile-reading-font-size;
+    line-height: 1.6rem;
+  }
+  @include shared.tablet-only {
+    font-size: shared.$tablet-reading-font-size;
+    line-height: 1.6rem;
+  }
+  @include shared.desktop-only {
+    font-size: shared.$desktop-reading-font-size;
+    line-height: 2.4rem;
+  }
 }

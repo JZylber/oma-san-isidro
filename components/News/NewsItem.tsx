@@ -1,15 +1,15 @@
-import styles from './NewsItem.module.scss';
-import NewsArrow from '../../img/newsArrow.svg';
+import styles from "./NewsItem.module.scss";
+import NewsArrow from "../../img/newsArrow.svg";
 
 interface NewsItemProps {
-    content: string
-  }
+  content: string;
+}
 
-export default function NewsItem(props:NewsItemProps){
-    return(
-        <div className={styles.container}>
-            <span>{props.content} </span>
-            <NewsArrow className={styles.arrow}/>
-        </div>
-    )
+export default function NewsItem(props: NewsItemProps) {
+  return (
+    <div className={styles.container}>
+      <span>{props.content} </span>
+      <NewsArrow className={styles.arrow} />
+    </div>
+  );
 }

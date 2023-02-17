@@ -65,4 +65,8 @@
       transform: translateX(3 * shared.$desktopXspacing);
     }
   }
+
+  :hover {
+    cursor: pointer;
+  }
 }
