@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import Head from "next/head";
+import { Authorization } from "../../components/Auth/Auth";
 import Layout from "../../components/Layout/Layout";
 
 const NanduAuthorization: NextPage = () => {
@@ -9,7 +10,7 @@ const NanduAuthorization: NextPage = () => {
         <title>Autorización Ñandú</title>
       </Head>
       <Layout>
-        <h1>Autorización Ñandú</h1>
+        <Authorization type="nandu" />
       </Layout>
     </>
   );

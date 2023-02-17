@@ -10,7 +10,7 @@ const OMAAuthorization: NextPage = () => {
         <title>Autorización OMA</title>
       </Head>
       <Layout>
-        <Authorization />
+        <Authorization type="oma" />
       </Layout>
     </>
   );

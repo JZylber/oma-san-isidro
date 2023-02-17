@@ -4,6 +4,7 @@ import Warning from "../../img/warning.svg";
 import { AuthItem } from "./AuthItem";
 import { Button } from "../buttons/Button";
 import Footer from "../Footer/Footer";
+
 const specs = [
   {
     important: "Solo autorizaciones oficiales de OMA",
@@ -23,7 +24,16 @@ const specs = [
   },
 ];
 
-export const Authorization = () => {
+export const Authorization = ({ type }: { type: string }) => {
+  const handleClick = () => {
+    const link = document.createElement("a");
+    link.href = `/files/autorizacion-${type}.pdf`;
+    link.target = `_blank`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className={styles.main}>
       <h1>Autorización</h1>
@@ -39,7 +49,7 @@ export const Authorization = () => {
         </div>
       </div>
       <div className={styles.button}>
-        <Button content="Descargar autorización">
+        <Button content="Descargar autorización" onClick={handleClick}>
           <NewsArrow className={styles.arrow} />
         </Button>
         <p>
