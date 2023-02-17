@@ -28,7 +28,7 @@ const TypedFilter = ({category_name,values,update_filter} : TypedFilterProps) =>
     useOutsideAlerter(wrapperRef);
 
 
-    useEffect(() => update_filter(value),[value,update_filter])
+    useEffect(() => update_filter(value),[value])
     const getSuggestions = (value : string) => {
         const inputValue = value.trim().toLowerCase();
         const inputLength = inputValue.length;
