@@ -20,7 +20,7 @@ const specs = [
   },
   {
     important: "No se aceptarán autorizaciones con fechas corregidas",
-    text: "lo tanto deberán presentar la actualizada (2022) que puedan bajar de esta página en Autorización.",
+    text: "lo tanto deberán presentar la actualizada que puedan bajar aquí.",
   },
 ];
 
