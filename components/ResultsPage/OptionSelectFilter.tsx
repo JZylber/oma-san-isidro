@@ -59,12 +59,12 @@ const OptionSelectFilter = ({category_name,values,update_filter,includeSearchBar
         }
     }
     return(
-    <div className={styles.wrapper}>
+    <div ref={wrapperRef} className={styles.wrapper}>
         <div className={styles.header}>
             <span>{category_name}</span>
             <div className={styles.icon} onClick={toggleFilter}></div>
         </div>
-        <div ref={wrapperRef} className={isOpen?styles.filterOptions_open: styles.filterOptions}>
+        <div className={isOpen?styles.filterOptions_open: styles.filterOptions}>
             {includeSearchBar && <input onChange={searchOptions}/>}
             <div className={styles.filterOptions_item}>
                 <input type="checkbox" value="all" key="all" onChange={allOptions} checked={selectedValues.length === values.length}/>

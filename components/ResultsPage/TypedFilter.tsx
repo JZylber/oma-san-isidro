@@ -51,12 +51,12 @@ const TypedFilter = ({category_name,values,update_filter} : TypedFilterProps) =>
         setSuggestions(getSuggestions(target.value))
     }
     return(
-    <div className={styles.wrapper}>
+    <div ref={wrapperRef} className={styles.wrapper}>
         <div className={styles.header}>
             <span>{category_name}</span>
             <div className={styles.icon} onClick={toggleFilter}></div>
         </div>
-        <div ref={wrapperRef} className={isOpen?styles.filterOptions_open: styles.filterOptions}>
+        <div className={isOpen?styles.filterOptions_open: styles.filterOptions}>
             <input onChange={searchSuggestions} value={value}/>
             <ul className={styles.suggestions}>
                 {suggestions.map((suggestion,index) => renderSuggestion(suggestion,index))}
