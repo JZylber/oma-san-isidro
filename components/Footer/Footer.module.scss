@@ -1,25 +1,27 @@
 @use '../../styles/shared.scss' as shared;
 
 .footer  {
-    width: 100%;
+    @include shared.mobile-only{
+        width: 80%;
+    }
     @include shared.tablet-only{
         display: grid;
-        grid-column: 1/-1;
-        grid-row: 4/5;
+        width: 85%;
         @include shared.tablet-columns;
+        margin-top: 4.8rem;
         grid-template-rows: 5.8rem max-content;
         align-items: start;
         row-gap: 6*shared.$tabletYspacing;
         margin-top: 7.2rem;
     }
-    @include shared.desktop-only {
+    @include shared.desktop-only{
         display: grid;
-        grid-column: 1/-1;
-        grid-row: 4/5;
         @include shared.desktop-columns;
         grid-template-rows: 9rem max-content;
         align-items: start;
         row-gap: 6*shared.$desktop-spacing;
+        width: 80%;
+        max-width: 1200px;
     }
     &_secretary{
         @include shared.tablet-only {

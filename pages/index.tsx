@@ -40,9 +40,6 @@ const Home: NextPage = () => {
           <h3 className={styles.sectionTitle}>Preguntas Frecuentes</h3>
           <Faq />
         </section>
-
-        {/* FOOTER */}
-        <Footer />
       </Layout>
     </>
   );

@@ -59,7 +59,6 @@ export const Authorization = ({ type }: { type: string }) => {
           nuevamente luego de unos segundos.
         </p>
       </div>
-      <Footer />
     </div>
   );
 };

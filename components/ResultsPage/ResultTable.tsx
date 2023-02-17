@@ -8,7 +8,7 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
     const schools : Array<string> = Array.from(new Set(results.map((result) => result.participacion.colegio.nombre + (result.participacion.colegio.sede?`-${result.participacion.colegio.sede}`:""))))
     const levels : Array<string> = Array.from(new Set(results.map((result) => result.participacion.nivel.toString())))
     const numberOfProblems = results[0].prueba.cantidad_problemas
-    const starting_filters : ResultFilter = {nombre: undefined,apellido: undefined,colegio: schools,nivel: levels,aprobado: []}
+    const starting_filters : ResultFilter = {nombre: undefined,apellido: undefined,colegio: schools,nivel: levels,aprobado: ["Si","No"]}
     const [filters,setFilters] = useState<ResultFilter>(starting_filters)
 
     const updateFilter = (category: string, newValue: undefined | string | boolean | number | Array<string>) => {
@@ -63,8 +63,9 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
                             <td><OptionSelectFilter category_name="Aprobado" values={["Si","No"]} update_filter={(newValue : Array<string>) => updateFilter("aprobado",newValue)}/></td>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody><>
                         {results.map((result,index) => make_element(result,index))}
+                        </>
                     </tbody>
                 </table>)
         } else {
@@ -76,7 +77,7 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
     return(
         <>
         <div className={styles.results}>
-            {make_table(results?.filter(isFilterCompliant))}
+            {make_table(results.filter(isFilterCompliant))}
         </div>
         </>
     )
