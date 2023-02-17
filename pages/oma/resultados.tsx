@@ -1,4 +1,4 @@
-import { GetServerSideProps, NextPage } from "next";
+import {GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import Results from "../../components/ResultsPage/results";
 import { School, yearTests } from "../../components/ResultsPage/resultsTypes";
@@ -6,7 +6,7 @@ import {getAvailableResults, getSchools} from "../../lib/aux_db_calls";
 import styles from "./resultados.module.scss"
 import Layout from "../../components/Layout/Layout";
 
-export const getServerSideProps: GetServerSideProps= async ({ params }) => {
+export const getStaticProps: GetStaticProps= async ({ params }) => {
     const available = await getAvailableResults("OMA");
     const newProps = {results: available.results}
     return {
