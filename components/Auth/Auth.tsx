@@ -36,6 +36,7 @@ export const Authorization = ({ type }: { type: string }) => {
 
   return (
     <div className={styles.main}>
+      <div className={styles.type}>{type == "oma"?"Oma":"Ñandú"}</div>
       <h1>Autorización</h1>
       <div className={styles.container}>
         <div className={styles.title}>

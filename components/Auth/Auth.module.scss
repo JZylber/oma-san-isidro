@@ -2,6 +2,17 @@
 .main {
   grid-column: 1 / 10;
 
+  .type {
+    @include shared.mobile-only{
+      display: block;
+      @include shared.font-unbounded(400);
+      font-size: 1.5 * shared.$mobile-reading-font-size;
+    }
+    @include shared.not-mobile{
+      display: none;
+    }
+  }
+
   h1 {
     @include shared.font-unbounded(600);
 
@@ -10,12 +21,7 @@
       margin-top: 4 * shared.$mobile-spacing;
       margin-bottom: 2.5 * shared.$mobile-spacing;
 
-      &::before {
-        content: "oma";
-        display: block;
-        @include shared.font-unbounded(400);
-        font-size: 1.5 * shared.$mobile-reading-font-size;
-      }
+      
     }
 
     @include shared.not-mobile {
