@@ -1,5 +1,19 @@
 @use '../../../styles/shared.scss' as shared;
 
+.link{
+    text-decoration: none;
+    color: shared.$black;
+    @include shared.mobile-only {
+        display: none;
+    }
+    @include shared.not-mobile {
+        grid-column-end: span 2;
+        display: grid;
+        grid-template-columns: 2fr;
+        grid-template-rows: 1fr;
+     }
+  }
+
 .item {
     position: relative;
     @include shared.mobile-only {

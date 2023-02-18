@@ -14,10 +14,10 @@ import { useRouter } from "next/router";
 
 type NavProps = {
     togglePageContent? : () => void,
-    changeRoute: (route: string) => void
+    onRouteChange: () => void
 };
 
-export default function NavBar({togglePageContent,changeRoute}:NavProps){
+export default function NavBar({togglePageContent,onRouteChange}:NavProps){
     let [openFullMenu,setOpenFullMenu] = useState(false);
     const defaultMenuHierarchy : Array<menuItem> = [
         {text: "Inicio",link:"/",selected : false,subItems:[]},
@@ -94,7 +94,7 @@ export default function NavBar({togglePageContent,changeRoute}:NavProps){
         const item = menuHierarchy[itemIndex]
         if(item){
             if(item.link){
-                changeRoute(item.link)
+                onRouteChange()
             }
             item.selected = true;
             setMenuHierarchy(selectItem(menuHierarchy,itemIndex))
@@ -105,7 +105,7 @@ export default function NavBar({togglePageContent,changeRoute}:NavProps){
         const item = menuHierarchy[mainItemIndex]
         const subItemIndex = item.subItems.findIndex((subitem) => subitem.text === subItemName)
         const subItem = item.subItems[subItemIndex]
-        subItem.link && changeRoute(subItem.link);
+        subItem.link && onRouteChange();
         setMenuHierarchy(selectItem(menuHierarchy,mainItemIndex,subItemIndex))
     } 
 
