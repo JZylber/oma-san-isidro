@@ -75,7 +75,7 @@ const MobileMenu= ({closeMenu,menuHierarchy} : mobileMenuProps) => {
             <ul>
                 {item.subItems.map((subitem) => {
                     const sublink = subitem.link as string
-                    return(<Link href={sublink} className={styles.link}><li className={`${subitem.selected ? styles.subitem_selected : ""}`}  onClick={() => selectSubItem(item.text,subitem.text)} key={item.text + subitem.text}>{subitem.text}</li></Link>)
+                    return(<Link href={sublink} className={styles.link} key={item.text + subitem.text}><li className={`${subitem.selected ? styles.subitem_selected : ""}`}  onClick={() => selectSubItem(item.text,subitem.text)} >{subitem.text}</li></Link>)
                 })}
             </ul>
         </div>
