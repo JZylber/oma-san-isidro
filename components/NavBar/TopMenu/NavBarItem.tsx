@@ -1,23 +1,31 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { ReactElement } from 'react';
 import styles from './NavBarItem.module.scss'
 
 interface NavBarItemsProps {
     text: string,
     selected: boolean,
     link?: string,
-    onClick?: (link?:string) => void,
-    onMouseEnter?: () => void,
-    onMouseLeave?: () => void,
+    onClick?: () => void,
     phantom? : boolean
   }
 
+const ConditionalWrapper = ({ condition, wrapper, children }:{condition: boolean, wrapper: (children: ReactElement) => ReactElement, children: ReactElement}) => 
+    condition ? wrapper(children) : children;
+
 const NavBarItem = (props : NavBarItemsProps) => {
-    const goToLink = (link?:string) => {
-        props.onClick && props.onClick(link);
+    const onClick = () => {
+        props.onClick && props.onClick();
     }
+    const link = props.link as string
     return(
-    <div className={[styles.item,props.phantom && styles.phantom, props.selected && styles.item_selected].join(" ")} onClick={() => goToLink(props.link)} onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave}>
+    <ConditionalWrapper
+        condition={props.link != undefined}
+        wrapper={(children: ReactElement) => <Link href={link} className={styles.link}>{children}</Link>}>
+    <div className={[styles.item,props.phantom && styles.phantom, props.selected && styles.item_selected].join(" ")} onClick={onClick}>
         <span>{props.text}</span>  
-    </div>);
+    </div>
+    </ConditionalWrapper>);
 }
 export default NavBarItem

@@ -10,15 +10,13 @@ const Layout = ({children}:{children : ReactNode}) => {
     const togglePageContent = () => {
         setShowChildren(!showChildren);
     }
-    const router = useRouter();
-    const changeRoute = (route: string) => {
+    const changeRoute = () => {
         setShowChildren(false);
         setIsLoading(true);
-        router.push(route)
     }
     return(
         <div className={styles.layout}>
-        <NavBar togglePageContent={togglePageContent} changeRoute={changeRoute}/>
+        <NavBar togglePageContent={togglePageContent} onRouteChange={changeRoute}/>
         {showChildren && <main className={styles.main}>{children}</main>}
         {isLoading ? <span>Cargando...</span> :  <Footer/>}
         </div>

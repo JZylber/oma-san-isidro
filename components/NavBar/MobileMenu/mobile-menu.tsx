@@ -1,8 +1,9 @@
 import MenuArrow from '../../../img/menuArrow.svg';
 import styles from './mobile-menu.module.scss';
 import { useRouter } from 'next/router'
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 import { menuItem, showCurrentPageSelected } from '../NavBarRouting';
+import Link from 'next/link';
 
 
 
@@ -10,6 +11,9 @@ type mobileMenuProps = {
     closeMenu : () => void,
     menuHierarchy : Array<menuItem>
 }
+
+const ConditionalWrapper = ({ condition, wrapper, children }:{condition: boolean, wrapper: (children: ReactElement) => ReactElement, children: ReactElement}) => 
+    condition ? wrapper(children) : children;
 
 const MobileMenu= ({closeMenu,menuHierarchy} : mobileMenuProps) => {
 
@@ -25,8 +29,7 @@ const MobileMenu= ({closeMenu,menuHierarchy} : mobileMenuProps) => {
                 if(item.link != null){
                     if(item.link == currentRoute){
                         closeMenu();
-                    }else{
-                        router.push(item.link);}
+                    }
                 }
                 let newItem : menuItem = item;
                 newItem.selected = !newItem.selected;
@@ -49,8 +52,6 @@ const MobileMenu= ({closeMenu,menuHierarchy} : mobileMenuProps) => {
                 if(selectedSubitem.link){
                     if(selectedSubitem.link == currentRoute){
                         closeMenu();
-                    }else{
-                        router.push(selectedSubitem.link);
                     }
                 }
             }
@@ -60,15 +61,21 @@ const MobileMenu= ({closeMenu,menuHierarchy} : mobileMenuProps) => {
 
     //Renderizado de cada item del menu
     const renderMenuItem = (item : menuItem) => {
+        const link = item.link as string 
         return(
         <div className={styles[["item",(item.selected && item.subItems.length > 0 ?"_selected":"")].join("")]} key={item.text}>
+            <ConditionalWrapper
+                condition={item.link != undefined}
+                wrapper={(children: ReactElement) => <Link href={link} className={styles.link}>{children}</Link>}>
             <div className={styles.main} onClick={() => selectMainItem(item.text)}>
                 <span>{item.text}</span>
                 <MenuArrow/>
             </div>
+            </ConditionalWrapper>
             <ul>
                 {item.subItems.map((subitem) => {
-                    return(<li className={`${subitem.selected ? styles.subitem_selected : ""}`}  onClick={() => selectSubItem(item.text,subitem.text)} key={item.text + subitem.text}>{subitem.text}</li>)
+                    const sublink = subitem.link as string
+                    return(<Link href={sublink} className={styles.link}><li className={`${subitem.selected ? styles.subitem_selected : ""}`}  onClick={() => selectSubItem(item.text,subitem.text)} key={item.text + subitem.text}>{subitem.text}</li></Link>)
                 })}
             </ul>
         </div>
