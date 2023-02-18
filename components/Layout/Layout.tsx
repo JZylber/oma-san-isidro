@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import {ReactNode, useState} from "react";
+import {ReactElement, ReactNode, useState} from "react";
 import Footer from "../Footer/Footer";
 import NavBar from '../NavBar/Navbar';
 import styles from './Layout.module.scss';
@@ -11,14 +11,27 @@ const Layout = ({children}:{children : ReactNode}) => {
         setShowChildren(!showChildren);
     }
     const changeRoute = () => {
-        setShowChildren(false);
         setIsLoading(true);
+    }
+    const renderContent = () : ReactElement =>{
+        if(showChildren){
+            if(isLoading){
+                return(<span>Cargando...</span>)
+            } else {
+                return(
+                <>
+                <main className={styles.main}>{children}</main>
+                <Footer/>
+                </>)
+            } 
+        }else {
+            return(<></>)
+        }
     }
     return(
         <div className={styles.layout}>
         <NavBar togglePageContent={togglePageContent} onRouteChange={changeRoute}/>
-        {showChildren && <main className={styles.main}>{children}</main>}
-        {isLoading ? <span>Cargando...</span> :  <Footer/>}
+        {renderContent()}
         </div>
     )
 }
