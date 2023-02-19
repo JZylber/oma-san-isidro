@@ -1,12 +1,11 @@
-import { useRouter } from "next/router";
 import NewsItem from "./NewsItem";
+import { NewsItemData } from "./NewsTypes";
 
-export default function News(){
+export default function News({newsData}:{newsData:NewsItemData[]}){
+    const newsToDisplay = newsData.slice(newsData.length - 3, newsData.length);
     return(
     <div>
-        <NewsItem content="Aprobados Nacional Ñandú" link={"/"}></NewsItem>
-        <NewsItem content="Aprobados Nacional OMA" link={"/oma/resultados?año=2022&instancia=NACIONAL"}></NewsItem>
-        <NewsItem content="Sedes 2023" link={"/"}></NewsItem>
+        {newsToDisplay.map((newsItemData,index) => <NewsItem content={newsItemData.title} link={newsItemData.link} key={index}></NewsItem>)}
     </div>
     )
 }
