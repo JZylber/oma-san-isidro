@@ -12,5 +12,9 @@ module.exports = {
     });
 
     return config;
+  },
+  reactStrictMode: true,
+  env: {
+      API_TOKEN: process.env.API_TOKEN,
   }
 };
