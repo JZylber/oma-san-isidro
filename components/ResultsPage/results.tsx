@@ -19,7 +19,7 @@ const Results = ({competition,availableResults} : ResultProps) => {
     }
     const getResults = async (year : number,instance : string, type: string)=> {
         try {
-            let searchedResults = await fetch(`/api/results?ano=${year}&instancia=${instance}&competencia=${type}`).then((response) => response.json());
+            let searchedResults = await fetch(`/api/results?secret=${process.env.API_TOKEN}&ano=${year}&instancia=${instance}&competencia=${type}`).then((response) => response.json());
             setIsLoading(false)
             setResults(searchedResults)
         } catch (error) {

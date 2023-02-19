@@ -3,6 +3,9 @@ import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../lib/prisma"
 
 export default async function handle(req : NextApiRequest, res : NextApiResponse) {
+    if (req.query.secret !== process.env.API_TOKEN) {
+        return res.status(401).json({ message: 'Invalid token' })
+    }
     try {
     let {ano,instancia,competencia} = req.query;
     if(ano && instancia && competencia){
@@ -53,6 +56,6 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
             })
         res.status(200).json(result);}}
     catch (error) {
-        res.status(503).json(error)
+        res.status(503).json( {message: error})
     }
 }
