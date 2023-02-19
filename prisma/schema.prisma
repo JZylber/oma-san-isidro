@@ -18,6 +18,8 @@ enum INSTANCIA {
   NACIONAL
 }
 
+//Results
+
 model Participante{
   id_participante Int @default(autoincrement()) @id
   dni Int @unique
@@ -75,4 +77,12 @@ model Rinde {
   id_participacion Int
   prueba Prueba @relation(fields: [id_prueba],references: [id_prueba])
   id_prueba Int
+}
+
+//News
+model Noticias{
+  id_noticia Int @default(autoincrement()) @id
+  titulo String
+  link String
+  agregado DateTime @default(now())
 }

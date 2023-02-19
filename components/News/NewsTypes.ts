@@ -1,4 +1,4 @@
 export interface NewsItemData {
-    title:string,
+    titulo:string,
     link:string
 }

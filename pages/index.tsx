@@ -9,12 +9,11 @@ import Layout from "../components/Layout/Layout";
 import path from "path";
 import fsPromises from 'fs/promises';
 import {NewsItemData} from "../components/News/NewsTypes";
+import { getNews } from "../lib/aux_db_calls";
 
 export async function getStaticProps() {
-  const filePath = path.join(process.cwd(), '/data/news.json');
-  const jsonNews = await fsPromises.readFile(filePath);
-  const news = JSON.parse(jsonNews.toString());
-  let newProps = {news : news}
+  const news = await getNews()
+  let newProps = {news : news.results}
   return {
     props: newProps
   }

@@ -29,3 +29,19 @@ export const getSchools = async () => {
   const results = query
   return ({results});
   };
+
+export const getNews = async () => {
+  const query = await prisma.noticias.findMany(
+    {
+      orderBy: [
+        {agregado: 'desc'}
+      ],
+      select: {
+        titulo: true,
+        link: true
+      }
+    } 
+    )
+    const results = query
+    return ({results});
+  };
