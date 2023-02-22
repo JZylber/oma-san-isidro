@@ -15,6 +15,6 @@ module.exports = {
   },
   reactStrictMode: true,
   env: {
-      API_TOKEN: process.env.API_TOKEN,
+      API_TOKEN: process.env.API_TOKEN
   }
 };

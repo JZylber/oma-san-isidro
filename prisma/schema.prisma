@@ -80,9 +80,20 @@ model Rinde {
 }
 
 //News
+
 model Noticias{
   id_noticia Int @default(autoincrement()) @id
   titulo String
   link String
   agregado DateTime @default(now())
+}
+
+//Calendario
+
+model Fechas{
+  id_fecha Int @default(autoincrement()) @id
+  fecha_inicio DateTime
+  fecha_fin DateTime?
+  tipo String
+  texto String
 }
