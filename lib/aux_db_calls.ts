@@ -45,3 +45,22 @@ export const getNews = async () => {
     const results = query
     return ({results});
   };
+
+  export const getCalendarEvents = async (year:number) => {
+    const query = await prisma.fechas.findMany({
+      where: {
+        fecha_inicio: {
+          gte: new Date(year,0,1),
+          lt:  new Date(year,11,31)
+        }
+      },
+      select: {
+        fecha_inicio: true,
+        fecha_fin: true,
+        tipo: true,
+        texto: true
+      }
+    })
+    const results = query
+    return ({results});
+    };
