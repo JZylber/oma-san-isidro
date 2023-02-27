@@ -1,7 +1,7 @@
 import { CalendarEvent } from "../../pages/calendario";
-import styles from "./DateBox.module.scss";
+import styles from "./DateCard.module.scss";
 
-const DateBox = ({calendarEvent}:{calendarEvent : CalendarEvent}) => {
+const DateCard = ({calendarEvent}:{calendarEvent : CalendarEvent}) => {
     const months = ["ENE","FEB","MAR","ABR","MAY","JUN","JUL","AGO","SEP","OCT","NOV","DIC"]
     const getEndDate = (cevent : CalendarEvent) => {
         if(cevent.fecha_fin){
@@ -19,4 +19,4 @@ const DateBox = ({calendarEvent}:{calendarEvent : CalendarEvent}) => {
     )
 }
 
-export default DateBox
+export default DateCard

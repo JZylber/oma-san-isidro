@@ -1,7 +1,7 @@
 import { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
-import DateBox from "../components/DateBox/DateBox";
+import DateCard from "../components/DateCard/DateCard";
 import Layout from "../components/Layout/Layout";
 import MonthSelect from "../components/MonthSelect/MonthSelect";
 import { getCalendarEvents } from "../lib/aux_db_calls";
@@ -38,7 +38,7 @@ const Calendar : NextPage<{results : Array<CalendarEvent>}> = ({results}) => {
             <hr className={styles.divider}></hr>
             <MonthSelect displayedMonth={displayedMonth} setDisplayedMonth={setDisplayedMonth}/>
             <div className={styles.events}>
-                {getMonthEvents(displayedMonth).map((event,idx) => <DateBox key={idx} calendarEvent={event}/>)}
+                {getMonthEvents(displayedMonth).map((event,idx) => <DateCard key={idx} calendarEvent={event}/>)}
             </div>
         </Layout>
         </>
