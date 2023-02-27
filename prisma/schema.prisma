@@ -85,7 +85,7 @@ model Noticias{
   id_noticia Int @default(autoincrement()) @id
   titulo String
   link String
-  agregado DateTime @default(now()) @db.Date
+  agregado DateTime @default(now())
 }
 
 //Calendario
