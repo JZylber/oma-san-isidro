@@ -1,0 +1,22 @@
+@use "../../styles/shared.scss" as shared;
+
+.calendar_title {
+    @include shared.font-unbounded(600);
+
+    @include shared.mobile-only {
+      font-size: 2.4 * shared.$mobile-actionable-font-size;
+      margin-top: 4 * shared.$mobile-spacing;
+      margin-bottom: 2.5 * shared.$mobile-spacing;  
+    }
+}
+
+.divider {
+    @include shared.mobile-only{
+        margin-left: -12.5%;
+        margin-right: -12.5%;
+        width: 125%;
+    }
+    @include shared.not-mobile{
+        display: none;
+    }
+}
