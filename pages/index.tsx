@@ -6,8 +6,6 @@ import Title from "../components/Title/Title";
 import styles from "./styles/Home.module.scss";
 import MainNandu from "../img/mainNandu.svg";
 import Layout from "../components/Layout/Layout";
-import path from "path";
-import fsPromises from 'fs/promises';
 import {NewsItemData} from "../components/News/NewsTypes";
 import { getNews } from "../lib/aux_db_calls";
 
