@@ -1,5 +1,6 @@
 import {createContext, ReactElement, ReactNode, useState} from "react";
 import Footer from "../Footer/Footer";
+import Loader from "../Loader/Loader";
 import NavBar from '../NavBar/Navbar';
 import styles from './Layout.module.scss';
 
@@ -21,7 +22,7 @@ const Layout = ({children}:{children : ReactNode}) => {
     const renderContent = () : ReactElement =>{
         if(showChildren){
             if(isLoading){
-                return(<span>Cargando...</span>)
+                return(<Loader/>)
             } else {
                 return(
                 <pageLayoutContext.Provider value={{onRouteChange: changeRoute}}>

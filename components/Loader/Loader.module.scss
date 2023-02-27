@@ -1,0 +1,36 @@
+@use '../../styles/shared.scss' as shared;
+
+.loader_container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    @include shared.mobile-only{
+        margin-top: 12.8rem;
+    }
+    @include shared.not-mobile{
+        margin-top: 25.6rem;
+    }
+}
+
+.loader {
+    width: 5.6rem;
+    height: 5.6rem;
+    border: 5px solid shared.$black;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+    } 
