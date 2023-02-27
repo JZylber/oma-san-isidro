@@ -1,6 +1,7 @@
 import { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
+import DateBox from "../components/DateBox/DateBox";
 import Layout from "../components/Layout/Layout";
 import MonthSelect from "../components/MonthSelect/MonthSelect";
 import { getCalendarEvents } from "../lib/aux_db_calls";
@@ -14,15 +15,19 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     };     
 }
 
-interface calendarEvents{
+export interface CalendarEvent{
     fecha_inicio: Date,
-    fecha_fin: Date,
+    fecha_fin?: Date,
     tipo: string,
     texto: string
 }
 
-const Calendar : NextPage<{results : Array<calendarEvents>}> = ({results}) => {
+const Calendar : NextPage<{results : Array<CalendarEvent>}> = ({results}) => {
+    const events = results.map((calendarEvent) => {return ({...calendarEvent,fecha_inicio:new Date(calendarEvent.fecha_inicio), fecha_fin: calendarEvent.fecha_fin?new Date(calendarEvent.fecha_fin):undefined})})
     const [displayedMonth,setDisplayedMonth] = useState(new Date().getMonth())
+    const getMonthEvents = (month: number) => {
+        return(events.filter((event) => event.fecha_inicio.getMonth() === month))
+    } 
     return(
         <>
         <Head>
@@ -32,6 +37,9 @@ const Calendar : NextPage<{results : Array<calendarEvents>}> = ({results}) => {
             <h1 className={styles.calendar_title}>Calendario</h1>
             <hr className={styles.divider}></hr>
             <MonthSelect displayedMonth={displayedMonth} setDisplayedMonth={setDisplayedMonth}/>
+            <div className={styles.events}>
+                {getMonthEvents(displayedMonth).map((event,idx) => <DateBox key={idx} calendarEvent={event}/>)}
+            </div>
         </Layout>
         </>
         )
