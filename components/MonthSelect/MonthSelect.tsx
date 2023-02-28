@@ -1,6 +1,7 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction} from "react";
 import styles from "./MonthSelect.module.scss";
 import MenuArrow from '../../img/menuArrow.svg';
+import { useSwipeable } from "react-swipeable";
 
 interface MonthSelectProps {
     displayedMonth : number,
@@ -12,9 +13,13 @@ const MonthSelect = ({displayedMonth,setDisplayedMonth}: MonthSelectProps) => {
     const monthClick = (forward: boolean) => {
         setDisplayedMonth(forward? (displayedMonth + 1% months.length): ((displayedMonth - 1) % months.length  + months.length) % months.length)
     }
-
+    const handlers = useSwipeable({
+        onSwipedLeft: () => monthClick(false),
+        onSwipedRight: () => monthClick(true)
+    })
+   
     return(
-        <div className={styles.container}>
+        <div {...handlers} className={styles.container}>
             <span onClick={() => monthClick(false)} className={styles.sideMonth}>{months[((displayedMonth - 1) % months.length  + months.length) % months.length]}</span>
             <MenuArrow onClick={() => monthClick(false)} className={styles.rotated}/>
             <span className={styles.selectedMonth}>{months[(displayedMonth) % months.length]}</span>
