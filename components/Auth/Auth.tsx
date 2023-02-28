@@ -8,7 +8,7 @@ import Footer from "../Footer/Footer";
 const specs = [
   {
     important: "Solo autorizaciones oficiales de OMA",
-    text: "serán aceptadas. Tampoco se aceptarán autorizaciones enviadas por fax o fotocopia",
+    text: "serán aceptadas. Tampoco se aceptarán autorizaciones enviadas por fax o fotocopia.",
   },
   {
     important: "La fecha y lugar de entrega de autorizaciones",
@@ -43,11 +43,11 @@ export const Authorization = ({ type }: { type: string }) => {
           <h3>Tener en cuenta</h3>
           <Warning className={styles.warning} />
         </div>
-        <div className={styles.items}>
+        <ul className={styles.items}>
           {specs.map((spec, i) => {
             return <AuthItem key={i} {...spec} />;
           })}
-        </div>
+        </ul>
       </div>
       <div className={styles.button}>
         <Button content="Descargar autorización" onClick={handleClick}>
