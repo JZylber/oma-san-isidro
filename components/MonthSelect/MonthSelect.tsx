@@ -11,7 +11,7 @@ interface MonthSelectProps {
 const MonthSelect = ({displayedMonth,setDisplayedMonth}: MonthSelectProps) => {
     const months = ["ENE","FEB","MAR","ABR","MAY","JUN","JUL","AGO","SEP","OCT","NOV","DIC"]
     const monthClick = (forward: boolean) => {
-        setDisplayedMonth(forward? (displayedMonth + 1% months.length): ((displayedMonth - 1) % months.length  + months.length) % months.length)
+        setDisplayedMonth(forward? ((displayedMonth + 1)% months.length): ((displayedMonth - 1) % months.length  + months.length) % months.length)
     }
     const mainHandlers = useSwipeable({
         onSwipedLeft: () => monthClick(true),
