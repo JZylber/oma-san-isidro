@@ -13,18 +13,24 @@ const MonthSelect = ({displayedMonth,setDisplayedMonth}: MonthSelectProps) => {
     const monthClick = (forward: boolean) => {
         setDisplayedMonth(forward? (displayedMonth + 1% months.length): ((displayedMonth - 1) % months.length  + months.length) % months.length)
     }
-    const handlers = useSwipeable({
-        onSwipedLeft: () => monthClick(false),
-        onSwipedRight: () => monthClick(true)
+    const mainHandlers = useSwipeable({
+        onSwipedLeft: () => monthClick(true),
+        onSwipedRight: () => monthClick(false)
+    })
+    const leftTap = useSwipeable({
+        onTap: () => monthClick(false)
+    })
+    const rightTap = useSwipeable({
+        onTap: () => monthClick(true)
     })
    
     return(
-        <div {...handlers} className={styles.container}>
-            <span  className={styles.sideMonth}>{months[((displayedMonth - 1) % months.length  + months.length) % months.length]}</span>
-            <MenuArrow  className={styles.rotated}/>
+        <div {...mainHandlers} className={styles.container}>
+            <span {...leftTap} className={styles.sideMonth}>{months[((displayedMonth - 1) % months.length  + months.length) % months.length]}</span>
+            <MenuArrow {...leftTap}  className={styles.rotated}/>
             <span className={styles.selectedMonth}>{months[(displayedMonth) % months.length]}</span>
-            <MenuArrow />
-            <span  className={styles.sideMonth}>{months[(displayedMonth + 1) % months.length]}</span>
+            <MenuArrow {...rightTap} />
+            <span {...rightTap} className={styles.sideMonth}>{months[(displayedMonth + 1) % months.length]}</span>
         </div>)
 }
 
