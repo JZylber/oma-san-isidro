@@ -79,6 +79,7 @@
 .items {
   @include shared.mobile-only {
     padding: 0;
+    margin-left: 16px;
   }
 
   @include shared.not-mobile {
