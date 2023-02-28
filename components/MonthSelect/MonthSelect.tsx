@@ -20,11 +20,11 @@ const MonthSelect = ({displayedMonth,setDisplayedMonth}: MonthSelectProps) => {
    
     return(
         <div {...handlers} className={styles.container}>
-            <span onClick={() => monthClick(false)} className={styles.sideMonth}>{months[((displayedMonth - 1) % months.length  + months.length) % months.length]}</span>
-            <MenuArrow onClick={() => monthClick(false)} className={styles.rotated}/>
+            <span  className={styles.sideMonth}>{months[((displayedMonth - 1) % months.length  + months.length) % months.length]}</span>
+            <MenuArrow  className={styles.rotated}/>
             <span className={styles.selectedMonth}>{months[(displayedMonth) % months.length]}</span>
-            <MenuArrow onClick={() => monthClick(true)}/>
-            <span onClick={() => monthClick(true)} className={styles.sideMonth}>{months[(displayedMonth + 1) % months.length]}</span>
+            <MenuArrow />
+            <span  className={styles.sideMonth}>{months[(displayedMonth + 1) % months.length]}</span>
         </div>)
 }
 
