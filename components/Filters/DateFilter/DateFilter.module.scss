@@ -61,6 +61,7 @@
     flex-wrap: wrap;
     &_chip{
         @include shared.font-unbounded(500);
+        background-color: shared.$light-blue;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -75,7 +76,8 @@
         margin-bottom: .8rem;
         &_clear{
             width: 4.8rem;
-            background-color: shared.$light-blue;
+            background-color: shared.$black;
+            color: shared.$white;
         }
     }
 }

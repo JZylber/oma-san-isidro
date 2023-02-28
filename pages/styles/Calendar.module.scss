@@ -15,6 +15,7 @@
         margin-left: -12.5%;
         margin-right: -12.5%;
         width: 125%;
+        border-color: shared.$black;
     }
     @include shared.not-mobile{
         display: none;
