@@ -54,6 +54,9 @@ export const getNews = async () => {
           lt:  new Date(year,11,31)
         }
       },
+      orderBy: [{
+        fecha_inicio : 'asc'
+      }],
       select: {
         fecha_inicio: true,
         fecha_fin: true,
