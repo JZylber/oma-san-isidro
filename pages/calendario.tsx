@@ -9,7 +9,7 @@ import { getCalendarEvents } from "../lib/aux_db_calls";
 import styles from "./styles/Calendar.module.scss";
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-    const year = 2022
+    const year = new Date().getFullYear()
     const available = await getCalendarEvents(year)
     const newProps = {results: JSON.parse(JSON.stringify(available.results)),year: year}
     return {
