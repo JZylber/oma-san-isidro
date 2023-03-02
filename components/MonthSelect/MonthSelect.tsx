@@ -27,9 +27,9 @@ const MonthSelect = ({displayedMonth,setDisplayedMonth}: MonthSelectProps) => {
     return(
         <div {...mainHandlers} className={styles.container}>
             <span {...leftTap} className={styles.sideMonth}>{months[((displayedMonth - 1) % months.length  + months.length) % months.length]}</span>
-            <MenuArrow {...leftTap}  className={styles.rotated}/>
+            <MenuArrow  className={styles.rotated}/>
             <span className={styles.selectedMonth}>{months[(displayedMonth) % months.length]}</span>
-            <MenuArrow {...rightTap} />
+            <MenuArrow />
             <span {...rightTap} className={styles.sideMonth}>{months[(displayedMonth + 1) % months.length]}</span>
         </div>)
 }

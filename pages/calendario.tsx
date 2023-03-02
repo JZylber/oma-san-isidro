@@ -17,6 +17,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     };     
 }
 
+export interface JSONCalendarEvent{
+    fecha_inicio: string,
+    fecha_fin?: string,
+    tipo: string,
+    texto: string
+}
+
 export interface CalendarEvent{
     fecha_inicio: Date,
     fecha_fin?: Date,
@@ -24,8 +31,15 @@ export interface CalendarEvent{
     texto: string
 }
 
-const Calendar : NextPage<{results : Array<CalendarEvent>,year:number}> = ({results,year}) => {
-    const events = results.map((calendarEvent) => {return ({...calendarEvent,fecha_inicio:new Date(calendarEvent.fecha_inicio), fecha_fin: calendarEvent.fecha_fin?new Date(calendarEvent.fecha_fin):undefined})})
+const getDateFromJSON = (JSONDate : string) => {
+    let date = JSONDate.split('T')[0];
+    let [year,month,day] = date.split('-').map((n) => Number(n));
+    month = month - 1;
+    return(new Date(year,month,day))
+}
+
+const Calendar : NextPage<{results : Array<JSONCalendarEvent>,year:number}> = ({results,year}) => {
+    const events = results.map((calendarEvent) => {return ({...calendarEvent,fecha_inicio:getDateFromJSON(calendarEvent.fecha_inicio), fecha_fin: calendarEvent.fecha_fin?getDateFromJSON(calendarEvent.fecha_fin):undefined})})
     const [displayedMonth,setDisplayedMonth] = useState(new Date().getMonth())
     const [categories,setCategories] = useState<string []>([])
     const getMonthEvents = (month: number) => {
