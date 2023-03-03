@@ -37,15 +37,18 @@ const DateFilter = ({availableCategories,categories,setCategories}:DateFilterPro
     const clearFilters = () => {
         setCategories([]);
     }
-    const isOpen = canOpen && (availableCategories.length - categories.length > 0)
+    const isOpen = canOpen && (availableCategories.length - categories.length > 0);
+    const unSelectedFilters = availableCategories.filter((category) => !categories.includes(category));
   return (
     <>
-    <div className={styles.filter_box} ref={wrapperRef}>
+    <div className={styles.filter_box_container}>
+      <div className={styles.filter_box} ref={wrapperRef}>
         <div onClick={toggleFilter} className={[styles.filterText,styles.filterTitle,isOpen?styles.filterTitleOpen:""].join(" ")}><div className={styles.filterTitleStart}><FilterIcon/></div><span>Filtrar</span><div className={styles.filterTitleEnd}><SelectIcon/></div></div>
         {isOpen && 
             <ul className={styles.dropdownFilter}>
-                {availableCategories.filter((category) => !categories.includes(category)).map((category,idx) => <li onClick={() => addFilter(category)} className={[styles.filterText,styles.filterOption].join(" ")} key={idx}><span>{category}</span></li>)}
+                {unSelectedFilters.map((category,idx) => <li onClick={() => addFilter(category)} className={[styles.filterText,styles.filterOption].join(" ")} key={idx}><span>{category}</span></li>)}
             </ul>}
+      </div>
     </div>
     {categories.length>0 && <div className={styles.currentFilter}>
         <div onClick={clearFilters} className={[styles.currentFilter_chip,styles.currentFilter_chip_clear].join(" ")}><span>X</span></div>

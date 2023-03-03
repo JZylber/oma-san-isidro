@@ -11,6 +11,10 @@
     @include shared.not-mobile{
         grid-column: 1/-1;
     }
+    @include shared.desktop-only{
+        font-size: 6rem;
+        margin-bottom: 5.6rem;
+    }
 }
 
 .divider {
@@ -26,5 +30,10 @@
 }
 
 .events {
-    margin-bottom: 2.4rem;
+    @include shared.mobile-only{
+        margin-bottom: 2.4rem;
+    }
+    @include shared.not-mobile{
+        display: none;
+    }
 }
