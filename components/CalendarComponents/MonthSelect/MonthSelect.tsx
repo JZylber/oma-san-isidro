@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction} from "react";
 import styles from "./MonthSelect.module.scss";
-import MenuArrow from '../../img/menuArrow.svg';
+import MenuArrow from '../../../img/menuArrow.svg';
 import { useSwipeable } from "react-swipeable";
 
 interface MonthSelectProps {

@@ -1,0 +1,78 @@
+@use '../../../styles/shared.scss' as shared;
+
+.datebox_container{
+    border: 2px solid shared.$black;
+    border-radius: 9px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    @include shared.mobile-only{
+        padding: 1.6rem;
+        margin-top: 2.4rem;
+        margin-bottom: 2.4rem;
+    }
+    @include shared.desktop-only{
+        min-height: 25.6rem;
+        padding-top: 3.2rem;
+        padding-bottom: 3.2rem;
+        padding-left: shared.$desktopXspacing*3;
+        padding-right: shared.$desktopXspacing*3;
+    }
+}
+
+.event_text{
+    @include shared.mobile-only{
+        @include shared.font-unbounded(400);
+        font-size: 2.4rem;
+    }
+    @include shared.desktop-only{
+        @include shared.font-unbounded(500);
+        font-size: 3.4rem;
+        line-height: 3.8rem;
+    }
+    
+}
+.date {
+    @include shared.font-montserrat(400);
+    @include shared.mobile-only{
+        font-size: 1.6rem;
+        padding-top: 1.6rem;
+        padding-bottom: 1.6rem;
+    }
+    @include shared.desktop-only{
+        font-size: shared.$desktop-reading-font-size;
+        padding-top: 1.6rem;
+        padding-bottom: 1.6rem;
+    }
+    
+}
+
+.category{
+    @include shared.font-unbounded(500);
+    font-size: 1.2rem;
+    background: shared.$light-blue;
+    border: 2px solid shared.$black;
+    border-radius: 9px;
+    @include shared.mobile-only{
+        padding-top: .4rem;
+        padding-bottom: .4rem;
+        padding-left: .8rem;
+        padding-right: .8rem;
+    }
+    @include shared.desktop-only{
+        padding-top: .8rem;
+        padding-bottom: .8rem;
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+    &_container{
+        @include shared.mobile-only{
+            height: fit-content;
+        }
+        @include shared.desktop-only{
+            height: 100%;
+            display: flex;
+            flex-direction: column-reverse;
+        }
+    }
+}

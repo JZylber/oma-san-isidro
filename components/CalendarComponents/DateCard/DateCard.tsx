@@ -1,4 +1,4 @@
-import { CalendarEvent } from "../../pages/calendario";
+import { CalendarEvent } from "../../../pages/calendario";
 import styles from "./DateCard.module.scss";
 
 const DateCard = ({calendarEvent}:{calendarEvent : CalendarEvent}) => {
@@ -14,7 +14,9 @@ const DateCard = ({calendarEvent}:{calendarEvent : CalendarEvent}) => {
         <div className={styles.datebox_container}>
             <h3 className={styles.event_text}>{calendarEvent.texto}</h3>
             <span className={styles.date}>{`${calendarEvent.fecha_inicio.getDate()} ${months[calendarEvent.fecha_inicio.getMonth()]}${getEndDate(calendarEvent)}`}</span>
-            <div className={styles.category}>{calendarEvent.tipo}</div>
+            <div className={styles.category_container}>
+                <div className={styles.category}>{calendarEvent.tipo}</div>
+            </div>
         </div>
     )
 }
