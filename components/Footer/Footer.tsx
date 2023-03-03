@@ -1,5 +1,6 @@
 import styles from "./Footer.module.scss";
 import OMALogo from "../../img/logoOMA.svg";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -17,7 +18,7 @@ const Footer = () => {
             <a href="http://omasanisidro.flashingsites.com.ar/">Sitio viejo</a>
           </li>
           <li>
-            <a>Contacto</a>
+            <Link href={'/contacto'}>Contacto</Link>
           </li>
           <li>
             <a>Mapa del sitio</a>
