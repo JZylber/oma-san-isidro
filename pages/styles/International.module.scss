@@ -20,19 +20,16 @@
     @include shared.mobile-only{
         font-size: shared.$mobileXspacing * 1.78;
         line-height: shared.$mobileXspacing * 2;
-        white-space: nowrap;
     }
     @include shared.tablet-only{
         grid-column: 1/-1;
         font-size: shared.$tabletXspacing * 1.96 ;
         line-height:  2*shared.$tabletXspacing;
-        white-space: nowrap;
     }
     @include shared.desktop-only {
         grid-column: 1/-1;
         font-size: shared.$desktopXspacing * 3.225;
         line-height: shared.$desktopXspacing * 4;
-        white-space: nowrap;
     }
     @include shared.largest {
         font-size: (shared.$desktopXlargest/180)  * 3.125;
@@ -96,7 +93,10 @@
         margin-bottom: 2.4rem;
         .tournament {
             display: flex;
-            align-items: start;
+            align-items: flex-start;
+            @include shared.mobile-only{
+                flex-direction: column;
+            }
             @include shared.not-mobile{
                 justify-content: space-between;
             }
@@ -109,8 +109,8 @@
                 }
             
                 @include shared.not-mobile {
-                    min-width: 25%;
-                    width: 25%;
+                    min-width: 30%;
+                    width: 30%;
                     font-size: shared.$desktop-reading-font-size;
                     &::after{
                         content: ":";
@@ -123,13 +123,64 @@
                     font-size: shared.$mobile-reading-font-size;
                 };
                 @include shared.not-mobile{
-                    max-width: 72.5%;
+                    max-width: 67.5%;
+                    width: 67.5%;
                     font-size: shared.$desktop-reading-font-size;
                 }
             }
             &:not(:last-child){
                 margin-bottom: 1.6rem;
             }
+        }
+    }
+}
+
+
+.table{
+    border: 2px solid shared.$black;
+    border-radius: 9px;
+    border-spacing: 0;
+    width: 100%;
+    th:not(:last-child), td:not(:last-child) {
+        border-right: 2px solid shared.$black;
+    }
+    &_header{
+        background-color: shared.$light-blue;
+        tr, th {
+            border-bottom: 2px solid shared.$black;
+        }
+        @include shared.font-unbounded(500);
+        @include shared.not-mobile{
+            font-size: 2rem;
+        }
+        @include shared.mobile-only{
+            font-size: 1.1rem;
+        }
+    }
+    &_column{
+        &_tournament{
+            width: 13%;
+        }
+        &_name{
+            width: 19%;
+        }
+        &_level{
+            width: 7%;
+        }
+    }
+    &_body{
+        @include shared.font-montserrat(400);
+        @include shared.not-mobile{
+            font-size: 2rem;
+        }
+        @include shared.mobile-only{
+            font-size: 1.1rem;
+        }
+        tr,td{
+            text-align: center;
+        }
+        tr:not(:last-child) td{
+            border-bottom: 2px solid shared.$black;
         }
     }
 }
