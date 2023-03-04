@@ -3,18 +3,81 @@
 .container{
     border: 2px solid shared.$black;
     border-radius: 9px;
+    margin: 2.4rem 0rem 0rem 0rem;
+    overflow: hidden;
     display: flex;
+    flex-direction: column;
+    &_entry{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        &:not(:last-child){
+            border-bottom: 2px solid shared.$black;
+        }
+    }
 }
 
 .date{
-
+    @include shared.font-montserrat(400);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: shared.$light-blue;
+    @include shared.mobile-only{
+        font-size: 1.6rem;
+    }
+    @include shared.desktop-only{
+        font-size: shared.$desktop-reading-font-size;
+        padding: 1.6rem 1.6rem 1.6rem 1.6rem;
+        border-right: 2px solid shared.$black;
+        min-width: 18rem;
+    }
 }
 .event{
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: .8rem;
+    @include shared.mobile-only{
+        @include shared.font-montserrat(700);
+        font-size: 2rem;
+    }
+    @include shared.desktop-only{
+        @include shared.font-montserrat(700);
+        font-size: 2.8rem;
+    }
 }
 .type{
-
+    @include shared.font-montserrat(400);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: shared.$light-blue;
+    @include shared.mobile-only{
+        font-size: 1.6rem;
+    }
+    @include shared.desktop-only{
+        font-size: shared.$desktop-reading-font-size;
+        padding: 1.6rem 1.6rem 1.6rem 1.6rem;
+        border-left: 2px solid shared.$black;
+        min-width: 36rem;
+    }
 }
-.link{
+
+.link {
+    color: shared.$black;
+    @include shared.mobile-only {
+        width: 100%;
+        text-align: center;
+    }
     
+    @include shared.tablet-only {
+        width: 63.5%;
+        margin-top: 2 * shared.$tablet-spacing;
+    }
+    @include shared.desktop-only {
+        width: 47.5%;
+        margin-top: 4 * shared.$desktop-spacing;
+    }
 }

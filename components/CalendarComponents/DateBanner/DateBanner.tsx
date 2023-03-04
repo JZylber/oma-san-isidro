@@ -1,5 +1,8 @@
+import Link from "next/link";
+import { Button } from "../../buttons/Button";
 import { CalendarEvent } from "../CalendarTypes";
 import styles from "./DateBanner.module.scss";
+import NewsArrow from "../../../img/newsArrow.svg"
 
 const DateBanner = ({dates}:{dates: CalendarEvent []}) => {
     const currentDate = new Date()
@@ -7,16 +10,38 @@ const DateBanner = ({dates}:{dates: CalendarEvent []}) => {
     upcomingDates.sort(function(a, b) {
         var distancea = Math.abs(currentDate.getTime() - a.fecha_inicio.getTime());
         var distanceb = Math.abs(currentDate.getTime() - b.fecha_inicio.getTime());
-    return distancea - distanceb; // sort a before b when the distance is smaller
+    return distancea - distanceb;
     });
-    let upcomingDate = upcomingDates[0]
     const months = ["ENE","FEB","MAR","ABR","MAY","JUN","JUL","AGO","SEP","OCT","NOV","DIC"]
-    return(
-        <div className={styles.container}>
-            <div>{`${upcomingDate.fecha_inicio.getDate()} - ${months[upcomingDate.fecha_inicio.getMonth()]}`}</div>
-            <div>{upcomingDate.texto}</div>
-            <div>{upcomingDate.tipo}</div>
+    const getEndDate = (cevent : CalendarEvent) => {
+        if(cevent.fecha_fin){
+            return(` - ${cevent.fecha_fin.getDate()} ${months[cevent.fecha_fin.getMonth()]}`)
+        } else {
+            return("")
+        }
+    }
+    const renderUpcomingDate = (date:CalendarEvent,idx : number) => {
+        return(
+        <div className={styles.container_entry} key={idx}>
+            <div className={styles.date}><span>{`${date.fecha_inicio.getDate()} ${months[date.fecha_inicio.getMonth()]}${getEndDate(date)}`}</span></div>
+            <div className={styles.event}>{date.texto}</div>
+            <div className={styles.type}>{date.tipo}</div>
         </div>
+        )
+    }
+    return(
+        <>
+        <div className={styles.container}>
+        {upcomingDates.slice(0,3).map(renderUpcomingDate)}
+        </div>
+        <Link href="./calendario" style={{textDecoration: 'none'}}>
+            <div className={styles.link}>
+                <Button content="Ver Calendario Completo">
+                    <NewsArrow/>
+                </Button>
+            </div>
+        </Link>
+        </>
     )
 }
 
