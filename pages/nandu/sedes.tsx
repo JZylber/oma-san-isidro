@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import Head from "next/head";
+import InProgress from "../../components/InProgress/InProgress";
 import Layout from "../../components/Layout/Layout";
 
 const NanduVenues : NextPage = () => {
@@ -9,7 +10,7 @@ const NanduVenues : NextPage = () => {
             <title>Sedes Ñandú</title>
         </Head>
         <Layout>
-            <h1>Sedes Ñandú</h1>
+            <InProgress/>
         </Layout>
         </>
         )

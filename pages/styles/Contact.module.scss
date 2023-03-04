@@ -1,0 +1,102 @@
+@use "../../styles/shared.scss" as shared;
+
+.title {
+    @include shared.font-unbounded(600);
+
+    @include shared.mobile-only {
+      font-size: 2.4 * shared.$mobile-actionable-font-size;
+      margin-top: 4 * shared.$mobile-spacing;
+      margin-bottom: 2.5 * shared.$mobile-spacing;
+    }
+    @include shared.not-mobile {
+      grid-column: 1/-1;
+      font-size: 2 * shared.$desktop-actionable-font-size;
+      line-height: 2.5;
+    }
+  }
+
+.inquiries{
+  box-sizing: border-box;
+  border: 2px solid black;
+  border-radius: 9px;
+  margin-bottom: 4.8rem;
+  @include shared.mobile-only {
+    padding: 32px 16px 32px 16px;
+  }
+  @include shared.not-mobile{
+    grid-column: 1/-1;
+    padding: 3.2rem;
+  }
+}
+
+.category_title{
+        @include shared.font-unbounded(500);
+        @include shared.mobile-only {
+          font-size: 1.3 * shared.$mobile-reading-font-size;
+          width: 100%;
+          margin-bottom: 16px;
+        }
+    
+        @include shared.not-mobile {
+          align-self: center;
+          font-size: shared.$desktop-actionable-font-size;
+        }
+}
+
+.zone{
+    display: flex;
+    width: 100%;
+    margin-top: 3.2rem;
+    margin-bottom: 3.2rem;
+    @include shared.mobile-only{
+        flex-direction: column;
+        align-items: center;
+    }
+    h4{
+        @include shared.font-montserrat(600);
+        text-align: center;
+        @include shared.mobile-only{
+            font-size: shared.$mobile-reading-font-size;
+            margin-bottom: 1.6rem;
+        };
+        @include shared.not-mobile{
+            width: 40%;
+            font-size: shared.$desktop-reading-font-size
+        };
+    }
+    ul{
+        @include shared.mobile-only{
+        }
+        @include shared.not-mobile{
+            width: 60%;
+        }
+        list-style: none;
+        li{
+            @include shared.mobile-only{
+                margin-bottom: .8rem;
+            }
+        }
+    }
+}
+
+.math_clubs{
+    grid-column: 1/-1;
+    h3 {
+        @include shared.mobile-only{
+            margin-bottom: 1.2rem;
+        }
+        @include shared.not-mobile{
+            margin-bottom: 2rem;
+        }
+    }
+}
+
+.mail_text{
+    @include shared.font-montserrat(400);
+    @include shared.mobile-only{
+        font-size: shared.$mobile-reading-font-size;
+    };
+    @include shared.not-mobile{
+        font-size: shared.$desktop-reading-font-size;
+    }
+}

@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import Head from "next/head";
+import InProgress from "../../components/InProgress/InProgress";
 import Layout from "../../components/Layout/Layout";
 
 const OMAProblems : NextPage = () => {
@@ -9,7 +10,7 @@ const OMAProblems : NextPage = () => {
             <title>Problemas OMA</title>
         </Head>
         <Layout>
-            <h1>Problemas OMA</h1>
+            <InProgress/>
         </Layout>        
         </>)
 }
