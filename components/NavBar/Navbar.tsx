@@ -125,7 +125,9 @@ export default function NavBar({togglePageContent,onRouteChange}:NavProps){
         <nav className={styles.navbar}> 
             <div className={styles[["navbar_main", (openFullMenu ? "_full" : "")].join("")]}>
                 <div className={styles.iconWrapper}>
-                    {openFullMenu?<X className={styles.icon} onClick={()=>openCloseMenu()}/>:<MenuIcon className={styles.icon} onClick={()=>openCloseMenu()}/>}
+                    <div className={styles.iconWrapper_icon}>
+                      {openFullMenu?<X className={styles.icon} onClick={()=>openCloseMenu()}/>:<MenuIcon className={styles.icon} onClick={()=>openCloseMenu()}/>}
+                    </div>
                 </div>
                 {openFullMenu ? <MobileMenu closeMenu={openCloseMenu} menuHierarchy={menuHierarchy}/>: <TopMenu menuHierarchy={menuHierarchy} onMainItemClick={clickMainItem}/> }
             </div>

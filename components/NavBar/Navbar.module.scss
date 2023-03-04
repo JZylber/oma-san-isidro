@@ -4,6 +4,15 @@
   @include shared.mobile-only {
     width: 80%;
     margin-left: 10%;
+    display: flex;
+    justify-content: flex-start;
+    &_icon{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 32.5px;
+      width: 48px;
+    }
   }
   @include shared.not-mobile {
     display: none;
