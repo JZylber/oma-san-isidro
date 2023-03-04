@@ -38,7 +38,7 @@
   }
   @include shared.desktop-only {
     font-size: shared.$desktop-actionable-font-size;
-    line-height: 3.75 * shared.$desktop-spacing;
+    line-height: 2.8rem;
     margin-bottom: 3 * shared.$desktop-spacing;
   }
 }
