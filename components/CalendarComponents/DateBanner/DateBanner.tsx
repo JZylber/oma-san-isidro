@@ -37,7 +37,7 @@ const DateBanner = ({dates}:{dates: CalendarEvent []}) => {
         <Link href="./calendario" style={{textDecoration: 'none'}}>
             <div className={styles.link}>
                 <Button content="Ver Calendario Completo">
-                    <NewsArrow/>
+                    <NewsArrow className={styles.arrow}/>
                 </Button>
             </div>
         </Link>

@@ -27,10 +27,16 @@
         font-size: 1.6rem;
     }
     @include shared.not-mobile{
-        font-size: shared.$desktop-reading-font-size;
         padding: 1.6rem 1.6rem 1.6rem 1.6rem;
         border-right: 2px solid shared.$black;
-        min-width: 18rem;
+    }
+    @include shared.tablet-only{
+        font-size: shared.$tablet-reading-font-size;
+        min-width: 12rem;
+    }
+    @include shared.desktop-only{
+        font-size: shared.$desktop-reading-font-size;
+        min-width: 16rem;
     }
 }
 .event{
@@ -39,12 +45,14 @@
     align-items: center;
     text-align: center;
     padding: .8rem;
+    @include shared.font-montserrat(700);
     @include shared.mobile-only{
-        @include shared.font-montserrat(700);
         font-size: 2rem;
     }
-    @include shared.not-mobile{
-        @include shared.font-montserrat(700);
+    @include shared.tablet-only{
+        font-size: 2rem;
+    }
+    @include shared.desktop-only{
         font-size: 2.8rem;
     }
 }
@@ -58,10 +66,16 @@
         font-size: 1.6rem;
     }
     @include shared.not-mobile{
-        font-size: shared.$desktop-reading-font-size;
         padding: 1.6rem 1.6rem 1.6rem 1.6rem;
         border-left: 2px solid shared.$black;
-        min-width: 36rem;
+    }
+    @include shared.tablet-only{
+        font-size: shared.$tablet-reading-font-size;
+        min-width: 24rem;
+    }
+    @include shared.desktop-only{
+        font-size: shared.$desktop-reading-font-size;
+        min-width: 32rem;
     }
 }
 
@@ -81,3 +95,14 @@
         margin-top: 4 * shared.$desktop-spacing;
     }
 }
+
+.arrow {
+    @include shared.desktop-only {
+      padding: 5px 0 0 0;
+    }
+  
+    @include shared.not-desktop {
+      display: none;
+    }
+  }
+  
