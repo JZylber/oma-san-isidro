@@ -13,6 +13,7 @@
         bottom: 2rem;
         grid-row: 1/2;
         grid-column: 1/5 ;
+        height: 27*shared.$tabletXspacing;
     }
     @include shared.desktop-only {
         grid-row: 1/2;
