@@ -3,6 +3,7 @@ import Head from "next/head";
 import Layout from "../components/Layout/Layout";
 import styles from "./styles/International.module.scss";
 import dataOMA from "../data/internacionalOMA.json"
+import dataNandu from "../data/internacionalNandu.json"
 
 const Internacional : NextPage = () => {
     const renderOMAparticipant = (omaParticipant : Array<string | boolean>,idx:number) => {
@@ -18,6 +19,16 @@ const Internacional : NextPage = () => {
                 <td>{t4?"Si":""}</td>
             </tr>)
     }
+    const renderNanduparticipant = (omaParticipant : Array<string | boolean>,idx:number) => {
+        const [level,surname,name] = omaParticipant;
+        return(
+            <tr key={idx}>
+                <td>{level}</td>
+                <td>{surname}</td>
+                <td>{name}</td>
+            </tr>)
+    }
+
 
     return(
         <>
@@ -87,7 +98,20 @@ const Internacional : NextPage = () => {
             </div>
             <div className={styles.category}>
                 <h2 className={styles.category_title}>Alumnos que participaron en Ñandú en 2022</h2>
+                <p className={styles.nandu_text}>Pueden Participar en la Olimpíada de Mayo aquellos alumnos que aprobaron el Regional y nacieron después del 01/01/2008</p>
             </div>
+            <table className={[styles.table,styles.middle_columns].join(" ")}>
+                    <thead className={styles.table_header}>
+                        <tr>
+                            <th>Nivel</th>
+                            <th>Apellido</th>
+                            <th>Nombre</th>
+                        </tr>
+                    </thead>
+                    <tbody className={styles.table_body}>
+                        {dataNandu.map(renderNanduparticipant)}
+                    </tbody>
+                </table>
         </Layout>
         </>
         )
