@@ -1,0 +1,22 @@
+@use '../../../styles/shared.scss' as shared;
+
+.container{
+    padding-bottom: 8.6rem;
+    padding-top: 5.6rem;
+    &:not(:last-child){
+        border-bottom: 2px solid black;
+    }
+}
+
+.title {
+    @include shared.font-unbounded(300);
+    font-size: 3.4rem;
+}
+
+.events {
+    margin-top: 3.2rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 2rem;
+    row-gap: 5rem;
+}

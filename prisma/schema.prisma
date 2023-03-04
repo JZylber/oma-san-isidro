@@ -60,7 +60,7 @@ model Competencia {
 
 model Prueba {
   id_prueba Int @default(autoincrement()) @id
-  fecha DateTime
+  fecha DateTime @db.Date
   instancia INSTANCIA
   cantidad_problemas Int @default(3)
   competencia Competencia @relation(fields: [id_competencia],references: [id_competencia])
@@ -80,9 +80,20 @@ model Rinde {
 }
 
 //News
+
 model Noticias{
   id_noticia Int @default(autoincrement()) @id
   titulo String
   link String
   agregado DateTime @default(now())
+}
+
+//Calendario
+
+model Fechas{
+  id_fecha Int @default(autoincrement()) @id
+  fecha_inicio DateTime @db.Date
+  fecha_fin DateTime? @db.Date
+  tipo String
+  texto String
 }

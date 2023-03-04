@@ -20,7 +20,15 @@ export default async function handler(req : NextApiRequest, res:NextApiResponse)
       } catch (err) {
         return res.status(500).send('Error revalidating')
       }
-    }else{
+    }else if(req.query.type === "calendar"){
+      try {
+        await res.revalidate('/calendar')
+        return res.json({ revalidated: true })
+      } catch (err) {
+        return res.status(500).send('Error revalidating')
+      }
+    }
+    else{
       res.status(401).json({ message: 'Incorrect option' })
     }
     

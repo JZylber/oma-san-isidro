@@ -3,7 +3,6 @@ import NewsArrow from "../../img/newsArrow.svg";
 import Warning from "../../img/warning.svg";
 import { AuthItem } from "./AuthItem";
 import { Button } from "../buttons/Button";
-import Footer from "../Footer/Footer";
 
 const specs = [
   {
