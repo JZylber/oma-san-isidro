@@ -26,7 +26,7 @@
     @include shared.mobile-only{
         font-size: 1.6rem;
     }
-    @include shared.desktop-only{
+    @include shared.not-mobile{
         font-size: shared.$desktop-reading-font-size;
         padding: 1.6rem 1.6rem 1.6rem 1.6rem;
         border-right: 2px solid shared.$black;
@@ -43,7 +43,7 @@
         @include shared.font-montserrat(700);
         font-size: 2rem;
     }
-    @include shared.desktop-only{
+    @include shared.not-mobile{
         @include shared.font-montserrat(700);
         font-size: 2.8rem;
     }
@@ -57,7 +57,7 @@
     @include shared.mobile-only{
         font-size: 1.6rem;
     }
-    @include shared.desktop-only{
+    @include shared.not-mobile{
         font-size: shared.$desktop-reading-font-size;
         padding: 1.6rem 1.6rem 1.6rem 1.6rem;
         border-left: 2px solid shared.$black;
