@@ -7,17 +7,21 @@ import styles from "./styles/Home.module.scss";
 import MainNandu from "../img/mainNandu.svg";
 import Layout from "../components/Layout/Layout";
 import {NewsItemData} from "../components/News/NewsTypes";
-import { getNews } from "../lib/aux_db_calls";
+import { getCalendarEvents, getNews } from "../lib/aux_db_calls";
+import DateBanner from "../components/CalendarComponents/DateBanner/DateBanner";
+import { getDatesFromJson, JSONCalendarEvent } from "../components/CalendarComponents/CalendarTypes";
 
 export async function getStaticProps() {
   const news = await getNews()
-  let newProps = {news : news.results}
+  const events = await getCalendarEvents(new Date().getFullYear())
+  let newProps = {news : news.results,events: JSON.parse(JSON.stringify(events.results))}
   return {
     props: newProps
   }
 }
 
-const Home: NextPage<{news: NewsItemData[]}> = ({news}) => {
+const Home: NextPage<{news: NewsItemData[], events: JSONCalendarEvent[]}> = ({news,events}) => {
+  const dates = getDatesFromJson(events)
   return (
     <>
       <Head>
@@ -36,6 +40,12 @@ const Home: NextPage<{news: NewsItemData[]}> = ({news}) => {
         <div className={styles.containerImg}>
           <MainNandu className={styles.mainImage} />
         </div>
+
+        {/* Next Events */}
+        <section className={styles.eventSection}>
+          <h3 className={styles.sectionTitle}>Próximas fechas</h3>
+          <DateBanner dates={dates}/>
+        </section>
 
         {/* FAQ */}
         <section className={styles.FAQSection}>

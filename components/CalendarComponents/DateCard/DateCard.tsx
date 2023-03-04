@@ -1,4 +1,4 @@
-import { CalendarEvent } from "../../../pages/calendario";
+import { CalendarEvent } from "../CalendarTypes";
 import styles from "./DateCard.module.scss";
 
 const DateCard = ({calendarEvent}:{calendarEvent : CalendarEvent}) => {
