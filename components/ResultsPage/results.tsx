@@ -1,5 +1,6 @@
 import { useRouter } from "next/router"
 import {useCallback, useEffect, useState } from "react"
+import InProgress from "../InProgress/InProgress"
 import ResultFinderForm from "./resultFinderForm"
 import styles from "./results.module.scss"
 import {ResultProps,TestQueryResults } from "./resultsTypes"
@@ -39,10 +40,12 @@ const Results = ({competition,availableResults} : ResultProps) => {
       }, [query,searchResults])
     
     return(
-        <>
+        <>{/*
         <h1 className={styles.title}>Resultados {competition}</h1>
         <ResultFinderForm availableResults={availableResults} searchResults={searchResults}/>
         {isLoading ? "Buscando resultados...": (results?<ResultTable results={results}/>:"¡Elegí un año y una instancia y hacé click en buscar resultados!")}
+        */}
+        <InProgress/>
         </>
     )
 }

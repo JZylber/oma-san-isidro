@@ -5,7 +5,7 @@
     grid-column: 1 / -1;
 
     @include shared.mobile-only {
-      font-size: 2.4 * shared.$mobile-actionable-font-size;
+      font-size: 2 * shared.$mobile-actionable-font-size;
       margin-top: 4 * shared.$mobile-spacing;
       margin-bottom: 2.5 * shared.$mobile-spacing;
     }
