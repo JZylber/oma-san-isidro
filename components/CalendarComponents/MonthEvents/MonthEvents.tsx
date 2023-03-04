@@ -1,4 +1,4 @@
-import { CalendarEvent } from "../../../pages/calendario";
+import { CalendarEvent } from "../CalendarTypes";
 import DateCard from "../DateCard/DateCard";
 import styles from "./MonthEvents.module.scss";
 
