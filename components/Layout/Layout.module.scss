@@ -20,7 +20,7 @@
         width: 85%;
         @include shared.tablet-columns;
         margin-top: 4.8rem;
-        grid-template-rows: 27*shared.$tabletXspacing max-content max-content max-content;
+        grid-template-rows: max-content max-content max-content max-content;
     }
     @include shared.desktop-only{
         display: grid;

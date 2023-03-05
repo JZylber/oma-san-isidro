@@ -11,6 +11,10 @@
     @include shared.not-mobile{
         grid-column: 1/-1;
     }
+    @include shared.tablet-only{
+        font-size: 3.7rem;
+        margin-bottom: 3.2rem;
+    }
     @include shared.desktop-only{
         font-size: 6rem;
         margin-bottom: 5.6rem;
@@ -42,7 +46,11 @@
     @include shared.mobile-only{
         display: none;
     }
-    @include shared.not-mobile{
+    @include shared.tablet-only{
+        grid-row: 4/5;
+        grid-column: 1/-1;
+    }
+    @include shared.desktop-only{
         grid-row: 3/4;
         grid-column: 1/-1;
     }

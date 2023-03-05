@@ -164,7 +164,7 @@
             @include shared.tablet-only{
                 font-size: shared.$tablet-reading-font-size;
                 line-height: 2.25 * shared.$tablet-spacing;
-                margin-bottom: 0.8rem;
+                margin-bottom: 1.6rem;
             }
             @include shared.desktop-only {
                 font-size: shared.$desktop-reading-font-size;
