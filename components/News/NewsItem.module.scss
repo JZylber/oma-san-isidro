@@ -1,0 +1,73 @@
+@use "../../styles/shared.scss" as shared;
+
+.link{
+  text-decoration: none;
+  color: shared.$black;
+}
+
+.container {
+  box-sizing: border-box;
+  background: shared.$light-blue;
+  border: 2px solid #000000;
+  border-radius: 9px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  align-items: center;
+  text-align: center;
+
+  @include shared.font-unbounded(500);
+  @include shared.mobile-only {
+    margin-top: 1.6rem;
+    margin-bottom: 2.4rem;
+
+    height: 7.2rem;
+
+    box-shadow: 0px 0.6rem black;
+
+    font-size: shared.$mobile-actionable-font-size;
+    line-height: 2.375 * shared.$mobile-spacing;
+  }
+  @include shared.tablet-only {
+    margin-top: 1.6rem;
+    box-shadow: 0px 0.6rem black;
+
+    font-size: shared.$tablet-actionable-font-size;
+    line-height: 2.5 * shared.$tablet-max-spacing;
+
+    height: 6.4rem;
+    &:first-child {
+      margin-top: 2 * shared.$tabletYspacing;
+    }
+  }
+  @include shared.desktop-only {
+    font-size: shared.$desktop-actionable-font-size;
+    line-height: 3rem;
+
+    height: 8rem;
+
+    margin-top: 2 * shared.$desktop-spacing;
+    margin-bottom: 3 * shared.$desktop-spacing;
+    box-shadow: 0px 0.8rem black;
+  }
+  span {
+    @include shared.desktop-only {
+      width: 80%;
+    }
+    @include shared.not-desktop {
+      width: 100%;
+    }
+  }
+  .arrow {
+    @include shared.not-desktop {
+      display: none;
+    }
+    @include shared.desktop-only {
+      display: inline;
+      float: right;
+      transform: translateX(3 * shared.$desktopXspacing);
+    }
+  }
+}

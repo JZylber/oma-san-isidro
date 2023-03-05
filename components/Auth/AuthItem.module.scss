@@ -1,0 +1,25 @@
+@use "../../styles/shared.scss" as shared;
+
+.item {
+  @include shared.font-montserrat(300);
+
+  @include shared.mobile-only {
+    width: 100%;
+    font-size: shared.$mobile-reading-font-size;
+    margin-bottom: 16px;
+  }
+
+  @include shared.tablet-only {
+    width: 38 * shared.$tabletXspacing;
+    max-width: 50%;
+    font-size: shared.$tablet-reading-font-size;
+    margin: 2 * shared.$tabletYspacing 0;
+  }
+
+  @include shared.desktop-only {
+    width: 45 * shared.$desktopXspacing;
+    max-width: 50%;
+    font-size: 0.85 * shared.$desktop-reading-font-size;
+    padding-bottom: 20px;
+  }
+}

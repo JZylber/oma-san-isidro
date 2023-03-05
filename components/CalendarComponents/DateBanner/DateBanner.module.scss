@@ -1,0 +1,127 @@
+@use '../../../styles/shared.scss' as shared;
+
+.container{
+    border: 2px solid shared.$black;
+    border-radius: 9px;
+    margin: 2.4rem 0rem 0rem 0rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    &_entry{
+        width: 100%;
+        display: flex;
+        @include shared.mobile-only{
+            flex-direction: column;
+            align-items: center;
+        }
+        @include shared.not-mobile{
+            justify-content: space-between;
+        }
+        &:not(:last-child){
+            border-bottom: 2px solid shared.$black;
+         }
+    }
+}
+
+.date{
+    @include shared.font-montserrat(400);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include shared.mobile-only{
+        font-size: 1.6rem;
+        order: 2;
+    }
+    @include shared.not-mobile{
+        background-color: shared.$light-blue;
+        padding: 1.6rem 1.6rem 1.6rem 1.6rem;
+        border-right: 2px solid shared.$black;
+    }
+    @include shared.tablet-only{
+        font-size: shared.$tablet-reading-font-size;
+        min-width: 12rem;
+    }
+    @include shared.desktop-only{
+        font-size: shared.$desktop-reading-font-size;
+        min-width: 16rem;
+    }
+}
+.event{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: .8rem;
+    @include shared.mobile-only{
+        @include shared.font-unbounded(400);
+        font-size: 2.4rem;
+        line-height: 2.8rem;
+        height: 8.4rem;
+        order: 1;
+    }
+    @include shared.tablet-only{
+        @include shared.font-montserrat(700);
+        font-size: 2rem;
+    }
+    @include shared.desktop-only{
+        @include shared.font-montserrat(700);
+        font-size: 2.8rem;
+    }
+}
+.type{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: shared.$light-blue;
+    @include shared.mobile-only{
+        @include shared.font-unbounded(500);
+        font-size: 1.6rem;
+        order: 3;
+        border: 2px solid shared.$black;
+        border-radius: 9px;
+        width: fit-content;
+        margin: .8rem 0rem .8rem 0rem;
+        padding: .4rem
+    }
+    @include shared.not-mobile{
+        @include shared.font-montserrat(400);
+        padding: 1.6rem 1.6rem 1.6rem 1.6rem;
+        border-left: 2px solid shared.$black;
+    }
+    @include shared.tablet-only{
+        font-size: shared.$tablet-reading-font-size;
+        min-width: 24rem;
+    }
+    @include shared.desktop-only{
+        font-size: shared.$desktop-reading-font-size;
+        min-width: 32rem;
+    }
+}
+
+.link {
+    color: shared.$black;
+    @include shared.mobile-only {
+        width: 100%;
+        text-align: center;
+    }
+    
+    @include shared.tablet-only {
+        width: 63.5%;
+        margin-top: 2 * shared.$tablet-spacing;
+    }
+    @include shared.desktop-only {
+        width: 47.5%;
+        margin-top: 4 * shared.$desktop-spacing;
+    }
+}
+
+.arrow {
+    @include shared.desktop-only {
+      padding: 5px 0 0 0;
+    }
+  
+    @include shared.not-desktop {
+      display: none;
+    }
+  }
+  

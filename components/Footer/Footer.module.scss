@@ -1,0 +1,227 @@
+@use '../../styles/shared.scss' as shared;
+
+.footer  {
+    @include shared.mobile-only{
+        width: 80%;
+        margin-top: 5.6rem;
+    }
+    @include shared.tablet-only{
+        display: grid;
+        width: 85%;
+        @include shared.tablet-columns;
+        margin-top: 4.8rem;
+        grid-template-rows: 5.8rem max-content;
+        align-items: start;
+        row-gap: 6*shared.$tabletYspacing;
+        margin-top: 7.2rem;
+    }
+    @include shared.desktop-only{
+        display: grid;
+        @include shared.desktop-columns;
+        grid-template-rows: 9rem max-content;
+        align-items: start;
+        row-gap: 6*shared.$desktop-spacing;
+        width: 80%;
+        margin-top: 16rem;
+        max-width: 1200px;
+    }
+    &_secretary{
+        @include shared.tablet-only {
+            grid-column: 7/-1;
+            grid-row: 1/2;
+            transform: translateX(-2*shared.$desktop-spacing);
+            width: max-content;
+        }
+        @include shared.desktop-only {
+            grid-column: 9/-1;
+            grid-row: 1/2;
+            transform: translateX(-2*shared.$desktop-spacing);
+            width: max-content;
+        }
+        h4{
+            @include shared.font-montserrat(700);
+            @include shared.mobile-only{
+                font-size: shared.$mobile-reading-font-size;
+                line-height: 2 * shared.$mobile-spacing;
+                margin-bottom: 0.8rem;
+
+            }
+            @include shared.tablet-only{
+                font-size: shared.$tablet-reading-font-size;
+                line-height: 2.25 * shared.$tablet-spacing;
+                margin-bottom: 0.625 * shared.$tablet-spacing;
+            }
+            @include shared.desktop-only {
+                font-size: shared.$desktop-reading-font-size;
+                line-height: 3 * shared.$desktop-spacing;
+                margin-bottom: 1.25 * shared.$desktop-spacing;
+            }
+        }
+
+        span{
+            @include shared.font-montserrat(500);
+            @include shared.mobile-only{
+                font-size: shared.$mobile-reading-font-size;
+                line-height: 2 * shared.$mobile-spacing;
+            }
+            @include shared.tablet-only{
+                font-size: shared.$tablet-reading-font-size;
+                line-height: 2.25 * shared.$tablet-spacing;
+            }
+            @include shared.desktop-only {
+                font-size: shared.$desktop-reading-font-size;
+                line-height: 3 * shared.$desktop-spacing;
+            }
+        }
+    }
+    &_links {
+        @include shared.mobile-only{
+            height: 9.6rem;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3.2rem;
+            margin-bottom: 3.2rem;
+        }
+        @include shared.tablet-only{
+            grid-column: 1/7;
+            grid-row: 1/2;
+            display: grid;
+            @include shared.tablet-columns(6);
+            grid-template-rows: 1fr;
+            height: 100%;
+        }
+        @include shared.desktop-only{
+            grid-column: 1/9;
+            grid-row: 1/2;
+            display: grid;
+            @include shared.desktop-columns(8);
+            grid-template-rows: 1fr;
+            height: 100%;
+        }
+        ul {
+            list-style: none;
+            
+            @include shared.not-desktop{
+                flex-direction: column;
+                justify-content: space-around;
+                display: flex;
+            }
+
+            @include shared.tablet-only{
+                grid-column: 2/-1;
+                grid-row: 1/2;
+                min-height: 100%;
+                flex-wrap: wrap;
+            }
+            @include shared.desktop-only {
+                display: grid;
+                // padding-left: 5.5*shared.$desktop-spacing;
+                @include shared.desktop-columns(7);
+                grid-column: 2/9;
+                grid-row: 1/2;
+                min-height: 100%;
+                // flex-wrap: wrap;
+            }
+        }
+        ul li:nth-child(1){
+            @include shared.desktop-only{
+                grid-column: 1/4;
+                grid-row: 1
+            }
+        }
+        ul li:nth-child(2){
+            @include shared.desktop-only{
+                grid-column: 1/4;
+            }
+        }
+        ul li:nth-child(3){
+            @include shared.tablet-only{
+                margin-left: 5.5rem;            
+            }
+            @include shared.desktop-only{
+                margin-left: 1rem;
+                grid-column: 5/7;  
+                grid-row: 1 
+            }
+        }
+        ul li:nth-child(4){
+            @include shared.tablet-only{
+                margin-left: 5.5rem;
+            }
+            @include shared.desktop-only{
+                margin-left: 1rem;
+                grid-column: 5/7;   
+            }
+        }
+        ul li {
+            @include shared.font-montserrat(500);
+            text-decoration-line: underline;
+            color: shared.$black;
+            @include shared.mobile-only{
+                font-size: shared.$mobile-reading-font-size;
+                line-height: 2 * shared.$mobile-spacing;
+            }
+            @include shared.tablet-only{
+                font-size: shared.$tablet-reading-font-size;
+                line-height: 2.25 * shared.$tablet-spacing;
+                margin-bottom: 1.6rem;
+            }
+            @include shared.desktop-only {
+                font-size: shared.$desktop-reading-font-size;
+                line-height: 3 * shared.$desktop-spacing;
+                padding-bottom: 0.8rem;
+            }
+        }
+        a:link, a:visited {
+            color: shared.$black;
+        }
+    }
+    &_logo {
+        @include shared.not-mobile {
+            position: relative;
+            bottom: 10rem;
+            height: 2rem;
+            width: 2rem;
+            grid-column: 1/2;
+            grid-row: 1/2;
+        }
+    }
+    &_credits {
+        @include shared.font-montserrat(400);
+        text-align: center;
+        border-top: 1px solid shared.$black;
+
+        @include shared.mobile-only{
+            font-size: shared.$mobile-reading-font-size;
+            line-height: 1.75 * shared.$mobile-spacing;
+            padding-top: 2 * shared.$mobile-spacing;
+            padding-bottom: 2 * shared.$mobile-spacing;
+        }
+        @include shared.tablet-only {
+            grid-column: 1/-1;
+            grid-row: 2/3;
+
+            font-size: shared.$tablet-reading-font-size;
+            line-height: 2.3125 * shared.$tablet-spacing;
+
+            padding: 1.6rem 0 1.6rem 0;
+            text-align: left;
+        }
+        @include shared.desktop-only {
+            grid-column: 1/-1;
+            grid-row: 2/3;
+
+            font-size: shared.$desktop-reading-font-size;
+            line-height: 3 * shared.$desktop-spacing;
+
+            padding-top: 2.5 * shared.$desktop-spacing;
+            padding-bottom: 3 * shared.$desktop-spacing;
+            text-align: left;
+        }
+        p {
+            @include shared.not-mobile {
+                display: inline-block;
+            } 
+        }
+    }
+}

@@ -1,0 +1,28 @@
+@use '../../../styles/shared.scss' as shared;
+
+.container {
+    margin-top: 3.2rem;
+    margin-bottom: 3.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    @include shared.not-mobile{
+        display: none;
+    }
+}
+
+.sideMonth {
+    @include shared.font-unbounded(400);
+    font-size: shared.$desktop-actionable-font-size;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.rotated {
+    transform: rotate(180deg)
+}
+
+.selectedMonth {
+    @include shared.font-unbounded(400);
+    font-size: 2.9rem;
+    color: shared.$black;
+}

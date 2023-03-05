@@ -1,0 +1,108 @@
+$black: #000000;
+$light-blue: #D9F5FC;
+$white: #FEFDF3;
+
+$mobileXspacing: 100vw/50;
+$mobileYspacing: 100vh/106;
+
+$mobile-spacing: 100vmin/50;
+$mobile-max-spacing: 100vmax/106;
+
+$tabletXspacing: 100vw/104.25;
+$tabletYspacing: 100vh/149.25;
+
+$tablet-spacing: 100vmin/104.25;
+$tablet-max-spacing: 100vmax/149.25;
+
+$desktopXspacing: 100vw/180;
+$desktopYspacing: 100vh/128;
+
+$desktopXlargest: 1518px;
+
+$desktop-spacing: 100vmin/128;
+$desktop-max-spacing: 100vmin/180;
+
+/*Typography sizes*/
+$section-title-font-size: 2rem;
+
+$mobile-actionable-font-size: 1.5rem; 
+$mobile-reading-font-size: 1.4rem;
+
+$tablet-actionable-font-size: 1.5rem;
+$tablet-reading-font-size: 1.5rem;
+
+$desktop-actionable-font-size: 2.4rem;
+$desktop-reading-font-size: 2rem;
+
+/*Unified media queries*/
+@mixin mobile-only {
+    @media screen and (max-width:767px){
+        @content;
+    }
+}
+@mixin tablet-only {
+    @media screen and (min-width:768px) and (max-width:1023px){
+        @content;
+    }
+}
+@mixin desktop-only {
+    @media screen and (min-width:1024px){
+        @content;
+    }
+}
+@mixin not-mobile {
+    @media screen and (min-width:768px){
+        @content;
+    }
+}
+@mixin not-desktop {
+    @media screen and (max-width:1023px){
+        @content;
+    }
+}
+
+@mixin largest {
+    @media screen and (min-width:$desktopXlargest){
+        @content;
+    }
+}
+
+/*Used Fonts*/
+
+@mixin font-montserrat($weight) {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: $weight;
+}
+
+@mixin font-unbounded($weight) {
+    font-family: 'Unbounded';
+    font-style: normal;
+    font-weight: $weight;
+}
+
+/*Grids*/
+@mixin tablet-columns($columns: 8){
+    column-gap: 2.5 * $tabletXspacing;
+    grid-template-columns: repeat($columns,1fr);
+}
+
+@mixin desktop-columns($columns: 10) {
+    gap: 0 2.5 * $desktopXspacing;
+    grid-template-columns: repeat($columns,1fr);
+}
+
+
+/*Animations*/
+@mixin font-weight-transition{
+    text-shadow:
+            -0.25px -0.25px 0 #000000,
+            0.25px -0.25px 0 #000000,
+            -0.25px 0.25px 0 #000000,
+            0.25px 0.25px 0 #000000;
+            -webkit-transition: all .5s;
+            -moz-transition: all .5s;
+            -o-transition: all .5s;
+            transition: all .5s;
+            cursor: pointer;
+}

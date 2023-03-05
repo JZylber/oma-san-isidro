@@ -1,0 +1,18 @@
+import { NextPage } from "next";
+import Head from "next/head";
+import InProgress from "../../components/InProgress/InProgress";
+import Layout from "../../components/Layout/Layout";
+
+const OMARules : NextPage = () => {
+    return(
+        <>
+        <Head>
+            <title>Reglamento OMA</title>
+        </Head>
+        <Layout>
+            <InProgress/>
+        </Layout>
+        </>)
+}
+
+export default OMARules
