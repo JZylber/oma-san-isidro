@@ -1,9 +1,10 @@
 import { Dispatch, SetStateAction} from "react";
 import {Swiper,SwiperProps, SwiperSlide} from 'swiper/react';
 import { Navigation } from "swiper";
+import NavArrow from "../../../img/menuArrow.svg"
+import { renderToStaticMarkup } from "react-dom/server"
 import 'swiper/scss';
 import 'swiper/scss/navigation';
-
 import styles from './MonthSelect.module.scss'
 
 
@@ -16,7 +17,10 @@ const MonthSelect = ({displayedMonth,setDisplayedMonth}: MonthSelectProps) => {
     const months = ["ENE","FEB","MAR","ABR","MAY","JUN","JUL","AGO","SEP","OCT","NOV","DIC"];
     const parameters : SwiperProps = {
         modules:[Navigation],
-        navigation: true,
+        navigation: {
+            prevEl: '.previous',
+            nextEl: '.next',
+        },
         slidesPerView : 3,
         loop:true,
         centeredSlides:true,
@@ -38,12 +42,14 @@ const MonthSelect = ({displayedMonth,setDisplayedMonth}: MonthSelectProps) => {
     }
     return(
         <div className={styles.container}>
-        <Swiper {...parameters}>
+        <div className='previous' style={{transform: 'rotate(180deg)',display:'flex',justifyContent:'center'}}><NavArrow/></div>
+        <Swiper {...parameters}>    
             {months.map((month,idx) => 
                 <SwiperSlide className={styles.swiper_slide} key={idx}>
                     <span className={styles.sideMonth}>{month}</span>
                 </SwiperSlide>)}
         </Swiper>
+        <div className='next'><NavArrow/></div>
         </div>)
 }
 
