@@ -3,13 +3,22 @@
 .container {
     margin-top: 3.2rem;
     margin-bottom: 3.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
     @include shared.not-mobile{
         display: none;
     }
 }
+
+.swiper{
+    width: 100%;
+    height: 100%;
+}
+
+.swiper_slide {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
 .sideMonth {
     @include shared.font-unbounded(400);
