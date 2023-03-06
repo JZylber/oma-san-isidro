@@ -24,19 +24,29 @@ const MonthSelect = ({displayedMonth,setDisplayedMonth}: MonthSelectProps) => {
         slidesPerView : 3,
         loop:true,
         centeredSlides:true,
+        autoHeight:true,
         initialSlide: displayedMonth,
-        onSlideChange:(swiper) => {
+        onActiveIndexChange(swiper){
+            setDisplayedMonth(swiper.realIndex)
+        },
+        onBeforeTransitionStart(swiper) {
             swiper.slides.forEach((slide,index) => {
                 let element = slide.firstElementChild;
-                if(index == swiper.activeIndex){
-                    element?.classList.remove(styles.sideMonth)
-                    element?.classList.add(styles.selectedMonth)
-                } else {
-                    element?.classList.add(styles.sideMonth)
-                    element?.classList.remove(styles.selectedMonth)
-                }
-            })
-            setDisplayedMonth(swiper.realIndex)
+                element?.classList.add(styles.sideMonth)
+                element?.classList.remove(styles.selectedMonth)
+            }) 
+        },
+        onTransitionStart(swiper) {
+            let element =swiper.slides[swiper.activeIndex].firstElementChild
+            element?.classList.remove(styles.sideMonth)
+            element?.classList.add(styles.selectedMonth)
+        },
+        onTouchMove(swiper,event) {
+            swiper.slides.forEach((slide,index) => {
+                let element = slide.firstElementChild;
+                element?.classList.add(styles.sideMonth)
+                element?.classList.remove(styles.selectedMonth)
+            }) 
         },
         className:["mySwiper",styles.swiper].join(" ")
     }

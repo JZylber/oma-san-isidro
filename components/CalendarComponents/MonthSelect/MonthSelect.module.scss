@@ -18,21 +18,16 @@
 }
 
 .swiper_slide {
-    text-align: center;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100%;
+    align-items: flex-end;
+    height: auto;
   }
 
 .sideMonth {
     @include shared.font-unbounded(400);
     font-size: shared.$desktop-actionable-font-size;
     color: rgba(0, 0, 0, 0.5);
-}
-
-.rotated {
-    transform: rotate(180deg)
 }
 
 .selectedMonth {
