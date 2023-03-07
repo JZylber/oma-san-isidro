@@ -2,7 +2,6 @@ import { Dispatch, SetStateAction} from "react";
 import {Swiper,SwiperProps, SwiperSlide} from 'swiper/react';
 import { Navigation } from "swiper";
 import NavArrow from "../../../img/menuArrow.svg"
-import { renderToStaticMarkup } from "react-dom/server"
 import 'swiper/scss';
 import 'swiper/scss/navigation';
 import styles from './MonthSelect.module.scss'
@@ -26,18 +25,18 @@ const MonthSelect = ({displayedMonth,setDisplayedMonth}: MonthSelectProps) => {
         centeredSlides:true,
         autoHeight:true,
         initialSlide: displayedMonth,
-        onActiveIndexChange(swiper){
+        onActiveIndexChange: (swiper) =>{
             setDisplayedMonth(swiper.realIndex)
         },
-        onBeforeTransitionStart(swiper) {
+        onBeforeTransitionStart: (swiper) => {
             swiper.slides.forEach((slide,index) => {
                 let element = slide.firstElementChild;
                 element?.classList.add(styles.sideMonth)
                 element?.classList.remove(styles.selectedMonth)
             }) 
         },
-        onTransitionStart(swiper) {
-            let element =swiper.slides[swiper.activeIndex].firstElementChild
+        onTransitionStart : (swiper) => {
+            let element = swiper.slides[swiper.activeIndex]?.firstElementChild
             element?.classList.remove(styles.sideMonth)
             element?.classList.add(styles.selectedMonth)
         },
@@ -52,14 +51,14 @@ const MonthSelect = ({displayedMonth,setDisplayedMonth}: MonthSelectProps) => {
     }
     return(
         <div className={styles.container}>
-        <div className='previous' style={{transform: 'rotate(180deg)',display:'flex',justifyContent:'center'}}><NavArrow/></div>
+        <div className='previous' style={{transform: 'rotate(180deg)',display:'flex',justifyContent:'center',alignItems:'center',height:'2.5rem',width:'2.5rem'}}><NavArrow/></div>
         <Swiper {...parameters}>    
             {months.map((month,idx) => 
                 <SwiperSlide className={styles.swiper_slide} key={idx}>
                     <span className={styles.sideMonth}>{month}</span>
                 </SwiperSlide>)}
         </Swiper>
-        <div className='next'><NavArrow/></div>
+        <div className='next' style={{display:'flex',justifyContent:'center',alignItems:'center',height:'2.5rem',width:'2.5rem'}}><NavArrow/></div>
         </div>)
 }
 
