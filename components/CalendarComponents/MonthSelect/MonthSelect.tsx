@@ -1,7 +1,11 @@
 import { Dispatch, SetStateAction} from "react";
-import styles from "./MonthSelect.module.scss";
-import MenuArrow from '../../../img/menuArrow.svg';
-import { useSwipeable } from "react-swipeable";
+import {Swiper,SwiperProps, SwiperSlide} from 'swiper/react';
+import { Navigation } from "swiper";
+import NavArrow from "../../../img/menuArrow.svg"
+import 'swiper/scss';
+import 'swiper/scss/navigation';
+import styles from './MonthSelect.module.scss'
+
 
 interface MonthSelectProps {
     displayedMonth : number,
@@ -9,28 +13,53 @@ interface MonthSelectProps {
 }
 
 const MonthSelect = ({displayedMonth,setDisplayedMonth}: MonthSelectProps) => {
-    const months = ["ENE","FEB","MAR","ABR","MAY","JUN","JUL","AGO","SEP","OCT","NOV","DIC"]
-    const monthClick = (forward: boolean) => {
-        setDisplayedMonth(forward? ((displayedMonth + 1)% months.length): ((displayedMonth - 1) % months.length  + months.length) % months.length)
+    const months = ["ENE","FEB","MAR","ABR","MAY","JUN","JUL","AGO","SEP","OCT","NOV","DIC"];
+    const parameters : SwiperProps = {
+        modules:[Navigation],
+        navigation: {
+            prevEl: '.previous',
+            nextEl: '.next',
+        },
+        slidesPerView : 3,
+        loop:true,
+        centeredSlides:true,
+        initialSlide: displayedMonth,
+        observer: true,
+        observeParents: true,
+        onActiveIndexChange: (swiper) =>{
+            setDisplayedMonth(swiper.realIndex)
+        },
+        onBeforeTransitionStart: (swiper) => {
+            swiper.slides.forEach((slide,index) => {
+                let element = slide.firstElementChild;
+                element?.classList.add(styles.sideMonth)
+                element?.classList.remove(styles.selectedMonth)
+            }) 
+        },
+        onTransitionStart : (swiper) => {
+            let element = swiper.slides[swiper.activeIndex]?.firstElementChild
+            element?.classList.remove(styles.sideMonth)
+            element?.classList.add(styles.selectedMonth)
+        },
+        onTouchMove(swiper,event) {
+            swiper.slides.forEach((slide,index) => {
+                let element = slide.firstElementChild;
+                element?.classList.add(styles.sideMonth)
+                element?.classList.remove(styles.selectedMonth)
+            }) 
+        },
+        className:["mySwiper",styles.swiper].join(" ")
     }
-    const mainHandlers = useSwipeable({
-        onSwipedLeft: () => monthClick(true),
-        onSwipedRight: () => monthClick(false)
-    })
-    const leftTap = useSwipeable({
-        onTap: () => monthClick(false)
-    })
-    const rightTap = useSwipeable({
-        onTap: () => monthClick(true)
-    })
-   
     return(
-        <div {...mainHandlers} className={styles.container}>
-            <span {...leftTap} className={styles.sideMonth}>{months[((displayedMonth - 1) % months.length  + months.length) % months.length]}</span>
-            <MenuArrow  className={styles.rotated}/>
-            <span className={styles.selectedMonth}>{months[(displayedMonth) % months.length]}</span>
-            <MenuArrow />
-            <span {...rightTap} className={styles.sideMonth}>{months[(displayedMonth + 1) % months.length]}</span>
+        <div className={styles.container}>
+        <div className='previous' style={{transform: 'rotate(180deg)',display:'flex',justifyContent:'center',alignItems:'center',height:'2.5rem',width:'2.5rem'}}><NavArrow/></div>
+        <Swiper {...parameters}>    
+            {months.map((month,idx) => 
+                <SwiperSlide className={styles.swiper_slide} key={idx}>
+                    <span className={[styles.sideMonth,styles.swiper_text_transition].join(" ")}>{month}</span>
+                </SwiperSlide>)}
+        </Swiper>
+        <div className='next' style={{display:'flex',justifyContent:'center',alignItems:'center',height:'2.5rem',width:'2.5rem'}}><NavArrow/></div>
         </div>)
 }
 
