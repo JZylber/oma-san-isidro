@@ -55,7 +55,7 @@ const MonthSelect = ({displayedMonth,setDisplayedMonth}: MonthSelectProps) => {
         <Swiper {...parameters}>    
             {months.map((month,idx) => 
                 <SwiperSlide className={styles.swiper_slide} key={idx}>
-                    <span className={styles.sideMonth}>{month}</span>
+                    <span className={[styles.sideMonth,styles.swiper_text_transition].join(" ")}>{month}</span>
                 </SwiperSlide>)}
         </Swiper>
         <div className='next' style={{display:'flex',justifyContent:'center',alignItems:'center',height:'2.5rem',width:'2.5rem'}}><NavArrow/></div>
