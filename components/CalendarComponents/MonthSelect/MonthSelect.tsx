@@ -23,8 +23,9 @@ const MonthSelect = ({displayedMonth,setDisplayedMonth}: MonthSelectProps) => {
         slidesPerView : 3,
         loop:true,
         centeredSlides:true,
-        autoHeight:true,
         initialSlide: displayedMonth,
+        observer: true,
+        observeParents: true,
         onActiveIndexChange: (swiper) =>{
             setDisplayedMonth(swiper.realIndex)
         },
