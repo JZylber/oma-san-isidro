@@ -2,5 +2,20 @@
 
 .form {
     grid-column: 1/-1;
-    font-size: shared.$desktop-reading-font-size
+    display: flex;
+    margin-bottom: 1.6rem;
+    &_categoryContainer{
+        width: fit-content;
+        label{
+            font-size: shared.$section-title-font-size;
+            @include shared.font-montserrat(400);
+            @include shared.mobile-only;
+        }
+        select{
+            display: none;
+            @include shared.font-unbounded(500);
+            font-size: 1.6rem;
+            padding-right: 3.2rem;
+        }
+    }
 }

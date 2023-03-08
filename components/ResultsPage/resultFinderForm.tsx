@@ -1,37 +1,36 @@
 import { ChangeEvent, ChangeEventHandler, FormEventHandler, useState } from "react";
 import styles from "./resultFinderForm.module.scss"
-import { ResultProps, TestQueryResults, yearTests } from "./resultsTypes"
+import {yearTests } from "./resultsTypes"
+import SelectResultCategory from "./SelectResultCategory";
+import {Button} from "../buttons/Button"
 
 type FormProps = {
     availableResults: Array<yearTests>,
     searchResults : (year: number, instance: string) => void;
 }
+
+interface searchParametersType {
+    año: number|null, 
+    instancia: string|null
+}
     
 const ResultFinderForm = ({availableResults,searchResults} : FormProps) => {
     const resultYears =  availableResults.map((yearTests) => yearTests.ano);
-    const [instances,setInstances] = useState(availableResults[0].pruebas)
-    const handleSubmit : FormEventHandler<HTMLFormElement>= (event : React.SyntheticEvent) => {
-        event.preventDefault();
-        const target = event.target as typeof event.target & {
-            año: { value: number };
-            instancia: { value: string };
-        };
-        searchResults(target.año.value,target.instancia.value);
-    }
-    const handleYearChange:ChangeEventHandler<HTMLSelectElement>= (event : ChangeEvent) => {
-        const target = event.target as typeof event.target & {
-            value: number
-        };
-        const newInstances = availableResults.find((year) => year.ano == target.value)?.pruebas
-        newInstances && setInstances(newInstances)
+    const [searchParameters,setSearchParameters] = useState<searchParametersType>({año:null,instancia:null})
+    let instances = searchParameters.año?(availableResults.find((result) => result.ano === searchParameters.año) as yearTests).pruebas:[]
+    const handleSubmit = () => {
+        const {año,instancia} = searchParameters;
+        if(año && instancia){
+            searchResults(año,instancia);
+        }
     }
 
     return(
-    <form className={styles.form} onSubmit={handleSubmit}>
-        <label>Año</label><select id="año" onChange={handleYearChange}>{resultYears.map((year) => {return(<option value={year} key={year}>{year}</option>)})}</select>
-        <label>Instancia</label><select id="instancia">{instances.map((instance) => {return(<option value={instance} key={instance}>{instance}</option>)})}</select>
-        <input type="submit" value="Buscar resultados"/>
-    </form>)
+    <div className={styles.form}>
+        <SelectResultCategory category="Año" value={searchParameters.año} setValue={(value : number) => setSearchParameters({año:value,instancia:null})} options={resultYears}/>
+        <SelectResultCategory category="Instancia" value={searchParameters.instancia} setValue={(value : string) => setSearchParameters({...searchParameters,instancia:value})} options={instances}/>
+        <Button content="Buscar resultados" onClick={handleSubmit}/>
+    </div>)
 }
 
 export default ResultFinderForm

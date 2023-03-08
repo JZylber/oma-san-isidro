@@ -1,0 +1,154 @@
+@use '../../styles/shared.scss' as shared;
+
+.filter_box{
+    border: 2px solid shared.$black;
+    border-radius: 9px;
+    @include shared.mobile-only{
+        font-size: shared.$mobile-actionable-font-size;
+        @include shared.font-unbounded(500);
+    }
+    @include shared.tablet-only{
+        @include shared.font-unbounded(400);
+        font-size: shared.$tablet-reading-font-size;
+        position: absolute;
+        width: 100%;
+        z-index: 1;
+        background-color: shared.$white;
+    }
+    @include shared.desktop-only{
+        @include shared.font-unbounded(400);
+        font-size: shared.$desktop-reading-font-size;
+        position: absolute;
+        width: 100%;
+        z-index: 1;
+        background-color: shared.$white;
+    }
+    &_container{
+        width: 30%;
+        margin-right: 1.6rem;
+        margin-top: 1.6rem;
+        @include shared.tablet-only{
+            position: relative;
+            min-height: 7.4rem;
+        }
+        @include shared.desktop-only{
+            position: relative;
+            min-height: 7.4rem;
+        }
+    }
+}
+
+.dropdownFilter{
+    list-style: none;
+    flex: 0 1 auto;
+    overflow-y: scroll;
+    @include shared.not-desktop{
+        max-height: 3.5*6.4rem;
+        -ms-overflow-style: none;  
+        scrollbar-width: none; 
+            &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+    @include shared.desktop-only{
+        max-height: 3.5*6.4rem;
+    }
+}
+
+.filter{
+    &Text{
+        @include shared.font-unbounded(500);
+        font-size: 1.6rem;
+        padding-right: 3.2rem;
+        padding-left: 3.2rem;
+        display: flex;
+        align-items: center;
+    };
+    &Title{
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
+        min-height: 7.2rem;
+        @include shared.tablet-only{
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+        @include shared.desktop-only{
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+        &Open{
+            border-bottom: 2px solid shared.$black;
+        }
+    }
+    &Option{
+        &:not(:last-child){
+            border-bottom: 2px solid shared.$black;
+        }
+        height: 6.4rem;
+        box-sizing: border-box;
+    }
+
+}
+.currentFilter{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    @include shared.mobile-only{
+        margin-top: 3.2rem;
+    }
+    @include shared.tablet-only{
+        grid-column: 1/-1;
+        font-size: shared.$tablet-actionable-font-size;
+        grid-row: 3/4;
+    }
+    @include shared.desktop-only{
+        grid-column: 4/-1;
+        font-size: shared.$desktop-actionable-font-size;
+        grid-row: 2/3;
+    }
+    &_chip{
+        @include shared.font-unbounded(500);
+        background-color: shared.$light-blue;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #000000;
+        box-sizing: border-box;
+        border-radius: 9px;
+        @include shared.mobile-only{
+            height: 4rem;
+            padding-left: 1.2rem;
+            padding-right: 1.2rem;
+            font-size: shared.$mobile-actionable-font-size;
+            margin-right: 1.6rem;
+            margin-bottom: .8rem;
+        }
+        @include shared.tablet-only{
+            height: 4rem;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            font-size: shared.$tablet-actionable-font-size;
+            margin-bottom: .4rem;
+            margin-top: .4rem;
+            margin-right: 1rem;
+        }
+        @include shared.desktop-only{
+            height: 4.8rem;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            font-size: shared.$desktop-actionable-font-size;
+            margin-bottom: .4rem;
+            margin-top: .4rem;
+            margin-right: 1.6rem;
+        }
+        
+        &_clear{
+            width: 4rem;
+            background-color: shared.$black;
+            color: shared.$white;
+        }
+    }
+}
