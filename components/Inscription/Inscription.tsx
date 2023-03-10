@@ -4,7 +4,7 @@ import styles from "./Inscription.module.scss"
 export const Inscripcion = ( { type } : {type : string} ) => {
     return(
         <>
-        <h1 className={styles.title}>{type}</h1>
+        <h1 className={styles.title}>Inscripción</h1>
         <div className={styles.container}>
            <div className={styles.first}>
             <h1>1. Abonar</h1>
@@ -22,7 +22,7 @@ export const Inscripcion = ( { type } : {type : string} ) => {
             <Button content="Descargar Planilla" />
            </div>
            <div>
-            <h1>Enviar planilla y comprobante de pago a la responsable de su zona.</h1>
+          <h2>Enviar planilla y comprobante de pago a la responsable de su zona.</h2>
             <ul>
                 <li>San Fernando, San Isidro y Vicente López: <a href="mailto:elena@oma.org.ar?subject=Planila%20de%20inscripcion%20colegio%3A">elena@oma.org.ar</a></li>
                 <li>Tigre, Don Torcuato, M.Argentinas, San Miguel y José C.Paz: <a href="mailto:silviachillo@gmail.com?subject=Planila%20de%20inscripcion%20colegio%3A">silviachillo@gmail.com</a></li>
