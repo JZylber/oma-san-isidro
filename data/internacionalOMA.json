@@ -105,7 +105,7 @@
         true,
         true,
         true,
-        false
+        true
     ],
     [
         "2",
@@ -114,7 +114,7 @@
         false,
         false,
         true,
-        false
+        true
     ],
     [
         "1",
@@ -123,7 +123,7 @@
         true,
         true,
         true,
-        false
+        true
     ],
     [
         "1",
@@ -141,7 +141,7 @@
         false,
         false,
         true,
-        false
+        true
     ],
     [
         "1",
@@ -177,7 +177,7 @@
         false,
         false,
         true,
-        false
+        true
     ],
     [
         "1",
@@ -247,7 +247,7 @@
         "Lopez Santiago",
         "Milagros",
         true,
-        false,
+        true,
         true,
         true
     ],
@@ -276,7 +276,7 @@
         true,
         true,
         true,
-        false
+        true
     ],
     [
         "1",
@@ -294,7 +294,7 @@
         false,
         true,
         true,
-        false
+        true
     ],
     [
         "1",
@@ -303,7 +303,7 @@
         true,
         true,
         true,
-        false
+        true
     ],
     [
         "1",
@@ -318,10 +318,10 @@
         "1",
         "Arcapalo",
         "Pedro",
-        false,
         true,
         true,
-        false
+        true,
+        true
     ],
     [
         "2",
@@ -330,7 +330,7 @@
         false,
         false,
         true,
-        false
+        true
     ],
     [
         "1",
@@ -393,7 +393,7 @@
         false,
         false,
         true,
-        false
+        true
     ],
     [
         "2",
@@ -402,7 +402,7 @@
         false,
         true,
         true,
-        false
+        true
     ],
     [
         "1",
@@ -411,7 +411,7 @@
         false,
         true,
         true,
-        false
+        true
     ],
     [
         "1",
@@ -420,7 +420,7 @@
         false,
         true,
         true,
-        false
+        true
     ],
     [
         "1",
@@ -429,7 +429,7 @@
         true,
         true,
         true,
-        false
+        true
     ],
     [
         "2",
@@ -465,7 +465,7 @@
         true,
         true,
         true,
-        false
+        true
     ],
     [
         "1",
@@ -474,7 +474,7 @@
         true,
         true,
         true,
-        false
+        true
     ],
     [
         "3",
@@ -492,7 +492,7 @@
         true,
         true,
         true,
-        false
+        true
     ],
     [
         "1",
@@ -501,7 +501,7 @@
         true,
         true,
         true,
-        false
+        true
     ],
     [
         "2",
@@ -510,6 +510,6 @@
         false,
         false,
         true,
-        false
+        true
     ]
 ]
