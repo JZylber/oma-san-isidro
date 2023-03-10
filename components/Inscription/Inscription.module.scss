@@ -1,0 +1,208 @@
+@use "../../styles/shared.scss" as shared;
+
+.type {
+  @include shared.mobile-only{
+    display: block;
+    @include shared.font-unbounded(400);
+    font-size: 1.5 * shared.$mobile-reading-font-size;
+  }
+  @include shared.not-mobile{
+    display: none;
+  }
+}
+
+
+.title {
+  @include shared.font-unbounded(600);
+  @include shared.mobile-only {
+    font-size: 2.4 * shared.$mobile-actionable-font-size;
+    margin-top: 2.5 * shared.$mobile-spacing;
+    margin-bottom: 2.5 * shared.$mobile-spacing;
+  }
+
+  @include shared.not-mobile {
+    grid-column: 1/-1;
+    font-size: 2 * shared.$desktop-actionable-font-size;
+    margin-bottom: 3.2rem
+  }
+}
+
+.container {
+    grid-column: 1 /11;
+    display: flex;
+    flex-direction: column;
+}
+
+.step_information{
+  margin-top: 2rem;
+  h1{
+      @include shared.font-unbounded(500);
+      @include shared.mobile-only {
+        font-size: 1.3 * shared.$mobile-reading-font-size;
+        width: 100%;
+        margin-bottom: 16px;
+      }
+      @include shared.not-mobile {
+        align-self: center;
+        font-size: shared.$desktop-actionable-font-size;
+    }
+  }
+  p, ol li, ul li{
+    @include shared.font-montserrat(300);
+    margin-top: 1.6rem;
+    @include shared.mobile-only {
+      font-size: shared.$mobile-reading-font-size;
+    }
+  
+    @include shared.tablet-only {
+      font-size: shared.$tablet-reading-font-size;
+    }
+  
+    @include shared.desktop-only {
+      font-size: 0.85 * shared.$desktop-reading-font-size; 
+    }
+  }
+  h3{
+    @include shared.font-unbounded(400);
+    @include shared.mobile-only {
+      font-size: shared.$mobile-reading-font-size;
+    }
+  
+    @include shared.tablet-only {
+      font-size: shared.$tablet-reading-font-size;
+    }
+  
+    @include shared.desktop-only {
+      font-size: 0.85 * shared.$desktop-reading-font-size; 
+    }
+  }
+  ol{
+    list-style-type: upper-roman;
+  }
+  &_bold{
+    @include shared.font-montserrat(600);
+  }
+}
+
+.contact_information{
+  box-sizing: border-box;
+  border: 2px solid black;
+  border-radius: 9px;
+  margin-top: 3.2rem;
+  margin-bottom: 3.2rem;
+  @include shared.mobile-only {
+    padding: 32px 16px 32px 16px;
+  }
+  @include shared.not-mobile{
+    padding:  0 3.2rem 0 3.2rem;
+  }
+}
+.zone{
+    display: flex;
+    width: 100%;
+    margin-top: 3.2rem;
+    margin-bottom: 3.2rem;
+    @include shared.mobile-only{
+        flex-direction: column;
+        align-items: center;
+    }
+    h4{
+        @include shared.font-montserrat(600);
+        text-align: center;
+        @include shared.mobile-only{
+            font-size: shared.$mobile-reading-font-size;
+            margin-bottom: 1.6rem;
+        };
+        @include shared.not-mobile{
+            width: 70%;
+            font-size: shared.$desktop-reading-font-size
+        };
+    }
+    ul{
+        @include shared.mobile-only{
+        }
+        @include shared.not-mobile{
+            width: 30%;
+        }
+        list-style: none;
+        li{
+            @include shared.mobile-only{
+                margin-bottom: .8rem;
+            }
+        }
+    }
+}
+
+.border_box {
+    border: 2px solid black;
+    border-radius: 9px;
+    width: 80%;
+    &_container{
+      margin-top: 1.6rem;
+      margin-bottom: 1.6rem;
+      display: flex;
+      justify-content: center;
+    }
+    @include shared.mobile-only {
+      padding: 2rem 1rem;
+    }
+  
+    @include shared.not-mobile {
+      box-sizing: border-box;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 1.6rem;
+    }
+  
+    @include shared.tablet-only {
+      line-height: 1.3;
+    }
+    * {
+        margin: .5rem;
+    }
+}
+
+.bank_data{
+  li {
+    @include shared.font-montserrat(300);
+    margin-top: 1.6rem;
+    @include shared.mobile-only {
+      font-size: shared.$mobile-reading-font-size;
+    }
+  
+    @include shared.tablet-only {
+      font-size: shared.$tablet-reading-font-size;
+    }
+  
+    @include shared.desktop-only {
+      font-size: 0.85 * shared.$desktop-reading-font-size; 
+    }
+  }
+}
+
+.button_container{
+  @include shared.mobile-only {
+    width: 100%;
+    text-align: center;
+  }
+
+  @include shared.tablet-only {
+    width: 63.5%;
+    margin-top: 2 * shared.$tablet-spacing;
+  }
+
+  @include shared.desktop-only {
+    width: 47.5%;
+    margin-top: 4 * shared.$desktop-spacing;
+  }
+}
+
+.arrow{
+  @include shared.not-desktop{
+    display: none;
+  }
+  @include shared.desktop-only{
+    display: block;
+    transform: rotate(90deg);
+  }
+}
