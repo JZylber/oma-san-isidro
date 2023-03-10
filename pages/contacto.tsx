@@ -40,9 +40,13 @@ const Contact : NextPage = () => {
                     </ul>
                 </div>
             </div>
-            <div className={styles.math_clubs}>
+            <div className={styles.independent_category}>
                 <h3 className={styles.category_title}>Mateclubes</h3>
                 <p className={styles.mail_text}>Gloria Sampablo: gloriasampablo@gmail.com</p>
+            </div>
+            <div className={styles.independent_category}>
+                <h3 className={styles.category_title}>Desarrolladores</h3>
+                <p className={styles.mail_text}>Para consultas y feedback sobre la página: omasanisidro.devs@gmail.com</p>
             </div>
         </Layout>
         </>

@@ -79,7 +79,7 @@
     }
 }
 
-.math_clubs{
+.independent_category{
     grid-column: 1/-1;
     h3 {
         @include shared.mobile-only{
@@ -88,6 +88,9 @@
         @include shared.not-mobile{
             margin-bottom: 2rem;
         }
+    }
+    &:not(:first-child){
+        margin-top: 1.6rem;
     }
 }
 
