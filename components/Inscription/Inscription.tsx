@@ -14,7 +14,7 @@ export const Inscripcion = ( { type } : {type : string} ) => {
     return(
         <>
         <div className={styles.type}>{type == "OMA"?"Oma":"Ñandú"}</div>
-        <h1 className={styles.title}>Inscripción {type}</h1>
+        <h1 className={styles.title}>Inscripción</h1>
         <div className={styles.container}>
             <div className={styles.step_information}>
                 <h1>1. Pago</h1>
