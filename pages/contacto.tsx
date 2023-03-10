@@ -17,36 +17,36 @@ const Contact : NextPage = () => {
                 <div className={styles.zone}>
                     <h4>Vicente López</h4>
                     <ul>
-                        <li className={styles.mail_text}>Gloria Sampablo: gloriasampablo@gmail.com</li>
-                        <li className={styles.mail_text}>Alicia Lozano: alilo_ali@hotmail.com</li>
+                        <li className={styles.mail_text}>Gloria Sampablo: <a href="mailto:gloriasampablo@gmail.com">gloriasampablo@gmail.com</a></li>
+                        <li className={styles.mail_text}>Alicia Lozano: <a href="mailto:alilo_ali@hotmail.com">alilo_ali@hotmail.com</a></li>
                     </ul>
                 </div>
                 <div className={styles.zone}>
                     <h4>San Isidro</h4>
                     <ul>
-                        <li className={styles.mail_text}>Elena Guillé: elena@oma.org.ar</li>
+                        <li className={styles.mail_text}>Elena Guillé: <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a></li>
                     </ul>
                 </div>
                 <div className={styles.zone}>
                     <h4>San Fernando - Tigre - Don Torcuato</h4>
                     <ul>
-                        <li className={styles.mail_text}>Silvia Chillo: silviachillo@gmail.com</li>
+                        <li className={styles.mail_text}>Silvia Chillo: <a href="mailto:silviachillo@gmail.com">silviachillo@gmail.com</a></li>
                     </ul>
                 </div>
                 <div className={styles.zone}>
                     <h4>José C.Paz - San Miguel - Malvinas Argentinas</h4>
                     <ul>
-                        <li className={styles.mail_text}>Silvia Chillo: silviachillo@gmail.com</li>
+                        <li className={styles.mail_text}>Silvia Chillo: <a href="mailto:silviachillo@gmail.com">silviachillo@gmail.com</a></li>
                     </ul>
                 </div>
             </div>
             <div className={styles.independent_category}>
                 <h3 className={styles.category_title}>Mateclubes</h3>
-                <p className={styles.mail_text}>Gloria Sampablo: gloriasampablo@gmail.com</p>
+                <p className={styles.mail_text}>Gloria Sampablo: <a href="mailto:gloriasampablo@gmail.com">gloriasampablo@gmail.com</a></p>
             </div>
             <div className={styles.independent_category}>
                 <h3 className={styles.category_title}>Desarrolladores</h3>
-                <p className={styles.mail_text}>Para consultas y feedback sobre la página: omasanisidro.devs@gmail.com</p>
+                <p className={styles.mail_text}>Para consultas y feedback sobre la página: <a href="mailto:omasanisidro.devs@gmail.com">omasanisidro.devs@gmail.com</a></p>
             </div>
         </Layout>
         </>
