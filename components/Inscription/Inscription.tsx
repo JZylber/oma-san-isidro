@@ -4,20 +4,19 @@ import styles from "./Inscription.module.scss"
 export const Inscripcion = ( { type } : {type : string} ) => {
     return(
         <>
+        <div className={styles.type}>{type == "OMA"?"Oma":"Ñandú"}</div>
         <h1 className={styles.title}>Inscripción</h1>
         <div className={styles.container}>
            <div className={styles.first}>
             <h1>1. Abonar</h1>
-            <div className={styles.payment}>
                 <p>El pago por alumno este año es de: $3.000</p>
                 <p>Se debe realizar por medio de un depósito en la cuenta de la Olimpíada.</p>
                 <p>Se debe efectuar un solo depósito por la totalidad de alumnos inscriptos.</p>
                 <p>*Los alumnos que abonen la inscripción presencialmente, en primera ronda, no deberán volver a abonar la inscripción a OMA.</p>
                 <p>*La inscripción a la competencia de Mateclubes se hará en tercera ronda y el costo de la competencia es de $6.000 por club.</p>
-            </div>
            </div>
            <div>
-            <h1>2. Inscripción - Abierta hasta el 30/02</h1>
+            <h1>2. Inscripción - Abierta hasta el {type == "OMA"?"5 de mayo":"21 de abril"}</h1>
             <p>Los profesores a encargados de OMA deberán realizar la inscripción para el torneo intercolegial en el siguiente enlace.</p>
             <Button content="Descargar Planilla" />
            </div>

@@ -1,5 +1,16 @@
 @use "../../styles/shared.scss" as shared;
 
+.type {
+  @include shared.mobile-only{
+    display: block;
+    @include shared.font-unbounded(400);
+    font-size: 1.5 * shared.$mobile-reading-font-size;
+  }
+  @include shared.not-mobile{
+    display: none;
+  }
+}
+
 
 .title {
     @include shared.font-unbounded(800);
