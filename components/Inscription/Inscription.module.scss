@@ -198,5 +198,11 @@
 }
 
 .arrow{
-  transform: rotate(90deg);
+  @include shared.not-desktop{
+    display: none;
+  }
+  @include shared.desktop-only{
+    display: block;
+    transform: rotate(90deg);
+  }
 }
