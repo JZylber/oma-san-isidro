@@ -126,6 +126,7 @@
         }
         list-style: none;
         li{
+            margin-top: 0;
             @include shared.mobile-only{
                 margin-bottom: .8rem;
             }
