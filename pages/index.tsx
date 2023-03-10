@@ -10,6 +10,8 @@ import {NewsItemData} from "../components/News/NewsTypes";
 import { getCalendarEvents, getNews } from "../lib/aux_db_calls";
 import DateBanner from "../components/CalendarComponents/DateBanner/DateBanner";
 import { getDatesFromJson, JSONCalendarEvent } from "../components/CalendarComponents/CalendarTypes";
+import HomeModal from "../components/Popups/HomeModal";
+import { useEffect, useState } from "react";
 
 export async function getStaticProps() {
   const news = await getNews()
@@ -22,12 +24,23 @@ export async function getStaticProps() {
 
 const Home: NextPage<{news: NewsItemData[], events: JSONCalendarEvent[]}> = ({news,events}) => {
   const dates = getDatesFromJson(events)
+  const [openModal,setOpenModal] = useState(false)
+
+  useEffect(() => {
+    let pop_status = sessionStorage.getItem('pop_status');
+    if(!pop_status){
+      setOpenModal(true);
+      sessionStorage.setItem('pop_status','true');
+    }
+  }, []);
+
   return (
     <>
       <Head>
         <title>OMA San Isidro</title>
       </Head>
       <Layout>
+        <HomeModal open={openModal} setOpen={setOpenModal}/>
         <Title />
 
         {/* NEWS */}
