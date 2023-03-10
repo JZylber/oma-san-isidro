@@ -91,7 +91,7 @@
   margin-top: 3.2rem;
   margin-bottom: 3.2rem;
   @include shared.mobile-only {
-    padding: 32px 16px 32px 16px;
+    padding: 0 16px 0 16px;
   }
   @include shared.not-mobile{
     padding:  0 3.2rem 0 3.2rem;
