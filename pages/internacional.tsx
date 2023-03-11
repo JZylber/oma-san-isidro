@@ -5,18 +5,17 @@ import styles from "./styles/International.module.scss";
 import dataOMA from "../data/internacionalOMA.json"
 import dataNandu from "../data/internacionalNandu.json"
 
+const orderBySurname = (a: Array<string | boolean>, b: Array<string | boolean>) => {
+    let a1 = a[1] as string;
+    let b1 = b[1] as string;
+    return a1.localeCompare(b1);
+};
+
 const Internacional : NextPage = () => {
-    let sortedDataOma = dataOMA
-    sortedDataOma.sort(function(a, b) {
-        if (a[1] > b[1]) {
-            return 1;
-          }
-          if (a[1] < b[1]) {
-            return -1;
-          }
-          // a must be equal to b
-          return 0;
-        });
+    let sortedDataOma = dataOMA;
+    sortedDataOma.sort(orderBySurname);
+    let sortedDataNandu = dataNandu;
+    sortedDataNandu.sort(orderBySurname);
     const renderOMAparticipant = (omaParticipant : Array<string | boolean>,idx:number) => {
         const [level,surname,name,t1,t2,t3,t4] = omaParticipant;
         return(
@@ -35,8 +34,8 @@ const Internacional : NextPage = () => {
         return(
             <tr key={idx}>
                 <td>{level}</td>
-                <td>{surname}</td>
-                <td>{name}</td>
+                <td className={styles.left_align}>{surname}</td>
+                <td className={styles.left_align}>{name}</td>
             </tr>)
     }
 
@@ -120,7 +119,7 @@ const Internacional : NextPage = () => {
                         </tr>
                     </thead>
                     <tbody className={styles.table_body}>
-                        {dataNandu.map(renderNanduparticipant)}
+                        {sortedDataNandu.map(renderNanduparticipant)}
                     </tbody>
                 </table>
         </Layout>
