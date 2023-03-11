@@ -31,7 +31,7 @@ export const Inscripcion = ( { type } : {type : string} ) => {
                         </ul>
                     </div>
                 </div>
-                <p>La inscripción a la competencia de Mateclubes se hará en tercera ronda y el costo de la competencia es de $6.000 por club. No se exime de pago por haber participado en otro torneo.</p>
+                <p>La inscripción a la competencia de Mateclubes es gratuita y se hace desde la página de OMA. Recién se paga en la tercera ronda (que es presencial) y el costo de la competencia es de $6.000 por club. No se exime de pago por haber participado en otro torneo.</p>
            </div>
            <div className={styles.step_information}>
             <h1>2. Inscripción</h1>
