@@ -63,7 +63,7 @@ export const Inscripcion = ( { type } : {type : string} ) => {
            </div>
            <div className={styles.step_information}>
             <h1>3. Documentos a presentar en el certamen Intercolegial</h1>
-            <p>Además de las autorizaciones, el día del certamen se deberá presentar el comprobante <span className={styles.step_information_bold}>original</span> del depósito bancario para poder entregar el recibo correspndiente.</p>
+            <p>Además de las autorizaciones, el día del certamen se deberá presentar el comprobante <span className={styles.step_information_bold}>original</span> del depósito bancario para poder entregar el recibo correspondiente.</p>
             <p>Aquellos que precisen factura C deberán presentar los siguiente datos:</p>
             <div>
                 <ul>
