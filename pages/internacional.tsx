@@ -11,8 +11,8 @@ const Internacional : NextPage = () => {
         return(
             <tr key={idx}>
                 <td>{level}</td>
-                <td>{surname}</td>
-                <td>{name}</td>
+                <td className={styles.left_align}>{surname}</td>
+                <td className={styles.left_align}>{name}</td>
                 <td>{t1?"Si":""}</td>
                 <td>{t2?"Si":""}</td>
                 <td>{t3?"Si":""}</td>

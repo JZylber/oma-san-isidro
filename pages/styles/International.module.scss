@@ -169,6 +169,10 @@
             width: 7%;
         }
     }
+    .left_align{
+        text-align: left;
+        padding-left: .8rem
+    }
     &_body{
         @include shared.font-montserrat(400);
         @include shared.not-mobile{
