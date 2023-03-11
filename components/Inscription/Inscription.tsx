@@ -5,7 +5,7 @@ import styles from "./Inscription.module.scss"
 export const Inscripcion = ( { type } : {type : string} ) => {
     const downloadForm = () => {
         const link = document.createElement("a");
-        link.href = `/files/planilla_inscripción_${type.toLowerCase()}.xls`;
+        link.href = `/files/planilla_datos_${type.toLowerCase()}.xls`;
         link.target = `_blank`;
         document.body.appendChild(link);
         link.click();
@@ -34,17 +34,17 @@ export const Inscripcion = ( { type } : {type : string} ) => {
                 <p>La inscripción a la competencia de Mateclubes se hará en tercera ronda y el costo de la competencia es de $6.000 por club. No se exime de pago por haber participado en otro torneo.</p>
            </div>
            <div className={styles.step_information}>
-            <h1>2. Inscripción - Abierta hasta el {type == "OMA"?"5 de mayo":"21 de abril"}</h1>
+            <h1>2. Inscripción</h1>
             <ol className={styles.step_information_substeps}>
                 <li>Los profesores encargados de OMA deberán realizar la inscripción para la instancia intercolegial en el siguiente enlace:</li>
                 <div className={styles.button_container}>
                     <Button content="(Todavía no disponible)" />
                 </div>
-                <li>Luego, deben completar la planilla de inscripción con los datos pedidos</li>
+                <li>Luego, deben completar la planilla de datos con los datos pedidos</li>
                 <div className={styles.button_container}>
-                    <Button content="Planilla de Inscripción" onClick={downloadForm}><Arrow className={styles.arrow}/></Button>
+                    <Button content="Planilla de Datos" onClick={downloadForm}><Arrow className={styles.arrow}/></Button>
                 </div>
-                <li>Enviar la planilla de inscripción y el comprobante de pago escaneado a la responsable de su zona.</li>
+                <li>Enviar la planilla de datos y el comprobante de pago escaneado a la responsable de su zona<span className={styles.step_information_bold}> hasta el {type == "OMA"?"5 de mayo":"21 de abril"}</span>.</li>
                 <div className={styles.contact_information}>
                     <div className={styles.zone}>
                         <h4>San Fernando, San Isidro y Vicente López</h4>
@@ -63,7 +63,7 @@ export const Inscripcion = ( { type } : {type : string} ) => {
            </div>
            <div className={styles.step_information}>
             <h1>3. Documentos a presentar en el certamen Intercolegial</h1>
-            <p>Además de las autorizaciones, el día del certamen se deberá presentar el comprobante <span className={styles.step_information_bold}>original</span> del depósito bancario para poder entregar el recibo correspondiente.</p>
+            <p>El día del certamen se deberá presentar el comprobante <span className={styles.step_information_bold}>original</span> del depósito bancario para poder entregar el recibo correspondiente.</p>
             <p>Aquellos que precisen factura C deberán presentar los siguiente datos:</p>
             <div>
                 <ul>
