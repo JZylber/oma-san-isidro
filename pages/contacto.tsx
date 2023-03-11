@@ -43,6 +43,7 @@ const Contact : NextPage = () => {
             <div className={styles.independent_category}>
                 <h3 className={styles.category_title}>Mateclubes</h3>
                 <p className={styles.mail_text}>Gloria Sampablo: <a href="mailto:gloriasampablo@gmail.com">gloriasampablo@gmail.com</a></p>
+                <p className={styles.mail_text}>Silvia Chillo: <a href="mailto:silviachillo@gmail.com">silviachillo@gmail.com</a></p>
             </div>
             <div className={styles.independent_category}>
                 <h3 className={styles.category_title}>Desarrolladores</h3>
