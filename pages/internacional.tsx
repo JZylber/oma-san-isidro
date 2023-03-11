@@ -6,6 +6,17 @@ import dataOMA from "../data/internacionalOMA.json"
 import dataNandu from "../data/internacionalNandu.json"
 
 const Internacional : NextPage = () => {
+    let sortedDataOma = dataOMA
+    sortedDataOma.sort(function(a, b) {
+        if (a[1] > b[1]) {
+            return 1;
+          }
+          if (a[1] < b[1]) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+        });
     const renderOMAparticipant = (omaParticipant : Array<string | boolean>,idx:number) => {
         const [level,surname,name,t1,t2,t3,t4] = omaParticipant;
         return(
@@ -91,7 +102,7 @@ const Internacional : NextPage = () => {
                         </tr>
                     </thead>
                     <tbody className={styles.table_body}>
-                        {dataOMA.map(renderOMAparticipant)}
+                        {sortedDataOma.map(renderOMAparticipant)}
                     </tbody>
                 </table>
 
