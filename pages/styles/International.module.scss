@@ -16,24 +16,8 @@
   }
 
 .description{
-    @include shared.font-montserrat(400);
-    @include shared.mobile-only{
-        font-size: shared.$mobileXspacing * 1.78;
-        line-height: shared.$mobileXspacing * 2;
-    }
-    @include shared.tablet-only{
+    @include shared.not-mobile{
         grid-column: 1/-1;
-        font-size: shared.$tabletXspacing * 1.96 ;
-        line-height:  2*shared.$tabletXspacing;
-    }
-    @include shared.desktop-only {
-        grid-column: 1/-1;
-        font-size: shared.$desktopXspacing * 3.225;
-        line-height: shared.$desktopXspacing * 4;
-    }
-    @include shared.largest {
-        font-size: (shared.$desktopXlargest/180)  * 3.125;
-        line-height: (shared.$desktopXlargest/180)  * 4;
     }
 }
 
@@ -145,6 +129,7 @@
         overflow-x: auto;
         white-space: nowrap;
         width: 100%;
+        margin-top: 1.6rem;
     }
     border-spacing: 0;
     width:100%;
@@ -207,7 +192,7 @@
     }
 }
 
-.nandu_text {
+.description_text {
     margin-top: 2rem;
     @include shared.font-montserrat(300);
     @include shared.mobile-only {
