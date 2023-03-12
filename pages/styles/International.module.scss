@@ -138,17 +138,23 @@
 
 
 .table{
-    border: 2px solid shared.$black;
-    border-radius: 9px;
+    &_container{
+        border: 2px solid shared.$black;
+        border-radius: 9px;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        width: 100%;
+    }
     border-spacing: 0;
-    width: 100%;
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
+    width:100%;
     th:not(:last-child), td:not(:last-child) {
         border-right: 1px solid #D3D3D3;
     }
     &_header{
+        tr{
+            width: 100%;
+        }
         tr th{
             padding: .4rem .8rem .4rem .8rem;
             background-color: shared.$light-blue;
@@ -166,13 +172,13 @@
     }
     &_column{
         &_tournament{
-            width: 13%;
+            min-width: 13.25%;
         }
         &_name{
-            width: 19%;
+            min-width: 20%;
         }
         &_level{
-            width: 7%;
+            min-width: 7%;
         }
     }
     .right_align{

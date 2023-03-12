@@ -88,23 +88,24 @@ const Internacional : NextPage = () => {
                          <p className={styles.tournament_requirements}>Campeones y subcampeones de 1° y 2° Nivel de Ñandú 2022.</p>
                     </li>
                 </ul>
-                <table className={styles.table}>
-                    <thead className={styles.table_header}>
-                        <tr>
-                            <th className={styles.table_column_level}>Nivel</th>
-                            <th className={[styles.table_column_name,styles.sticky_column].join(" ")}>Apellido</th>
-                            <th className={styles.table_column_name}>Nombre</th>
-                            <th className={styles.table_column_tournament}>Mayo</th>
-                            <th className={styles.table_column_tournament}>Cono Sur</th>
-                            <th className={styles.table_column_tournament}>IMO</th>
-                            <th className={styles.table_column_tournament}>Ibero</th>
-                        </tr>
-                    </thead>
-                    <tbody className={styles.table_body}>
-                        {sortedDataOma.map(renderOMAparticipant)}
-                    </tbody>
-                </table>
-
+                <div className={styles.table_container}>
+                    <table className={styles.table}>
+                        <thead className={styles.table_header}>
+                            <tr>
+                                <th className={styles.table_column_level}>Nivel</th>
+                                <th className={[styles.table_column_name,styles.sticky_column].join(" ")}>Apellido</th>
+                                <th className={styles.table_column_name}>Nombre</th>
+                                <th className={styles.table_column_tournament}>Mayo</th>
+                                <th className={styles.table_column_tournament}>Cono Sur</th>
+                                <th className={styles.table_column_tournament}>IMO</th>
+                                <th className={styles.table_column_tournament}>Ibero</th>
+                            </tr>
+                        </thead>
+                        <tbody className={styles.table_body}>
+                            {sortedDataOma.map(renderOMAparticipant)}
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div className={styles.category}>
                 <h2 className={styles.category_title}>Alumnos que participaron en Ñandú en 2022</h2>
