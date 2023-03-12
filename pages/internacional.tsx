@@ -21,7 +21,7 @@ const Internacional : NextPage = () => {
         return(
             <tr key={idx}>
                 <td className={styles.right_align}>{level}</td>
-                <td>{surname}</td>
+                <td className={styles.sticky_column}>{surname}</td>
                 <td>{name}</td>
                 <td>{t1?"Si":""}</td>
                 <td>{t2?"Si":""}</td>
@@ -92,7 +92,7 @@ const Internacional : NextPage = () => {
                     <thead className={styles.table_header}>
                         <tr>
                             <th className={styles.table_column_level}>Nivel</th>
-                            <th className={styles.table_column_name}>Apellido</th>
+                            <th className={[styles.table_column_name,styles.sticky_column].join(" ")}>Apellido</th>
                             <th className={styles.table_column_name}>Nombre</th>
                             <th className={styles.table_column_tournament}>Mayo</th>
                             <th className={styles.table_column_tournament}>Cono Sur</th>

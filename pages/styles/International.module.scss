@@ -142,13 +142,16 @@
     border-radius: 9px;
     border-spacing: 0;
     width: 100%;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
     th:not(:last-child), td:not(:last-child) {
         border-right: 1px solid #D3D3D3;
     }
     &_header{
-        background-color: shared.$light-blue;
         tr th{
             padding: .4rem .8rem .4rem .8rem;
+            background-color: shared.$light-blue;
         }
         tr, th {
             border-bottom: 1px solid #D3D3D3;
@@ -175,6 +178,11 @@
     .right_align{
         text-align: right;
     }
+    .sticky_column{
+        position: sticky;
+        left: 0;
+        z-index: 1;
+    }
     &_body{
         @include shared.font-montserrat(400);
         @include shared.not-mobile{
@@ -185,6 +193,7 @@
         }
         tr td{
             padding: .2rem .8rem .2rem .8rem;
+            background-color: shared.$white;
         }
         tr:not(:last-child) td{
             border-bottom: 1px solid #D3D3D3;
