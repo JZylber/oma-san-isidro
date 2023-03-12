@@ -20,9 +20,9 @@ const Internacional : NextPage = () => {
         const [level,surname,name,t1,t2,t3,t4] = omaParticipant;
         return(
             <tr key={idx}>
-                <td>{level}</td>
-                <td className={styles.left_align}>{surname}</td>
-                <td className={styles.left_align}>{name}</td>
+                <td className={styles.right_align}>{level}</td>
+                <td>{surname}</td>
+                <td>{name}</td>
                 <td>{t1?"Si":""}</td>
                 <td>{t2?"Si":""}</td>
                 <td>{t3?"Si":""}</td>
@@ -33,9 +33,9 @@ const Internacional : NextPage = () => {
         const [level,surname,name] = omaParticipant;
         return(
             <tr key={idx}>
-                <td>{level}</td>
-                <td className={styles.left_align}>{surname}</td>
-                <td className={styles.left_align}>{name}</td>
+                <td className={styles.right_align}>{level}</td>
+                <td>{surname}</td>
+                <td>{name}</td>
             </tr>)
     }
 
