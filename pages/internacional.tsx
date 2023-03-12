@@ -111,7 +111,8 @@ const Internacional : NextPage = () => {
                 <h2 className={styles.category_title}>Alumnos que participaron en Ñandú en 2022</h2>
                 <p className={styles.nandu_text}>Pueden Participar en la Olimpíada de Mayo aquellos alumnos que aprobaron el Regional y nacieron después del 01/01/2008</p>
             </div>
-            <table className={[styles.table,styles.middle_columns].join(" ")}>
+            <div className={styles.table_container}>
+                <table className={[styles.table,styles.middle_columns].join(" ")}>
                     <thead className={styles.table_header}>
                         <tr>
                             <th>Nivel</th>
@@ -123,6 +124,7 @@ const Internacional : NextPage = () => {
                         {sortedDataNandu.map(renderNanduparticipant)}
                     </tbody>
                 </table>
+            </div>
         </Layout>
         </>
         )
