@@ -3,26 +3,44 @@
 .container {
     margin-top: 3.2rem;
     margin-bottom: 3.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+    @include shared.mobile-only{
+        display: flex;
+        align-items: center;
+    }
     @include shared.not-mobile{
         display: none;
     }
+}
+
+.swiper{
+    width: 100%;
+    height: 100%;
+}
+
+.swiper_slide {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: auto;
+  }
+
+.swiper_text_transition{
+    -webkit-transition: font-size .3s linear, color .3s linear;
+    -moz-transition: font-size .3s linear, color .3s linear;
+    -o-transition: font-size .3s linear, color .3s linear;
+    transition: font-size .3s linear, color .3s linear;
 }
 
 .sideMonth {
     @include shared.font-unbounded(400);
     font-size: shared.$desktop-actionable-font-size;
     color: rgba(0, 0, 0, 0.5);
-}
-
-.rotated {
-    transform: rotate(180deg)
+    line-height: 3.6rem;
 }
 
 .selectedMonth {
     @include shared.font-unbounded(400);
     font-size: 2.9rem;
     color: shared.$black;
+    line-height: 3.6rem;
 }

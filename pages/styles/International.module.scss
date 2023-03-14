@@ -16,24 +16,8 @@
   }
 
 .description{
-    @include shared.font-montserrat(400);
-    @include shared.mobile-only{
-        font-size: shared.$mobileXspacing * 1.78;
-        line-height: shared.$mobileXspacing * 2;
-    }
-    @include shared.tablet-only{
+    @include shared.not-mobile{
         grid-column: 1/-1;
-        font-size: shared.$tabletXspacing * 1.96 ;
-        line-height:  2*shared.$tabletXspacing;
-    }
-    @include shared.desktop-only {
-        grid-column: 1/-1;
-        font-size: shared.$desktopXspacing * 3.225;
-        line-height: shared.$desktopXspacing * 4;
-    }
-    @include shared.largest {
-        font-size: (shared.$desktopXlargest/180)  * 3.125;
-        line-height: (shared.$desktopXlargest/180)  * 4;
     }
 }
 
@@ -138,17 +122,30 @@
 
 
 .table{
-    border: 2px solid shared.$black;
-    border-radius: 9px;
+    &_container{
+        border: 2px solid shared.$black;
+        border-radius: 9px;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        width: 100%;
+        margin-top: 1.6rem;
+    }
     border-spacing: 0;
-    width: 100%;
+    width:100%;
     th:not(:last-child), td:not(:last-child) {
-        border-right: 2px solid shared.$black;
+        border-right: 1px solid #D3D3D3;
     }
     &_header{
-        background-color: shared.$light-blue;
+        tr{
+            width: 100%;
+        }
+        tr th{
+            padding: .4rem .8rem .4rem .8rem;
+            background-color: shared.$light-blue;
+        }
         tr, th {
-            border-bottom: 2px solid shared.$black;
+            border-bottom: 1px solid #D3D3D3;
         }
         @include shared.font-unbounded(500);
         @include shared.not-mobile{
@@ -160,14 +157,22 @@
     }
     &_column{
         &_tournament{
-            width: 13%;
+            min-width: 13.25%;
         }
         &_name{
-            width: 19%;
+            min-width: 20%;
         }
         &_level{
-            width: 7%;
+            min-width: 7%;
         }
+    }
+    .right_align{
+        text-align: right;
+    }
+    .sticky_column{
+        position: sticky;
+        left: 0;
+        z-index: 1;
     }
     &_body{
         @include shared.font-montserrat(400);
@@ -177,16 +182,17 @@
         @include shared.mobile-only{
             font-size: 1.1rem;
         }
-        tr,td{
-            text-align: center;
+        tr td{
+            padding: .2rem .8rem .2rem .8rem;
+            background-color: shared.$white;
         }
         tr:not(:last-child) td{
-            border-bottom: 2px solid shared.$black;
+            border-bottom: 1px solid #D3D3D3;
         }
     }
 }
 
-.nandu_text {
+.description_text {
     margin-top: 2rem;
     @include shared.font-montserrat(300);
     @include shared.mobile-only {
