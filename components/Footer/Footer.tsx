@@ -24,7 +24,9 @@ const Footer = () => {
             <a>Mapa del sitio</a>
           </li>
         </ul>
-        <OMALogo className={styles.footer_links_logo} />
+        <div className={styles.footer_logo}>
+          <OMALogo/>
+        </div>
       </div>
       <div className={styles.footer_credits}>
         <p>© 2022 Joaquín Aldrey y Julián Zylber.</p>

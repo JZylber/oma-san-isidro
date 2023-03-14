@@ -187,10 +187,6 @@
     }
     &_logo {
         @include shared.not-mobile {
-            position: relative;
-            bottom: 10rem;
-            height: 2rem;
-            width: 2rem;
             grid-column: 1/2;
             grid-row: 1/2;
         }
