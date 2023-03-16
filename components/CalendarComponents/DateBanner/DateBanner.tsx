@@ -4,7 +4,13 @@ import { CalendarEvent } from "../CalendarTypes";
 import styles from "./DateBanner.module.scss";
 import NewsArrow from "../../../img/newsArrow.svg"
 
-const DateBanner = ({dates}:{dates: CalendarEvent []}) => {
+interface DateBannerProps {
+    dates: CalendarEvent [],
+    displayAmount?: number,
+    displayCategory?: string
+} 
+
+const DateBanner = ({dates,displayAmount = 3,displayCategory}:DateBannerProps) => {
     const currentDate = new Date()
     const upcomingDates = dates.filter((date) => date.fecha_inicio > currentDate)
     upcomingDates.sort(function(a, b) {
@@ -25,14 +31,14 @@ const DateBanner = ({dates}:{dates: CalendarEvent []}) => {
         <div className={styles.container_entry} key={idx}>
             <div className={styles.date}><span>{`${date.fecha_inicio.getDate()} ${months[date.fecha_inicio.getMonth()]}${getEndDate(date)}`}</span></div>
             <div className={styles.event}>{date.texto}</div>
-            <div className={styles.type}>{date.tipo}</div>
+            {displayCategory === undefined && <div className={styles.type}>{date.tipo}</div>}
         </div>
         )
     }
     return(
         <>
         <div className={styles.container}>
-        {upcomingDates.slice(0,3).map(renderUpcomingDate)}
+        {upcomingDates.slice(0,displayAmount).filter((date) => (displayCategory === undefined) || (displayCategory === date.tipo)).map(renderUpcomingDate)}
         </div>
         <Link href="./calendario" style={{textDecoration: 'none'}}>
             <div className={styles.link}>

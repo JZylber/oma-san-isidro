@@ -12,6 +12,10 @@ const Geometry : NextPage = () => {
         <Layout>
             <div className={styles.container}>
                 <h1 className={styles.title}>Torneo de Geometría e Imaginación</h1>
+                <section>
+                    <h3 className={styles.section_title}>Próximas Fechas</h3>
+                    
+                </section>
             </div>
         </Layout>        
         </>)

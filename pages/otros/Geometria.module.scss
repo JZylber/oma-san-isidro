@@ -19,3 +19,16 @@
       line-height: 2.5;
     }
   }
+.section_title {
+    font-size: shared.$section-title-font-size;
+    @include shared.font-montserrat(400);
+    @include shared.mobile-only {
+      text-align: center;
+    }
+    @include shared.tablet-only {
+      text-align: left;
+    }
+    @include shared.desktop-only {
+      text-align: left;
+    }
+  }
