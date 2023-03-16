@@ -12,6 +12,7 @@ interface DateBannerProps {
 
 const DateBanner = ({dates,displayAmount = 3,displayCategory}:DateBannerProps) => {
     const showCategory = !displayCategory;
+    const category_filter = showCategory ? "" : `?categoria=${displayCategory}`
     const currentDate = new Date()
     const upcomingDates = dates.filter((date) => date.fecha_inicio > currentDate)
     upcomingDates.sort(function(a, b) {
@@ -41,7 +42,7 @@ const DateBanner = ({dates,displayAmount = 3,displayCategory}:DateBannerProps) =
         <div className={styles.container}>
         {upcomingDates.filter((date) => (displayCategory === undefined) || (displayCategory === date.tipo)).slice(0,displayAmount).map(renderUpcomingDate)}
         </div>
-        <Link href="./calendario" style={{textDecoration: 'none'}}>
+        <Link href={`/calendario${category_filter}`} style={{textDecoration: 'none'}}>
             <div className={styles.link}>
                 <Button content="Ver Calendario Completo">
                     <NewsArrow className={styles.arrow}/>
