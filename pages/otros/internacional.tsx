@@ -1,9 +1,9 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import Layout from "../components/Layout/Layout";
-import styles from "./styles/International.module.scss";
-import dataOMA from "../data/internacionalOMA.json"
-import dataNandu from "../data/internacionalNandu.json"
+import Layout from "../../components/Layout/Layout";
+import styles from "./International.module.scss";
+import dataOMA from "../../data/internacionalOMA.json"
+import dataNandu from "../../data/internacionalNandu.json"
 
 const orderBySurname = (a: Array<string | boolean>, b: Array<string | boolean>) => {
     let a1 = a[1] as string;

@@ -37,7 +37,13 @@ export default function NavBar({togglePageContent,onRouteChange}:NavProps){
             {text: "Resultados",link:'/nandu/resultados',selected : false,subItems:[]},
             {text: "Problemas",link:'/nandu/problemas',selected : false,subItems:[]}
         ]},
-        {text: "Internacional",link:"/internacional",selected : false,subItems:[]},
+        {text: "Otros",link: undefined,selected:false,subItems:[
+          {text: "Internacional",link:"/otros/internacional",selected : false,subItems:[]},
+          {text: "Mateclubes",link:"/otros/mateclubes",selected : false,subItems:[]},
+          {text: "Geometría",link:"/otros/geometria",selected : false,subItems:[]},
+          {text: "Libros",link:"/otros/libros",selected : false,subItems:[]},
+        ]},
+        
     ];
     const router = useRouter()
     const [menuHierarchy,setMenuHierarchy] = useState(showCurrentPageSelected(defaultMenuHierarchy,router.pathname));
