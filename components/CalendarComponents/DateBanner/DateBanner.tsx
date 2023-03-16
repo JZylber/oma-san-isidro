@@ -11,6 +11,7 @@ interface DateBannerProps {
 } 
 
 const DateBanner = ({dates,displayAmount = 3,displayCategory}:DateBannerProps) => {
+    const showCategory = !displayCategory;
     const currentDate = new Date()
     const upcomingDates = dates.filter((date) => date.fecha_inicio > currentDate)
     upcomingDates.sort(function(a, b) {
@@ -28,10 +29,10 @@ const DateBanner = ({dates,displayAmount = 3,displayCategory}:DateBannerProps) =
     }
     const renderUpcomingDate = (date:CalendarEvent,idx : number) => {
         return(
-        <div className={styles.container_entry} key={idx}>
+        <div className={[styles.container_entry,showCategory?styles.container_entry_categorized:styles.container_entry_uncategorized].join(" ")} key={idx}>
             <div className={styles.date}><span>{`${date.fecha_inicio.getDate()} ${months[date.fecha_inicio.getMonth()]}${getEndDate(date)}`}</span></div>
             <div className={styles.event}>{date.texto}</div>
-            {displayCategory === undefined && <div className={styles.type}>{date.tipo}</div>}
+            {showCategory && <div className={styles.type}>{date.tipo}</div>}
         </div>
         )
     }
