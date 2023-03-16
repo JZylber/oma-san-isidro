@@ -56,12 +56,18 @@ const Geometry : NextPage<{results : Array<JSONCalendarEvent>,year:number}> = ({
                 <div className={styles.warning_box}>
                     <div className={styles.warning_box_title}>
                         <h3>Importante</h3>
-                        <Warning className={styles.warning} />
+                        <Warning className={styles.warning_box_title_icon} />
                     </div>
                     <div className={styles.warning_box_content}>
                         <p>Como la Primera Ronda del Torneo Geometría e Imaginación es la primera actividad/certamen que participan los alumnos en 2023, se deberán abonar los 3000 pesos por alumno de inscripción anual en el momento de inscribirse a esta. Si esto ocurre, NO se deben abonar luego las inscripciones para OMA o Ñandú.</p>
                     </div>
                 </div>
+                <section className={styles.section}>
+                    <h3 className={styles.section_title}>Consultas</h3>
+                    <div className={styles.section_content}>
+                        <p>Para cualquier consulta del torneo escribir a <a href="mailto:roxana.magistrali@gmail.com">roxana.magistrali@gmail.com</a></p>
+                    </div>
+                </section>
             </div>
         </Layout>        
         </>)

@@ -105,6 +105,11 @@
     }
     &_title {
         display: flex;
+        &_icon {
+            @include shared.mobile-only {
+              display: none;
+            }
+          }
       }
     &_content {
         @include shared.font-montserrat(400);
