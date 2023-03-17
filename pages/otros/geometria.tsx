@@ -25,7 +25,6 @@ const Geometry : NextPage<{results : Array<JSONCalendarEvent>,year:number}> = ({
             <title>Geometría e Imaginación</title>
         </Head>
         <Layout>
-            <div className={styles.container}>
                 <h1 className={styles.title}>Torneo de Geometría e Imaginación</h1>
                 <section className={styles.section}>
                     <h3 className={styles.section_title}>Próximas Fechas</h3>
@@ -68,7 +67,6 @@ const Geometry : NextPage<{results : Array<JSONCalendarEvent>,year:number}> = ({
                         <p>Para cualquier consulta del torneo escribir a <a href="mailto:roxana.magistrali@gmail.com">roxana.magistrali@gmail.com</a></p>
                     </div>
                 </section>
-            </div>
         </Layout>        
         </>)
 }

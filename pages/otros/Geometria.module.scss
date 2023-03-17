@@ -1,11 +1,5 @@
 @use "../../styles/shared.scss" as shared;
 
-.container{
-    @include shared.not-mobile{
-        grid-column: 1/-1;
-    }
-}
-
 .title {
     @include shared.font-unbounded(600);
     @include shared.mobile-only {
