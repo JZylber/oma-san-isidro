@@ -41,8 +41,8 @@ export default function NavBar({togglePageContent,onRouteChange}:NavProps){
           {text: "Internacional",link:"/otros/internacional",selected : false,subItems:[]},
           {text: "Mateclubes",link:"/otros/mateclubes",selected : false,subItems:[]},
           {text: "Geometría",link:"/otros/geometria",selected : false,subItems:[]},
-          {text: "Libros",link:"/otros/libros",selected : false,subItems:[]},
           {text: "Calendario",link:"/otros/calendario",selected : false,subItems:[]},
+          {text: "Libros",link:"/otros/libros",selected : false,subItems:[]},
         ]},
         
     ];
