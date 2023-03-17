@@ -27,7 +27,7 @@ const MathClubs : NextPage<{results : Array<JSONCalendarEvent>,year:number}> = (
             <h1 className={styles.title}>Mateclubes</h1>
             <section className={styles.section}>
                 <h3 className={styles.section_title}>Próximas Fechas</h3>
-                <DateBanner dates={events} displayAmount={3} displayCategory="Mateclubes"/>
+                <DateBanner dates={events} displayAmount={4} displayCategory="Mateclubes"/>
             </section>
         </Layout>        
         </>)

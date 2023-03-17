@@ -7,6 +7,14 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    &_medium{
+        @include shared.tablet-only{
+            max-width: 60rem;
+        }
+        @include shared.desktop-only{
+            max-width: 90rem;
+        }
+    }
     &_entry{
         width: 100%;
         display: flex;

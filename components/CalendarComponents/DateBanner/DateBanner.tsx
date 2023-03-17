@@ -39,7 +39,7 @@ const DateBanner = ({dates,displayAmount = 3,displayCategory}:DateBannerProps) =
     }
     return(
         <>
-        <div className={styles.container}>
+        <div className={[styles.container,!showCategory && styles.container_medium].join(" ")}>
         {upcomingDates.filter((date) => (displayCategory === undefined) || (displayCategory === date.tipo)).slice(0,displayAmount).map(renderUpcomingDate)}
         </div>
         <Link href={`/calendario${category_filter}`} style={{textDecoration: 'none'}}>
