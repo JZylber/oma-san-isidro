@@ -9,20 +9,19 @@
       margin-bottom: 2.5 * shared.$mobile-spacing;
     }
     @include shared.not-mobile {
-      grid-column: 1/-1;
       font-size: 2 * shared.$desktop-actionable-font-size;
       line-height: 2.5;
     }
   }
 
-.description{
-    @include shared.not-mobile{
-        grid-column: 1/-1;
-    }
-}
 
 .middle_columns{
-    grid-column: 2/-2;
+    @include shared.tablet-only{
+        margin: 0 10% 0 10%;
+    }
+    @include shared.desktop-only{
+        margin: 0 12.5% 0 12.5%;
+    }
 }
 
 .rounded_box {
@@ -59,7 +58,6 @@
     }
 }
 .category {
-    grid-column: 1/-1;
     margin-bottom: 2.4rem;
     &_title{
         @include shared.font-unbounded(500);
@@ -128,7 +126,6 @@
         display: block;
         overflow-x: auto;
         white-space: nowrap;
-        width: 100%;
         margin-top: 1.6rem;
     }
     border-spacing: 0;

@@ -8,9 +8,6 @@
       margin-top: 4 * shared.$mobile-spacing;
       margin-bottom: 2.5 * shared.$mobile-spacing;  
     }
-    @include shared.not-mobile{
-        grid-column: 1/-1;
-    }
     @include shared.tablet-only{
         font-size: 3.7rem;
         margin-bottom: 3.2rem;
@@ -45,13 +42,5 @@
 .calendar {
     @include shared.mobile-only{
         display: none;
-    }
-    @include shared.tablet-only{
-        grid-row: 4/5;
-        grid-column: 1/-1;
-    }
-    @include shared.desktop-only{
-        grid-row: 3/4;
-        grid-column: 1/-1;
     }
 }

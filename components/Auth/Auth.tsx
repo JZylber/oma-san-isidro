@@ -34,9 +34,9 @@ export const Authorization = ({ type }: { type: string }) => {
   };
 
   return (
-    <div className={styles.main}>
+    <>
       <div className={styles.type}>{type == "oma"?"Oma":"Ñandú"}</div>
-      <h1>Autorización</h1>
+      <h1 className={styles.main_title}>Autorización</h1>
       <div className={styles.container}>
         <div className={styles.title}>
           <h3>Tener en cuenta</h3>
@@ -58,6 +58,6 @@ export const Authorization = ({ type }: { type: string }) => {
           nuevamente luego de unos segundos.
         </p>
       </div>
-    </div>
+    </>
   );
 };

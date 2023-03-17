@@ -1,8 +1,6 @@
 @use "../../styles/shared.scss" as shared;
-.main {
-  grid-column: 1 / 10;
 
-  .type {
+.type {
     @include shared.mobile-only{
       display: block;
       @include shared.font-unbounded(400);
@@ -13,7 +11,7 @@
     }
   }
 
-  h1 {
+.main_title {
     @include shared.font-unbounded(600);
 
     @include shared.mobile-only {
@@ -26,8 +24,8 @@
       font-size: 2 * shared.$desktop-actionable-font-size;
       line-height: 2.5;
     }
-  }
 }
+
 
 .container {
   box-sizing: border-box;
