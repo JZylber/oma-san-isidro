@@ -47,7 +47,7 @@ const Internacional : NextPage = () => {
         </Head>
         <Layout>
             <h1 className={styles.title}>Internacional</h1>
-            <p className={[styles.description,styles.description_text].join(" ")}> Alumnos que pueden participar en las selecciones para olimpíadas internacionales 2023</p>
+            <p className={styles.description_text}> Alumnos que pueden participar en las selecciones para olimpíadas internacionales 2023</p>
             <div className={[styles.rounded_box,styles.middle_columns].join(" ")}>
                 <h3>Pretorneo de las Ciudades</h3>
                 <p>Participan los alumnos de OMA que en el 2022 llegaron por lo menos al Regional y los alumnos de  3° Nivel de Ñandú invitados por la OMA</p>
@@ -110,8 +110,8 @@ const Internacional : NextPage = () => {
             <div className={styles.category}>
                 <h2 className={styles.category_title}>Alumnos que participaron en Ñandú en 2022</h2>
                 <p className={styles.description_text}>Pueden Participar en la Olimpíada de Mayo aquellos alumnos que aprobaron el Regional y nacieron después del 01/01/2008</p>
-                <div className={styles.table_container}>
-                    <table className={[styles.table,styles.middle_columns].join(" ")}>
+                <div className={[styles.table_container,styles.middle_columns].join(" ")}>
+                    <table className={styles.table}>
                         <thead className={styles.table_header}>
                             <tr>
                                 <th>Nivel</th>
