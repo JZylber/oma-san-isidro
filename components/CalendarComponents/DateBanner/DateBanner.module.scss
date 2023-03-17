@@ -7,6 +7,14 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    &_medium{
+        @include shared.tablet-only{
+            max-width: 60rem;
+        }
+        @include shared.desktop-only{
+            max-width: 90rem;
+        }
+    }
     &_entry{
         width: 100%;
         display: flex;
@@ -14,12 +22,19 @@
             flex-direction: column;
             align-items: center;
         }
-        @include shared.not-mobile{
-            justify-content: space-between;
-        }
         &:not(:last-child){
             border-bottom: 2px solid shared.$black;
-         }
+        }
+        &_categorized{
+            @include shared.not-mobile{
+                justify-content: space-between;
+            }
+        }
+        &_uncategorized{
+            @include shared.not-mobile{
+                justify-content: flex-start;
+            }
+        }
     }
 }
 
@@ -39,11 +54,11 @@
     }
     @include shared.tablet-only{
         font-size: shared.$tablet-reading-font-size;
-        min-width: 12rem;
+        min-width: 14rem;
     }
     @include shared.desktop-only{
         font-size: shared.$desktop-reading-font-size;
-        min-width: 16rem;
+        min-width: 18rem;
     }
 }
 .event{
@@ -61,11 +76,11 @@
     }
     @include shared.tablet-only{
         @include shared.font-montserrat(700);
-        font-size: 2rem;
+        font-size: 1.6rem;
     }
     @include shared.desktop-only{
         @include shared.font-montserrat(700);
-        font-size: 2.8rem;
+        font-size: 2.4rem;
     }
 }
 .type{

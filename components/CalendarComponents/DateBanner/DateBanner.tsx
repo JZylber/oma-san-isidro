@@ -4,7 +4,15 @@ import { CalendarEvent } from "../CalendarTypes";
 import styles from "./DateBanner.module.scss";
 import NewsArrow from "../../../img/newsArrow.svg"
 
-const DateBanner = ({dates}:{dates: CalendarEvent []}) => {
+interface DateBannerProps {
+    dates: CalendarEvent [],
+    displayAmount?: number,
+    displayCategory?: string
+} 
+
+const DateBanner = ({dates,displayAmount = 3,displayCategory}:DateBannerProps) => {
+    const showCategory = !displayCategory;
+    const category_filter = showCategory ? "" : `?categoria=${displayCategory}`
     const currentDate = new Date()
     const upcomingDates = dates.filter((date) => date.fecha_inicio > currentDate)
     upcomingDates.sort(function(a, b) {
@@ -22,19 +30,19 @@ const DateBanner = ({dates}:{dates: CalendarEvent []}) => {
     }
     const renderUpcomingDate = (date:CalendarEvent,idx : number) => {
         return(
-        <div className={styles.container_entry} key={idx}>
+        <div className={[styles.container_entry,showCategory?styles.container_entry_categorized:styles.container_entry_uncategorized].join(" ")} key={idx}>
             <div className={styles.date}><span>{`${date.fecha_inicio.getDate()} ${months[date.fecha_inicio.getMonth()]}${getEndDate(date)}`}</span></div>
             <div className={styles.event}>{date.texto}</div>
-            <div className={styles.type}>{date.tipo}</div>
+            {showCategory && <div className={styles.type}>{date.tipo}</div>}
         </div>
         )
     }
     return(
         <>
-        <div className={styles.container}>
-        {upcomingDates.slice(0,3).map(renderUpcomingDate)}
+        <div className={[styles.container,!showCategory && styles.container_medium].join(" ")}>
+        {upcomingDates.filter((date) => (displayCategory === undefined) || (displayCategory === date.tipo)).slice(0,displayAmount).map(renderUpcomingDate)}
         </div>
-        <Link href="./calendario" style={{textDecoration: 'none'}}>
+        <Link href={`/calendario${category_filter}`} style={{textDecoration: 'none'}}>
             <div className={styles.link}>
                 <Button content="Ver Calendario Completo">
                     <NewsArrow className={styles.arrow}/>
