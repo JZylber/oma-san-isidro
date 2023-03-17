@@ -1,14 +1,14 @@
 import { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import DateCard from "../components/CalendarComponents/DateCard/DateCard";
-import DateFilter from "../components/CalendarComponents/DateFilter/DateFilter";
-import Layout from "../components/Layout/Layout";
-import MonthSelect from "../components/CalendarComponents/MonthSelect/MonthSelect";
-import { getCalendarEvents } from "../lib/aux_db_calls";
-import styles from "./styles/Calendar.module.scss";
-import MonthEvents from "../components/CalendarComponents/MonthEvents/MonthEvents";
-import { getDatesFromJson, JSONCalendarEvent } from "../components/CalendarComponents/CalendarTypes";
+import DateCard from "../../components/CalendarComponents/DateCard/DateCard";
+import DateFilter from "../../components/CalendarComponents/DateFilter/DateFilter";
+import Layout from "../../components/Layout/Layout";
+import MonthSelect from "../../components/CalendarComponents/MonthSelect/MonthSelect";
+import { getCalendarEvents } from "../../lib/aux_db_calls";
+import styles from "./Calendar.module.scss";
+import MonthEvents from "../../components/CalendarComponents/MonthEvents/MonthEvents";
+import { getDatesFromJson, JSONCalendarEvent } from "../../components/CalendarComponents/CalendarTypes";
 import { useRouter } from "next/router";
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
