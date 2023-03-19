@@ -3,6 +3,7 @@ import { Button } from "../../buttons/Button";
 import { CalendarEvent } from "../CalendarTypes";
 import styles from "./DateBanner.module.scss";
 import NewsArrow from "../../../img/newsArrow.svg"
+import PageLink from "../../../img/pageLinkIcon.svg"
 
 interface DateBannerProps {
     dates: CalendarEvent [],
@@ -41,6 +42,12 @@ const DateBanner = ({dates,displayAmount = 3,displayCategory}:DateBannerProps) =
         <>
         <div className={[styles.container,!showCategory && styles.container_medium].join(" ")}>
         {upcomingDates.filter((date) => (displayCategory === undefined) || (displayCategory === date.tipo)).slice(0,displayAmount).map(renderUpcomingDate)}
+        <Link href={`/otros/calendario${category_filter}`} className={styles.link_tag}>
+            <div className={styles.small_link}>
+                <PageLink/>
+                <span>Ver calendario completo</span>
+            </div>
+        </Link>
         </div>
         <Link href={`/otros/calendario${category_filter}`} className={styles.link_tag}>
             <div className={styles.link}>
