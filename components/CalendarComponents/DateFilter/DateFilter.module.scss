@@ -1,5 +1,16 @@
 @use '../../../styles/shared.scss' as shared;
 
+.filter_container{
+    @include shared.tablet-only {
+        display: grid;
+        @include shared.tablet-columns;
+    }
+    @include shared.desktop-only{
+        display: flex;
+    }
+    
+}
+
 .filter_box{
     border: 2px solid shared.$black;
     border-radius: 9px;
@@ -25,16 +36,14 @@
     }
     &_container{
         @include shared.tablet-only{
-            grid-column: 1/5;
-            grid-row: 2/3;
             position: relative;
             min-height: 6.4rem;
+            grid-column: 1/5;
         }
         @include shared.desktop-only{
-            grid-column: 1/4;
-            grid-row: 2/3;
             position: relative;
             min-height: 6.4rem;
+            min-width: calc(33% - 2rem);
         }
     }
 }
@@ -110,18 +119,16 @@
         margin-top: 3.2rem;
     }
     @include shared.tablet-only{
-        grid-column: 1/-1;
+        grid-column: 5/-1;
         font-size: shared.$tablet-actionable-font-size;
-        grid-row: 3/4;
     }
     @include shared.desktop-only{
-        grid-column: 4/-1;
         font-size: shared.$desktop-actionable-font-size;
-        grid-row: 2/3;
+        margin-left: 2rem;
     }
     &_chip{
         @include shared.font-unbounded(500);
-        background-color: shared.$light-blue;
+        background-color: shared.$white;
         display: flex;
         align-items: center;
         justify-content: center;

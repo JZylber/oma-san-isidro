@@ -39,7 +39,7 @@ const Home: NextPage<{news: NewsItemData[], events: JSONCalendarEvent[]}> = ({ne
       <Head>
         <title>OMA San Isidro</title>
       </Head>
-      <Layout>
+      <Layout grid={true}>
         <HomeModal open={openModal} setOpen={setOpenModal}/>
         <Title />
 
@@ -56,8 +56,8 @@ const Home: NextPage<{news: NewsItemData[], events: JSONCalendarEvent[]}> = ({ne
 
         {/* Next Events */}
         <section className={styles.eventSection}>
-          <h3 className={styles.sectionTitle}>Próximas fechas</h3>
-          <DateBanner dates={dates}/>
+          <h3 className={styles.sectionTitle}>Próxima fecha</h3>
+          <DateBanner dates={dates} displayAmount={1}/>
         </section>
 
         {/* FAQ */}

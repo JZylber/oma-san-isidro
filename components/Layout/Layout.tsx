@@ -10,7 +10,7 @@ interface PageLayoutContext {
 
 export const pageLayoutContext = createContext<PageLayoutContext>({} as PageLayoutContext)
 
-const Layout = ({children}:{children : ReactNode}) => {
+const Layout = ({grid = false ,children}:{grid? : boolean,children : ReactNode}) => {
     const [showChildren,setShowChildren] = useState(true)
     const [isLoading,setIsLoading] = useState(false)
     const togglePageContent = () => {
@@ -26,7 +26,7 @@ const Layout = ({children}:{children : ReactNode}) => {
             } else {
                 return(
                 <pageLayoutContext.Provider value={{onRouteChange: changeRoute}}>
-                    <main className={styles.main}>{children}</main>
+                    <main className={[styles.main,grid?styles.grid:""].join(" ")}>{children}</main>
                     <Footer/>
                 </pageLayoutContext.Provider>)
             } 

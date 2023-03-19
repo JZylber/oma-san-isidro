@@ -41,12 +41,19 @@ const MonthSelect = ({displayedMonth,setDisplayedMonth}: MonthSelectProps) => {
             element?.classList.remove(styles.sideMonth)
             element?.classList.add(styles.selectedMonth)
         },
-        onTouchMove(swiper,event) {
+        onTouchMove: (swiper,event) => {
             swiper.slides.forEach((slide,index) => {
                 let element = slide.firstElementChild;
                 element?.classList.add(styles.sideMonth)
                 element?.classList.remove(styles.selectedMonth)
             }) 
+        },
+        onTap: (swiper,event) => {
+            if(swiper.clickedIndex > swiper.activeIndex){
+                swiper.slideNext();
+            } else {
+                swiper.slidePrev();
+            }
         },
         className:["mySwiper",styles.swiper].join(" ")
     }

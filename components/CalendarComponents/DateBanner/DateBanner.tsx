@@ -3,10 +3,19 @@ import { Button } from "../../buttons/Button";
 import { CalendarEvent } from "../CalendarTypes";
 import styles from "./DateBanner.module.scss";
 import NewsArrow from "../../../img/newsArrow.svg"
+import PageLink from "../../../img/pageLinkIcon.svg"
 
-const DateBanner = ({dates}:{dates: CalendarEvent []}) => {
+interface DateBannerProps {
+    dates: CalendarEvent [],
+    displayAmount?: number,
+    displayCategory?: string
+} 
+
+const DateBanner = ({dates,displayAmount = 3,displayCategory}:DateBannerProps) => {
+    const showCategory = !displayCategory;
+    const category_filter = showCategory ? "" : `?categoria=${displayCategory}`
     const currentDate = new Date()
-    const upcomingDates = dates.filter((date) => date.fecha_inicio > currentDate)
+    const upcomingDates = dates.filter((date) => date.fecha_inicio >= currentDate)
     upcomingDates.sort(function(a, b) {
         var distancea = Math.abs(currentDate.getTime() - a.fecha_inicio.getTime());
         var distanceb = Math.abs(currentDate.getTime() - b.fecha_inicio.getTime());
@@ -15,26 +24,32 @@ const DateBanner = ({dates}:{dates: CalendarEvent []}) => {
     const months = ["ENE","FEB","MAR","ABR","MAY","JUN","JUL","AGO","SEP","OCT","NOV","DIC"]
     const getEndDate = (cevent : CalendarEvent) => {
         if(cevent.fecha_fin){
-            return(` - ${cevent.fecha_fin.getDate()} ${months[cevent.fecha_fin.getMonth()]}`)
+            return(` - ${cevent.fecha_fin.getDate()}`)
         } else {
             return("")
         }
     }
     const renderUpcomingDate = (date:CalendarEvent,idx : number) => {
         return(
-        <div className={styles.container_entry} key={idx}>
-            <div className={styles.date}><span>{`${date.fecha_inicio.getDate()} ${months[date.fecha_inicio.getMonth()]}${getEndDate(date)}`}</span></div>
+        <div className={[styles.container_entry,showCategory?styles.container_entry_categorized:styles.container_entry_uncategorized].join(" ")} key={idx}>
+            <div className={styles.date}><span>{`${date.fecha_inicio.getDate()} ${getEndDate(date)} ${months[date.fecha_inicio.getMonth()]}`}</span></div>
             <div className={styles.event}>{date.texto}</div>
-            <div className={styles.type}>{date.tipo}</div>
+            {showCategory && <div className={styles.type}>{date.tipo}</div>}
         </div>
         )
     }
     return(
         <>
-        <div className={styles.container}>
-        {upcomingDates.slice(0,3).map(renderUpcomingDate)}
+        <div className={[styles.container,!showCategory && styles.container_medium].join(" ")}>
+        {upcomingDates.filter((date) => (displayCategory === undefined) || (displayCategory === date.tipo)).slice(0,displayAmount).map(renderUpcomingDate)}
+        <Link href={`/otros/calendario${category_filter}`} className={styles.link_tag}>
+            <div className={styles.small_link}>
+                <PageLink/>
+                <span>Ver calendario completo</span>
+            </div>
+        </Link>
         </div>
-        <Link href="./calendario" style={{textDecoration: 'none'}}>
+        <Link href={`/otros/calendario${category_filter}`} className={styles.link_tag}>
             <div className={styles.link}>
                 <Button content="Ver Calendario Completo">
                     <NewsArrow className={styles.arrow}/>

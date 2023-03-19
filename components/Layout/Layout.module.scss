@@ -16,17 +16,24 @@
         justify-content: center;
     }
     @include shared.tablet-only{
-        display: grid;
         width: 85%;
-        @include shared.tablet-columns;
         margin-top: 4.8rem;
-        grid-template-rows: max-content max-content max-content max-content;
     }
     @include shared.desktop-only{
-        display: grid;
-        @include shared.desktop-columns;
-        grid-template-rows: max-content max-content max-content max-content;
         width: 80%;
         max-width: 1200px;
+    }
+}
+
+.grid {
+    @include shared.not-mobile{
+        display: grid;
+        grid-template-rows: max-content max-content max-content max-content;
+    }
+    @include shared.tablet-only{
+        @include shared.tablet-columns;
+    }
+    @include shared.desktop-only{
+        @include shared.desktop-columns;
     }
 }

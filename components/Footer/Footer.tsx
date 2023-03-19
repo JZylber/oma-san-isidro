@@ -15,7 +15,7 @@ const Footer = () => {
             <a href="https://www.oma.org.ar/">Sitio principal de OMA</a>
           </li>
           <li>
-            <a href="http://omasanisidro.flashingsites.com.ar/">Sitio viejo</a>
+            <a href="http://omasanisidro.flashingsites.com.ar/index_old.htm">Sitio viejo</a>
           </li>
           <li>
             <Link href={'/contacto'}>Contacto</Link>

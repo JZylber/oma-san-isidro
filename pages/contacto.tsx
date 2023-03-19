@@ -46,6 +46,10 @@ const Contact : NextPage = () => {
                 <p className={styles.mail_text}>Silvia Chillo: <a href="mailto:silviachillo@gmail.com">silviachillo@gmail.com</a></p>
             </div>
             <div className={styles.independent_category}>
+                <h3 className={styles.category_title}>Torneo de Geometría e Imaginación</h3>
+                <p className={styles.mail_text}>Roxana Magistrali: <a href="mailto:roxana.magistrali@gmail.com">roxana.magistrali@gmail.com</a></p>
+            </div>
+            <div className={styles.independent_category}>
                 <h3 className={styles.category_title}>Desarrolladores</h3>
                 <p className={styles.mail_text}>Para consultas y feedback sobre la página: <a href="mailto:omasanisidro.devs@gmail.com">omasanisidro.devs@gmail.com</a></p>
             </div>
