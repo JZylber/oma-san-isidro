@@ -62,9 +62,9 @@ const Geometry : NextPage<{results : Array<JSONCalendarEvent>,year:number}> = ({
                     </div>
                 </div>
                 <section className={styles.section}>
-                    <h3 className={styles.section_title}>Consultas</h3>
+                    <h3 className={styles.section_title}>Inscripción y Consultas</h3>
                     <div className={styles.section_content}>
-                        <p>Para cualquier consulta del torneo escribir a <a href="mailto:roxana.magistrali@gmail.com">roxana.magistrali@gmail.com</a></p>
+                        <p>Para inscribirse al torneo o para más información, escribir a <a href="mailto:roxana.magistrali@gmail.com">roxana.magistrali@gmail.com</a></p>
                     </div>
                 </section>
         </Layout>        
