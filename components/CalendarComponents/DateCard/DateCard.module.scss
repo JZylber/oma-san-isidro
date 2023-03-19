@@ -6,20 +6,24 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    background: shared.$light-blue;
+    box-sizing: border-box;
     @include shared.mobile-only{
         padding: 1.6rem;
         margin-top: 2.4rem;
         margin-bottom: 2.4rem;
+        min-height: 20.8rem;
     }
     @include shared.tablet-only{
-        min-height: 16rem;
-        padding-top: 1.6rem;
-        padding-bottom: 1.6rem;
-        padding-left: shared.$tabletXspacing*1.25;
-        padding-right: shared.$tabletXspacing*1.25;
+        grid-column: span 4 ;
+        min-height: 24rem;
+        padding-top: 2.4rem;
+        padding-bottom: 2.4rem;
+        padding-left: shared.$tabletXspacing*4;
+        padding-right: shared.$tabletXspacing*4;
     }
     @include shared.desktop-only{
-        min-height: 25.6rem;
+        min-height: 27.6rem;
         padding-top: 3.2rem;
         padding-bottom: 3.2rem;
         padding-left: shared.$desktopXspacing*3;
@@ -34,8 +38,8 @@
     }
     @include shared.tablet-only{
         @include shared.font-unbounded(500);
-        font-size: 2rem;
-        line-height: 2.2rem;
+        font-size: 2.2rem;
+        line-height: 3rem;
     }
     @include shared.desktop-only{
         @include shared.font-unbounded(500);
@@ -66,38 +70,31 @@
 
 .category{
     @include shared.font-unbounded(500);
-    background: shared.$light-blue;
+    background: shared.$white;
     border: 2px solid shared.$black;
     border-radius: 9px;
+    font-size: 1.2rem;
     @include shared.mobile-only{
-        font-size: 1.2rem;
         padding-top: .4rem;
         padding-bottom: .4rem;
         padding-left: .8rem;
         padding-right: .8rem;
     }
     @include shared.tablet-only{
-        font-size: 1.2rem;
-        padding-top: .75rem;
-        padding-bottom: .75rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
+        padding-top: .8rem;
+        padding-bottom: .8rem;
+        padding-left: 2.4rem;
+        padding-right: 2.4rem;
     }
     @include shared.desktop-only{
-        font-size: 1.2rem;
         padding-top: .8rem;
         padding-bottom: .8rem;
         padding-left: 3rem;
         padding-right: 3rem;
     }
     &_container{
-        @include shared.mobile-only{
-            height: fit-content;
-        }
-        @include shared.not-mobile{
-            height: 100%;
-            display: flex;
-            flex-direction: column-reverse;
-        }
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column-reverse;
     }
 }

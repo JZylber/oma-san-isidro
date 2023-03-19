@@ -1,12 +1,14 @@
 @use '../../../styles/shared.scss' as shared;
 
 .filter_container{
-    @include shared.not-mobile{
+    @include shared.tablet-only {
+        display: grid;
+        @include shared.tablet-columns;
+    }
+    @include shared.desktop-only{
         display: flex;
     }
-    @include shared.tablet-only{
-        flex-direction: column;
-    }
+    
 }
 
 .filter_box{
@@ -36,7 +38,7 @@
         @include shared.tablet-only{
             position: relative;
             min-height: 6.4rem;
-            width: 50%;
+            grid-column: 1/5;
         }
         @include shared.desktop-only{
             position: relative;
@@ -117,6 +119,7 @@
         margin-top: 3.2rem;
     }
     @include shared.tablet-only{
+        grid-column: 5/-1;
         font-size: shared.$tablet-actionable-font-size;
     }
     @include shared.desktop-only{
@@ -125,7 +128,7 @@
     }
     &_chip{
         @include shared.font-unbounded(500);
-        background-color: shared.$light-blue;
+        background-color: shared.$white;
         display: flex;
         align-items: center;
         justify-content: center;
