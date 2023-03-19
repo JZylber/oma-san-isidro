@@ -125,7 +125,7 @@
     }
     &_chip{
         @include shared.font-unbounded(500);
-        background-color: shared.$light-blue;
+        background-color: shared.$white;
         display: flex;
         align-items: center;
         justify-content: center;

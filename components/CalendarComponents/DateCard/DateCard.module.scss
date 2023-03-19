@@ -6,6 +6,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    background: shared.$light-blue;
     @include shared.mobile-only{
         padding: 1.6rem;
         margin-top: 2.4rem;
@@ -66,7 +67,7 @@
 
 .category{
     @include shared.font-unbounded(500);
-    background: shared.$light-blue;
+    background: shared.$white;
     border: 2px solid shared.$black;
     border-radius: 9px;
     @include shared.mobile-only{
