@@ -5,8 +5,7 @@ import DateBanner from "../../components/CalendarComponents/DateBanner/DateBanne
 import Layout from "../../components/Layout/Layout";
 import { getCalendarEvents } from "../../lib/aux_db_calls";
 import styles from "./Geometria.module.scss";
-import Warning from "../../img/warning.svg";
-import InProgress from "../../components/InProgress/InProgress";
+import Warning from "../../public/images/warning.svg";
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
     const year = new Date().getFullYear()

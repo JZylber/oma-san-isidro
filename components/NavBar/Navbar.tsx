@@ -1,6 +1,6 @@
 import styles from "./Navbar.module.scss";
-import MenuIcon from "../../img/menuIcon.svg";
-import X from "../../img/x.svg";
+import MenuIcon from "../../public/images/menuIcon.svg";
+import X from "../../public/images/x.svg";
 import { useState } from "react";
 import MobileMenu from "./MobileMenu/mobile-menu";
 import TopMenu from "./TopMenu/TopMenu";

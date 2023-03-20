@@ -1,7 +1,7 @@
 import { Dispatch, RefObject, SetStateAction, useEffect, useRef, useState } from "react";
 import styles from "./DateFilter.module.scss";
-import SelectIcon from "../../../img/menuSelectIcon.svg";
-import FilterIcon from "../../../img/filter.svg";
+import SelectIcon from "../../../public/images/menuSelectIcon.svg";
+import FilterIcon from "../../../public/images/filter.svg";
 
 interface DateFilterProps{
     availableCategories: string [],

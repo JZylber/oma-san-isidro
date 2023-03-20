@@ -1,6 +1,6 @@
 import styles from "./Auth.module.scss";
-import NewsArrow from "../../img/newsArrow.svg";
-import Warning from "../../img/warning.svg";
+import NewsArrow from "../../public/images/newsArrow.svg";
+import Warning from "../../public/images/warning.svg";
 import { AuthItem } from "./AuthItem";
 import { Button } from "../buttons/Button";
 
