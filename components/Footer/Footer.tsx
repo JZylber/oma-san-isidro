@@ -1,5 +1,5 @@
 import styles from "./Footer.module.scss";
-import OMALogo from "../../img/logoOMA.svg";
+import OMALogo from "../../public/images/logoOMA.svg";
 import Link from "next/link";
 
 const Footer = () => {

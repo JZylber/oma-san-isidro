@@ -2,8 +2,8 @@ import Link from "next/link";
 import { Button } from "../../buttons/Button";
 import { CalendarEvent } from "../CalendarTypes";
 import styles from "./DateBanner.module.scss";
-import NewsArrow from "../../../img/newsArrow.svg"
-import PageLink from "../../../img/pageLinkIcon.svg"
+import NewsArrow from "../../../public/images/newsArrow.svg"
+import PageLink from "../../../public/images/pageLinkIcon.svg"
 
 interface DateBannerProps {
     dates: CalendarEvent [],

@@ -1,5 +1,5 @@
 import styles from "./NewsItem.module.scss";
-import NewsArrow from "../../img/newsArrow.svg";
+import NewsArrow from "../../public/images/newsArrow.svg";
 import Link from "next/link";
 import { useContext } from "react";
 import { pageLayoutContext } from "../Layout/Layout";

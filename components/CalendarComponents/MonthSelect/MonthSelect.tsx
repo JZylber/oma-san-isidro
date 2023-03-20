@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction} from "react";
 import {Swiper,SwiperProps, SwiperSlide} from 'swiper/react';
 import { Navigation } from "swiper";
-import NavArrow from "../../../img/menuArrow.svg"
+import NavArrow from "../../../public/images/menuArrow.svg"
 import 'swiper/scss';
 import 'swiper/scss/navigation';
 import styles from './MonthSelect.module.scss'

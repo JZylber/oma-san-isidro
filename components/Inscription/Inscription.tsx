@@ -1,5 +1,5 @@
 import { Button } from "../buttons/Button"
-import Arrow from "../../img/newsArrow.svg"
+import Arrow from "../../public/images/newsArrow.svg"
 import styles from "./Inscription.module.scss"
 
 export const Inscripcion = ( { type } : {type : string} ) => {

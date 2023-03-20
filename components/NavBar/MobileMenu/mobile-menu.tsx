@@ -1,4 +1,4 @@
-import MenuArrow from '../../../img/menuArrow.svg';
+import MenuArrow from '../../../public/images/menuArrow.svg';
 import styles from './mobile-menu.module.scss';
 import { useRouter } from 'next/router'
 import { ReactElement, useState } from "react";
