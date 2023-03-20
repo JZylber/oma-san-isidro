@@ -100,7 +100,7 @@ export default function NavBar({togglePageContent,onRouteChange}:NavProps){
         const itemIndex = menuHierarchy.findIndex((item) => item.text == itemName);
         const item = menuHierarchy[itemIndex]
         if(item){
-            if(item.link){
+            if(item.link && item.link !==  router.pathname){
                 onRouteChange()
             }
             item.selected = true;
@@ -112,7 +112,9 @@ export default function NavBar({togglePageContent,onRouteChange}:NavProps){
         const item = menuHierarchy[mainItemIndex]
         const subItemIndex = item.subItems.findIndex((subitem) => subitem.text === subItemName)
         const subItem = item.subItems[subItemIndex]
-        subItem.link && onRouteChange();
+        if(subItem.link && subItem.link !== router.pathname){
+          onRouteChange();
+        }
         setMenuHierarchy(selectItem(menuHierarchy,mainItemIndex,subItemIndex))
     } 
 
