@@ -45,6 +45,16 @@ export const Inscripcion = ( { type } : {type : string} ) => {
                     <Button content="Planilla de Datos" onClick={downloadForm}><Arrow className={styles.arrow}/></Button>
                 </div>
                 <li>Enviar la planilla de datos y el comprobante de pago escaneado a la responsable de su zona<span className={styles.step_information_bold}> hasta el {type == "OMA"?"5 de mayo":"21 de abril"}</span>.</li>
+                <p>Aquellos que precisen factura C deberán también enviar los siguiente datos:</p>
+                <div>
+                    <ul>
+                        <li>CUIL/CUIT</li>
+                        <li>Condición frente al IVA y dirección postal si tuvieran más de una.</li>
+                        <li>Email</li>
+                        <li>Concepto a facturar</li>
+                        <li>Importe de la transferencia</li>
+                    </ul>
+                </div>
                 <div className={styles.contact_information}>
                     <div className={styles.zone}>
                         <h4>San Fernando, San Isidro y Vicente López</h4>
@@ -58,22 +68,12 @@ export const Inscripcion = ( { type } : {type : string} ) => {
                             <li className={styles.mail_text}><a href="mailto:silviachillo@gmail.com?subject=Planila%20de%20inscripcion%20colegio%3A">silviachillo@gmail.com</a></li>
                         </ul>
                     </div>
-                </div> 
+                </div>
             </ol>
            </div>
            <div className={styles.step_information}>
             <h1>3. Documentos a presentar en el certamen Intercolegial</h1>
             <p>El día del certamen se deberá presentar el comprobante <span className={styles.step_information_bold}>original</span> del depósito bancario para poder entregar el recibo correspondiente.</p>
-            <p>Aquellos que precisen factura C deberán presentar los siguiente datos:</p>
-            <div>
-                <ul>
-                    <li>CUIL/CUIT</li>
-                    <li>Condición frente al IVA y dirección postal si tuvieran más de una.</li>
-                    <li>Email</li>
-                    <li>Concepto a facturar</li>
-                    <li>Importe de la transferencia</li>
-                </ul>
-            </div>
            </div>
         </div>
         </>
