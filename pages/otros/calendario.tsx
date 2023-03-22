@@ -44,6 +44,8 @@ const Calendar : NextPage<{results : Array<JSONCalendarEvent>,year:number}> = ({
         <>
         <Head>
             <title>Calendario</title>
+            <meta   name="description"
+                content="Calendario anual de todas las competencias matemáticas del país"></meta>
         </Head>
         <Layout>
             <h1 className={styles.calendar_title}>Calendario {year}</h1>

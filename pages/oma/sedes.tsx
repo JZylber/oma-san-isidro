@@ -8,6 +8,8 @@ const OMAVenues : NextPage = () => {
         <>
         <Head>
             <title>Sedes OMA</title>
+            <meta   name="description"
+                content="Información de las sedes para la próxima instancia de OMA"></meta>
         </Head>
         <Layout>
             <InProgress/>

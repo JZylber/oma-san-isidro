@@ -8,6 +8,8 @@ const NanduVenues : NextPage = () => {
         <>
         <Head>
             <title>Sedes Ñandú</title>
+            <meta   name="description"
+                content="Información de las sedes para la próxima instancia de Ñandú"></meta>
         </Head>
         <Layout>
             <InProgress/>

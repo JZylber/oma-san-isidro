@@ -8,6 +8,8 @@ const NanduRules : NextPage = () => {
         <>
         <Head>
             <title>Reglamento Ñandú</title>
+            <meta   name="description"
+                content="Reglamento oficial para participar de Ñandú"></meta>
         </Head>
         <Layout>
             <InProgress/>

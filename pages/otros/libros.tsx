@@ -8,6 +8,8 @@ const Books : NextPage = () => {
         <>
         <Head>
             <title>Libros</title>
+            <meta   name="description"
+                content="Precios e información de los libros a la venta por OMA"></meta>
         </Head>
         <Layout>
             <InProgress/>

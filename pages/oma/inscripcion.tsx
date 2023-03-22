@@ -8,6 +8,8 @@ const OMAInscription: NextPage = () => {
     <>
       <Head>
         <title>Inscripción OMA</title>
+        <meta   name="description"
+                content="Información de como inscribirse para participar de OMA"></meta>
       </Head>
       <Layout>
         <Inscripcion type="OMA" />

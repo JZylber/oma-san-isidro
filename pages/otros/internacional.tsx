@@ -44,6 +44,8 @@ const Internacional : NextPage = () => {
         <>
         <Head>
             <title>Olimpíadas Internacionales</title>
+            <meta   name="description"
+                content="Alumnos de la región que pueden participar en selectivos/competencias internacionales"></meta>
         </Head>
         <Layout>
             <h1 className={styles.title}>Internacional</h1>
