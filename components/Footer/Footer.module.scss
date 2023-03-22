@@ -162,13 +162,14 @@
                 grid-column: 5/7;   
             }
         }
-        ul li {
+        &_item {
             @include shared.font-montserrat(500);
             text-decoration-line: underline;
             color: shared.$black;
             @include shared.mobile-only{
                 font-size: shared.$mobile-reading-font-size;
                 line-height: 2 * shared.$mobile-spacing;
+                margin-bottom: .8rem;
             }
             @include shared.tablet-only{
                 font-size: shared.$tablet-reading-font-size;

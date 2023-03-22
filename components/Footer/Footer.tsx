@@ -12,17 +12,23 @@ const Footer = () => {
       <div className={styles.footer_links}>
         <ul>
           <li>
-            <a href="https://www.oma.org.ar/">Sitio principal de OMA</a>
+            <div className={styles.footer_links_item}>
+              <a href="https://www.oma.org.ar/">Sitio principal de OMA</a>
+            </div>
           </li>
           <li>
-            <a href="http://omasanisidro.flashingsites.com.ar/index_old.htm">Sitio viejo</a>
+            <div className={styles.footer_links_item}>
+              <a href="http://omasanisidro.flashingsites.com.ar/index_old.htm">Sitio viejo</a>
+            </div>
           </li>
           <li>
-            <Link href={'/contacto'}>Contacto</Link>
+            <div className={styles.footer_links_item}>
+              <Link href={'/contacto'}>Contacto</Link>
+            </div>
           </li>
-          <li>
+          {/*<li>
             <a>Mapa del sitio</a>
-          </li>
+          </li>*/}
         </ul>
         <div className={styles.footer_logo}>
           <OMALogo/>
