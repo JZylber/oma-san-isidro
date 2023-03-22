@@ -12,7 +12,7 @@ const DateCard = ({calendarEvent}:{calendarEvent : CalendarEvent}) => {
     }
     return(
         <div className={styles.datebox_container}>
-            <h3 className={styles.event_text}>{calendarEvent.texto}</h3>
+            <p className={styles.event_text}>{calendarEvent.texto}</p>
             <span className={styles.date}>{`${calendarEvent.fecha_inicio.getDate()} ${months[calendarEvent.fecha_inicio.getMonth()]}${getEndDate(calendarEvent)}`}</span>
             <div className={styles.category_container}>
                 <div className={styles.category}>{calendarEvent.tipo}</div>

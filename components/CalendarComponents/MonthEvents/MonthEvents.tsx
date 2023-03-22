@@ -11,7 +11,7 @@ const MonthEvents = ({name,events}:MonthEventsProps) => {
     if(events.length > 0){
         return(
             <div className={styles.container}>
-                <h3 className={styles.title}>{name}</h3>
+                <h2 className={styles.title}>{name}</h2>
                 <div className={styles.events}>
                     {events.map((event,idx) => <DateCard key={idx} calendarEvent={event}/>)}
                 </div>
