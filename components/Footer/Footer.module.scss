@@ -38,7 +38,7 @@
             transform: translateX(-2*shared.$desktop-spacing);
             width: max-content;
         }
-        h4{
+        &_title{
             @include shared.font-montserrat(700);
             @include shared.mobile-only{
                 font-size: shared.$mobile-reading-font-size;
@@ -58,7 +58,7 @@
             }
         }
 
-        span{
+        &_name{
             @include shared.font-montserrat(500);
             @include shared.mobile-only{
                 font-size: shared.$mobile-reading-font-size;
