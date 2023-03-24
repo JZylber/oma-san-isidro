@@ -7,9 +7,9 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    background-color: shared.$white;
     @include shared.mobile-only{
         padding: 2.4rem 1.6rem 2.4rem 1.6rem;
-        background-color: shared.$light-blue;
     }
     &_medium{
         @include shared.tablet-only{
@@ -54,8 +54,8 @@
         padding: .8rem 0 .8rem 0;
     }
     @include shared.not-mobile{
-        justify-content: center;
         background-color: shared.$light-blue;
+        justify-content: center;
         padding: 1.6rem 1.6rem 1.6rem 1.6rem;
         border-right: 2px solid shared.$black;
     }
@@ -94,9 +94,9 @@
 .type{
     display: flex;
     align-items: center;
+    background-color: shared.$light-blue;
     @include shared.mobile-only{
         @include shared.font-unbounded(500);
-        background-color: shared.$white;
         font-size: 1.6rem;
         order: 3;
         border: 2px solid shared.$black;
@@ -106,7 +106,6 @@
         padding: .4rem
     }
     @include shared.not-mobile{
-        background-color: shared.$light-blue;
         @include shared.font-montserrat(400);
         padding: 1.6rem 1.6rem 1.6rem 1.6rem;
         border-left: 2px solid shared.$black;
@@ -149,9 +148,6 @@
     @include shared.mobile-only{
         font-size: 1.6rem;
         margin-top: 2.2rem;
-    }
-    @include shared.not-mobile {
-        display: none;
     }
 }
 

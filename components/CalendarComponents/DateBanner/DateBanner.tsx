@@ -49,13 +49,6 @@ const DateBanner = ({dates,displayAmount = 3,displayCategory}:DateBannerProps) =
             </div>
         </Link>
         </div>
-        <Link href={`/otros/calendario${category_filter}`} className={styles.link_tag}>
-            <div className={styles.link}>
-                <Button content="Ver Calendario Completo">
-                    <NewsArrow className={styles.arrow}/>
-                </Button>
-            </div>
-        </Link>
         </>
     )
 }
