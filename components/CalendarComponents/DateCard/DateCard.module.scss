@@ -6,6 +6,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    flex-wrap: wrap;
     background: shared.$light-blue;
     box-sizing: border-box;
     @include shared.mobile-only{
@@ -14,6 +15,7 @@
         margin-bottom: 2.4rem;
         min-height: 20.8rem;
     }
+
     @include shared.tablet-only{
         grid-column: span 4 ;
         min-height: 24rem;
@@ -45,6 +47,7 @@
         @include shared.font-unbounded(500);
         font-size: 3.4rem;
         line-height: 3.8rem;
+        flex-grow: 1;
     }
     
 }
@@ -64,6 +67,7 @@
         font-size: shared.$desktop-reading-font-size;
         padding-top: 1.6rem;
         padding-bottom: 1.6rem;
+        
     }
     
 }
