@@ -45,12 +45,18 @@
         display: none;
     }
     @include shared.not-mobile{
-        height: 127px;
         display: flex;
         align-items: center;
         overflow: hidden;
-        width: 160px;
         margin-right: 3.2rem;
+    }
+    @include shared.tablet-only{
+        height: 105px;
+        width: 140px;
+    }
+    @include shared.desktop-only{
+        height: 127px;
+        width: 160px;
     }
 }
 
@@ -147,7 +153,12 @@
             height: 19px;
             order: 1;
         }
-        @include shared.not-mobile{
+        @include shared.tablet-only{
+            width: 20px;
+            height: 20px;
+            order: 2;
+        }
+        @include shared.desktop-only{
             width: 25px;
             height: 25px;
             order: 2;
@@ -162,14 +173,3 @@
         }
     }
 }
-
-.arrow {
-    @include shared.desktop-only {
-      padding: 5px 0 0 0;
-    }
-  
-    @include shared.not-desktop {
-      display: none;
-    }
-  }
-  
