@@ -24,15 +24,30 @@
     @include shared.tablet-only {
       line-height: 1.3;
     }
-    * {
-        margin: .5rem;
+    padding: .5rem;
+    h3{
+      @include shared.font-unbounded(400);
+      @include shared.mobile-only {
+        font-size: shared.$mobile-reading-font-size;
+      }
+    
+      @include shared.tablet-only {
+        font-size: shared.$tablet-reading-font-size;
+      }
+    
+      @include shared.desktop-only {
+        font-size: 0.85 * shared.$desktop-reading-font-size; 
+      }
     }
 }
 
 .bank_data{
-  li {
+  list-style: disc;
+  list-style-position: inside;
+  .item {
     @include shared.font-montserrat(300);
     margin-top: 1.6rem;
+    display: list-item;
     @include shared.mobile-only {
       font-size: shared.$mobile-reading-font-size;
     }
