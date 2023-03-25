@@ -14,6 +14,18 @@ interface Book{
     nuevo: boolean
 }
 
+const orderByName = (a: Book, b: Book) => { 
+    let a1 = a.nombre
+    let b1 = b.nombre
+    let a1Words = a1.split(" ")
+    let b1Words = b1.split(" ")
+    if(a1Words[0] === b1Words[0] && ["(OMA)","(Ñandú)"].includes(a1Words[0])){
+        return(Number(a1Words[2])  < Number(b1Words[2]))
+    } else{
+        return a1.localeCompare(b1);
+    }
+};
+
 const Books : NextPage = () => {
     const [fetchingBooks,setFetchingBooks] = useState(true);
     const [books,setBooks] = useState<Array<Book>>([])
@@ -21,8 +33,8 @@ const Books : NextPage = () => {
         try {
             let searchedResults = await fetch(`/api/books?secret=${process.env.API_TOKEN}`).then((response) => response.json());
             setFetchingBooks(false);
+            searchedResults.sort(orderByName);
             setBooks(searchedResults);
-            console.log(books);
         } catch (error) {
             console.error(error);
         }
@@ -47,7 +59,7 @@ const Books : NextPage = () => {
                 </tr>
             </thead>
             <tbody className={styles.table_body}>
-                {books.map(renderBook)}
+                {books. map(renderBook)}
             </tbody>
         </table>
     </div>
