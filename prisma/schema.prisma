@@ -97,3 +97,12 @@ model Fechas{
   tipo String
   texto String
 }
+
+model Libro{
+  id_libro Int @default(autoincrement()) @id
+  nombre String
+  categoria String?
+  precio Float
+  descuento Float?
+  tapa String?
+}
