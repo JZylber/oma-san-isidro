@@ -8,6 +8,8 @@ const OMARules : NextPage = () => {
         <>
         <Head>
             <title>Reglamento OMA</title>
+            <meta   name="description"
+                content="Reglamento oficial para participar de OMA"></meta>
         </Head>
         <Layout>
             <InProgress/>

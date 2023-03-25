@@ -9,6 +9,8 @@ const Contact : NextPage = () => {
         <>
         <Head>
             <title>Contacto</title>
+            <meta   name="description"
+                    content="Información de contacto de OMA/Ñandú para las distintas localidades de la región"></meta>
         </Head>
         <Layout>
             <h1 className={styles.title}>Contacto</h1>

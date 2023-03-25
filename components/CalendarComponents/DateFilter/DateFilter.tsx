@@ -43,7 +43,7 @@ const DateFilter = ({availableCategories,categories,setCategories}:DateFilterPro
     <div className={styles.filter_container}>
       <div className={styles.filter_box_container}>
         <div className={styles.filter_box} ref={wrapperRef}>
-          <div onClick={toggleFilter} className={[styles.filterText,styles.filterTitle,isOpen?styles.filterTitleOpen:""].join(" ")}>
+          <div onClick={toggleFilter} className={[styles.filterText,styles.filterTitle,isOpen ? styles.filterTitleOpen : ""].join(" ")}>
             <div className={styles.filterTitleStart}><FilterIcon/></div>
             <span>Filtrar</span>
             <div className={styles.filterTitleEnd}><SelectIcon/></div>

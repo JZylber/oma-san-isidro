@@ -39,7 +39,7 @@ export const Authorization = ({ type }: { type: string }) => {
       <h1 className={styles.main_title}>Autorización</h1>
       <div className={styles.container}>
         <div className={styles.title}>
-          <h3>Tener en cuenta</h3>
+          <h2>Tener en cuenta</h2>
           <Warning className={styles.warning} />
         </div>
         <ul className={styles.items}>

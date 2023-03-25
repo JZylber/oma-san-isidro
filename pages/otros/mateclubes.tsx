@@ -22,6 +22,8 @@ const MathClubs : NextPage<{results : Array<JSONCalendarEvent>,year:number}> = (
         <>
         <Head>
             <title>Mateclubes</title>
+            <meta   name="description"
+                content="Información general de los mateclubes"></meta>
         </Head>
         <Layout>
             <h1 className={styles.title}>Mateclubes</h1>

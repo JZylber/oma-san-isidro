@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { Button } from "../../buttons/Button";
 import { CalendarEvent } from "../CalendarTypes";
 import styles from "./DateBanner.module.scss";
-import NewsArrow from "../../../public/images/newsArrow.svg"
+import CalendarIcon from "../../../public/images/calendarIcon.svg"
 import PageLink from "../../../public/images/pageLinkIcon.svg"
 
 interface DateBannerProps {
@@ -29,33 +28,32 @@ const DateBanner = ({dates,displayAmount = 3,displayCategory}:DateBannerProps) =
             return("")
         }
     }
-    const renderUpcomingDate = (date:CalendarEvent,idx : number) => {
+    const renderUpcomingDate = (date:CalendarEvent,idx : number,dates: CalendarEvent []) => {
         return(
-        <div className={[styles.container_entry,showCategory?styles.container_entry_categorized:styles.container_entry_uncategorized].join(" ")} key={idx}>
+        <div className={[styles.container_entry].join(" ")} key={idx}>
             <div className={styles.date}><span>{`${date.fecha_inicio.getDate()} ${getEndDate(date)} ${months[date.fecha_inicio.getMonth()]}`}</span></div>
             <div className={styles.event}>{date.texto}</div>
-            {showCategory && <div className={styles.type}>{date.tipo}</div>}
+            <div className={styles.type_container}>
+                {showCategory && <div className={styles.type}>{date.tipo}</div>}
+                {idx === dates.length-1 && 
+                <Link href={`/otros/calendario${category_filter}`} className={styles.link_tag}>
+                    <div className={styles.small_link}>
+                        <div className={styles.small_link_image}><PageLink/></div>
+                        <span>Ver calendario completo</span>
+                    </div>
+                </Link>}
+           </div>
         </div>
         )
     }
     return(
         <>
         <div className={[styles.container,!showCategory && styles.container_medium].join(" ")}>
-        {upcomingDates.filter((date) => (displayCategory === undefined) || (displayCategory === date.tipo)).slice(0,displayAmount).map(renderUpcomingDate)}
-        <Link href={`/otros/calendario${category_filter}`} className={styles.link_tag}>
-            <div className={styles.small_link}>
-                <PageLink/>
-                <span>Ver calendario completo</span>
+            {displayAmount === 1 && <div className={styles.calendar_icon}><CalendarIcon/></div>}
+            <div className={styles.entries}>
+            {upcomingDates.filter((date) => (displayCategory === undefined) || (displayCategory === date.tipo)).slice(0,displayAmount).map(renderUpcomingDate)}
             </div>
-        </Link>
         </div>
-        <Link href={`/otros/calendario${category_filter}`} className={styles.link_tag}>
-            <div className={styles.link}>
-                <Button content="Ver Calendario Completo">
-                    <NewsArrow className={styles.arrow}/>
-                </Button>
-            </div>
-        </Link>
         </>
     )
 }

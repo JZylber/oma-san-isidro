@@ -23,6 +23,8 @@ const Geometry : NextPage<{results : Array<JSONCalendarEvent>,year:number}> = ({
         <>
         <Head>
             <title>Geometría e Imaginación</title>
+            <meta   name="description"
+                content="Información general del torneo de geometría e imaginación"></meta>
         </Head>
         <Layout>
                 <h1 className={styles.title}>Torneo de Geometría e Imaginación</h1>

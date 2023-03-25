@@ -9,6 +9,8 @@ const NanduInscription : NextPage = () => {
         <>
         <Head>
             <title>Inscripción Ñandú</title>
+            <meta   name="description"
+                content="Información de como inscribirse para participar de Ñandú"></meta>
         </Head>
         <Layout>
             <Inscripcion type="Ñandú"/>

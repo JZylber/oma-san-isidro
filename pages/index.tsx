@@ -38,6 +38,8 @@ const Home: NextPage<{news: NewsItemData[], events: JSONCalendarEvent[]}> = ({ne
     <>
       <Head>
         <title>OMA San Isidro</title>
+        <meta   name="description"
+                content="Página principal de la Secretaría Regional Buenos Aires Norte de la Olimpíadas Matemáticas Argentinas"></meta>
       </Head>
       <Layout grid={true}>
         <HomeModal open={openModal} setOpen={setOpenModal}/>

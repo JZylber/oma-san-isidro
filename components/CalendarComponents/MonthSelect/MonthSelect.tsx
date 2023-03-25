@@ -21,7 +21,6 @@ const MonthSelect = ({displayedMonth,setDisplayedMonth}: MonthSelectProps) => {
             nextEl: '.next',
         },
         slidesPerView : 3,
-        loop:true,
         centeredSlides:true,
         initialSlide: displayedMonth,
         observer: true,
