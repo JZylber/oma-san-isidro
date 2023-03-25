@@ -46,7 +46,7 @@ export const getNews = async () => {
     return ({results});
   };
 
-  export const getCalendarEvents = async (year:number) => {
+export const getCalendarEvents = async (year:number) => {
     const query = await prisma.fechas.findMany({
       where: {
         fecha_inicio: {
