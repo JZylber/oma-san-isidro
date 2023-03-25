@@ -42,6 +42,9 @@
             font-size: shared.$desktop-actionable-font-size;
         }
     }
+    ul{
+        list-style-position: inside;
+    }
     &_title {
         display: flex;
         &_icon {

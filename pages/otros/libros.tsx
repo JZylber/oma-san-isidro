@@ -78,7 +78,11 @@ const Books : NextPage = () => {
                         <Warning className={styles.warning_box_title_icon} />
                     </div>
                     <div className={styles.warning_box_content}>
-                        <p>Para comprar libros, se deben poner en contacto con la <Link href={"/contacto"}>coordinadora de su zona</Link>.</p>
+                        <p>Para comprar libros, se deben poner en contacto con cualquiera de las encargadas de venta:</p>
+                        <ul>
+                            <li>Elena Guillé: <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a></li>
+                            <li>Silvia Chillo: <a href="mailto:silviachillo@gmail.com">silviachillo@gmail.com</a></li>
+                        </ul>
                         <p>Proximamente: Estamos trabajando para que se puedan encargar libros desde la página. El pago y la entrega van a seguir estando a cargo de las coordinadoras regionales.</p>
                     </div>
             </div>
