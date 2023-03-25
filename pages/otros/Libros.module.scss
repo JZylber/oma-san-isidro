@@ -76,8 +76,7 @@
         border: 2px solid shared.$black;
         border-radius: 9px;
         display: block;
-        overflow-x: auto;
-        white-space: nowrap;
+        overflow: hidden;
         margin-top: 1.6rem;
     }
     border-spacing: 0;
@@ -103,6 +102,9 @@
         @include shared.mobile-only{
             font-size: 1.1rem;
         }
+        .book_name_column{
+            max-width: 80%;
+        }
     }
     .right_align{
         text-align: right;
@@ -126,6 +128,19 @@
         }
         tr:not(:last-child) td{
             border-bottom: 1px solid #D3D3D3;
+        }
+        &_bookName{
+            display: flex;
+            .special{
+                @include shared.font-unbounded(500);
+                text-align: center;
+                @include shared.mobile-only{
+                    min-width: 7rem;
+                }
+                @include shared.not-mobile{
+                    min-width: 12rem;
+                }
+            }
         }
     }
 }

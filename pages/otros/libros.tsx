@@ -32,7 +32,7 @@ const Books : NextPage = () => {
     },[])
     const renderBook = (book: Book,idx: number) => {
         return(<tr key={idx}>
-            <td><p>{book.nuevo?"¡NUEVO!":""}</p><p>{book.nombre}</p></td>
+            <td className={styles.table_body_bookName}><p className={styles.special}>{book.nuevo?"¡NUEVO!":""}</p><p>{book.nombre}</p></td>
             <td>{`$${book.precio}`}</td>
         </tr>)
     } 
@@ -42,7 +42,7 @@ const Books : NextPage = () => {
         <table className={styles.table}>
             <thead className={styles.table_header}>
                 <tr>
-                    <th>Nombre</th>
+                    <th className={styles.book_name_column}>Nombre</th>
                     <th>Precio</th>
                 </tr>
             </thead>
