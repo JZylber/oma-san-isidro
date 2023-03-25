@@ -6,10 +6,12 @@
     margin: 2.4rem 0rem 0rem 0rem;
     overflow: hidden;
     display: flex;
-    flex-direction: column;
     background-color: shared.$white;
     @include shared.mobile-only{
         padding: 2.4rem 1.6rem 2.4rem 1.6rem;
+    }
+    @include shared.not-mobile{
+        padding: 3.2rem;
     }
     &_medium{
         @include shared.tablet-only{
@@ -21,26 +23,34 @@
     }
     &_entry{
         width: 100%;
-        display: flex;
-        @include shared.mobile-only{
-            flex-direction: column;
-            &:not(:first-child){
-                padding-top: .8rem;
-            }
+        display: flex;  
+        flex-direction: column;
+        &:not(:first-child){
+            padding-top: .8rem;
         }
-        &:not(:nth-last-child(2)){
+        &:not(:last-child){
             border-bottom: 2px solid shared.$black;
         }
-        &_categorized{
-            @include shared.not-mobile{
-                justify-content: space-between;
-            }
-        }
-        &_uncategorized{
-            @include shared.not-mobile{
-                justify-content: flex-start;
-            }
-        }
+    }
+}
+
+.entries{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.calendar_icon{
+    @include shared.mobile-only{
+        display: none;
+    }
+    @include shared.not-mobile{
+        height: 127px;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        width: 160px;
+        margin-right: 3.2rem;
     }
 }
 
@@ -48,106 +58,93 @@
     @include shared.font-montserrat(400);
     display: flex;
     align-items: center;
+    order: 2;
     @include shared.mobile-only{
-        font-size: 1.6rem;
-        order: 2;
+        font-size: 1.5rem;
         padding: .8rem 0 .8rem 0;
     }
     @include shared.not-mobile{
-        background-color: shared.$light-blue;
-        justify-content: center;
-        padding: 1.6rem 1.6rem 1.6rem 1.6rem;
-        border-right: 2px solid shared.$black;
+        padding: 1.6rem 0rem 1.6rem 0rem;
     }
     @include shared.tablet-only{
         font-size: shared.$tablet-reading-font-size;
-        min-width: 14rem;
     }
     @include shared.desktop-only{
         font-size: shared.$desktop-reading-font-size;
-        min-width: 18rem;
     }
 }
 .event{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    @include shared.font-unbounded(400);
+    order: 1;
     @include shared.mobile-only{
-        @include shared.font-unbounded(400);
         font-size: 2.4rem;
         line-height: 2.8rem;
-        order: 1;
-    }
-    @include shared.not-mobile{
-        text-align: center;
-        padding: .8rem;
     }
     @include shared.tablet-only{
-        @include shared.font-montserrat(700);
-        font-size: 1.6rem;
+        font-size: shared.$tablet-actionable-font-size;
     }
     @include shared.desktop-only{
-        @include shared.font-montserrat(700);
-        font-size: 2.4rem;
+        font-size: shared.$desktop-actionable-font-size;
     }
 }
 .type{
     display: flex;
     align-items: center;
     background-color: shared.$light-blue;
+    border: 2px solid shared.$black;
+    border-radius: 9px;
+    width: fit-content;
+    @include shared.font-unbounded(500);
     @include shared.mobile-only{
-        @include shared.font-unbounded(500);
-        font-size: 1.6rem;
-        order: 3;
-        border: 2px solid shared.$black;
-        border-radius: 9px;
-        width: fit-content;
+        font-size: 1.5rem;
         margin: .8rem 0rem .8rem 0rem;
         padding: .4rem
     }
     @include shared.not-mobile{
-        @include shared.font-montserrat(400);
-        padding: 1.6rem 1.6rem 1.6rem 1.6rem;
-        border-left: 2px solid shared.$black;
-        justify-content: center;
+        padding: .8rem 1.6rem .8rem 1.6rem;
     }
     @include shared.tablet-only{
-        font-size: shared.$tablet-reading-font-size;
-        min-width: 24rem;
+        font-size: 1.2rem;
     }
     @include shared.desktop-only{
-        font-size: shared.$desktop-reading-font-size;
-        min-width: 32rem;
+        font-size: 1.2rem;
+    }
+    &_container{
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        order: 3;
     }
 }
-
-.link {
-    color: shared.$black;
-    @include shared.mobile-only {
-        display: none;
-    }
-    
-    @include shared.tablet-only {
-        width: 63.5%;
-        margin-top: 2 * shared.$tablet-spacing;
-    }
-    @include shared.desktop-only {
-        width: 47.5%;
-        margin-top: 4 * shared.$desktop-spacing;
-    }
-    &_tag{
-        text-decoration: none;
-    }
-}
-
 .small_link{
     color: shared.$black;
     display: flex;
     text-decoration: underline;
     @include shared.font-unbounded(400);
     @include shared.mobile-only{
-        font-size: 1.6rem;
+        font-size: shared.$mobile-actionable-font-size;
         margin-top: 2.2rem;
+    }
+    @include shared.tablet-only{
+        font-size: shared.$tablet-actionable-font-size;
+    }
+    @include shared.desktop-only{
+        font-size: shared.$desktop-reading-font-size;
+    }
+    &_image{
+        @include shared.mobile-only{
+            width: 19px;
+            height: 19px;
+            order: 1;
+        }
+        @include shared.not-mobile{
+            width: 25px;
+            height: 25px;
+            order: 2;
+        }
     }
 }
 
