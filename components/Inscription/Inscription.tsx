@@ -1,6 +1,7 @@
 import { Button } from "../buttons/Button"
 import Arrow from "../../public/images/newsArrow.svg"
 import styles from "./Inscription.module.scss"
+import BankInformation from "./BankInformation"
 
 export const Inscripcion = ( { type } : {type : string} ) => {
     const downloadForm = () => {
@@ -20,17 +21,8 @@ export const Inscripcion = ( { type } : {type : string} ) => {
                 <h1>1. Pago</h1>
                 <p>El pago por alumno este año es de: <span className={styles.step_information_bold}>$3.000</span>.</p>
                 <p>Se debe realizar un solo depósito por la totalidad de alumnos inscriptos en la cuenta de la Olimpíada.</p>
-                <p>La inscripción incluye la participación al torneo de geometría. Como este ocurre primero y se abona presencialmente, aquellos alumnos que participen en el torneo de geometría <span className={styles.step_information_bold}>no deben abonar la inscripción a {type}</span>. El costo de inscripción para participar del torneo de geometría solamente es también de $3000.</p>
-                <div className={styles.border_box_container}>
-                    <div className={styles.border_box}>
-                        <h3>El depósito debe realizarse a nombre de: Fundación Olimpíada Matemática Argentina en cualquier sucursal del banco HSBC (Cuenta Corriente)</h3>
-                        <ul className={styles.bank_data}>
-                            <li>N° Cuenta: 6093228419</li>
-                            <li>CBU: 15006099 - 00060932284196</li>
-                            <li>CUIT: 30-67928383-5</li>
-                        </ul>
-                    </div>
-                </div>
+                <p>La inscripción incluye la participación al torneo de geometría. Como este ocurre primero, aquellos alumnos que participen en el torneo de geometría <span className={styles.step_information_bold}>no deben abonar la inscripción a {type}</span>. El costo de inscripción para participar del torneo de geometría solamente es también de $3000.</p>
+                <BankInformation/>
                 <p>La inscripción a la competencia de Mateclubes es gratuita y se hace desde la página de OMA. Recién se paga en la tercera ronda (que es presencial) y el costo de la competencia es de $6.000 por club. No se exime de pago por haber participado en otro torneo.</p>
            </div>
            <div className={styles.step_information}>

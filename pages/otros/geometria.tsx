@@ -6,6 +6,7 @@ import Layout from "../../components/Layout/Layout";
 import { getCalendarEvents } from "../../lib/aux_db_calls";
 import styles from "./Geometria.module.scss";
 import Warning from "../../public/images/warning.svg";
+import BankInformation from "../../components/Inscription/BankInformation";
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
     const year = new Date().getFullYear()
@@ -31,6 +32,17 @@ const Geometry : NextPage<{results : Array<JSONCalendarEvent>,year:number}> = ({
                 <section className={styles.section}>
                     <h3 className={styles.section_title}>Próximas Fechas</h3>
                     <DateBanner dates={events} displayAmount={3} displayCategory="Geometría"/>
+                </section>
+                <section className={styles.section}>
+                    <h3 className={styles.section_title}>Inscripción</h3>
+                    <div className={styles.section_content}>
+                        <ol>
+                            <li>Abonar $3000 por participante. Se debe realizar un solo depósito por la totalidad de alumnos inscriptos. <span className={styles.bold}>Los participantes del torneo de geometría no deben abonar luego la inscripción a OMA/Ñandú.</span></li>
+                            <BankInformation/>
+                            <li>Completar una planilla con los datos de los alumnos. Deben consignar apellido y nombre, DNI, nivel y año que cursan. Esta planilla deben enviarla a Roxana Magistrali: <a href="mailto:roxana.magistrali@gmail.com">roxana.magistrali@gmail.com</a> antes del 12 de abril junto con el comprobante de pago escaneado.</li>
+                            <li>El día de la primera instancia, llevar el comprobante de pago para poder entregarles un recibo</li>
+                        </ol>
+                    </div>
                 </section>
                 <section className={styles.section}>
                     <h3 className={styles.section_title}>Información General</h3>
@@ -64,9 +76,9 @@ const Geometry : NextPage<{results : Array<JSONCalendarEvent>,year:number}> = ({
                     </div>
                 </div>
                 <section className={styles.section}>
-                    <h3 className={styles.section_title}>Inscripción y Consultas</h3>
+                    <h3 className={styles.section_title}>Consultas</h3>
                     <div className={styles.section_content}>
-                        <p>Para inscribirse al torneo o para más información, escribir a <a href="mailto:roxana.magistrali@gmail.com">roxana.magistrali@gmail.com</a></p>
+                        <p>Para más información, escribir a <a href="mailto:roxana.magistrali@gmail.com">roxana.magistrali@gmail.com</a></p>
                     </div>
                 </section>
         </Layout>        
