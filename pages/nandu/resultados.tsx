@@ -19,6 +19,8 @@ const NanduResults : NextPage<{results: Array<yearTests>}> = ({results}) => {
         <>
         <Head>
           <title>Resultados Ñandú</title>
+          <meta   name="description"
+                content="Resultados de las participaciones en pruebas de Ñandú"></meta>
         </Head>
         <Layout>
             <Results competition="Ñandú" availableResults={results}/>

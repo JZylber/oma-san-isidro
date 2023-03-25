@@ -29,6 +29,7 @@
      span {
         transition: all .5s;
         @include shared.font-unbounded(400);
+        text-transform: lowercase;
         @include shared.tablet-only{
             font-size: shared.$tablet-actionable-font-size;
             padding-top: 1.6rem;

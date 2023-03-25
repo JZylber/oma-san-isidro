@@ -1,30 +1,38 @@
 import styles from "./Footer.module.scss";
-import OMALogo from "../../img/logoOMA.svg";
+import OMALogo from "../../public/images/logoOMA.svg";
 import Link from "next/link";
 
 const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.footer_secretary}>
-        <h4>Secretaria Regional</h4>
-        <span>Elena Guillé</span>
+        <p className={styles.footer_secretary_title}>Secretaria Regional</p>
+        <p className={styles.footer_secretary_name}>Elena Guillé</p>
       </div>
       <div className={styles.footer_links}>
         <ul>
           <li>
-            <a href="https://www.oma.org.ar/">Sitio principal de OMA</a>
+            <div className={styles.footer_links_item}>
+              <a href="https://www.oma.org.ar/">Sitio principal de OMA</a>
+            </div>
           </li>
           <li>
-            <a href="http://omasanisidro.flashingsites.com.ar/">Sitio viejo</a>
+            <div className={styles.footer_links_item}>
+              <a href="http://omasanisidro.flashingsites.com.ar/index_old.htm">Sitio viejo</a>
+            </div>
           </li>
           <li>
-            <Link href={'/contacto'}>Contacto</Link>
+            <div className={styles.footer_links_item}>
+              <Link href={'/contacto'}>Contacto</Link>
+            </div>
           </li>
-          <li>
+          {/*<li>
             <a>Mapa del sitio</a>
-          </li>
+          </li>*/}
         </ul>
-        <OMALogo className={styles.footer_links_logo} />
+        <div className={styles.footer_logo}>
+          <OMALogo/>
+        </div>
       </div>
       <div className={styles.footer_credits}>
         <p>© 2022 Joaquín Aldrey y Julián Zylber.</p>

@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction} from "react";
 import {Swiper,SwiperProps, SwiperSlide} from 'swiper/react';
 import { Navigation } from "swiper";
-import NavArrow from "../../../img/menuArrow.svg"
+import NavArrow from "../../../public/images/menuArrow.svg"
 import 'swiper/scss';
 import 'swiper/scss/navigation';
 import styles from './MonthSelect.module.scss'
@@ -21,7 +21,6 @@ const MonthSelect = ({displayedMonth,setDisplayedMonth}: MonthSelectProps) => {
             nextEl: '.next',
         },
         slidesPerView : 3,
-        loop:true,
         centeredSlides:true,
         initialSlide: displayedMonth,
         observer: true,
@@ -41,12 +40,19 @@ const MonthSelect = ({displayedMonth,setDisplayedMonth}: MonthSelectProps) => {
             element?.classList.remove(styles.sideMonth)
             element?.classList.add(styles.selectedMonth)
         },
-        onTouchMove(swiper,event) {
+        onTouchMove: (swiper,event) => {
             swiper.slides.forEach((slide,index) => {
                 let element = slide.firstElementChild;
                 element?.classList.add(styles.sideMonth)
                 element?.classList.remove(styles.selectedMonth)
             }) 
+        },
+        onTap: (swiper,event) => {
+            if(swiper.clickedIndex > swiper.activeIndex){
+                swiper.slideNext();
+            } else {
+                swiper.slidePrev();
+            }
         },
         className:["mySwiper",styles.swiper].join(" ")
     }

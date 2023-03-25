@@ -8,6 +8,8 @@ const OMAAuthorization: NextPage = () => {
     <>
       <Head>
         <title>Autorización OMA</title>
+        <meta   name="description"
+                content="Descarga de la autorización para participar de cada una de las instancias de OMA"></meta>
       </Head>
       <Layout>
         <Authorization type="oma" />

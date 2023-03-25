@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import InProgress from "../../components/InProgress/InProgress";
+import { Inscripcion } from "../../components/Inscription/Inscription";
 import Layout from "../../components/Layout/Layout";
 
 const OMAInscription: NextPage = () => {
@@ -8,9 +8,11 @@ const OMAInscription: NextPage = () => {
     <>
       <Head>
         <title>Inscripción OMA</title>
+        <meta   name="description"
+                content="Información de como inscribirse para participar de OMA"></meta>
       </Head>
       <Layout>
-        <InProgress/>
+        <Inscripcion type="OMA" />
       </Layout>
     </>
   );

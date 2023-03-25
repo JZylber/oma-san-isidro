@@ -38,7 +38,7 @@
             transform: translateX(-2*shared.$desktop-spacing);
             width: max-content;
         }
-        h4{
+        &_title{
             @include shared.font-montserrat(700);
             @include shared.mobile-only{
                 font-size: shared.$mobile-reading-font-size;
@@ -58,7 +58,7 @@
             }
         }
 
-        span{
+        &_name{
             @include shared.font-montserrat(500);
             @include shared.mobile-only{
                 font-size: shared.$mobile-reading-font-size;
@@ -111,6 +111,9 @@
                 grid-column: 2/-1;
                 grid-row: 1/2;
                 min-height: 100%;
+                flex-direction: column;
+                justify-content: space-around;
+                display: flex;
                 flex-wrap: wrap;
             }
             @include shared.desktop-only {
@@ -124,12 +127,18 @@
             }
         }
         ul li:nth-child(1){
+            @include shared.tablet-only{
+                min-width: 40%;
+            }
             @include shared.desktop-only{
                 grid-column: 1/4;
                 grid-row: 1
             }
         }
         ul li:nth-child(2){
+            @include shared.tablet-only{
+                min-width: 40%;
+            }
             @include shared.desktop-only{
                 grid-column: 1/4;
             }
@@ -153,18 +162,19 @@
                 grid-column: 5/7;   
             }
         }
-        ul li {
+        &_item {
             @include shared.font-montserrat(500);
             text-decoration-line: underline;
             color: shared.$black;
             @include shared.mobile-only{
                 font-size: shared.$mobile-reading-font-size;
                 line-height: 2 * shared.$mobile-spacing;
+                margin-bottom: .8rem;
             }
             @include shared.tablet-only{
                 font-size: shared.$tablet-reading-font-size;
                 line-height: 2.25 * shared.$tablet-spacing;
-                margin-bottom: 1.6rem;
+                margin-bottom: 1.2rem;
             }
             @include shared.desktop-only {
                 font-size: shared.$desktop-reading-font-size;
@@ -177,11 +187,9 @@
         }
     }
     &_logo {
+        height: 100%;
+        aspect-ratio : 1 / 1;
         @include shared.not-mobile {
-            position: relative;
-            bottom: 10rem;
-            height: 2rem;
-            width: 2rem;
             grid-column: 1/2;
             grid-row: 1/2;
         }

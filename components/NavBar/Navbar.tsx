@@ -1,6 +1,6 @@
 import styles from "./Navbar.module.scss";
-import MenuIcon from "../../img/menuIcon.svg";
-import X from "../../img/x.svg";
+import MenuIcon from "../../public/images/menuIcon.svg";
+import X from "../../public/images/x.svg";
 import { useState } from "react";
 import MobileMenu from "./MobileMenu/mobile-menu";
 import TopMenu from "./TopMenu/TopMenu";
@@ -37,7 +37,14 @@ export default function NavBar({togglePageContent,onRouteChange}:NavProps){
             {text: "Resultados",link:'/nandu/resultados',selected : false,subItems:[]},
             {text: "Problemas",link:'/nandu/problemas',selected : false,subItems:[]}
         ]},
-        {text: "Internacional",link:"/internacional",selected : false,subItems:[]},
+        {text: "Otros",link: undefined,selected:false,subItems:[
+          {text: "Internacional",link:"/otros/internacional",selected : false,subItems:[]},
+          {text: "Mateclubes",link:"/otros/mateclubes",selected : false,subItems:[]},
+          {text: "Geometría",link:"/otros/geometria",selected : false,subItems:[]},
+          {text: "Calendario",link:"/otros/calendario",selected : false,subItems:[]},
+          {text: "Libros",link:"/otros/libros",selected : false,subItems:[]},
+        ]},
+        
     ];
     const router = useRouter()
     const [menuHierarchy,setMenuHierarchy] = useState(showCurrentPageSelected(defaultMenuHierarchy,router.pathname));
@@ -93,7 +100,7 @@ export default function NavBar({togglePageContent,onRouteChange}:NavProps){
         const itemIndex = menuHierarchy.findIndex((item) => item.text == itemName);
         const item = menuHierarchy[itemIndex]
         if(item){
-            if(item.link){
+            if(item.link && item.link !==  router.pathname){
                 onRouteChange()
             }
             item.selected = true;
@@ -105,7 +112,9 @@ export default function NavBar({togglePageContent,onRouteChange}:NavProps){
         const item = menuHierarchy[mainItemIndex]
         const subItemIndex = item.subItems.findIndex((subitem) => subitem.text === subItemName)
         const subItem = item.subItems[subItemIndex]
-        subItem.link && onRouteChange();
+        if(subItem.link && subItem.link !== router.pathname){
+          onRouteChange();
+        }
         setMenuHierarchy(selectItem(menuHierarchy,mainItemIndex,subItemIndex))
     } 
 

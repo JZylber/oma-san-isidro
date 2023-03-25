@@ -19,8 +19,10 @@ const SubMenu = ({items,onSubItemClick} : SubMenuProps) => {
                 const link = item.link as string
                 return(
                 <Fragment key={position}>
-                <Link href={link} className={styles.link}><li className={[styles.submenu_bar_item,item.selected && styles.submenu_bar_item_selected].join(" ")} onClick={() => onSubItemClick(item.text)} key={item.text}>{item.text}</li></Link>
-                {position < (items.length - 1) && <div className={styles.submenu_bar_separator} key={position}></div>}
+                <li className={[styles.submenu_bar_item,item.selected && styles.submenu_bar_item_selected].join(" ")} onClick={() => onSubItemClick(item.text)} key={item.text}>
+                    <Link href={link} className={styles.link}>{item.text}</Link>
+                </li>
+                {position < (items.length - 1) && <li><div className={styles.submenu_bar_separator} key={position}></div></li>}
                 </Fragment>
                 )
             })}

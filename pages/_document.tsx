@@ -2,7 +2,7 @@ import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
     return (
-      <Html>
+      <Html lang="es">
         <Head>
             <meta name="description" content="" />
             <link rel="icon" href="/favicon.ico" />
@@ -13,6 +13,7 @@ export default function Document() {
         <body>
           <Main />
           <NextScript />
+          <div id="modal-root"></div>
         </body>
       </Html>
     )

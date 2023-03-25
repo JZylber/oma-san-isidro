@@ -20,6 +20,8 @@ const OMAResults : NextPage<{results : Array<yearTests>}> = ({results}) => {
         <>
         <Head>
             <title>Resultados OMA</title>
+            <meta   name="description"
+                content="Resultados de las participaciones en pruebas de OMA"></meta>
         </Head>
         <Layout>
             <Results competition="OMA" availableResults={results}/>

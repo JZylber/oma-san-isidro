@@ -4,12 +4,14 @@ import Faq from "../components/FAQ/Faq";
 import News from "../components/News/News";
 import Title from "../components/Title/Title";
 import styles from "./styles/Home.module.scss";
-import MainNandu from "../img/mainNandu.svg";
+import MainNandu from "../public/images/mainNandu.svg";
 import Layout from "../components/Layout/Layout";
 import {NewsItemData} from "../components/News/NewsTypes";
 import { getCalendarEvents, getNews } from "../lib/aux_db_calls";
 import DateBanner from "../components/CalendarComponents/DateBanner/DateBanner";
 import { getDatesFromJson, JSONCalendarEvent } from "../components/CalendarComponents/CalendarTypes";
+import HomeModal from "../components/Popups/HomeModal";
+import { useEffect, useState } from "react";
 
 export async function getStaticProps() {
   const news = await getNews()
@@ -22,12 +24,25 @@ export async function getStaticProps() {
 
 const Home: NextPage<{news: NewsItemData[], events: JSONCalendarEvent[]}> = ({news,events}) => {
   const dates = getDatesFromJson(events)
+  const [openModal,setOpenModal] = useState(false)
+
+  useEffect(() => {
+    let pop_status = sessionStorage.getItem('pop_status');
+    if(!pop_status){
+      setOpenModal(true);
+      sessionStorage.setItem('pop_status','true');
+    }
+  }, []);
+
   return (
     <>
       <Head>
         <title>OMA San Isidro</title>
+        <meta   name="description"
+                content="Página principal de la Secretaría Regional Buenos Aires Norte de la Olimpíadas Matemáticas Argentinas"></meta>
       </Head>
-      <Layout>
+      <Layout grid={true}>
+        <HomeModal open={openModal} setOpen={setOpenModal}/>
         <Title />
 
         {/* NEWS */}
@@ -43,8 +58,8 @@ const Home: NextPage<{news: NewsItemData[], events: JSONCalendarEvent[]}> = ({ne
 
         {/* Next Events */}
         <section className={styles.eventSection}>
-          <h3 className={styles.sectionTitle}>Próximas fechas</h3>
-          <DateBanner dates={dates}/>
+          <h3 className={styles.sectionTitle}>Próxima fecha</h3>
+          <DateBanner dates={dates} displayAmount={1}/>
         </section>
 
         {/* FAQ */}

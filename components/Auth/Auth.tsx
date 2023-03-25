@@ -1,6 +1,6 @@
 import styles from "./Auth.module.scss";
-import NewsArrow from "../../img/newsArrow.svg";
-import Warning from "../../img/warning.svg";
+import NewsArrow from "../../public/images/newsArrow.svg";
+import Warning from "../../public/images/warning.svg";
 import { AuthItem } from "./AuthItem";
 import { Button } from "../buttons/Button";
 
@@ -34,12 +34,12 @@ export const Authorization = ({ type }: { type: string }) => {
   };
 
   return (
-    <div className={styles.main}>
+    <>
       <div className={styles.type}>{type == "oma"?"Oma":"Ñandú"}</div>
-      <h1>Autorización</h1>
+      <h1 className={styles.main_title}>Autorización</h1>
       <div className={styles.container}>
         <div className={styles.title}>
-          <h3>Tener en cuenta</h3>
+          <h2>Tener en cuenta</h2>
           <Warning className={styles.warning} />
         </div>
         <ul className={styles.items}>
@@ -58,6 +58,6 @@ export const Authorization = ({ type }: { type: string }) => {
           nuevamente luego de unos segundos.
         </p>
       </div>
-    </div>
+    </>
   );
 };

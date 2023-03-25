@@ -2,7 +2,6 @@
 
 .title{
     @include shared.font-unbounded(600);
-    grid-column: 1 / -1;
 
     @include shared.mobile-only {
       font-size: 2 * shared.$mobile-actionable-font-size;

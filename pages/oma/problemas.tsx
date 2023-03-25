@@ -8,6 +8,8 @@ const OMAProblems : NextPage = () => {
         <>
         <Head>
             <title>Problemas OMA</title>
+            <meta   name="description"
+                content="Banco de problemas tomados en pruebas previas de OMA"></meta>
         </Head>
         <Layout>
             <InProgress/>

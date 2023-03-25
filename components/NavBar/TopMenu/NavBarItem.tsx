@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { ReactElement } from 'react';
 import styles from './NavBarItem.module.scss'
 
