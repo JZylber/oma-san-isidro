@@ -114,9 +114,16 @@
     }
     &_container{
         display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
         order: 3;
+        @include shared.mobile-only{
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-start;
+        }
+        @include shared.not-mobile{
+            justify-content: space-between;
+            align-items: flex-end;
+        }
     }
 }
 .small_link{
@@ -144,6 +151,14 @@
             width: 25px;
             height: 25px;
             order: 2;
+        }
+    }
+    span {
+        @include shared.mobile-only{
+            order: 2;
+        }
+        @include shared.not-mobile{
+            order: 1;
         }
     }
 }
