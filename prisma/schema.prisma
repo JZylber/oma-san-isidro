@@ -101,8 +101,9 @@ model Fechas{
 model Libro{
   id_libro Int @default(autoincrement()) @id
   nombre String
-  categoria String?
   precio Float
-  descuento Float?
+  categoria String?
+  descuento Float @default(0)
+  nuevo Boolean @default(false)
   tapa String?
 }

@@ -1,0 +1,131 @@
+@use "../../styles/shared.scss" as shared;
+
+.title {
+    @include shared.font-unbounded(600);
+    @include shared.mobile-only {
+      font-size: 2.4 * shared.$mobile-actionable-font-size;
+      margin-top: 4 * shared.$mobile-spacing;
+      margin-bottom: 2.5 * shared.$mobile-spacing;
+    }
+    @include shared.not-mobile {
+      font-size: 2 * shared.$desktop-actionable-font-size;
+      line-height: 2.5;
+    }
+  }
+
+.warning_box {
+    box-sizing: border-box;
+    border: 2px solid black;
+    border-radius: 9px;
+  
+    @include shared.mobile-only {
+      padding: 38px 16px 34px 16px;
+    }
+    @include shared.tablet-only {
+        padding: 20px;
+    }
+    @include shared.desktop-only {
+        padding: 2 * shared.$desktop-spacing 4 * shared.$desktopXspacing 2 * shared.$desktopXspacing 4 * shared.$desktopXspacing;
+    }
+    h3 {
+        @include shared.font-unbounded(500);
+        @include shared.mobile-only {
+            font-size: 1.3 * shared.$mobile-reading-font-size;
+            width: 100%;
+            margin-bottom: 16px;
+            &:after {
+            content: ":";
+            }
+        }
+        @include shared.not-mobile {
+            align-self: center; 
+            font-size: shared.$desktop-actionable-font-size;
+        }
+    }
+    &_title {
+        display: flex;
+        &_icon {
+            @include shared.mobile-only {
+              display: none;
+            }
+          }
+      }
+    &_content {
+        @include shared.font-montserrat(400);
+        @include shared.mobile-only {
+            font-size: shared.$mobile-actionable-font-size;
+        }
+
+        @include shared.tablet-only {
+            font-size: shared.$tablet-actionable-font-size;
+        }
+
+        @include shared.desktop-only {
+            font-size: 0.85*shared.$desktop-actionable-font-size;
+        }
+        p{
+            &:not(:first-child){
+                margin-top: .8rem;
+            }
+        }
+      }
+}
+
+.table{
+    &_container{
+        border: 2px solid shared.$black;
+        border-radius: 9px;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        margin-top: 1.6rem;
+    }
+    border-spacing: 0;
+    width:100%;
+    th:not(:last-child), td:not(:last-child) {
+        border-right: 1px solid #D3D3D3;
+    }
+    &_header{
+        tr{
+            width: 100%;
+        }
+        tr th{
+            padding: .4rem .8rem .4rem .8rem;
+            background-color: shared.$light-blue;
+        }
+        tr, th {
+            border-bottom: 1px solid #D3D3D3;
+        }
+        @include shared.font-unbounded(500);
+        @include shared.not-mobile{
+            font-size: 2rem;
+        }
+        @include shared.mobile-only{
+            font-size: 1.1rem;
+        }
+    }
+    .right_align{
+        text-align: right;
+    }
+    .sticky_column{
+        position: sticky;
+        left: 0;
+        z-index: 1;
+    }
+    &_body{
+        @include shared.font-montserrat(400);
+        @include shared.not-mobile{
+            font-size: 2rem;
+        }
+        @include shared.mobile-only{
+            font-size: 1.1rem;
+        }
+        tr td{
+            padding: .2rem .8rem .2rem .8rem;
+            background-color: shared.$white;
+        }
+        tr:not(:last-child) td{
+            border-bottom: 1px solid #D3D3D3;
+        }
+    }
+}
