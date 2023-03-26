@@ -1,8 +1,11 @@
 @use '../../styles/shared.scss' as shared;
 
 .results {
-    grid-column: 1/-1;
-    font-size: shared.$desktop-reading-font-size
+    border: 2px solid #000000;
+    box-sizing: border-box;
+    border-radius: 9px;
+    overflow: hidden;
+    margin-top: 1.6rem;
 }
 .result_table {
     width: 100%;

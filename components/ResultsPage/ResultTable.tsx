@@ -39,8 +39,7 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
     }
 
     const make_element = (result : TestQueryResults,index : number) => {
-        const name = result.participacion.participante.nombre
-        const surname = result.participacion.participante.apellido
+        const participant = participantName(result)
         const school = result.participacion.colegio.nombre + (result.participacion.colegio.sede?`-${result.participacion.colegio.sede}`:"") 
         const level = result.participacion.nivel
         const points = result.resultados
@@ -48,10 +47,9 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
         const present = result.presente
         return(
             <tr key={index}>
-                <td>{name}</td>
-                <td>{surname}</td>
-                <td>{school}</td>
+                <td>{participant}</td>
                 <td>{level}</td>
+                <td>{school}</td>
                 {numberOfProblems>0 && (present ? points.map((point,index) => <td key={index}>{point}</td>): <td colSpan={numberOfProblems + 1}>Ausente</td>)}
                 <td>{passed?"Si":"No"}</td>
             </tr>)
@@ -64,10 +62,9 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
                 <table className={styles.result_table}>
                     <thead>
                         <tr>
-                            <td><TypedFilter category_name="Nombre" values={Array.from(new Set(results.map((result) => result.participacion.participante.nombre)))} update_filter={(newValue : string) => updateFilter("nombre",newValue)}/></td>
-                            <td><TypedFilter category_name="Apellido" values={Array.from(new Set(results.map((result) => result.participacion.participante.apellido)))} update_filter={(newValue : string) => updateFilter("apellido",newValue)}/></td>
-                            <td>Colegio</td>
+                            <td>Participante</td>
                             <td>Nivel</td>
+                            <td>Colegio</td>
                             {numberOfProblems > 0 &&
                                 <>
                                 {Array.from(new Array(numberOfProblems), (x, i) => i + 1).map((number) => <td key={number}>{`P${number}`}</td>)}
@@ -77,9 +74,8 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
                             <td>Aprobado</td>
                         </tr>
                     </thead>
-                    <tbody><>
+                    <tbody>
                         {results.map((result,index) => make_element(result,index))}
-                        </>
                     </tbody>
                 </table>)
         } else {
@@ -97,6 +93,7 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
             <SelectResultCategory category="Aprobado" value={filters.aprobado} setValue={(value? : boolean) => updateFilter("aprobado",value)} options={[true,false]} clear={true}/>
         </div>
         <div className={styles.results}>
+            {make_table(results.filter(isFilterCompliant))}
         </div>
         </>
     )

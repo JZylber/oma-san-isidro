@@ -71,15 +71,15 @@
         justify-content: space-between;
         min-height: 4.8rem;
         padding: 1.6rem;
+        background-color: shared.$white;
         &Open{
-            border-bottom: 2px solid shared.$black;
+            border-bottom: 2px solid shared.$black !important;
         }
     }
     &Option{
         &:not(:last-child){
             border-bottom: 2px solid shared.$black;
         }
-        height: 4.8rem;
         box-sizing: border-box;
     }
 
@@ -105,14 +105,10 @@
         margin-top: 3.2rem;
     }
     @include shared.tablet-only{
-        grid-column: 1/-1;
         font-size: shared.$tablet-actionable-font-size;
-        grid-row: 3/4;
     }
     @include shared.desktop-only{
-        grid-column: 4/-1;
         font-size: shared.$desktop-actionable-font-size;
-        grid-row: 2/3;
     }
     &_chip{
         @include shared.font-unbounded(500);
