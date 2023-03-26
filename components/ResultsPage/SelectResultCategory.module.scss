@@ -15,21 +15,12 @@
 .filter_box{
     border: 2px solid shared.$black;
     border-radius: 9px;
-    @include shared.font-unbounded(500);
-    @include shared.mobile-only{
-        font-size: shared.$mobile-actionable-font-size;
-    }
+    overflow: hidden;
     @include shared.not-mobile{
         position: absolute;
         width: 100%;
         z-index: 1;
         background-color: shared.$white;
-    }
-    @include shared.tablet-only{
-        font-size: shared.$tablet-reading-font-size;
-    }
-    @include shared.desktop-only{
-        font-size: 1.6rem;
     }
     &_container{
        width: 100%;
@@ -63,6 +54,16 @@
         display: flex;
         align-items: center;
         padding: 1.6rem;
+        @include shared.font-unbounded(500);
+        @include shared.mobile-only{
+            font-size: shared.$mobile-actionable-font-size;
+        }
+        @include shared.tablet-only{
+            font-size: shared.$tablet-reading-font-size;
+        }
+        @include shared.desktop-only{
+            font-size: 1.6rem;
+        }
     };
     &Title{
         box-sizing: border-box;
@@ -83,6 +84,19 @@
     }
 
 }
+.clean_input{
+    @include shared.appearance;
+    border: none;
+    outline: none;
+    -webkit-box-shadow: none !important; 	
+    -moz-box-shadow: none !important; 	
+    box-shadow: none !important;
+    &:focus{
+        outline: none;
+    }
+    max-width: 100%;
+}
+
 .currentFilter{
     display: flex;
     flex-wrap: wrap;

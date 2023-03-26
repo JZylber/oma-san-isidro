@@ -9,9 +9,17 @@ const participantName = (result: TestQueryResults) => {
     return(`${result.participacion.participante.nombre} ${result.participacion.participante.apellido}`)
 }
 
+const removeRepeatedSchools = (schools : School []) => {
+    return schools.filter((value, index, self) =>
+        index === self.findIndex((t) => (
+            t.nombre === value.nombre && t.sede === value.sede && t.localidad === value.localidad
+  ))
+)
+}
+
 const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
-    let schools : Array<School> = Array.from(new Set(results.map((result) => result.participacion.colegio)))
-    const genericSchools: Array<School> =Array.from(new Set(schools.filter((school) => school.sede).map((school) => {return({nombre: school.nombre})})));
+    let schools : Array<School> = removeRepeatedSchools(results.map((result) => result.participacion.colegio));
+    const genericSchools: Array<School> =removeRepeatedSchools(schools.filter((school) => school.sede).map((school) => {return({nombre: school.nombre})}));
     schools = schools.concat(genericSchools);
     const names : Array<string> = Array.from(new Set(results.map(participantName)))
     const numberOfProblems = results[0].prueba.cantidad_problemas;
@@ -83,8 +91,8 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
     return(
         <>
         <div className={styles.filters}>
-            <SelectResultCategory category="Participante" value={filters.participante} setValue={(value?: string) => updateFilter("participante",value)} options={names} clear={true}/>
-            <SelectResultCategory category="Colegio" value={filters.colegio} setValue={(value? : School) => updateFilter("colegio",value)} options={schools} clear={true}/>
+            <SelectResultCategory category="Participante" value={filters.participante} setValue={(value?: string) => updateFilter("participante",value)} options={names} clear={true} input={true}/>
+            <SelectResultCategory category="Colegio" value={filters.colegio} setValue={(value? : School) => updateFilter("colegio",value)} options={schools} clear={true} input={true}/>
             <SelectResultCategory category="Nivel" value={filters.nivel} setValue={(value? : number) => updateFilter("nivel",value)} options={[1,2,3]} clear={true}/>
             <SelectResultCategory category="Aprobado" value={filters.aprobado} setValue={(value? : boolean) => updateFilter("aprobado",value)} options={[true,false]} clear={true}/>
         </div>

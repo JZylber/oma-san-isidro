@@ -29,6 +29,17 @@ const SelectResultCategory = <T extends string|number|boolean|School,>({category
         return `${school.nombre}${school.sede?"-"+school.sede:""}`
       }
     }
+    const [tempValue,setTempValue] = useState(value?displayOption(value):"");
+    const setInputFilter = (option : T) => {
+      setValue(option);
+      setTempValue(displayOption(option));
+      toggleFilter();
+    }
+    const [autocompleteOptions,setAutocompleteOptions] = useState(options);
+    useEffect(() => {
+      let filteredOptions = options.filter((option) => {return displayOption(option).toLocaleLowerCase().includes(tempValue.toLocaleLowerCase())});
+      setAutocompleteOptions(filteredOptions);
+    },[tempValue])
     const useOutsideAlerter = (ref : RefObject<HTMLDivElement>) => {
         useEffect(() => {
           const handleClickOutside = (event : MouseEvent) => {
@@ -51,11 +62,25 @@ const SelectResultCategory = <T extends string|number|boolean|School,>({category
       <p className={styles.category}>{category}</p>
       <div className={styles.filter_box_container}>
         <div className={[styles.filter_box,isOpen && styles.filter_box_open].join(" ")} ref={wrapperRef}>
-          <div onClick={toggleFilter} className={[styles.filterText,styles.filterTitle,isOpen?styles.filterTitleOpen:""].join(" ")}><span>{value!==undefined?displayOption(value):`-`}</span><div className={styles.filterTitleEnd}><SelectIcon/></div></div>
+          {!input?
+            <div onClick={toggleFilter} className={[styles.filterText,styles.filterTitle,isOpen?styles.filterTitleOpen:""].join(" ")}>
+              <span>{value!==undefined?displayOption(value):`-`}</span>
+              <div className={styles.filterTitleEnd}>
+                <SelectIcon/>
+              </div>
+            </div>
+            :
+            <input 
+              className={[styles.clean_input,styles.filterText,styles.filterTitle,isOpen?styles.filterTitleOpen:""].join(" ")} 
+              value={tempValue}
+              onChange={(event) => {setTempValue(event.target.value);setCanOpen(true)}}
+            />}
           {isOpen && 
               <ul className={styles.dropdownFilter}>
                   {clear && <li onClick={() => {setValue(undefined);toggleFilter()}} className={[styles.filterText,styles.filterOption].join(" ")}><span>Quitar filtro</span></li>}
-                  {options.map((option,idx) => <li onClick={() => {setValue(option);toggleFilter()}} className={[styles.filterText,styles.filterOption].join(" ")} key={idx}><span>{displayOption(option)}</span></li>)}
+                  {input?
+                    autocompleteOptions.map((option,idx) => <li onClick={() => {setInputFilter(option)}} className={[styles.filterText,styles.filterOption].join(" ")} key={idx}><span>{displayOption(option)}</span></li>)
+                    :options.map((option,idx) => <li onClick={() => {setValue(option);toggleFilter()}} className={[styles.filterText,styles.filterOption].join(" ")} key={idx}><span>{displayOption(option)}</span></li>)}
               </ul>}
         </div>
       </div>
