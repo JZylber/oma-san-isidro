@@ -1,6 +1,5 @@
 import { useRouter } from "next/router"
 import {useCallback, useEffect, useState } from "react"
-import InProgress from "../InProgress/InProgress"
 import ResultFinderForm from "./resultFinderForm"
 import styles from "./results.module.scss"
 import {ResultProps,TestQueryResults } from "./resultsTypes"

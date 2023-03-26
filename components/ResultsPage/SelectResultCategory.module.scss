@@ -1,40 +1,40 @@
 @use '../../styles/shared.scss' as shared;
 
+.category{
+    @include shared.font-montserrat(400);
+    font-size: 1.6rem;
+    &_container {
+        display: flex;
+        flex-direction: column;
+        min-width: 180px;
+        width: 19%;
+        margin-right: 2rem;
+    }
+}
+
 .filter_box{
     border: 2px solid shared.$black;
     border-radius: 9px;
+    @include shared.font-unbounded(500);
     @include shared.mobile-only{
         font-size: shared.$mobile-actionable-font-size;
-        @include shared.font-unbounded(500);
+    }
+    @include shared.not-mobile{
+        position: absolute;
+        width: 100%;
+        z-index: 1;
+        background-color: shared.$white;
     }
     @include shared.tablet-only{
-        @include shared.font-unbounded(400);
         font-size: shared.$tablet-reading-font-size;
-        position: absolute;
-        width: 100%;
-        z-index: 1;
-        background-color: shared.$white;
     }
     @include shared.desktop-only{
-        @include shared.font-unbounded(400);
-        font-size: shared.$desktop-reading-font-size;
-        position: absolute;
-        width: 100%;
-        z-index: 1;
-        background-color: shared.$white;
+        font-size: 1.6rem;
     }
     &_container{
-        width: 30%;
-        margin-right: 1.6rem;
-        margin-top: 1.6rem;
-        @include shared.tablet-only{
-            position: relative;
-            min-height: 7.4rem;
-        }
-        @include shared.desktop-only{
-            position: relative;
-            min-height: 7.4rem;
-        }
+       width: 100%;
+       position: relative;
+       min-height: 5.4rem;
     }
 }
 
@@ -57,28 +57,16 @@
 
 .filter{
     &Text{
-        @include shared.font-unbounded(500);
-        font-size: 1.6rem;
-        padding-right: 3.2rem;
-        padding-left: 3.2rem;
         display: flex;
         align-items: center;
+        padding: 1.6rem;
     };
     &Title{
-        padding-top: 2rem;
-        padding-bottom: 2rem;
         box-sizing: border-box;
         display: flex;
         justify-content: space-between;
-        min-height: 7.2rem;
-        @include shared.tablet-only{
-            padding-top: 1.5rem;
-            padding-bottom: 1.5rem;
-        }
-        @include shared.desktop-only{
-            padding-top: 2rem;
-            padding-bottom: 2rem;
-        }
+        min-height: 4.8rem;
+        padding: 1.6rem;
         &Open{
             border-bottom: 2px solid shared.$black;
         }
@@ -87,7 +75,7 @@
         &:not(:last-child){
             border-bottom: 2px solid shared.$black;
         }
-        height: 6.4rem;
+        height: 4.8rem;
         box-sizing: border-box;
     }
 
