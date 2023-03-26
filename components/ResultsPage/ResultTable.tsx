@@ -1,9 +1,8 @@
 import { useState } from "react";
-import OptionSelectFilter from "./OptionSelectFilter";
 import { ResultFilter, School, TestQueryResults } from "./resultsTypes";
 import styles from "./ResultTable.module.scss"
 import SelectResultCategory from "./SelectResultCategory";
-import TypedFilter from "./TypedFilter";
+import SelectIcon from "../../public/images/menuSelectIcon.svg";
 
 const participantName = (result: TestQueryResults) => {
     return(`${result.participacion.participante.nombre} ${result.participacion.participante.apellido}`)
@@ -54,10 +53,32 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
                 <td>{passed?"Si":"No"}</td>
             </tr>)
     }
-    
+    let filtered_results = results.filter(isFilterCompliant);
+    //PAGINATION
+    const [page,setPage] = useState(0);
+    const page_size = 50
+    let max_pages =  Math.ceil(filtered_results.length / page_size) - 1;
+    let firstResult = page * page_size
+    let lastResult = Math.min((page + 1)*page_size,filtered_results.length)
+    const results_in_page = filtered_results.slice(firstResult,lastResult)
+    const nextPage = () => {
+        if(page<max_pages){
+            setPage(page + 1);
+        }
+    }
+    const prevPage = () => {
+        if(page > 0){
+            setPage(page - 1);
+        }
+    }
+    const pagination = 
+        <div className={styles.pagination}>
+            <p>Mostrando {firstResult + 1}-{lastResult} de {filtered_results.length}</p>
+            <div className={[styles.prev,page===0 && styles.greyed].join(" ")} onClick={prevPage}><SelectIcon/></div>
+            <div className={[styles.next,page===max_pages && styles.greyed].join(" ")} onClick={nextPage}><SelectIcon/></div>
+        </div>
     const make_table = (results? : Array<TestQueryResults>) => {
         if(results){
-            
             return(
                 <table className={styles.result_table}>
                     <thead>
@@ -92,8 +113,11 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
             <SelectResultCategory category="Nivel" value={filters.nivel} setValue={(value? : number) => updateFilter("nivel",value)} options={[1,2,3]} clear={true}/>
             <SelectResultCategory category="Aprobado" value={filters.aprobado} setValue={(value? : boolean) => updateFilter("aprobado",value)} options={[true,false]} clear={true}/>
         </div>
+        <div className={styles.table_header}>
+            {pagination}
+        </div>
         <div className={styles.results}>
-            {make_table(results.filter(isFilterCompliant))}
+            {make_table(results_in_page)}
         </div>
         </>
     )

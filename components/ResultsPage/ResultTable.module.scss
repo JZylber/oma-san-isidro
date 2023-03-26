@@ -48,6 +48,29 @@
         }
     }
 }
+.table_header{
+    margin-top: 6rem;
+    display: flex;
+    justify-content: space-between;
+    .pagination{
+        display: flex;
+        @include shared.font-montserrat(400);
+        font-size: 1.6rem;
+        .prev{
+            transform: rotate(90deg);
+            padding-left: .8rem;
+            padding-right: .8rem;
+        };
+        .next{
+            transform: rotate(-90deg);
+            padding-left: .8rem;
+            padding-right: .8rem;
+        };
+        .greyed{
+            /*Pendiente*/
+        }
+    }
+}
 
 .filters {
     display: flex;
