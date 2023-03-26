@@ -10,9 +10,42 @@
 .result_table {
     width: 100%;
     border-collapse: collapse;
-    tr { 
-    border: solid;
-    border-width: 1px 0;
+    tr {
+        &:not(:last-child){
+            border-bottom: 2px solid shared.$black;
+        }
+    }
+    thead {
+        background-color: shared.$light-blue;
+        border-bottom: 2px solid shared.$black;
+        @include shared.font-unbounded(500);
+        font-size: 1.6rem;
+        tr td {
+            &:first-child{
+                padding: 2rem 1rem .8rem 3.2rem;
+            }
+            &:last-child{
+                padding: 2rem 3.2rem .8rem 1rem;
+            }
+            &:not(:last-child):not(:first-child) {
+                padding: 2rem 1rem .8rem 1rem;
+            }        
+        }
+    }
+    tbody {
+        @include shared.font-montserrat(500);
+        font-size: 1.6rem;
+        tr td {
+            &:first-child{
+                padding: 2rem 1rem 2rem 3.2rem;
+            }
+            &:last-child{
+                padding: 2rem 3.2rem 2rem 1rem;
+            }
+            &:not(:last-child):not(:first-child) {
+                padding: 2rem 1rem 2rem 1rem;
+            }  
+        }
     }
 }
 
