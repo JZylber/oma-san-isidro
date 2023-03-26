@@ -27,8 +27,8 @@ const ResultFinderForm = ({availableResults,searchResults} : FormProps) => {
 
     return(
     <div className={styles.form}>
-        <SelectResultCategory category="Año" value={searchParameters.año} setValue={(value : number) => setSearchParameters({año:value,instancia:undefined})} options={resultYears}/>
-        <SelectResultCategory category="Instancia" value={searchParameters.instancia} setValue={(value : string) => setSearchParameters({...searchParameters,instancia:value})} options={instances}/>
+        <SelectResultCategory category="Año" value={searchParameters.año} setValue={(value? : number) => setSearchParameters({año:value,instancia:undefined})} options={resultYears}/>
+        <SelectResultCategory category="Instancia" value={searchParameters.instancia} setValue={(value? : string) => setSearchParameters({...searchParameters,instancia:value})} options={instances}/>
         <div onClick={handleSubmit} className={styles.searchButton}>
             <span>Buscar</span>
         </div>

@@ -36,6 +36,9 @@
        position: relative;
        min-height: 5.4rem;
     }
+    &_open{
+        z-index: 2;
+    }
 }
 
 .dropdownFilter{

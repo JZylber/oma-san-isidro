@@ -83,8 +83,10 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
     return(
         <>
         <div className={styles.filters}>
-            <SelectResultCategory category="Participante" value={filters.participante} setValue={(value: string) => updateFilter("participante",value)} options={names}/>
-            <SelectResultCategory category="Colegio" value={filters.colegio} setValue={(value : School) => updateFilter("colegio",value)} options={schools}/>
+            <SelectResultCategory category="Participante" value={filters.participante} setValue={(value?: string) => updateFilter("participante",value)} options={names} clear={true}/>
+            <SelectResultCategory category="Colegio" value={filters.colegio} setValue={(value? : School) => updateFilter("colegio",value)} options={schools} clear={true}/>
+            <SelectResultCategory category="Nivel" value={filters.nivel} setValue={(value? : number) => updateFilter("nivel",value)} options={[1,2,3]} clear={true}/>
+            <SelectResultCategory category="Aprobado" value={filters.aprobado} setValue={(value? : boolean) => updateFilter("aprobado",value)} options={[true,false]} clear={true}/>
         </div>
         <div className={styles.results}>
         </div>

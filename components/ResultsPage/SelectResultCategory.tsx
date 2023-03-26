@@ -6,11 +6,13 @@ import styles from "./SelectResultCategory.module.scss"
 interface SelectResultProps<T>{
     category: string,
     value: T | undefined,
-    setValue: (option: T) => void,
-    options: T [];
+    setValue: (option: T | undefined) => void,
+    options: T [],
+    input?: boolean,
+    clear?: boolean
 }
 
-const SelectResultCategory = <T extends string|number|School,>({category,value,setValue,options}:SelectResultProps<T>) => {
+const SelectResultCategory = <T extends string|number|boolean|School,>({category,value,setValue,options,input = false,clear=false}:SelectResultProps<T>) => {
     const [canOpen,setCanOpen] = useState(false)
     const toggleFilter = () => {
         setCanOpen(!canOpen)
@@ -20,6 +22,8 @@ const SelectResultCategory = <T extends string|number|School,>({category,value,s
         return `${option}`;
       } else if(typeof option === 'string') {
         return `${option.slice(0,1)}${option.slice(1).toLocaleLowerCase()}`
+      }else if(typeof option === 'boolean') {
+        return option?"Si":"No"
       }else {
         let school = option as School
         return `${school.nombre}${school.sede?"-"+school.sede:""}`
@@ -46,10 +50,11 @@ const SelectResultCategory = <T extends string|number|School,>({category,value,s
     <div className={styles.category_container}>
       <p className={styles.category}>{category}</p>
       <div className={styles.filter_box_container}>
-        <div className={styles.filter_box} ref={wrapperRef}>
-          <div onClick={toggleFilter} className={[styles.filterText,styles.filterTitle,isOpen?styles.filterTitleOpen:""].join(" ")}><span>{value?displayOption(value):`-`}</span><div className={styles.filterTitleEnd}><SelectIcon/></div></div>
+        <div className={[styles.filter_box,isOpen && styles.filter_box_open].join(" ")} ref={wrapperRef}>
+          <div onClick={toggleFilter} className={[styles.filterText,styles.filterTitle,isOpen?styles.filterTitleOpen:""].join(" ")}><span>{value!==undefined?displayOption(value):`-`}</span><div className={styles.filterTitleEnd}><SelectIcon/></div></div>
           {isOpen && 
               <ul className={styles.dropdownFilter}>
+                  {clear && <li onClick={() => {setValue(undefined);toggleFilter()}} className={[styles.filterText,styles.filterOption].join(" ")}><span>Quitar filtro</span></li>}
                   {options.map((option,idx) => <li onClick={() => {setValue(option);toggleFilter()}} className={[styles.filterText,styles.filterOption].join(" ")} key={idx}><span>{displayOption(option)}</span></li>)}
               </ul>}
         </div>
