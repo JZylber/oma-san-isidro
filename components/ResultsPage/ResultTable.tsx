@@ -5,11 +5,15 @@ import styles from "./ResultTable.module.scss"
 import SelectResultCategory from "./SelectResultCategory";
 import TypedFilter from "./TypedFilter";
 
+const participantName = (result: TestQueryResults) => {
+    return(`${result.participacion.participante.nombre} ${result.participacion.participante.apellido}`)
+}
+
 const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
     let schools : Array<School> = Array.from(new Set(results.map((result) => result.participacion.colegio)))
     const genericSchools: Array<School> =Array.from(new Set(schools.filter((school) => school.sede).map((school) => {return({nombre: school.nombre})})));
     schools = schools.concat(genericSchools);
-    const levels : Array<string> = Array.from(new Set(results.map((result) => result.participacion.nivel.toString())))
+    const names : Array<string> = Array.from(new Set(results.map(participantName)))
     const numberOfProblems = results[0].prueba.cantidad_problemas;
     const starting_filters : ResultFilter = {participante: undefined,colegio: undefined,nivel: undefined,aprobado: undefined}
     const [filters,setFilters] = useState<ResultFilter>(starting_filters)
@@ -19,7 +23,7 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
     }
 
     const isFilterCompliant = (result: TestQueryResults) => {
-        const name = !filters.participante || result.participacion.participante.nombre.toLowerCase() === (filters.participante.toLowerCase())
+        const name = !filters.participante || participantName(result) === (filters.participante.toLowerCase())
         const school = !filters.colegio || ((filters.colegio.nombre === result.participacion.colegio.nombre) && (!filters.colegio.sede || filters.colegio.sede === result.participacion.colegio.sede))
         const level = !filters.nivel || filters.nivel === result.participacion.nivel
         const passed = filters.aprobado === undefined || filters.aprobado === result.aprobado
@@ -79,6 +83,7 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
     return(
         <>
         <div className={styles.filters}>
+            <SelectResultCategory category="Participante" value={filters.participante} setValue={(value: string) => updateFilter("participante",value)} options={names}/>
             <SelectResultCategory category="Colegio" value={filters.colegio} setValue={(value : School) => updateFilter("colegio",value)} options={schools}/>
         </div>
         <div className={styles.results}>
