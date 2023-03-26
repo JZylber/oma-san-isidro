@@ -1,25 +1,28 @@
 import {RefObject, useEffect, useRef, useState } from "react"
 import SelectIcon from "../../public/images/menuSelectIcon.svg";
+import { School } from "./resultsTypes";
 import styles from "./SelectResultCategory.module.scss"
 
 interface SelectResultProps<T>{
     category: string,
-    value: T | null,
+    value: T | undefined,
     setValue: (option: T) => void,
     options: T [];
 }
 
-
-const SelectResultCategory = <T extends string|number,>({category,value,setValue,options}:SelectResultProps<T>) => {
+const SelectResultCategory = <T extends string|number|School,>({category,value,setValue,options}:SelectResultProps<T>) => {
     const [canOpen,setCanOpen] = useState(false)
     const toggleFilter = () => {
         setCanOpen(!canOpen)
     }
     const displayOption = (option: T) => {
-      if(typeof option === "number"){
+      if(typeof option === 'number'){
         return `${option}`;
-      } else {
+      } else if(typeof option === 'string') {
         return `${option.slice(0,1)}${option.slice(1).toLocaleLowerCase()}`
+      }else {
+        let school = option as School
+        return `${school.nombre}${school.sede?"-"+school.sede:""}`
       }
     }
     const useOutsideAlerter = (ref : RefObject<HTMLDivElement>) => {

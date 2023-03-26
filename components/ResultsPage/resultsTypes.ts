@@ -35,11 +35,10 @@ export interface TestQueryResults {
 }
 
 export interface ResultFilter {
-    nombre?: string,
-    apellido?: string,
-    colegio: Array<string>,
-    nivel:  Array<string>,
-    aprobado: Array<string>
+    participante?: string,
+    colegio?: School,
+    nivel?:  number,
+    aprobado?: boolean
 } 
 
 export type School = {
