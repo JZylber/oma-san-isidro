@@ -31,7 +31,7 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
     }
 
     const isFilterCompliant = (result: TestQueryResults) => {
-        const name = !filters.participante || participantName(result) === (filters.participante.toLowerCase())
+        const name = !filters.participante || participantName(result) === (filters.participante)
         const school = !filters.colegio || ((filters.colegio.nombre === result.participacion.colegio.nombre) && (!filters.colegio.sede || filters.colegio.sede === result.participacion.colegio.sede))
         const level = !filters.nivel || filters.nivel === result.participacion.nivel
         const passed = filters.aprobado === undefined || filters.aprobado === result.aprobado
@@ -87,8 +87,8 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
     return(
         <>
         <div className={styles.filters}>
-            <SelectResultCategory category="Participante" value={filters.participante} setValue={(value?: string) => updateFilter("participante",value)} options={names} clear={true} input={true}/>
-            <SelectResultCategory category="Colegio" value={filters.colegio} setValue={(value? : School) => updateFilter("colegio",value)} options={schools} clear={true} input={true}/>
+            <SelectResultCategory category="Participante" value={filters.participante} setValue={(value?: string) => updateFilter("participante",value)} options={names} input={true}/>
+            <SelectResultCategory category="Colegio" value={filters.colegio} setValue={(value? : School) => updateFilter("colegio",value)} options={schools} input={true}/>
             <SelectResultCategory category="Nivel" value={filters.nivel} setValue={(value? : number) => updateFilter("nivel",value)} options={[1,2,3]} clear={true}/>
             <SelectResultCategory category="Aprobado" value={filters.aprobado} setValue={(value? : boolean) => updateFilter("aprobado",value)} options={[true,false]} clear={true}/>
         </div>

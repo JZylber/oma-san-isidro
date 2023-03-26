@@ -35,11 +35,16 @@ const SelectResultCategory = <T extends string|number|boolean|School,>({category
       setTempValue(displayOption(option));
       toggleFilter();
     }
-    const [autocompleteOptions,setAutocompleteOptions] = useState(options);
+    const cleanFilter = () => {
+      setValue(undefined);
+      setTempValue("");
+    }
     useEffect(() => {
-      let filteredOptions = options.filter((option) => {return displayOption(option).toLocaleLowerCase().includes(tempValue.toLocaleLowerCase())});
-      setAutocompleteOptions(filteredOptions);
+      if(tempValue === ""){
+          cleanFilter();
+      }
     },[tempValue])
+    const filteredOptions = options.filter((option) => {return displayOption(option).toLocaleLowerCase().includes(tempValue.toLocaleLowerCase())});
     const useOutsideAlerter = (ref : RefObject<HTMLDivElement>) => {
         useEffect(() => {
           const handleClickOutside = (event : MouseEvent) => {
@@ -70,16 +75,20 @@ const SelectResultCategory = <T extends string|number|boolean|School,>({category
               </div>
             </div>
             :
+            <div className={[styles.filter_input,isOpen?styles.filterTitleOpen:""].join(" ")}>
             <input 
-              className={[styles.clean_input,styles.filterText,styles.filterTitle,isOpen?styles.filterTitleOpen:""].join(" ")} 
+              className={[styles.clean_input,styles.filterText,styles.filterTitle].join(" ")} 
               value={tempValue}
               onChange={(event) => {setTempValue(event.target.value);setCanOpen(true)}}
-            />}
+            />
+            {value&&<div className={[styles.filterText,styles.filter_clear].join(" ")} onClick={cleanFilter}>X</div>}
+            </div>
+            }
           {isOpen && 
               <ul className={styles.dropdownFilter}>
                   {clear && <li onClick={() => {setValue(undefined);toggleFilter()}} className={[styles.filterText,styles.filterOption].join(" ")}><span>Quitar filtro</span></li>}
                   {input?
-                    autocompleteOptions.map((option,idx) => <li onClick={() => {setInputFilter(option)}} className={[styles.filterText,styles.filterOption].join(" ")} key={idx}><span>{displayOption(option)}</span></li>)
+                    filteredOptions.map((option,idx) => <li onClick={() => {setInputFilter(option)}} className={[styles.filterText,styles.filterOption].join(" ")} key={idx}><span>{displayOption(option)}</span></li>)
                     :options.map((option,idx) => <li onClick={() => {setValue(option);toggleFilter()}} className={[styles.filterText,styles.filterOption].join(" ")} key={idx}><span>{displayOption(option)}</span></li>)}
               </ul>}
         </div>

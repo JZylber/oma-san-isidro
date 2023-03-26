@@ -49,6 +49,16 @@
     }
 }
 
+.filter_input{
+    display: flex;
+    width: 100%;
+}
+
+.filter_clear{
+    flex-basis: content;
+    padding-left: 0 !important;
+}
+
 .filter{
     &Text{
         display: flex;
@@ -94,7 +104,8 @@
     &:focus{
         outline: none;
     }
-    max-width: 100%;
+    width: 100%;
+    text-overflow: ellipsis;
 }
 
 .currentFilter{
