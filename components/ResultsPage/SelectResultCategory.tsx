@@ -9,10 +9,12 @@ interface SelectResultProps<T>{
     setValue: (option: T | undefined) => void,
     options: T [],
     input?: boolean,
-    clear?: boolean
+    clear?: boolean,
+    sortOptions?: (option_a : T,option_b: T) => number;
 }
 
-const SelectResultCategory = <T extends string|number|boolean|School,>({category,value,setValue,options,input = false,clear=false}:SelectResultProps<T>) => {
+const SelectResultCategory = <T extends string|number|boolean|School,>({category,value,setValue,options,input = false,clear=false,sortOptions}:SelectResultProps<T>) => {
+    sortOptions && options.sort(sortOptions);
     const [canOpen,setCanOpen] = useState(false)
     const toggleFilter = () => {
         setCanOpen(!canOpen)
@@ -49,7 +51,7 @@ const SelectResultCategory = <T extends string|number|boolean|School,>({category
           setTempValue(displayOption(value));
         }
     },[canOpen,value,,displayOption])
-    const filteredOptions = options.filter((option) => {return displayOption(option).toLocaleLowerCase().includes(tempValue.toLocaleLowerCase())});
+    let filteredOptions = options.filter((option) => {return displayOption(option).toLocaleLowerCase().includes(tempValue.toLocaleLowerCase())});
     const useOutsideAlerter = (ref : RefObject<HTMLDivElement>) => {
         useEffect(() => {
           const handleClickOutside = (event : MouseEvent) => {

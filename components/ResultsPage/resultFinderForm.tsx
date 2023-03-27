@@ -14,6 +14,11 @@ interface searchParametersType {
     año: number|undefined, 
     instancia: string|undefined
 }
+
+const sortInstances = (ins_a : string, ins_b : string) => {
+    const ordered_instances = ["INTERESCOLAR","ZONAL","PROVINCIAL","REGIONAL","NACIONAL"];
+    return(ordered_instances.indexOf(ins_a) - ordered_instances.indexOf(ins_b)); 
+}
     
 const ResultFinderForm = ({availableResults,searchResults,clearResults} : FormProps) => {
     const resultYears =  availableResults.map((yearTests) => yearTests.ano);
@@ -49,7 +54,7 @@ const ResultFinderForm = ({availableResults,searchResults,clearResults} : FormPr
     return(
     <form className={styles.form}>
         <SelectResultCategory category="Año" value={searchParameters.año} setValue={setYear} options={resultYears}/>
-        <SelectResultCategory category="Instancia" value={searchParameters.instancia} setValue={setInstance} options={instances}/>
+        <SelectResultCategory category="Instancia" value={searchParameters.instancia} setValue={setInstance} options={instances} sortOptions={sortInstances}/>
         <div onClick={handleSubmit} className={styles.searchButton}>
             <span>Buscar</span>
         </div>
