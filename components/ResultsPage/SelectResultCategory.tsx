@@ -1,4 +1,4 @@
-import {RefObject, useEffect, useRef, useState } from "react"
+import {RefObject, useCallback, useEffect, useRef, useState } from "react"
 import SelectIcon from "../../public/images/menuSelectIcon.svg";
 import { School } from "./resultsTypes";
 import styles from "./SelectResultCategory.module.scss"
@@ -17,7 +17,7 @@ const SelectResultCategory = <T extends string|number|boolean|School,>({category
     const toggleFilter = () => {
         setCanOpen(!canOpen)
     }
-    const displayOption = (option: T) => {
+    const displayOption = useCallback((option: T) => {
       if(typeof option === 'number'){
         return `${option}`;
       } else if(typeof option === 'string') {
@@ -28,31 +28,27 @@ const SelectResultCategory = <T extends string|number|boolean|School,>({category
         let school = option as School
         return `${school.nombre}${school.sede?"-"+school.sede:""}`
       }
-    }
+    },[]);
     const [tempValue,setTempValue] = useState(value?displayOption(value):"");
     const setInputFilter = (option : T) => {
       setValue(option);
-      setTempValue(displayOption(option));
       toggleFilter();
     }
-    const cleanFilter = () => {
+    const cleanFilter = useCallback(() => {
       setValue(undefined);
-      setTempValue("");
-    }
+    },[setValue]);
     useEffect(() => {
-      if(tempValue === ""){
+      if(input && tempValue === "" && value !== undefined){
           cleanFilter();
       }
-    },[tempValue])
+    },[tempValue,value,cleanFilter,input])
     useEffect(() => {
-      if(!canOpen){
         if(value === undefined){
-          setTempValue("");
+          !canOpen && setTempValue("");
         }else{
           setTempValue(displayOption(value));
         }
-      }
-    },[canOpen])
+    },[canOpen,value,,displayOption])
     const filteredOptions = options.filter((option) => {return displayOption(option).toLocaleLowerCase().includes(tempValue.toLocaleLowerCase())});
     const useOutsideAlerter = (ref : RefObject<HTMLDivElement>) => {
         useEffect(() => {
