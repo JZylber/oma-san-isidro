@@ -44,6 +44,15 @@ const SelectResultCategory = <T extends string|number|boolean|School,>({category
           cleanFilter();
       }
     },[tempValue])
+    useEffect(() => {
+      if(!canOpen){
+        if(value === undefined){
+          setTempValue("");
+        }else{
+          setTempValue(displayOption(value));
+        }
+      }
+    },[canOpen])
     const filteredOptions = options.filter((option) => {return displayOption(option).toLocaleLowerCase().includes(tempValue.toLocaleLowerCase())});
     const useOutsideAlerter = (ref : RefObject<HTMLDivElement>) => {
         useEffect(() => {

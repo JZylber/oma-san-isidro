@@ -52,10 +52,21 @@
     margin-top: 6rem;
     display: flex;
     justify-content: space-between;
-    .pagination{
+    align-items: flex-end;
+}
+.table_footer{
+    margin-top: 1.6rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.pagination{
         display: flex;
         @include shared.font-montserrat(400);
         font-size: 1.6rem;
+        svg{
+            fill: shared.$black;
+        }
         .prev{
             transform: rotate(90deg);
             padding-left: .8rem;
@@ -67,11 +78,37 @@
             padding-right: .8rem;
         };
         .greyed{
-            /*Pendiente*/
+            svg {
+                fill: gray;
+            }
         }
-    }
 }
 
 .filters {
     display: flex;
+}
+
+.downloadButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.2rem;
+    min-width: 180px;
+    width: 19%;
+    background-color: shared.$light-blue;
+    border-width: 2px 2px 4px 2px;
+    border-style: solid;
+    border-color: #000000;
+    border-radius: 9px;
+    @include shared.font-unbounded(500);
+    font-size: 1.6rem;
+}
+
+.arrow{
+    transform: rotate(90deg);
+    height: 2rem;
+    margin-left: 1.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

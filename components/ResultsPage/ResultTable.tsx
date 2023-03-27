@@ -3,7 +3,7 @@ import { ResultFilter, School, TestQueryResults } from "./resultsTypes";
 import styles from "./ResultTable.module.scss"
 import SelectResultCategory from "./SelectResultCategory";
 import SelectIcon from "../../public/images/menuSelectIcon.svg";
-
+import Arrow from "../../public/images/newsArrow.svg"
 const participantName = (result: TestQueryResults) => {
     return(`${result.participacion.participante.nombre} ${result.participacion.participante.apellido}`)
 }
@@ -27,6 +27,7 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
 
     const updateFilter = (category: string, newValue: undefined | string | boolean | number | School) => {
         setFilters({...filters,[category]:newValue})
+        setPage(0);
     }
 
     const isFilterCompliant = (result: TestQueryResults) => {
@@ -114,10 +115,19 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
             <SelectResultCategory category="Aprobado" value={filters.aprobado} setValue={(value? : boolean) => updateFilter("aprobado",value)} options={[true,false]} clear={true}/>
         </div>
         <div className={styles.table_header}>
+            <div className={styles.downloadButton}>
+                <span>Descargar</span>
+                <div className={styles.arrow}>
+                    <Arrow/>
+                </div>
+            </div>
             {pagination}
         </div>
         <div className={styles.results}>
             {make_table(results_in_page)}
+        </div>
+        <div className={styles.table_footer}>
+            {pagination}
         </div>
         </>
     )

@@ -85,6 +85,11 @@
         &Open{
             border-bottom: 2px solid shared.$black !important;
         }
+        &End{
+            svg{
+                fill: shared.$black;
+            }
+        }
     }
     &Option{
         &:not(:last-child){

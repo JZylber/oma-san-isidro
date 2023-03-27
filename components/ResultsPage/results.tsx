@@ -1,3 +1,4 @@
+import { clear } from "console"
 import { useRouter } from "next/router"
 import {useCallback, useEffect, useState } from "react"
 import Loader from "../Loader/Loader"
@@ -10,7 +11,7 @@ const Results = ({competition,availableResults} : ResultProps) => {
     const router = useRouter()
     const query = router.query
     const [isLoading,setIsLoading] = useState(false)
-    const [results,setResults] = useState<Array<TestQueryResults>>()
+    const [results,setResults] = useState<Array<TestQueryResults> | undefined>()
     const nameAsDB = (name: string) => {
         if(name == "Ñandú"){
             return("ÑANDÚ")
@@ -31,6 +32,10 @@ const Results = ({competition,availableResults} : ResultProps) => {
         getResults(year,instance,nameAsDB(competition))
         setIsLoading(true)
     },[competition])
+
+    const clearResults = () => {
+        setResults(undefined);
+    }
     
     useEffect(() => {
         if(query["año"] && query["instancia"]){
@@ -42,8 +47,8 @@ const Results = ({competition,availableResults} : ResultProps) => {
     return(
         <>
         <h1 className={styles.title}>Resultados {competition}</h1>
-        <ResultFinderForm availableResults={availableResults} searchResults={searchResults}/>
-        {isLoading ? <Loader/> : (results?<ResultTable results={results}/>:"¡Elegí un año y una instancia y hacé click en buscar resultados!")}
+        <ResultFinderForm availableResults={availableResults} searchResults={searchResults} clearResults={clearResults}/>
+        {isLoading ? <Loader/> : (results?(results.length>0?<ResultTable results={results}/>:<span className={styles.infoText}>No hay resultados para mostrar.</span>):<span className={styles.infoText}>¡Elegí un año y una instancia y hacé click en buscar resultados!</span>)}
         </>
     )
 }
