@@ -1,6 +1,4 @@
-import { clear } from "console"
-import { useRouter } from "next/router"
-import {useCallback, useEffect, useState } from "react"
+import {useCallback, useState } from "react"
 import Loader from "../Loader/Loader"
 import ResultFinderForm from "./resultFinderForm"
 import styles from "./results.module.scss"
@@ -8,8 +6,6 @@ import {ResultProps,TestQueryResults } from "./resultsTypes"
 import ResultTable from "./ResultTable"
 
 const Results = ({competition,availableResults} : ResultProps) => {
-    const router = useRouter()
-    const query = router.query
     const [isLoading,setIsLoading] = useState(false)
     const [results,setResults] = useState<Array<TestQueryResults> | undefined>()
     const nameAsDB = (name: string) => {
@@ -36,14 +32,6 @@ const Results = ({competition,availableResults} : ResultProps) => {
     const clearResults = () => {
         setResults(undefined);
     }
-    
-    useEffect(() => {
-        if(query["año"] && query["instancia"]){
-            const instance = query["instancia"] as string;
-            searchResults(Number(query["año"]),instance)
-        }
-      }, [query,searchResults])
-    
     return(
         <>
         <h1 className={styles.title}>Resultados {competition}</h1>
