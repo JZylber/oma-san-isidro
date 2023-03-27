@@ -1,18 +1,14 @@
 @use '../../styles/shared.scss' as shared;
 
 .loader_container{
+    flex: 1 1 auto;
+    min-height: 100vh;
     height: 100%;
     width: 100%;
     display: flex;
     flex-flow: column;
     justify-content: center;
     align-items: center;
-    @include shared.mobile-only{
-        margin-top: 12.8rem;
-    }
-    @include shared.not-mobile{
-        margin-top: 25.6rem;
-    }
 }
 
 .loader {

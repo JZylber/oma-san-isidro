@@ -9,6 +9,10 @@ html {
     font-size: 62.5%;
 }
 
+html, body, #__next{
+    min-height: 100vh;
+}
+
 body {
     background-color: shared.$white;
 }
