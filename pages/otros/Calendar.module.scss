@@ -44,3 +44,15 @@
         display: none;
     }
 }
+
+.printButtonContainer{
+    @include shared.mobile-only{
+        width: 100%;
+    }
+    @include shared.tablet-only{
+        width: 50%;
+    }
+    @include shared.desktop-only{
+        width: 30%;
+    }
+}
