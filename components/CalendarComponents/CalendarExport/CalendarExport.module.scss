@@ -1,20 +1,20 @@
 @use '../../../styles/shared.scss' as shared;
 
 .container{
-    padding: 4rem 3.2rem 4rem 3.2rem;
+    padding: 3.2rem 3.2rem 3.2rem 3.2rem;
     h1{
         @include shared.font-unbounded(500);
         font-size: 3.2rem;
-        padding-bottom: .8rem;
+        padding-bottom: .6rem;
     }
     h2{
         @include shared.font-unbounded(500);
         font-size: 2rem;
-        padding-top: .6rem;
+        padding-top: .3rem;
         border-top: 2px solid black;
     }
-    ul{
-        padding-bottom: .6rem;
+    ul:not(:last-child){
+        padding-bottom: .3rem;
     }
     ul li{
         @include shared.font-montserrat(400);
