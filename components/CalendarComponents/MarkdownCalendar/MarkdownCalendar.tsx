@@ -19,7 +19,9 @@ const MarkdownCalendar = ({year,events}: MarkdownCalendarProps) => {
         }
     })
     return(
-        <ReactMarkdown children={markdown}/>
+        <ReactMarkdown>
+            {markdown}
+        </ReactMarkdown>
     )
 }
 
