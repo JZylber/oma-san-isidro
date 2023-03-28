@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { ResultFilter, School, TestQueryResults } from "./resultsTypes";
 import styles from "./ResultTable.module.scss"
-import SelectResultCategory from "./SelectResultCategory";
 import SelectIcon from "../../public/images/menuSelectIcon.svg";
 import Arrow from "../../public/images/newsArrow.svg"
+import NoResults from "./NoResults";
+import ResultFilterForm from "./resultFilterForm";
 const participantName = (result: TestQueryResults) => {
     return(`${result.participacion.participante.nombre} ${result.participacion.participante.apellido}`)
 }
@@ -106,29 +107,28 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
             )
         }
     }
+    const table =
+    <>
+    <div className={styles.table_header}>
+        <div className={styles.downloadButton}>
+            <span>Descargar</span>
+            <div className={styles.arrow}>
+                <Arrow/>
+            </div>
+        </div>
+        {pagination}
+    </div>
+    <div className={styles.results}>
+        {make_table(results_in_page)}
+    </div>
+    <div className={styles.table_footer}>
+        {pagination}
+    </div>
+    </>
     return(
         <>
-        <div className={styles.filters}>
-            <SelectResultCategory category="Participante" value={filters.participante} setValue={(value?: string) => updateFilter("participante",value)} options={names} input={true}/>
-            <SelectResultCategory category="Colegio" value={filters.colegio} setValue={(value? : School) => updateFilter("colegio",value)} options={schools} input={true}/>
-            <SelectResultCategory category="Nivel" value={filters.nivel} setValue={(value? : number) => updateFilter("nivel",value)} options={[1,2,3]} clear={true}/>
-            <SelectResultCategory category="Aprobado" value={filters.aprobado} setValue={(value? : boolean) => updateFilter("aprobado",value)} options={[true,false]} clear={true}/>
-        </div>
-        <div className={styles.table_header}>
-            <div className={styles.downloadButton}>
-                <span>Descargar</span>
-                <div className={styles.arrow}>
-                    <Arrow/>
-                </div>
-            </div>
-            {pagination}
-        </div>
-        <div className={styles.results}>
-            {make_table(results_in_page)}
-        </div>
-        <div className={styles.table_footer}>
-            {pagination}
-        </div>
+            <ResultFilterForm filters={filters} updateFilter={updateFilter} schools={schools} names={names}/>
+            {filtered_results.length > 0?table:<NoResults/>}
         </>
     )
 }
