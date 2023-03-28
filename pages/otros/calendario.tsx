@@ -70,7 +70,7 @@ const Calendar : NextPage<{results : Array<JSONCalendarEvent>,year:number}> = ({
                 {months.map((name,number) => <MonthEvents key={number} name={name} events={getMonthEvents(number)}/>)}
             </div>
             <div style={{ display: "none" }}>
-                <div style={{ padding: "4rem 3.2rem 4rem 3.2rem" }} ref={printCalendarRef}>
+                <div className={styles.markdown} style={{padding: "4rem 3.2rem 4rem 3.2rem"}} ref={printCalendarRef}>
                     <MarkdownCalendar year={year} events={months.map((name,number) => {return({name: name, events: getMonthEvents(number)}) })}/>
                 </div>
             </div>

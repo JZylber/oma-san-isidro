@@ -56,3 +56,21 @@
         width: 30%;
     }
 }
+
+.markdown{
+    h1{
+        font-size: 8rem;
+        padding-bottom: 2rem;
+    }
+    h2{
+        font-size: 3.2rem;
+        padding-top: 1.6rem;
+        border-top: 2px solid black;
+    }
+    ul{
+        padding-bottom: 1.6rem;
+    }
+    ul li{
+        font-size: 2rem;
+    }
+}
