@@ -48,10 +48,10 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
         return(
             <tr key={index}>
                 <td>{participant}</td>
-                <td>{level}</td>
+                <td className={styles.center_align}>{level}</td>
                 <td>{school}</td>
-                {numberOfProblems>0 && (present ? points.map((point,index) => <td key={index}>{point}</td>): <td colSpan={numberOfProblems + 1}>Ausente</td>)}
-                <td>{passed?"Si":"No"}</td>
+                {numberOfProblems>0 && (present ? points.map((point,index) => <td key={index} className={styles.center_align}>{point}</td>): <td colSpan={numberOfProblems + 1} className={styles.center_align}>Ausente</td>)}
+                <td className={styles.center_align}>{passed?"Si":"No"}</td>
             </tr>)
     }
     let filtered_results = results.filter(isFilterCompliant);
@@ -85,15 +85,15 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
                     <thead>
                         <tr>
                             <td>Participante</td>
-                            <td>Nivel</td>
+                            <td className={styles.center_align}>Nivel</td>
                             <td>Colegio</td>
                             {numberOfProblems > 0 &&
                                 <>
-                                {Array.from(new Array(numberOfProblems), (x, i) => i + 1).map((number) => <td key={number}>{`P${number}`}</td>)}
-                                <td>Total</td>
+                                {Array.from(new Array(numberOfProblems), (x, i) => i + 1).map((number) => <td key={number} className={styles.center_align}>{`P${number}`}</td>)}
+                                <td className={styles.center_align}>Total</td>
                                 </>
                             }
-                            <td>Aprobado</td>
+                            <td className={styles.center_align}>Aprobado</td>
                         </tr>
                     </thead>
                     <tbody>

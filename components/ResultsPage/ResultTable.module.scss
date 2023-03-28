@@ -22,30 +22,36 @@
         font-size: 1.6rem;
         tr td {
             &:first-child{
-                padding: 2rem 1rem .8rem 3.2rem;
+                padding: 1.6rem 2rem 1.6rem 4.4rem;
             }
             &:last-child{
-                padding: 2rem 3.2rem .8rem 1rem;
+                padding: 1.6rem 4.4rem 1.6rem 2rem;
             }
             &:not(:last-child):not(:first-child) {
-                padding: 2rem 1rem .8rem 1rem;
+                padding: 1.6rem 2rem 1.6rem 2rem;
             }        
         }
-    }
+    } 
     tbody {
         @include shared.font-montserrat(500);
         font-size: 1.6rem;
         tr td {
             &:first-child{
-                padding: 2rem 1rem 2rem 3.2rem;
+                padding: 1.6rem 2rem 1.6rem 4.4rem;
             }
             &:last-child{
-                padding: 2rem 3.2rem 2rem 1rem;
+                padding: 1.6rem 4.4rem 1.6rem 2rem;
             }
             &:not(:last-child):not(:first-child) {
-                padding: 2rem 1rem 2rem 1rem;
+                padding: 1.6rem 2rem 1.6rem 2rem;
             }  
         }
+        tr:hover{
+            background-color: shared.$light-blue;
+        } 
+    }
+    .center_align{
+        text-align: center;
     }
 }
 .table_header{
