@@ -35,7 +35,7 @@ const Results = ({competition,availableResults} : ResultProps) => {
     }
     const displayResults = (results?: TestQueryResults[]) => {
         if(results === undefined){
-            return(<span>Selecciona año e instancia para poder ejecutar una búsqueda.</span>)
+            return(<span className={styles.infoText}>Selecciona año e instancia para poder ejecutar una búsqueda.</span>)
         }else if(results.length === 0){
             return(<NoResults/>)
         }else{
@@ -45,7 +45,7 @@ const Results = ({competition,availableResults} : ResultProps) => {
 
     return(
         <>
-        <h1 className={styles.title}>Resultados {competition}</h1>
+        <h1 className={styles.title}>Resultados</h1>
         <ResultFinderForm availableResults={availableResults} searchResults={searchResults} clearResults={clearResults}/>
         {isLoading ? <Loader/> : displayResults(results)}
         </>
