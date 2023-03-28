@@ -1,5 +1,6 @@
 import {useCallback, useState } from "react"
 import Loader from "../Loader/Loader"
+import NoResults from "./NoResults"
 import ResultFinderForm from "./resultFinderForm"
 import styles from "./results.module.scss"
 import {ResultProps,TestQueryResults } from "./resultsTypes"
@@ -32,11 +33,21 @@ const Results = ({competition,availableResults} : ResultProps) => {
     const clearResults = () => {
         setResults(undefined);
     }
+    const displayResults = (results?: TestQueryResults[]) => {
+        if(results === undefined){
+            return(<span>Selecciona año e instancia para poder ejecutar una búsqueda.</span>)
+        }else if(results.length === 0){
+            return(<NoResults/>)
+        }else{
+            return(<ResultTable results={results}/>)
+        }
+    }
+
     return(
         <>
         <h1 className={styles.title}>Resultados {competition}</h1>
         <ResultFinderForm availableResults={availableResults} searchResults={searchResults} clearResults={clearResults}/>
-        {isLoading ? <Loader/> : (results?(results.length>0?<ResultTable results={results}/>:<span className={styles.infoText}>No hay resultados para mostrar.</span>):<span className={styles.infoText}>¡Elegí un año y una instancia y hacé click en buscar resultados!</span>)}
+        {isLoading ? <Loader/> : displayResults(results)}
         </>
     )
 }

@@ -70,6 +70,10 @@
   @include shared.mobile-only {
     display: none;
   }
+  @include shared.not-mobile{
+    width: 71px;
+    height: 71px;
+  }
 }
 
 .items {

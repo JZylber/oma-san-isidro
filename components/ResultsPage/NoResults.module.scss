@@ -1,0 +1,32 @@
+@use '../../styles/shared.scss' as shared;
+
+.container{
+    display: flex;
+    border: 2px solid #000000;
+    border-radius: 9px;
+    padding: 1.6rem;
+}
+
+.icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg {
+        width: 130px;
+        height: 130px;
+    }
+}
+.message{
+    padding: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    &_title{
+        @include shared.font-unbounded(500);
+        font-size: 3.4rem;
+        padding-bottom: 1.2rem;
+    }
+    &_body{
+        @include shared.font-montserrat(400);
+        font-size: shared.$desktop-reading-font-size;
+    }
+}
