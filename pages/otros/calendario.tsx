@@ -12,7 +12,7 @@ import { getDatesFromJson, JSONCalendarEvent } from "../../components/CalendarCo
 import { useRouter } from "next/router";
 import {Button} from "../../components/buttons/Button";
 import { useReactToPrint } from "react-to-print";
-import MarkdownCalendar from "../../components/CalendarComponents/MarkdownCalendar/MarkdownCalendar";
+import CalendarExport from "../../components/CalendarComponents/CalendarExport/CalendarExport";
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
     const year = new Date().getFullYear()
@@ -70,8 +70,8 @@ const Calendar : NextPage<{results : Array<JSONCalendarEvent>,year:number}> = ({
                 {months.map((name,number) => <MonthEvents key={number} name={name} events={getMonthEvents(number)}/>)}
             </div>
             <div style={{ display: "none" }}>
-                <div className={styles.markdown} style={{padding: "4rem 3.2rem 4rem 3.2rem"}} ref={printCalendarRef}>
-                    <MarkdownCalendar year={year} events={months.map((name,number) => {return({name: name, events: getMonthEvents(number)}) })}/>
+                <div ref={printCalendarRef}>
+                    <CalendarExport year={year} events={months.map((name,number) => {return({name: name, events: getMonthEvents(number)}) })}/>
                 </div>
             </div>
         </Layout>
