@@ -19,6 +19,6 @@ export const getDateFromJSON = (JSONDate : string) => {
     return(new Date(year,month,day))
 }
 
-export const getDatesFromJson = (JSONDates: JSONCalendarEvent []) => {
+export const getDatesFromJson = (JSONDates: JSONCalendarEvent []): CalendarEvent [] => {
     return(JSONDates.map((calendarEvent) => {return ({...calendarEvent,fecha_inicio:getDateFromJSON(calendarEvent.fecha_inicio), fecha_fin: calendarEvent.fecha_fin?getDateFromJSON(calendarEvent.fecha_fin):undefined})}))
 }
