@@ -5,6 +5,7 @@ import X from "../../public/images/x.svg";
 import CSV from "../../public/images/csv.svg";
 import XLS from "../../public/images/xls.svg";
 import PDF from "../../public/images/pdf.svg";
+import Download from "../../public/images/newsArrow.svg";
 import { Button } from "../buttons/Button";
 
 interface DownloadModalProps{
@@ -62,7 +63,9 @@ const DownloadPopup = ({open,setOpen}: DownloadModalProps) => {
                     </div>
                 <div className={styles.button_container}>
                     <Button content="Confirmar Descarga">
-                        <></>
+                        <div className={styles.button_arrow}>
+                            <Download/>
+                        </div>
                     </Button>
                 </div>
             </div>
