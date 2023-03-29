@@ -1,6 +1,6 @@
 import { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import DateCard from "../../components/CalendarComponents/DateCard/DateCard";
 import DateFilter from "../../components/CalendarComponents/DateFilter/DateFilter";
 import Layout from "../../components/Layout/Layout";
@@ -10,6 +10,9 @@ import styles from "./Calendar.module.scss";
 import MonthEvents from "../../components/CalendarComponents/MonthEvents/MonthEvents";
 import { getDatesFromJson, JSONCalendarEvent } from "../../components/CalendarComponents/CalendarTypes";
 import { useRouter } from "next/router";
+import {Button} from "../../components/buttons/Button";
+import { useReactToPrint } from "react-to-print";
+import CalendarExport from "../../components/CalendarComponents/CalendarExport/CalendarExport";
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
     const year = new Date().getFullYear()
@@ -40,6 +43,11 @@ const Calendar : NextPage<{results : Array<JSONCalendarEvent>,year:number}> = ({
         return(monthEvents)
     };
     const months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
+    const printCalendarRef = useRef(null);
+    const printCalendar = useReactToPrint({
+        content: () => printCalendarRef.current,
+        documentTitle: `Calendario ${year}`
+    });
     return(
         <>
         <Head>
@@ -52,11 +60,19 @@ const Calendar : NextPage<{results : Array<JSONCalendarEvent>,year:number}> = ({
             <hr className={styles.divider}></hr>
             <MonthSelect displayedMonth={displayedMonth} setDisplayedMonth={setDisplayedMonth}/>
             <DateFilter categories={categories} setCategories={setCategories} availableCategories={Array.from(new Set(events.map((e) => e.tipo)))}/>
+            <div className={styles.printButtonContainer}>
+                <Button content="Imprimir" onClick={printCalendar}/>
+            </div>
             <div className={styles.events}>
                 {getMonthEvents(displayedMonth).map((event,idx) => <DateCard key={idx} calendarEvent={event}/>)}
             </div>
             <div className={styles.calendar}>
                 {months.map((name,number) => <MonthEvents key={number} name={name} events={getMonthEvents(number)}/>)}
+            </div>
+            <div style={{ display: "none" }}>
+                <div ref={printCalendarRef}>
+                    <CalendarExport year={year} events={months.map((name,number) => {return({name: name, events: getMonthEvents(number)}) })}/>
+                </div>
             </div>
         </Layout>
         </>
