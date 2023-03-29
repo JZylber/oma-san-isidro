@@ -5,6 +5,7 @@ import SelectIcon from "../../public/images/menuSelectIcon.svg";
 import Arrow from "../../public/images/newsArrow.svg"
 import NoResults from "./NoResults";
 import ResultFilterForm from "./resultFilterForm";
+import DownloadPopup from "./DownloadModal";
 const participantName = (result: TestQueryResults) => {
     return(`${result.participacion.participante.nombre} ${result.participacion.participante.apellido}`)
 }
@@ -79,6 +80,8 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
             <div className={[styles.prev,page===0 && styles.greyed].join(" ")} onClick={prevPage}><SelectIcon/></div>
             <div className={[styles.next,page===max_pages && styles.greyed].join(" ")} onClick={nextPage}><SelectIcon/></div>
         </div>
+    //Download Modal
+    const [openDownloadPopup,setOpenDownloadPopup] = useState(false);
     const make_table = (results? : Array<TestQueryResults>) => {
         if(results){
             return(
@@ -110,7 +113,7 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
     const table =
     <>
     <div className={styles.table_header}>
-        <div className={styles.downloadButton}>
+        <div className={styles.downloadButton} onClick={() => setOpenDownloadPopup(true)}>
             <span>Descargar</span>
             <div className={styles.arrow}>
                 <Arrow/>
@@ -129,6 +132,7 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
         <>
             <ResultFilterForm filters={filters} updateFilter={updateFilter} schools={schools} names={names}/>
             {filtered_results.length > 0?table:<NoResults/>}
+            <DownloadPopup open={openDownloadPopup} setOpen={setOpenDownloadPopup}/>
         </>
     )
 }

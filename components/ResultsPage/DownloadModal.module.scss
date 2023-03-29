@@ -1,0 +1,21 @@
+@use '../../styles/shared.scss' as shared;
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: shared.$white;
+    border: 2px solid #000000;
+    border-radius: 9px;
+    padding: 4rem 6.4rem 4rem 6.4rem;
+    &_header{
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
+
+.title{
+    @include shared.font-unbounded(500);
+    font-size: 6rem;
+}
