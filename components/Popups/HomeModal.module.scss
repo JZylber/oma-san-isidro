@@ -1,74 +1,61 @@
 @use "../../styles/shared.scss" as shared;
 
-.modal{
-    &_overlay{
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: rgba(0, 0, 0, 0.5);
+.modal_content{
+  background-color: shared.$white;
+  border: 2px solid #000000;
+  border-radius: 9px;
+  padding: 2.4rem;
+  @include shared.mobile-only{
+      width: 80%;
+  }
+  @include shared.tablet-only{
+      width: 65%;
+  }
+  @include shared.desktop-only{
+      width: 50%;
+  }
+  h1 {
+      @include shared.font-unbounded(600);
+
+      @include shared.mobile-only {
+        font-size: 2.4 * shared.$mobile-actionable-font-size;
+        margin-top: shared.$mobile-spacing;
+        margin-bottom: 2.5 * shared.$mobile-spacing;
+      }
+
+      @include shared.not-mobile {
+        font-size: 2 * shared.$desktop-actionable-font-size;
+      }
+  }
+  p {
+      @include shared.font-montserrat(300);
+      @include shared.mobile-only {
+        font-size: shared.$mobile-reading-font-size;
+      }
+    
+      @include shared.tablet-only {
+        font-size: shared.$tablet-reading-font-size;
+      }
+    
+      @include shared.desktop-only {
+        font-size: 0.85 * shared.$desktop-reading-font-size; 
+      }
+      &:not(:last-child){
+          margin-top: 1.6rem;
+      }
     }
-    &_content{
-        background-color: shared.$white;
-        border: 2px solid #000000;
-        border-radius: 9px;
-        padding: 2.4rem;
-        @include shared.mobile-only{
-            width: 80%;
-        }
-        @include shared.tablet-only{
-            width: 65%;
-        }
-        @include shared.desktop-only{
-            width: 50%;
-        }
-        h1 {
-            @include shared.font-unbounded(600);
-        
-            @include shared.mobile-only {
-              font-size: 2.4 * shared.$mobile-actionable-font-size;
-              margin-top: shared.$mobile-spacing;
-              margin-bottom: 2.5 * shared.$mobile-spacing;
-            }
-        
-            @include shared.not-mobile {
-              font-size: 2 * shared.$desktop-actionable-font-size;
-            }
-        }
-        p {
-            @include shared.font-montserrat(300);
-            @include shared.mobile-only {
-              font-size: shared.$mobile-reading-font-size;
-            }
-          
-            @include shared.tablet-only {
-              font-size: shared.$tablet-reading-font-size;
-            }
-          
-            @include shared.desktop-only {
-              font-size: 0.85 * shared.$desktop-reading-font-size; 
-            }
-            &:not(:last-child){
-                margin-top: 1.6rem;
-            }
-          }
-          &_signature {
-            @include shared.font-unbounded(500);
-            margin-top: 2.4rem;
-            margin-bottom: 2.4rem;
-            display: inline-block;
-            @include shared.mobile-only {
-              font-size: 1.3 * shared.$mobile-reading-font-size;
-            }
-        
-            @include shared.not-mobile {
-              font-size: shared.$desktop-actionable-font-size;
-            }
-          }
+    &_signature {
+      @include shared.font-unbounded(500);
+      margin-top: 2.4rem;
+      margin-bottom: 2.4rem;
+      display: inline-block;
+      @include shared.mobile-only {
+        font-size: 1.3 * shared.$mobile-reading-font-size;
+      }
+
+      @include shared.not-mobile {
+        font-size: shared.$desktop-actionable-font-size;
+      }
     }
 }
 
