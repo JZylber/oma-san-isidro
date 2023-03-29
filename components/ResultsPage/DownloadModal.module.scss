@@ -13,6 +13,8 @@
         width: 100%;
         justify-content: flex-end;
     }
+    overflow-x: scroll;
+    overflow-y: scroll;
 }
 
 .title{
@@ -25,7 +27,7 @@
     @include shared.font-unbounded(300);
     font-size: 4rem;
     margin-bottom: 4rem;
-    margin-top: 7.2rem;
+    margin-top: 4.8rem;
 }
 
 .format_options{
@@ -33,15 +35,16 @@
     column-gap: 8rem;
 }
 
-.format_option{
+.format_text{
+    @include shared.font-montserrat(400);
+    font-size: 2rem;
+}
+
+.option{
     display: flex;
     flex-direction: column;
     align-items: center;
     row-gap: 2.4rem;
-    p{
-        @include shared.font-montserrat(400);
-        font-size: 2rem;
-    }
 }
 
 .selected{
@@ -58,4 +61,33 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.minWidth{
+    width: min-content;
+}
+
+.result_options{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.result_button{
+    padding: 1.4rem;
+    border: 2px solid #000000;
+    border-radius: 9px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    box-sizing: border-box;
+    @include shared.font-unbounded(400);
+    font-size: shared.$desktop-actionable-font-size;
+}
+
+.result_text{
+    @include shared.font-montserrat(400);
+    font-size: 1.6rem;
+    text-align: center;
 }
