@@ -7,15 +7,36 @@ import XLS from "../../public/images/xls.svg";
 import PDF from "../../public/images/pdf.svg";
 import Download from "../../public/images/newsArrow.svg";
 import { Button } from "../buttons/Button";
+import { TestQueryResults } from "./resultsTypes";
 
 interface DownloadModalProps{
     open: boolean,
     setOpen: Dispatch<SetStateAction<boolean>>,
+    results: TestQueryResults [],
+    filteredResults: TestQueryResults []
 }
 
-const DownloadPopup = ({open,setOpen}: DownloadModalProps) => {
+const DownloadPopup = ({open,setOpen,results,filteredResults}: DownloadModalProps) => {
     const [format,setFormat] = useState("csv");
     const [allResults,setAllResults] = useState(false);
+    const resultsToExport = allResults?results:filteredResults;
+    const getExportedFile = async () => {
+        try {
+            let exportFile = await fetch(`/api/export-results?secret=${process.env.API_TOKEN}`,
+            {
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify({fileFormat: format, results: resultsToExport})
+            }
+            ).then((response) => response.json());
+            console.log(exportFile);
+        } catch (error) {
+            console.error(error);
+        }
+    };
     return(
         <Modal open={open}>
             <div className={styles.container}>
@@ -62,7 +83,7 @@ const DownloadPopup = ({open,setOpen}: DownloadModalProps) => {
                         </div>
                     </div>
                 <div className={styles.button_container}>
-                    <Button content="Confirmar Descarga">
+                    <Button content="Confirmar Descarga" onClick={() => getExportedFile()}>
                         <div className={styles.button_arrow}>
                             <Download/>
                         </div>

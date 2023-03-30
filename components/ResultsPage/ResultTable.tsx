@@ -143,7 +143,12 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
         <>
             <ResultFilterForm filters={filters} updateFilter={updateFilter} schools={schools} names={names} levels={levels} passed={passed}/>
             {filtered_results.length > 0?table:<NoResults/>}
-            <DownloadPopup open={openDownloadPopup} setOpen={setOpenDownloadPopup}/>
+            <DownloadPopup 
+                open={openDownloadPopup} 
+                setOpen={setOpenDownloadPopup}
+                results={results}
+                filteredResults={filtered_results}
+            />
         </>
     )
 }
