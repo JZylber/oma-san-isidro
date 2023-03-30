@@ -31,8 +31,17 @@ const DownloadPopup = ({open,setOpen,results,filteredResults}: DownloadModalProp
                 method: "POST",
                 body: JSON.stringify({fileFormat: format, results: resultsToExport})
             }
-            ).then((response) => response.json());
-            console.log(exportFile);
+            )
+            .then( res => res.blob() )
+            .then( blob => {
+                var url = window.URL.createObjectURL(blob);
+                var a = document.createElement('a');
+                a.href = url;
+                a.download = `resultados.${format}`;
+                document.body.appendChild(a);
+                a.click();    
+                a.remove();
+            });
         } catch (error) {
             console.error(error);
         }
