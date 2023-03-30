@@ -8,7 +8,7 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
     try{
         //MODULES
         const fs = require("fs");
-        const { stringify } = require("csv-stringify");
+        const {stringify} = require("csv-stringify/sync");
 
         //DATA
         const {fileFormat,results}:{fileFormat : string , results : TestQueryResults[] }= req.body;
@@ -29,9 +29,10 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
                 `${result.participacion.colegio.nombre}${result.participacion.colegio.sede?"-"+result.participacion.colegio.sede:""}`
             ].concat(result.prueba.cantidad_problemas>0?result.resultados:[]).concat([result.aprobado?"Si":"No"])
         )});
+        const output = stringify(data,{header:true,columns:columns})
         res.setHeader('Content-Type', 'file/csv');
-        stringify(data,{header:true,columns:columns}, (error : any, output : any) => res.send(output));
-    }
+        res.send(output);
+        }
     catch (error) {
         res.status(500).json( {message: {error}})
     }
