@@ -6,6 +6,7 @@ import Arrow from "../../public/images/newsArrow.svg"
 import NoResults from "./NoResults";
 import ResultFilterForm from "./resultFilterForm";
 import DownloadPopup from "./DownloadModal";
+
 const participantName = (result: TestQueryResults) => {
     return(`${result.participacion.participante.nombre} ${result.participacion.participante.apellido}`)
 }
@@ -19,10 +20,6 @@ const removeRepeatedSchools = (schools : School []) => {
 }
 
 const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
-    let schools : Array<School> = removeRepeatedSchools(results.map((result) => result.participacion.colegio));
-    const genericSchools: Array<School> =removeRepeatedSchools(schools.filter((school) => school.sede).map((school) => {return({nombre: school.nombre})}));
-    schools = schools.concat(genericSchools);
-    const names : Array<string> = Array.from(new Set(results.map(participantName)))
     const numberOfProblems = results[0].prueba.cantidad_problemas;
     const starting_filters : ResultFilter = {participante: undefined,colegio: undefined,nivel: undefined,aprobado: undefined}
     const [filters,setFilters] = useState<ResultFilter>(starting_filters)
@@ -56,7 +53,21 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
                 <td className={styles.center_align}>{passed?"Si":"No"}</td>
             </tr>)
     }
+    //FILTERING
     let filtered_results = results.filter(isFilterCompliant);
+    let filterData: {schools: Array<School>, names: Set<string>, levels: Set<number>, passed: Set<boolean>} = {schools: [],names: new Set(), levels: new Set(), passed: new Set()};
+    filtered_results.forEach((result) =>{
+        filterData.schools.push(result.participacion.colegio);
+        filterData.names.add(participantName(result));
+        filterData.levels.add(result.participacion.nivel);
+        filterData.passed.add(result.aprobado);
+    })
+    let schools : Array<School> = removeRepeatedSchools(filterData.schools);
+    const genericSchools: Array<School> =removeRepeatedSchools(schools.filter((school) => school.sede).map((school) => {return({nombre: school.nombre})}));
+    schools = schools.concat(genericSchools);
+    const names : Array<string> = Array.from(new Set(filtered_results.map(participantName)));
+    const levels: Array<number> = Array.from(filterData.levels);
+    const passed: Array<boolean> = Array.from(filterData.passed);
     //PAGINATION
     const [page,setPage] = useState(0);
     const page_size = 50
@@ -130,7 +141,7 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
     </>
     return(
         <>
-            <ResultFilterForm filters={filters} updateFilter={updateFilter} schools={schools} names={names}/>
+            <ResultFilterForm filters={filters} updateFilter={updateFilter} schools={schools} names={names} levels={levels} passed={passed}/>
             {filtered_results.length > 0?table:<NoResults/>}
             <DownloadPopup open={openDownloadPopup} setOpen={setOpenDownloadPopup}/>
         </>
