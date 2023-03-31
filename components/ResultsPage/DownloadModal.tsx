@@ -39,7 +39,7 @@ const DownloadPopup = ({open,setOpen,testInfo,results,filteredResults}: Download
                 if(res.status === 200){
                     return(res.blob());
                 } else {
-                    throw res;
+                    throw res.json();
                 }
                 } )
             .then( blob => {
