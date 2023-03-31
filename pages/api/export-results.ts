@@ -38,32 +38,17 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
             const output_excel = XLSX.write(wb,{type: "buffer"});
             res.send(output_excel);
         } else if(fileFormat === 'pdf'){
-            //PRODUCTION SPECIAL OPTIONS
-            let chrome;
-            let puppeteer;
-
-            if (process.env.AWS_LAMBDA_FUNCTION_VERSION) {
-                chrome = require("chrome-aws-lambda");
-                puppeteer = require("puppeteer-core");
-            } else {
-                puppeteer = require("puppeteer");
-            }
-            let options : object = {
-                headless: true,
-                args: [
-                    "--no-sandbox",
-                    "--disable-setuid-sandbox",
-                ],
-            };
-            if (process.env.AWS_LAMBDA_FUNCTION_VERSION) {
-                options = {
-                args: [...chrome.args, "--hide-scrollbars", "--disable-web-security"],
-                defaultViewport: chrome.defaultViewport,
-                executablePath: await chrome.executablePath,
-                headless: true,
+            
+            const chromium= require("@sparticuz/chromium");
+            const puppeteer = require("puppeteer-core");
+            const options = {
+                args: chromium.args,
+                defaultViewport: chromium.defaultViewport,
+                executablePath: await chromium.executablePath(),
+                headless: chromium.headless,
                 ignoreHTTPSErrors: true,
-                };
-            }
+            };
+
             const browser = await puppeteer.launch(options);
             const page = await browser.newPage();
             const wb = XLSX.read(output_string,{type: "string", raw: true});
