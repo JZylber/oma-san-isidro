@@ -12,11 +12,12 @@ import { TestQueryResults } from "./resultsTypes";
 interface DownloadModalProps{
     open: boolean,
     setOpen: Dispatch<SetStateAction<boolean>>,
+    testInfo: string,
     results: TestQueryResults [],
     filteredResults: TestQueryResults []
 }
 
-const DownloadPopup = ({open,setOpen,results,filteredResults}: DownloadModalProps) => {
+const DownloadPopup = ({open,setOpen,testInfo,results,filteredResults}: DownloadModalProps) => {
     const [format,setFormat] = useState("csv");
     const [allResults,setAllResults] = useState(false);
     const resultsToExport = allResults?results:filteredResults;
@@ -29,12 +30,12 @@ const DownloadPopup = ({open,setOpen,results,filteredResults}: DownloadModalProp
                   'Content-Type': 'application/json'
                 },
                 method: "POST",
-                body: JSON.stringify({fileFormat: format, results: resultsToExport})
+                body: JSON.stringify({fileFormat: format, testInfo: testInfo,results: resultsToExport})
             }
             )
             .then( res => res.blob() )
             .then( blob => {
-                const fileName = `resultados.${format}`;
+                const fileName = `resultados_${testInfo.split(" ").join("_")}.${format}`;
                 let a = document.createElement("a");
                 document.body.appendChild(a);
                 var url = URL.createObjectURL(blob);
@@ -91,7 +92,7 @@ const DownloadPopup = ({open,setOpen,results,filteredResults}: DownloadModalProp
                             <div className={[styles.result_button,allResults && styles.selected].join(" ")} onClick={() => setAllResults(true)}>
                                 Todos
                             </div>
-                            <p className={styles.result_text}>Todos los resultados de <span className={styles.result_text_bold}>2023 zonal</span>.</p>
+                            <p className={styles.result_text}>Todos los resultados de <span className={styles.result_text_bold}>{testInfo}</span>.</p>
                         </div>
                     </div>
                 <div className={styles.button_container}>

@@ -12,8 +12,8 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
         const puppeteer = require('puppeteer');
 
         //DATA
-        const {fileFormat,results}:{fileFormat : string , results : TestQueryResults[] }= req.body;
-        const fileName = `resultados.${fileFormat}`
+        const {fileFormat,testInfo,results}:{fileFormat : string , testInfo: string, results : TestQueryResults[] }= req.body;
+        const fileName = `resultados_${testInfo.split(" ").join("_")}.${fileFormat}`
         let columns = [
             "Nombre",
             "Apellido",
@@ -35,7 +35,7 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
         if(fileFormat === 'csv'){
             res.send(output_string);
         } else if(fileFormat === 'xlsx'){
-            let wb = XLSX.read(output_string,{type: "string"});
+            let wb = XLSX.read(output_string,{type: "string", raw: true});
             const output_excel = XLSX.write(wb,{type: "buffer"});
             res.send(output_excel);
         } else if(fileFormat === 'pdf'){
@@ -44,12 +44,27 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
 
             //To reflect CSS used for screens instead of print
             await page.emulateMediaType('screen');
-            await page.evaluate(()=>{
-                document.body.innerHTML += '<h1>Calendario 2023</h1>';
+            const wb = XLSX.read(output_string,{type: "string", raw: true});
+            const ws = wb.Sheets.Sheet1;
+            const html_table = XLSX.utils.sheet_to_html(ws, { id: "results" });
+            const html_content = ` 
+                <!DOCTYPE html>
+                <html>
+                <body>
+                    <h1>Resultados ${testInfo}</h1>
+                    ${html_table}    
+                </body>
+                </html> `;
+            await page.setContent(html_content);
+            await page.addStyleTag({url: "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"});
+            await page.evaluate(() => {
+                const table = document.getElementById("results");
+                table?.classList.add("table");
+                const table_header = document.getElementsByTagName("tr");
+                table_header[0].classList.add("table-dark");
             })
             // Downlaod the PDF
             const output_pdf = await page.pdf({
-                path: 'result.pdf',
                 margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
                 printBackground: true,
                 format: 'A4',

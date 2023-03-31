@@ -19,7 +19,7 @@ const removeRepeatedSchools = (schools : School []) => {
 )
 }
 
-const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
+const ResultTable = ({results,testInfo}:{results : Array<TestQueryResults>, testInfo: string}) => {
     const numberOfProblems = results[0].prueba.cantidad_problemas;
     const starting_filters : ResultFilter = {participante: undefined,colegio: undefined,nivel: undefined,aprobado: undefined}
     const [filters,setFilters] = useState<ResultFilter>(starting_filters)
@@ -146,6 +146,7 @@ const ResultTable = ({results}:{results : Array<TestQueryResults>}) => {
             <DownloadPopup 
                 open={openDownloadPopup} 
                 setOpen={setOpenDownloadPopup}
+                testInfo={testInfo}
                 results={results}
                 filteredResults={filtered_results}
             />

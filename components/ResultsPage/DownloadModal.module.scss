@@ -96,6 +96,9 @@
     @include shared.font-montserrat(400);
     font-size: 1.6rem;
     text-align: center;
+    &_bold{
+        @include shared.font-montserrat(600);
+    }
 }
 
 .button_container{
