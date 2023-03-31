@@ -35,7 +35,13 @@ const DownloadPopup = ({open,setOpen,testInfo,results,filteredResults}: Download
                 body: JSON.stringify({fileFormat: format, testInfo: testInfo,results: resultsToExport})
             }
             )
-            .then( res => res.blob() )
+            .then( res => {
+                if(res.status === 200){
+                    return(res.blob());
+                } else {
+                    throw res;
+                }
+                } )
             .then( blob => {
                 const fileName = `resultados_${testInfo.split(" ").join("_")}.${format}`;
                 let a = document.createElement("a");

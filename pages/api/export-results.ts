@@ -79,7 +79,7 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
                 format: 'A4',
             });
             await browser.close();
-            res.send(output_pdf);
+            res.status(200).send(output_pdf);
         } else {
             res.status(400).json( {message: 'Invalid file extension'})
         }
