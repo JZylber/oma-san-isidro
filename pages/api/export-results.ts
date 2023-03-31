@@ -39,7 +39,14 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
             const output_excel = XLSX.write(wb,{type: "buffer"});
             res.send(output_excel);
         } else if(fileFormat === 'pdf'){
-            const browser = await puppeteer.launch();
+            const browser = await puppeteer.launch({
+                headless: true,
+                args: [
+                    "--no-sandbox",
+                    "--disable-setuid-sandbox",
+                    "--font-render-hinting=none",
+                ],
+            });
             const page = await browser.newPage();
 
             //To reflect CSS used for screens instead of print
@@ -55,8 +62,11 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
                     ${html_table}    
                 </body>
                 </html> `;
-            await page.setContent(html_content);
+            await page.setContent(html_content, {
+                waitUntil: ["networkidle0"],
+            });
             await page.addStyleTag({url: "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"});
+            await page.evaluateHandle("document.fonts.ready");
             await page.evaluate(() => {
                 const table = document.getElementById("results");
                 table?.classList.add("table");
