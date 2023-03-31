@@ -62,6 +62,7 @@ const DownloadPopup = ({open,setOpen,testInfo,results,filteredResults}: Download
             });
         } catch (error) {
             console.error(error);
+            setGeneratingExport(false);
         }
     };
     return(
