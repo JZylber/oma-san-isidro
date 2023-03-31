@@ -21,6 +21,7 @@ const DownloadPopup = ({open,setOpen,testInfo,results,filteredResults}: Download
     const [format,setFormat] = useState("csv");
     const [allResults,setAllResults] = useState(false);
     const resultsToExport = allResults?results:filteredResults;
+    const [generatingExport,setGeneratingExport] = useState(false);
     const getExportedFile = async () => {
         try {
             let exportFile = await fetch(`/api/export-results?secret=${process.env.API_TOKEN}`,
@@ -44,7 +45,7 @@ const DownloadPopup = ({open,setOpen,testInfo,results,filteredResults}: Download
                 a.click();
                 URL.revokeObjectURL(a.href)
                 a.remove();
-
+                setGeneratingExport(false);
             });
         } catch (error) {
             console.error(error);
@@ -96,12 +97,17 @@ const DownloadPopup = ({open,setOpen,testInfo,results,filteredResults}: Download
                         </div>
                     </div>
                 <div className={styles.button_container}>
-                    <Button content="Confirmar Descarga" onClick={() => getExportedFile()}>
+                    <Button content="Confirmar Descarga" onClick={() => {getExportedFile();setGeneratingExport(true);}}>
                         <div className={styles.button_arrow}>
                             <Download/>
                         </div>
                     </Button>
                 </div>
+                {generatingExport &&
+                    <div className={styles.generating}>
+                        <h1 className={styles.title}>Generando archivo...</h1>
+                    </div>
+                }
             </div>
         </Modal>
     )
