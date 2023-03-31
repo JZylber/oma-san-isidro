@@ -7,9 +7,9 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
     }
     try{
         //MODULES
-        const fs = require("fs");
         const {stringify} = require("csv-stringify/sync");
         const XLSX = require("xlsx");
+        const puppeteer = require('puppeteer');
 
         //DATA
         const {fileFormat,results}:{fileFormat : string , results : TestQueryResults[] }= req.body;
@@ -38,6 +38,26 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
             let wb = XLSX.read(output_string,{type: "string"});
             const output_excel = XLSX.write(wb,{type: "buffer"});
             res.send(output_excel);
+        } else if(fileFormat === 'pdf'){
+            const browser = await puppeteer.launch();
+            const page = await browser.newPage();
+
+            //To reflect CSS used for screens instead of print
+            await page.emulateMediaType('screen');
+            await page.evaluate(()=>{
+                document.body.innerHTML += '<h1>Calendario 2023</h1>';
+            })
+            // Downlaod the PDF
+            const output_pdf = await page.pdf({
+                path: 'result.pdf',
+                margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
+                printBackground: true,
+                format: 'A4',
+            });
+            await browser.close();
+            res.send(output_pdf);
+        } else {
+            res.status(400).json( {message: 'Invalid file extension'})
         }
         }
     catch (error) {
