@@ -5,7 +5,7 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
     if (req.query.secret !== process.env.API_TOKEN) {
         return res.status(401).json({ message: 'Invalid token' })
     }
-    try{
+    
         //MODULES
         const {stringify} = require("csv-stringify/sync");
         const XLSX = require("xlsx");
@@ -75,7 +75,6 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
             // Download the PDF
             const output_pdf = await page.pdf({
                 margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
-                printBackground: true,
                 format: 'A4',
             });
             await browser.close();
@@ -83,8 +82,5 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
         } else {
             res.status(400).json( {message: 'Invalid file extension'})
         }
-        }
-    catch (error) {
-        res.status(500).json( {message: {error}})
-    }
+    
 }
