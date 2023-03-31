@@ -35,11 +35,17 @@ const DownloadPopup = ({open,setOpen,testInfo,results,filteredResults}: Download
                 body: JSON.stringify({fileFormat: format, testInfo: testInfo,results: resultsToExport})
             }
             )
-            .then( res => {
-                if(res.status === 200){
-                    return(res.blob());
-                } else {
-                    throw res.json();
+            .then( async response => {
+                const isJson = response.headers.get('content-type')?.includes('application/json');
+                const data = isJson ? await response.json() : null;
+
+                // check for error response
+                if (!response.ok) {
+                    // get error message from body or default to response status
+                    const error = (data && data.message) || response.status;
+                    return Promise.reject(error);
+                } else{
+                    return response.blob();
                 }
                 } )
             .then( blob => {
