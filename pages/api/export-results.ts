@@ -9,6 +9,7 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
         //MODULES
         const fs = require("fs");
         const {stringify} = require("csv-stringify/sync");
+        const XLSX = require("xlsx");
 
         //DATA
         const {fileFormat,results}:{fileFormat : string , results : TestQueryResults[] }= req.body;
@@ -29,9 +30,15 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
                 `${result.participacion.colegio.nombre}${result.participacion.colegio.sede?"-"+result.participacion.colegio.sede:""}`
             ].concat(result.prueba.cantidad_problemas>0?result.resultados:[]).concat([result.aprobado?"Si":"No"])
         )});
-        const output = stringify(data,{header:true,columns:columns})
-        res.setHeader('Content-Type', 'file/csv');
-        res.send(output);
+        const output_string = stringify(data,{header:true,columns:columns})
+        res.setHeader('Content-Type', `attachment; filename="${fileName}"`);
+        if(fileFormat === 'csv'){
+            res.send(output_string);
+        } else if(fileFormat === 'xlsx'){
+            let wb = XLSX.read(output_string,{type: "string"});
+            const output_excel = XLSX.write(wb,{type: "buffer"});
+            res.send(output_excel);
+        }
         }
     catch (error) {
         res.status(500).json( {message: {error}})

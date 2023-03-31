@@ -3,7 +3,7 @@ import Modal from "../Popups/Modal";
 import styles from "./DownloadModal.module.scss";
 import X from "../../public/images/x.svg";
 import CSV from "../../public/images/csv.svg";
-import XLS from "../../public/images/xls.svg";
+import XLSX from "../../public/images/xls.svg";
 import PDF from "../../public/images/pdf.svg";
 import Download from "../../public/images/newsArrow.svg";
 import { Button } from "../buttons/Button";
@@ -64,10 +64,10 @@ const DownloadPopup = ({open,setOpen,results,filteredResults}: DownloadModalProp
                             <p className={styles.format_text}>CSV</p>
                         </div>
                         <div className={styles.option}>
-                            <div className={[styles.format_container,format==="xls" && styles.selected].join(" ")} onClick={() => setFormat("xls")}>
-                                <XLS/>
+                            <div className={[styles.format_container,format==="xlsx" && styles.selected].join(" ")} onClick={() => setFormat("xlsx")}>
+                                <XLSX/>
                             </div>
-                            <p className={styles.format_text}>XLS</p>
+                            <p className={styles.format_text}>XLSX</p>
                         </div>
                         <div className={styles.option}>
                             <div className={[styles.format_container,format==="pdf" && styles.selected].join(" ")} onClick={() => setFormat("pdf")}>
