@@ -61,14 +61,14 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
             await page.setContent(html_content, {
                 waitUntil: ["networkidle0"],
             });
-            await page.addStyleTag({url: "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"});
+            //await page.addStyleTag({url: "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"});
             await page.evaluate(() => {
                 const table = document.getElementById("results");
                 table?.classList.add("table");
                 const table_header = document.getElementsByTagName("tr");
                 table_header[0].classList.add("table-dark");
             })
-            // Downlaod the PDF
+            // Download the PDF
             const output_pdf = await page.pdf({
                 margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
                 printBackground: true,
