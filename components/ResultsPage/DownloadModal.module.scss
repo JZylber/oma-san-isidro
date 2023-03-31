@@ -116,9 +116,13 @@
     height: calc(100% - 8rem);
     width: calc(100% - 12.8rem);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 2;
     background-color: shared.$white;
     text-align: center;
+    .loader{
+        margin-top: 4rem;
+    }
 }

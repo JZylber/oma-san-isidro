@@ -8,6 +8,7 @@ import PDF from "../../public/images/pdf.svg";
 import Download from "../../public/images/newsArrow.svg";
 import { Button } from "../buttons/Button";
 import { TestQueryResults } from "./resultsTypes";
+import BasicLoader from "../Loader/BasicLoader";
 
 interface DownloadModalProps{
     open: boolean,
@@ -106,6 +107,9 @@ const DownloadPopup = ({open,setOpen,testInfo,results,filteredResults}: Download
                 {generatingExport &&
                     <div className={styles.generating}>
                         <h1 className={styles.title}>Generando archivo...</h1>
+                        <div className={styles.loader}>
+                            <BasicLoader/>
+                        </div>
                     </div>
                 }
             </div>
