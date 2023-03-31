@@ -21,7 +21,7 @@ const Results = ({competition,availableResults} : ResultProps) => {
         try {
             let searchedResults = await fetch(`/api/results?secret=${process.env.API_TOKEN}&ano=${year}&instancia=${instance}&competencia=${type}`).then((response) => response.json());
             setIsLoading(false);
-            setTestInfo(`${instance.slice(0,1)}${instance.slice(1).toLocaleLowerCase()} ${year}`)
+            setTestInfo(`${competition} ${instance.slice(0,1)}${instance.slice(1).toLocaleLowerCase()} ${year}`)
             setResults(searchedResults);
         } catch (error) {
             console.error(error);
