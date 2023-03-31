@@ -9,8 +9,6 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
         //MODULES
         const {stringify} = require("csv-stringify/sync");
         const XLSX = require("xlsx");
-        const puppeteer = require('puppeteer');
-        const fs = require("fs");
 
         //DATA
         const {fileFormat,testInfo,results}:{fileFormat : string , testInfo: string, results : TestQueryResults[] }= req.body;
@@ -40,13 +38,33 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
             const output_excel = XLSX.write(wb,{type: "buffer"});
             res.send(output_excel);
         } else if(fileFormat === 'pdf'){
-            const browser = await puppeteer.launch({
+            //PRODUCTION SPECIAL OPTIONS
+            let chrome;
+            let puppeteer;
+
+            if (process.env.AWS_LAMBDA_FUNCTION_VERSION) {
+                chrome = require("chrome-aws-lambda");
+                puppeteer = require("puppeteer-core");
+            } else {
+                puppeteer = require("puppeteer");
+            }
+            let options : object = {
                 headless: true,
                 args: [
                     "--no-sandbox",
                     "--disable-setuid-sandbox",
                 ],
-            });
+            };
+            if (process.env.AWS_LAMBDA_FUNCTION_VERSION) {
+                options = {
+                args: [...chrome.args, "--hide-scrollbars", "--disable-web-security"],
+                defaultViewport: chrome.defaultViewport,
+                executablePath: await chrome.executablePath,
+                headless: true,
+                ignoreHTTPSErrors: true,
+                };
+            }
+            const browser = await puppeteer.launch(options);
             const page = await browser.newPage();
             const wb = XLSX.read(output_string,{type: "string", raw: true});
             const ws = wb.Sheets.Sheet1;
@@ -71,13 +89,12 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
             })
             // Download the PDF
             const output_pdf = await page.pdf({
-                path: `public/${fileName}`,
                 margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
                 printBackground: true,
                 format: 'A4',
             });
             await browser.close();
-            res.send(fs.readFileSync(`public/${fileName}`));
+            res.send(output_pdf);
         } else {
             res.status(400).json( {message: 'Invalid file extension'})
         }
