@@ -5,7 +5,7 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
     if (req.query.secret !== process.env.API_TOKEN) {
         return res.status(401).json({ message: 'Invalid token' })
     }
-    try{
+    
         //MODULES
         const {stringify} = require("csv-stringify/sync");
         const XLSX = require("xlsx");
@@ -38,13 +38,12 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
             const output_excel = XLSX.write(wb,{type: "buffer"});
             res.send(output_excel);
         } else if(fileFormat === 'pdf'){
-            
-            const chromium= require("@sparticuz/chromium-min");
-            const puppeteer = require("puppeteer-core");
+            const PCR = require("puppeteer-chromium-resolver");
+            const puppeteer = require("puppeteer-core")
+            const stats = await PCR({});
             const options = {
-                args: [...chromium.args,"--no-sandbox","--disable-setuid-sandbox",],
-                defaultViewport: chromium.defaultViewport,
-                executablePath: await chromium.executablePath("/public/files/chromiumPack.tar"),
+                args: ["--no-sandbox","--disable-setuid-sandbox",],
+                executablePath: stats.executablePath,
                 headless: true,
                 ignoreHTTPSErrors: true,
             };
@@ -75,6 +74,7 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
             // Download the PDF
             const output_pdf = await page.pdf({
                 margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
+                printBackground: true,
                 format: 'A4',
             });
             await browser.close();
@@ -82,8 +82,5 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
         } else {
             res.status(400).json( {message: 'Invalid file extension'})
         }
-    }
-    catch (error) {
-            res.status(500).json( {message: {error}})
-    }
+    
 }
