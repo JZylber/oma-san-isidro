@@ -34,13 +34,16 @@ const DownloadPopup = ({open,setOpen,results,filteredResults}: DownloadModalProp
             )
             .then( res => res.blob() )
             .then( blob => {
-                var url = window.URL.createObjectURL(blob);
-                var a = document.createElement('a');
-                a.href = url;
-                a.download = `resultados.${format}`;
+                const fileName = `resultados.${format}`;
+                let a = document.createElement("a");
                 document.body.appendChild(a);
-                a.click();    
+                var url = URL.createObjectURL(blob);
+                a.href =  url;
+                a.download = fileName;
+                a.click();
+                URL.revokeObjectURL(a.href)
                 a.remove();
+
             });
         } catch (error) {
             console.error(error);
