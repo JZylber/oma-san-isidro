@@ -39,7 +39,7 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
             res.send(output_excel);
         } else if(fileFormat === 'pdf'){
             
-            const chromium= require("@sparticuz/chromium");
+            const chromium= require("@sparticuz/chromium-min");
             const puppeteer = require("puppeteer-core");
             const options = {
                 args: chromium.args,
