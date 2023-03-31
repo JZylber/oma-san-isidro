@@ -17,7 +17,7 @@ const Results = ({competition,availableResults} : ResultProps) => {
             return("OMA")
         }
     };
-    const getResults = async (year : number,instance : string, type: string)=> {
+    const getResults = useCallback(async (year : number,instance : string, type: string)=> {
         try {
             let searchedResults = await fetch(`/api/results?secret=${process.env.API_TOKEN}&ano=${year}&instancia=${instance}&competencia=${type}`).then((response) => response.json());
             setIsLoading(false);
@@ -26,11 +26,11 @@ const Results = ({competition,availableResults} : ResultProps) => {
         } catch (error) {
             console.error(error);
         }
-    };
+    },[competition,setIsLoading,setTestInfo,setResults]);
     const searchResults = useCallback((year : number, instance: string) => {
         getResults(year,instance,nameAsDB(competition));
         setIsLoading(true);
-    },[competition]);
+    },[competition,getResults]);
 
     const clearResults = () => {
         setResults(undefined);
