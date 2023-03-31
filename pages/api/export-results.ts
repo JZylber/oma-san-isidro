@@ -10,6 +10,7 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
         const {stringify} = require("csv-stringify/sync");
         const XLSX = require("xlsx");
         const puppeteer = require('puppeteer');
+        const fs = require("fs");
 
         //DATA
         const {fileFormat,testInfo,results}:{fileFormat : string , testInfo: string, results : TestQueryResults[] }= req.body;
@@ -61,7 +62,7 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
             await page.setContent(html_content, {
                 waitUntil: ["networkidle0"],
             });
-            //await page.addStyleTag({url: "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"});
+            await page.addStyleTag({url: "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"});
             await page.evaluate(() => {
                 const table = document.getElementById("results");
                 table?.classList.add("table");
@@ -70,12 +71,13 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
             })
             // Download the PDF
             const output_pdf = await page.pdf({
+                path: `public/${fileName}`,
                 margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
                 printBackground: true,
                 format: 'A4',
             });
             await browser.close();
-            res.send(output_pdf);
+            res.send(fs.readFileSync(`public/${fileName}`));
         } else {
             res.status(400).json( {message: 'Invalid file extension'})
         }
