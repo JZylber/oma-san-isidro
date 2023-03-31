@@ -44,13 +44,9 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
                 args: [
                     "--no-sandbox",
                     "--disable-setuid-sandbox",
-                    "--font-render-hinting=none",
                 ],
             });
             const page = await browser.newPage();
-
-            //To reflect CSS used for screens instead of print
-            await page.emulateMediaType('screen');
             const wb = XLSX.read(output_string,{type: "string", raw: true});
             const ws = wb.Sheets.Sheet1;
             const html_table = XLSX.utils.sheet_to_html(ws, { id: "results" });
@@ -66,7 +62,6 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
                 waitUntil: ["networkidle0"],
             });
             await page.addStyleTag({url: "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"});
-            await page.evaluateHandle("document.fonts.ready");
             await page.evaluate(() => {
                 const table = document.getElementById("results");
                 table?.classList.add("table");
