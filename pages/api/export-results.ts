@@ -47,7 +47,6 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
                 headless: true,
                 ignoreHTTPSErrors: true,
             };
-
             const browser = await puppeteer.launch(options);
             const page = await browser.newPage();
             const wb = XLSX.read(output_string,{type: "string", raw: true});
@@ -80,9 +79,12 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
             await browser.close();
             res.status(200).send(output_pdf);
         } else {
-            res.status(400).json( {message: 'Invalid file extension'})
+            res.status(400).json( {message: 'Invalid file extension'});
         }
     } catch (error){
-        res.status(500).json({message: error})
+        let message;
+        if (error instanceof Error) message = error.message;
+        else message = String(error);
+        res.status(500).json({message: message});
     };
 }
