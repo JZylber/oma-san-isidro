@@ -42,10 +42,10 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
             const chromium= require("@sparticuz/chromium-min");
             const puppeteer = require("puppeteer-core");
             const options = {
-                args: chromium.args,
+                args: [...chromium.args,"--no-sandbox","--disable-setuid-sandbox",],
                 defaultViewport: chromium.defaultViewport,
                 executablePath: await chromium.executablePath("/public/files/chromiumPack.tar"),
-                headless: chromium.headless,
+                headless: true,
                 ignoreHTTPSErrors: true,
             };
 
