@@ -44,7 +44,7 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
             const options = {
                 args: chromium.args,
                 defaultViewport: chromium.defaultViewport,
-                executablePath: await chromium.executablePath("/tmp/chromium"),
+                executablePath: await chromium.executablePath("/public/files/chromiumPack.tar"),
                 headless: chromium.headless,
                 ignoreHTTPSErrors: true,
             };
