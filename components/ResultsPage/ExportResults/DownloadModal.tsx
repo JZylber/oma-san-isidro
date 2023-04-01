@@ -1,14 +1,15 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import Modal from "../Popups/Modal";
+import Modal from "../../Popups/Modal";
 import styles from "./DownloadModal.module.scss";
-import X from "../../public/images/x.svg";
-import CSV from "../../public/images/csv.svg";
-import XLSX from "../../public/images/xls.svg";
-import PDF from "../../public/images/pdf.svg";
-import Download from "../../public/images/newsArrow.svg";
-import { Button } from "../buttons/Button";
-import { TestQueryResults } from "./resultsTypes";
-import BasicLoader from "../Loader/BasicLoader";
+import X from "../../../public/images/x.svg";
+import CSV from "../../../public/images/csv.svg";
+import XLSX from "../../../public/images/xls.svg";
+import PDF from "../../../public/images/pdf.svg";
+import Download from "../../../public/images/newsArrow.svg";
+import { Button } from "../../buttons/Button";
+import { TestQueryResults } from "./../resultsTypes";
+import BasicLoader from "../../Loader/BasicLoader";
+import { processResults } from "./CreateFiles";
 
 interface DownloadModalProps{
     open: boolean,
@@ -23,47 +24,14 @@ const DownloadPopup = ({open,setOpen,testInfo,results,filteredResults}: Download
     const [allResults,setAllResults] = useState(false);
     const resultsToExport = allResults?results:filteredResults;
     const [generatingExport,setGeneratingExport] = useState(false);
-    const getExportedFile = async () => {
+    const getExportedFile = () => {
+        setGeneratingExport(true);
         try {
-            let exportFile = await fetch(`/api/export-results?secret=${process.env.API_TOKEN}`,
-            {
-                headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json'
-                },
-                method: "POST",
-                body: JSON.stringify({fileFormat: format, testInfo: testInfo,results: resultsToExport})
-            }
-            )
-            .then( async response => {
-                const isJson = response.headers.get('content-type')?.includes('application/json');
-                const data = isJson ? await response.json() : null;
-
-                // check for error response
-                if (!response.ok) {
-                    // get error message from body or default to response status
-                    const error = (data && data.message) || response.status;
-                    return Promise.reject(error);
-                } else{
-                    return response.blob();
-                }
-                } )
-            .then( blob => {
-                const fileName = `resultados_${testInfo.split(" ").join("_")}.${format}`;
-                let a = document.createElement("a");
-                document.body.appendChild(a);
-                var url = URL.createObjectURL(blob);
-                a.href =  url;
-                a.download = fileName;
-                a.click();
-                URL.revokeObjectURL(a.href)
-                a.remove();
-                setGeneratingExport(false);
-            });
+            processResults(format,testInfo,resultsToExport);   
         } catch (error) {
             console.error(error);
-            setGeneratingExport(false);
         }
+        setGeneratingExport(false);
     };
     return(
         <Modal open={open}>
@@ -111,7 +79,7 @@ const DownloadPopup = ({open,setOpen,testInfo,results,filteredResults}: Download
                         </div>
                     </div>
                 <div className={styles.button_container}>
-                    <Button content="Confirmar Descarga" onClick={() => {getExportedFile();setGeneratingExport(true);}}>
+                    <Button content="Confirmar Descarga" onClick={() => getExportedFile()}>
                         <div className={styles.button_arrow}>
                             <Download/>
                         </div>

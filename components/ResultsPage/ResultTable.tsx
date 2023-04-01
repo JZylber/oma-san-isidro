@@ -5,7 +5,7 @@ import SelectIcon from "../../public/images/menuSelectIcon.svg";
 import Arrow from "../../public/images/newsArrow.svg"
 import NoResults from "./NoResults";
 import ResultFilterForm from "./resultFilterForm";
-import DownloadPopup from "./DownloadModal";
+import DownloadPopup from "./ExportResults/DownloadModal";
 
 const participantName = (result: TestQueryResults) => {
     return(`${result.participacion.participante.nombre} ${result.participacion.participante.apellido}`)
