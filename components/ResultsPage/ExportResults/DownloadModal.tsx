@@ -112,7 +112,7 @@ const DownloadPopup = ({open,setOpen,testInfo,results,filteredResults}: Download
             </div>
             <div style={{display: "none"}}>
                 <div ref={documentRef}>
-                    <PrintableTable results={results} testInfo={testInfo}/>
+                    <PrintableTable results={resultsToExport} testInfo={testInfo}/>
                 </div>
             </div>
         </Modal>
