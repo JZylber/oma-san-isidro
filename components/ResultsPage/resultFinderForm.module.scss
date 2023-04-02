@@ -3,8 +3,14 @@
 
 .form {
     display: flex;
-    padding-bottom: 2rem;
-    align-items: flex-end;
+    @include shared.mobile-only{
+        flex-direction: column;
+        row-gap: 2.4rem;
+    } 
+    @include shared.not-mobile{
+        padding-bottom: 2rem;
+        align-items: flex-end;
+    } 
 }
 
 .searchButton{
@@ -12,19 +18,26 @@
     align-items: center;
     justify-content: center;
     padding: 1.2rem;
-    min-width: 180px;
-    width: 19%;
     background-color: shared.$light-blue;
     border-width: 2px 2px 4px 2px;
     border-style: solid;
     border-color: #000000;
     border-radius: 9px;
     box-sizing: border-box;
+    @include shared.mobile-only{
+        margin-top: 2rem;
+        width: 100%;
+    }
     @include shared.not-mobile{
+        min-width: 180px;
+        width: 19%;
         max-height: category.$height
     }
     span {
         @include shared.font-unbounded(500);
+        @include shared.mobile-only{
+            font-size: 1.5rem;
+        }
         @include shared.tablet-only{
             font-size: 1.5rem;
         }

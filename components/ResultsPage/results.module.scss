@@ -5,8 +5,8 @@
 
     @include shared.mobile-only {
       font-size: 2.9rem;
-      margin-top: 4 * shared.$mobile-spacing;
-      margin-bottom: 2.5 * shared.$mobile-spacing;  
+      margin-top: .8rem;
+      margin-bottom: 4rem;  
     }
     @include shared.not-mobile{
         grid-column: 1/-1;
@@ -24,4 +24,18 @@
 .infoText{
     @include shared.font-montserrat(400);
     font-size: 1.6rem;
+    @include shared.mobile-only{
+        margin-top: 2.4rem;
+    }
+}
+
+.competition{
+    @include shared.mobile-only{
+        @include shared.font-unbounded(300);
+        font-size: 2rem;
+        margin-top: 3.6rem;
+    }
+    @include shared.not-mobile{
+        display: none;
+    }
 }

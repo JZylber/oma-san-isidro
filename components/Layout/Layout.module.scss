@@ -16,7 +16,7 @@
         width: 80%;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        align-content: center;
     }
     @include shared.tablet-only{
         width: 85%;

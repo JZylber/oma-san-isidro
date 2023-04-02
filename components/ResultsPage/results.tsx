@@ -47,6 +47,7 @@ const Results = ({competition,availableResults} : ResultProps) => {
 
     return(
         <>
+        <p className={styles.competition}>{competition.toLocaleLowerCase()}</p>
         <h1 className={styles.title}>Resultados</h1>
         <ResultFinderForm availableResults={availableResults} searchResults={searchResults} clearResults={clearResults}/>
         {isLoading ? <Loader/> : displayResults(results)}

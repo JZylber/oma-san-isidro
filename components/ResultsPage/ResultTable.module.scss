@@ -1,6 +1,9 @@
 @use '../../styles/shared.scss' as shared;
 
 .results {
+    @include shared.mobile-only{
+        display: none;
+    }
     border: 2px solid #000000;
     box-sizing: border-box;
     border-radius: 9px;
@@ -97,9 +100,14 @@
 }
 
 .pagination{
-        display: flex;
-        @include shared.font-montserrat(400);
-        font-size: 1.6rem;
+        @include shared.mobile-only{
+            display: none;
+        }
+        @include shared.not-mobile{
+            display: flex;
+            @include shared.font-montserrat(400);
+            font-size: 1.6rem;
+        }
         svg{
             fill: shared.$black;
         }
