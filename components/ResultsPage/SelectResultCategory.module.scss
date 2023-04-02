@@ -2,33 +2,57 @@
 
 .category{
     @include shared.font-montserrat(400);
-    font-size: 1.6rem;
+    padding-bottom: .4rem;
+    @include shared.tablet-only{
+        font-size: shared.$tablet-actionable-font-size;
+    }
+    @include shared.desktop-only{
+        font-size: 1.6rem;
+    }
     &_container {
         display: flex;
         flex-direction: column;
-        min-width: 180px;
-        width: 19%;
+        @include shared.tablet-only{
+            flex: 1 1 0;
+            width: 0;
+        }
+        @include shared.desktop-only{
+            min-width: 180px;
+            width: 19%;
+        }
         margin-right: 2rem;
     }
 }
+
+$height: 4.8rem;
 
 .filter_box{
     border: 2px solid shared.$black;
     border-radius: 9px;
     overflow: hidden;
+    box-sizing: border-box;
     @include shared.not-mobile{
         position: absolute;
         width: 100%;
         z-index: 1;
         background-color: shared.$white;
     }
+    @include shared.tablet-only{
+        max-height: 100%;
+    }
+    @include shared.desktop-only{
+        max-height: 100%;
+    }
     &_container{
        width: 100%;
        position: relative;
-       min-height: 5.4rem;
+       @include shared.not-mobile{
+        min-height: $height;
+       }
     }
     &_open{
         z-index: 2;
+        max-height: fit-content;
     }
 }
 
@@ -36,16 +60,13 @@
     list-style: none;
     flex: 0 1 auto;
     overflow-y: scroll;
-    @include shared.not-desktop{
-        max-height: 3.5*6.4rem;
+    max-height: 3.5*$height;
+    @include shared.not-mobile{
         -ms-overflow-style: none;  
         scrollbar-width: none; 
             &::-webkit-scrollbar {
         display: none;
       }
-    }
-    @include shared.desktop-only{
-        max-height: 3.5*6.4rem;
     }
 }
 
@@ -70,17 +91,16 @@
         }
         @include shared.tablet-only{
             font-size: shared.$tablet-reading-font-size;
+            padding: 1.4rem 2rem 1.4rem 2rem;
         }
         @include shared.desktop-only{
+            padding: 1.6rem;
             font-size: 1.6rem;
         }
     };
     &Title{
-        box-sizing: border-box;
         display: flex;
         justify-content: space-between;
-        min-height: 4.8rem;
-        padding: 1.6rem;
         background-color: shared.$white;
         &Open{
             border-bottom: 2px solid shared.$black !important;

@@ -22,13 +22,28 @@
         font-size: 1.6rem;
         tr td {
             &:first-child{
-                padding: 1.6rem 2rem 1.6rem 4.4rem;
+                @include shared.tablet-only{
+                    padding: 1.6rem .8rem 1.6rem 2rem;
+                }
+                @include shared.desktop-only{
+                    padding: 1.6rem 2rem 1.6rem 4.4rem;
+                }
             }
             &:last-child{
-                padding: 1.6rem 4.4rem 1.6rem 2rem;
+                @include shared.tablet-only{
+                    padding: 1.6rem 2rem 1.6rem .8rem;
+                }
+                @include shared.desktop-only{
+                    padding: 1.6rem 4.4rem 1.6rem 2rem;
+                }
             }
             &:not(:last-child):not(:first-child) {
-                padding: 1.6rem 2rem 1.6rem 2rem;
+                @include shared.tablet-only{
+                    padding: 1.6rem .8rem 1.6rem .8rem;
+                }
+                @include shared.desktop-only{
+                    padding: 1.6rem 2rem 1.6rem 2rem;
+                }   
             }        
         }
     } 
@@ -37,13 +52,28 @@
         font-size: 1.6rem;
         tr td {
             &:first-child{
-                padding: 1.6rem 2rem 1.6rem 4.4rem;
+                @include shared.tablet-only{
+                    padding: 1.6rem .8rem 1.6rem 2rem;
+                }
+                @include shared.desktop-only{
+                    padding: 1.6rem 2rem 1.6rem 4.4rem;
+                }
             }
             &:last-child{
-                padding: 1.6rem 4.4rem 1.6rem 2rem;
+                @include shared.tablet-only{
+                    padding: 1.6rem 2rem 1.6rem .8rem;
+                }
+                @include shared.desktop-only{
+                    padding: 1.6rem 4.4rem 1.6rem 2rem;
+                }
             }
             &:not(:last-child):not(:first-child) {
-                padding: 1.6rem 2rem 1.6rem 2rem;
+                @include shared.tablet-only{
+                    padding: 1.6rem .8rem 1.6rem .8rem;
+                }
+                @include shared.desktop-only{
+                    padding: 1.6rem 2rem 1.6rem 2rem;
+                }
             }  
         }
         tr:hover{
