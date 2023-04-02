@@ -2,32 +2,35 @@ import { TestQueryResults } from "../resultsTypes";
 import { read, writeFile} from 'xlsx';
 import { stringify } from 'csv-stringify/sync';
 
-export const processResults = (format : string, testInfo: string,results: TestQueryResults []) => {
-    const fileName = `resultados_${testInfo.split(" ").join("_")}.${format}`;
+export const extractResults = (results : TestQueryResults []) => {
     let columns = [
-            "Nombre",
-            "Apellido",
-            "Nivel",
-            "Colegio",
-        ].concat(results[0].prueba.cantidad_problemas>0?Array.from({length: results[0].prueba.cantidad_problemas}, (_, i) => `P${i + 1}`).concat(["Total"]):[]).concat(
-            ["Aprobado"]
-        );
+        "Nombre",
+        "Apellido",
+        "Nivel",
+        "Colegio",
+    ].concat(results[0].prueba.cantidad_problemas>0?Array.from({length: results[0].prueba.cantidad_problemas}, (_, i) => `P${i + 1}`).concat(["Total"]):[]).concat(
+        ["Aprobado"]
+    );
     const data : Array<Array<string | number>> = results.map((result : TestQueryResults) => {
         return([
-                result.participacion.participante.nombre,
-                result.participacion.participante.apellido,
-                result.participacion.nivel,
-                `${result.participacion.colegio.nombre}${result.participacion.colegio.sede?"-"+result.participacion.colegio.sede:""}`
-            ].concat(result.prueba.cantidad_problemas>0?result.resultados:[]).concat([result.aprobado?"Si":"No"])
-        )});
+            result.participacion.participante.nombre,
+            result.participacion.participante.apellido,
+            result.participacion.nivel,
+            `${result.participacion.colegio.nombre}${result.participacion.colegio.sede?"-"+result.participacion.colegio.sede:""}`
+        ].concat(result.prueba.cantidad_problemas>0?result.resultados:[]).concat([result.aprobado?"Si":"No"])
+    )});
+    return({columns:columns,data:data})
+}
+
+export const processResults = (format : string, testInfo: string,results: TestQueryResults []) => {
+    const fileName = `resultados_${testInfo.split(" ").join("_")}.${format}`;
+    const {columns,data} = extractResults(results);
     const csv_string = stringify(data,{header:true,columns:columns});
     let file;
     if(format === "csv"){
         file = create_csv(csv_string);
     } else if (format === "xlsx"){
         create_xlsx(csv_string,fileName);
-    } else if (format === "pdf"){
-        create_pdf(csv_string);
     } else {
         throw Error("Unsupported format");
     }
@@ -40,9 +43,6 @@ const create_csv = (csv:string) => {
 const create_xlsx = (csv:string,fileName: string) => {
     let wb = read(csv,{type: "string", raw: true});
     writeFile(wb,fileName);
-}
-const create_pdf = (csv:string) => {
-    
 }
 
 const downloadFile = (fileBlob : Blob, fileName: string) => {

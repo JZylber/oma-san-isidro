@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, MutableRefObject, SetStateAction, useRef, useState } from "react";
 import Modal from "../../Popups/Modal";
 import styles from "./DownloadModal.module.scss";
 import X from "../../../public/images/x.svg";
@@ -10,6 +10,8 @@ import { Button } from "../../buttons/Button";
 import { TestQueryResults } from "./../resultsTypes";
 import BasicLoader from "../../Loader/BasicLoader";
 import { processResults } from "./CreateFiles";
+import { useReactToPrint } from "react-to-print";
+import PrintableTable from "./PrintableTable";
 
 interface DownloadModalProps{
     open: boolean,
@@ -19,15 +21,29 @@ interface DownloadModalProps{
     filteredResults: TestQueryResults []
 }
 
+export interface printFunctions{
+    printResults: () => void;
+    printRef: MutableRefObject<HTMLDivElement | null>
+}
+
 const DownloadPopup = ({open,setOpen,testInfo,results,filteredResults}: DownloadModalProps) => {
     const [format,setFormat] = useState("csv");
     const [allResults,setAllResults] = useState(false);
     const resultsToExport = allResults?results:filteredResults;
     const [generatingExport,setGeneratingExport] = useState(false);
+    const documentRef = useRef<HTMLDivElement | null>(null); 
+    const printResults = useReactToPrint({
+        content: () => documentRef.current,
+        documentTitle: `Resultados ${testInfo}`
+    });
     const getExportedFile = () => {
         setGeneratingExport(true);
         try {
-            processResults(format,testInfo,resultsToExport);   
+            if(format === "pdf"){
+                printResults()
+            } else{
+                processResults(format,testInfo,resultsToExport);   
+            }
         } catch (error) {
             console.error(error);
         }
@@ -93,6 +109,11 @@ const DownloadPopup = ({open,setOpen,testInfo,results,filteredResults}: Download
                         </div>
                     </div>
                 }
+            </div>
+            <div style={{display: "none"}}>
+                <div ref={documentRef}>
+                    <PrintableTable results={results} testInfo={testInfo}/>
+                </div>
             </div>
         </Modal>
     )
