@@ -205,5 +205,6 @@
   @include shared.desktop-only{
     display: block;
     transform: rotate(90deg);
+    width: 30px;
   }
 }
