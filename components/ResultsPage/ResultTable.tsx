@@ -91,6 +91,23 @@ const ResultTable = ({results,testInfo}:{results : Array<TestQueryResults>, test
             <div className={[styles.prev,page===0 && styles.greyed].join(" ")} onClick={prevPage}><SelectIcon/></div>
             <div className={[styles.next,page===max_pages && styles.greyed].join(" ")} onClick={nextPage}><SelectIcon/></div>
         </div>
+    const mobile_pagination = 
+        <div className={styles.mobile_pagination}>
+            <p>Mostrando {firstResult + 1}-{lastResult} de {filtered_results.length}</p>
+            <div className={styles.page_select}>
+                <div className={[styles.prev,page===0 && styles.greyed].join(" ")} onClick={prevPage}><SelectIcon/></div>
+                <div className={styles.pages}>
+                    {page >= 2 && <div className={styles.item} onClick={() => setPage(0)}>{1}</div>}
+                    {page >= 3 && <div className={styles.item}>...</div>}
+                    {page >= 1 && <div className={styles.item} onClick={() => setPage(page - 1)}>{page}</div>}
+                    <div className={[styles.item,styles.selected].join(" ")}>{page + 1}</div>
+                    {(max_pages - page) >= 1 && <div className={styles.item} onClick={() => setPage(page + 1)}>{page + 2}</div>}
+                    {(max_pages - page) >= 3 && <div className={styles.item}>...</div>}
+                    {(max_pages - page) >= 2 && <div className={styles.item} onClick={() => setPage(max_pages)}>{max_pages + 1}</div>}
+                </div>
+                <div className={[styles.next,page===max_pages && styles.greyed].join(" ")} onClick={nextPage}><SelectIcon/></div>
+            </div>
+        </div>
     //Download Modal
     const [openDownloadPopup,setOpenDownloadPopup] = useState(false);
     const make_table = (results? : Array<TestQueryResults>) => {
@@ -123,6 +140,7 @@ const ResultTable = ({results,testInfo}:{results : Array<TestQueryResults>, test
     }
     const table =
     <>
+    {mobile_pagination}
     <div className={styles.table_header}>
         <div className={styles.downloadButton} onClick={() => setOpenDownloadPopup(true)}>
             <span>Descargar</span>
