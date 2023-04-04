@@ -33,11 +33,31 @@
     flex-direction: column;
     &_title{
         @include shared.font-unbounded(500);
-        font-size: 3.4rem;
+        @include shared.mobile-only{
+            font-size: 2rem;
+        }
+        @include shared.not-mobile{
+            font-size: 3.4rem;
+        }
         padding-bottom: 1.2rem;
     }
     &_body{
         @include shared.font-montserrat(400);
-        font-size: shared.$desktop-reading-font-size;
+        @include shared.mobile-only{
+            font-size: 1.4rem;
+            display: inline;
+        }
+        @include shared.not-mobile{
+            font-size: shared.$desktop-reading-font-size;
+        }
+        &:not(:first-child)::before{
+            content: ' ';
+        }
+        &_container{
+            @include shared.not-mobile{
+                display: flex;
+                flex-direction: column;
+            }
+        }
     }
 }
