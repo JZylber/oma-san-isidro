@@ -32,18 +32,9 @@ const DownloadPopup = ({open,setOpen,testInfo,results,filteredResults}: Download
     const resultsToExport = allResults?results:filteredResults;
     const [generatingExport,setGeneratingExport] = useState(false);
     const documentRef = useRef<HTMLDivElement | null>(null); 
-    const printResults = useReactToPrint({
-        content: () => documentRef.current,
-        documentTitle: `Resultados ${testInfo}`
-    });
-    const getExportedFile = () => {
-        setGeneratingExport(true);
+    const getExportedFile = async () => {
         try {
-            if(format === "pdf"){
-                printResults()
-            } else{
-                processResults(format,testInfo,resultsToExport);   
-            }
+            await processResults(format,testInfo,resultsToExport,documentRef.current!); 
         } catch (error) {
             console.error(error);
         }
@@ -51,7 +42,7 @@ const DownloadPopup = ({open,setOpen,testInfo,results,filteredResults}: Download
     };
     return(
         <Modal open={open}>
-            <div className={styles.container}>
+            <div className={[styles.container,generatingExport?styles.fixed_container:""].join(" ")}>
                 <div className={styles.container_header}>
                     <div className={styles.close_icon} onClick={() => setOpen(false)}>
                         <X/>
@@ -95,7 +86,7 @@ const DownloadPopup = ({open,setOpen,testInfo,results,filteredResults}: Download
                         </div>
                     </div>
                 <div className={styles.button_container}>
-                    <Button content="Confirmar Descarga" onClick={() => getExportedFile()}>
+                    <Button content="Confirmar Descarga" onClick={() => {getExportedFile();setGeneratingExport(true);}}>
                         <div className={styles.button_arrow}>
                             <Download/>
                         </div>
@@ -110,10 +101,8 @@ const DownloadPopup = ({open,setOpen,testInfo,results,filteredResults}: Download
                     </div>
                 }
             </div>
-            <div style={{display: "none"}}>
-                <div ref={documentRef}>
-                    <PrintableTable results={resultsToExport} testInfo={testInfo}/>
-                </div>
+            <div ref={documentRef} style={{position: "absolute",top: "100vh"}}>
+                <PrintableTable results={resultsToExport} testInfo={testInfo}/>
             </div>
         </Modal>
     )

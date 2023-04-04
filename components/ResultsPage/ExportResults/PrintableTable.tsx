@@ -1,12 +1,13 @@
 import { TestQueryResults } from "../resultsTypes"
 import { extractResults } from "./CreateFiles"
+import styles from './PrintableTable.module.scss';
 
 const PrintableTable = ({results,testInfo}:{results: TestQueryResults[], testInfo: string}) => {
     const {data,columns} = extractResults(results)
     return( 
-        <>
-            <h1>Resultados {testInfo}</h1>
-            <table>
+        <div className={styles.container}>
+            <h1 className={styles.title}>Resultados {testInfo}</h1>
+            <table className={styles.result_table}>
                 <thead>
                     <tr>
                         {columns.map((name,idx) => <td key={idx}>{name}</td>)}
@@ -21,7 +22,7 @@ const PrintableTable = ({results,testInfo}:{results: TestQueryResults[], testInf
                     })}
                 </tbody>
             </table>
-        </>)
+        </div>)
 }
 
 export default PrintableTable
