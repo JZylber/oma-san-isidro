@@ -6,8 +6,9 @@ import Arrow from "../../public/images/newsArrow.svg"
 import NoResults from "./NoResults";
 import ResultFilterForm from "./resultFilterForm";
 import DownloadPopup from "./ExportResults/DownloadModal";
+import ResultCard from "./Mobile/ResultCard";
 
-const participantName = (result: TestQueryResults) => {
+export const participantName = (result: TestQueryResults) => {
     return(`${result.participacion.participante.nombre} ${result.participacion.participante.apellido}`)
 }
 
@@ -152,6 +153,9 @@ const ResultTable = ({results,testInfo}:{results : Array<TestQueryResults>, test
     </div>
     <div className={styles.results}>
         {make_table(results_in_page)}
+    </div>
+    <div className={styles.mobile_results}>
+        {results_in_page.map((result,idx) => <ResultCard key={idx} result={result}/>)}
     </div>
     <div className={styles.table_footer}>
         {pagination}

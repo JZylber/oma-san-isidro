@@ -202,7 +202,6 @@
     justify-content: center;
     padding: 1.2rem;
     min-width: 180px;
-    width: 19%;
     background-color: shared.$light-blue;
     border-width: 2px 2px 4px 2px;
     border-style: solid;
@@ -210,13 +209,31 @@
     border-radius: 9px;
     @include shared.font-unbounded(500);
     font-size: 1.6rem;
+    @include shared.mobile-only{
+        width: 100%;
+    }
+    @include shared.not-mobile{
+        width: 19%;
+    }
 }
 
 .arrow{
     transform: rotate(90deg);
-    height: 2rem;
     margin-left: 1.8rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 18px;
+}
+
+.mobile_results{
+    @include shared.mobile-only{
+        display: flex;
+        flex-direction: column;
+        row-gap: 2.4rem;
+        margin-top: 5rem;
+    }
+    @include shared.not-mobile{
+        display: none;
+    }
 }
