@@ -18,7 +18,9 @@
     @include shared.mobile-only{
         display: none;
     }
-    display: flex;
+    @include shared.not-mobile{
+        display: flex;
+    }
 }
 
 .mobile_filters{

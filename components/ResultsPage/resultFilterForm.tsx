@@ -17,22 +17,25 @@ interface ResultFilterProps{
 
 const ResultFilterForm = ({filters,updateFilter,schools,names,levels,passed} : ResultFilterProps) => {
     const [openFilters,setOpenFilters] = useState(false);
+    const [isMobile,setIsMobile] = useState(false);
     useEffect(() => {
-        console.log(filters);
-    },[filters]);
+        if(!isMobile && openFilters){
+            setIsMobile(true);
+        }
+    },[openFilters]);
     return(
         <div className={styles.container}>
             <div className={styles.mobile_filters} onClick={() => setOpenFilters(true)}>
                 <FilterIcon/>
                 <span>Más filtros</span>
             </div>
-            <form className={styles.filters}>
+            {!isMobile && <form className={styles.filters}>
                 <SelectResultCategory category="Participante" value={filters.participante} setValue={(value?: string) => updateFilter("participante",value)} options={names} input={true}/>
                 <SelectResultCategory category="Colegio" value={filters.colegio} setValue={(value? : School) => updateFilter("colegio",value)} options={schools} input={true}/>
                 <SelectResultCategory category="Nivel" value={filters.nivel} setValue={(value? : number) => updateFilter("nivel",value)} options={levels} clear={true}/>
                 <SelectResultCategory category="Aprobado" value={filters.aprobado} setValue={(value? : boolean) => updateFilter("aprobado",value)} options={passed} clear={true}/>
-            </form>
-            <Modal open={openFilters}>
+            </form>}
+            {isMobile && <Modal open={openFilters}>
                 <form className={styles.filter_modal}>
                     <div className={styles.close}>
                         <X className={styles.icon} onClick={() => setOpenFilters(false)}/>
@@ -41,7 +44,7 @@ const ResultFilterForm = ({filters,updateFilter,schools,names,levels,passed} : R
                     <SelectResultCategory category="Participante" value={filters.participante} setValue={(value?: string) => updateFilter("participante",value)} options={names} input={true}/>
                     <SelectResultCategory category="Colegio" value={filters.colegio} setValue={(value? : School) => updateFilter("colegio",value)} options={schools} input={true}/>
                 </form>
-            </Modal>
+            </Modal>}
         </div>
     )
 }
