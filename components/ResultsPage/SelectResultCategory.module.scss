@@ -36,11 +36,11 @@ $height: 4.8rem;
     border-radius: 9px;
     overflow: hidden;
     box-sizing: border-box;
+    background-color: shared.$white;
     @include shared.not-mobile{
         position: absolute;
         width: 100%;
         z-index: 1;
-        background-color: shared.$white;
     }
     @include shared.tablet-only{
         max-height: 100%;
