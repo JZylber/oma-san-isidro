@@ -31,8 +31,8 @@ const ResultCard = ({result}:{result: TestQueryResults}) => {
                                 </div>)
                             } else {
                                 return(
-                                <div className={styles.total_container}>
-                                    <div key={index} className={styles.category}>
+                                <div key={index} className={styles.total_container}>
+                                    <div className={styles.category}>
                                         <p className={styles.title}>Total</p>
                                         <p className={styles.value}>{point}</p>
                                     </div>
