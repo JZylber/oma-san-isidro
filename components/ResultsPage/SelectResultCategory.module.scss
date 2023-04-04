@@ -15,6 +15,9 @@
     &_container {
         display: flex;
         flex-direction: column;
+        @include shared.mobile-only{
+            width: 100%;
+        }
         @include shared.not-mobile{
             margin-right: 2rem;
         }
@@ -196,5 +199,31 @@ $height: 4.8rem;
             background-color: shared.$black;
             color: shared.$white;
         }
+    }
+}
+
+.buttons_container{
+    display: flex;
+    column-gap: 2rem;
+    .button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 0;
+        flex: 1 1 0;
+        background: shared.$white;
+        border: 2px solid shared.$black;
+        border-radius: 9px;
+        min-height: 6rem;
+        @include shared.font-unbounded(500);
+        font-size: 2rem;
+    }
+    .selected{
+        background-color: shared.$black;
+        color: shared.$white;
+    }
+    .unavailable{
+        opacity: 0.3;
+        pointer-events: none;
     }
 }
