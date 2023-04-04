@@ -4,7 +4,7 @@ import SelectResultCategory from "./SelectResultCategory"
 import FilterIcon from "../../public/images/filter.svg"
 import X from "../../public/images/x.svg"
 import Modal from "../Popups/Modal"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 interface ResultFilterProps{
     filters: ResultFilter,
@@ -17,6 +17,9 @@ interface ResultFilterProps{
 
 const ResultFilterForm = ({filters,updateFilter,schools,names,levels,passed} : ResultFilterProps) => {
     const [openFilters,setOpenFilters] = useState(false);
+    useEffect(() => {
+        console.log(filters);
+    },[filters]);
     return(
         <div className={styles.container}>
             <div className={styles.mobile_filters} onClick={() => setOpenFilters(true)}>
@@ -30,14 +33,14 @@ const ResultFilterForm = ({filters,updateFilter,schools,names,levels,passed} : R
                 <SelectResultCategory category="Aprobado" value={filters.aprobado} setValue={(value? : boolean) => updateFilter("aprobado",value)} options={passed} clear={true}/>
             </form>
             <Modal open={openFilters}>
-                <div className={styles.filter_modal}>
+                <form className={styles.filter_modal}>
                     <div className={styles.close}>
                         <X className={styles.icon} onClick={() => setOpenFilters(false)}/>
                     </div>
                     <p className={styles.title}>Más filtros</p>
                     <SelectResultCategory category="Participante" value={filters.participante} setValue={(value?: string) => updateFilter("participante",value)} options={names} input={true}/>
                     <SelectResultCategory category="Colegio" value={filters.colegio} setValue={(value? : School) => updateFilter("colegio",value)} options={schools} input={true}/>
-                </div>
+                </form>
             </Modal>
         </div>
     )

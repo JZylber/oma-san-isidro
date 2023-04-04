@@ -50,6 +50,7 @@
     align-items: center;
     margin-right: 2rem;
     margin-left: 2rem;
+    row-gap: 2.4rem;
     width: 100%;
     .close{
         display: flex;
@@ -58,6 +59,7 @@
     }
 }
 .title{
+    margin-top: -2.4rem;
     @include shared.font-unbounded(500);
     font-size: 1.8rem;
 }
