@@ -6,6 +6,7 @@
     @include shared.mobile-only{
         flex-direction: column;
         row-gap: 2.4rem;
+        margin-bottom: 2.4rem;
     } 
     @include shared.not-mobile{
         padding-bottom: 2rem;

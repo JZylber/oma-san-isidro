@@ -24,9 +24,6 @@
 .infoText{
     @include shared.font-montserrat(400);
     font-size: 1.6rem;
-    @include shared.mobile-only{
-        margin-top: 2.4rem;
-    }
 }
 
 .competition{

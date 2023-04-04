@@ -12,6 +12,10 @@ export const participantName = (result: TestQueryResults) => {
     return(`${result.participacion.participante.nombre} ${result.participacion.participante.apellido}`)
 }
 
+export const schoolName = (result: TestQueryResults) => {
+    return(result.participacion.colegio.nombre + (result.participacion.colegio.sede?`-${result.participacion.colegio.sede}`:""))
+}
+
 const removeRepeatedSchools = (schools : School []) => {
     return schools.filter((value, index, self) =>
         index === self.findIndex((t) => (
@@ -40,7 +44,7 @@ const ResultTable = ({results,testInfo}:{results : Array<TestQueryResults>, test
 
     const make_element = (result : TestQueryResults,index : number) => {
         const participant = participantName(result)
-        const school = result.participacion.colegio.nombre + (result.participacion.colegio.sede?`-${result.participacion.colegio.sede}`:"") 
+        const school = schoolName(result);
         const level = result.participacion.nivel
         const points = result.resultados
         const passed = result.aprobado
