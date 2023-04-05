@@ -117,6 +117,13 @@
     }
 }
 
+.grayed{
+    @include shared.not-desktop{
+        opacity: 0.5;
+        pointer-events: none;
+    }
+}
+
 .selected{
     background-color: shared.$light-blue;
 }
