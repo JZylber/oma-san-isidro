@@ -17,11 +17,11 @@
     justify-content: center;
     align-items: center;
     svg {
-        @include shared.mobile-only{
+        @include shared.not-desktop{
             width: 100px;
             height: 100px;
         }
-        @include shared.not-mobile{
+        @include shared.desktop-only{
             width: 130px;
             height: 130px;
         }
@@ -36,16 +36,27 @@
         @include shared.mobile-only{
             font-size: 2rem;
         }
-        @include shared.not-mobile{
+        @include shared.tablet-only{
+            font-size: 2.2rem;
+        }
+        @include shared.desktop-only{
             font-size: 3.4rem;
         }
         padding-bottom: 1.2rem;
+        &::after{
+            @include shared.desktop-only{
+                content: ' :('
+            }
+        }
     }
     &_body{
         @include shared.font-montserrat(400);
         @include shared.mobile-only{
             font-size: 1.4rem;
             display: inline;
+        }
+        @include shared.tablet-only{
+            font-size: 1.5rem;
         }
         @include shared.not-mobile{
             font-size: shared.$desktop-reading-font-size;
