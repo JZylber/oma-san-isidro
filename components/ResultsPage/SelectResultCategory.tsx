@@ -86,7 +86,6 @@ const SelectResultCategory = <T extends string|number|boolean|School,>({category
       toggleFilter();
     }
     const optionsToDisplay = allOptions?allOptions:options;
-    const [initialOptions] = useState(options);
     return (
       <div className={styles.category_container}>
         <p className={styles.category}>{category}</p>
@@ -121,7 +120,7 @@ const SelectResultCategory = <T extends string|number|boolean|School,>({category
         {buttons &&
               <div className={styles.buttons_container}>
                 {
-                optionsToDisplay.map((option,idx) => <div onClick={() => toggleValue(option)} className={[styles.button,value === option?styles.selected:"",(initialOptions.includes(option))?"":styles.unavailable].join(" ")} key={idx}><span>{displayOption(option)}</span></div>)
+                optionsToDisplay.map((option,idx) => <div onClick={() => toggleValue(option)} className={[styles.button,value === option?styles.selected:""].join(" ")} key={idx}><span>{displayOption(option)}</span></div>)
                 }
               </div>
         }
