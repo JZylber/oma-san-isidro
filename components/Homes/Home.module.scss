@@ -1,0 +1,32 @@
+@use "../../styles/shared.scss" as shared;
+
+.title{
+    @include shared.font-unbounded(600);
+
+    @include shared.mobile-only {
+      font-size: 2 * shared.$mobile-actionable-font-size;
+      margin-top: 4 * shared.$mobile-spacing;
+      margin-bottom: 2.5 * shared.$mobile-spacing;
+    }
+    @include shared.not-mobile {
+        font-size: 2 * shared.$desktop-actionable-font-size;
+        line-height: 2.5;
+    }
+}
+
+.sectionTitle {
+    font-size: shared.$section-title-font-size;
+    @include shared.font-montserrat(400);
+    @include shared.mobile-only {
+      text-align: center;
+      line-height: 3 * shared.$mobile-spacing;
+    }
+    @include shared.tablet-only {
+      text-align: left;
+      line-height: 2.25 * shared.$tablet-max-spacing;
+    }
+    @include shared.desktop-only {
+      text-align: left;
+      line-height: 3 * shared.$desktop-spacing;
+    }
+  }

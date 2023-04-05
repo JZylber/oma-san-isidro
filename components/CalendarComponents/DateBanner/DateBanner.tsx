@@ -7,10 +7,11 @@ import PageLink from "../../../public/images/pageLinkIcon.svg"
 interface DateBannerProps {
     dates: CalendarEvent [],
     displayAmount?: number,
-    displayCategory?: string
+    displayCategory?: string,
+    ignoreCurrentDate?: boolean
 } 
 
-const DateBanner = ({dates,displayAmount = 3,displayCategory}:DateBannerProps) => {
+const DateBanner = ({dates,displayAmount = 3,displayCategory,ignoreCurrentDate=false}:DateBannerProps) => {
     const showCategory = !displayCategory;
     const category_filter = showCategory ? "" : `?categoria=${displayCategory}`
     const currentDate = new Date()
@@ -18,8 +19,9 @@ const DateBanner = ({dates,displayAmount = 3,displayCategory}:DateBannerProps) =
     upcomingDates.sort(function(a, b) {
         var distancea = Math.abs(currentDate.getTime() - a.fecha_inicio.getTime());
         var distanceb = Math.abs(currentDate.getTime() - b.fecha_inicio.getTime());
-    return distancea - distanceb;
+        return distancea - distanceb;
     });
+    const datesToRender = ignoreCurrentDate ? dates : upcomingDates;
     const months = ["ENE","FEB","MAR","ABR","MAY","JUN","JUL","AGO","SEP","OCT","NOV","DIC"]
     const getEndDate = (cevent : CalendarEvent) => {
         if(cevent.fecha_fin){
@@ -28,7 +30,7 @@ const DateBanner = ({dates,displayAmount = 3,displayCategory}:DateBannerProps) =
             return("")
         }
     }
-    const renderUpcomingDate = (date:CalendarEvent,idx : number,dates: CalendarEvent []) => {
+    const renderDate = (date:CalendarEvent,idx : number,dates: CalendarEvent []) => {
         return(
         <div className={[styles.container_entry].join(" ")} key={idx}>
             <div className={styles.date}><span>{`${date.fecha_inicio.getDate()} ${getEndDate(date)} ${months[date.fecha_inicio.getMonth()]}`}</span></div>
@@ -51,7 +53,7 @@ const DateBanner = ({dates,displayAmount = 3,displayCategory}:DateBannerProps) =
         <div className={[styles.container,!showCategory && styles.container_medium].join(" ")}>
             {displayAmount === 1 && <div className={styles.calendar_icon}><CalendarIcon/></div>}
             <div className={styles.entries}>
-            {upcomingDates.filter((date) => (displayCategory === undefined) || (displayCategory === date.tipo)).slice(0,displayAmount).map(renderUpcomingDate)}
+            {datesToRender.filter((date) => (displayCategory === undefined) || (displayCategory === date.tipo)).slice(0,displayAmount).map(renderDate)}
             </div>
         </div>
         </>
