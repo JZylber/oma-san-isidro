@@ -3,18 +3,19 @@ import Head from "next/head";
 import InProgress from "../../components/InProgress/InProgress";
 import Layout from "../../components/Layout/Layout";
 
-const OMAVenues : NextPage = () => {
+const NanduVenues : NextPage = () => {
     return(
         <>
         <Head>
-            <title>Sedes OMA</title>
+            <title>Ñandú</title>
             <meta   name="description"
-                content="Información de las sedes para la próxima instancia de OMA"></meta>
+                content="Paǵina principal de Ñandú"></meta>
         </Head>
         <Layout>
             <InProgress/>
         </Layout>
-        </>)
+        </>
+        )
 }
 
-export default OMAVenues
+export default NanduVenues
