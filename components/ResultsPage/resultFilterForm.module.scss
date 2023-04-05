@@ -13,6 +13,10 @@
         margin-bottom: 7.2rem;
     }
 }
+.icon{
+    width: 19px;
+    height: 17px;
+}
 
 .filters {
     @include shared.mobile-only{
