@@ -48,18 +48,16 @@
             ul {
                 margin: 0 10% 0 10%;
                 list-style: none;
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                display: none;
-                padding-bottom: shared.$mobile-spacing * 3;
+                overflow: hidden;
+                max-height: 0;
+                transition: max-height 0.3s ease-in-out;
             }
             ul li {
                 @include shared.font-unbounded(300);
                 font-size: 2rem;
                 line-height: shared.$mobile-spacing * 6;
-
                 letter-spacing: -0.035em;
+               
             }
             .subitem_selected {
                 font-weight: 500;
@@ -68,19 +66,21 @@
             &:last-child{
                 border-bottom: 2px solid shared.$black;
             }    
-            &_selected{
-                @extend .item;
-                background-color: shared.$white;
-                ul {
-                    display: block;
-                }
-                svg {
-                    transform: rotate(90deg);
-                }
+            
+        }
+        .selected{
+            @extend .item;
+            background-color: shared.$white;
+            ul {
+                max-height: 200px;
             }
-        }        
+            svg {
+                transform: rotate(90deg);
+            }
+        }     
     }
 }
+
 
 .link{
     text-decoration: none;

@@ -132,15 +132,15 @@ export default function NavBar({togglePageContent,onRouteChange}:NavProps){
 
     return(
         <nav className={styles.navbar}> 
-            <div className={styles[["navbar_main", (openFullMenu ? "_full" : "")].join("")]}>
-                <div className={styles.iconWrapper}>
-                    <div className={styles.iconWrapper_icon}>
-                      {openFullMenu?<X className={styles.icon} onClick={()=>openCloseMenu()}/>:<MenuIcon className={styles.icon} onClick={()=>openCloseMenu()}/>}
-                    </div>
-                </div>
-                {openFullMenu ? <MobileMenu closeMenu={openCloseMenu} menuHierarchy={menuHierarchy}/>: <TopMenu menuHierarchy={menuHierarchy} onMainItemClick={clickMainItem}/> }
+          <div className={openFullMenu ? `${styles.iconWrapper} ${styles.iconFull}`: styles.iconWrapper}>
+            <div className={styles.iconWrapper_icon}>
+              {openFullMenu?<X className={styles.icon} onClick={()=>openCloseMenu()}/>:<MenuIcon className={styles.icon} onClick={()=>openCloseMenu()}/>}
             </div>
-            {isNotAtHome() && <SubMenu items={getSubitems()} onSubItemClick={(subItemName: string) => clickSubItem(selectedMainItem(),subItemName)}/>}
+          </div>
+          <div className={openFullMenu ? `${styles.navbar_main} ${styles.full}` : styles.navbar_main}>
+              {openFullMenu ? <MobileMenu closeMenu={openCloseMenu} menuHierarchy={menuHierarchy} />: <TopMenu menuHierarchy={menuHierarchy} onMainItemClick={clickMainItem}/> }
+          </div>
+          {isNotAtHome() && <SubMenu items={getSubitems()} onSubItemClick={(subItemName: string) => clickSubItem(selectedMainItem(),subItemName)}/>}
         </nav>
     )
 }

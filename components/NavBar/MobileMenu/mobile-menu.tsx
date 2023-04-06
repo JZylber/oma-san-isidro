@@ -9,7 +9,7 @@ import Link from 'next/link';
 
 type mobileMenuProps = {
     closeMenu : () => void,
-    menuHierarchy : Array<menuItem>
+    menuHierarchy : Array<menuItem>,
 }
 
 const ConditionalWrapper = ({ condition, wrapper, children }:{condition: boolean, wrapper: (children: ReactElement) => ReactElement, children: ReactElement}) => 
@@ -63,7 +63,7 @@ const MobileMenu= ({closeMenu,menuHierarchy} : mobileMenuProps) => {
     const renderMenuItem = (item : menuItem) => {
         const link = item.link as string 
         return(
-        <div className={styles[["item",(item.selected && item.subItems.length > 0 ?"_selected":"")].join("")]} key={item.text}>
+        <div className={item.selected && item.subItems.length > 0 ? `${styles.item} ${styles.selected}` : styles.item } key={item.text}>
             <ConditionalWrapper
                 condition={item.link != undefined}
                 wrapper={(children: ReactElement) => <Link href={link} className={styles.link}>{children}</Link>}>
@@ -72,12 +72,13 @@ const MobileMenu= ({closeMenu,menuHierarchy} : mobileMenuProps) => {
                 <MenuArrow/>
             </div>
             </ConditionalWrapper>
-            <ul>
-                {item.subItems.map((subitem) => {
-                    const sublink = subitem.link as string
-                    return(<Link href={sublink} className={styles.link} key={item.text + subitem.text}><li className={`${subitem.selected ? styles.subitem_selected : ""}`}  onClick={() => selectSubItem(item.text,subitem.text)} >{subitem.text}</li></Link>)
-                })}
-            </ul>
+                <ul>
+                    {item.subItems.map((subitem) => {
+                        const sublink = subitem.link as string
+                        return(<Link href={sublink} className={styles.link} key={item.text + subitem.text}><li className={`${subitem.selected ? styles.subitem_selected : ""}`}  onClick={() => selectSubItem(item.text,subitem.text)} >{subitem.text}</li></Link>)
+                    })}
+                </ul>
+            
         </div>
         
         )

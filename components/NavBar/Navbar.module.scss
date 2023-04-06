@@ -2,10 +2,15 @@
 
 .iconWrapper {
   @include shared.mobile-only {
-    width: 80%;
-    margin-left: 10%;
+    width: 100%;
     display: flex;
     justify-content: flex-start;
+    padding-top: 4.5em;
+    padding-left: 5em;
+    box-sizing: border-box;
+    background-color: transparent;
+    transition: background-color 0.3s ease-out;
+    
     &_icon{
       display: flex;
       align-items: center;
@@ -26,8 +31,14 @@
   }
 }
 
+.iconFull {
+  @include shared.mobile-only {
+  background-color: shared.$light-blue;
+  }
+}
 .navbar {
   width: 100%;
+
   @include shared.mobile-only {
     min-height: shared.$mobile-spacing * 4;
   }
@@ -45,15 +56,17 @@
     }
   }
   .navbar {
-    width: 100%;
     &_main {
       @include shared.mobile-only {
         padding-top: 2.4rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        position: fixed;
+        top: 10%;
+        left: -100%;
+        width: 100%;
+        transition: left 0.3s ease-in-out;
       }
       @include shared.not-mobile {
+        width: 100%;
         background-color: shared.$light-blue;
         border-bottom: 2px solid;
         position: relative;
@@ -66,12 +79,15 @@
       @include shared.desktop-only {
         padding-top: 1.6rem;
       }
-      &_full {
-        @extend .navbar_main;
-        background-color: shared.$light-blue;
-      }
     }
   }
+}
+
+.full {
+  padding-top: 2.4rem; 
+  background-color: shared.$light-blue;
+  opacity: 1;
+  left: 0 !important;
 }
 
 .wrapper {
