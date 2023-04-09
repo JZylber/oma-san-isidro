@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import Head from "next/head";
 import InProgress from "../../components/InProgress/InProgress";
 import Layout from "../../components/Layout/Layout";
+import Problems from "../../components/Problems/Problems";
 
 const NanduProblems : NextPage = () => {
     return(
@@ -10,7 +11,7 @@ const NanduProblems : NextPage = () => {
             <title>Problemas Ñandú</title>
         </Head>
         <Layout>
-            <InProgress/>
+            <Problems type="Nandu"/>
         </Layout>
         </>
         )
