@@ -5,19 +5,22 @@ const Problems : ({type}: {type: string}) => JSX.Element = ({type}) => {
     const problems : {[key: string]: {[key:string]: string}}= require(`../../data/Problemas${type}.json`);
     return(
     <>
+        <div className={styles.type}>{type == "OMA"?"Oma":"Ñandú"}</div>
         <h1 className={styles.title}>Problemas</h1>
-        {Object.keys(problems).map((key:string,idx:number) => {
+        {Object.keys(problems).sort().reverse().map((key:string,idx:number) => {
             const problem = problems[key];
             return(
-                <Fragment key={idx}>
-                    <h2>{key}</h2>
+                <section className={styles.year_problems} key={idx}>
+                    <h2 className={styles.year_number}>{key}</h2>
+                    <div className={styles.year_links}>
                     {Object.keys(problem).map((key:string,idx:number) => {
                         const problemLink = problem[key];
                         return(
-                            <a href={problemLink} target="_blank" rel="noopener noreferrer" key={idx}>{key}</a>
+                            <a className={styles.link} href={problemLink} target="_blank" rel="noopener noreferrer" key={idx}>{key}</a>
                         )
                     })}
-                </Fragment>
+                    </div>
+                </section>
             );
         })}
     </>
