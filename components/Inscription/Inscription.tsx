@@ -30,11 +30,15 @@ export const Inscripcion = ( { type } : {type : string} ) => {
             <ol className={styles.step_information_substeps}>
                 <li>Los profesores encargados de OMA deberán realizar la inscripción para la instancia intercolegial en el siguiente enlace:</li>
                 <div className={styles.button_container}>
-                    <Button content="(Todavía no disponible)" />
+                    <Button content={type == "OMA"?"(Todavía no disponible)":"Link de Inscripción"} onClick={() => type == "OMA"?null:window.location.href = "https://oma.org.ar/virtual/inscripcion.php?competencia=OMN&region=53&hash=02609c0a&ano=2023"}>
+                        <>
+                            {type !== "OMA" && <Arrow className={styles.arrow}/>}
+                        </>
+                    </Button>
                 </div>
                 <li>Luego, deben completar la planilla de datos con los datos pedidos</li>
                 <div className={styles.button_container}>
-                    <Button content="Planilla de Datos" onClick={downloadForm}><Arrow className={styles.arrow}/></Button>
+                    <Button content="Planilla de Datos" onClick={downloadForm}><Arrow className={[styles.arrow,styles.download].join(" ")}/></Button>
                 </div>
                 <li>Enviar la planilla de datos y el comprobante de pago escaneado a la responsable de su zona<span className={styles.step_information_bold}> hasta el {type == "OMA"?"5 de mayo":"21 de abril"}</span>.</li>
                 <p>Aquellos que precisen factura C deberán también enviar los siguiente datos:</p>
