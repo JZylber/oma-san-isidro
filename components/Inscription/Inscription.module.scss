@@ -204,6 +204,9 @@
   }
   @include shared.desktop-only{
     display: block;
-    transform: rotate(90deg);
   }
+}
+
+.download{
+  transform: rotate(90deg);
 }
