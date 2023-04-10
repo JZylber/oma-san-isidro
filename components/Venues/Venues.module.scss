@@ -28,7 +28,8 @@
 
 .section_title {
   font-size: shared.$section-title-font-size;
-  @include shared.font-montserrat(400);
+  @include shared.font-unbounded(500);
+  margin: 1.6rem 0rem 1.6rem 0rem;
   @include shared.mobile-only {
     text-align: center;
     line-height: 3 * shared.$mobile-spacing;
@@ -40,5 +41,28 @@
   @include shared.desktop-only {
     text-align: left;
     line-height: 3 * shared.$desktop-spacing;
+  }
+}
+
+.dropPoints{
+  margin-top: .8rem
+}
+
+.text{
+  @include shared.font-montserrat(300);
+
+  @include shared.mobile-only {
+    font-size: shared.$mobile-reading-font-size;
+  }
+
+  @include shared.tablet-only {
+    font-size: shared.$tablet-reading-font-size;
+  }
+
+  @include shared.desktop-only {
+    font-size: 0.85 * shared.$desktop-reading-font-size;
+  }
+  .bold{
+    @include shared.font-montserrat(500);
   }
 }
