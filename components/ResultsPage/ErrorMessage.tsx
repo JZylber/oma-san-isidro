@@ -12,6 +12,8 @@ const ErrorTexts : {[key: number]: ErrorMessageText} = {
         },
     503:{   title: "Error de conexión",
             paragraphs: ["No se pudo establecer una conexión con el servidor.", "Intente nuevamente más tarde."]},
+    600:{   title: "Error inesperado",
+            paragraphs: ["Ha ocurrido un error inesperado.", "Intente nuevamente más tarde."]}
 }
 
 const ErrorMessage = ({status = 400}:{status?: number}) => {

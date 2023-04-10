@@ -40,7 +40,7 @@ const Results = ({competition,availableResults} : ResultProps) => {
             if(networkError){
                 setStatus(networkError.status);
             } else{
-                setStatus(600)
+                setStatus(600);
             }
         } finally {
             setIsLoading(false);
