@@ -1,6 +1,6 @@
 import {useCallback, useState } from "react"
 import Loader from "../Loader/Loader"
-import NoResults from "./NoResults"
+import ErrorMessage from "./ErrorMessage"
 import ResultFinderForm from "./resultFinderForm"
 import styles from "./results.module.scss"
 import {ResultProps,TestQueryResults } from "./resultsTypes"
@@ -39,7 +39,7 @@ const Results = ({competition,availableResults} : ResultProps) => {
         if(results === undefined){
             return(<span className={styles.infoText}>Selecciona año e instancia para poder ejecutar una búsqueda.</span>)
         }else if(results.length === 0){
-            return(<NoResults/>)
+            return(<ErrorMessage/>)
         }else{
             return(<ResultTable results={results} testInfo={testInfo}/>)
         }

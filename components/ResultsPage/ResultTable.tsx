@@ -3,7 +3,7 @@ import { ResultFilter, School, TestQueryResults } from "./resultsTypes";
 import styles from "./ResultTable.module.scss"
 import SelectIcon from "../../public/images/menuSelectIcon.svg";
 import Arrow from "../../public/images/newsArrow.svg"
-import NoResults from "./NoResults";
+import ErrorMessage from "./ErrorMessage";
 import ResultFilterForm from "./resultFilterForm";
 import DownloadPopup from "./ExportResults/DownloadModal";
 import ResultCard from "./Mobile/ResultCard";
@@ -168,7 +168,7 @@ const ResultTable = ({results,testInfo}:{results : Array<TestQueryResults>, test
     return(
         <>
             <ResultFilterForm filters={filters} updateFilter={updateFilter} schools={schools} names={names} levels={levels} passed={passed}/>
-            {filtered_results.length > 0?table:<NoResults/>}
+            {filtered_results.length > 0?table:<ErrorMessage/>}
             <DownloadPopup 
                 open={openDownloadPopup} 
                 setOpen={setOpenDownloadPopup}
