@@ -1,7 +1,7 @@
 import { NextPage } from "next"
 import Head from "next/head"
 import Layout from "../../components/Layout/Layout"
-import InProgress from "../../components/InProgress/InProgress"
+import Venues from "../../components/Venues/Venues"
 
 const OMAVenues : NextPage = () => {
     return(
@@ -12,7 +12,7 @@ const OMAVenues : NextPage = () => {
                 content="Reglamento oficial para participar de Ñandú"></meta>
         </Head>
         <Layout>
-            <InProgress/>
+            <Venues type="oma"/>
         </Layout>
         </>
         )
