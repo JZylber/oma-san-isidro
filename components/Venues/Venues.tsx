@@ -34,7 +34,7 @@ const Venues = ({type}:{type:string}) => {
                 <ul className={styles.dropPoints}>
                     {dropPointsData.map((dropPoint, index) => {
                         const {localidad, nombre, direccion, aclaraciones} = dropPoint;
-                        return(<li className={styles.text}><span className={styles.bold}>{localidad}: </span>{nombre?`${nombre} - `:""}{direccion}{aclaraciones?` (${aclaraciones})`:""}</li>)
+                        return(<li className={styles.text} key={index}><span className={styles.bold}>{localidad}: </span>{nombre?`${nombre} - `:""}{direccion}{aclaraciones?` (${aclaraciones})`:""}</li>)
                     })}
                 </ul>
                 </>
