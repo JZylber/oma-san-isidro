@@ -10,6 +10,8 @@ const ErrorTexts : {[key: number]: ErrorMessageText} = {
     400:{   title: "La consulta no arrojó ningún resultado", 
             paragraphs: ["No hay resultados para los filtros seleccionados.", "Cambie los filtros e intente nuevamente."]
         },
+    503:{   title: "Error de conexión",
+            paragraphs: ["No se pudo establecer una conexión con el servidor.", "Intente nuevamente más tarde."]},
 }
 
 const ErrorMessage = ({status = 400}:{status?: number}) => {
