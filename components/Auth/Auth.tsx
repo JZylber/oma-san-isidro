@@ -7,15 +7,15 @@ import { Button } from "../buttons/Button";
 const specs = [
   {
     important: "Solo autorizaciones oficiales de OMA",
-    text: "serán aceptadas. Tampoco se aceptarán autorizaciones enviadas por fax o fotocopia.",
-  },
-  {
-    important: "La fecha y lugar de entrega de autorizaciones",
-    text: "informará una vez que se sepa la cantidad de alumnos inscriptos de cada colegio.",
+    text: "serán aceptadas. Deben estar completas y con la firma ORIGINAL. Tampoco se aceptarán autorizaciones enviadas por fax o fotocopia",
   },
   {
     important: "No podrá rendir la prueba",
     text: "el alumno que no presente dicha autorizaciones firmada por el padre, madre, tutor o encargado y con la firma y sello del colegio.",
+  },
+  {
+    important: "La fecha y lugar de entrega de autorizaciones",
+    text: "informará una vez que se sepa la cantidad de alumnos inscriptos de cada colegio.",
   },
   {
     important: "No se aceptarán autorizaciones con fechas corregidas",
