@@ -16,7 +16,7 @@ const ErrorTexts : {[key: number]: ErrorMessageText} = {
             paragraphs: ["Ha ocurrido un error inesperado.", "Intente nuevamente más tarde."]}
 }
 
-const ErrorMessage = ({status = 400}:{status?: number}) => {
+const ErrorMessage = ({status = 600}:{status?: number}) => {
     const {title,paragraphs} = ErrorTexts[status]
     return(
         <div className={styles.container}>

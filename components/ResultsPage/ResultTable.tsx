@@ -168,7 +168,7 @@ const ResultTable = ({results,testInfo}:{results : Array<TestQueryResults>, test
     return(
         <>
             <ResultFilterForm filters={filters} updateFilter={updateFilter} schools={schools} names={names} levels={levels} passed={passed}/>
-            {filtered_results.length > 0?table:<ErrorMessage/>}
+            {filtered_results.length > 0?table:<ErrorMessage status={400}/>}
             <DownloadPopup 
                 open={openDownloadPopup} 
                 setOpen={setOpenDownloadPopup}
