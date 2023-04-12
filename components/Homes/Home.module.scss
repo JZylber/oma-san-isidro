@@ -15,18 +15,31 @@
 }
 
 .sectionTitle {
-    font-size: shared.$section-title-font-size;
+    @include shared.desktop-only{
+    @include shared.font-unbounded(500);
+      font-size: 3.4rem;
+      margin-bottom: 1.2rem;
+    }
+}
+
+.section{
+  margin-top: 4.8rem;
+  &_text{
     @include shared.font-montserrat(400);
-    @include shared.mobile-only {
-      text-align: center;
-      line-height: 3 * shared.$mobile-spacing;
-    }
-    @include shared.tablet-only {
-      text-align: left;
-      line-height: 2.25 * shared.$tablet-max-spacing;
-    }
-    @include shared.desktop-only {
-      text-align: left;
-      line-height: 3 * shared.$desktop-spacing;
+    @include shared.desktop-only{
+      font-size: 2rem;
     }
   }
+}
+
+.link{
+  color: shared.$black;
+  @include shared.font-montserrat(600);
+}
+
+.icon{
+  display: inline-block;
+  margin-left: .4rem;
+  width: 17px;
+  height: 17px;
+}
