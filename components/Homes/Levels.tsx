@@ -11,7 +11,7 @@ const Levels = ({category}:{category : string}) => {
     return(
         <ul className={styles.levels}>
             {data.map((level,index) => {return(
-                <li className={styles.level}>
+                <li key={index} className={styles.level}>
                     <div className={styles.number}>{index + 1}</div>
                     <div className={styles.arrow}><LongArrow/></div>
                     <span className={styles.text}>{level}</span>
