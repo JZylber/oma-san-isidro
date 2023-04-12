@@ -3,6 +3,7 @@ import { CalendarEvent } from "../CalendarComponents/CalendarTypes";
 import AllDatesBanner from "../CalendarComponents/DateBanner/AllDatesBanner";
 import styles from "./Home.module.scss";
 import PageLink from "../../public/images/pageLinkIcon.svg";
+import Levels from "./Levels";
 
 interface HomeProps {
     competition: string
@@ -20,7 +21,7 @@ const Home = ({competition,dates}:HomeProps) => {
         </section>
         <section className={styles.section}>
             <h2 className={styles.sectionTitle}>Niveles</h2>
-           
+            <Levels category={competition === "OMA"?"oma":"nandu"}/>
         </section>
         <section className={styles.section}>
         </section>

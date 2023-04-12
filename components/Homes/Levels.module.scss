@@ -1,0 +1,29 @@
+@use "../../styles/shared.scss" as shared;
+
+.level{
+    display: flex;
+    align-items: center;
+    column-gap: 2.4rem;
+    &:not(:last-child){
+        margin-bottom: 1.3rem;
+    }
+    .number{
+        background: shared.$light-blue;
+        border: 2px solid shared.$black;
+        border-radius: 9px;
+        padding: .6rem;
+        width: 10.4rem;
+        display: flex;
+        justify-content: center;
+        @include shared.font-unbounded(500);
+        font-size: 1.6rem;
+    }
+    .arrow{
+        width: 96px;
+    }
+    .text{
+        @include shared.font-montserrat(400);
+        font-size: 2.4rem;
+    }
+}
+
