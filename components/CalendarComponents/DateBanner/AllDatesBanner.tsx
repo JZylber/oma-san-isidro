@@ -24,6 +24,15 @@ const AllDatesBanner = ({dates,category}:DateBannerProps) => {
                     </div>
                 </Link>
             </div>
+            <div className={styles.dates_container}>
+                {dates.map((date,idx) => {
+                    return(
+                        <div className={styles.event} key={idx}>
+                            <span className={styles.text}>{date.texto}</span>
+                            <span className={styles.date}>{`${date.fecha_inicio.getDate()} ${months[date.fecha_inicio.getMonth()]}`}</span>
+                        </div>
+                    )})}
+            </div>
         </section>
     )
 }

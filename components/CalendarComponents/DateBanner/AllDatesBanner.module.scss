@@ -10,4 +10,38 @@
 .header{
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
+}
+.dates_container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    @include shared.desktop-only{
+        column-gap: 1.6rem;
+        row-gap: 1.6rem;
+        margin-top: 1.6rem;
+    }
+}
+
+.event{
+    background: shared.$white;
+    border: 2px solid shared.$black;
+    border-radius: 9px;  
+    display: flex;
+    flex-direction: column;
+    @include shared.desktop-only{
+        padding: 4rem 3.2rem 4rem 3.2rem;
+        row-gap: 1.6rem;
+    }
+    .text{
+        @include shared.font-unbounded(400);
+        @include shared.desktop-only{
+            font-size: 2.4rem;
+        }
+    }
+    .date{
+        @include shared.font-montserrat(400);
+        @include shared.desktop-only{
+            font-size: 2rem;
+        }
+    }
 }
