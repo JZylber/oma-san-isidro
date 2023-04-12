@@ -1,0 +1,13 @@
+@use '../../../styles/shared.scss' as shared;
+
+.title{
+    @include shared.desktop-only{
+        @include shared.font-unbounded(500);
+        font-size: 3.4rem;
+    }
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+}
