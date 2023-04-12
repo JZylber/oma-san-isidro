@@ -1,16 +1,16 @@
 import { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { getDatesFromJson, JSONCalendarEvent } from "../../components/CalendarComponents/CalendarTypes";
-import DateBanner from "../../components/CalendarComponents/DateBanner/DateBanner";
 import Layout from "../../components/Layout/Layout";
 import { getCalendarEvents } from "../../lib/aux_db_calls";
 import styles from "./Geometria.module.scss";
 import Warning from "../../public/images/warning.svg";
 import BankInformation from "../../components/Inscription/BankInformation";
+import AllDatesBanner from "../../components/CalendarComponents/DateBanner/AllDatesBanner";
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
     const year = new Date().getFullYear()
-    const available = await getCalendarEvents(year)
+    const available = await getCalendarEvents(year,"Geometría")
     const newProps = {results: JSON.parse(JSON.stringify(available.results)),year: year}
     return {
       props: newProps,
@@ -29,10 +29,7 @@ const Geometry : NextPage<{results : Array<JSONCalendarEvent>,year:number}> = ({
         </Head>
         <Layout>
                 <h1 className={styles.title}>Torneo de Geometría e Imaginación</h1>
-                <section className={styles.section}>
-                    <h3 className={styles.section_title}>Próximas Fechas</h3>
-                    <DateBanner dates={events} displayAmount={3} displayCategory="Geometría"/>
-                </section>
+                <AllDatesBanner dates={events} category="Geometría"/>
                 <section className={styles.section}>
                     <h3 className={styles.section_title}>Inscripción</h3>
                     <div className={styles.section_content}>
