@@ -1,5 +1,5 @@
 import { CalendarEvent } from "../CalendarComponents/CalendarTypes";
-import DateBanner from "../CalendarComponents/DateBanner/DateBanner";
+import AllDatesBanner from "../CalendarComponents/DateBanner/AllDatesBanner";
 import styles from "./Home.module.scss";
 
 interface HomeProps {
@@ -11,8 +11,7 @@ const Home = ({competition,dates}:HomeProps) => {
     return(
         <>
         <h1 className={styles.title}>{competition}</h1>
-        <h2 className={styles.sectionTitle}>Fechas</h2>
-        <DateBanner dates={dates} displayAmount={dates.length} displayCategory={competition} ignoreCurrentDate={true}/>
+        <AllDatesBanner dates={dates} category={competition}/>
         <h2 className={styles.sectionTitle}>Próxima instancia</h2>
         <p>Aca iría la información de la próxima instancia, en particular, horario y sedes asignadas a cada colegio (es una tabla que indica zona, colegio, y sede, con dirección de la sede). Podría haber un filtro para zona/colegio/sede, pero debería ser una tabla chica, no se si hacen falta</p>
         <h2 className={styles.sectionTitle}>Niveles</h2>
