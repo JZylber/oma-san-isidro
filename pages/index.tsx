@@ -26,13 +26,13 @@ const Home: NextPage<{news: NewsItemData[], events: JSONCalendarEvent[]}> = ({ne
   const dates = getDatesFromJson(events)
   const [openModal,setOpenModal] = useState(false)
 
-  useEffect(() => {
+  /*useEffect(() => {
     let pop_status = sessionStorage.getItem('pop_status');
     if(!pop_status){
       setOpenModal(true);
       sessionStorage.setItem('pop_status','true');
     }
-  }, []);
+  }, []);*/
 
   return (
     <>
