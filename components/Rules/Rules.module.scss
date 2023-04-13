@@ -1,0 +1,73 @@
+@use "../../styles/shared.scss" as shared;
+
+.type {
+    @include shared.mobile-only{
+      display: block;
+      @include shared.font-unbounded(400);
+      font-size: 1.5 * shared.$mobile-reading-font-size;
+      margin-top: 1.6rem;
+    }
+    @include shared.not-mobile{
+      display: none;
+    }
+}
+
+
+.title {
+    @include shared.font-unbounded(600);
+
+    @include shared.mobile-only {
+      font-size: 2.4 * shared.$mobile-actionable-font-size;
+      margin-top: 4 * shared.$mobile-spacing;
+      margin-bottom: 2.5 * shared.$mobile-spacing;
+    }
+
+    @include shared.not-mobile {
+      font-size: 2 * shared.$desktop-actionable-font-size;
+      line-height: 2.5;
+    }
+}
+
+.rules{
+    li {
+        @include shared.font-montserrat(300);
+      
+        @include shared.mobile-only {
+          font-size: shared.$mobile-reading-font-size;
+        }
+      
+        @include shared.tablet-only {
+          font-size: shared.$tablet-reading-font-size;
+        }
+      
+        @include shared.desktop-only {
+          font-size: 0.85 * shared.$desktop-reading-font-size;
+        }
+      }
+}
+
+.button {
+    @include shared.mobile-only {
+      width: 100%;
+    }
+  
+    @include shared.tablet-only {
+      width: 63.5%;
+    }
+  
+    @include shared.desktop-only {
+      width: 63.5%;
+    }
+}  
+
+.arrow {
+    @include shared.desktop-only {
+      rotate: 90deg;
+      padding: 5px 0 0 0;
+    }
+  
+    @include shared.not-desktop {
+      display: none;
+    }
+  }
+  

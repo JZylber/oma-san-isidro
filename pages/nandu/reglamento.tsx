@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import InProgress from "../../components/InProgress/InProgress";
 import Layout from "../../components/Layout/Layout";
+import Rules from "../../components/Rules/Rules";
 
 const NanduRules : NextPage = () => {
     return(
@@ -12,7 +12,7 @@ const NanduRules : NextPage = () => {
                 content="Reglamento oficial para participar de Ñandú"></meta>
         </Head>
         <Layout>
-            <InProgress/>
+            <Rules type="Ñandú"/>
         </Layout>
         </>
         )

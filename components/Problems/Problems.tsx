@@ -1,5 +1,4 @@
 import styles from "./Problems.module.scss";
-import { Fragment } from "react";
 
 const Problems : ({type}: {type: string}) => JSX.Element = ({type}) => {  
     const problems : {[key: string]: {[key:string]: string}}= require(`../../data/Problemas${type}.json`);
