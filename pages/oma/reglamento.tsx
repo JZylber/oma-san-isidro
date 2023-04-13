@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import Head from "next/head";
 import InProgress from "../../components/InProgress/InProgress";
 import Layout from "../../components/Layout/Layout";
+import Rules from "../../components/Rules/Rules";
 
 const OMARules : NextPage = () => {
     return(
@@ -12,7 +13,7 @@ const OMARules : NextPage = () => {
                 content="Reglamento oficial para participar de OMA"></meta>
         </Head>
         <Layout>
-            <InProgress/>
+            <Rules type="OMA"/>
         </Layout>
         </>)
 }
