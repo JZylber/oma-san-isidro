@@ -231,7 +231,6 @@
 }
 
 .generating{
-    position: absolute;
     height: 100vh;
     width: 100%;
     display: flex;
@@ -244,4 +243,7 @@
     .loader{
         margin-top: 4rem;
     }
+}
+.hide{
+    display: none;
 }

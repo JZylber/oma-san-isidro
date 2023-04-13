@@ -43,6 +43,7 @@ const DownloadPopup = ({open,setOpen,testInfo,results,filteredResults}: Download
     return(
         <Modal open={open}>
             <div className={[styles.container,generatingExport?styles.fixed_container:""].join(" ")}>
+                <div className={generatingExport?styles.hide:""}>
                 <div className={styles.container_header}>
                     <div className={styles.close_icon} onClick={() => setOpen(false)}>
                         <X/>
@@ -91,6 +92,7 @@ const DownloadPopup = ({open,setOpen,testInfo,results,filteredResults}: Download
                             <Download/>
                         </div>
                     </Button>
+                </div>
                 </div>
                 {generatingExport &&
                     <div className={styles.generating}>
