@@ -1,0 +1,71 @@
+@use '../../styles/shared.scss' as shared;
+
+.container{
+    border-top: 2px solid rgba(0, 0, 0, 0.5);
+    @include shared.mobile-only{
+        margin-top: 3.2rem;
+        padding-top: 4rem;
+        margin-bottom: 5.2rem;
+    }
+    @include shared.not-mobile{
+        margin-top: 3rem;
+        padding-top: 4rem;
+        margin-bottom: 7.2rem;
+    }
+}
+.icon{
+    width: 19px;
+    height: 17px;
+}
+
+.filters {
+    @include shared.mobile-only{
+        display: none;
+    }
+    @include shared.not-mobile{
+        display: flex;
+    }
+}
+
+.mobile_filters{
+    @include shared.mobile-only{
+        background: shared.$white;
+        border: 2px solid #000000;
+        border-radius: 9px;
+        display: flex;
+        align-items: center;
+        padding: 1.2rem;
+        text-align: center;
+        span {
+            flex: 1 1 0;
+            @include shared.font-unbounded(500);
+            font-size: 1.5rem;
+        }
+    }
+    @include shared.not-mobile{
+        display: none;
+    }
+}
+.filter_modal{
+    background: shared.$light-blue;
+    border: 2px solid shared.$black;
+    border-radius: 9px;
+    padding: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 2rem;
+    margin-left: 2rem;
+    row-gap: 2.4rem;
+    width: 100%;
+    .close{
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+    }
+}
+.title{
+    margin-top: -2.4rem;
+    @include shared.font-unbounded(500);
+    font-size: 1.8rem;
+}

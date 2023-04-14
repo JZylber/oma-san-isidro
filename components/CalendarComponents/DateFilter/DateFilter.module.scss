@@ -102,6 +102,11 @@
         &Start{
             display: flex;
         }
+        &End{
+            svg{
+                fill: shared.$black
+            }
+        }
     }
     &Option{
         &:not(:last-child){

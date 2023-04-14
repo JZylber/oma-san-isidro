@@ -1,0 +1,229 @@
+@use '../../styles/shared.scss' as shared;
+
+.category{
+    @include shared.font-montserrat(400);
+    padding-bottom: .4rem;
+    @include shared.mobile-only{
+        font-size: shared.$mobile-actionable-font-size;
+    }
+    @include shared.tablet-only{
+        font-size: shared.$tablet-actionable-font-size;
+    }
+    @include shared.desktop-only{
+        font-size: 1.6rem;
+    }
+    &_container {
+        display: flex;
+        flex-direction: column;
+        @include shared.mobile-only{
+            width: 100%;
+        }
+        @include shared.not-mobile{
+            margin-right: 2rem;
+        }
+        @include shared.tablet-only{
+            flex: 1 1 0;
+            width: 0;
+        }
+        @include shared.desktop-only{
+            min-width: 180px;
+            width: 19%;
+        }
+    }
+}
+
+$height: 4.8rem;
+
+.filter_box{
+    border: 2px solid shared.$black;
+    border-radius: 9px;
+    overflow: hidden;
+    box-sizing: border-box;
+    background-color: shared.$white;
+    @include shared.not-mobile{
+        position: absolute;
+        width: 100%;
+        z-index: 1;
+    }
+    @include shared.tablet-only{
+        max-height: 100%;
+    }
+    @include shared.desktop-only{
+        max-height: 100%;
+    }
+    &_container{
+       width: 100%;
+       position: relative;
+       @include shared.not-mobile{
+        min-height: $height;
+       }
+    }
+    &_open{
+        z-index: 2;
+        max-height: fit-content;
+    }
+}
+
+.dropdownFilter{
+    list-style: none;
+    flex: 0 1 auto;
+    overflow-y: scroll;
+    max-height: 3.5*$height;
+    @include shared.not-mobile{
+        -ms-overflow-style: none;  
+        scrollbar-width: none; 
+            &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+}
+
+.filter_input{
+    display: flex;
+    width: 100%;
+}
+
+.filter_clear{
+    flex-basis: content;
+    padding-left: 0 !important;
+}
+
+.filter{
+    &Text{
+        display: flex;
+        align-items: center;
+        @include shared.font-unbounded(500);
+        @include shared.mobile-only{
+            span {
+                flex-grow: 1;
+            }
+            text-align: center;
+            font-size: shared.$mobile-actionable-font-size;
+            padding: 1.4rem 2rem 1.4rem 2rem;
+        }
+        @include shared.tablet-only{
+            font-size: shared.$tablet-reading-font-size;
+            padding: 1.4rem 2rem 1.4rem 2rem;
+        }
+        @include shared.desktop-only{
+            padding: 1.4rem 1.8rem 1.4rem 1.8rem;
+            font-size: 1.5rem;
+        }
+    };
+    &Title{
+        display: flex;
+        justify-content: space-between;
+        background-color: shared.$white;
+        &Open{
+            border-bottom: 2px solid shared.$black !important;
+        }
+        &End{
+            svg{
+                fill: shared.$black;
+            }
+        }
+    }
+    &Option{
+        &:not(:last-child){
+            border-bottom: 2px solid shared.$black;
+        }
+        box-sizing: border-box;
+    }
+
+}
+.clean_input{
+    @include shared.appearance;
+    border: none;
+    outline: none;
+    -webkit-box-shadow: none !important; 	
+    -moz-box-shadow: none !important; 	
+    box-shadow: none !important;
+    &:focus{
+        outline: none;
+    }
+    width: 100%;
+    text-overflow: ellipsis;
+}
+
+.currentFilter{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    @include shared.mobile-only{
+        margin-top: 3.2rem;
+    }
+    @include shared.tablet-only{
+        font-size: shared.$tablet-actionable-font-size;
+    }
+    @include shared.desktop-only{
+        font-size: shared.$desktop-actionable-font-size;
+    }
+    &_chip{
+        @include shared.font-unbounded(500);
+        background-color: shared.$light-blue;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #000000;
+        box-sizing: border-box;
+        border-radius: 9px;
+        @include shared.mobile-only{
+            height: 4rem;
+            padding-left: 1.2rem;
+            padding-right: 1.2rem;
+            font-size: shared.$mobile-actionable-font-size;
+            margin-right: 1.6rem;
+            margin-bottom: .8rem;
+        }
+        @include shared.tablet-only{
+            height: 4rem;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            font-size: shared.$tablet-actionable-font-size;
+            margin-bottom: .4rem;
+            margin-top: .4rem;
+            margin-right: 1rem;
+        }
+        @include shared.desktop-only{
+            height: 4.8rem;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            font-size: shared.$desktop-actionable-font-size;
+            margin-bottom: .4rem;
+            margin-top: .4rem;
+            margin-right: 1.6rem;
+        }
+        
+        &_clear{
+            width: 4rem;
+            background-color: shared.$black;
+            color: shared.$white;
+        }
+    }
+}
+
+.buttons_container{
+    display: flex;
+    column-gap: 2rem;
+    .button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 0;
+        flex: 1 1 0;
+        background: shared.$white;
+        border: 2px solid shared.$black;
+        border-radius: 9px;
+        min-height: 6rem;
+        @include shared.font-unbounded(500);
+        font-size: 2rem;
+    }
+    .selected{
+        background-color: shared.$black;
+        color: shared.$white;
+    }
+    .unavailable{
+        opacity: 0.3;
+        pointer-events: none;
+    }
+}

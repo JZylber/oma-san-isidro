@@ -1,0 +1,249 @@
+@use '../../../styles/shared.scss' as shared;
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: shared.$white;
+    border: 2px solid #000000;
+    border-radius: 9px;
+    position: relative;
+    @include shared.mobile-only{
+        padding: 2.4rem;
+    }
+    @include shared.tablet-only{
+        padding: 3.2rem 4rem 3.2rem 4rem;
+    }
+    @include shared.desktop-only{
+        padding: 4rem 6.4rem 4rem 6.4rem;
+    }
+    &_header{
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+    }
+    overflow-y: scroll;
+    max-height: 80vh;
+}
+
+.close_icon{
+    @include shared.mobile-only{
+        width: 19px;
+        height: 17px;
+    }
+    @include shared.tablet-only{
+        width: 27px;
+        height: 24px;
+    }
+    @include shared.desktop-only{
+        width: 36px;
+        height: 32px;
+    }
+    
+}
+
+.title{
+    @include shared.font-unbounded(500);
+    @include shared.mobile-only{
+        font-size: 3.4rem;
+        margin-top: 2.4rem;
+    }
+    @include shared.tablet-only{
+        font-size: 3.7rem;
+    }
+    @include shared.desktop-only{
+        font-size: 6rem;
+        margin-top: 1.6rem;
+    }
+}
+
+.option_title{
+    @include shared.font-unbounded(300);
+    @include shared.mobile-only{
+        font-size: 2rem;
+        margin-top: 3.4rem;
+        margin-bottom: 2rem;
+    }
+    @include shared.tablet-only{
+        font-size: 2.2rem;
+        margin-top: 4.8rem;
+        margin-bottom: 2rem;
+    }
+    @include shared.desktop-only{
+        font-size: 4rem;
+        margin-bottom: 4rem;
+        margin-top: 4.8rem;
+    }
+}
+
+.format_options{
+    display: flex;
+    @include shared.mobile-only{
+        column-gap: .8rem;
+    }
+    @include shared.tablet-only{
+        column-gap: 3.6rem;
+    }
+    @include shared.desktop-only{
+        column-gap: 8rem;
+    }
+}
+
+.format_text{
+    @include shared.font-montserrat(400);
+    @include shared.mobile-only{
+        font-size: 1.4rem;
+    }
+    @include shared.tablet-only{
+        font-size: 1.5rem;
+    }
+    @include shared.desktop-only{
+        font-size: 2rem;
+    }
+}
+
+.option{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @include shared.mobile-only{
+        row-gap: 1rem;
+    }
+    @include shared.tablet-only{
+        row-gap: 1.6rem;
+    }
+    @include shared.desktop-only{
+        row-gap: 2.4rem;
+    }
+}
+
+.grayed{
+    @include shared.not-desktop{
+        opacity: 0.5;
+        pointer-events: none;
+    }
+}
+
+.selected{
+    background-color: shared.$light-blue;
+}
+
+.format_container{
+    box-sizing: border-box;
+    border: 2px solid #000000;
+    border-radius: 9px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include shared.mobile-only{
+        width: 88px;
+        height: 94px;
+        padding: 2rem;
+    }
+    @include shared.tablet-only{
+        width: 116px;
+        height: 112px;
+        padding: 2rem
+    }
+    @include shared.desktop-only{
+        width: 150px;
+        height: 144px;
+        padding: 2rem 3rem 2rem 3rem;
+    }
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.minWidth{
+    width: min-content;
+}
+
+.result_options{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.result_button{
+    border: 2px solid #000000;
+    border-radius: 9px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    @include shared.font-unbounded(400);
+    @include shared.mobile-only{
+        padding: 1.6rem;
+        font-size: 1.6rem;
+        width: 135px;
+    }
+    @include shared.tablet-only{
+        padding: 2rem;
+        font-size: 1.6rem;
+        width: 202px;
+    }
+    @include shared.desktop-only{
+        padding: 1.4rem;
+        width: 250px;
+        font-size: shared.$desktop-actionable-font-size;
+    }
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.result_text{
+    @include shared.font-montserrat(400);
+    @include shared.mobile-only{
+        font-size: 1.2rem;
+    }
+    @include shared.tablet-only{
+        font-size: 1.2rem;
+    }
+    @include shared.desktop-only{
+        font-size: 1.6rem;
+    }
+    text-align: center;
+    &_bold{
+        @include shared.font-montserrat(600);
+    }
+}
+
+.button_container{
+    margin-top: 4rem;
+    width: 100%;
+}
+
+.fixed_container{
+    overflow: hidden;
+}
+
+.button_arrow{
+    transform: rotate(90deg);
+    width: 28px;
+    @include shared.mobile-only{
+        display: none;
+    }
+    @include shared.tablet-only{
+        margin-right: 2.8rem;
+    }
+}
+
+.generating{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    background-color: shared.$white;
+    text-align: center;
+    .loader{
+        margin-top: 4rem;
+    }
+}
+.hide{
+    display: none;
+}

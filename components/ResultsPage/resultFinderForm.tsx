@@ -1,36 +1,63 @@
-import { ChangeEvent, ChangeEventHandler, FormEventHandler, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./resultFinderForm.module.scss"
-import { ResultProps, TestQueryResults, yearTests } from "./resultsTypes"
+import {yearTests } from "./resultsTypes"
+import SelectResultCategory from "./SelectResultCategory";
+import { useRouter } from "next/router";
 
 type FormProps = {
     availableResults: Array<yearTests>,
     searchResults : (year: number, instance: string) => void;
+    clearResults: () => void;
+}
+
+interface searchParametersType {
+    año: number|undefined, 
+    instancia: string|undefined
+}
+
+const sortInstances = (ins_a : string, ins_b : string) => {
+    const ordered_instances = ["INTERESCOLAR","ZONAL","PROVINCIAL","REGIONAL","NACIONAL"];
+    return(ordered_instances.indexOf(ins_a) - ordered_instances.indexOf(ins_b)); 
 }
     
-const ResultFinderForm = ({availableResults,searchResults} : FormProps) => {
+const ResultFinderForm = ({availableResults,searchResults,clearResults} : FormProps) => {
     const resultYears =  availableResults.map((yearTests) => yearTests.ano);
-    const [instances,setInstances] = useState(availableResults[0].pruebas)
-    const handleSubmit : FormEventHandler<HTMLFormElement>= (event : React.SyntheticEvent) => {
-        event.preventDefault();
-        const target = event.target as typeof event.target & {
-            año: { value: number };
-            instancia: { value: string };
-        };
-        searchResults(target.año.value,target.instancia.value);
+    const router = useRouter();
+    
+    const [searchParameters,setSearchParameters] = useState<searchParametersType>({año: undefined,instancia:undefined});
+    useEffect(() => {
+        const {año,instancia} = router.query;
+        if(año && instancia){
+            const instance = instancia as string;
+            const year = Number(año);
+            setSearchParameters({año:year,instancia:instance});
+            searchResults(year,instance);
+        }
+      }, [router,searchResults,setSearchParameters]);
+    let instances = searchParameters.año?(availableResults.find((result) => result.ano === searchParameters.año) as yearTests).pruebas:[]
+    const handleSubmit = () => {
+        const {año,instancia} = searchParameters;
+        if(año && instancia){
+            searchResults(año,instancia);
+        }
     }
-    const handleYearChange:ChangeEventHandler<HTMLSelectElement>= (event : ChangeEvent) => {
-        const target = event.target as typeof event.target & {
-            value: number
-        };
-        const newInstances = availableResults.find((year) => year.ano == target.value)?.pruebas
-        newInstances && setInstances(newInstances)
+    const setYear = (value? : number) => {
+        setSearchParameters({año:value,instancia:undefined});
+        clearResults();
+    }
+
+    const setInstance = (value? : string) => {
+        setSearchParameters({...searchParameters,instancia:value})
+        clearResults();
     }
 
     return(
-    <form className={styles.form} onSubmit={handleSubmit}>
-        <label>Año</label><select id="año" onChange={handleYearChange}>{resultYears.map((year) => {return(<option value={year} key={year}>{year}</option>)})}</select>
-        <label>Instancia</label><select id="instancia">{instances.map((instance) => {return(<option value={instance} key={instance}>{instance}</option>)})}</select>
-        <input type="submit" value="Buscar resultados"/>
+    <form className={styles.form}>
+        <SelectResultCategory category="Año" value={searchParameters.año} setValue={setYear} options={resultYears}/>
+        <SelectResultCategory category="Instancia" value={searchParameters.instancia} setValue={setInstance} options={instances} sortOptions={sortInstances}/>
+        <div onClick={handleSubmit} className={styles.searchButton}>
+            <span>Buscar</span>
+        </div>
     </form>)
 }
 

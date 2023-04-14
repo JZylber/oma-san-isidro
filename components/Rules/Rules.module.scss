@@ -64,6 +64,7 @@
     @include shared.desktop-only {
       rotate: 90deg;
       padding: 5px 0 0 0;
+      width: 30px;
     }
   
     @include shared.not-desktop {

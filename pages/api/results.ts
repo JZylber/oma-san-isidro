@@ -52,7 +52,13 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
                             }
                         }
                     }
-                }   
+                },
+                orderBy: [
+                    {participacion:{
+                        nivel: 'asc'
+                    }
+                    }
+                ]   
             })
         res.status(200).json(result);}}
     catch (error) {

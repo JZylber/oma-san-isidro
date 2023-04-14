@@ -70,6 +70,10 @@
   @include shared.mobile-only {
     display: none;
   }
+  @include shared.not-mobile{
+    width: 71px;
+    height: 71px;
+  }
 }
 
 .items {
@@ -123,6 +127,7 @@
   @include shared.desktop-only {
     rotate: 90deg;
     padding: 5px 0 0 0;
+    width: 30px;
   }
 
   @include shared.not-desktop {
