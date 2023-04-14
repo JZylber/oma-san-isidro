@@ -10,6 +10,35 @@ interface NetworkError extends Error {
     status: number;
 }
 
+const normalizeString = (str: string) => {  
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+}
+
+const sortByNames = (a: TestQueryResults, b: TestQueryResults) => {
+    const surnameA = normalizeString(a.participacion.participante.apellido);
+    const surnameB = normalizeString(b.participacion.participante.apellido);
+    if (surnameA < surnameB) {
+        return -1;
+    }
+    else if (surnameA > surnameB) {
+        return 1;
+    }
+    else if (surnameA === surnameB) {
+        const nameA = normalizeString(a.participacion.participante.nombre);
+        const nameB = normalizeString(b.participacion.participante.nombre);
+        if (nameA < nameB) {    
+            return -1;
+        }
+        else if (nameA > nameB) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+};
+
+
 const Results = ({competition,availableResults} : ResultProps) => {
     const [isLoading,setIsLoading] = useState(false);
     const [results,setResults] = useState<Array<TestQueryResults> | undefined>();
@@ -34,6 +63,7 @@ const Results = ({competition,availableResults} : ResultProps) => {
                 .catch((error) => {throw error});
             setTestInfo(`${competition} ${instance.slice(0,1)}${instance.slice(1).toLocaleLowerCase()} ${year}`)
             setStatus(200);
+            searchedResults.sort(sortByNames);
             setResults(searchedResults);
         } catch (error) {
             let networkError = error as NetworkError;
