@@ -15,6 +15,10 @@ interface SelectResultProps<T>{
     buttons?: boolean;
 }
 
+const normalizeString = (str : string) => {
+  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase();
+}
+
 const SelectResultCategory = <T extends string|number|boolean|School,>({category,value,setValue,options,allOptions,input = false,clear=false,buttons=false,sortOptions}:SelectResultProps<T>) => {
     if(buttons && (input || clear)){
       throw Error("SelectResultCategory: Buttons can't be used with input or clear options");
@@ -59,7 +63,7 @@ const SelectResultCategory = <T extends string|number|boolean|School,>({category
           setTempValue(displayOption(value));
         }
     },[canOpen,value,,displayOption])
-    let filteredOptions = options.filter((option) => {return displayOption(option).toLocaleLowerCase().includes(tempValue.toLocaleLowerCase())});
+    let filteredOptions = options.filter((option) => {return normalizeString(displayOption(option)).includes(normalizeString(tempValue))});
     const useOutsideAlerter = (ref : RefObject<HTMLDivElement>) => {
         useEffect(() => {
           const handleClickOutside = (event : MouseEvent) => {
