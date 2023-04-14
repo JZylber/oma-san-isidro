@@ -65,6 +65,7 @@
       display: none;
     }
     @include shared.desktop-only {
+      width: 30px;
       display: inline;
       float: right;
       transform: translateX(3 * shared.$desktopXspacing);

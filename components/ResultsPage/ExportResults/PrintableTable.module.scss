@@ -1,0 +1,33 @@
+@use "../../../styles/shared.scss" as shared;
+
+.container{
+    box-sizing: border-box;
+    width: 210mm;
+    margin: 5mm;
+}
+
+.title{
+    @include shared.font-unbounded(500);
+    font-size: 10mm;
+}
+
+.result_table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 4mm;
+    thead {
+        background-color: shared.$light-blue;
+        border-bottom: 2px solid shared.$black;
+        @include shared.font-unbounded(500);
+    }
+    tbody {
+        @include shared.font-montserrat(500);
+        tr{
+            border-bottom: 1px solid grey;
+        }
+    }
+    td{ 
+        padding: 1.3mm; 
+        padding-right: 2.6mm;
+    }
+}

@@ -11,8 +11,8 @@ interface PageLayoutContext {
 export const pageLayoutContext = createContext<PageLayoutContext>({} as PageLayoutContext)
 
 const Layout = ({grid = false ,children}:{grid? : boolean,children : ReactNode}) => {
-    const [showChildren,setShowChildren] = useState(true)
-    const [isLoading,setIsLoading] = useState(false)
+    const [showChildren,setShowChildren] = useState(true);
+    const [isLoading,setIsLoading] = useState(false);
     const togglePageContent = () => {
         setShowChildren(!showChildren);
     }
@@ -36,8 +36,8 @@ const Layout = ({grid = false ,children}:{grid? : boolean,children : ReactNode})
     }
     return(
         <div className={styles.layout}>
-        <NavBar togglePageContent={togglePageContent} onRouteChange={changeRoute}/>
-        {renderContent()}
+            <NavBar togglePageContent={togglePageContent} onRouteChange={changeRoute}/>
+            {renderContent()}
         </div>
     )
 }

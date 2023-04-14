@@ -112,9 +112,11 @@
                 grid-row: 1/2;
                 min-height: 100%;
                 flex-direction: column;
-                justify-content: space-around;
+                justify-content: flex-start;
+                align-items: flex-start;
                 display: flex;
                 flex-wrap: wrap;
+                column-gap: 5.5rem;
             }
             @include shared.desktop-only {
                 display: grid;
@@ -125,6 +127,9 @@
                 min-height: 100%;
                 // flex-wrap: wrap;
             }
+        }
+        ul li{
+            height: 50%;
         }
         ul li:nth-child(1){
             @include shared.tablet-only{
@@ -144,9 +149,6 @@
             }
         }
         ul li:nth-child(3){
-            @include shared.tablet-only{
-                margin-left: 5.5rem;            
-            }
             @include shared.desktop-only{
                 margin-left: 1rem;
                 grid-column: 5/7;  
@@ -154,9 +156,6 @@
             }
         }
         ul li:nth-child(4){
-            @include shared.tablet-only{
-                margin-left: 5.5rem;
-            }
             @include shared.desktop-only{
                 margin-left: 1rem;
                 grid-column: 5/7;   
@@ -173,8 +172,6 @@
             }
             @include shared.tablet-only{
                 font-size: shared.$tablet-reading-font-size;
-                line-height: 2.25 * shared.$tablet-spacing;
-                margin-bottom: 1.2rem;
             }
             @include shared.desktop-only {
                 font-size: shared.$desktop-reading-font-size;

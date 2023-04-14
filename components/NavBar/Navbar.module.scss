@@ -12,6 +12,7 @@
       justify-content: center;
       height: 32.5px;
       width: 48px;
+      overflow: hidden;
     }
   }
   @include shared.not-mobile {
@@ -19,8 +20,6 @@
   }
 }
 .icon {
-  @include shared.mobile-only {
-  }
   @include shared.not-mobile {
     display: none;
   }

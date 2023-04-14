@@ -92,6 +92,14 @@ $desktop-reading-font-size: 2rem;
     grid-template-columns: repeat($columns,1fr);
 }
 
+@mixin appearance ($value: none) {
+    -webkit-appearance:     $value;
+    -moz-appearance:        $value;
+    -ms-appearance:         $value;
+    -o-appearance:          $value;
+    appearance:             $value;
+}
+
 
 /*Animations*/
 @mixin font-weight-transition{
