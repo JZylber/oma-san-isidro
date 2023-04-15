@@ -2,8 +2,8 @@ import Link from "next/link";
 import { CalendarEvent } from "../CalendarComponents/CalendarTypes";
 import AllDatesBanner from "../CalendarComponents/DateBanner/AllDatesBanner";
 import styles from "./Home.module.scss";
-import PageLink from "../../public/images/pageLinkIcon.svg";
 import Levels from "./Levels";
+import Image from "next/image";
 
 interface HomeProps {
     competition: string
@@ -17,7 +17,7 @@ const Home = ({competition,dates}:HomeProps) => {
         <AllDatesBanner dates={dates} category={competition}/>
         <section className={styles.section}>
             <h2 className={styles.sectionTitle}>Próxima instancia</h2>
-            <p className={styles.section_text}>Para información de la próxima instancia como los puntos de entrega de autorizaciones, y los colegios asignados para rendir la prueba, podés ir a la sección <Link href={`/${competition === "OMA"?"oma":"nandu"}/sedes`} className={styles.link}>sedes</Link><div className={styles.icon}><PageLink/></div></p>
+            <p className={styles.section_text}>Para información de la próxima instancia como los puntos de entrega de autorizaciones, y los colegios asignados para rendir la prueba, podés ir a la sección <Link href={`/${competition === "OMA"?"oma":"nandu"}/sedes`} className={styles.link}>sedes</Link><div className={styles.icon}><Image src="/images/pageLinkIcon.svg" fill={true} alt=""/></div></p>
         </section>
         <section className={styles.section}>
             <h2 className={styles.sectionTitle}>Niveles</h2>
