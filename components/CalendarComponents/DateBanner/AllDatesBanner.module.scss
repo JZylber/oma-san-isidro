@@ -12,8 +12,13 @@
 
 .header{
     display: flex;
-    justify-content: space-between;
     align-items: flex-end;
+    @include shared.mobile-only{
+        justify-content: center;
+    }
+    @include shared.not-mobile{
+        justify-content: space-between;
+    }
     &_link{
         @include shared.mobile-only{
             display: none;

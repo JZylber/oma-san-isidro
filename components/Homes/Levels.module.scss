@@ -3,7 +3,11 @@
 .level{
     display: flex;
     align-items: center;
-    @include shared.not-desktop{
+    @include shared.mobile-only{
+        flex-direction: column;
+        row-gap: .8rem;
+    }
+    @include shared.tablet-only{
         column-gap: 2rem;
     }
     @include shared.desktop-only{
@@ -16,6 +20,14 @@
         background: shared.$light-blue;
         border: 2px solid shared.$black;
         border-radius: 9px;
+        display: flex;
+        justify-content: center;
+        @include shared.font-unbounded(500);
+        @include shared.mobile-only{
+            padding: .4rem;
+            width: 7.2rem;
+            font-size: 1.5rem;
+        }
         @include shared.tablet-only{
             padding: .4rem;
             width: 7.2rem;
@@ -26,12 +38,11 @@
             width: 10.4rem;
             font-size: 1.6rem;
         }
-        display: flex;
-        justify-content: center;
-        @include shared.font-unbounded(500);
-        
     }
     .arrow{
+        @include shared.mobile-only{
+            display: none;
+        }
         @include shared.tablet-only{
             width: 64px;
         }
@@ -41,6 +52,9 @@
     }
     .text{
         @include shared.font-montserrat(400);
+        @include shared.mobile-only{
+            text-align: center;
+        }
         @include shared.not-desktop{
             font-size: 2rem;
         }

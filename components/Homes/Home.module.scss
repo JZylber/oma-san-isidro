@@ -17,6 +17,9 @@
 .sectionTitle {
     @include shared.font-unbounded(500);
     margin-bottom: 1.2rem;
+    @include shared.mobile-only{
+        text-align: center;
+    }
     @include shared.not-desktop{
       font-size: 2.4rem;
     }
