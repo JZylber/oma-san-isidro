@@ -3,7 +3,12 @@
 .level{
     display: flex;
     align-items: center;
-    column-gap: 2.4rem;
+    @include shared.not-desktop{
+        column-gap: 2rem;
+    }
+    @include shared.desktop-only{
+        column-gap: 2.4rem;
+    }
     &:not(:last-child){
         margin-bottom: 1.3rem;
     }
@@ -11,19 +16,37 @@
         background: shared.$light-blue;
         border: 2px solid shared.$black;
         border-radius: 9px;
-        padding: .6rem;
-        width: 10.4rem;
+        @include shared.tablet-only{
+            padding: .4rem;
+            width: 7.2rem;
+            font-size: 1.4rem;
+        }
+        @include shared.desktop-only{
+            padding: .6rem;
+            width: 10.4rem;
+            font-size: 1.6rem;
+        }
         display: flex;
         justify-content: center;
         @include shared.font-unbounded(500);
-        font-size: 1.6rem;
+        
     }
     .arrow{
-        width: 96px;
+        @include shared.tablet-only{
+            width: 64px;
+        }
+        @include shared.desktop-only{
+            width: 96px;
+        }
     }
     .text{
         @include shared.font-montserrat(400);
-        font-size: 2.4rem;
+        @include shared.not-desktop{
+            font-size: 2rem;
+        }
+        @include shared.desktop-only{
+            font-size: 2.4rem;
+        }
     }
 }
 
