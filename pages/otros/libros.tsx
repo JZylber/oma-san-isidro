@@ -3,9 +3,9 @@ import Head from "next/head";
 import Layout from "../../components/Layout/Layout";
 import styles from "./Libros.module.scss";
 import Warning from "../../public/images/warning.svg";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import Loader from "../../components/Loader/Loader";
+import Image from "next/image";
 
 interface Book{
     nombre : string,
@@ -75,7 +75,7 @@ const Books : NextPage = () => {
             <div className={styles.warning_box}>
                     <div className={styles.warning_box_title}>
                         <h3>Importante</h3>
-                        <Warning className={styles.warning_box_title_icon} />
+                        <div className={styles.warning_box_title_icon}><Image src="/images/warning.svg" fill={true} alt=""/></div>
                     </div>
                     <div className={styles.warning_box_content}>
                         <p>Para comprar libros, se deben poner en contacto con cualquiera de las encargadas de venta:</p>
