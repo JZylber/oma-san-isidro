@@ -1,0 +1,68 @@
+@use "../../styles/shared.scss" as shared;
+
+.type {
+  @include shared.mobile-only{
+    display: block;
+    @include shared.font-unbounded(400);
+    font-size: 1.5 * shared.$mobile-reading-font-size;
+  }
+  @include shared.not-mobile{
+    display: none;
+  }
+}
+
+
+.title {
+  @include shared.font-unbounded(600);
+  @include shared.mobile-only {
+    font-size: 2.4 * shared.$mobile-actionable-font-size;
+    margin-top: 2.5 * shared.$mobile-spacing;
+    margin-bottom: 2.5 * shared.$mobile-spacing;
+  }
+
+  @include shared.not-mobile {
+    font-size: 2 * shared.$desktop-actionable-font-size;
+    margin-bottom: 3.2rem
+  }
+}
+
+.section_title {
+  font-size: shared.$section-title-font-size;
+  @include shared.font-unbounded(500);
+  margin: 1.6rem 0rem 1.6rem 0rem;
+  @include shared.mobile-only {
+    text-align: center;
+    line-height: 3 * shared.$mobile-spacing;
+  }
+  @include shared.tablet-only {
+    text-align: left;
+    line-height: 2.25 * shared.$tablet-max-spacing;
+  }
+  @include shared.desktop-only {
+    text-align: left;
+    line-height: 3 * shared.$desktop-spacing;
+  }
+}
+
+.dropPoints{
+  margin-top: .8rem
+}
+
+.text{
+  @include shared.font-montserrat(300);
+
+  @include shared.mobile-only {
+    font-size: shared.$mobile-reading-font-size;
+  }
+
+  @include shared.tablet-only {
+    font-size: shared.$tablet-reading-font-size;
+  }
+
+  @include shared.desktop-only {
+    font-size: 0.85 * shared.$desktop-reading-font-size;
+  }
+  .bold{
+    @include shared.font-montserrat(500);
+  }
+}

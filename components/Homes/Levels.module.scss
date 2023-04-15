@@ -1,0 +1,66 @@
+@use "../../styles/shared.scss" as shared;
+
+.level{
+    display: flex;
+    align-items: center;
+    @include shared.mobile-only{
+        flex-direction: column;
+        row-gap: .8rem;
+    }
+    @include shared.tablet-only{
+        column-gap: 2rem;
+    }
+    @include shared.desktop-only{
+        column-gap: 2.4rem;
+    }
+    &:not(:last-child){
+        margin-bottom: 1.3rem;
+    }
+    .number{
+        background: shared.$light-blue;
+        border: 2px solid shared.$black;
+        border-radius: 9px;
+        display: flex;
+        justify-content: center;
+        @include shared.font-unbounded(500);
+        @include shared.mobile-only{
+            padding: .4rem;
+            width: 7.2rem;
+            font-size: 1.5rem;
+        }
+        @include shared.tablet-only{
+            padding: .4rem;
+            width: 7.2rem;
+            font-size: 1.4rem;
+        }
+        @include shared.desktop-only{
+            padding: .6rem;
+            width: 10.4rem;
+            font-size: 1.6rem;
+        }
+    }
+    .arrow{
+        @include shared.mobile-only{
+            display: none;
+        }
+        @include shared.tablet-only{
+            width: 64px;
+        }
+        @include shared.desktop-only{
+            width: 96px;
+        }
+    }
+    .text{
+        @include shared.font-montserrat(400);
+        @include shared.mobile-only{
+            text-align: center;
+        }
+        @include shared.not-desktop{
+            font-size: 2rem;
+        }
+        @include shared.desktop-only{
+            font-size: 2.4rem;
+        }
+    }
+}
+

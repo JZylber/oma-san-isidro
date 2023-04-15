@@ -1,18 +1,18 @@
-import { NextPage } from "next";
-import Head from "next/head";
-import InProgress from "../../components/InProgress/InProgress";
-import Layout from "../../components/Layout/Layout";
+import { NextPage } from "next"
+import Head from "next/head"
+import Layout from "../../components/Layout/Layout"
+import Venues from "../../components/Venues/Venues"
 
 const NanduVenues : NextPage = () => {
     return(
         <>
         <Head>
-            <title>Sedes Ñandú</title>
+            <title>Reglamento Ñandú</title>
             <meta   name="description"
-                content="Información de las sedes para la próxima instancia de Ñandú"></meta>
+                content="Reglamento oficial para participar de Ñandú"></meta>
         </Head>
         <Layout>
-            <InProgress/>
+            <Venues type="nandu"/>
         </Layout>
         </>
         )

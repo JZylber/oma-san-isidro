@@ -5,10 +5,11 @@ import DateBanner from "../../components/CalendarComponents/DateBanner/DateBanne
 import Layout from "../../components/Layout/Layout";
 import { getCalendarEvents } from "../../lib/aux_db_calls";
 import styles from "./Mateclubes.module.scss";
+import AllDatesBanner from "../../components/CalendarComponents/DateBanner/AllDatesBanner";
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
     const year = new Date().getFullYear()
-    const available = await getCalendarEvents(year)
+    const available = await getCalendarEvents(year,"Mateclubes")
     const newProps = {results: JSON.parse(JSON.stringify(available.results)),year: year}
     return {
       props: newProps,
@@ -27,10 +28,7 @@ const MathClubs : NextPage<{results : Array<JSONCalendarEvent>,year:number}> = (
         </Head>
         <Layout>
             <h1 className={styles.title}>Mateclubes</h1>
-            <section className={styles.section}>
-                <h3 className={styles.section_title}>Próximas Fechas</h3>
-                <DateBanner dates={events} displayAmount={4} displayCategory="Mateclubes"/>
-            </section>
+            <AllDatesBanner dates={events} category="Mateclubes"/>
         </Layout>        
         </>)
 }

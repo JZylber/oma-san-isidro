@@ -46,8 +46,31 @@ export const getNews = async () => {
     return ({results});
   };
 
-export const getCalendarEvents = async (year:number) => {
-    const query = await prisma.fechas.findMany({
+export const getCalendarEvents = async (year:number,type?: string) => {
+    let query = []; 
+    if(type){
+      query = await prisma.fechas.findMany({
+        where: {
+          fecha_inicio: {
+            gte: new Date(year,0,1),
+            lt:  new Date(year,11,31)
+          },
+          tipo: type
+        },
+        orderBy: [{
+          fecha_inicio : 'asc'
+        }],
+        select: {
+          fecha_inicio: true,
+          fecha_fin: true,
+          tipo: true,
+          texto: true
+        }
+      })
+      const results = query
+      return ({results});
+    } else {
+     query = await prisma.fechas.findMany({
       where: {
         fecha_inicio: {
           gte: new Date(year,0,1),
@@ -63,7 +86,7 @@ export const getCalendarEvents = async (year:number) => {
         tipo: true,
         texto: true
       }
-    })
+    })}
     const results = query
     return ({results});
     };
