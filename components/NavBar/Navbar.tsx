@@ -1,7 +1,7 @@
 import styles from "./Navbar.module.scss";
 import MenuIcon from "../../public/images/menuIcon.svg";
 import X from "../../public/images/x.svg";
-import { useState } from "react";
+import {useState } from "react";
 import MobileMenu from "./MobileMenu/mobile-menu";
 import TopMenu from "./TopMenu/TopMenu";
 import {
@@ -21,19 +21,21 @@ export default function NavBar({togglePageContent,onRouteChange}:NavProps){
     let [openFullMenu,setOpenFullMenu] = useState(false);
     const defaultMenuHierarchy : Array<menuItem> = [
         {text: "Inicio",link:"/",selected : false,subItems:[]},
-        {text: "Oma",link:undefined,selected : false,subItems:[
-            {text: "Autorización",link:'/oma/autorizacion',selected : false,subItems:[]},
+        {text: "Oma",link:'/oma',selected : false,subItems:[
+            {text: "General",link:'/oma',selected : false,subItems:[]},
             {text: "Inscripción",link:'/oma/inscripcion',selected : false,subItems:[]},
-            {text: "Reglamento",link:'/oma/reglamento',selected : false,subItems:[]},
+            {text: "Autorización",link:'/oma/autorizacion',selected : false,subItems:[]},
             {text: "Sedes",link:'/oma/sedes',selected : false,subItems:[]},
+            {text: "Reglamento",link:'/oma/reglamento',selected : false,subItems:[]},
             {text: "Resultados",link:'/oma/resultados',selected : false,subItems:[]},
             {text: "Problemas",link:'/oma/problemas',selected : false,subItems:[]}
         ]},
-        {text: "Ñandú",link:undefined,selected : false,subItems:[
-            {text: "Autorización",link:'/nandu/autorizacion',selected : false,subItems:[]},
+        {text: "Ñandú",link:'/nandu',selected : false,subItems:[
+            {text: "General",link:'/nandu',selected : false,subItems:[]},
             {text: "Inscripción",link:'/nandu/inscripcion',selected : false,subItems:[]},
-            {text: "Reglamento",link:'/nandu/reglamento',selected : false,subItems:[]},
+            {text: "Autorización",link:'/nandu/autorizacion',selected : false,subItems:[]},
             {text: "Sedes",link:'/nandu/sedes',selected : false,subItems:[]},
+            {text: "Reglamento",link:'/nandu/reglamento',selected : false,subItems:[]},
             {text: "Resultados",link:'/nandu/resultados',selected : false,subItems:[]},
             {text: "Problemas",link:'/nandu/problemas',selected : false,subItems:[]}
         ]},
@@ -95,7 +97,6 @@ export default function NavBar({togglePageContent,onRouteChange}:NavProps){
       return newItem;
     });
   };
-
     const clickMainItem = (itemName : string) => {
         const itemIndex = menuHierarchy.findIndex((item) => item.text == itemName);
         const item = menuHierarchy[itemIndex]
@@ -104,7 +105,7 @@ export default function NavBar({togglePageContent,onRouteChange}:NavProps){
                 onRouteChange()
             }
             item.selected = true;
-            setMenuHierarchy(selectItem(menuHierarchy,itemIndex))
+            setMenuHierarchy(selectItem(menuHierarchy,itemIndex,item.subItems.length > 0 ? 0 : undefined))
         }
     }
     const clickSubItem = (mainItemName : string,subItemName: string) => {
@@ -124,7 +125,7 @@ export default function NavBar({togglePageContent,onRouteChange}:NavProps){
     }
 
     const isNotAtHome = () => {
-        const homeIndex: number = menuHierarchy.findIndex((item) => item.text == 'Inicio');
+        const homeIndex: number = menuHierarchy.findIndex((item) => item.text === 'Inicio');
         const home: menuItem = menuHierarchy[homeIndex]
         const isAtHome: boolean = home.selected;
         return !isAtHome;

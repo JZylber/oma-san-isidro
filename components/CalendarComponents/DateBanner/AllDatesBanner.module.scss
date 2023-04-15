@@ -1,0 +1,96 @@
+@use '../../../styles/shared.scss' as shared;
+
+.title{
+    @include shared.font-unbounded(500);
+    @include shared.not-desktop{
+        font-size: 2.4rem;
+    }
+    @include shared.desktop-only{
+        font-size: 3.4rem;
+    }
+}
+
+.header{
+    display: flex;
+    align-items: flex-end;
+    @include shared.mobile-only{
+        justify-content: center;
+    }
+    @include shared.not-mobile{
+        justify-content: space-between;
+    }
+    &_link{
+        @include shared.mobile-only{
+            display: none;
+        }
+    }
+}
+
+.footer{
+    @include shared.mobile-only{
+        display: flex;
+    }
+    @include shared.not-mobile{
+        display: none;
+    }
+}
+.dates_container{
+    @include shared.mobile-only{
+        display: flex;
+        flex-direction: column;
+        row-gap: 1.6rem;
+        margin-top: 1rem;
+    }
+    @include shared.tablet-only{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 1.6rem;
+        row-gap: 1.6rem;
+        margin-top: 1.6rem;
+    }
+    @include shared.desktop-only{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 1.6rem;
+        row-gap: 1.6rem;
+        margin-top: 1.6rem;
+    }
+}
+
+.event{
+    background: shared.$white;
+    border: 2px solid shared.$black;
+    border-radius: 9px;  
+    display: flex;
+    flex-direction: column;
+    @include shared.mobile-only{
+        padding: 1rem 1.6rem 1rem 1.6rem;
+        row-gap: 1.6rem;
+    }
+    @include shared.tablet-only{
+        padding: 2.4rem 2rem 2.4rem 2rem;
+        row-gap: 1.6rem;
+    }
+    @include shared.desktop-only{
+        padding: 4rem 3.2rem 4rem 3.2rem;
+        row-gap: 1.6rem;
+    }
+    .text{
+        @include shared.font-unbounded(400);
+        @include shared.not-desktop{
+            font-size: 2rem;
+        }
+        @include shared.desktop-only{
+            font-size: 2.4rem;
+        }
+    }
+    .date{
+        @include shared.font-montserrat(400);
+        @include shared.not-desktop{
+            font-size: 1.5rem;
+        }
+        @include shared.desktop-only{
+            font-size: 2rem;
+        }
+    }
+}

@@ -65,7 +65,7 @@ const MobileMenu= ({closeMenu,menuHierarchy} : mobileMenuProps) => {
         return(
         <div className={styles[["item",(item.selected && item.subItems.length > 0 ?"_selected":"")].join("")]} key={item.text}>
             <ConditionalWrapper
-                condition={item.link != undefined}
+                condition={item.link != undefined && item.subItems.length === 0}
                 wrapper={(children: ReactElement) => <Link href={link} className={styles.link}>{children}</Link>}>
             <div className={styles.main} onClick={() => selectMainItem(item.text)}>
                 <span>{item.text}</span>
