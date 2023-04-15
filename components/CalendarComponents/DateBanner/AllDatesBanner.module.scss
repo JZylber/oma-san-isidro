@@ -14,8 +14,27 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    &_link{
+        @include shared.mobile-only{
+            display: none;
+        }
+    }
+}
+
+.footer{
+    @include shared.mobile-only{
+        display: flex;
+    }
+    @include shared.not-mobile{
+        display: none;
+    }
 }
 .dates_container{
+    @include shared.mobile-only{
+        display: flex;
+        flex-direction: column;
+        row-gap: 1.6rem;
+    }
     @include shared.tablet-only{
         display: grid;
         grid-template-columns: repeat(2, 1fr);

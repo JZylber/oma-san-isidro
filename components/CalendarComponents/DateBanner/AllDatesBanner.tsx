@@ -1,9 +1,9 @@
 import { CalendarEvent } from "../CalendarTypes";
 import banner_styles from "./DateBanner.module.scss";
 import styles from "./AllDatesBanner.module.scss";
-import PageLink from "../../../public/images/pageLinkIcon.svg"
+import PageLink from "../../../public/images/pageLinkIcon.svg";
+import PageLink2 from "../../../public/images/pageLinkIcon2.svg";
 import Link from "next/link";
-import { title } from "process";
 
 interface DateBannerProps {
     dates: CalendarEvent [],
@@ -17,7 +17,7 @@ const AllDatesBanner = ({dates,category}:DateBannerProps) => {
         <section>
             <div className={styles.header}>
                 <span className={styles.title}>Fechas</span>
-                <Link href={`/otros/calendario?categoria=${category}`} className={banner_styles.link_tag}>
+                <Link href={`/otros/calendario?categoria=${category}`} className={[banner_styles.link_tag,styles.header_link].join(" ")}>
                     <div className={banner_styles.small_link}>
                         <div className={banner_styles.small_link_image}><PageLink/></div>
                         <span>Ver calendario {category}</span>
@@ -32,6 +32,14 @@ const AllDatesBanner = ({dates,category}:DateBannerProps) => {
                             <span className={styles.date}>{`${date.fecha_inicio.getDate()} ${months[date.fecha_inicio.getMonth()]}`}</span>
                         </div>
                     )})}
+            </div>
+            <div className={styles.footer}>
+                <Link href={`/otros/calendario?categoria=${category}`} className={banner_styles.link_tag}>
+                    <div className={banner_styles.small_link}>
+                        <div className={banner_styles.small_link_image}><PageLink2/></div>
+                        <span>Ver calendario {category}</span>
+                    </div>
+                </Link>
             </div>
         </section>
     )
