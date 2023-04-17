@@ -49,7 +49,7 @@
     }
   }
   h2{
-    @include shared.font-montserrat(600);
+    @include shared.font-unbounded(500);
     text-decoration: underline;
     margin-top: 1.6rem;
     @include shared.mobile-only {
