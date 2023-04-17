@@ -27,20 +27,13 @@ export const Inscripcion = ( { type } : {type : string} ) => {
            </div>
            <div className={styles.step_information}>
             <h1>2. Inscripción</h1>
-            <ol className={styles.step_information_substeps}>
-                <li>Los profesores encargados de OMA tienen <span className={styles.step_information_bold}> hasta el {type == "OMA"?"(a determinar)":"28 de abril"}</span> para realizar la inscripción para la instancia intercolegial en el siguiente enlace:</li>
-                <div className={styles.button_container}>
-                    <Button content={type == "OMA"?"(Todavía no disponible)":"Link de Inscripción"} onClick={() => type == "OMA"?null:window.location.href = "https://oma.org.ar/virtual/inscripcion.php?competencia=OMN&region=53&hash=02609c0a&ano=2023"}>
-                        <>
-                            {type !== "OMA" && <Arrow className={styles.arrow}/>}
-                        </>
-                    </Button>
-                </div>
-                <li>Luego, deben completar la planilla de datos con los datos pedidos</li>
+            <p>Los profesores encargados de {type == "OMA"?"Oma":"Ñandú"} deben realizar la inscripción que consiste de 2 pasos.</p>
+            <h2>Paso 1: hasta el {type == "OMA"?"5 de mayo":"21 de abril"}</h2>
+                <p>Completar la planilla de datos con los datos pedidos:</p>
                 <div className={styles.button_container}>
                     <Button content="Planilla de Datos" onClick={downloadForm}><Arrow className={[styles.arrow,styles.download].join(" ")}/></Button>
                 </div>
-                <li>Enviar la planilla de datos y el comprobante de pago escaneado a la responsable de su zona<span className={styles.step_information_bold}> hasta el {type == "OMA"?"5 de mayo":"21 de abril"}</span>.</li>
+                <p>Enviar la planilla de datos y el comprobante de pago escaneado a la responsable de su zona.</p>
                 <p>Aquellos que precisen factura C deberán también enviar los siguiente datos:</p>
                 <div>
                     <ul>
@@ -65,7 +58,15 @@ export const Inscripcion = ( { type } : {type : string} ) => {
                         </ul>
                     </div>
                 </div>
-            </ol>
+            <h2>Paso 2: hasta el {type == "OMA"?"(a determinar)":"28 de abril"}</h2>
+                <p>Ingresar los datos de los participantes en el siguiente link:</p>
+                <div className={styles.button_container}>
+                    <Button content={type == "OMA"?"(Todavía no disponible)":"Link de Inscripción"} onClick={() => type == "OMA"?null:window.location.href = "https://oma.org.ar/virtual/inscripcion.php?competencia=OMN&region=53&hash=02609c0a&ano=2023"}>
+                        <>
+                            {type !== "OMA" && <Arrow className={styles.arrow}/>}
+                        </>
+                    </Button>
+                </div>
            </div>
            <div className={styles.step_information}>
             <h1>3. Documentos a presentar en el certamen Intercolegial</h1>
