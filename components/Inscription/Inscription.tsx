@@ -27,13 +27,8 @@ export const Inscripcion = ( { type } : {type : string} ) => {
            </div>
            <div className={styles.step_information}>
             <h1>2. Inscripción</h1>
-            <p>Los profesores encargados de {type == "OMA"?"Oma":"Ñandú"} deben realizar la inscripción que consiste de 2 partes:</p>
-            <ul>
-                <li><span className={styles.step_information_bold}>Inscripción regional:</span> se envía la información requerida a la secretaria regional de san isidro para el armado de sedes para la instancia {type == "OMA"?"Intercolegial":"Interescolar"}</li>
-                <li><span className={styles.step_information_bold}>Inscripción general:</span> se envía la información individual de cada participante a la organización central de OMA</li>
-            </ul>
-            <p><span className={styles.step_information_bold}>Para inscribirse a {type == "OMA"?"Oma":"Ñandú"} deben hacerse ambas inscripciones.</span> A continuación, más detalle en como hacer cada una.</p>
-            <h2>Inscripción regional: hasta el {type == "OMA"?"5 de mayo":"21 de abril"}</h2>
+            <p>Los profesores encargados de {type == "OMA"?"Oma":"Ñandú"} deben realizar la inscripción que consiste de 2 pasos.</p>
+            <h2>Paso 1: hasta el {type == "OMA"?"5 de mayo":"21 de abril"}</h2>
                 <p>Completar la planilla de datos con los datos pedidos:</p>
                 <div className={styles.button_container}>
                     <Button content="Planilla de Datos" onClick={downloadForm}><Arrow className={[styles.arrow,styles.download].join(" ")}/></Button>
@@ -63,7 +58,7 @@ export const Inscripcion = ( { type } : {type : string} ) => {
                         </ul>
                     </div>
                 </div>
-            <h2>Inscripción general: hasta el {type == "OMA"?"(a determinar)":"28 de abril"}</h2>
+            <h2>Paso 2: hasta el {type == "OMA"?"(a determinar)":"28 de abril"}</h2>
                 <p>Ingresar los datos de los participantes en el siguiente link:</p>
                 <div className={styles.button_container}>
                     <Button content={type == "OMA"?"(Todavía no disponible)":"Link de Inscripción"} onClick={() => type == "OMA"?null:window.location.href = "https://oma.org.ar/virtual/inscripcion.php?competencia=OMN&region=53&hash=02609c0a&ano=2023"}>
