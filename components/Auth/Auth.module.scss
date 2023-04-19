@@ -37,6 +37,7 @@
     padding: 38px 16px 34px 16px;
   }
 
+
   h2 {
     @include shared.mobile-only {
       font-size: 1.3 * shared.$mobile-reading-font-size;
@@ -132,5 +133,33 @@
 
   @include shared.not-desktop {
     display: none;
+  }
+}
+.section_title {
+  @include shared.font-unbounded(500);
+  margin-top: 1.6rem;
+  margin-bottom: 1rem;
+  @include shared.mobile-only {
+    font-size: 1.3 * shared.$mobile-reading-font-size;
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  @include shared.not-mobile {
+    align-self: center;
+    font-size: shared.$desktop-actionable-font-size;
+  }
+}
+.text{
+  @include shared.font-montserrat(300);
+  @include shared.mobile-only {
+    font-size: shared.$mobile-reading-font-size;
+  }
+
+  @include shared.tablet-only {
+    font-size: shared.$tablet-reading-font-size;
+  }
+
+  @include shared.desktop-only {
+    font-size: 0.85 * shared.$desktop-reading-font-size;
   }
 }
