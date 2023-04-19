@@ -61,7 +61,7 @@ export const Authorization = ({ type }: { type: string }) => {
         </p>
       </div>
       <h2 className={styles.section_title}>Entrega</h2>
-      <p className={styles.text}> Las autorizaciones se entregan en los puntos de entrega, que pueden variar de instancia a instancia. Los puntos de entrega de la siguiente instancia se encuentran en <Link href={type == "oma"?"/oma/sedes":"/nandu/sedes"}>sedes</Link><div className={styles.icon}><Image src="/images/pageLinkIcon.svg" fill={true} alt=""/></div>.</p>
+      <p className={styles.text}>Los puntos de entrega de la siguiente instancia se encuentran en <Link href={type == "oma"?"/oma/sedes":"/nandu/sedes"}>sedes</Link><div className={styles.icon}><Image src="/images/pageLinkIcon.svg" fill={true} alt=""/></div>.</p>
     </>
   );
 };
