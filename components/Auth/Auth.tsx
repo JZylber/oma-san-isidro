@@ -17,7 +17,7 @@ export const Authorization = ({ type }: { type: string }) => {
       text: "el alumno que no presente dicha autorizaciones firmada por el padre, madre, tutor o encargado y con la firma y sello del colegio.",
     },
     {
-      important: "La fecha y lugar de entrega de autorizaciones",
+      important: "La fecha y lugares de entrega de autorizaciones",
       text: <>de la siguiente instancia se encuentran en <Link href={type == "oma"?"/oma/sedes":"/nandu/sedes"}>sedes</Link><div className={styles.icon}><Image src="/images/pageLinkIcon.svg" fill={true} alt=""/></div>.</>,
     },
     {
