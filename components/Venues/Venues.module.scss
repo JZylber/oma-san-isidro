@@ -27,20 +27,19 @@
 }
 
 .section_title {
-  font-size: shared.$section-title-font-size;
   @include shared.font-unbounded(500);
   margin: 1.6rem 0rem 1.6rem 0rem;
   @include shared.mobile-only {
     text-align: center;
-    line-height: 3 * shared.$mobile-spacing;
+    font-size: 2.4rem;
   }
   @include shared.tablet-only {
     text-align: left;
-    line-height: 2.25 * shared.$tablet-max-spacing;
+    font-size: 2.2rem;
   }
   @include shared.desktop-only {
     text-align: left;
-    line-height: 3 * shared.$desktop-spacing;
+    font-size: 3.4rem;
   }
 }
 
@@ -60,9 +59,23 @@
   }
 
   @include shared.desktop-only {
-    font-size: 0.85 * shared.$desktop-reading-font-size;
+    font-size: shared.$desktop-reading-font-size;
   }
   .bold{
     @include shared.font-montserrat(500);
+  }
+}
+
+.icon{
+  position: relative;
+  display: inline-block;
+  margin-left: .4rem;
+  @include shared.not-desktop {
+    width: 17px;
+    height: 17px;
+  }
+  @include shared.desktop-only {
+    width: 20px;
+    height: 20px;
   }
 }

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "./Venues.module.scss";
+import Image from "next/image";
 
 interface VenueInfo {
     dropPoints: boolean;
@@ -30,7 +31,7 @@ const Venues = ({type}:{type:string}) => {
             <h2 className={styles.section_title}>Autorizaciones</h2>
             {dropPointsData ?
                 <>
-                <p className={styles.text}>Las autorizaciones se pueden conseguir <Link href={`/${type}/autorizacion`}>aquí</Link>. Estas se pueden entregar hasta el <span className={styles.bold}>{auth_max_date?`${auth_max_date.getDate()}/${auth_max_date.getMonth() + 1}`:"(A definir)"}</span> en los siguientes puntos:</p>
+                <p className={styles.text}>Las autorizaciones se pueden conseguir <Link href={type == "oma"?"/oma/autorizacion":"/nandu/autorizacion"}>aquí<div className={styles.icon}><Image src="/images/pageLinkIcon.svg" fill={true} alt=""/></div></Link>. Estas se pueden entregar hasta el <span className={styles.bold}>{auth_max_date?`${auth_max_date.getDate()}/${auth_max_date.getMonth() + 1}`:"(A definir)"}</span> en los siguientes puntos:</p>
                 <ul className={styles.dropPoints}>
                     {dropPointsData.map((dropPoint, index) => {
                         const {localidad, nombre, direccion, aclaraciones} = dropPoint;
