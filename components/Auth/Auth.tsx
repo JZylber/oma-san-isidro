@@ -6,26 +6,25 @@ import { Button } from "../buttons/Button";
 import Link from "next/link";
 import Image from "next/image";
 
-const specs = [
-  {
-    important: "Solo autorizaciones oficiales de OMA",
-    text: "serán aceptadas. Deben estar completas y con la firma ORIGINAL. Tampoco se aceptarán autorizaciones enviadas por fax o fotocopia",
-  },
-  {
-    important: "No podrá rendir la prueba",
-    text: "el alumno que no presente dicha autorizaciones firmada por el padre, madre, tutor o encargado y con la firma y sello del colegio.",
-  },
-  {
-    important: "La fecha y lugar de entrega de autorizaciones",
-    text: "informará una vez que se sepa la cantidad de alumnos inscriptos de cada colegio.",
-  },
-  {
-    important: "No se aceptarán autorizaciones con fechas corregidas",
-    text: "lo tanto deberán presentar la actualizada que puedan bajar aquí.",
-  },
-];
-
 export const Authorization = ({ type }: { type: string }) => {
+  const specs = [
+    {
+      important: "Solo autorizaciones oficiales de OMA",
+      text: "serán aceptadas. Deben estar completas y con la firma ORIGINAL. Tampoco se aceptarán autorizaciones enviadas por fax o fotocopia",
+    },
+    {
+      important: "No podrá rendir la prueba",
+      text: "el alumno que no presente dicha autorizaciones firmada por el padre, madre, tutor o encargado y con la firma y sello del colegio.",
+    },
+    {
+      important: "La fecha y lugares de entrega de autorizaciones",
+      text: <>de la siguiente instancia se encuentran en <Link href={type == "oma"?"/oma/sedes":"/nandu/sedes"}>sedes</Link><div className={styles.icon}><Image src="/images/pageLinkIcon.svg" fill={true} alt=""/></div>.</>,
+    },
+    {
+      important: "No se aceptarán autorizaciones con fechas corregidas",
+      text: "lo tanto deberán presentar la actualizada que puedan bajar aquí.",
+    },
+  ];
   const handleClick = () => {
     const link = document.createElement("a");
     link.href = `/files/autorizacion-${type}.pdf`;
@@ -60,8 +59,6 @@ export const Authorization = ({ type }: { type: string }) => {
           nuevamente luego de unos segundos.
         </p>
       </div>
-      <h2 className={styles.section_title}>Entrega</h2>
-      <p className={styles.text}>Los puntos de entrega de la siguiente instancia se encuentran en <Link href={type == "oma"?"/oma/sedes":"/nandu/sedes"}>sedes</Link><div className={styles.icon}><Image src="/images/pageLinkIcon.svg" fill={true} alt=""/></div>.</p>
     </>
   );
 };

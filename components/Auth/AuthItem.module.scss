@@ -19,7 +19,10 @@
   @include shared.desktop-only {
     width: 45 * shared.$desktopXspacing;
     max-width: 50%;
-    font-size: 0.85 * shared.$desktop-reading-font-size;
+    font-size: shared.$desktop-reading-font-size;
     padding-bottom: 20px;
+  }
+  .important{
+    @include shared.font-montserrat(600);
   }
 }
