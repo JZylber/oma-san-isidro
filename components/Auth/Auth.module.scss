@@ -49,9 +49,12 @@
       }
     }
 
-    @include shared.not-mobile {
+    @include shared.tablet-only {
+      font-size: 2.2rem;
+    }
+    @include shared.desktop-only{
       align-self: center;
-      font-size: shared.$desktop-actionable-font-size;
+      font-size: 3.4rem;
     }
   }
 }
