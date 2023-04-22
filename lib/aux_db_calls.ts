@@ -1,4 +1,5 @@
 import prisma from "./prisma";
+import { INSTANCIA } from "@prisma/client";
 
 export const getAvailableResults = async (type: string) => {
     const query = await prisma.prueba.findMany({
@@ -96,3 +97,21 @@ export const getCalendarEvents = async (year:number,type?: string) => {
     const results = query
     return ({results});
     };
+
+const getInstanceVenues = async (type: string, year: number, instance: string) => {
+  let ins = instance as INSTANCIA;
+  const query = await prisma.prueba.findMany({
+    where: {
+      AND: [
+      {competencia: {
+        tipo: type,
+        ano: year
+      }},
+      {instancia: ins}
+    ]},
+    select: {
+      sedeinstancia: true
+    }});
+  const results = query
+  return ({results});
+};
