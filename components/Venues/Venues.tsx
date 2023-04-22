@@ -4,9 +4,11 @@ import table_styles from "../ResultsPage/ResultTable.module.scss";
 import Image from "next/image";
 import SelectResultCategory from "../ResultsPage/SelectResultCategory";
 import { useState } from "react";
+import { School } from "../ResultsPage/resultsTypes";
+import { removeRepeatedSchools } from "../ResultsPage/ResultTable";
 
 export interface Venue{
-    colegio: string;
+    colegio: School;
     nombre: string;
     direccion: string;
     localidad: string;
@@ -31,18 +33,28 @@ const venueInfo : {[key: string]: VenueInfo} = {
     oma: {dropPoints: false, next_competition: "Intercolegial"}
 }
 
+const schoolName = (school: School) => {
+    return(school.nombre + (school.sede?`-${school.sede}`:""))
+}
+
 const Venues = ({type,venues}:{type:string,venues: Venue[]}) => {
     const {dropPoints, next_competition,auth_max_date} = venueInfo[type];
     const dropPointsData : DropPointInfo [] | null = dropPoints ? require(`./data/${type}${next_competition.toLocaleLowerCase()}auth.json`) : null;
 
     //Venues
-    const [filters,setFilters] = useState<{colegio?:string,sede?:string}>({colegio: undefined, sede: undefined});
+    const [filters,setFilters] = useState<{colegio?:School,sede?:string}>({colegio: undefined, sede: undefined});
     const isFilterCompliant = (venue: Venue) => {
         const {colegio,sede} = filters;
-        return (colegio? venue.colegio === colegio : true) && (sede? venue.nombre === sede : true);
+        const isSchool = (colegio? (venue.colegio.nombre === colegio.nombre) && (colegio.sede?venue.colegio.sede === colegio.sede:true) : true);
+        const isVenue = (sede? venue.nombre === sede : true);
+        return isSchool && isVenue;
     }
-    const schools = Array.from(new Set(venues.map(venue => venue.colegio)));
-    const venue_names = Array.from(new Set(venues.map(venue => venue.nombre))); 
+    const filteredVenues = venues.filter(isFilterCompliant);
+    const availableSchools = filteredVenues.map(venue => venue.colegio);
+    let schools : Array<School> = removeRepeatedSchools(availableSchools);
+    const genericSchools: Array<School> =removeRepeatedSchools(schools.filter((school) => school.sede).map((school) => {return({nombre: school.nombre})}));
+    schools = schools.concat(genericSchools);
+    const venue_names = Array.from(new Set(filteredVenues.map(venue => venue.nombre))); 
     return(
         <>
             <h1 className={styles.title}>Sedes {next_competition}</h1>
@@ -62,7 +74,7 @@ const Venues = ({type,venues}:{type:string,venues: Venue[]}) => {
             {venues.length > 0 ?
             <>
             <form className={styles.form}>
-                <SelectResultCategory category="Colegio" value={filters.colegio} setValue={(option?: string) => {setFilters({...filters,colegio: option})}} options={schools} input={true}/>
+                <SelectResultCategory category="Colegio" value={filters.colegio} setValue={(option?: School) => {setFilters({...filters,colegio: option})}} options={schools} input={true}/>
                 <SelectResultCategory category="Sede" value={filters.sede} setValue={(option?: string) => {setFilters({...filters,sede: option})}} options={venue_names} input={true}/>
             </form>
             <div className={table_styles.results}>
@@ -77,10 +89,10 @@ const Venues = ({type,venues}:{type:string,venues: Venue[]}) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {venues.filter(isFilterCompliant).map((venue,index) => {
+                    {filteredVenues.map((venue,index) => {
                         return(
                             <tr key={index}>
-                                <td>{venue.colegio}</td>
+                                <td>{schoolName(venue.colegio)}</td>
                                 <td>{venue.nombre}</td>
                                 <td>{venue.direccion}</td>
                                 <td>{venue.localidad}</td>

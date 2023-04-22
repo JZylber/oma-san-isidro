@@ -114,6 +114,7 @@ export const getInstanceVenues = async (type: string, year: number, instance: st
           colegio: {
             select: {
               nombre: true,
+              sede: true
           }},
           sede: true,
           aclaracion: true
@@ -124,7 +125,7 @@ export const getInstanceVenues = async (type: string, year: number, instance: st
   const venues = query!.sedeinstancia;
   const results = venues.map((sede) => {return(
     {
-      colegio: sede.colegio.nombre,
+      colegio: sede.colegio,
       ...sede.sede,
       aclaracion: sede.aclaracion
     }
