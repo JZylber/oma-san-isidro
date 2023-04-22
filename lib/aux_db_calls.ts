@@ -122,7 +122,7 @@ export const getInstanceVenues = async (type: string, year: number, instance: st
       }
     }
   });
-  const venues = query!.sedeinstancia;
+  const venues = query?query.sedeinstancia:[];
   const results = venues.map((sede) => {return(
     {
       colegio: sede.colegio,
