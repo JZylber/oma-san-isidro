@@ -47,6 +47,7 @@ model Colegio {
   sede String?
   localidad String?
   participaciones Participacion[]
+  sede_instancia SedeInstancia[]
 }
 
 model Competencia {
@@ -66,6 +67,7 @@ model Prueba {
   competencia Competencia @relation(fields: [id_competencia],references: [id_competencia])
   id_competencia Int
   rinden Rinde[]
+  sedeinstancia SedeInstancia[]
 }
 
 model Rinde {
@@ -106,4 +108,24 @@ model Libro{
   descuento Float @default(0)
   nuevo Boolean @default(false)
   tapa String?
+}
+
+//Venues
+
+model Sede{
+  id_sede Int @default(autoincrement()) @id
+  nombre String
+  direccion String
+  sedeinstancia SedeInstancia[]
+}
+
+model SedeInstancia{
+  id_sede_instancia Int @default(autoincrement()) @id
+  prueba Prueba @relation(fields: [id_prueba], references: [id_prueba])
+  id_prueba Int
+  sede Sede @relation(fields: [id_sede], references: [id_sede])
+  id_sede Int
+  colegio Colegio @relation(fields: [id_colegio], references: [id_colegio])
+  id_colegio Int
+  aclaracion String?
 }
