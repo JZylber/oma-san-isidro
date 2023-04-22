@@ -2,9 +2,16 @@ import Link from "next/link";
 import styles from "./Venues.module.scss";
 import Image from "next/image";
 
+export interface Venue{
+    colegio: string;
+    sede: string;
+    direccion: string;
+    localidad: string;
+    aclaraciones?: string;
+}
+
 interface VenueInfo {
     dropPoints: boolean;
-    venues: boolean;
     next_competition: string;
     auth_max_date?: Date;
 }
@@ -17,14 +24,13 @@ interface DropPointInfo {
 }
 
 const venueInfo : {[key: string]: VenueInfo} = {
-    nandu: {dropPoints: true, venues: false, next_competition: "Interescolar", auth_max_date: new Date(2023, 3, 28)},
-    oma: {dropPoints: false, venues: false, next_competition: "Intercolegial"}
+    nandu: {dropPoints: true, next_competition: "Interescolar", auth_max_date: new Date(2023, 3, 28)},
+    oma: {dropPoints: false, next_competition: "Intercolegial"}
 }
 
-const Venues = ({type}:{type:string}) => {
-    const {dropPoints, venues, next_competition,auth_max_date} = venueInfo[type];
+const Venues = ({type,venues}:{type:string,venues: Venue[]}) => {
+    const {dropPoints, next_competition,auth_max_date} = venueInfo[type];
     const dropPointsData : DropPointInfo [] | null = dropPoints ? require(`./data/${type}${next_competition.toLocaleLowerCase()}auth.json`) : null;
-    const venuesData = venues ? require(`./data/${type}${next_competition.toLocaleLowerCase()}venues.json`) : null;
     return(
         <>
             <h1 className={styles.title}>Sedes {next_competition}</h1>
@@ -41,8 +47,8 @@ const Venues = ({type}:{type:string}) => {
                 </>
             : <p className={styles.text}>Proximamente...</p>}
             <h2 className={styles.section_title}>Sedes</h2>
-            {venuesData ? 
-                <p className={styles.text}></p>
+            {venues.length > 0 ? 
+                <p className={styles.text}>Info</p>
             : <p className={styles.text}>Proximamente...</p>}
         </>
     )

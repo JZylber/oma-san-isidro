@@ -3,7 +3,6 @@ import Head from "next/head";
 import Results from "../../components/ResultsPage/results";
 import {yearTests } from "../../components/ResultsPage/resultsTypes";
 import {getAvailableResults, getSchools} from "../../lib/aux_db_calls";
-import styles from "./resultados.module.scss"
 import Layout from "../../components/Layout/Layout";
 
 export const getStaticProps: GetStaticProps= async ({ params }) => {

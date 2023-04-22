@@ -98,20 +98,36 @@ export const getCalendarEvents = async (year:number,type?: string) => {
     return ({results});
     };
 
-const getInstanceVenues = async (type: string, year: number, instance: string) => {
+export const getInstanceVenues = async (type: string, year: number, instance: string) => {
   let ins = instance as INSTANCIA;
-  const query = await prisma.prueba.findMany({
+  const query = await prisma.prueba.findFirst({
     where: {
-      AND: [
-      {competencia: {
+      competencia: {
         tipo: type,
         ano: year
-      }},
-      {instancia: ins}
-    ]},
+      },
+      instancia: ins
+    },
     select: {
-      sedeinstancia: true
-    }});
-  const results = query
+      sedeinstancia: {
+        select: {
+          colegio: {
+            select: {
+              nombre: true,
+          }},
+          sede: true,
+          aclaracion: true
+        }
+      }
+    }
+  });
+  const venues = query!.sedeinstancia;
+  const results = venues.map((sede) => {return(
+    {
+      colegio: sede.colegio.nombre,
+      ...sede.sede,
+      aclaracion: sede.aclaracion
+    }
+  )});
   return ({results});
 };

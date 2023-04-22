@@ -1,9 +1,20 @@
-import { NextPage } from "next"
+import { GetStaticProps, NextPage } from "next"
 import Head from "next/head"
 import Layout from "../../components/Layout/Layout"
-import Venues from "../../components/Venues/Venues"
+import Venues, { Venue } from "../../components/Venues/Venues"
+import { getInstanceVenues } from "../../lib/aux_db_calls";
 
-const NanduVenues : NextPage = () => {
+export const getStaticProps: GetStaticProps= async ({ params }) => {
+    const next_instance = "INTERCOLEGIAL";
+    const year = (new Date()).getFullYear();
+    const available = await getInstanceVenues("ÑANDÚ",year,next_instance);
+    const newProps = {venues: available.results}
+    return {
+      props: newProps,
+    };      
+  };
+
+const NanduVenues : NextPage<{venues: Venue[]}> = ({venues}) => {
     return(
         <>
         <Head>
@@ -12,7 +23,7 @@ const NanduVenues : NextPage = () => {
                 content="Reglamento oficial para participar de Ñandú"></meta>
         </Head>
         <Layout>
-            <Venues type="nandu"/>
+            <Venues type="nandu" venues={venues}/>
         </Layout>
         </>
         )
