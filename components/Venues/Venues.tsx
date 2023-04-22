@@ -1,13 +1,16 @@
 import Link from "next/link";
 import styles from "./Venues.module.scss";
+import table_styles from "../ResultsPage/ResultTable.module.scss";
 import Image from "next/image";
+import SelectResultCategory from "../ResultsPage/SelectResultCategory";
+import { useState } from "react";
 
 export interface Venue{
     colegio: string;
-    sede: string;
+    nombre: string;
     direccion: string;
     localidad: string;
-    aclaraciones?: string;
+    aclaracion?: string;
 }
 
 interface VenueInfo {
@@ -31,6 +34,15 @@ const venueInfo : {[key: string]: VenueInfo} = {
 const Venues = ({type,venues}:{type:string,venues: Venue[]}) => {
     const {dropPoints, next_competition,auth_max_date} = venueInfo[type];
     const dropPointsData : DropPointInfo [] | null = dropPoints ? require(`./data/${type}${next_competition.toLocaleLowerCase()}auth.json`) : null;
+
+    //Venues
+    const [filters,setFilters] = useState<{colegio?:string,sede?:string}>({colegio: undefined, sede: undefined});
+    const isFilterCompliant = (venue: Venue) => {
+        const {colegio,sede} = filters;
+        return (colegio? venue.colegio === colegio : true) && (sede? venue.nombre === sede : true);
+    }
+    const schools = Array.from(new Set(venues.map(venue => venue.colegio)));
+    const venue_names = Array.from(new Set(venues.map(venue => venue.nombre))); 
     return(
         <>
             <h1 className={styles.title}>Sedes {next_competition}</h1>
@@ -47,9 +59,40 @@ const Venues = ({type,venues}:{type:string,venues: Venue[]}) => {
                 </>
             : <p className={styles.text}>Proximamente...</p>}
             <h2 className={styles.section_title}>Sedes</h2>
-            {venues.length > 0 ? 
-                <p className={styles.text}>Info</p>
-            : <p className={styles.text}>Proximamente...</p>}
+            {venues.length > 0 ?
+            <>
+            <form className={styles.form}>
+                <SelectResultCategory category="Colegio" value={filters.colegio} setValue={(option?: string) => {setFilters({...filters,colegio: option})}} options={schools} input={true}/>
+                <SelectResultCategory category="Sede" value={filters.sede} setValue={(option?: string) => {setFilters({...filters,sede: option})}} options={venue_names} input={true}/>
+            </form>
+            <div className={table_styles.results}>
+                <table className={table_styles.result_table}>
+                <thead>
+                    <tr>
+                        <td>Colegio</td>
+                        <td>Sede</td>
+                        <td>Dirección</td>
+                        <td>Localidad</td>
+                        <td style={{maxWidth:"20%"}}>Aclaraciones</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {venues.filter(isFilterCompliant).map((venue,index) => {
+                        return(
+                            <tr key={index}>
+                                <td>{venue.colegio}</td>
+                                <td>{venue.nombre}</td>
+                                <td>{venue.direccion}</td>
+                                <td>{venue.localidad}</td>
+                                <td>{venue.aclaracion?venue.aclaracion:""}</td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+        </table>
+        </div>
+        </>
+        : <p className={styles.text}>Proximamente...</p>}
         </>
     )
 }

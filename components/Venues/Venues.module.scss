@@ -79,3 +79,10 @@
     height: 20px;
   }
 }
+
+.form{
+  display: flex;
+  @include shared.mobile-only {
+    flex-direction: column;
+  }
+}
