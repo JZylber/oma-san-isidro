@@ -18,9 +18,9 @@ const NanduVenues : NextPage<{venues: Venue[]}> = ({venues}) => {
     return(
         <>
         <Head>
-            <title>Reglamento Ñandú</title>
+            <title>Sedes Ñandú</title>
             <meta   name="description"
-                content="Reglamento oficial para participar de Ñandú"></meta>
+                content="Sedes de instancias Ñandú y puntos de entrega de autorizaciones"></meta>
         </Head>
         <Layout>
             <Venues type="nandu" venues={venues}/>

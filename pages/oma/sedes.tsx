@@ -18,9 +18,9 @@ export const OMAVenues : NextPage<{venues: Venue[]}> = ({venues}) => {
     return(
         <>
         <Head>
-            <title>Reglamento Ñandú</title>
+        <title>Sedes OMA</title>
             <meta   name="description"
-                content="Reglamento oficial para participar de Ñandú"></meta>
+                content="Sedes de instancias OMA y puntos de entrega de autorizaciones"></meta>
         </Head>
         <Layout>
             <Venues type="oma" venues={venues}/>
