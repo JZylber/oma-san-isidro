@@ -82,6 +82,7 @@
 
 .form{
   display: flex;
+  margin-top: 1.2rem;
   @include shared.mobile-only {
     flex-direction: column;
   }

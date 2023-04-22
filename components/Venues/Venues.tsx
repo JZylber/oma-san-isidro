@@ -73,6 +73,7 @@ const Venues = ({type,venues}:{type:string,venues: Venue[]}) => {
             <h2 className={styles.section_title}>Sedes</h2>
             {venues.length > 0 ?
             <>
+            <p className={styles.text}>Presentarse <span className={styles.bold}>13:30 hs</span></p>
             <form className={styles.form}>
                 <SelectResultCategory category="Colegio" value={filters.colegio} setValue={(option?: School) => {setFilters({...filters,colegio: option})}} options={schools} input={true}/>
                 <SelectResultCategory category="Sede" value={filters.sede} setValue={(option?: string) => {setFilters({...filters,sede: option})}} options={venue_names} input={true}/>
