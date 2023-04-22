@@ -85,7 +85,7 @@ const Venues = ({type,venues}:{type:string,venues: Venue[]}) => {
                         <td>Sede</td>
                         <td>Dirección</td>
                         <td>Localidad</td>
-                        <td style={{maxWidth:"20%"}}>Aclaraciones</td>
+                        <td style={{maxWidth:"15%"}}>Aclaraciones</td>
                     </tr>
                 </thead>
                 <tbody>
