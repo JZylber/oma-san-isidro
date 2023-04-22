@@ -1,21 +1,27 @@
 import prisma from "./prisma";
 
 export const getAvailableResults = async (type: string) => {
-    const query = await prisma.competencia.findMany({
-    where : {
-      tipo : type
-    },
-    select : {
-      ano : true,
-      pruebas : {
-          select : {
-              instancia: true
-          }
-      }
-    }
-    })
-    const results = query.map((year) => {return({...year,pruebas:year.pruebas.map((prueba) => prueba.instancia)})})
-    return ({results});
+    const query = await prisma.prueba.findMany({
+      where: {
+        AND: [
+        {competencia: {
+          tipo: type
+        }},
+        {fecha: {
+          lt: new Date()}
+        }
+      ]},
+      select: {
+        instancia: true,
+        competencia: {
+          select: {
+            ano: true
+         }
+        }
+      }});
+    let years = Array.from(new Set(query.map((prueba) => prueba.competencia.ano))).map((ano : number): {ano:number,pruebas:string[]} => {return({ano:ano,pruebas:[]})});
+    query.forEach((prueba) => {years.find((year) => year.ano === prueba.competencia.ano)!.pruebas.push(prueba.instancia)});
+    return ({years});
     };
 
 export const getSchools = async () => {

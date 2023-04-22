@@ -8,7 +8,7 @@ import Layout from "../../components/Layout/Layout";
 
 export const getStaticProps: GetStaticProps= async ({ params }) => {
     const available = await getAvailableResults("ÑANDÚ");
-    const newProps = {results: available.results}
+    const newProps = {results: available.years}
     return {
       props: newProps,
     };      
