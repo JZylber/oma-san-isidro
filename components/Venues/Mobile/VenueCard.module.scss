@@ -48,27 +48,34 @@
     display: flex;
     flex-direction: column;
     row-gap: 3rem;
-    .category{
-        display: flex;
-        flex-direction: column;
-        row-gap: 0.4rem;
-        .title{
-            @include shared.font-montserrat(400);
-            font-size: 1.4rem;
-        }
-        .value{
-            @include shared.font-montserrat(500);
-            font-size: 2.2rem;
-        }
+}
+
+.category{
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.4rem;
+    .title{
+        @include shared.font-montserrat(400);
+        font-size: 1.4rem;
     }
-    .results{
-        display: flex;
-        column-gap: 2.8rem;
-        .total_container{
-            display: flex;
-            width: 0px;
-            flex: 1 1 0;
-            justify-content: flex-end;
-        }
+    .value{
+        @include shared.font-montserrat(500);
+        font-size: 2.2rem;
     }
+}
+
+.results{
+    display: flex;
+    column-gap: 2.8rem;
+    .total_container{
+        display: flex;
+        width: 0px;
+        flex: 1 1 0;
+        justify-content: flex-end;
+    }
+}
+
+.subtext{
+    @include shared.font-montserrat(400);
+    font-size: 1.75rem;
 }

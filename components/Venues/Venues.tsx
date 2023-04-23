@@ -3,6 +3,7 @@ import styles from "./Venues.module.scss";
 import table_styles from "../ResultsPage/ResultTable.module.scss";
 import Image from "next/image";
 import SelectResultCategory from "../ResultsPage/SelectResultCategory";
+import VenueCard from "./Mobile/VenueCard";
 import { useState } from "react";
 import { School } from "../ResultsPage/resultsTypes";
 import { removeRepeatedSchools } from "../ResultsPage/ResultTable";
@@ -103,6 +104,9 @@ const Venues = ({type,venues}:{type:string,venues: Venue[]}) => {
                     })}
                 </tbody>
         </table>
+        </div>
+        <div className={styles.venue_items}>
+            {filteredVenues.map((venue,index) => <VenueCard key={index} venue={venue}/>)}
         </div>
         </>
         : <p className={styles.text}>Proximamente...</p>}
