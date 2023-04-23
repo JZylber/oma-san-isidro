@@ -116,6 +116,7 @@ model Sede{
   id_sede Int @default(autoincrement()) @id
   nombre String
   direccion String
+  localidad String
   sedeinstancia SedeInstancia[]
 }
 

@@ -79,3 +79,23 @@
     height: 20px;
   }
 }
+
+.form{
+  display: flex;
+  margin-top: 1.2rem;
+  @include shared.mobile-only {
+    flex-direction: column;
+  }
+}
+
+.venue_items{
+  @include shared.mobile-only{
+    margin-top: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.6rem;
+  }
+  @include shared.not-mobile{
+    display: none;
+  }
+}
