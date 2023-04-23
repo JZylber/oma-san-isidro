@@ -1,21 +1,28 @@
 import prisma from "./prisma";
+import { INSTANCIA } from "@prisma/client";
 
 export const getAvailableResults = async (type: string) => {
-    const query = await prisma.competencia.findMany({
-    where : {
-      tipo : type
-    },
-    select : {
-      ano : true,
-      pruebas : {
-          select : {
-              instancia: true
-          }
-      }
-    }
-    })
-    const results = query.map((year) => {return({...year,pruebas:year.pruebas.map((prueba) => prueba.instancia)})})
-    return ({results});
+    const query = await prisma.prueba.findMany({
+      where: {
+        AND: [
+        {competencia: {
+          tipo: type
+        }},
+        {fecha: {
+          lt: new Date()}
+        }
+      ]},
+      select: {
+        instancia: true,
+        competencia: {
+          select: {
+            ano: true
+         }
+        }
+      }});
+    let years = Array.from(new Set(query.map((prueba) => prueba.competencia.ano))).map((ano : number): {ano:number,pruebas:string[]} => {return({ano:ano,pruebas:[]})});
+    query.forEach((prueba) => {years.find((year) => year.ano === prueba.competencia.ano)!.pruebas.push(prueba.instancia)});
+    return ({years});
     };
 
 export const getSchools = async () => {
@@ -90,3 +97,38 @@ export const getCalendarEvents = async (year:number,type?: string) => {
     const results = query
     return ({results});
     };
+
+export const getInstanceVenues = async (type: string, year: number, instance: string) => {
+  let ins = instance as INSTANCIA;
+  const query = await prisma.prueba.findFirst({
+    where: {
+      competencia: {
+        tipo: type,
+        ano: year
+      },
+      instancia: ins
+    },
+    select: {
+      sedeinstancia: {
+        select: {
+          colegio: {
+            select: {
+              nombre: true,
+              sede: true
+          }},
+          sede: true,
+          aclaracion: true
+        }
+      }
+    }
+  });
+  const venues = query?query.sedeinstancia:[];
+  const results = venues.map((sede) => {return(
+    {
+      colegio: sede.colegio,
+      ...sede.sede,
+      aclaracion: sede.aclaracion
+    }
+  )});
+  return ({results});
+};

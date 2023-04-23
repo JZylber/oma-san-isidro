@@ -1,18 +1,29 @@
-import { NextPage } from "next"
+import { GetStaticProps, NextPage } from "next"
 import Head from "next/head"
 import Layout from "../../components/Layout/Layout"
-import Venues from "../../components/Venues/Venues"
+import Venues, { Venue } from "../../components/Venues/Venues"
+import { getInstanceVenues } from "../../lib/aux_db_calls";
 
-const OMAVenues : NextPage = () => {
+export const getStaticProps: GetStaticProps= async ({ params }) => {
+    const next_instance = "INTERCOLEGIAL";
+    const year = new Date().getFullYear();
+    const available = await getInstanceVenues("OMA",year,next_instance);
+    const newProps = {venues: available.results}
+    return {
+      props: newProps,
+    };      
+  };
+
+export const OMAVenues : NextPage<{venues: Venue[]}> = ({venues}) => {
     return(
         <>
         <Head>
-            <title>Reglamento Ñandú</title>
+        <title>Sedes OMA</title>
             <meta   name="description"
-                content="Reglamento oficial para participar de Ñandú"></meta>
+                content="Sedes de instancias OMA y puntos de entrega de autorizaciones"></meta>
         </Head>
         <Layout>
-            <Venues type="oma"/>
+            <Venues type="oma" venues={venues}/>
         </Layout>
         </>
         )

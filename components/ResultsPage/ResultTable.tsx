@@ -16,7 +16,7 @@ export const schoolName = (result: TestQueryResults) => {
     return(result.participacion.colegio.nombre + (result.participacion.colegio.sede?`-${result.participacion.colegio.sede}`:""))
 }
 
-const removeRepeatedSchools = (schools : School []) => {
+export const removeRepeatedSchools = (schools : School []) => {
     return schools.filter((value, index, self) =>
         index === self.findIndex((t) => (
             t.nombre === value.nombre && t.sede === value.sede && t.localidad === value.localidad
