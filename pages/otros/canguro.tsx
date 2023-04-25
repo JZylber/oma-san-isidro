@@ -16,11 +16,11 @@ const Kangaroo : NextPage = () => {
         </Head>
         <Layout>
             <h1 className={styles.title}>Canguro Matemático</h1>
-            <Button content="Resultados" onClick={() => window.location.href = "https://www.oma.org.ar/canguro/editar.html"}>
-                        <>
-                            <Image src="/images/newsArrow.svg" alt="" width={30} height={30} />
-                        </>
-            </Button>
+            <div className={styles.button_container}>
+                <Button content="Resultados" onClick={() => window.location.href = "https://www.oma.org.ar/canguro/editar.html"}>
+                    <Image src="/images/newsArrow.svg" alt="" width={30} height={30} />
+                </Button>
+            </div>
         </Layout>        
         </>)
 }
