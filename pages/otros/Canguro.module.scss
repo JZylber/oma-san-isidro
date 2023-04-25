@@ -13,3 +13,21 @@
       line-height: 2.5;
     }
   }
+
+  .button_container{
+    @include shared.mobile-only {
+      width: 100%;
+      text-align: center;
+    }
+  
+    @include shared.tablet-only {
+      width: 63.5%;
+      margin-top: 2 * shared.$tablet-spacing;
+    }
+  
+    @include shared.desktop-only {
+      width: 47.5%;
+      margin-top: 4 * shared.$desktop-spacing;
+    }
+  }
+  
