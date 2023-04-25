@@ -64,23 +64,6 @@
       margin-top: 2.4rem;
     } 
     margin-bottom: 2.4rem;
-    .title{
-        font-size: shared.$section-title-font-size;
-        @include shared.font-unbounded(500);
-        margin-bottom: .8rem;
-        @include shared.mobile-only {
-          text-align: center;
-          line-height: 3 * shared.$mobile-spacing;
-        }
-        @include shared.tablet-only {
-          text-align: left;
-          line-height: 2.25 * shared.$tablet-max-spacing;
-        }
-        @include shared.desktop-only {
-          text-align: left;
-          line-height: 3 * shared.$desktop-spacing;
-        }
-      }
     .links{
         display: flex;
         column-gap: .8rem;
@@ -117,4 +100,54 @@
             }
         }
     }
+}
+.section_title{
+  font-size: shared.$section-title-font-size;
+  @include shared.font-unbounded(500);
+  margin-bottom: .8rem;
+  @include shared.mobile-only {
+    text-align: center;
+    line-height: 3 * shared.$mobile-spacing;
+  }
+  @include shared.tablet-only {
+    text-align: left;
+    line-height: 2.25 * shared.$tablet-max-spacing;
+  }
+  @include shared.desktop-only {
+    text-align: left;
+    line-height: 3 * shared.$desktop-spacing;
+  }
+}
+
+.arrow {
+  @include shared.not-desktop {
+    display: none;
+  }
+}
+
+.category_medals{
+  display: flex;
+  @include shared.mobile-only{
+    flex-direction: column;
+    align-items: center;
+  }
+  @include shared.not-mobile{
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+}
+
+.medals{
+  padding-top: .8rem;
+  padding-bottom: .8rem;
+}
+
+.category{
+  font-size: 0.85*shared.$section-title-font-size;
+  @include shared.font-unbounded(500);
+}
+
+.medal{
+  @extend .main_text
 }
