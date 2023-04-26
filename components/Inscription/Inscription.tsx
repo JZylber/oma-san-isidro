@@ -58,13 +58,11 @@ export const Inscripcion = ( { type } : {type : string} ) => {
                         </ul>
                     </div>
                 </div>
-            <h2>Paso 2: hasta el {type == "OMA"?"(a determinar)":"28 de abril"}</h2>
+            <h2>Paso 2: hasta el {type == "OMA"?"9 de mayo":"28 de abril"}</h2>
                 <p>Ingresar los datos de los participantes en el siguiente link:</p>
                 <div className={styles.button_container}>
-                    <Button content={type == "OMA"?"(Todavía no disponible)":"Link de Inscripción"} onClick={() => type == "OMA"?null:window.location.href = "https://oma.org.ar/virtual/inscripcion.php?competencia=OMN&region=53&hash=02609c0a&ano=2023"}>
-                        <>
-                            {type !== "OMA" && <Arrow className={styles.arrow}/>}
-                        </>
+                    <Button content="Link de Inscripción" onClick={() => type == "OMA"?window.location.href ="https://oma.org.ar/virtual/inscripcion.php?competencia=OMA&region=53&hash=18acdad3&ano=2023":window.location.href = "https://oma.org.ar/virtual/inscripcion.php?competencia=OMN&region=53&hash=02609c0a&ano=2023"}>
+                        <Arrow className={styles.arrow}/>
                     </Button>
                 </div>
            </div>
