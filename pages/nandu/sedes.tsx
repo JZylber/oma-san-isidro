@@ -5,7 +5,7 @@ import Venues, { Venue } from "../../components/Venues/Venues"
 import { getInstanceVenues } from "../../lib/aux_db_calls";
 
 export const getStaticProps: GetStaticProps= async ({ params }) => {
-    const next_instance = "INTERCOLEGIAL";
+    const next_instance = "INTERESCOLAR";
     const year = (new Date()).getFullYear();
     const available = await getInstanceVenues("ÑANDÚ",year,next_instance);
     const newProps = {venues: available.results}

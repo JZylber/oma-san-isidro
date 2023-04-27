@@ -16,7 +16,7 @@ interface searchParametersType {
 }
 
 const sortInstances = (ins_a : string, ins_b : string) => {
-    const ordered_instances = ["INTERESCOLAR","ZONAL","PROVINCIAL","REGIONAL","NACIONAL"];
+    const ordered_instances = ["INTERESCOLAR","INTERCOLEGIAL","ZONAL","PROVINCIAL","REGIONAL","NACIONAL"];
     return(ordered_instances.indexOf(ins_a) - ordered_instances.indexOf(ins_b)); 
 }
     
