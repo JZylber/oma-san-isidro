@@ -5,9 +5,11 @@ import Layout from "../../components/Layout/Layout";
 import { getInscriptionData } from "../../lib/aux_db_calls";
 import { getDateFromJSON } from "../../lib/aux_functions";
 
+const competition = "ÑANDÚ"
+
 export const getStaticProps = async () => {
     const year = (new Date()).getFullYear();
-    const data = await getInscriptionData("ÑANDÚ",year)
+    const data = await getInscriptionData(competition,year)
     return {
         props: JSON.parse(JSON.stringify(data.results)),
     };
@@ -33,7 +35,7 @@ const NanduInscription : NextPage<InscriptionProps> = ({fecha_inscripcion_nacion
                 content="Información de como inscribirse para participar de Ñandú"></meta>
         </Head>
         <Layout>
-            <Inscripcion type="Ñandú" data={inscription_data}/>
+            <Inscripcion type={competition} data={inscription_data}/>
         </Layout>
         </>
         )

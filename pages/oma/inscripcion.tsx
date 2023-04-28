@@ -5,9 +5,11 @@ import Layout from "../../components/Layout/Layout";
 import { getInscriptionData } from "../../lib/aux_db_calls";
 import { getDateFromJSON } from "../../lib/aux_functions";
 
+const competition = "OMA"
+
 export const getStaticProps = async () => {
   const year = (new Date()).getFullYear();
-  const data = await getInscriptionData("OMA",year)
+  const data = await getInscriptionData(competition,year)
   return {
       props: JSON.parse(JSON.stringify(data.results)),
   };
@@ -33,7 +35,7 @@ const OMAInscription: NextPage<InscriptionProps> = ({fecha_inscripcion_nacional,
                 content="Información de como inscribirse para participar de OMA"></meta>
       </Head>
       <Layout>
-        <Inscripcion type="OMA" data={inscription_data}/>
+        <Inscripcion type={competition} data={inscription_data}/>
       </Layout>
     </>
   );
