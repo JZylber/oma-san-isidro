@@ -70,6 +70,7 @@ model Prueba {
   cantidad_problemas Int @default(3)
   competencia Competencia @relation(fields: [id_competencia],references: [id_competencia])
   id_competencia Int
+  fecha_limite_autorizacion DateTime? @db.Date
   rinden Rinde[]
   sedeinstancia SedeInstancia[]
   puntoinstancia PuntoInstancia[]

@@ -98,6 +98,34 @@ export const getCalendarEvents = async (year:number,type?: string) => {
     return ({results});
     };
 
+    export const getInstanceDropPoints = async (type: string, year: number, instance: string) => {
+      let ins = instance as INSTANCIA;
+      const query = await prisma.prueba.findFirst({
+        where: {
+          competencia: {
+            tipo: type,
+            ano: year
+          },
+          instancia: ins
+        },
+        select: {
+            puntoinstancia: {
+              select: {
+                punto: {
+                  select: {
+                    nombre: true,
+                    direccion: true,
+                    localidad: true,
+                    aclaracion: true
+                }
+              }
+            }
+          }
+      }});
+      const results = query?query.puntoinstancia:[];
+      return ({results});
+    };
+
 export const getInstanceVenues = async (type: string, year: number, instance: string) => {
   let ins = instance as INSTANCIA;
   const query = await prisma.prueba.findFirst({
