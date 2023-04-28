@@ -19,6 +19,7 @@ const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
 ];
 
 export const Inscripcion = ( { type,data} : InscriptionProps ) => {
+    const name = type === "OMA"?"Oma":"Ñandú"
     const {fecha_inscripcion_nacional,fecha_inscripcion_regional,link_inscripcion} = data;
     const downloadForm = () => {
         const link = document.createElement("a");
@@ -30,7 +31,7 @@ export const Inscripcion = ( { type,data} : InscriptionProps ) => {
       };
     return(
         <>
-        <div className={styles.type}>{type == "OMA"?"Oma":"Ñandú"}</div>
+        <div className={styles.type}>{name}</div>
         <h1 className={styles.title}>Inscripción</h1>
         <div className={styles.container}>
             <div className={styles.step_information}>
@@ -43,7 +44,7 @@ export const Inscripcion = ( { type,data} : InscriptionProps ) => {
            </div>
            <div className={styles.step_information}>
             <h1>2. Inscripción</h1>
-            <p>Los profesores encargados de {type == "OMA"?"Oma":"Ñandú"} deben realizar la inscripción que consiste de 2 pasos.</p>
+            <p>Los profesores encargados de {name} deben realizar la inscripción que consiste de 2 pasos.</p>
             <h2>Paso 1: hasta el {fecha_inscripcion_regional?`${fecha_inscripcion_regional.getDate()} de ${monthNames[fecha_inscripcion_regional.getMonth()].toLocaleLowerCase()}`:"(a determinar)"}</h2>
                 <p>Completar la planilla de datos con los datos pedidos:</p>
                 <div className={styles.button_container}>
