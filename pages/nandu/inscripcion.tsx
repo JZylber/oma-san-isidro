@@ -4,6 +4,13 @@ import InProgress from "../../components/InProgress/InProgress";
 import { Inscripcion } from "../../components/Inscription/Inscription";
 import Layout from "../../components/Layout/Layout";
 
+export const getStaticProps = async () => {
+    const year = (new Date()).getFullYear();
+    return {
+        props: {},
+    };
+};
+
 const NanduInscription : NextPage = () => {
     return(
         <>
