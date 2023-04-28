@@ -36,7 +36,6 @@ const schoolName = (school: School) => {
 }
 
 const Venues = ({type,instance,dropPoints,venues,auth_max_date}:VenueProps) => {
-    console.log(dropPoints);
     //Venues
     const [filters,setFilters] = useState<{colegio?:School,sede?:string}>({colegio: undefined, sede: undefined});
     const isFilterCompliant = (venue: Venue) => {
@@ -53,7 +52,7 @@ const Venues = ({type,instance,dropPoints,venues,auth_max_date}:VenueProps) => {
     const venue_names = Array.from(new Set(filteredVenues.map(venue => venue.nombre))); 
     return(
         <>
-            <h1 className={styles.title}>Sedes {instance}</h1>
+            <h1 className={styles.title}>Sedes {instance[0] + instance.substring(1).toLocaleLowerCase()}</h1>
             <h2 className={styles.section_title}>Autorizaciones</h2>
             {dropPoints.length > 0 ?
                 <>
