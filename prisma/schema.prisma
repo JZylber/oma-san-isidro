@@ -12,6 +12,7 @@ datasource db {
 
 enum INSTANCIA {
   INTERCOLEGIAL
+  INTERESCOLAR
   ZONAL
   PROVINCIAL
   REGIONAL
@@ -55,6 +56,9 @@ model Competencia {
   numero Int
   ano Int @map("año")
   tipo String
+  link_inscripcion String?
+  fecha_inscripcion_regional DateTime? @db.Date
+  fecha_inscripcion_nacional DateTime? @db.Date
   pruebas Prueba[]
   participantes Participacion[]
 }
@@ -66,8 +70,10 @@ model Prueba {
   cantidad_problemas Int @default(3)
   competencia Competencia @relation(fields: [id_competencia],references: [id_competencia])
   id_competencia Int
+  fecha_limite_autorizacion DateTime? @db.Date
   rinden Rinde[]
   sedeinstancia SedeInstancia[]
+  puntoinstancia PuntoInstancia[]
 }
 
 model Rinde {
@@ -129,4 +135,21 @@ model SedeInstancia{
   colegio Colegio @relation(fields: [id_colegio], references: [id_colegio])
   id_colegio Int
   aclaracion String?
+}
+
+model PuntoEntrega{
+  id_punto Int @default(autoincrement()) @id
+  nombre String?
+  direccion String
+  localidad String
+  aclaracion String?
+  puntoinstancia PuntoInstancia[]
+}
+
+model PuntoInstancia{
+  id_punto_instancia Int @default(autoincrement()) @id
+  prueba Prueba @relation(fields: [id_prueba], references: [id_prueba])
+  id_prueba Int
+  punto PuntoEntrega @relation(fields: [id_punto], references: [id_punto])
+  id_punto Int
 }

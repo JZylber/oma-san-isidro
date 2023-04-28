@@ -16,32 +16,26 @@ export interface Venue{
     aclaracion?: string;
 }
 
-interface VenueInfo {
-    dropPoints: boolean;
-    next_competition: string;
-    auth_max_date?: Date;
-}
-
-interface DropPointInfo {
+export interface DropPoint {
     localidad: string,
     nombre?: string,
     direccion: string,
-    aclaraciones?: string,
+    aclaracion?: string,
 }
 
-const venueInfo : {[key: string]: VenueInfo} = {
-    nandu: {dropPoints: true, next_competition: "Interescolar", auth_max_date: new Date(2023, 3, 28)},
-    oma: {dropPoints: false, next_competition: "Intercolegial"}
+interface VenueProps {
+    type: string;
+    instance: string;
+    venues: Venue[];
+    dropPoints: DropPoint[];
+    auth_max_date?: Date;
 }
 
 const schoolName = (school: School) => {
     return(school.nombre + (school.sede?`-${school.sede}`:""))
 }
 
-const Venues = ({type,venues}:{type:string,venues: Venue[]}) => {
-    const {dropPoints, next_competition,auth_max_date} = venueInfo[type];
-    const dropPointsData : DropPointInfo [] | null = dropPoints ? require(`./data/${type}${next_competition.toLocaleLowerCase()}auth.json`) : null;
-
+const Venues = ({type,instance,dropPoints,venues,auth_max_date}:VenueProps) => {
     //Venues
     const [filters,setFilters] = useState<{colegio?:School,sede?:string}>({colegio: undefined, sede: undefined});
     const isFilterCompliant = (venue: Venue) => {
@@ -58,15 +52,15 @@ const Venues = ({type,venues}:{type:string,venues: Venue[]}) => {
     const venue_names = Array.from(new Set(filteredVenues.map(venue => venue.nombre))); 
     return(
         <>
-            <h1 className={styles.title}>Sedes {next_competition}</h1>
+            <h1 className={styles.title}>Sedes {instance[0] + instance.substring(1).toLocaleLowerCase()}</h1>
             <h2 className={styles.section_title}>Autorizaciones</h2>
-            {dropPointsData ?
+            {dropPoints.length > 0 ?
                 <>
                 <p className={styles.text}>Las autorizaciones se pueden conseguir <Link href={type == "oma"?"/oma/autorizacion":"/nandu/autorizacion"}>aquí<div className={styles.icon}><Image src="/images/pageLinkIcon.svg" fill={true} alt=""/></div></Link>. Estas se pueden entregar hasta el <span className={styles.bold}>{auth_max_date?`${auth_max_date.getDate()}/${auth_max_date.getMonth() + 1}`:"(A definir)"}</span> en los siguientes puntos:</p>
                 <ul className={styles.dropPoints}>
-                    {dropPointsData.map((dropPoint, index) => {
-                        const {localidad, nombre, direccion, aclaraciones} = dropPoint;
-                        return(<li className={styles.text} key={index}><span className={styles.bold}>{localidad}: </span>{nombre?`${nombre} - `:""}{direccion}{aclaraciones?` (${aclaraciones})`:""}</li>)
+                    {dropPoints.map((dropPoint, index) => {
+                        const {localidad, nombre, direccion, aclaracion} = dropPoint;
+                        return(<li className={styles.text} key={index}><span className={styles.bold}>{localidad}: </span>{nombre?`${nombre} - `:""}{direccion}{aclaracion?` (${aclaracion})`:""}</li>)
                     })}
                 </ul>
                 </>

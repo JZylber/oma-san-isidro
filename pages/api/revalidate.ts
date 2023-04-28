@@ -29,8 +29,23 @@ export default async function handler(req : NextApiRequest, res:NextApiResponse)
       } catch (err) {
         return res.status(500).send('Error revalidating')
       }
+    } else if(req.query.type === "venues"){
+    try {
+      await res.revalidate('/oma/sedes')
+      await res.revalidate('/nandu/sedes')
+      return res.json({ revalidated: true })
+    } catch (err) {
+      return res.status(500).send('Error revalidating')
     }
-    else{
+    } else if(req.query.type === "inscriptions"){
+      try {
+        await res.revalidate('/oma/inscripciones')
+        await res.revalidate('/nandu/inscripciones')
+        return res.json({ revalidated: true })
+      } catch (err) {
+        return res.status(500).send('Error revalidating')
+      }
+    } else{
       res.status(401).json({ message: 'Incorrect option' })
     }
     

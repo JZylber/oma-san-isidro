@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CalendarEvent } from "../CalendarComponents/CalendarTypes";
-import AllDatesBanner from "../CalendarComponents/DateBanner/AllDatesBanner";
+import AllDatesBanner from "../CalendarComponents/DateBanner/NextDatesBanner";
 import styles from "./Home.module.scss";
 import Levels from "./Levels";
 import Image from "next/image";
