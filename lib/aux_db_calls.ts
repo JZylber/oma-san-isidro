@@ -183,3 +183,19 @@ export const getInstanceVenues = async (type: string, year: number, instance: st
   )});
   return ({results});
 };
+
+export const getInscriptionData = async (type: string, year: number) => {
+  const query = await prisma.competencia.findFirst({
+    where: {
+      tipo: type,
+      ano: year
+    },
+    select: {
+      fecha_inscripcion_nacional: true,
+      fecha_inscripcion_regional: true,
+      link_inscripcion: true
+    }
+  });
+  const results = query
+  return ({results});
+};
