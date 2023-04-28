@@ -117,12 +117,14 @@ export const getCalendarEvents = async (year:number,type?: string) => {
                     direccion: true,
                     localidad: true,
                     aclaracion: true
+                  }
                 }
               }
             }
-          }
-      }});
-      const results = query?query.puntoinstancia:[];
+        } 
+    });
+      const dropPoints = query?query.puntoinstancia:[];
+      const results = dropPoints.map((punto) => {return({...punto.punto})}); 
       return ({results});
     };
 

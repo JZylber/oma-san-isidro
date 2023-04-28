@@ -36,6 +36,7 @@ const schoolName = (school: School) => {
 }
 
 const Venues = ({type,instance,dropPoints,venues,auth_max_date}:VenueProps) => {
+    console.log(dropPoints);
     //Venues
     const [filters,setFilters] = useState<{colegio?:School,sede?:string}>({colegio: undefined, sede: undefined});
     const isFilterCompliant = (venue: Venue) => {
