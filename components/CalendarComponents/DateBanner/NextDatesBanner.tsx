@@ -1,6 +1,6 @@
 import { CalendarEvent } from "../CalendarTypes";
 import banner_styles from "./DateBanner.module.scss";
-import styles from "./AllDatesBanner.module.scss";
+import styles from "./NextDatesBanner.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -9,9 +9,10 @@ interface DateBannerProps {
     category: string,
 } 
 
-const AllDatesBanner = ({dates,category}:DateBannerProps) => {
+const NextDatesBanner = ({dates,category}:DateBannerProps) => {
     const months = ["ENE","FEB","MAR","ABR","MAY","JUN","JUL","AGO","SEP","OCT","NOV","DIC"];
-
+    const current_date = new Date();
+    const next_dates = dates.filter(date => date.fecha_inicio > current_date).slice(0,3);
     return(
         <section>
             <div className={styles.header}>
@@ -24,7 +25,7 @@ const AllDatesBanner = ({dates,category}:DateBannerProps) => {
                 </Link>
             </div>
             <div className={styles.dates_container}>
-                {dates.map((date,idx) => {
+                {next_dates.map((date,idx) => {
                     return(
                         <div className={styles.event} key={idx}>
                             <span className={styles.text}>{date.texto}</span>
@@ -44,4 +45,4 @@ const AllDatesBanner = ({dates,category}:DateBannerProps) => {
     )
 }
 
-export default AllDatesBanner
+export default NextDatesBanner
