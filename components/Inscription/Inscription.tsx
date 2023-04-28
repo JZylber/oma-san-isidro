@@ -3,7 +3,23 @@ import Arrow from "../../public/images/newsArrow.svg"
 import styles from "./Inscription.module.scss"
 import BankInformation from "./BankInformation"
 
-export const Inscripcion = ( { type } : {type : string} ) => {
+export interface InscriptionData {
+    fecha_inscripcion_nacional?: Date,
+    fecha_inscripcion_regional?: Date,
+    link_inscripcion?: string
+}
+
+interface InscriptionProps {
+    type: string,
+    data: InscriptionData,
+}
+
+const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+  "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+];
+
+export const Inscripcion = ( { type,data} : InscriptionProps ) => {
+    const {fecha_inscripcion_nacional,fecha_inscripcion_regional,link_inscripcion} = data;
     const downloadForm = () => {
         const link = document.createElement("a");
         link.href = `/files/planilla_datos_${type.toLowerCase()}.xls`;
@@ -28,7 +44,7 @@ export const Inscripcion = ( { type } : {type : string} ) => {
            <div className={styles.step_information}>
             <h1>2. Inscripción</h1>
             <p>Los profesores encargados de {type == "OMA"?"Oma":"Ñandú"} deben realizar la inscripción que consiste de 2 pasos.</p>
-            <h2>Paso 1: hasta el {type == "OMA"?"5 de mayo":"21 de abril"}</h2>
+            <h2>Paso 1: hasta el {fecha_inscripcion_regional?`${fecha_inscripcion_regional.getDate()} de ${monthNames[fecha_inscripcion_regional.getMonth()].toLocaleLowerCase()}`:"(a determinar)"}</h2>
                 <p>Completar la planilla de datos con los datos pedidos:</p>
                 <div className={styles.button_container}>
                     <Button content="Planilla de Datos" onClick={downloadForm}><Arrow className={[styles.arrow,styles.download].join(" ")}/></Button>
@@ -58,11 +74,13 @@ export const Inscripcion = ( { type } : {type : string} ) => {
                         </ul>
                     </div>
                 </div>
-            <h2>Paso 2: hasta el {type == "OMA"?"9 de mayo":"28 de abril"}</h2>
+            <h2>Paso 2: hasta el {fecha_inscripcion_nacional?`${fecha_inscripcion_nacional.getDate()} de ${monthNames[fecha_inscripcion_nacional.getMonth()].toLocaleLowerCase()}`:"(a determinar)"}</h2>
                 <p>Ingresar los datos de los participantes en el siguiente link:</p>
                 <div className={styles.button_container}>
-                    <Button content="Link de Inscripción" onClick={() => type == "OMA"?window.location.href ="https://oma.org.ar/virtual/inscripcion.php?competencia=OMA&region=53&hash=18acdad3&ano=2023":window.location.href = "https://oma.org.ar/virtual/inscripcion.php?competencia=OMN&region=53&hash=02609c0a&ano=2023"}>
-                        <Arrow className={styles.arrow}/>
+                    <Button content={link_inscripcion?"Link de Inscripción":"(No Disponible)"} onClick={() => {link_inscripcion?window.location.href = link_inscripcion:null}}>
+                        <>
+                            {link_inscripcion && <Arrow className={styles.arrow}/>}
+                        </>
                     </Button>
                 </div>
            </div>
