@@ -3,7 +3,7 @@ import Head from "next/head"
 import Layout from "../../components/Layout/Layout"
 import Venues, { DropPoint, Venue } from "../../components/Venues/Venues"
 import { getInstanceDropPoints, getInstanceVenues } from "../../lib/aux_db_calls";
-import { getDateFromJSON } from "../../components/CalendarComponents/CalendarTypes";
+import { getDateFromJSON } from "../../lib/aux_functions";
 
 const competition = "OMA";
 
@@ -19,7 +19,9 @@ export const getStaticProps: GetStaticProps= async ({ params }) => {
     };      
   };
 
-const OMAVenues : NextPage<{next_instance: string,venues: Venue[],dropPoints: DropPoint [], auth_max_date: Date}> = ({next_instance,venues,dropPoints,auth_max_date}) => {
+const OMAVenues : NextPage<{next_instance: string,venues: Venue[],dropPoints: DropPoint [], auth_max_date: string}> = ({next_instance,venues,dropPoints,auth_max_date}) => {
+    console.log(next_instance);
+    console.log(auth_max_date);
     const date = getDateFromJSON(auth_max_date);
     return(
         <>
