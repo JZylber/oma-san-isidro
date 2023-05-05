@@ -158,5 +158,8 @@
         "Zonal": "https://oma.org.ar/enunciados/zonal_\u00f1_2022.pdf",
         "Regional": "https://oma.org.ar/enunciados/regional_\u00f1_2022.pdf",
         "Nacional": "https://oma.org.ar/enunciados/nacional_\u00f1_2022.pdf"
+    },
+    "2023": {
+        "Interescolar": "/files/problemas/Interescolar Ñandú 2023.pdf"
     }
 }
