@@ -2,6 +2,7 @@ import { Button } from "../buttons/Button"
 import Arrow from "../../public/images/newsArrow.svg"
 import styles from "./Inscription.module.scss"
 import BankInformation from "./BankInformation"
+import Link from "next/link"
 
 export interface InscriptionData {
     fecha_inscripcion_nacional?: Date,
@@ -88,6 +89,7 @@ export const Inscripcion = ( { type,data} : InscriptionProps ) => {
            <div className={styles.step_information}>
             <h1>3. Documentos a presentar en el certamen Intercolegial</h1>
             <p>El día del certamen se deberá presentar el comprobante <span className={styles.step_information_bold}>original</span> del depósito bancario para poder entregar el recibo correspondiente.</p>
+            <p><span className={styles.step_information_bold}>Además, en esta y en todas las instancias se deben presentar las <Link href={type === "OMA"?"/oma/autorizacion":"/nandu/autorizacion"}>autorizaciones</Link> de los participantes.</span></p>
            </div>
         </div>
         </>
