@@ -9,6 +9,7 @@ export const getAvailableResults = async (type: string) => {
           tipo: type
         }},
         {fecha: {
+          gte: new Date(2022,0,1),
           lt: new Date()}
         }
       ]},
