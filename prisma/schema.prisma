@@ -1,155 +1,153 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL") 
+  url      = env("DATABASE_URL")
 }
 
-enum INSTANCIA {
-  INTERCOLEGIAL
-  INTERESCOLAR
-  ZONAL
-  PROVINCIAL
-  REGIONAL
-  NACIONAL
-}
-
-//Results
-
-model Participante{
-  id_participante Int @default(autoincrement()) @id
-  dni Int @unique
-  nombre String
-  apellido String
-  email String?
+model Participante {
+  id_participante Int             @id @default(autoincrement())
+  dni             Int             @unique
+  nombre          String
+  apellido        String
+  email           String?
   participaciones Participacion[]
 }
 
 model Participacion {
-  id_participacion Int @default(autoincrement()) @id
-  nivel Int
-  participante Participante @relation(fields: [id_participante], references: [id_participante])
-  id_participante Int
-  colegio Colegio @relation(fields: [id_colegio], references: [id_colegio])
-  id_colegio Int @default(1)
-  rinde Rinde[]
-  competencia Competencia @relation(fields: [id_competencia],references: [id_competencia]) 
-  id_competencia Int
+  id_participacion Int          @id @default(autoincrement())
+  nivel            Int
+  id_participante  Int
+  id_colegio       Int          @default(1)
+  id_competencia   Int
+  colegio          Colegio      @relation(fields: [id_colegio], references: [id_colegio])
+  competencia      Competencia  @relation(fields: [id_competencia], references: [id_competencia])
+  participante     Participante @relation(fields: [id_participante], references: [id_participante])
+  rinde            Rinde[]
 }
 
 model Colegio {
-  id_colegio Int @default(autoincrement()) @id
-  nombre String
-  sede String?
-  localidad String?
+  id_colegio      Int             @id @default(autoincrement())
+  nombre          String
+  sede            String?
+  localidad       String?
   participaciones Participacion[]
-  sede_instancia SedeInstancia[]
+  sede_instancia  SedeInstancia[]
 }
 
 model Competencia {
-  id_competencia Int @default(autoincrement()) @id
-  numero Int
-  ano Int @map("año")
-  tipo String
-  link_inscripcion String?
-  fecha_inscripcion_regional DateTime? @db.Date
-  fecha_inscripcion_nacional DateTime? @db.Date
-  pruebas Prueba[]
-  participantes Participacion[]
+  id_competencia             Int             @id @default(autoincrement())
+  numero                     Int
+  ano                        Int             @map("año")
+  tipo                       String
+  fecha_inscripcion_nacional DateTime?       @db.Date
+  fecha_inscripcion_regional DateTime?       @db.Date
+  link_inscripcion           String?
+  participantes              Participacion[]
+  pruebas                    Prueba[]
 }
 
 model Prueba {
-  id_prueba Int @default(autoincrement()) @id
-  fecha DateTime @db.Date
-  instancia INSTANCIA
-  cantidad_problemas Int @default(3)
-  competencia Competencia @relation(fields: [id_competencia],references: [id_competencia])
-  id_competencia Int
-  fecha_limite_autorizacion DateTime? @db.Date
-  rinden Rinde[]
-  sedeinstancia SedeInstancia[]
-  puntoinstancia PuntoInstancia[]
+  id_prueba                 Int              @id @default(autoincrement())
+  fecha                     DateTime         @db.Date
+  instancia                 INSTANCIA
+  id_competencia            Int
+  cantidad_problemas        Int              @default(3)
+  fecha_limite_autorizacion DateTime?        @db.Date
+  problemas                 Problema[]
+  competencia               Competencia      @relation(fields: [id_competencia], references: [id_competencia])
+  puntoinstancia            PuntoInstancia[]
+  rinden                    Rinde[]
+  sedeinstancia             SedeInstancia[]
 }
 
 model Rinde {
-  id_rinde  Int @default(autoincrement()) @id
-  presente Boolean
-  aprobado Boolean
-  resultados Json
-  participacion Participacion @relation(fields: [id_participacion],references: [id_participacion])
+  id_rinde         Int           @id @default(autoincrement())
+  presente         Boolean
+  aprobado         Boolean
+  resultados       Json
   id_participacion Int
-  prueba Prueba @relation(fields: [id_prueba],references: [id_prueba])
-  id_prueba Int
+  id_prueba        Int
+  participacion    Participacion @relation(fields: [id_participacion], references: [id_participacion])
+  prueba           Prueba        @relation(fields: [id_prueba], references: [id_prueba])
 }
 
-//News
-
-model Noticias{
-  id_noticia Int @default(autoincrement()) @id
-  titulo String
-  link String
-  agregado DateTime @default(now())
+model Noticias {
+  id_noticia Int      @id @default(autoincrement())
+  titulo     String
+  link       String
+  agregado   DateTime @default(now())
 }
 
-//Calendario
-
-model Fechas{
-  id_fecha Int @default(autoincrement()) @id
-  fecha_inicio DateTime @db.Date
-  fecha_fin DateTime? @db.Date
-  tipo String
-  texto String
+model Fechas {
+  id_fecha     Int       @id @default(autoincrement())
+  fecha_inicio DateTime  @db.Date
+  fecha_fin    DateTime? @db.Date
+  tipo         String
+  texto        String
 }
 
-model Libro{
-  id_libro Int @default(autoincrement()) @id
-  nombre String
-  precio Float
+model Libro {
+  id_libro  Int     @id @default(autoincrement())
+  nombre    String
   categoria String?
-  descuento Float @default(0)
-  nuevo Boolean @default(false)
-  tapa String?
+  precio    Float
+  descuento Float   @default(0)
+  tapa      String?
+  nuevo     Boolean @default(false)
 }
 
-//Venues
-
-model Sede{
-  id_sede Int @default(autoincrement()) @id
-  nombre String
-  direccion String
-  localidad String
+model Sede {
+  id_sede       Int             @id @default(autoincrement())
+  nombre        String
+  direccion     String
+  localidad     String
   sedeinstancia SedeInstancia[]
 }
 
-model SedeInstancia{
-  id_sede_instancia Int @default(autoincrement()) @id
-  prueba Prueba @relation(fields: [id_prueba], references: [id_prueba])
-  id_prueba Int
-  sede Sede @relation(fields: [id_sede], references: [id_sede])
-  id_sede Int
-  colegio Colegio @relation(fields: [id_colegio], references: [id_colegio])
-  id_colegio Int
-  aclaracion String?
+model SedeInstancia {
+  id_sede_instancia Int     @id @default(autoincrement())
+  id_prueba         Int
+  id_sede           Int
+  id_colegio        Int
+  aclaracion        String?
+  colegio           Colegio @relation(fields: [id_colegio], references: [id_colegio])
+  prueba            Prueba  @relation(fields: [id_prueba], references: [id_prueba])
+  sede              Sede    @relation(fields: [id_sede], references: [id_sede])
 }
 
-model PuntoEntrega{
-  id_punto Int @default(autoincrement()) @id
-  nombre String?
-  direccion String
-  localidad String
-  aclaracion String?
+model PuntoEntrega {
+  id_punto       Int              @id @default(autoincrement())
+  nombre         String?
+  direccion      String
+  localidad      String
+  aclaracion     String?
   puntoinstancia PuntoInstancia[]
 }
 
-model PuntoInstancia{
-  id_punto_instancia Int @default(autoincrement()) @id
-  prueba Prueba @relation(fields: [id_prueba], references: [id_prueba])
-  id_prueba Int
-  punto PuntoEntrega @relation(fields: [id_punto], references: [id_punto])
-  id_punto Int
+model PuntoInstancia {
+  id_punto_instancia Int          @id @default(autoincrement())
+  id_prueba          Int
+  id_punto           Int
+  prueba             Prueba       @relation(fields: [id_prueba], references: [id_prueba])
+  punto              PuntoEntrega @relation(fields: [id_punto], references: [id_punto])
+}
+
+model Problema {
+  id_problema Int    @id @default(autoincrement())
+  nivel       Int
+  link        String
+  id_prueba   Int
+  Prueba      Prueba @relation(fields: [id_prueba], references: [id_prueba])
+}
+
+enum INSTANCIA {
+  INTERCOLEGIAL
+  ZONAL
+  PROVINCIAL
+  REGIONAL
+  NACIONAL
+  INTERESCOLAR
 }
