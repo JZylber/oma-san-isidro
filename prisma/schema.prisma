@@ -139,7 +139,7 @@ model Problema {
   id_problema Int    @id @default(autoincrement())
   nivel       Int
   link        String
-  link_foro   String?
+  links_foro  Json @default("[]")
   id_prueba   Int
   Prueba      Prueba @relation(fields: [id_prueba], references: [id_prueba])
 }
