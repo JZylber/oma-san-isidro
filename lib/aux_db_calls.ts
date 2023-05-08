@@ -161,13 +161,34 @@ export const getInstanceVenues = async (type: string, year: number, instance: st
     },
     select: {
       sedeinstancia: {
+        orderBy: [{
+          sede: {
+            localidad: 'asc'
+          }
+        },
+        {
+          sede: {
+            nombre: 'asc'
+          }
+        },
+        {
+          colegio: {
+            nombre: 'asc'
+          }
+        }],
         select: {
           colegio: {
             select: {
               nombre: true,
               sede: true
           }},
-          sede: true,
+          sede: {
+            select: {
+              nombre: true,
+              direccion: true,
+              localidad: true
+            }
+          },
           aclaracion: true
         }
       }
