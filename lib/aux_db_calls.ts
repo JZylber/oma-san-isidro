@@ -11,7 +11,12 @@ export const getAvailableResults = async (type: string) => {
         {fecha: {
           gte: new Date(2022,0,1),
           lt: new Date()}
-        }
+        },
+        {NOT: {
+          rinden: {
+            none: {}
+          }
+        }}
       ]},
       select: {
         instancia: true,
@@ -19,7 +24,7 @@ export const getAvailableResults = async (type: string) => {
           select: {
             ano: true
          }
-        }
+        },
       }});
     let years = Array.from(new Set(query.map((prueba) => prueba.competencia.ano))).map((ano : number): {ano:number,pruebas:string[]} => {return({ano:ano,pruebas:[]})});
     query.forEach((prueba) => {years.find((year) => year.ano === prueba.competencia.ano)!.pruebas.push(prueba.instancia)});
