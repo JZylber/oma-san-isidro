@@ -44,6 +44,9 @@ const Venues = ({type,instance,dropPoints,venues,auth_max_date}:VenueProps) => {
         const isVenue = (sede? venue.nombre === sede : true);
         return isSchool && isVenue;
     }
+    const hasDisclaimers = venues.reduce((disclaimers : number,venue: Venue) => {
+        return disclaimers + (venue.aclaracion !== null?1:0);
+    },0) > 0;
     const filteredVenues = venues.filter(isFilterCompliant);
     const availableSchools = filteredVenues.map(venue => venue.colegio);
     let schools : Array<School> = removeRepeatedSchools(availableSchools);
@@ -81,7 +84,7 @@ const Venues = ({type,instance,dropPoints,venues,auth_max_date}:VenueProps) => {
                         <td>Sede</td>
                         <td>Dirección</td>
                         <td>Localidad</td>
-                        <td style={{maxWidth:"15%"}}>Aclaraciones</td>
+                        {hasDisclaimers && <td style={{maxWidth:"15%"}}>Aclaraciones</td>}
                     </tr>
                 </thead>
                 <tbody>
@@ -92,7 +95,7 @@ const Venues = ({type,instance,dropPoints,venues,auth_max_date}:VenueProps) => {
                                 <td>{venue.nombre}</td>
                                 <td>{venue.direccion}</td>
                                 <td>{venue.localidad}</td>
-                                <td>{venue.aclaracion?venue.aclaracion:""}</td>
+                                {hasDisclaimers && <td>{venue.aclaracion?venue.aclaracion:""}</td>}
                             </tr>
                         )
                     })}
