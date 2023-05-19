@@ -30,8 +30,10 @@ const ResultFinderForm = ({availableResults,searchResults,clearResults} : FormPr
         if(año && instancia){
             const instance = instancia as string;
             const year = Number(año);
-            setSearchParameters({año:year,instancia:instance});
-            searchResults(year,instance);
+            if(resultYears.includes(year) && availableResults.find((result) => result.ano === year)?.pruebas.includes(instance)){
+                setSearchParameters({año:year,instancia:instance});
+                searchResults(year,instance);
+            }
         }
       }, [router,searchResults,setSearchParameters]);
     let instances = searchParameters.año?(availableResults.find((result) => result.ano === searchParameters.año) as yearTests).pruebas:[]
