@@ -23,19 +23,22 @@ const sortInstances = (ins_a : string, ins_b : string) => {
 const ResultFinderForm = ({availableResults,searchResults,clearResults} : FormProps) => {
     const resultYears =  availableResults.map((yearTests) => yearTests.ano);
     const router = useRouter();
+    const [checkRoute,setCheckRoute] = useState(false);
     
     const [searchParameters,setSearchParameters] = useState<searchParametersType>({año: undefined,instancia:undefined});
     useEffect(() => {
-        const {año,instancia} = router.query;
-        if(año && instancia){
-            const instance = instancia as string;
-            const year = Number(año);
-            if(resultYears.includes(year) && availableResults.find((result) => result.ano === year)?.pruebas.includes(instance)){
-                setSearchParameters({año:year,instancia:instance});
-                searchResults(year,instance);
+        if(!checkRoute){
+            const {año,instancia} = router.query;
+            if(año && instancia){
+                const instance = instancia as string;
+                const year = Number(año);
+                if(resultYears.includes(year) && availableResults.find((result) => result.ano === year)?.pruebas.includes(instance)){
+                    setSearchParameters({año:year,instancia:instance});
+                    searchResults(year,instance);
+                }
             }
-        }
-      }, [router,searchResults,setSearchParameters]);
+        setCheckRoute(true);}
+      }, [checkRoute,router,searchResults,setSearchParameters,availableResults,resultYears]);
     let instances = searchParameters.año?(availableResults.find((result) => result.ano === searchParameters.año) as yearTests).pruebas:[]
     const handleSubmit = () => {
         const {año,instancia} = searchParameters;
