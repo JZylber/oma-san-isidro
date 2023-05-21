@@ -36,10 +36,15 @@ const instanceIsAvailable = (instance: string, env: string, availableInstances?:
 
     
 const ResultFinderForm = ({availableResults,searchResults,clearResults} : FormProps) => {
-    const resultYears =  availableResults.map((yearTests) => yearTests.ano);
     const router = useRouter();
     const [checkRoute,setCheckRoute] = useState(false);
-    const env = process.env.NODE_ENV
+    const env = process.env.NODE_ENV;
+
+    let possible_years = availableResults;
+    if(env === "production"){
+        possible_years = possible_years.filter((yearTests) => yearTests.pruebas.some((test) => test.disponible));
+    }
+    const resultYears =  possible_years.map((yearTests) => yearTests.ano);
     
     const [searchParameters,setSearchParameters] = useState<searchParametersType>({año: undefined,instancia:undefined});
     useEffect(() => {
