@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./resultFinderForm.module.scss"
-import {yearTests } from "./resultsTypes"
+import {InstanceData, yearTests } from "./resultsTypes"
 import SelectResultCategory from "./SelectResultCategory";
 import { useRouter } from "next/router";
 
@@ -19,11 +19,27 @@ const sortInstances = (ins_a : string, ins_b : string) => {
     const ordered_instances = ["INTERESCOLAR","INTERCOLEGIAL","ZONAL","PROVINCIAL","REGIONAL","NACIONAL"];
     return(ordered_instances.indexOf(ins_a) - ordered_instances.indexOf(ins_b)); 
 }
+
+const instanceIsAvailable = (instance: string, env: string, availableInstances?: Array<InstanceData>) => {
+    if(availableInstances){
+        const selected_instance = availableInstances.find((inst) => inst.nombre === instance);
+        if(selected_instance){
+            if(env === "production"){
+                return(selected_instance.disponible);
+            } else {
+                return(true);
+            }
+        }
+    }
+    return(false);
+}
+
     
 const ResultFinderForm = ({availableResults,searchResults,clearResults} : FormProps) => {
     const resultYears =  availableResults.map((yearTests) => yearTests.ano);
     const router = useRouter();
     const [checkRoute,setCheckRoute] = useState(false);
+    const env = process.env.NODE_ENV
     
     const [searchParameters,setSearchParameters] = useState<searchParametersType>({año: undefined,instancia:undefined});
     useEffect(() => {
@@ -32,14 +48,18 @@ const ResultFinderForm = ({availableResults,searchResults,clearResults} : FormPr
             if(año && instancia){
                 const instance = instancia as string;
                 const year = Number(año);
-                if(resultYears.includes(year) && availableResults.find((result) => result.ano === year)?.pruebas.includes(instance)){
+                if(resultYears.includes(year) && instanceIsAvailable(instance,env,availableResults.find((result) => result.ano === year)?.pruebas)  ){
                     setSearchParameters({año:year,instancia:instance});
                     searchResults(year,instance);
                 }
             }
         setCheckRoute(true);}
-      }, [checkRoute,router,searchResults,setSearchParameters,availableResults,resultYears]);
-    let instances = searchParameters.año?(availableResults.find((result) => result.ano === searchParameters.año) as yearTests).pruebas:[]
+      }, [checkRoute,router,searchResults,setSearchParameters,availableResults,resultYears,env]);
+    let possibleInstances = searchParameters.año?(availableResults.find((result) => result.ano === searchParameters.año) as yearTests).pruebas:[];
+    if(env === "production"){
+        possibleInstances = possibleInstances.filter((instance) => instance.disponible);
+    }
+    const instances = possibleInstances.map((instance) => instance.nombre);
     const handleSubmit = () => {
         const {año,instancia} = searchParameters;
         if(año && instancia){

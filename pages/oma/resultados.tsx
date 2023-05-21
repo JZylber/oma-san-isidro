@@ -1,8 +1,8 @@
 import {GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import Results from "../../components/ResultsPage/results";
-import { School, yearTests } from "../../components/ResultsPage/resultsTypes";
-import {getAvailableResults, getSchools} from "../../lib/aux_db_calls";
+import {yearTests } from "../../components/ResultsPage/resultsTypes";
+import {getAvailableResults} from "../../lib/aux_db_calls";
 import styles from "./resultados.module.scss"
 import Layout from "../../components/Layout/Layout";
 

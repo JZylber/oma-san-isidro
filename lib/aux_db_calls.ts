@@ -23,11 +23,12 @@ export const getAvailableResults = async (type: string) => {
         competencia: {
           select: {
             ano: true
-         }
+         },
         },
+        resultados_disponibles: true
       }});
-    let years = Array.from(new Set(query.map((prueba) => prueba.competencia.ano))).map((ano : number): {ano:number,pruebas:string[]} => {return({ano:ano,pruebas:[]})});
-    query.forEach((prueba) => {years.find((year) => year.ano === prueba.competencia.ano)!.pruebas.push(prueba.instancia)});
+    let years = Array.from(new Set(query.map((prueba) => prueba.competencia.ano))).map((ano : number): {ano:number,pruebas:{nombre: string, disponible: boolean}[]} => {return({ano:ano,pruebas:[]})});
+    query.forEach((prueba) => {years.find((year) => year.ano === prueba.competencia.ano)!.pruebas.push({nombre: prueba.instancia,disponible: prueba.resultados_disponibles})});
     return ({years});
     };
 
