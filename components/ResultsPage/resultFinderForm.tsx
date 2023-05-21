@@ -60,7 +60,7 @@ const ResultFinderForm = ({availableResults,searchResults,clearResults} : FormPr
                 }
             }
         setCheckRoute(true);}
-      }, [checkRoute,router,searchResults,setSearchParameters,availableResults,resultYears,env]);
+      }, [checkRoute,router,searchResults,setSearchParameters,availableResults,resultYears,env,vercel_env]);
     let possibleInstances = searchParameters.año?(availableResults.find((result) => result.ano === searchParameters.año) as yearTests).pruebas:[];
     if(env === "production" && vercel_env?vercel_env === "production":false){
         possibleInstances = possibleInstances.filter((instance) => instance.disponible);
