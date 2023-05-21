@@ -20,11 +20,11 @@ const sortInstances = (ins_a : string, ins_b : string) => {
     return(ordered_instances.indexOf(ins_a) - ordered_instances.indexOf(ins_b)); 
 }
 
-const instanceIsAvailable = (instance: string, env: string, availableInstances?: Array<InstanceData>) => {
+const instanceIsAvailable = (instance: string, env: string, vercel_env?: string, availableInstances?: Array<InstanceData>) => {
     if(availableInstances){
         const selected_instance = availableInstances.find((inst) => inst.nombre === instance);
         if(selected_instance){
-            if(env === "production"){
+            if(env === "production" && vercel_env === "production"){
                 return(selected_instance.disponible);
             } else {
                 return(true);
@@ -39,9 +39,10 @@ const ResultFinderForm = ({availableResults,searchResults,clearResults} : FormPr
     const router = useRouter();
     const [checkRoute,setCheckRoute] = useState(false);
     const env = process.env.NODE_ENV;
+    const vercel_env = process.env.VERCEL_ENV;
 
     let possible_years = availableResults;
-    if(env === "production"){
+    if(env === "production"&& vercel_env === "production"){
         possible_years = possible_years.filter((yearTests) => yearTests.pruebas.some((test) => test.disponible));
     }
     const resultYears =  possible_years.map((yearTests) => yearTests.ano);
@@ -53,7 +54,7 @@ const ResultFinderForm = ({availableResults,searchResults,clearResults} : FormPr
             if(año && instancia){
                 const instance = instancia as string;
                 const year = Number(año);
-                if(resultYears.includes(year) && instanceIsAvailable(instance,env,availableResults.find((result) => result.ano === year)?.pruebas)  ){
+                if(resultYears.includes(year) && instanceIsAvailable(instance,env,vercel_env,availableResults.find((result) => result.ano === year)?.pruebas)  ){
                     setSearchParameters({año:year,instancia:instance});
                     searchResults(year,instance);
                 }
@@ -61,7 +62,7 @@ const ResultFinderForm = ({availableResults,searchResults,clearResults} : FormPr
         setCheckRoute(true);}
       }, [checkRoute,router,searchResults,setSearchParameters,availableResults,resultYears,env]);
     let possibleInstances = searchParameters.año?(availableResults.find((result) => result.ano === searchParameters.año) as yearTests).pruebas:[];
-    if(env === "production"){
+    if(env === "production" && vercel_env === "production"){
         possibleInstances = possibleInstances.filter((instance) => instance.disponible);
     }
     const instances = possibleInstances.map((instance) => instance.nombre);
