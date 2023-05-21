@@ -14,7 +14,12 @@ import HomeModal from "../components/Popups/HomeModal";
 import { useEffect, useState } from "react";
 
 export async function getStaticProps() {
-  const news = await getNews()
+  const news = await getNews();
+  const env = process.env.NODE_ENV;
+  const vercel_env = process.env.VERCEL_ENV;
+  if(env === "production" && (vercel_env?vercel_env === "production":true)){
+    news.results = news.results.filter((item:NewsItemData) => item.visible)
+  }
   const events = await getCalendarEvents(new Date().getFullYear())
   let newProps = {news : news.results,events: JSON.parse(JSON.stringify(events.results))}
   return {
