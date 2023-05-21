@@ -5,7 +5,7 @@ export default function News({newsData}:{newsData:NewsItemData[]}){
     const env = process.env.NODE_ENV;
     const vercel_env = process.env.VERCEL_ENV;
     let newsToDisplay = newsData;
-    if(env === "production" && vercel_env?vercel_env === "production":false){
+    if(env === "production" && (vercel_env?vercel_env === "production":true)){
         newsToDisplay = newsToDisplay.filter((newsItemData) => newsItemData.visible);
     }
     newsToDisplay = newsToDisplay.slice(0, 3);
