@@ -166,5 +166,8 @@
         "Zonal": "https://oma.org.ar/enunciados/Zonal OMA 2022.pdf",
         "Regional": "https://oma.org.ar/enunciados/regional 2022.pdf",
         "Nacional": "https://oma.org.ar/enunciados/Nacional OMA 2022.pdf"
+    },
+    "2023":{
+        "Intercolegial": "https://pvqbkogjtilwnziibxsx.supabase.co/storage/v1/object/public/Problemas/2023/Oma/Intercolegial%20OMA%202023.pdf?t=2023-05-21T13%3A06%3A02.494Z"
     }
 }
