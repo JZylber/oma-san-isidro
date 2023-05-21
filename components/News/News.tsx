@@ -2,7 +2,12 @@ import NewsItem from "./NewsItem";
 import { NewsItemData } from "./NewsTypes";
 
 export default function News({newsData}:{newsData:NewsItemData[]}){
-    const newsToDisplay = newsData.slice(0, 3);
+    const env = process.env.NODE_ENV;
+    let newsToDisplay = newsData;
+    if(env === "production"){
+        newsToDisplay = newsToDisplay.filter((newsItemData) => newsItemData.visible);
+    }
+    newsToDisplay = newsToDisplay.slice(0, 3);
     return(
     <div>
         {newsToDisplay.map((newsItemData,index) => <NewsItem content={newsItemData.titulo} link={newsItemData.link} key={index}></NewsItem>)}

@@ -51,7 +51,8 @@ export const getNews = async () => {
       ],
       select: {
         titulo: true,
-        link: true
+        link: true,
+        visible: true,
       }
     } 
     )
