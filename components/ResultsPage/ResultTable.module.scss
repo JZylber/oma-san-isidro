@@ -237,3 +237,9 @@
         display: none;
     }
 }
+
+.disclaimer{
+    padding-top: 2.4rem;
+    @include shared.font-montserrat(500);
+    font-size: 1.6rem;
+}

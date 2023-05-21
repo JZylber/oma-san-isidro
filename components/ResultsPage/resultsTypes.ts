@@ -1,6 +1,11 @@
+export interface InstanceData {
+    nombre: string,
+    disponible: boolean,
+}
+
 export interface yearTests {
     ano: number,
-    pruebas: Array<string>
+    pruebas: Array<InstanceData>
 }
 
 export type ResultProps = {

@@ -7,6 +7,15 @@ import Layout from "../../components/Layout/Layout";
 
 export const getStaticProps: GetStaticProps= async ({ params }) => {
     const available = await getAvailableResults("ÑANDÚ");
+    const env = process.env.NODE_ENV;
+    const vercel_env = process.env.VERCEL_ENV;
+    if(env === "production" && (vercel_env?vercel_env === "production":true)){
+      available.years = available.years.map((item:yearTests) => {
+        item.pruebas = item.pruebas.filter((test) => test.disponible)
+        return item;
+      });
+      available.years = available.years.filter((item:yearTests) => item.pruebas.length > 0);
+    }
     const newProps = {results: available.years}
     return {
       props: newProps,
