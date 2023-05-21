@@ -19,32 +19,11 @@ const sortInstances = (ins_a : string, ins_b : string) => {
     const ordered_instances = ["INTERESCOLAR","INTERCOLEGIAL","ZONAL","PROVINCIAL","REGIONAL","NACIONAL"];
     return(ordered_instances.indexOf(ins_a) - ordered_instances.indexOf(ins_b)); 
 }
-
-const instanceIsAvailable = (instance: string, env: string, vercel_env?: string, availableInstances?: Array<InstanceData>) => {
-    if(availableInstances){
-        const selected_instance = availableInstances.find((inst) => inst.nombre === instance);
-        if(selected_instance){
-            if(env === "production" && (vercel_env?vercel_env === "production":true)){
-                return(selected_instance.disponible);
-            } else {
-                return(true);
-            }
-        }
-    }
-    return(false);
-}
-
     
 const ResultFinderForm = ({availableResults,searchResults,clearResults} : FormProps) => {
     const router = useRouter();
     const [checkRoute,setCheckRoute] = useState(false);
-    const env = process.env.NODE_ENV;
-    const vercel_env = process.env.VERCEL_ENV;
-    let possible_years = availableResults;
-    if(env === "production" && (vercel_env?vercel_env === "production":true)){
-        possible_years = possible_years.filter((yearTests) => yearTests.pruebas.some((test) => test.disponible));
-    }
-    const resultYears =  possible_years.map((yearTests) => yearTests.ano);
+    const resultYears =  availableResults.map((yearTests) => yearTests.ano);
     
     const [searchParameters,setSearchParameters] = useState<searchParametersType>({año: undefined,instancia:undefined});
     useEffect(() => {
@@ -53,17 +32,14 @@ const ResultFinderForm = ({availableResults,searchResults,clearResults} : FormPr
             if(año && instancia){
                 const instance = instancia as string;
                 const year = Number(año);
-                if(resultYears.includes(year) && instanceIsAvailable(instance,env,vercel_env,availableResults.find((result) => result.ano === year)?.pruebas)  ){
+                if(resultYears.includes(year) && availableResults.find((result) => result.ano === year)?.pruebas.find((instance) => instance.nombre === instancia))  {
                     setSearchParameters({año:year,instancia:instance});
                     searchResults(year,instance);
                 }
             }
         setCheckRoute(true);}
-      }, [checkRoute,router,searchResults,setSearchParameters,availableResults,resultYears,env,vercel_env]);
+      }, [checkRoute,router,searchResults,setSearchParameters,availableResults,resultYears]);
     let possibleInstances = searchParameters.año?(availableResults.find((result) => result.ano === searchParameters.año) as yearTests).pruebas:[];
-    if(env === "production" && (vercel_env?vercel_env === "production":true)){
-        possibleInstances = possibleInstances.filter((instance) => instance.disponible);
-    }
     const instances = possibleInstances.map((instance) => instance.nombre);
     const handleSubmit = () => {
         const {año,instancia} = searchParameters;
