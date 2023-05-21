@@ -61,6 +61,7 @@ model Prueba {
   puntoinstancia            PuntoInstancia[]
   rinden                    Rinde[]
   sedeinstancia             SedeInstancia[]
+  resultados_disponibles    Boolean          @default(false)
 }
 
 model Rinde {
@@ -79,6 +80,7 @@ model Noticias {
   titulo     String
   link       String
   agregado   DateTime @default(now())
+  visible    Boolean  @default(true)
 }
 
 model Fechas {
