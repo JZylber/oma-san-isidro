@@ -40,7 +40,6 @@ const ResultFinderForm = ({availableResults,searchResults,clearResults} : FormPr
     const [checkRoute,setCheckRoute] = useState(false);
     const env = process.env.NODE_ENV;
     const vercel_env = process.env.VERCEL_ENV;
-
     let possible_years = availableResults;
     if(env === "production" && (vercel_env?vercel_env === "production":true)){
         possible_years = possible_years.filter((yearTests) => yearTests.pruebas.some((test) => test.disponible));
