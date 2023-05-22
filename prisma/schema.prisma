@@ -68,6 +68,7 @@ model Rinde {
   id_rinde         Int           @id @default(autoincrement())
   presente         Boolean
   aprobado         Boolean
+  aclaracion       String?
   resultados       Json
   id_participacion Int
   id_prueba        Int

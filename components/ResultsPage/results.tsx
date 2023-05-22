@@ -14,7 +14,7 @@ const normalizeString = (str: string) => {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
 
-const sortByNames = (a: TestQueryResults, b: TestQueryResults) => {
+/*const sortByNames = (a: TestQueryResults, b: TestQueryResults) => {
     const surnameA = normalizeString(a.participacion.participante.apellido);
     const surnameB = normalizeString(b.participacion.participante.apellido);
     if (surnameA < surnameB) {
@@ -36,7 +36,7 @@ const sortByNames = (a: TestQueryResults, b: TestQueryResults) => {
             return 0;
         }
     }
-};
+};*/
 
 
 const Results = ({competition,availableResults} : ResultProps) => {
@@ -63,7 +63,7 @@ const Results = ({competition,availableResults} : ResultProps) => {
                 .catch((error) => {throw error});
             setTestInfo(`${competition} ${instance.slice(0,1)}${instance.slice(1).toLocaleLowerCase()} ${year}`)
             setStatus(200);
-            searchedResults.sort(sortByNames);
+            //searchedResults.sort(sortByNames);
             setResults(searchedResults);
         } catch (error) {
             let networkError = error as NetworkError;

@@ -26,6 +26,17 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
                             ],
                         },
                 },
+                orderBy: [
+                    {participacion:{
+                        nivel: 'asc'
+                        }
+                    },
+                    {participacion:{
+                        participante: {
+                            apellido: 'asc'
+                        }}
+                    }
+                ],
                 select : {
                     prueba: {
                         select : {
@@ -34,6 +45,7 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
                     },
                     presente: true,
                     aprobado: true,
+                    aclaracion: true,
                     resultados: true,
                     participacion : {
                         select : {
@@ -53,12 +65,6 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
                         }
                     }
                 },
-                orderBy: [
-                    {participacion:{
-                        nivel: 'asc'
-                    }
-                    }
-                ]   
             })
         res.status(200).json(result);}}
     catch (error) {
