@@ -25,6 +25,7 @@ export interface TestQueryResults {
     }
     presente : boolean,
     aprobado : boolean,
+    aclaracion? : string,
     resultados : Array<string>,
     participacion : {
         nivel : number,

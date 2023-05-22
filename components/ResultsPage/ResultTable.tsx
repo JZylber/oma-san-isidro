@@ -45,16 +45,18 @@ const ResultTable = ({results,testInfo}:{results : Array<TestQueryResults>, test
     const make_element = (result : TestQueryResults,index : number) => {
         const participant = participantName(result)
         const school = schoolName(result);
-        const level = result.participacion.nivel
-        const points = result.resultados
-        const passed = result.aprobado
-        const present = result.presente
+        const level = result.participacion.nivel;
+        const points = result.resultados;
+        const passed = result.aprobado;
+        const present = result.presente;
+        const clarification = result.aclaracion;
+        const hasPoints = present && !clarification;
         return(
             <tr key={index}>
                 <td>{participant}</td>
                 <td className={styles.center_align}>{level}</td>
                 <td>{school}</td>
-                {numberOfProblems>0 && (present ? points.map((point,index) => <td key={index} className={styles.center_align}>{point}</td>): <td colSpan={numberOfProblems + 1} className={styles.center_align}>Ausente</td>)}
+                {numberOfProblems>0 && (hasPoints ? points.map((point,index) => <td key={index} className={styles.center_align}>{point}</td>): <td colSpan={numberOfProblems + 1} className={styles.center_align}>{present?clarification:"Ausente"}</td>)}
                 <td className={styles.center_align}>{passed?"Si":"No"}</td>
             </tr>)
     }
