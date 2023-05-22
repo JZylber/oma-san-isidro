@@ -44,7 +44,7 @@ const ResultFilterForm = ({filters,updateFilter,schools,names,levels,passed} : R
                     <SelectResultCategory category="Participante" value={filters.participante} setValue={(value?: string) => updateFilter("participante",value)} options={names} input={true}/>
                     <SelectResultCategory category="Colegio" value={filters.colegio} setValue={(value? : School) => updateFilter("colegio",value)} options={schools} input={true}/>
                     <SelectResultCategory category="Nivel" value={filters.nivel} setValue={(value? : number) => updateFilter("nivel",value)} options={levels} allOptions={[1,2,3]} buttons={true}/>
-                <SelectResultCategory category="Aprobado" value={filters.aprobado} setValue={(value? : boolean) => updateFilter("aprobado",value)} options={passed} allOptions={[true,false]} buttons={true}/>
+                    <SelectResultCategory category="Aprobado" value={filters.aprobado} setValue={(value? : boolean) => updateFilter("aprobado",value)} options={passed} allOptions={[true,false]} buttons={true}/>
                 </form>
             </Modal>}
         </div>
