@@ -2,10 +2,13 @@ import { participantName, schoolName } from "../ResultTable";
 import { TestQueryResults } from "../resultsTypes";
 import styles from "./ResultCard.module.scss";
 import ExpandArrow from "../../../public/images/menuArrow.svg"
-import { useState } from "react";
+import {useEffect, useState } from "react";
 
 const ResultCard = ({result}:{result: TestQueryResults}) => {
     const [expanded, setExpanded] = useState(false);
+    useEffect(() => {
+        setExpanded(false);
+    },[result]);
     const hasPoints = result.presente && !result.aclaracion;
     return(
         <div className={styles.container} onClick={() => setExpanded(!expanded)}>
