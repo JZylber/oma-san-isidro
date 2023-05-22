@@ -34,13 +34,17 @@ const ResultTable = ({results,testInfo}:{results : Array<TestQueryResults>, test
         setPage(0);
     }
 
-    const isFilterCompliant = (result: TestQueryResults) => {
+    const isFilterCompliant = (result: TestQueryResults, filters: ResultFilter) => {
         const name = !filters.participante || participantName(result) === (filters.participante)
         const school = !filters.colegio || ((filters.colegio.nombre === result.participacion.colegio.nombre) && (!filters.colegio.sede || filters.colegio.sede === result.participacion.colegio.sede))
         const level = !filters.nivel || filters.nivel === result.participacion.nivel
         const passed = filters.aprobado === undefined || filters.aprobado === result.aprobado
         return(name && school && level && passed) 
     }
+
+    const filter_results = (results: Array<TestQueryResults>, filters: ResultFilter) => {
+        return results.filter((result) => isFilterCompliant(result,filters));
+    };
 
     const make_element = (result : TestQueryResults,index : number) => {
         const participant = participantName(result)
@@ -61,20 +65,17 @@ const ResultTable = ({results,testInfo}:{results : Array<TestQueryResults>, test
             </tr>)
     }
     //FILTERING
-    let filtered_results = results.filter(isFilterCompliant);
-    let filterData: {schools: Array<School>, names: Set<string>, levels: Set<number>, passed: Set<boolean>} = {schools: [],names: new Set(), levels: new Set(), passed: new Set()};
-    filtered_results.forEach((result) =>{
-        filterData.schools.push(result.participacion.colegio);
-        filterData.names.add(participantName(result));
-        filterData.levels.add(result.participacion.nivel);
-        filterData.passed.add(result.aprobado);
-    })
-    let schools : Array<School> = removeRepeatedSchools(filterData.schools);
+    let filtered_results = filter_results(results,filters);
+    const availableOptions = (results: Array<TestQueryResults>, category: string, filters: ResultFilter):Array<TestQueryResults> => {
+        return filter_results(results,{...filters,[category]:undefined})
+    }
+
+    let schools : Array<School> = removeRepeatedSchools(availableOptions(results,"colegio",filters).map((result) => result.participacion.colegio));
     const genericSchools: Array<School> =removeRepeatedSchools(schools.filter((school) => school.sede).map((school) => {return({nombre: school.nombre})}));
     schools = schools.concat(genericSchools);
-    const names : Array<string> = Array.from(new Set(filtered_results.map(participantName)));
-    const levels: Array<number> = Array.from(filterData.levels);
-    const passed: Array<boolean> = Array.from(filterData.passed);
+    const names : Array<string> = Array.from(new Set(availableOptions(results,"participante",filters).map((result) => participantName(result))));
+    const levels: Array<number> = Array.from(new Set(availableOptions(results,"nivel",filters).map((result) => result.participacion.nivel)));
+    const passed: Array<boolean> = Array.from(new Set(availableOptions(results,"aprobado",filters).map((result) => result.aprobado)));
     //PAGINATION
     const [page,setPage] = useState(0);
     const page_size = 50

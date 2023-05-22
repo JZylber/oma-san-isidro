@@ -124,7 +124,7 @@ const SelectResultCategory = <T extends string|number|boolean|School,>({category
         {buttons &&
               <div className={styles.buttons_container}>
                 {
-                optionsToDisplay.map((option,idx) => <div onClick={() => toggleValue(option)} className={[styles.button,value === option?styles.selected:""].join(" ")} key={idx}><span>{displayOption(option)}</span></div>)
+                optionsToDisplay.map((option,idx) => <div onClick={() => toggleValue(option)} className={[styles.button,options.includes(option)?"":styles.unavailable,value === option?styles.selected:""].join(" ")} key={idx}><span>{displayOption(option)}</span></div>)
                 }
               </div>
         }
