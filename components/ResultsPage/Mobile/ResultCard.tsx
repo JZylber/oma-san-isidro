@@ -6,6 +6,7 @@ import { useState } from "react";
 
 const ResultCard = ({result}:{result: TestQueryResults}) => {
     const [expanded, setExpanded] = useState(false);
+    const hasPoints = result.presente && !result.aclaracion;
     return(
         <div className={styles.container} onClick={() => setExpanded(!expanded)}>
             <div className={styles.info}>
@@ -22,7 +23,7 @@ const ResultCard = ({result}:{result: TestQueryResults}) => {
                         <p className={styles.title}>Nivel</p>
                         <p className={styles.value}>{result.participacion.nivel}</p>
                     </div>
-                    {result.prueba.cantidad_problemas > 0 && result.presente && <div className={styles.results}>
+                    {result.prueba.cantidad_problemas > 0 && hasPoints && <div className={styles.results}>
                         {result.resultados.map((point,index) =>{ 
                             if(index < result.prueba.cantidad_problemas){
                                 return(<div key={index} className={styles.category}>
@@ -40,7 +41,7 @@ const ResultCard = ({result}:{result: TestQueryResults}) => {
                             }
                         })}
                     </div>}
-                    {!result.presente && <div className={styles.category}><p className={styles.value}>AUSENTE</p></div>}
+                    {!hasPoints && <div className={styles.category}><p className={styles.value}>{result.aclaracion?result.aclaracion.toUpperCase():"AUSENTE"}</p></div>}
                 </div>}
             </div>
             <ExpandArrow className={[styles.arrow,expanded?styles.rotated:""].join(" ")}/>
