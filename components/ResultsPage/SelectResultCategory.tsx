@@ -35,7 +35,7 @@ const SelectResultCategory = <T extends string|number|boolean|School,>({category
       if(typeof option === 'number'){
         return `${option}`;
       } else if(typeof option === 'string') {
-        return `${option.slice(0,1)}${option.slice(1).toLocaleLowerCase()}`
+        return `${option}`
       }else if(typeof option === 'boolean') {
         return option?"Si":"No"
       }else {
@@ -62,7 +62,7 @@ const SelectResultCategory = <T extends string|number|boolean|School,>({category
         }else{
           setTempValue(displayOption(value));
         }
-    },[canOpen,value,,displayOption])
+    },[canOpen,value,displayOption])
     let filteredOptions = options.filter((option) => {return normalizeString(displayOption(option)).includes(normalizeString(tempValue))});
     const useOutsideAlerter = (ref : RefObject<HTMLDivElement>) => {
         useEffect(() => {
