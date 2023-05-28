@@ -15,8 +15,16 @@ interface searchParametersType {
     instancia: string|undefined
 }
 
+const capitalize = (str : string) => {
+    return str.charAt(0).toLocaleUpperCase() + str.slice(1).toLocaleLowerCase();
+}
+
+const capitalizeIfNotUndefined = (str : string|undefined) => {
+    return str?capitalize(str):undefined;
+}
+
 const sortInstances = (ins_a : string, ins_b : string) => {
-    const ordered_instances = ["INTERESCOLAR","INTERCOLEGIAL","ZONAL","PROVINCIAL","REGIONAL","NACIONAL"];
+    const ordered_instances = ["Interescolar","Intercolegial","Zonal","Provincial","Regional","Nacional"];
     return(ordered_instances.indexOf(ins_a) - ordered_instances.indexOf(ins_b)); 
 }
     
@@ -53,14 +61,14 @@ const ResultFinderForm = ({availableResults,searchResults,clearResults} : FormPr
     }
 
     const setInstance = (value? : string) => {
-        setSearchParameters({...searchParameters,instancia:value})
+        setSearchParameters({...searchParameters,instancia:value?.toLocaleUpperCase()})
         clearResults();
     }
 
     return(
     <form className={styles.form}>
         <SelectResultCategory category="Año" value={searchParameters.año} setValue={setYear} options={resultYears}/>
-        <SelectResultCategory category="Instancia" value={searchParameters.instancia} setValue={setInstance} options={instances} sortOptions={sortInstances}/>
+        <SelectResultCategory category="Instancia" value={capitalizeIfNotUndefined(searchParameters.instancia)} setValue={setInstance} options={instances.map(capitalize)} sortOptions={sortInstances}/>
         <div onClick={handleSubmit} className={styles.searchButton}>
             <span>Buscar</span>
         </div>
