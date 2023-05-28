@@ -68,7 +68,7 @@ $height: 4.8rem;
     list-style: none;
     flex: 0 1 auto;
     overflow-y: scroll;
-    max-height: 3.5*$height;
+    max-height: 4.5*$height;
     @include shared.not-mobile{
         -ms-overflow-style: none;  
         scrollbar-width: none; 

@@ -35,7 +35,7 @@ const SelectResultCategory = <T extends string|number|boolean|School,>({category
       if(typeof option === 'number'){
         return `${option}`;
       } else if(typeof option === 'string') {
-        return `${option.slice(0,1)}${option.slice(1).toLocaleLowerCase()}`
+        return `${option}`
       }else if(typeof option === 'boolean') {
         return option?"Si":"No"
       }else {
@@ -62,7 +62,7 @@ const SelectResultCategory = <T extends string|number|boolean|School,>({category
         }else{
           setTempValue(displayOption(value));
         }
-    },[canOpen,value,,displayOption])
+    },[canOpen,value,displayOption])
     let filteredOptions = options.filter((option) => {return normalizeString(displayOption(option)).includes(normalizeString(tempValue))});
     const useOutsideAlerter = (ref : RefObject<HTMLDivElement>) => {
         useEffect(() => {
@@ -80,7 +80,6 @@ const SelectResultCategory = <T extends string|number|boolean|School,>({category
       }
     const wrapperRef = useRef<HTMLDivElement>(null);
     useOutsideAlerter(wrapperRef);
-    const isOpen = canOpen && options.length > 0
     const toggleValue = (option : T) => {
       if(value === option){
         setValue(undefined);
@@ -89,7 +88,9 @@ const SelectResultCategory = <T extends string|number|boolean|School,>({category
       }
       toggleFilter();
     }
+    const isOpen = canOpen && options.length > 0;
     const optionsToDisplay = allOptions?allOptions:options;
+    const displayClear = clear && value !== undefined;
     return (
       <div className={styles.category_container}>
         <p className={styles.category}>{category}</p>
@@ -114,7 +115,7 @@ const SelectResultCategory = <T extends string|number|boolean|School,>({category
               }
             {isOpen &&
                 <ul className={styles.dropdownFilter}>
-                    {clear && <li onClick={() => {setValue(undefined);toggleFilter()}} className={[styles.filterText,styles.filterOption].join(" ")}><span>Quitar filtro</span></li>}
+                    {displayClear && <li onClick={() => {setValue(undefined);toggleFilter()}} className={[styles.filterText,styles.filterOption].join(" ")}><span>Quitar filtro</span></li>}
                     {input?
                       filteredOptions.map((option,idx) => <li onClick={() => {setInputFilter(option)}} className={[styles.filterText,styles.filterOption].join(" ")} key={idx}><span>{displayOption(option)}</span></li>)
                       :options.map((option,idx) => <li onClick={() => {setValue(option);toggleFilter()}} className={[styles.filterText,styles.filterOption].join(" ")} key={idx}><span>{displayOption(option)}</span></li>)}
