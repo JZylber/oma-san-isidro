@@ -247,3 +247,8 @@
 .hide{
     display: none;
 }
+
+.unavailable{
+    opacity: 0.3;
+    pointer-events: none;
+}

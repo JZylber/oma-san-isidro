@@ -64,7 +64,7 @@ const DownloadPopup = ({open,setOpen,testInfo,results,filteredResults}: Download
                             </div>
                             <p className={styles.format_text}>XLSX</p>
                         </div>
-                        <div className={styles.option}>
+                        <div className={[styles.option,styles.unavailable].join(" ")}>
                             <div className={[styles.format_container,format==="pdf" && styles.selected,styles.grayed].join(" ")} onClick={() => setFormat("pdf")}>
                                 <PDF/>
                             </div>
