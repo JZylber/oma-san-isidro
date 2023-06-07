@@ -46,7 +46,7 @@ const Books : NextPage = () => {
         return(<tr key={idx}>
             <td className={styles.table_body_bookName}><p className={styles.special}>{book.nuevo?"¡NUEVO!":(book.descuento > 0?"¡OFERTA!":"")}</p><p>{book.nombre}</p></td>
             {book.descuento > 0 ?
-                <td><s>${book.precio}</s> ${Math.ceil(book.precio* (1 - book.descuento)/100)*100}</td>:
+                <td>${Math.ceil(book.precio* (1 - book.descuento)/100)*100} <s style={{opacity: "0.5"}}>${book.precio}</s></td>:
                 <td>{`$${book.precio}`}</td>}
         </tr>)
     } 
