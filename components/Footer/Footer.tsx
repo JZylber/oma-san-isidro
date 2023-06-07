@@ -26,6 +26,11 @@ const Footer = () => {
               <Link href={'/contacto'}>Contacto</Link>
             </div>
           </li>
+          <li>
+            <div className={styles.footer_links_item}>
+              <a href="https://oma.org.ar/donaciones/">Contribuciones</a>
+            </div>
+          </li>
           {/*<li>
             <a>Mapa del sitio</a>
           </li>*/}
