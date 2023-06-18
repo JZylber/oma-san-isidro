@@ -74,7 +74,7 @@ const Table = <S extends object,>({values,headers,Card,elements_per_page,downloa
     return(
         <>  
             {elements_per_page && mobile_pagination}
-            {elements_per_page && <div className={styles["table_header"+download?"_with_download":""]}>
+            {elements_per_page && <div className={styles["table_header"+(download?"_with_download":"")]}>
                 {pagination}
             </div>}
             <div className={styles.values}>
