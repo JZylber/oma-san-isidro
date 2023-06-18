@@ -3,13 +3,14 @@ import styles from "./Venues.module.scss";
 import table_styles from "../ResultsPage/ResultTable.module.scss";
 import Image from "next/image";
 import SelectResultCategory from "../ResultsPage/SelectResultCategory";
-import VenueCard from "./Mobile/VenueCard";
 import { useState } from "react";
 import { School } from "../ResultsPage/resultsTypes";
 import { removeRepeatedSchools } from "../ResultsPage/ResultTable";
+import Table from "../Table/Table";
+import VenueCard from "../Table/TableCards/VenueCard";
 
-export interface Venue{
-    colegio: School;
+export interface Venue<SchoolType>{
+    colegio: SchoolType;
     nombre: string;
     direccion: string;
     localidad: string;
@@ -26,7 +27,7 @@ export interface DropPoint {
 interface VenueProps {
     type: string;
     instance: string;
-    venues: Venue[];
+    venues: Venue<School>[];
     dropPoints: DropPoint[];
     auth_max_date?: Date;
 }
@@ -35,16 +36,26 @@ const schoolName = (school: School) => {
     return(school.nombre + (school.sede?`-${school.sede}`:""))
 }
 
+const renderVenue = (venue: Venue<School>,clarifications: boolean) : Venue<string> => {
+    const {colegio,nombre,direccion,localidad,aclaracion} = venue;
+    const base_venue = {colegio: schoolName(colegio),nombre,direccion,localidad}
+    if(clarifications){
+        return({...base_venue,aclaracion})
+    }else{
+        return(base_venue)
+    }
+}
+
 const Venues = ({type,instance,dropPoints,venues,auth_max_date}:VenueProps) => {
     //Venues
     const [filters,setFilters] = useState<{colegio?:School,sede?:string}>({colegio: undefined, sede: undefined});
-    const isFilterCompliant = (venue: Venue) => {
+    const isFilterCompliant = (venue: Venue<School>) => {
         const {colegio,sede} = filters;
         const isSchool = (colegio? (venue.colegio.nombre === colegio.nombre) && (colegio.sede?venue.colegio.sede === colegio.sede:true) : true);
         const isVenue = (sede? venue.nombre === sede : true);
         return isSchool && isVenue;
     }
-    const hasDisclaimers = venues.reduce((disclaimers : number,venue: Venue) => {
+    const hasDisclaimers = venues.reduce((disclaimers : number,venue: Venue<School>) => {
         return disclaimers + (venue.aclaracion !== null?1:0);
     },0) > 0;
     const filteredVenues = venues.filter(isFilterCompliant);
@@ -52,7 +63,8 @@ const Venues = ({type,instance,dropPoints,venues,auth_max_date}:VenueProps) => {
     let schools : Array<School> = removeRepeatedSchools(availableSchools);
     const genericSchools: Array<School> =removeRepeatedSchools(schools.filter((school) => school.sede).map((school) => {return({nombre: school.nombre})}));
     schools = schools.concat(genericSchools);
-    const venue_names = Array.from(new Set(filteredVenues.map(venue => venue.nombre))); 
+    const venue_names = Array.from(new Set(filteredVenues.map(venue => venue.nombre)));
+    const headers = ["Colegio","Sede","Dirección","Localidad"].concat(hasDisclaimers?["Aclaración"]:[]);; 
     return(
         <>
             <h1 className={styles.title}>Sedes {instance[0] + instance.substring(1).toLocaleLowerCase()}</h1>
@@ -76,35 +88,7 @@ const Venues = ({type,instance,dropPoints,venues,auth_max_date}:VenueProps) => {
                 <SelectResultCategory category="Colegio" value={filters.colegio} setValue={(option?: School) => {setFilters({...filters,colegio: option})}} options={schools} input={true}/>
                 <SelectResultCategory category="Sede" value={filters.sede} setValue={(option?: string) => {setFilters({...filters,sede: option})}} options={venue_names} input={true}/>
             </form>
-            <div className={table_styles.results}>
-                <table className={table_styles.result_table}>
-                <thead>
-                    <tr>
-                        <td>Colegio</td>
-                        <td>Sede</td>
-                        <td>Dirección</td>
-                        <td>Localidad</td>
-                        {hasDisclaimers && <td style={{maxWidth:"15%"}}>Aclaraciones</td>}
-                    </tr>
-                </thead>
-                <tbody>
-                    {filteredVenues.map((venue,index) => {
-                        return(
-                            <tr key={index}>
-                                <td>{schoolName(venue.colegio)}</td>
-                                <td>{venue.nombre}</td>
-                                <td>{venue.direccion}</td>
-                                <td>{venue.localidad}</td>
-                                {hasDisclaimers && <td>{venue.aclaracion?venue.aclaracion:""}</td>}
-                            </tr>
-                        )
-                    })}
-                </tbody>
-        </table>
-        </div>
-        <div className={styles.venue_items}>
-            {filteredVenues.map((venue,index) => <VenueCard key={index} venue={venue}/>)}
-        </div>
+            <Table values={filteredVenues.map((venue => renderVenue(venue,hasDisclaimers)))} headers={headers} Card={VenueCard} elements_per_page={10}/>
         </>
         : <p className={styles.text}>Proximamente...</p>}
         </>
