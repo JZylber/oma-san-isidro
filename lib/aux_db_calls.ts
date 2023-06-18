@@ -197,11 +197,24 @@ export const getInstanceVenues = async (type: string, year: number, instance: st
               localidad: true
             }
           },
-          aclaracion: true
-        }
-      }
-    }
-  });
+          aclaracion: true,
+          niveles: true,
+          ParticipacionSedeInstancia: {
+            select: {
+              participacion: {
+                select: {
+                  nivel: true,
+                  participante: {
+                    select: {
+                      nombre: true,
+                      apellido: true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }}}});
   const venues = query?query.sedeinstancia:[];
   const results = venues.map((sede) => {return(
     {

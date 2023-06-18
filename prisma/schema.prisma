@@ -17,15 +17,16 @@ model Participante {
 }
 
 model Participacion {
-  id_participacion Int          @id @default(autoincrement())
-  nivel            Int
-  id_participante  Int
-  id_colegio       Int          @default(1)
-  id_competencia   Int
-  colegio          Colegio      @relation(fields: [id_colegio], references: [id_colegio])
-  competencia      Competencia  @relation(fields: [id_competencia], references: [id_competencia])
-  participante     Participante @relation(fields: [id_participante], references: [id_participante])
-  rinde            Rinde[]
+  id_participacion           Int                          @id @default(autoincrement())
+  nivel                      Int
+  id_participante            Int
+  id_colegio                 Int                          @default(1)
+  id_competencia             Int
+  colegio                    Colegio                      @relation(fields: [id_colegio], references: [id_colegio])
+  competencia                Competencia                  @relation(fields: [id_competencia], references: [id_competencia])
+  participante               Participante                 @relation(fields: [id_participante], references: [id_participante])
+  rinde                      Rinde[]
+  ParticipacionSedeInstancia ParticipacionSedeInstancia[]
 }
 
 model Colegio {
@@ -111,14 +112,24 @@ model Sede {
 }
 
 model SedeInstancia {
-  id_sede_instancia Int     @id @default(autoincrement())
-  id_prueba         Int
-  id_sede           Int
-  id_colegio        Int
-  aclaracion        String?
-  colegio           Colegio @relation(fields: [id_colegio], references: [id_colegio])
-  prueba            Prueba  @relation(fields: [id_prueba], references: [id_prueba])
-  sede              Sede    @relation(fields: [id_sede], references: [id_sede])
+  id_sede_instancia          Int                          @id @default(autoincrement())
+  id_prueba                  Int
+  id_sede                    Int
+  id_colegio                 Int
+  aclaracion                 String?
+  niveles                    Int[]                        @default([])
+  colegio                    Colegio                      @relation(fields: [id_colegio], references: [id_colegio])
+  prueba                     Prueba                       @relation(fields: [id_prueba], references: [id_prueba])
+  sede                       Sede                         @relation(fields: [id_sede], references: [id_sede])
+  ParticipacionSedeInstancia ParticipacionSedeInstancia[]
+}
+
+model ParticipacionSedeInstancia {
+  id_participacion_sede_instancia Int           @id @default(autoincrement())
+  id_participacion                Int
+  id_sede_instancia               Int
+  participacion                   Participacion @relation(fields: [id_participacion], references: [id_participacion])
+  sedeinstancia                   SedeInstancia @relation(fields: [id_sede_instancia], references: [id_sede_instancia])
 }
 
 model PuntoEntrega {
@@ -142,7 +153,7 @@ model Problema {
   id_problema Int    @id @default(autoincrement())
   nivel       Int
   link        String
-  links_foro  Json @default("[]")
+  links_foro  Json   @default("[]")
   id_prueba   Int
   Prueba      Prueba @relation(fields: [id_prueba], references: [id_prueba])
 }
