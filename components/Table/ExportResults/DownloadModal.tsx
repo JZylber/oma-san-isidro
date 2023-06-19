@@ -74,13 +74,13 @@ const DownloadPopup = ({open,setOpen,testInfo,data,filteredData,headers}: Downlo
                             <div className={[styles.result_button,!allData && styles.selected].join(" ")} onClick={() => setAllData(false)}>
                                 Obtenidos
                             </div>
-                            <p className={styles.result_text}>Los resultados obtenidos por los filtros aplicados.</p>
+                            <p className={styles.result_text}>Los datos obtenidos por los filtros aplicados.</p>
                         </div>
                         <div className={[styles.option,styles.minWidth].join(" ")}>
                             <div className={[styles.result_button,allData && styles.selected].join(" ")} onClick={() => setAllData(true)}>
                                 Todos
                             </div>
-                            <p className={styles.result_text}>Todos los resultados de <span className={styles.result_text_bold}>{testInfo}</span>.</p>
+                            <p className={styles.result_text}>Todos los datos de <span className={styles.result_text_bold}>{testInfo}</span>.</p>
                         </div>
                     </div>
                 <div className={styles.button_container}>
