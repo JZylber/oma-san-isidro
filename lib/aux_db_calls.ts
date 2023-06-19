@@ -252,7 +252,7 @@ export const venueDataGenerator = async (competition: string, instance_hierarchy
       const auth_max_date = fecha_limite_autorizacion;
       const dropPoints = await getInstanceDropPoints(competition,year,next_instance);
       const venues = await getInstanceVenues(competition,year,next_instance);
-      return({next_instance: next_instance,venues: venues,dropPoints: dropPoints.results,auth_max_date: JSON.parse(JSON.stringify(auth_max_date))})
+      return({next_instance: next_instance,venues: venues.results,dropPoints: dropPoints.results,auth_max_date: JSON.parse(JSON.stringify(auth_max_date))})
   });
   return {
       props: newProps,
