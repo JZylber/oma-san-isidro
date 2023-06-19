@@ -38,7 +38,7 @@ const Table = <S extends object,>({values,allValues,headers,Card,elements_per_pa
         if(page > max_pages){
             setPage(max_pages);
         }
-    },[max_pages])
+    },[page,max_pages])
     let firstResult = page * page_size
     let lastResult = Math.min((page + 1)*page_size,values.length)
     const values_in_page = values.slice(firstResult,lastResult)
