@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Table.module.scss";
 import SelectIcon from "../../public/images/menuSelectIcon.svg";
-import {CardType} from "./TableCards/card";
+import {CardType} from "./types";
 import DownloadPopup from "./ExportResults/DownloadModal";
 import Arrow from "../../public/images/newsArrow.svg";
 
@@ -34,6 +34,11 @@ const Table = <S extends object,>({values,allValues,headers,Card,elements_per_pa
     const [page,setPage] = useState(0);
     const page_size = elements_per_page?elements_per_page:values.length
     let max_pages =  Math.ceil(values.length / page_size) - 1;
+    useEffect(() => {
+        if(page > max_pages){
+            setPage(max_pages);
+        }
+    },[max_pages])
     let firstResult = page * page_size
     let lastResult = Math.min((page + 1)*page_size,values.length)
     const values_in_page = values.slice(firstResult,lastResult)
