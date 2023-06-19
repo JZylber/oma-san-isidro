@@ -1,0 +1,81 @@
+@use '../../../styles/shared.scss' as shared;
+
+.container{
+    background: shared.$white;
+    border: 2px solid shared.$black;
+    border-radius: 9px;
+    padding: 2rem;
+    display: flex;
+}
+.info{
+    display: flex;
+    flex-direction: column;
+    width: 0;
+    flex: 1 1 0;
+    row-gap: 1.6rem;
+}
+.arrow{
+    width: 1.6rem;
+}
+.rotated{
+    transform: rotate(90deg);
+}
+.name {
+    @include shared.font-unbounded(400);
+    font-size: 2.4rem;
+
+}
+.passed{
+    background-color: shared.$light-blue;
+    border: 2px solid shared.$black;
+    border-radius: 9px;
+    padding: .8rem 1.6rem .8rem 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    @include shared.font-unbounded(400);
+    font-size: 1.2rem;
+}
+.not_passed{
+    background-color: shared.$white;
+    span::before{
+        content: 'NO ';
+    }
+}
+
+.extra_information{
+    display: flex;
+    flex-direction: column;
+    row-gap: 3rem;
+}
+
+.category{
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.4rem;
+    .title{
+        @include shared.font-montserrat(400);
+        font-size: 1.4rem;
+    }
+    .value{
+        @include shared.font-montserrat(500);
+        font-size: 2.2rem;
+    }
+}
+
+.results{
+    display: flex;
+    column-gap: 2.8rem;
+    .total_container{
+        display: flex;
+        width: 0px;
+        flex: 1 1 0;
+        justify-content: flex-end;
+    }
+}
+
+.subtext{
+    @include shared.font-montserrat(400);
+    font-size: 1.75rem;
+}
