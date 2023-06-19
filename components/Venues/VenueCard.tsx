@@ -1,9 +1,8 @@
 import styles from "./VenueCard.module.scss";
-import ExpandArrow from "../../../public/images/menuArrow.svg"
+import ExpandArrow from "../../public/images/menuArrow.svg"
 import { useState } from "react";
-import { Venue } from "../../Venues/Venues";
-import { School } from "../../ResultsPage/resultsTypes";
-import { CardType } from "./card";
+import { CardType } from "../Table/types";
+import { Venue } from "./Venues";
 
 const VenueCard: CardType<Venue<string>> = ({value}) => {
     const {colegio,nombre, direccion, localidad, aclaracion} = value;

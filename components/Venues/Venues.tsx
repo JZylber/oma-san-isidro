@@ -7,8 +7,8 @@ import { useState } from "react";
 import { School } from "../ResultsPage/resultsTypes";
 import { removeRepeatedSchools } from "../ResultsPage/ResultTable";
 import Table from "../Table/Table";
-import VenueCard from "../Table/TableCards/VenueCard";
-import ParticipantCard from "../Table/TableCards/ParticipantCard";
+import VenueCard from "./VenueCard";
+import ParticipantCard from "./ParticipantCard";
 
 export interface Venue<SchoolType>{
     colegio: SchoolType;
@@ -33,13 +33,6 @@ export interface Participant{
     sede: string;
 }
 
-export interface RenderedParticipant{
-    nivel: number;
-    participante: string;
-    colegio: string
-    sede?: string;
-}
-
 interface VenueProps {
     type: string;
     instance: string;
@@ -61,7 +54,7 @@ interface ParticipantFilters{
     sede?: string;
 }
 
-const schoolName = (school: School) => {
+export const schoolName = (school: School) => {
     return(school.nombre + (school.sede?`-${school.sede}`:""))
 }
 
@@ -79,12 +72,21 @@ const renderVenue = (venue: Venue<School>,clarifications: boolean) : Venue<strin
     }
 }
 
-const renderParticipant = (participant: Participant) : RenderedParticipant=> {
-    const {nombre,apellido,colegio,nivel,sede} = participant;
-    const base_participant = {nivel,participante: participantName(nombre,apellido),colegio: schoolName(colegio),sede}
-    return base_participant;
+const downloadParticipantData = (participant : Participant):Array<string> => {
+    return([participant.nivel.toString(),participant.nombre,participant.apellido,schoolName(participant.colegio),participant.sede])
 }
 
+const downloadParticipantHeaders = ["Nivel","Nombre","Apellido","Colegio","Sede"]
+
+const makeParticipantElement = (participant : Participant,index : number) => {
+    return(
+        <tr key={index}>
+            <td>{participant.nivel}</td>
+            <td>{participantName(participant.nombre,participant.apellido)}</td>
+            <td>{schoolName(participant.colegio)}</td>
+            <td>{participant.sede}</td>
+        </tr>)
+}
 const availableOptions = <S extends object,F extends object>(results: Array<S>, category: string, filters: F, filterCompliance: (arg:S,filter:F)=> boolean):Array<S> => {
     return results.filter((element: S) => {return(filterCompliance(element,{...filters,[category]:undefined}))});
 }
@@ -164,7 +166,18 @@ const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants}:Ven
                 <SelectResultCategory category="Sede" value={participantFilters.sede} setValue={(option?: string) => {setParticipantFilters({...participantFilters,sede: option})}} options={p_venue_names} input={true}/>
                 <SelectResultCategory category="Nivel" value={participantFilters.nivel} setValue={(option? : number) => {setParticipantFilters({...participantFilters,nivel: option})}} options={p_levels} clear={true}/>
             </form>
-            <Table values={filteredParticipants.map((participant => renderParticipant(participant)))} allValues={participants.map((participant => renderParticipant(participant)))} headers={participant_headers} Card={ParticipantCard} elements_per_page={50} download={true}/>
+            <Table 
+                values={filteredParticipants} 
+                allValues={participants} 
+                headers={participant_headers} 
+                Card={ParticipantCard} 
+                elements_per_page={50} 
+                download={true}
+                downloadHeaders={downloadParticipantHeaders}
+                process_data={downloadParticipantData}
+                make_element={makeParticipantElement}
+                testInfo={`${type == "OMA"?"OMA":"Nandú"} ${instance} ${(new Date).getFullYear()}`}
+            />
         </>
         : <p className={styles.text}>Proximamente...</p>}
         </>
