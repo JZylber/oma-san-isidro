@@ -151,7 +151,12 @@ const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants}:Ven
                 <SelectResultCategory category="Colegio" value={venueFilters.colegio} setValue={(option?: School) => {setVenueFilters({...venueFilters,colegio: option})}} options={v_schools} input={true}/>
                 <SelectResultCategory category="Sede" value={venueFilters.sede} setValue={(option?: string) => {setVenueFilters({...venueFilters,sede: option})}} options={v_venue_names} input={true}/>
             </form>
-            <Table values={filteredVenues.map((venue => renderVenue(venue,hasDisclaimers)))} headers={venue_headers} Card={VenueCard} elements_per_page={10}/>
+            <Table 
+                values={filteredVenues.map((venue => renderVenue(venue,hasDisclaimers)))}
+                allValues={venues.map((venue => renderVenue(venue,hasDisclaimers)))} 
+                headers={venue_headers} 
+                Card={VenueCard} 
+                elements_per_page={10}/>
             <h3 className={styles.section_subtitle}>Alumnos por sede</h3>
             <form className={styles.form}>
                 <SelectResultCategory category="Participante" value={participantFilters.nombreApellido} setValue={(option?: string) => {setParticipantFilters({...participantFilters,nombreApellido: option})}} options={p_names} input={true}/>
@@ -159,7 +164,7 @@ const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants}:Ven
                 <SelectResultCategory category="Sede" value={participantFilters.sede} setValue={(option?: string) => {setParticipantFilters({...participantFilters,sede: option})}} options={p_venue_names} input={true}/>
                 <SelectResultCategory category="Nivel" value={participantFilters.nivel} setValue={(option? : number) => {setParticipantFilters({...participantFilters,nivel: option})}} options={p_levels} clear={true}/>
             </form>
-            <Table values={filteredParticipants.map((participant => renderParticipant(participant)))} headers={participant_headers} Card={ParticipantCard} elements_per_page={50}/>
+            <Table values={filteredParticipants.map((participant => renderParticipant(participant)))} allValues={participants.map((participant => renderParticipant(participant)))} headers={participant_headers} Card={ParticipantCard} elements_per_page={50} download={true}/>
         </>
         : <p className={styles.text}>Proximamente...</p>}
         </>
