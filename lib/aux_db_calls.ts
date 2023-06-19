@@ -127,7 +127,7 @@ export const getInstances = async (type: string, year: number) => {
     return ({results});
 };
 
-export const getInstanceDropPoints = async (type: string, year: number, instance: string) => {
+const getInstanceDropPoints = async (type: string, year: number, instance: string) => {
       let ins = instance as INSTANCIA;
       const query = await prisma.prueba.findFirst({
         where: {
@@ -157,7 +157,7 @@ export const getInstanceDropPoints = async (type: string, year: number, instance
       return ({results});
     };
 
-export const getInstanceVenues = async (type: string, year: number, instance: string) => {
+const getInstanceVenues = async (type: string, year: number, instance: string) => {
   let ins = instance as INSTANCIA;
   const query = await prisma.prueba.findFirst({
     where: {
@@ -242,6 +242,47 @@ export const getInscriptionData = async (type: string, year: number) => {
   return ({results});
 };
 
+const passingParticipants = async (type: string, year: number, instance: string) => {
+  let ins = instance as INSTANCIA;
+  const query = await prisma.prueba.findFirst({
+    where: {
+      competencia: {
+        tipo: type,
+        ano: year
+      },
+      instancia: ins,
+    },
+    select: {
+      rinden: {
+        where: {
+          aprobado: true
+        },
+        select: {
+          participacion: {
+            select: {
+              participante: {
+                select: {
+                  nombre: true,
+                  apellido: true
+                }
+              },
+              colegio: {
+                select: {
+                  nombre: true,
+                  sede: true
+                }
+              },
+              nivel: true
+            }
+          }
+        }
+      }
+    }
+  });
+  const results = query?query.rinden:[];
+  return ({results});
+};
+
 //Complex calls
 export const venueDataGenerator = async (competition: string, instance_hierarchy: string[]) => {
   const date= new Date();
@@ -250,9 +291,16 @@ export const venueDataGenerator = async (competition: string, instance_hierarchy
       const {instancia,fecha_limite_autorizacion} = instances.results.filter(instance => instance.fecha > date)[0];
       const next_instance = instancia;
       const auth_max_date = fecha_limite_autorizacion;
-      const dropPoints = await getInstanceDropPoints(competition,year,next_instance);
-      const venues = await getInstanceVenues(competition,year,next_instance);
-      return({next_instance: next_instance,venues: venues.results,dropPoints: dropPoints.results,auth_max_date: JSON.parse(JSON.stringify(auth_max_date))})
+      const dropPoints = (await getInstanceDropPoints(competition,year,next_instance)).results;
+      const venues = (await getInstanceVenues(competition,year,next_instance)).results;
+      const previous_instance = instance_hierarchy[instance_hierarchy.indexOf(next_instance)-1];
+      const participants = (await passingParticipants(competition,year,previous_instance)).results;
+      const participant_venues = participants.map((participant) => {
+        let venue = venues.find((venue) => venue.colegio.nombre === participant.participacion.colegio.nombre && venue.colegio.sede === participant.participacion.colegio.sede);
+        return({...participant,venue: venue?.nombre});
+      });
+      const flat_participant_venues = participant_venues.map((participant) => {return({nombre: participant.participacion.participante.nombre, apellido: participant.participacion.participante.apellido ,colegio: participant.participacion.colegio, sede: participant.venue, nivel: participant.participacion.nivel})});
+      return({next_instance: next_instance,venues: venues,dropPoints: dropPoints,auth_max_date: JSON.parse(JSON.stringify(auth_max_date)),participants: flat_participant_venues})
   });
   return {
       props: newProps,

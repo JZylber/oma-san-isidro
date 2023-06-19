@@ -24,6 +24,15 @@ export interface DropPoint {
     aclaracion?: string,
 }
 
+export interface Participant<SchoolType>{
+    nombre: string;
+    apellido: string;
+    colegio: SchoolType;
+    nivel: number;
+    sede?: string;
+}
+
+
 interface VenueProps {
     type: string;
     instance: string;
