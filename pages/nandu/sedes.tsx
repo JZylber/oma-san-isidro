@@ -13,7 +13,7 @@ export const getStaticProps: GetStaticProps= async ({ params }) => {
     return venueDataGenerator(competition,instance_hierarchy); 
   };
 
-const NanduVenues : NextPage<{next_instance: string,venues: Venue<School>[],dropPoints: DropPoint [], auth_max_date: string,participants: Participant<School>[]}> = ({next_instance,venues,dropPoints,auth_max_date,participants}) => {
+const NanduVenues : NextPage<{next_instance: string,venues: Venue<School>[],dropPoints: DropPoint [], auth_max_date: string,participants: Participant[]}> = ({next_instance,venues,dropPoints,auth_max_date,participants}) => {
     const date = auth_max_date?getDateFromJSON(auth_max_date):undefined;
     return(
         <>
@@ -23,7 +23,7 @@ const NanduVenues : NextPage<{next_instance: string,venues: Venue<School>[],drop
                 content="Sedes de instancias Ñandú y puntos de entrega de autorizaciones"></meta>
         </Head>
         <Layout>
-            <Venues type={competition} venues={venues} instance={next_instance} dropPoints={dropPoints} auth_max_date={date}/>
+            <Venues type={competition} venues={venues} instance={next_instance} dropPoints={dropPoints} auth_max_date={date} participants={participants}/>
         </Layout>
         </>
         )
