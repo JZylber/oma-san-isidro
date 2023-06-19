@@ -13,7 +13,7 @@ export const getStaticProps: GetStaticProps= async ({ params }) => {
     return venueDataGenerator(competition,instance_hierarchy); 
   };
 
-const OMAVenues : NextPage<{next_instance: string,venues: Venue<School>[],dropPoints: DropPoint [], auth_max_date: string,participants: Participant[]}> = ({next_instance,venues,dropPoints,auth_max_date,participants}) => {
+const OMAVenues : NextPage<{next_instance: string,venues: Venue[],dropPoints: DropPoint [], auth_max_date: string,participants: Participant[]}> = ({next_instance,venues,dropPoints,auth_max_date,participants}) => {
   const date = auth_max_date?getDateFromJSON(auth_max_date):undefined;
     return(
         <>
