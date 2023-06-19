@@ -49,6 +49,18 @@ interface VenueProps {
     auth_max_date?: Date;
 }
 
+interface VenueFilters{
+    colegio?: School;
+    sede?: string;
+}
+
+interface ParticipantFilters{
+    nivel?: number;
+    nombreApellido?: string;
+    colegio?: School;
+    sede?: string;
+}
+
 const schoolName = (school: School) => {
     return(school.nombre + (school.sede?`-${school.sede}`:""))
 }
@@ -73,12 +85,16 @@ const renderParticipant = (participant: Participant) : RenderedParticipant=> {
     return base_participant;
 }
 
+const availableOptions = <S extends object,F extends object>(results: Array<S>, category: string, filters: F, filterCompliance: (arg:S,filter:F)=> boolean):Array<S> => {
+    return results.filter((element: S) => {return(filterCompliance(element,{...filters,[category]:undefined}))});
+}
+
 const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants}:VenueProps) => {
     //Venues
-    const [venueFilters,setVenueFilters] = useState<{colegio?:School,sede?:string}>({colegio: undefined, sede: undefined});
-    const [participantFilters,setParticipantFilters] = useState<{nivel?:number,nombreApellido?:string,colegio?:School,sede?:string}>({nivel: undefined, nombreApellido:undefined,colegio: undefined, sede: undefined});
-    const venueIsFilterCompliant = (venue: Venue<School>) => {
-        const {colegio,sede} = venueFilters;
+    const [venueFilters,setVenueFilters] = useState<VenueFilters>({colegio: undefined, sede: undefined});
+    const [participantFilters,setParticipantFilters] = useState<ParticipantFilters>({nivel: undefined, nombreApellido:undefined,colegio: undefined, sede: undefined});
+    const venueIsFilterCompliant = (venue: Venue<School>, filter: VenueFilters) => {
+        const {colegio,sede} = filter;
         const isSchool = (colegio? (venue.colegio.nombre === colegio.nombre) && (colegio.sede?venue.colegio.sede === colegio.sede:true) : true);
         const isVenue = (sede? venue.nombre === sede : true);
         return isSchool && isVenue;
@@ -86,7 +102,7 @@ const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants}:Ven
     const hasDisclaimers = venues.reduce((disclaimers : number,venue: Venue<School>) => {
         return disclaimers + (venue.aclaracion !== null?1:0);
     },0) > 0;
-    const filteredVenues = venues.filter(venueIsFilterCompliant);
+    const filteredVenues = venues.filter((element) => venueIsFilterCompliant(element,venueFilters));
     const v_availableSchools = filteredVenues.map(venue => venue.colegio);
     let v_schools : Array<School> = removeRepeatedSchools(v_availableSchools);
     const v_genericSchools: Array<School> =removeRepeatedSchools(v_schools.filter((school) => school.sede).map((school) => {return({nombre: school.nombre})}));
@@ -94,21 +110,21 @@ const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants}:Ven
     const v_venue_names = Array.from(new Set(filteredVenues.map(venue => venue.nombre)));
     const venue_headers = ["Colegio","Sede","Dirección","Localidad"].concat(hasDisclaimers?["Aclaración"]:[]); 
     //Participants
-    const participantIsFilterCompliant = (participant: Participant) => {
-        const {nivel,nombreApellido,colegio,sede} = participantFilters;
+    const participantIsFilterCompliant = (participant: Participant, filter: ParticipantFilters) => {
+        const {nivel,nombreApellido,colegio,sede} = filter;
         const isParticipant = ((nombreApellido)? nombreApellido === participantName(participant.nombre,participant.apellido): true);
         const isLevel = (nivel? participant.nivel === nivel : true);
         const isSchool = (colegio? (participant.colegio.nombre === colegio.nombre) && (colegio.sede?participant.colegio.sede === colegio.sede:true) : true);
         const isVenue = (sede? participant.sede === sede : true);
         return isParticipant && isLevel && isSchool && isVenue;
     }
-    const filteredParticipants = participants.filter(participantIsFilterCompliant);
+    const filteredParticipants = participants.filter((element) => participantIsFilterCompliant(element,participantFilters));
     const p_availableSchools = filteredParticipants.map(participant => participant.colegio);
     let p_schools : Array<School> = removeRepeatedSchools(p_availableSchools);
     const p_genericSchools: Array<School> =removeRepeatedSchools(p_schools.filter((school) => school.sede).map((school) => {return({nombre: school.nombre})}));
     p_schools = p_schools.concat(p_genericSchools);
     const p_venue_names = Array.from(new Set(filteredParticipants.map(participant => participant.sede)));
-    const p_levels = Array.from(new Set(filteredParticipants.map(participant => participant.nivel)));
+    const p_levels = Array.from(new Set(availableOptions(participants,"nivel",participantFilters,participantIsFilterCompliant).map(participant => participant.nivel)));
     const p_names = Array.from(new Set(filteredParticipants.map(participant => participantName(participant.nombre,participant.apellido))));
     const participant_headers = ["Nivel","Participante","Colegio","Sede"]; 
     return(

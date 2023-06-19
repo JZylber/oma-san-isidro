@@ -14,7 +14,6 @@ export const getStaticProps: GetStaticProps= async ({ params }) => {
   };
 
 const OMAVenues : NextPage<{next_instance: string,venues: Venue<School>[],dropPoints: DropPoint [], auth_max_date: string,participants: Participant[]}> = ({next_instance,venues,dropPoints,auth_max_date,participants}) => {
-  console.log(participants);  
   const date = auth_max_date?getDateFromJSON(auth_max_date):undefined;
     return(
         <>
