@@ -201,17 +201,7 @@ const getInstanceVenues = async (type: string, year: number, instance: string) =
           niveles: true,
           ParticipacionSedeInstancia: {
             select: {
-              participacion: {
-                select: {
-                  nivel: true,
-                  participante: {
-                    select: {
-                      nombre: true,
-                      apellido: true
-                    }
-                  }
-                }
-              }
+              id_participacion: true,
             }
           }
         }}}});
@@ -220,7 +210,9 @@ const getInstanceVenues = async (type: string, year: number, instance: string) =
     {
       colegio: sede.colegio,
       ...sede.sede,
-      aclaracion: sede.aclaracion
+      aclaracion: sede.aclaracion,
+      niveles: sede.niveles,
+      participantes: sede.ParticipacionSedeInstancia
     }
   )});
   return ({results});
@@ -257,9 +249,28 @@ const passingParticipants = async (type: string, year: number, instance: string)
         where: {
           aprobado: true
         },
+        orderBy: [
+        {participacion: {
+          nivel: 'asc'
+        }},  
+        {
+          participacion: {
+            participante: {
+              apellido: 'asc'
+            }
+          }
+        },
+        {
+          participacion: {
+            participante: {
+              nombre: 'asc'
+            }
+          }
+        }],
         select: {
           participacion: {
             select: {
+              id_participacion: true,
               participante: {
                 select: {
                   nombre: true,
@@ -296,7 +307,16 @@ export const venueDataGenerator = async (competition: string, instance_hierarchy
       const previous_instance = instance_hierarchy[instance_hierarchy.indexOf(next_instance)-1];
       const participants = (await passingParticipants(competition,year,previous_instance)).results;
       const participant_venues = participants.map((participant) => {
-        let venue = venues.find((venue) => venue.colegio.nombre === participant.participacion.colegio.nombre && venue.colegio.sede === participant.participacion.colegio.sede);
+        let venue = venues.find((venue) => 
+          {let isVenue = venue.colegio.nombre === participant.participacion.colegio.nombre && venue.colegio.sede === participant.participacion.colegio.sede
+           if(venue.niveles.length > 0){
+              return isVenue && venue.niveles.includes(participant.participacion.nivel)
+           } else if(venue.participantes.length > 0) {
+              return isVenue && venue.participantes.some((participante) => participante.id_participacion === participant.participacion.id_participacion)
+           } else
+              return isVenue
+          }
+        );
         return({...participant,venue: venue?.nombre});
       });
       const flat_participant_venues = participant_venues.map((participant) => {return({nombre: participant.participacion.participante.nombre, apellido: participant.participacion.participante.apellido ,colegio: participant.participacion.colegio, sede: participant.venue, nivel: participant.participacion.nivel})});
