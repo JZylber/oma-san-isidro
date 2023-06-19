@@ -10,8 +10,8 @@ import Table from "../Table/Table";
 import VenueCard from "./VenueCard";
 import ParticipantCard from "./ParticipantCard";
 
-export interface Venue<SchoolType>{
-    colegio: SchoolType;
+export interface Venue{
+    colegio: School;
     nombre: string;
     direccion: string;
     localidad: string;
@@ -36,7 +36,7 @@ export interface Participant{
 interface VenueProps {
     type: string;
     instance: string;
-    venues: Venue<School>[];
+    venues: Venue[];
     dropPoints: DropPoint[];
     participants: Participant[];
     auth_max_date?: Date;
@@ -61,15 +61,15 @@ export const schoolName = (school: School) => {
 export const participantName = (nombre: string, apellido: string) => {
     return(`${nombre} ${apellido}`)
 }
-
-const renderVenue = (venue: Venue<School>,clarifications: boolean) : Venue<string> => {
-    const {colegio,nombre,direccion,localidad,aclaracion} = venue;
-    const base_venue = {colegio: schoolName(colegio),nombre,direccion,localidad}
-    if(clarifications){
-        return({...base_venue,aclaracion})
-    }else{
-        return(base_venue)
-    }
+const makeVenueElement = (venue : Venue,index : number,clarifications?: boolean) => {
+    return(
+        <tr key={index}>
+            <td>{schoolName(venue.colegio)}</td>
+            <td>{venue.nombre}</td>
+            <td>{venue.direccion}</td>
+            <td>{venue.localidad}</td>
+            {clarifications && <td>{venue.aclaracion}</td>}
+        </tr>)
 }
 
 const downloadParticipantData = (participant : Participant):Array<string> => {
@@ -95,13 +95,13 @@ const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants}:Ven
     //Venues
     const [venueFilters,setVenueFilters] = useState<VenueFilters>({colegio: undefined, sede: undefined});
     const [participantFilters,setParticipantFilters] = useState<ParticipantFilters>({nivel: undefined, nombreApellido:undefined,colegio: undefined, sede: undefined});
-    const venueIsFilterCompliant = (venue: Venue<School>, filter: VenueFilters) => {
+    const venueIsFilterCompliant = (venue: Venue, filter: VenueFilters) => {
         const {colegio,sede} = filter;
         const isSchool = (colegio? (venue.colegio.nombre === colegio.nombre) && (colegio.sede?venue.colegio.sede === colegio.sede:true) : true);
         const isVenue = (sede? venue.nombre === sede : true);
         return isSchool && isVenue;
     }
-    const hasDisclaimers = venues.reduce((disclaimers : number,venue: Venue<School>) => {
+    const hasDisclaimers = venues.reduce((disclaimers : number,venue: Venue) => {
         return disclaimers + (venue.aclaracion !== null?1:0);
     },0) > 0;
     const filteredVenues = venues.filter((element) => venueIsFilterCompliant(element,venueFilters));
@@ -154,11 +154,13 @@ const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants}:Ven
                 <SelectResultCategory category="Sede" value={venueFilters.sede} setValue={(option?: string) => {setVenueFilters({...venueFilters,sede: option})}} options={v_venue_names} input={true}/>
             </form>
             <Table 
-                values={filteredVenues.map((venue => renderVenue(venue,hasDisclaimers)))}
-                allValues={venues.map((venue => renderVenue(venue,hasDisclaimers)))} 
+                values={filteredVenues}
+                allValues={venues} 
                 headers={venue_headers} 
                 Card={VenueCard} 
-                elements_per_page={10}/>
+                elements_per_page={10}
+                make_element={hasDisclaimers?(result,index) => makeVenueElement(result,index,true):makeVenueElement}
+                />
             <h3 className={styles.section_subtitle}>Alumnos por sede</h3>
             <form className={styles.form}>
                 <SelectResultCategory category="Participante" value={participantFilters.nombreApellido} setValue={(option?: string) => {setParticipantFilters({...participantFilters,nombreApellido: option})}} options={p_names} input={true}/>
