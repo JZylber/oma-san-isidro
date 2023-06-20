@@ -98,6 +98,7 @@
         display: none;
     }
     @include shared.not-mobile{
+        margin-top: 6rem;
         display: flex;
         justify-content: flex-end;
         align-items: flex-end;
