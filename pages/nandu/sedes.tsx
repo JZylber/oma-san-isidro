@@ -1,15 +1,14 @@
-import { GetStaticProps, NextPage } from "next"
+import { GetServerSideProps, NextPage } from "next"
 import Head from "next/head"
 import Layout from "../../components/Layout/Layout"
 import Venues, { DropPoint, Participant, Venue } from "../../components/Venues/Venues"
 import { getDateFromJSON} from "../../lib/aux_functions";
-import { School } from "../../components/ResultsPage/resultsTypes";
 import { venueDataGenerator } from "../../lib/aux_db_calls";
 
 const competition = "ÑANDÚ";
 const instance_hierarchy = ["INTERESCOLAR","ZONAL","REGIONAL","NACIONAL"];
 
-export const getStaticProps: GetStaticProps= async ({ params }) => {
+export const getServerSideProps: GetServerSideProps= async ({ params }) => {
     return venueDataGenerator(competition,instance_hierarchy); 
   };
 
