@@ -127,7 +127,7 @@ export const getInstances = async (type: string, year: number) => {
     return ({results});
 };
 
-export const getInstanceDropPoints = async (type: string, year: number, instance: string) => {
+const getInstanceDropPoints = async (type: string, year: number, instance: string) => {
       let ins = instance as INSTANCIA;
       const query = await prisma.prueba.findFirst({
         where: {
@@ -157,7 +157,7 @@ export const getInstanceDropPoints = async (type: string, year: number, instance
       return ({results});
     };
 
-export const getInstanceVenues = async (type: string, year: number, instance: string) => {
+const getInstanceVenues = async (type: string, year: number, instance: string) => {
   let ins = instance as INSTANCIA;
   const query = await prisma.prueba.findFirst({
     where: {
@@ -197,17 +197,22 @@ export const getInstanceVenues = async (type: string, year: number, instance: st
               localidad: true
             }
           },
-          aclaracion: true
-        }
-      }
-    }
-  });
+          aclaracion: true,
+          niveles: true,
+          ParticipacionSedeInstancia: {
+            select: {
+              id_participacion: true,
+            }
+          }
+        }}}});
   const venues = query?query.sedeinstancia:[];
   const results = venues.map((sede) => {return(
     {
       colegio: sede.colegio,
       ...sede.sede,
-      aclaracion: sede.aclaracion
+      aclaracion: sede.aclaracion,
+      niveles: sede.niveles,
+      participantes: sede.ParticipacionSedeInstancia
     }
   )});
   return ({results});
@@ -228,3 +233,96 @@ export const getInscriptionData = async (type: string, year: number) => {
   const results = query
   return ({results});
 };
+
+const passingParticipants = async (type: string, year: number, instance: string) => {
+  let ins = instance as INSTANCIA;
+  const query = await prisma.prueba.findFirst({
+    where: {
+      competencia: {
+        tipo: type,
+        ano: year
+      },
+      instancia: ins,
+    },
+    select: {
+      rinden: {
+        where: {
+          aprobado: true
+        },
+        orderBy: [
+        {participacion: {
+          nivel: 'asc'
+        }},  
+        {
+          participacion: {
+            participante: {
+              apellido: 'asc'
+            }
+          }
+        },
+        {
+          participacion: {
+            participante: {
+              nombre: 'asc'
+            }
+          }
+        }],
+        select: {
+          participacion: {
+            select: {
+              id_participacion: true,
+              participante: {
+                select: {
+                  nombre: true,
+                  apellido: true
+                }
+              },
+              colegio: {
+                select: {
+                  nombre: true,
+                  sede: true
+                }
+              },
+              nivel: true
+            }
+          }
+        }
+      }
+    }
+  });
+  const results = query?query.rinden:[];
+  return ({results});
+};
+
+//Complex calls
+export const venueDataGenerator = async (competition: string, instance_hierarchy: string[]) => {
+  const date= new Date();
+  const year = date.getFullYear();
+  const newProps = await getInstances(competition,year).then(async (instances) => {
+      const {instancia,fecha_limite_autorizacion} = instances.results.filter(instance => instance.fecha > date)[0];
+      const next_instance = instancia;
+      const auth_max_date = fecha_limite_autorizacion;
+      const dropPoints = (await getInstanceDropPoints(competition,year,next_instance)).results;
+      const venues = (await getInstanceVenues(competition,year,next_instance)).results;
+      const previous_instance = instance_hierarchy[instance_hierarchy.indexOf(next_instance)-1];
+      const participants = (await passingParticipants(competition,year,previous_instance)).results;
+      const participant_venues = participants.map((participant) => {
+        let venue = venues.find((venue) => 
+          {let isVenue = venue.colegio.nombre === participant.participacion.colegio.nombre && venue.colegio.sede === participant.participacion.colegio.sede
+           if(venue.niveles.length > 0){
+              return isVenue && venue.niveles.includes(participant.participacion.nivel)
+           } else if(venue.participantes.length > 0) {
+              return isVenue && venue.participantes.some((participante) => participante.id_participacion === participant.participacion.id_participacion)
+           } else
+              return isVenue
+          }
+        );
+        return({...participant,venue: venue?.nombre});
+      });
+      const flat_participant_venues = participant_venues.map((participant) => {return({nombre: participant.participacion.participante.nombre, apellido: participant.participacion.participante.apellido ,colegio: participant.participacion.colegio, sede: participant.venue, nivel: participant.participacion.nivel})});
+      return({next_instance: next_instance,venues: venues,dropPoints: dropPoints,auth_max_date: JSON.parse(JSON.stringify(auth_max_date)),participants: flat_participant_venues})
+  });
+  return {
+      props: newProps,
+  };
+}

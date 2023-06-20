@@ -1,0 +1,126 @@
+import { useEffect, useState } from "react";
+import styles from "./Table.module.scss";
+import SelectIcon from "../../public/images/menuSelectIcon.svg";
+import {CardType} from "./types";
+import DownloadPopup from "./ExportResults/DownloadModal";
+import Arrow from "../../public/images/newsArrow.svg";
+
+interface TableProps<S extends object>{
+    values: Array<S>,
+    allValues: Array<S>,
+    headers: Array<string>,
+    Card: CardType<S>,
+    elements_per_page?: number,
+    download?: boolean,
+    downloadHeaders?: Array<string>,
+    testInfo?: string,
+    make_element?: (result : S,index : number) => JSX.Element,
+    process_data?: (dataPoint : S) => Array<string>
+}
+
+const defaultDataProcessor = <S extends object>(dataPoint : S) => {
+    return Object.values(dataPoint);
+}
+
+const defaultMakeElement = <S extends object>(result : S,index : number) => {
+    return(
+        <tr key={index}>
+            {Object.values(result).map((cell,sub_index) => <td key={`${index}-${sub_index}`}>{cell}</td>)}
+        </tr>)
+}
+
+const Table = <S extends object,>({values,allValues,headers,Card,elements_per_page,download,downloadHeaders,make_element = defaultMakeElement,process_data = defaultDataProcessor,testInfo="esta instancia"}:TableProps<S>) => {
+    //PAGINATION
+    const [page,setPage] = useState(0);
+    const page_size = elements_per_page?elements_per_page:values.length
+    let max_pages =  Math.ceil(values.length / page_size) - 1;
+    useEffect(() => {
+        if(page > max_pages){
+            setPage(max_pages);
+        }
+    },[page,max_pages])
+    let firstResult = page * page_size
+    let lastResult = Math.min((page + 1)*page_size,values.length)
+    const values_in_page = values.slice(firstResult,lastResult)
+    const nextPage = () => {
+        if(page<max_pages){
+            setPage(page + 1);
+        }
+    }
+    const prevPage = () => {
+        if(page > 0){
+            setPage(page - 1);
+        }
+    }
+    const pagination = 
+        <div className={styles.pagination}>
+            <p>Mostrando {firstResult + 1}-{lastResult} de {values.length}</p>
+            <div className={[styles.prev,page===0 && styles.greyed].join(" ")} onClick={prevPage}><SelectIcon/></div>
+            <div className={[styles.next,page===max_pages && styles.greyed].join(" ")} onClick={nextPage}><SelectIcon/></div>
+        </div>
+    const mobile_pagination = 
+        <div className={styles.mobile_pagination}>
+            <p>Mostrando {firstResult + 1}-{lastResult} de {values.length}</p>
+            <div className={styles.page_select}>
+                <div className={[styles.prev,page===0 && styles.greyed].join(" ")} onClick={prevPage}><SelectIcon/></div>
+                <div className={styles.pages}>
+                    {page >= 2 && <div className={styles.item} onClick={() => setPage(0)}>{1}</div>}
+                    {page >= 3 && <div className={styles.item}>...</div>}
+                    {page >= 1 && <div className={styles.item} onClick={() => setPage(page - 1)}>{page}</div>}
+                    <div className={[styles.item,styles.selected].join(" ")}>{page + 1}</div>
+                    {(max_pages - page) >= 1 && <div className={styles.item} onClick={() => setPage(page + 1)}>{page + 2}</div>}
+                    {(max_pages - page) >= 3 && <div className={styles.item}>...</div>}
+                    {(max_pages - page) >= 2 && <div className={styles.item} onClick={() => setPage(max_pages)}>{max_pages + 1}</div>}
+                </div>
+                <div className={[styles.next,page===max_pages && styles.greyed].join(" ")} onClick={nextPage}><SelectIcon/></div>
+            </div>
+        </div>
+    //DOWNLOAD
+    const [openDownloadPopup,setOpenDownloadPopup] = useState(false);
+    const make_table = (values : Array<S>,headers: Array<string>) => {
+        return(
+            <table className={styles.values_table}>
+                <thead>
+                    <tr>
+                        {headers.map((header,index) => <td key={index}>{header}</td>)}
+                    </tr>
+                </thead>
+                <tbody>
+                    {values.map((result,index) => make_element(result,index))}
+                </tbody>
+            </table>)
+    }
+    return(
+        <>  
+            {elements_per_page && mobile_pagination}
+            {elements_per_page && <div className={styles["table_header"+(download?"_with_download":"")]}>
+                {download && <div className={styles.downloadButton} onClick={() => setOpenDownloadPopup(true)}>
+                    <span>Descargar</span>
+                    <div className={styles.arrow}>
+                        <Arrow/>
+                    </div>
+                </div>}
+                {pagination}
+            </div>}
+            <div className={styles.values}>
+                {make_table(values_in_page,headers)}
+            </div>
+            <div className={styles.mobile_values}>
+                {values_in_page.map((result,idx) => <Card key={idx} value={result}/>)}
+            </div>
+            {elements_per_page && <div className={styles.table_footer}>
+                {pagination}
+            </div>}
+            <DownloadPopup 
+                open={openDownloadPopup} 
+                setOpen={setOpenDownloadPopup}
+                testInfo={testInfo}
+                headers={downloadHeaders?downloadHeaders:headers}
+                data={allValues.map(process_data)}
+                filteredData={values.map(process_data)}
+            />
+        </>
+    )
+}
+
+export default Table
