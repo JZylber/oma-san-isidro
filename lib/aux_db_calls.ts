@@ -296,10 +296,11 @@ const passingParticipants = async (type: string, year: number, instance: string)
 
 //Complex calls
 export const venueDataGenerator = async (competition: string, instance_hierarchy: string[]) => {
-  const date= new Date();
+  const date = new Date();
+  date.setDate(date.getDate() - 1);
   const year = date.getFullYear();
   const newProps = await getInstances(competition,year).then(async (instances) => {
-      const {instancia,fecha_limite_autorizacion} = instances.results.filter(instance => instance.fecha > date)[0];
+      const {instancia,fecha_limite_autorizacion} = instances.results.filter(instance => instance.fecha >= date)[0];
       const next_instance = instancia;
       const auth_max_date = fecha_limite_autorizacion;
       const dropPoints = (await getInstanceDropPoints(competition,year,next_instance)).results;
