@@ -303,10 +303,16 @@ export const venueDataGenerator = async (competition: string, instance_hierarchy
       const {instancia,fecha_limite_autorizacion} = instances.results.filter(instance => instance.fecha >= date)[0];
       const next_instance = instancia;
       const auth_max_date = fecha_limite_autorizacion;
-      const dropPoints = (await getInstanceDropPoints(competition,year,next_instance)).results;
-      const venues = (await getInstanceVenues(competition,year,next_instance)).results;
       const previous_instance = instance_hierarchy[instance_hierarchy.indexOf(next_instance)-1];
+      const {dropPoints,venues,participants} = await Promise.all([getInstanceDropPoints(competition,year,next_instance),getInstanceVenues(competition,year,next_instance),passingParticipants(competition,year,previous_instance)])
+      .then(([dropPoints,venues,participants]) => {
+        return ({dropPoints:dropPoints.results,venues:venues.results,participants:participants.results})
+      });
+      /*const dropPoints = (await getInstanceDropPoints(competition,year,next_instance)).results;
+      const venues = (await getInstanceVenues(competition,year,next_instance)).results;
+      
       const participants = (await passingParticipants(competition,year,previous_instance)).results;
+      */
       const participant_venues = participants.map((participant) => {
         let venue = venues.find((venue) => 
           {let isVenue = venue.colegio.nombre === participant.participacion.colegio.nombre && venue.colegio.sede === participant.participacion.colegio.sede
