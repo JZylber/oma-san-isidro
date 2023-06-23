@@ -308,11 +308,6 @@ export const venueDataGenerator = async (competition: string, instance_hierarchy
       .then(([dropPoints,venues,participants]) => {
         return ({dropPoints:dropPoints.results,venues:venues.results,participants:participants.results})
       });
-      /*const dropPoints = (await getInstanceDropPoints(competition,year,next_instance)).results;
-      const venues = (await getInstanceVenues(competition,year,next_instance)).results;
-      
-      const participants = (await passingParticipants(competition,year,previous_instance)).results;
-      */
       const participant_venues = participants.map((participant) => {
         let venue = venues.find((venue) => 
           {let isVenue = venue.colegio.nombre === participant.participacion.colegio.nombre && venue.colegio.sede === participant.participacion.colegio.sede
