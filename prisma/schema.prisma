@@ -151,7 +151,7 @@ model PuntoInstancia {
 
 model Problema {
   id_problema Int    @id @default(autoincrement())
-  nivel       Int
+  nivel       Int 
   link        String
   links_foro  Json   @default("[]")
   id_prueba   Int
