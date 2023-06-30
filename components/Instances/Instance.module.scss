@@ -1,0 +1,32 @@
+@use '../../styles/shared.scss' as shared;
+
+.subtitle{
+    @include shared.font-montserrat(400);
+    @include shared.mobile-only{
+        font-size: 1.5rem;
+        padding: .8rem 0 .8rem 0;
+    }
+    @include shared.not-mobile{
+        padding: 1.6rem 0rem 1.6rem 0rem;
+    }
+    @include shared.tablet-only{
+        font-size: shared.$tablet-reading-font-size;
+    }
+    @include shared.desktop-only{
+        font-size: shared.$desktop-reading-font-size;
+    }
+}
+.title{
+    @include shared.font-unbounded(400);
+    padding-top: 1.6rem;
+    @include shared.mobile-only{
+        font-size: 3.6rem;
+        line-height: 2.8rem;
+    }
+    @include shared.tablet-only{
+        font-size: shared.$tablet-actionable-font-size*1.5;
+    }
+    @include shared.desktop-only{
+        font-size: shared.$desktop-actionable-font-size*1.5;
+    }
+}

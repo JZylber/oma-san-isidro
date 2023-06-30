@@ -1,6 +1,5 @@
 import Link from "next/link";
 import styles from "./Venues.module.scss";
-import table_styles from "../ResultsPage/ResultTable.module.scss";
 import Image from "next/image";
 import SelectResultCategory from "../ResultsPage/SelectResultCategory";
 import { useState } from "react";
