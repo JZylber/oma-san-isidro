@@ -25,7 +25,7 @@ export default function NavBar({togglePageContent,onRouteChange}:NavProps){
             {text: "General",link:'/oma',selected : false,subItems:[]},
             {text: "Inscripción",link:'/oma/inscripcion',selected : false,subItems:[]},
             {text: "Autorización",link:'/oma/autorizacion',selected : false,subItems:[]},
-            {text: "Sedes",link:'/oma/sedes',selected : false,subItems:[]},
+            {text: "Instancias",link:'/oma/instancias',selected : false,subItems:[]},
             {text: "Reglamento",link:'/oma/reglamento',selected : false,subItems:[]},
             {text: "Resultados",link:'/oma/resultados',selected : false,subItems:[]},
             {text: "Problemas",link:'/oma/problemas',selected : false,subItems:[]}
@@ -34,7 +34,7 @@ export default function NavBar({togglePageContent,onRouteChange}:NavProps){
             {text: "General",link:'/nandu',selected : false,subItems:[]},
             {text: "Inscripción",link:'/nandu/inscripcion',selected : false,subItems:[]},
             {text: "Autorización",link:'/nandu/autorizacion',selected : false,subItems:[]},
-            {text: "Sedes",link:'/nandu/sedes',selected : false,subItems:[]},
+            {text: "Instancias",link:'/nandu/instancias',selected : false,subItems:[]},
             {text: "Reglamento",link:'/nandu/reglamento',selected : false,subItems:[]},
             {text: "Resultados",link:'/nandu/resultados',selected : false,subItems:[]},
             {text: "Problemas",link:'/nandu/problemas',selected : false,subItems:[]}

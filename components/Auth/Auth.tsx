@@ -18,7 +18,7 @@ export const Authorization = ({ type }: { type: string }) => {
     },
     {
       important: "La fecha y lugares de entrega de autorizaciones",
-      text: <>de la siguiente instancia se encuentran en <Link href={type == "oma"?"/oma/sedes":"/nandu/sedes"}>sedes<div className={styles.icon}><Image src="/images/pageLinkIcon.svg" fill={true} alt=""/></div></Link>.</>,
+      text: <>de la siguiente instancia se encuentran en <Link href={type == "oma"?"/oma/instancias":"/nandu/instancias"}>instancias<div className={styles.icon}><Image src="/images/pageLinkIcon.svg" fill={true} alt=""/></div></Link>.</>,
     },
     {
       important: "No se aceptarán autorizaciones con fechas corregidas",
