@@ -38,9 +38,11 @@ const SelectResultCategory = <T extends string|number|boolean|School,>({category
         return `${option}`
       }else if(typeof option === 'boolean') {
         return option?"Si":"No"
-      }else {
+      }else if (option as School){
         let school = option as School
         return `${school.nombre}${school.sede?"-"+school.sede:""}`
+      }else{
+        return "";
       }
     },[]);
     const [tempValue,setTempValue] = useState(value?displayOption(value):"");
