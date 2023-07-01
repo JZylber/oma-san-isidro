@@ -29,7 +29,7 @@ const InstanceData = ({competition,instance}:InstanceProps) => {
     [competition,instance])
     useEffect(()=>{
         const fetchInstanceData = async () => {
-            let response = await fetch(`/api/instances/${competition}/${instancia}`).then((response) => {
+            let response = await fetch(`/api/instancias/${competition}/${instancia}`).then((response) => {
                 if(response.ok){
                     return(response.json())}
                 else{
