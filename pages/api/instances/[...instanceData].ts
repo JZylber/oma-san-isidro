@@ -257,7 +257,7 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
         const data = await venueDataGenerator(competition,instance);
         res.status(200).json(data);
       } catch (error) {
-        res.status(500).json({error: "Error al obtener los datos de la competencia"});
+        res.status(500).json({error: error,message:"Error al obtener los datos de la competencia"});
       }
     }else{
       res.status(200).json({});
