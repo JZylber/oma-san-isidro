@@ -33,7 +33,7 @@ const InstanceData = ({competition,instance}:InstanceProps) => {
                 if(response.ok){
                     return(response.json())}
                 else{
-                    throw {name: "NetworkError", message: "No se encontraron datos",status: response.status};  
+                    throw {name: "NetworkError", message: "No se encontraron datos",status: response.status,response: response};  
                 }});
             if(response.auth_max_date){
                 response.auth_max_date = getDateFromJSON(response.auth_max_date);
