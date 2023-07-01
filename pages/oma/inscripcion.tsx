@@ -2,14 +2,14 @@ import { NextPage } from "next";
 import Head from "next/head";
 import { Inscripcion, InscriptionData } from "../../components/Inscription/Inscription";
 import Layout from "../../components/Layout/Layout";
-import { getInstances } from "../../lib/aux_db_calls";
+import { getInscriptionData } from "../../lib/aux_db_calls";
 import { getDateFromJSON } from "../../lib/aux_functions";
 
 const competition = "OMA"
 
 export const getStaticProps = async () => {
   const year = (new Date()).getFullYear();
-  const data = await getInstances(competition,year)
+  const data = await getInscriptionData(competition,year)
   return {
       props: JSON.parse(JSON.stringify(data.results)),
   };
