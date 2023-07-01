@@ -253,8 +253,12 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
     instanceData = instanceData as string[]
     const [competition,instance] = instanceData;
     if(instance != "PROVINCIAL"){
-      const data = await venueDataGenerator(competition,instance);
-      res.status(200).json(data);
+      try{
+        const data = await venueDataGenerator(competition,instance);
+        res.status(200).json(data);
+      } catch (error) {
+        res.status(500).json({error: "Error al obtener los datos de la competencia"});
+      }
     }else{
       res.status(200).json({});
     }
