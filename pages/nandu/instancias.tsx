@@ -1,13 +1,11 @@
 import {GetStaticProps, NextPage } from "next"
 import Head from "next/head"
 import Layout from "../../components/Layout/Layout"
-import Venues, { DropPoint, Participant, Venue } from "../../components/Instances/Venues"
 import { getDateFromJSON} from "../../lib/aux_functions";
 import { getInstances} from "../../lib/aux_db_calls";
 import Instances from "../../components/Instances/InstanceMenu";
 
 const competition = "ÑANDÚ";
-const instance_hierarchy = ["INTERESCOLAR","ZONAL","REGIONAL","NACIONAL"];
 
 export const getStaticProps: GetStaticProps= async ({ params }) => {
     const year = (new Date()).getFullYear();

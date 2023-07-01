@@ -6,7 +6,6 @@ import { getInstances} from "../../lib/aux_db_calls";
 import Instances from "../../components/Instances/InstanceMenu";
 
 const competition = "OMA";
-const instance_hierarchy = ["INTERCOLEGIAL","ZONAL","REGIONAL","NACIONAL"];
 
 export const getStaticProps: GetStaticProps= async ({ params }) => {
     const year = (new Date()).getFullYear();

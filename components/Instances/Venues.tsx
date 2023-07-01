@@ -130,10 +130,9 @@ const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants}:Ven
     const participant_headers = ["Nivel","Participante","Colegio","Sede"]; 
     return(
         <>
-            <h1 className={styles.title}>Sedes {instance[0] + instance.substring(1).toLocaleLowerCase()}</h1>
-            <h2 className={styles.section_title}>Autorizaciones</h2>
-            {dropPoints.length > 0 ?
+            {dropPoints.length > 0 &&
                 <>
+                <h2 className={styles.section_title}>Autorizaciones</h2>
                 <p className={styles.text}>Las autorizaciones se pueden conseguir <Link href={type == "OMA"?"/oma/autorizacion":"/nandu/autorizacion"}>aquí<div className={styles.icon}><Image src="/images/pageLinkIcon.svg" fill={true} alt=""/></div></Link> y deben estar <span className={styles.bold}>completas</span> con las <span className={styles.bold}>firmas y sellos correspondientes</span>. Estas se pueden entregar hasta el <span className={styles.bold}>{auth_max_date?`${auth_max_date.getDate()}/${auth_max_date.getMonth() + 1}`:"(A definir)"}</span> en los siguientes puntos:</p>
                 <ul className={styles.dropPoints}>
                     {dropPoints.map((dropPoint, index) => {
@@ -142,10 +141,10 @@ const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants}:Ven
                     })}
                 </ul>
                 </>
-            : <p className={styles.text}>Proximamente...</p>}
-            <h2 className={styles.section_title}>Sedes</h2>
-            {venues.length > 0 ?
+            }
+            {venues.length > 0 &&
             <>
+            <h2 className={styles.section_title}>Sedes</h2>
             <p className={styles.text}>Presentarse <span className={styles.bold}>13:30 hs</span>. ¡No se olviden de las autorizaciones!</p>
             <h3 className={styles.section_subtitle}>Colegios por sede</h3>
             <form className={styles.form}>
@@ -179,8 +178,8 @@ const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants}:Ven
                 make_element={makeParticipantElement}
                 testInfo={`${type == "OMA"?"OMA":"Nandú"} ${instance} ${(new Date).getFullYear()}`}
             />
-        </>
-        : <p className={styles.text}>Proximamente...</p>}
+        </>}
+        {dropPoints.length === 0 && venues.length === 0 && <p className={styles.text}>Proximamente...</p>}
         </>
     )
 }
