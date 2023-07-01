@@ -1,4 +1,5 @@
-import { NextApiRequest, NextApiResponse } from "next"
+import { NextApiRequest, NextApiResponse } from "next";
+import prisma from "../../../lib/prisma";
 import { INSTANCIA } from "@prisma/client";
 
 const getInstanceDropPoints = async (type: string, year: number, instance: string) => {
