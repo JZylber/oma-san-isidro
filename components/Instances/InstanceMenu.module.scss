@@ -14,14 +14,15 @@
   }
 
 .menu_bar{
+    list-style: none;
+    display: flex;
+    background-color: shared.$white;
+    box-sizing: border-box;
     @include shared.mobile-only{
+        flex-direction: column;
     }
     @include shared.not-mobile {
-        list-style-type: none;
-        display: flex;
         justify-content: space-between;
-        background-color: shared.$white;
-        box-sizing: border-box;
     }
     @include shared.tablet-only{
         width: 85%;
@@ -40,6 +41,10 @@
         align-items: center;
         text-transform: lowercase;
         transition: all .5s;
+        @include shared.mobile-only{
+            font-size : shared.$mobile-reading-font-size*1.25;
+            width: 100%;
+        }
         @include shared.tablet-only{
             font-size : shared.$tablet-reading-font-size;
             line-height: 2.4rem;
@@ -58,8 +63,14 @@
         }
     }
     &_separator{
-        border-left: 1px solid grey;
-        height: 100%;
+        @include shared.mobile-only{
+            border-top: 1px solid grey;
+            width: 100%;
+        }
+        @include shared.not-mobile{
+            border-left: 1px solid grey;
+            height: 100%;
+        }
     }
 }
 
