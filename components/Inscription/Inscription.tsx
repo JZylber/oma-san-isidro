@@ -89,7 +89,7 @@ export const Inscripcion = ( { type,data} : InscriptionProps ) => {
            <div className={styles.step_information}>
             <h1>3. Documentos a presentar en el certamen Intercolegial</h1>
             <p>El día del certamen se deberá presentar el comprobante <span className={styles.step_information_bold}>original</span> del depósito bancario para poder entregar el recibo correspondiente.</p>
-            <p><span className={styles.step_information_bold}>Además, en esta y en todas las instancias se deben presentar las <Link href={type === "OMA"?"/oma/autorizacion":"/nandu/autorizacion"}>autorizaciones</Link> de los participantes, que se entregan en los lugares indicados en <Link href={type === "OMA"?"/oma/sedes":"/nandu/sedes"}>sedes</Link> antes de la fecha indicada también allí.</span></p>
+            <p><span className={styles.step_information_bold}>Además, en esta y en todas las instancias se deben presentar las <Link href={type === "OMA"?"/oma/autorizacion":"/nandu/autorizacion"}>autorizaciones</Link> de los participantes, que se entregan en los lugares indicados en <Link href={type === "OMA"?"/oma/instancias":"/nandu/instancias"}>instancias</Link> antes de la fecha indicada también allí.</span></p>
            </div>
         </div>
         </>
