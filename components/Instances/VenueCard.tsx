@@ -1,4 +1,4 @@
-import styles from "./VenueCard.module.scss";
+import styles from "./Card.module.scss";
 import ExpandArrow from "../../public/images/menuArrow.svg"
 import { useState } from "react";
 import { CardType } from "../Table/types";

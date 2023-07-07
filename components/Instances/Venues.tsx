@@ -86,7 +86,7 @@ const makeParticipantElement = (participant : Participant,index : number) => {
             <td>{participant.sede}</td>
         </tr>)
 }
-const availableOptions = <S extends object,F extends object>(results: Array<S>, category: string, filters: F, filterCompliance: (arg:S,filter:F)=> boolean):Array<S> => {
+export const availableOptions = <S extends object,F extends object>(results: Array<S>, category: string, filters: F, filterCompliance: (arg:S,filter:F)=> boolean):Array<S> => {
     return results.filter((element: S) => {return(filterCompliance(element,{...filters,[category]:undefined}))});
 }
 

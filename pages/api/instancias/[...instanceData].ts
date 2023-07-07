@@ -319,7 +319,8 @@ const provincialDataGenerator = async (competition: string, instance: string) =>
     return({...participant,puntos: interescolar_points + Number((participant.resultados as string[])[3])});
   });
   provincialParticipants = provincialParticipants.filter((participant) => participant.puntos >= 5);
-  return({participants: provincialParticipants});
+  const provincialParticipantsNames = provincialParticipants.map((participant) => {return({nombre: participant.participante.nombre, apellido: participant.participante.apellido ,colegio: participant.colegio, nivel: participant.nivel})});	
+  return({participants: provincialParticipantsNames});
 }
 
 export default async function handle(req : NextApiRequest, res : NextApiResponse) {
