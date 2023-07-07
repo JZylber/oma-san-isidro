@@ -25,7 +25,8 @@ const months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto
 
 const displayInstance = (instance: string, competition: string, instanceData: RegionalInstance | ProvincialInstance | undefined) => {
     if(instance === "PROVINCIAL"){
-        return <Provincial competition={competition}/>
+        const provincialInstance = instanceData as ProvincialInstance;
+        return <Provincial competition={competition} participants={provincialInstance.participants}/>
     }
     else if(instance === "NACIONAL"){
         return <span className={styles.text}>Proximamente...</span>
