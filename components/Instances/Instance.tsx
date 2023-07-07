@@ -24,14 +24,14 @@ interface RegionalInstance {
 const months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
 
 const displayInstance = (instance: string, competition: string, instanceData: RegionalInstance | ProvincialInstance | undefined) => {
-    if(instance === "PROVINCIAL"){
+    if(instance === "PROVINCIAL" &&  instanceData && "participants" in instanceData){
         const provincialInstance = instanceData as ProvincialInstance;
         return <Provincial competition={competition} participants={provincialInstance.participants}/>
     }
     else if(instance === "NACIONAL"){
         return <span className={styles.text}>Proximamente...</span>
     }
-    else if(instanceData){
+    else if(instanceData && "venues" in instanceData ){
         const regionalInstance = instanceData as RegionalInstance;
         return <Venues 
         instance={instance}
