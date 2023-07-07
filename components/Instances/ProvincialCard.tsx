@@ -14,6 +14,10 @@ const ProvincialParticipantCard: CardType<ProvincialParticipant> = ({value}) => 
                     <p className={styles.value}>{schoolName(colegio)}</p>
                 </div>
             </div>
+            <div className={styles.category}>
+                    <p className={styles.title}>Nivel</p>
+                    <p className={[styles.value,styles.value_center].join(" ")}>{nivel}</p>
+            </div>
         </div>
     )
 }

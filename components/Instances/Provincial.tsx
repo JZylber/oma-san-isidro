@@ -5,6 +5,7 @@ import Table from "../Table/Table";
 import styles from "./Provincial.module.scss";
 import { availableOptions, participantName, schoolName } from "./Venues";
 import ProvincialParticipantCard from "./ProvincialCard";
+import SelectResultCategory from "../ResultsPage/SelectResultCategory";
 
 interface ProvincialProps {
     competition: string,
@@ -63,6 +64,11 @@ const Provincial = ({competition, participants}: ProvincialProps) => {
         <p className={styles.text}>La instancia provincial es <span className={styles.bold}>OPCIONAL</span>. Esto quiere decir que tanto participantes que hayan clasificado al provincial y no vayan, como participantes que hayan aprobado la instancia zonal pero no hayan clasificado al provincial pueden seguir participando en OMA en la instancia regional.</p>
         <p className={styles.text}>Los participantes que pueden participar de la provincial son aquellos que sumen 5 puntos entre las instancias Zonal e {competition === "OMA"?"Intercolegial":"Interescolar"}.</p>
         <h3 className={styles.subtitle}>Clasificados a Provincial</h3>
+        <form className={styles.form}>
+                <SelectResultCategory category="Participante" value={participantFilters.nombreApellido} setValue={(option?: string) => {setParticipantFilters({...participantFilters,nombreApellido: option})}} options={p_names} input={true}/>
+                <SelectResultCategory category="Colegio" value={participantFilters.colegio} setValue={(option?: School) => {setParticipantFilters({...participantFilters,colegio: option})}} options={p_schools} input={true}/>
+                <SelectResultCategory category="Nivel" value={participantFilters.nivel} setValue={(option? : number) => {setParticipantFilters({...participantFilters,nivel: option})}} options={p_levels} clear={true}/>
+        </form>
         <Table 
             values={filteredParticipants} 
             allValues={participants} 
