@@ -1,0 +1,38 @@
+@use '../../styles/shared.scss' as shared;
+
+.text{
+    @include shared.font-montserrat(300);
+  
+    @include shared.mobile-only {
+      font-size: shared.$mobile-reading-font-size;
+    }
+  
+    @include shared.tablet-only {
+      font-size: shared.$tablet-reading-font-size;
+    }
+  
+    @include shared.desktop-only {
+      font-size: shared.$desktop-reading-font-size;
+    }
+.bold{
+      @include shared.font-montserrat(500);
+    }
+  }
+
+.subtitle{
+    @include shared.font-unbounded(500);
+    margin: 1.2rem 0rem 1.2rem 0rem;
+    @include shared.mobile-only {
+      text-align: center;
+      font-size: 2rem;
+    }
+    @include shared.tablet-only {
+      text-align: left;
+      font-size: 1.6rem;
+    }
+    @include shared.desktop-only {
+      text-align: left;
+      font-size: 2.6rem;
+    }
+  }
+  

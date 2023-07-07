@@ -4,6 +4,7 @@ import { Instance } from "./InstanceMenu";
 import Loader from "../Loader/Loader";
 import Venues, { DropPoint, Participant, Venue } from "./Venues";
 import { getDateFromJSON } from "../../lib/aux_functions";
+import Provincial, { ProvincialParticipant } from "./Provincial";
 
 interface InstanceProps {
     competition: string,
@@ -16,13 +17,38 @@ interface RegionalInstance {
     participants: Participant[];
     auth_max_date?: Date;
 }
+ interface ProvincialInstance {
+    participants : ProvincialParticipant[]
+ }
 
 const months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
+
+const displayInstance = (instance: string, competition: string, instanceData: RegionalInstance | ProvincialInstance | undefined) => {
+    if(instance === "PROVINCIAL"){
+        return <Provincial competition={competition}/>
+    }
+    else if(instance === "NACIONAL"){
+        return <span className={styles.text}>Proximamente...</span>
+    }
+    else if(instanceData){
+        const regionalInstance = instanceData as RegionalInstance;
+        return <Venues 
+        instance={instance}
+        type={competition}
+        venues={regionalInstance.venues} 
+        dropPoints={regionalInstance.dropPoints} 
+        participants={regionalInstance.participants} 
+        auth_max_date={regionalInstance.auth_max_date}/>
+    }
+    else{
+        return <span className={styles.text}>Proximamente...</span>
+    }
+};
 
 const InstanceData = ({competition,instance}:InstanceProps) => {
     const [instanceIsLoading,setInstanceIsLoading] = useState<boolean>(false);
     const {instancia,fecha} = instance;
-    const [instanceData,setInstanceData] = useState<object | RegionalInstance | undefined>(undefined);
+    const [instanceData,setInstanceData] = useState<ProvincialInstance | RegionalInstance | undefined>(undefined);
     useEffect(()=>{
         setInstanceData(undefined);
     },
@@ -46,23 +72,12 @@ const InstanceData = ({competition,instance}:InstanceProps) => {
             fetchInstanceData();
         }
     },[instanceData,competition,instancia]);
-    let regionalInstance = instanceData as RegionalInstance | undefined;
-    regionalInstance = (regionalInstance?.venues) ? regionalInstance : undefined;
     return(
         <>
         <h2 className={styles.title}>{instancia[0] + instancia.slice(1).toLocaleLowerCase()}</h2>
         <h3 className={styles.subtitle}>{`${fecha.getDate()} de ${months[fecha.getMonth()]}`}</h3>
         {instanceIsLoading ?<Loader/>:
-          regionalInstance?
-          <Venues 
-            instance={instancia}
-            type={competition}
-            venues={regionalInstance.venues} 
-            dropPoints={regionalInstance.dropPoints} 
-            participants={regionalInstance.participants} 
-            auth_max_date={regionalInstance.auth_max_date}/>
-          :<span className={styles.text}>Proximamente...</span>
-        }
+        displayInstance(instancia,competition,instanceData)}
         </>
     )
 }
