@@ -14,6 +14,10 @@
     @include shared.desktop-only {
       font-size: shared.$desktop-reading-font-size;
     }
+    & + .text{
+      margin-top: 1.2rem;
+    }
+
 .bold{
       @include shared.font-montserrat(500);
     }
