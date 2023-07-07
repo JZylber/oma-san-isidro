@@ -25,7 +25,8 @@ const months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto
 
 const displayInstance = (instance: string, competition: string, instanceData: RegionalInstance | ProvincialInstance | undefined) => {
     if(instance === "PROVINCIAL"){
-        return <Provincial competition={competition}/>
+        const provincialInstance = instanceData as ProvincialInstance;
+        return <Provincial competition={competition} participants={provincialInstance.participants}/>
     }
     else if(instance === "NACIONAL"){
         return <span className={styles.text}>Proximamente...</span>
@@ -77,7 +78,7 @@ const InstanceData = ({competition,instance}:InstanceProps) => {
         <h2 className={styles.title}>{instancia[0] + instancia.slice(1).toLocaleLowerCase()}</h2>
         <h3 className={styles.subtitle}>{`${fecha.getDate()} de ${months[fecha.getMonth()]}`}</h3>
         {instanceIsLoading ?<Loader/>:
-        displayInstance(instancia,competition,instanceData)}
+        instanceData && displayInstance(instancia,competition,instanceData)}
         </>
     )
 }

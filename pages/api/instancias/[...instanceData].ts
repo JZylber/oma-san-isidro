@@ -195,6 +195,67 @@ const passingParticipants = async (type: string, year: number, instance: string)
   return ({results});
 };
 
+const passingParticipantsWScore = async (type: string, year: number, instance: string) => {
+  let ins = instance as INSTANCIA;
+  const query = await prisma.prueba.findFirst({
+  where: {
+    competencia: {
+      tipo: type,
+      ano: year
+    },
+    instancia: ins,
+  },
+  select: {
+    rinden: {
+      where: {
+        aprobado: true
+      },
+      orderBy: [
+      {participacion: {
+        nivel: 'asc'
+      }},  
+      {
+        participacion: {
+          participante: {
+            apellido: 'asc'
+          }
+        }
+      },
+      {
+        participacion: {
+          participante: {
+            nombre: 'asc'
+          }
+        }
+      }],
+      select: {
+        resultados: true,
+        participacion: {
+          select: {
+            id_participacion: true,
+            participante: {
+              select: {
+                nombre: true,
+                apellido: true
+              }
+            },
+            colegio: {
+              select: {
+                nombre: true,
+                sede: true
+              }
+            },
+            nivel: true
+          }
+        }
+      }
+    }
+  }
+  });
+  const results = query?query.rinden.map((participation) => {return{...participation.participacion,resultados: participation.resultados}}):[];
+  return ({results});
+};
+
 const getAuthMaxDate = async (year: number,competition: string, instance: string) => {
   let ins = instance as INSTANCIA;
   const query = await prisma.prueba.findFirst({
@@ -248,6 +309,19 @@ const venueDataGenerator = async (competition: string, instance: string) => {
   return({venues: venues,dropPoints: dropPoints,auth_max_date: JSON.parse(JSON.stringify(auth_max_date)),participants: flat_participant_venues})
 }
 
+const provincialDataGenerator = async (competition: string, instance: string) => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const {interescolar,zonal} = await Promise.all([passingParticipantsWScore(competition,year,competition === "OMA"?'INTERCOLEGIAL':'INTERESCOLAR'),passingParticipantsWScore(competition,year,'ZONAL')]).then(([interescolar, zonal]) => {return({interescolar: interescolar.results,zonal: zonal.results})});
+  let provincialParticipants = zonal.map((participant) => {
+    let interescolar_participant = interescolar.find((interescolar_participant) => interescolar_participant.id_participacion === participant.id_participacion);
+    let interescolar_points = interescolar_participant?.resultados?Number((interescolar_participant.resultados as string[])[3]):0;
+    return({...participant,puntos: interescolar_points + Number((participant.resultados as string[])[3])});
+  });
+  provincialParticipants = provincialParticipants.filter((participant) => participant.puntos >= 5);
+  const provincialParticipantsNames = provincialParticipants.map((participant) => {return({nombre: participant.participante.nombre, apellido: participant.participante.apellido ,colegio: participant.colegio, nivel: participant.nivel})});	
+  return({participants: provincialParticipantsNames});
+}
 
 export default async function handle(req : NextApiRequest, res : NextApiResponse) {
     let {instanceData} = req.query
@@ -258,7 +332,18 @@ export default async function handle(req : NextApiRequest, res : NextApiResponse
         const data = await venueDataGenerator(competition,instance);
         res.status(200).json(data);
       } catch (error) {
-        res.status(500).json({message:"Error al obtener los datos de la competencia"});
+        let message = 'Error al obtener los datos de la competencia'
+        if (error instanceof Error) message = error.message
+        res.status(500).json({message:message});
+      }
+    }else if(instance === "PROVINCIAL"){
+      try{
+        const data = await provincialDataGenerator(competition,instance);
+        res.status(200).json(data);
+      } catch (error) {
+        let message = 'Error al obtener los datos de la competencia'
+        if (error instanceof Error) message = error.message
+        res.status(500).json({message:message});
       }
     }else{
       res.status(200).json({});
