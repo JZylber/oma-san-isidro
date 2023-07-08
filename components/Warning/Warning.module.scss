@@ -15,14 +15,19 @@
 
 
 .icon{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+    @include shared.mobile-only{
+        display: none;
+    }
     @include shared.not-desktop{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;    
+    }
+    @include shared.tablet-only{
         width: 50px;
         height: 50px;
-        }
+    }
     @include shared.desktop-only{
         width: 60px;
         height: 60px;
@@ -36,11 +41,12 @@
     }
     @include shared.tablet-only{
         font-size: 2.2rem;
+        padding-left: 1.2rem;
     }
     @include shared.desktop-only{
+        padding-left: 1.6rem;
         font-size: 3.4rem;
     }
-    padding-left: 1.6rem;
     &_container{
         display: flex;
         justify-content: flex-start;

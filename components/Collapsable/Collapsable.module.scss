@@ -17,7 +17,6 @@
     h3{
         @include shared.font-unbounded(500);
         @include shared.mobile-only {
-          text-align: center;
           font-size: 2rem;
         }
         @include shared.tablet-only {
