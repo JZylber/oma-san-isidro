@@ -319,8 +319,9 @@ const provincialDataGenerator = async (competition: string, instance: string) =>
     return({...participant,puntos: interescolar_points + Number((participant.resultados as string[])[3])});
   });
   provincialParticipants = provincialParticipants.filter((participant) => participant.puntos >= 5);
-  const provincialParticipantsNames = provincialParticipants.map((participant) => {return({nombre: participant.participante.nombre, apellido: participant.participante.apellido ,colegio: participant.colegio, nivel: participant.nivel})});	
-  return({participants: provincialParticipantsNames});
+  const provincialParticipantsNames = provincialParticipants.map((participant) => {return({nombre: participant.participante.nombre, apellido: participant.participante.apellido ,colegio: participant.colegio, nivel: participant.nivel})});
+  const auth_max_date = (await getAuthMaxDate(year,competition,instance)).query?.fecha_limite_autorizacion;
+  return({participants: provincialParticipantsNames,auth_max_date: JSON.parse(JSON.stringify(auth_max_date))});
 }
 
 export default async function handle(req : NextApiRequest, res : NextApiResponse) {

@@ -1,10 +1,44 @@
 @use '../../styles/shared.scss' as shared;
 
+.collapsable{
+    margin-top: 1.2rem;
+}
+
 .header{
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1rem 1rem 1rem;
+    border-radius: 9px;
+    border : 2px solid rgba(0, 0, 0, 0.5);
+    &:hover {
+      cursor: pointer;
+    }
+    h3{
+        @include shared.font-unbounded(500);
+        @include shared.mobile-only {
+          text-align: center;
+          font-size: 2rem;
+        }
+        @include shared.tablet-only {
+          text-align: left;
+          font-size: 1.6rem;
+        }
+        @include shared.desktop-only {
+          text-align: left;
+          font-size: 2.6rem;
+        }
+    }
+}
+
+.selected{
+    background-color: shared.$light-blue;
 }
 
 .rotated{
     transform: rotate(90deg);
+}
+
+.content{
+    padding: 1.2rem 1rem 1.2rem 1rem;    
 }
