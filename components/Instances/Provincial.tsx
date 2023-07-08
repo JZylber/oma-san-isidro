@@ -120,7 +120,7 @@ const Provincial = ({competition, participants}: ProvincialProps) => {
                 <li><span className={styles.bold}>ALIAS: </span>FOMAHSBCCC</li>
                 <li><span className={styles.bold}>CUIT: </span>30-67928383-5</li>
             </ul>
-            <p>Recordamos que para la acreditación deben presentar el <span className={styles.bold}>ORIGINAL</span> de dicho depósito.</p>
+            <p className={styles.text}>Recordamos que para la acreditación deben presentar el <span className={styles.bold}>ORIGINAL</span> de dicho depósito.</p>
         </Collapsable>
         <Collapsable title="Documentación">
             <p className={styles.text}>La documentación exigida incluye:</p>
@@ -148,6 +148,8 @@ const Provincial = ({competition, participants}: ProvincialProps) => {
             </div>
         </Collapsable>
         <Collapsable title="Premiación">
+            <p className={styles.text}>Para evitar inconvenientes y malos entendidos, podrán participar en el acto de premiación solo las personas debidamente acreditadas portando credencial o “tarjeta de invitación individual”. Se aclara que, indefectiblemente, todas aquellas personas que deseen adquirir las tarjetas de invitación individual para el Acto de premiación deben estar inscriptas con nombre, apellido y documento en la planilla.</p> 
+            <p className={styles.text}> Costo de la tarjeta $6000.- CUPOS LIMITADOS (menores de 3 años no pagan)  </p>
         </Collapsable>
         <Collapsable title="Participantes Clasificados">
         <p className={styles.text}>Los participantes que clasifican a la instancia provincial son aquellos que sumen 5 puntos entre las instancias Zonal e {competition === "OMA"?"Intercolegial":"Interescolar"}.</p>
@@ -169,7 +171,15 @@ const Provincial = ({competition, participants}: ProvincialProps) => {
             testInfo={`${competition == "OMA"?"OMA":"Nandú"} Provincial ${(new Date).getFullYear()}`}
         />
         </Collapsable>
-        <Collapsable title="Reglas">
+        <Collapsable title="Reglamento">
+            <ul className={styles.text}>
+                <li>Toda otra persona (padre, tutor, etc.) que desee integrar la delegación debe comprometerse a cumplir todas las normas establecidas para la delegación.</li> <li>Los que solicitaron alojamiento en las secretarías regionales, podrán hacerlo a partir de las 15:00 horas del día 9 de agosto.</li>
+                <li>Solo podrá asistir a las actividades programadas dentro de los espacios establecidos (esto incluye el ingresar, permanecer y circular por el mismo) quien se acredite debidamente el día 9 de agosto.</li>
+                <li>Se recuerda a los responsables de las delegaciones, se alojen o no en el hotel propuesto por la olimpíada, que durante todo el tiempo estarán a cargo de los alumnos y deberán participar de las actividades programadas con sus alumnos</li>
+                <li>Bajo ningún concepto los participantes podrán circular o permanecer fuera de su lugar de alojamiento después de las 00:00 hs</li>
+                <li>Todos deberán abstenerse de: transportar, ingerir o consumir alcohol, bebidas energizantes u otros estimulantes, fumar en los lugares cerrados, como habitaciones, el comedor, o donde se desarrollen las actividades de la competencia</li>
+            </ul>
+            <p className={styles.text}>Ante cualquier irregularidad o muestra de inconducta las personas involucradas serán sancionadas debiendo regresar de inmediato a su lugar de origen.</p>
         </Collapsable>
         </>:
         <p className={styles.text}>Proximamente...</p>
