@@ -6,6 +6,7 @@ import styles from "./Provincial.module.scss";
 import { availableOptions, participantName, schoolName } from "./Venues";
 import ProvincialParticipantCard from "./ProvincialCard";
 import SelectResultCategory from "../ResultsPage/SelectResultCategory";
+import Collapsable from "../Collapsable/Collapsable";
 
 interface ProvincialProps {
     competition: string,
@@ -61,9 +62,12 @@ const Provincial = ({competition, participants}: ProvincialProps) => {
     return(
         participants.length > 0 ?
         <>
-        <p className={styles.text}>La instancia provincial es <span className={styles.bold}>OPCIONAL</span>. Esto quiere decir que tanto participantes que hayan clasificado al provincial y no vayan, como participantes que hayan aprobado la instancia zonal pero no hayan clasificado al provincial pueden seguir participando en OMA en la instancia regional.</p>
-        <p className={styles.text}>Los participantes que pueden participar de la provincial son aquellos que sumen 5 puntos entre las instancias Zonal e {competition === "OMA"?"Intercolegial":"Interescolar"}.</p>
-        <h3 className={styles.subtitle}>Clasificados a Provincial</h3>
+        <p className={styles.text}>Los alumnos que aprobaron el zonal pasan al regional participen o no del provincial.</p>
+        <Collapsable title="Inscripción">
+            <p className={styles.text}>Los colegios deberán comunicar antes del <span className={styles.bold}>4 de agosto</span> la nómina de personas que viajan, por correo electrónico a: <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a></p>
+        </Collapsable>
+        <Collapsable title="Participantes Clasificados">
+        <p className={styles.text}>Los participantes que clasifican a la instancia provincial son aquellos que sumen 5 puntos entre las instancias Zonal e {competition === "OMA"?"Intercolegial":"Interescolar"}.</p>
         <form className={styles.form}>
                 <SelectResultCategory category="Participante" value={participantFilters.nombreApellido} setValue={(option?: string) => {setParticipantFilters({...participantFilters,nombreApellido: option})}} options={p_names} input={true}/>
                 <SelectResultCategory category="Colegio" value={participantFilters.colegio} setValue={(option?: School) => {setParticipantFilters({...participantFilters,colegio: option})}} options={p_schools} input={true}/>
@@ -81,8 +85,10 @@ const Provincial = ({competition, participants}: ProvincialProps) => {
             make_element={makeParticipantElement}
             testInfo={`${competition == "OMA"?"OMA":"Nandú"} Provincial ${(new Date).getFullYear()}`}
         />
+        </Collapsable>
         </>:
         <p className={styles.text}>Proximamente...</p>
+        
     )
 }
 

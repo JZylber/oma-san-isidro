@@ -10,7 +10,7 @@ interface CollapsableProps {
 const Collapsable = ({title,children}:CollapsableProps) => {
     const [open,setOpen] = useState<boolean>(false);
     return (
-    <section>
+    <section className={styles.collapsable}>
         <div className={styles.header} onClick={()=>setOpen(!open)}>
             <h3>{title}</h3>
             <div className={[styles.arrow,open?styles.rotated:""].join(" ")}>
