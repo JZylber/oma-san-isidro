@@ -124,6 +124,16 @@ const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) 
                 <li><span className={styles.bold}>CUIT: </span>30-67928383-5</li>
             </ul>
             <p className={styles.text}>Recordamos que para la acreditación deben presentar el <span className={styles.bold}>ORIGINAL</span> de dicho depósito.</p>
+            <p className={styles.text}>Si necesitan factura electrónica o factura C, por favor completar la planilla y enviar a <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a> junto con el comprobante de pago.</p>
+            <div className={styles.documentation}>
+                <div className={styles.button}>
+                    <Button content="Planilla Facturación" onClick={() => downloadFile("/provincial/nandu/PedidoFactura.xlsx")}>
+                        <div className={styles.arrow}>
+                            <Image src="/images/newsArrow.svg" width={30} height={40} alt="Descargar"/>
+                        </div>
+                    </Button>
+                </div>
+            </div>
         </Collapsable>
         <Collapsable title="Documentación">
             <p className={styles.text}>La documentación exigida incluye:</p>
