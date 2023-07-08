@@ -18,7 +18,8 @@ interface RegionalInstance {
     auth_max_date?: Date;
 }
  interface ProvincialInstance {
-    participants : ProvincialParticipant[]
+    participants : ProvincialParticipant[],
+    auth_max_date?: Date;
  }
 
 const months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
@@ -26,7 +27,7 @@ const months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto
 const displayInstance = (instance: string, competition: string, instanceData: RegionalInstance | ProvincialInstance | undefined) => {
     if(instance === "PROVINCIAL" &&  instanceData && "participants" in instanceData){
         const provincialInstance = instanceData as ProvincialInstance;
-        return <Provincial competition={competition} participants={provincialInstance.participants}/>
+        return <Provincial competition={competition} participants={provincialInstance.participants} auth_max_date={provincialInstance.auth_max_date}/>
     }
     else if(instance === "NACIONAL"){
         return <span className={styles.text}>Proximamente...</span>

@@ -14,6 +14,7 @@ import Image from "next/image";
 interface ProvincialProps {
     competition: string,
     participants: ProvincialParticipant[];
+    auth_max_date?: Date;
 };
 
 export interface ProvincialParticipant {
@@ -42,6 +43,8 @@ const downloadParticipantData = (participant : ProvincialParticipant):Array<stri
     return([participant.nivel.toString(),participant.nombre,participant.apellido,schoolName(participant.colegio)])
 }
 
+const months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+
 const downloadFile = (filename: string) => {
     const link = document.createElement("a");
     link.href = `/files/${filename}`;
@@ -52,7 +55,7 @@ const downloadFile = (filename: string) => {
   };
 
 
-const Provincial = ({competition, participants}: ProvincialProps) => {
+const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) => {
     const [participantFilters,setParticipantFilters] = useState<ProvincialParticipantFilters>({});
     //Participants
     const participantIsFilterCompliant = (participant: ProvincialParticipant, filter: ProvincialParticipantFilters) => {
@@ -72,11 +75,11 @@ const Provincial = ({competition, participants}: ProvincialProps) => {
     const participant_headers = ["Nivel","Participante","Colegio"];
     const downloadParticipantHeaders = ["Nivel","Nombre","Apellido","Colegio"]
     return(
-        participants.length > 0 ?
+        (participants.length > 0 && auth_max_date) ?
         <>
         <p className={styles.text}>Los alumnos que aprobaron el zonal pasan al regional participen o no del provincial.</p>
         <Collapsable title="Inscripción">
-            <p className={styles.text}>Los colegios deberán comunicar antes del <span className={styles.bold}>4 de agosto</span> la nómina de personas que viajan, por correo electrónico a: <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a></p>
+            <p className={styles.text}>Los colegios deberán comunicar antes del <span className={styles.bold}>{`${auth_max_date.getDate()} de ${months[auth_max_date.getMonth()]}`}</span> la nómina de personas que viajan, por correo electrónico a: <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a></p>
             <h4 className={styles.section_title}>Datos que deben enviar para la inscripción:</h4>
             <ul className={styles.text}>
                 <li>Nombre y apellido de los alumnos que participan.</li>
@@ -108,7 +111,7 @@ const Provincial = ({competition, participants}: ProvincialProps) => {
             <li><span className={styles.bold}>Tarjeta de premiación:</span> $6.000. Solo es necesaria la tarjeta para aquellos que no están acreditados como acompañantes y que participarán únicamente de la premiación. Deben inscribirse junto con los otros participantes en la planilla. Menores de 3 años no pagan. <span className={styles.bold}>CUPOS LIMITADOS</span></li>
         </ul>
         <Warning>
-            <p className={styles.text}>Los aranceles antes mencionados, pueden ser ajustados debido a la situación económica financiera del país, que puede hacer variar nuestros costos. Quienes quieran asegurarse estos aranceles pueden hacer su depósito o trasferencia en los próximos días, completando la inscripción como está detallada arriba y enviando el comprobante. En caso de tener que variar los aranceles lo avisaremos oportunamente.</p>
+            <p className={styles.text}>Los aranceles antes mencionados, pueden ser ajustados debido a la situación económica financiera del país, que puede hacer variar nuestros costos. Quienes quieran asegurarse estos aranceles pueden hacer su depósito o trasferencia en los próximos días, enviando el comprobante a <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a>. En caso de tener que variar los aranceles lo avisaremos oportunamente.</p>
         </Warning>
         </Collapsable>
         <Collapsable title="Pago">
