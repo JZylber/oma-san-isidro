@@ -1,0 +1,77 @@
+@use '../../styles/shared.scss' as shared;
+
+.container{
+    display: flex;
+    border: 2px solid #000000;
+    border-radius: 9px;
+    padding: 1.6rem;
+    margin: .8rem 0;
+    flex-direction: column;
+    @include shared.mobile-only{
+        align-items: center;
+    }
+}
+
+
+
+.icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    @include shared.not-desktop{
+        width: 50px;
+        height: 50px;
+        }
+    @include shared.desktop-only{
+        width: 60px;
+        height: 60px;
+    }
+}
+
+.title{
+    @include shared.font-unbounded(500);
+    @include shared.mobile-only{
+        font-size: 2rem;
+    }
+    @include shared.tablet-only{
+        font-size: 2.2rem;
+    }
+    @include shared.desktop-only{
+        font-size: 3.4rem;
+    }
+    padding-left: 1.6rem;
+    &_container{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+}
+
+.message{
+    padding: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    &_body{
+        @include shared.font-montserrat(400);
+        @include shared.mobile-only{
+            font-size: 1.4rem;
+            display: inline;
+        }
+        @include shared.tablet-only{
+            font-size: 1.5rem;
+        }
+        @include shared.not-mobile{
+            font-size: shared.$desktop-reading-font-size;
+        }
+        &:not(:first-child)::before{
+            content: ' ';
+        }
+        &_container{
+            @include shared.not-mobile{
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    }
+}

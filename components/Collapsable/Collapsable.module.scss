@@ -2,16 +2,15 @@
 
 .collapsable{
     border-bottom : 2px solid rgba(0, 0, 0, 0.5);
-    padding: 0rem 0rem 1.2rem 0rem;
-    &:hover {
-        cursor: pointer;
-    }
 }
 
 .header{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    &:hover {
+      cursor: pointer;
+    }
     h3{
         @include shared.font-unbounded(500);
         margin: 1.2rem 0rem 1.2rem 0rem;
@@ -30,6 +29,14 @@
     }
 }
 
+.selected{
+    color: shared.$light-blue;
+}
+
 .rotated{
     transform: rotate(90deg);
+}
+
+.content{
+    padding: 0rem 0rem 1.2rem 0rem;    
 }

@@ -7,6 +7,7 @@ import { availableOptions, participantName, schoolName } from "./Venues";
 import ProvincialParticipantCard from "./ProvincialCard";
 import SelectResultCategory from "../ResultsPage/SelectResultCategory";
 import Collapsable from "../Collapsable/Collapsable";
+import Warning from "../Warning/Warning";
 
 interface ProvincialProps {
     competition: string,
@@ -65,6 +66,18 @@ const Provincial = ({competition, participants}: ProvincialProps) => {
         <p className={styles.text}>Los alumnos que aprobaron el zonal pasan al regional participen o no del provincial.</p>
         <Collapsable title="Inscripción">
             <p className={styles.text}>Los colegios deberán comunicar antes del <span className={styles.bold}>4 de agosto</span> la nómina de personas que viajan, por correo electrónico a: <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a></p>
+            <Warning>
+                <p className={styles.text}>Recordamos a los colegios que son ellos los responsables de enviar la inscripción de sus alumnos, informando a los padres sobre el desarrollo de las actividades del Torneo, ya que los alumnos participan representando a la escuela.</p>
+                <p className={styles.text}>La Secretaría Regional no puede atender a los padres, ni corresponde que lo haga.</p>
+            </Warning>
+        </Collapsable>
+        <Collapsable title="Arancel y pago">
+        </Collapsable>
+        <Collapsable title="Programa">
+        </Collapsable>
+        <Collapsable title="Documentación">
+        </Collapsable>
+        <Collapsable title="Premiación">
         </Collapsable>
         <Collapsable title="Participantes Clasificados">
         <p className={styles.text}>Los participantes que clasifican a la instancia provincial son aquellos que sumen 5 puntos entre las instancias Zonal e {competition === "OMA"?"Intercolegial":"Interescolar"}.</p>
@@ -86,9 +99,11 @@ const Provincial = ({competition, participants}: ProvincialProps) => {
             testInfo={`${competition == "OMA"?"OMA":"Nandú"} Provincial ${(new Date).getFullYear()}`}
         />
         </Collapsable>
+        <Collapsable title="Reglas">
+        </Collapsable>
         </>:
         <p className={styles.text}>Proximamente...</p>
-        
+           
     )
 }
 
