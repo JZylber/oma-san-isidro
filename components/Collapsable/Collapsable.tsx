@@ -16,11 +16,10 @@ const Collapsable = ({title,children}:CollapsableProps) => {
             <div className={[styles.arrow,open?styles.rotated:""].join(" ")}>
                 <Image src="/images/menuArrow.svg" alt="arrow" width={20} height={20}/>
             </div>
-        </div>
-        {open && 
-        <div className={styles.content}>
+        </div> 
+        <div className={[styles.content,open?styles.open:""].join(" ")}>
             {children}
-        </div>}
+        </div>
     </section>
   );
 };
