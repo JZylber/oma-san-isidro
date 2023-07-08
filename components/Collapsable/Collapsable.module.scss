@@ -1,19 +1,21 @@
 @use '../../styles/shared.scss' as shared;
 
 .collapsable{
-    border-bottom : 2px solid rgba(0, 0, 0, 0.5);
+    margin-top: 1.2rem;
 }
 
 .header{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 1rem 1rem 1rem 1rem;
+    border-radius: 9px;
+    border : 2px solid rgba(0, 0, 0, 0.5);
     &:hover {
       cursor: pointer;
     }
     h3{
         @include shared.font-unbounded(500);
-        margin: 1.2rem 0rem 1.2rem 0rem;
         @include shared.mobile-only {
           text-align: center;
           font-size: 2rem;
@@ -30,7 +32,7 @@
 }
 
 .selected{
-    color: shared.$light-blue;
+    background-color: shared.$light-blue;
 }
 
 .rotated{
@@ -38,5 +40,5 @@
 }
 
 .content{
-    padding: 0rem 0rem 1.2rem 0rem;    
+    padding: 1.2rem 1rem 1.2rem 1rem;    
 }

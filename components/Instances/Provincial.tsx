@@ -8,6 +8,8 @@ import ProvincialParticipantCard from "./ProvincialCard";
 import SelectResultCategory from "../ResultsPage/SelectResultCategory";
 import Collapsable from "../Collapsable/Collapsable";
 import Warning from "../Warning/Warning";
+import { Button } from "../buttons/Button";
+import Image from "next/image";
 
 interface ProvincialProps {
     competition: string,
@@ -40,6 +42,15 @@ const downloadParticipantData = (participant : ProvincialParticipant):Array<stri
     return([participant.nivel.toString(),participant.nombre,participant.apellido,schoolName(participant.colegio)])
 }
 
+const downloadFile = (filename: string) => {
+    const link = document.createElement("a");
+    link.href = `/files/${filename}`;
+    link.target = `_blank`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
 
 const Provincial = ({competition, participants}: ProvincialProps) => {
     const [participantFilters,setParticipantFilters] = useState<ProvincialParticipantFilters>({});
@@ -70,12 +81,51 @@ const Provincial = ({competition, participants}: ProvincialProps) => {
                 <p className={styles.text}>Recordamos a los colegios que son ellos los responsables de enviar la inscripción de sus alumnos, informando a los padres sobre el desarrollo de las actividades del Torneo, ya que los alumnos participan representando a la escuela.</p>
                 <p className={styles.text}>La Secretaría Regional no puede atender a los padres, ni corresponde que lo haga.</p>
             </Warning>
+            <h4 className={styles.section_title}>Datos que deben enviar para la inscripción:</h4>
+            <ul className={styles.text}>
+                <li>Nombre y apellido de los alumnos que participan.</li>
+                <li>Nombre, apellido y número de documento del o los acompañantes, indicando si es docente o familiar.</li>
+                <li>Indicar si se hospedan por medio de la olimpíada o por su cuenta.</li>
+                <li>En caso de solicitar sólo tarjeta para la premiación, indicar nombre y apellido y número de documento de la persona para la cual se solicita.</li>
+            </ul>
+            <p className={styles.text}><span className={styles.bold}>Cuando tengamos el Hotel asignado para nuestra delegación, se informará por acá y esto no se puede hacer hasta no tener todas las inscripciones.</span></p>
         </Collapsable>
+        <Collapsable title="Información general y programa">
+            <p className={styles.text}>El encuentro de la <span className={styles.bold}>Olimpíada Regional Ñandú Metropolitana</span> se realizará en la ciudad de Mar del Plata los días 9, 10 y 11 de agosto. Cada delegación se trasladará por su cuenta y riesgo, con sus profesores acompañantes según las pautas establecidas <span className={styles.bold}>(máximo 8 alumnos por cada docente)</span>. También, como en años anteriores, nos ocuparemos del alojamiento y concentración de aquellas delegaciones que lo soliciten en la Secretaría Regional de la Olimpíada correspondiente.</p>
+            <p className={styles.text}>El alojamiento de las delegaciones que lo soliciten será en Hoteles de la mencionada ciudad  en habitaciones compartidas con otros participantes del encuentro. La reserva del alojamiento se hace contra entrega de las planillas debidamente cumplimentadas.</p>
+            <h4 className={styles.section_title}>Programa</h4>
+            <ul className={styles.text}>
+                <li><span className={styles.bold}>Acreditación:</span> Miércoles 9 de agosto de 15:00 a 20:00 horas en el hotel asignado a su delegación</li>
+                <li><span className={styles.bold}>Prueba escrita:</span> Jueves 10 de agosto a las 9:00 horas, Salón Colón - NH Gran Hotel Provincial - Mar del Plata</li>
+                <li><span className={styles.bold}>Exposición Oral y Premiación:</span> Viernes 11 de agosto a las 9:00 horas, Salón de las Américas - NH Gran Hotel Provincial - Mar del Plata</li>
+            </ul>
         <Collapsable title="Arancel y pago">
         </Collapsable>
-        <Collapsable title="Programa">
         </Collapsable>
         <Collapsable title="Documentación">
+            <p className={styles.text}>La documentación exigida incluye:</p>
+            <ul className={styles.text}>
+                <li>AUTORIZACIÓN de cada alumno (se utilizará la autorización que se descarga debajo)</li>
+                <li>DOCUMENTO original de cada alumno.</li>
+                <li>COMPROMISO de cada acompañante DOCENTE, PADRE, TUTOR (se utilizará el compromiso que se descarga debajo)</li>
+            </ul>
+            <p className={styles.text}>La documentación debe ser entregada en la acreditación.</p>
+            <div className={styles.documentation}>
+                <div className={styles.button}>
+                    <Button content="Autorización" onClick={() => downloadFile("/provincial/nandu/Autorización.docx")}>
+                        <div className={styles.arrow}>
+                            <Image src="/images/newsArrow.svg" width={30} height={40} alt="Descargar"/>
+                        </div>
+                    </Button>
+                </div>
+                <div className={styles.button}>
+                    <Button content="Compromiso" onClick={() => downloadFile("/provincial/nandu/Compromiso.docx")}>
+                        <div className={styles.arrow}>
+                            <Image src="/images/newsArrow.svg" width={30} height={40} alt="Descargar"/>
+                        </div>
+                    </Button>
+                </div>
+            </div>
         </Collapsable>
         <Collapsable title="Premiación">
         </Collapsable>
