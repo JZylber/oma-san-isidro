@@ -77,10 +77,6 @@ const Provincial = ({competition, participants}: ProvincialProps) => {
         <p className={styles.text}>Los alumnos que aprobaron el zonal pasan al regional participen o no del provincial.</p>
         <Collapsable title="Inscripción">
             <p className={styles.text}>Los colegios deberán comunicar antes del <span className={styles.bold}>4 de agosto</span> la nómina de personas que viajan, por correo electrónico a: <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a></p>
-            <Warning>
-                <p className={styles.text}>Recordamos a los colegios que son ellos los responsables de enviar la inscripción de sus alumnos, informando a los padres sobre el desarrollo de las actividades del Torneo, ya que los alumnos participan representando a la escuela.</p>
-                <p className={styles.text}>La Secretaría Regional no puede atender a los padres, ni corresponde que lo haga.</p>
-            </Warning>
             <h4 className={styles.section_title}>Datos que deben enviar para la inscripción:</h4>
             <ul className={styles.text}>
                 <li>Nombre y apellido de los alumnos que participan.</li>
@@ -89,6 +85,10 @@ const Provincial = ({competition, participants}: ProvincialProps) => {
                 <li>En caso de solicitar sólo tarjeta para la premiación, indicar nombre y apellido y número de documento de la persona para la cual se solicita.</li>
             </ul>
             <p className={styles.text}><span className={styles.bold}>Cuando tengamos el Hotel asignado para nuestra delegación, se informará por acá y esto no se puede hacer hasta no tener todas las inscripciones.</span></p>
+            <Warning>
+                <p className={styles.text}>Recordamos a los colegios que son ellos los responsables de enviar la inscripción de sus alumnos, informando a los padres sobre el desarrollo de las actividades del Torneo, ya que los alumnos participan representando a la escuela.</p>
+                <p className={styles.text}>La Secretaría Regional no puede atender a los padres, ni corresponde que lo haga.</p>
+            </Warning>
         </Collapsable>
         <Collapsable title="Información general y programa">
             <p className={styles.text}>El encuentro de la <span className={styles.bold}>Olimpíada Regional Ñandú Metropolitana</span> se realizará en la ciudad de Mar del Plata los días 9, 10 y 11 de agosto. Cada delegación se trasladará por su cuenta y riesgo, con sus profesores acompañantes según las pautas establecidas <span className={styles.bold}>(máximo 8 alumnos por cada docente)</span>. También, como en años anteriores, nos ocuparemos del alojamiento y concentración de aquellas delegaciones que lo soliciten en la Secretaría Regional de la Olimpíada correspondiente.</p>
@@ -99,8 +99,28 @@ const Provincial = ({competition, participants}: ProvincialProps) => {
                 <li><span className={styles.bold}>Prueba escrita:</span> Jueves 10 de agosto a las 9:00 horas, Salón Colón - NH Gran Hotel Provincial - Mar del Plata</li>
                 <li><span className={styles.bold}>Exposición Oral y Premiación:</span> Viernes 11 de agosto a las 9:00 horas, Salón de las Américas - NH Gran Hotel Provincial - Mar del Plata</li>
             </ul>
-        <Collapsable title="Arancel y pago">
         </Collapsable>
+        <Collapsable title="Aranceles">
+        <ul className={styles.text}>
+            <li><span className={styles.bold}>Participantes y/o acompañantes que se alojen en el hotel propuesto por la olimpíada:</span> $69.000. Incluye desde la cena del día miércoles 9 al almuerzo del viernes 11 (incluye una bebida por comida).</li>
+            <li><span className={styles.bold}>Participantes que NO se alojen en el hotel propuesto por la olimpíada:</span> $23.000.</li>
+            <li><span className={styles.bold}>Acompañantes que NO se alojen en el hotel propuesto por la olimpíada:</span> $18.000. (menores de 3 años no pagan)</li>
+            <li><span className={styles.bold}>Tarjeta de premiación:</span> $6.000. Solo es necesaria la tarjeta para aquellos que no están acreditados como acompañantes y que participarán únicamente de la premiación. Deben inscribirse junto con los otros participantes en la planilla. Menores de 3 años no pagan. <span className={styles.bold}>CUPOS LIMITADOS</span></li>
+        </ul>
+        <Warning>
+            <p className={styles.text}>Los aranceles antes mencionados, pueden ser ajustados debido a la situación económica financiera del país, que puede hacer variar nuestros costos. Quienes quieran asegurarse estos aranceles pueden hacer su depósito o trasferencia en los próximos días, completando la inscripción como está detallada arriba y enviando el comprobante. En caso de tener que variar los aranceles lo avisaremos oportunamente.</p>
+        </Warning>
+        </Collapsable>
+        <Collapsable title="Pago">
+            <p className={styles.text}>El pago se hace depositando o transfieriendo a la siguiente cuenta de la Fundación Olimpíada Matemática Argentina:</p>
+            <ul className={styles.text}>
+                <li><span className={styles.bold}>BANCO HSBC</span> (Cuenta Corriente) Sucursal Los Arcos (ex Salguero).</li>
+                <li><span className={styles.bold}>N° Cuenta: </span>6093228419</li>
+                <li><span className={styles.bold}>CBU: </span>1500609900060932284196</li>
+                <li><span className={styles.bold}>ALIAS: </span>FOMAHSBCCC</li>
+                <li><span className={styles.bold}>CUIT: </span>30-67928383-5</li>
+            </ul>
+            <p>Recordamos que para la acreditación deben presentar el <span className={styles.bold}>ORIGINAL</span> de dicho depósito.</p>
         </Collapsable>
         <Collapsable title="Documentación">
             <p className={styles.text}>La documentación exigida incluye:</p>
