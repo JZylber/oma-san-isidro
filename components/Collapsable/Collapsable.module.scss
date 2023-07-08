@@ -1,0 +1,10 @@
+@use '../../styles/shared.scss' as shared;
+
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.rotated{
+    transform: rotate(90deg);
+}
