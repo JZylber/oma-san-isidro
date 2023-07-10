@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import { removeRepeatedSchools } from "../ResultsPage/ResultTable";
 import { School } from "../ResultsPage/resultsTypes";
 import Table from "../Table/Table";
@@ -54,23 +54,40 @@ const downloadFile = (filename: string) => {
     document.body.removeChild(link);
   };
 
+interface ChangeValueAction<S> {
+    type: string,
+    value: S
+}
+
+
+const reducer = (state : Partial<ProvincialParticipant>,action: ChangeValueAction<Partial<ProvincialParticipant>>) => {
+    const {type,value} = action;
+    switch (type) {
+        case "actualizar":
+            return {...state,...value};
+        default:
+            return {...state};
+    }
+};
+
+
 
 const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) => {
-    const [participantFilters,setParticipantFilters] = useState<ProvincialParticipantFilters>({});
+    const [provincialFilters,dispatchProvincialFilters] = useReducer(reducer,{});
     //Participants
-    const participantIsFilterCompliant = (participant: ProvincialParticipant, filter: ProvincialParticipantFilters) => {
-        const {nivel,nombreApellido,colegio} = filter;
-        const isParticipant = ((nombreApellido)? nombreApellido === participantName(participant.nombre,participant.apellido): true);
+    const participantIsFilterCompliant = (participant: ProvincialParticipant, filter: Partial<ProvincialParticipant>) => {
+        const {nivel,nombre,apellido,colegio} = filter;
+        const isParticipant = (nombre && apellido)? participant.nombre.toLowerCase() == nombre.toLowerCase() && participant.apellido.toLowerCase() === apellido.toLowerCase(): true;
         const isLevel = (nivel? participant.nivel === nivel : true);
         const isSchool = (colegio? (participant.colegio.nombre === colegio.nombre) && (colegio.sede?participant.colegio.sede === colegio.sede:true) : true);
         return isParticipant && isLevel && isSchool;
     }
-    const filteredParticipants = participants.filter((element) => participantIsFilterCompliant(element,participantFilters));
+    const filteredParticipants = participants.filter((element) => participantIsFilterCompliant(element,provincialFilters));
     const p_availableSchools = filteredParticipants.map(participant => participant.colegio);
     let p_schools : Array<School> = removeRepeatedSchools(p_availableSchools);
     const p_genericSchools: Array<School> =removeRepeatedSchools(p_schools.filter((school) => school.sede).map((school) => {return({nombre: school.nombre})}));
     p_schools = p_schools.concat(p_genericSchools);
-    const p_levels = Array.from(new Set(availableOptions(participants,"nivel",participantFilters,participantIsFilterCompliant).map(participant => participant.nivel)));
+    const p_levels = Array.from(new Set(availableOptions(participants,"nivel",provincialFilters,participantIsFilterCompliant).map(participant => participant.nivel)));
     const p_names = Array.from(new Set(filteredParticipants.map(participant => participantName(participant.nombre,participant.apellido))));
     const participant_headers = ["Nivel","Participante","Colegio"];
     const downloadParticipantHeaders = ["Nivel","Nombre","Apellido","Colegio"]
@@ -167,9 +184,16 @@ const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) 
         <Collapsable title="Participantes Clasificados">
         <p className={styles.text}>Los participantes que clasifican a la instancia provincial son aquellos que sumen 5 puntos entre las instancias Zonal e {competition === "OMA"?"Intercolegial":"Interescolar"}.</p>
         <form className={styles.form}>
-                <SelectResultCategory category="Participante" value={participantFilters.nombreApellido} setValue={(option?: string) => {setParticipantFilters({...participantFilters,nombreApellido: option})}} options={p_names} input={true}/>
-                <SelectResultCategory category="Colegio" value={participantFilters.colegio} setValue={(option?: School) => {setParticipantFilters({...participantFilters,colegio: option})}} options={p_schools} input={true}/>
-                <SelectResultCategory category="Nivel" value={participantFilters.nivel} setValue={(option? : number) => {setParticipantFilters({...participantFilters,nivel: option})}} options={p_levels} clear={true}/>
+                <SelectResultCategory category="Participante" value={(provincialFilters.nombre && provincialFilters.apellido)?participantName(provincialFilters.nombre,provincialFilters.apellido):undefined} setValue={(option?: string) => {
+                    const participantForOption = participants.find(participant => participantName(participant.nombre,participant.apellido) === option);
+                    if(participantForOption){
+                        dispatchProvincialFilters({type:"actualizar",value:{nombre:participantForOption.nombre,apellido:participantForOption.apellido}})
+                    }else{
+                        dispatchProvincialFilters({type:"actualizar",value:{nombre:undefined,apellido:undefined}})
+                    }
+                    }} options={p_names} input={true}/>
+                <SelectResultCategory category="Colegio" value={provincialFilters.colegio} setValue={(option?: School) => dispatchProvincialFilters({type:"actualizar",value:{colegio:option}})} options={p_schools} input={true}/>
+                <SelectResultCategory category="Nivel" value={provincialFilters.nivel} setValue={(option? : number) =>dispatchProvincialFilters({type:"actualizar",value:{nivel:option}})} options={p_levels} clear={true}/>
         </form>
         <Table 
             values={filteredParticipants} 
