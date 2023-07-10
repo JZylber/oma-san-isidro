@@ -65,7 +65,9 @@ const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) 
         const isSchool = (colegio? (participant.colegio.nombre === colegio.nombre) && (colegio.sede?participant.colegio.sede === colegio.sede:true) : true);
         return isParticipant && isLevel && isSchool;
     }
-    const filteredParticipants = participants.filter((element) => participantIsFilterCompliant(element,participantFilters));
+    const excluded_participants = [{nombre:"Mateo",apellido:"Perez Lerner"}]
+    let filteredParticipants = participants.filter((element) => !excluded_participants.some((excluded) => excluded.nombre === element.nombre && excluded.apellido === element.apellido));
+    filteredParticipants = filteredParticipants.filter((element) => participantIsFilterCompliant(element,participantFilters));
     const p_availableSchools = filteredParticipants.map(participant => participant.colegio);
     let p_schools : Array<School> = removeRepeatedSchools(p_availableSchools);
     const p_genericSchools: Array<School> =removeRepeatedSchools(p_schools.filter((school) => school.sede).map((school) => {return({nombre: school.nombre})}));
