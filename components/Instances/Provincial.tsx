@@ -60,10 +60,10 @@ interface ChangeValueAction<S> {
 }
 
 
-const reducer = (state : Partial<ProvincialParticipant>,action: ChangeValueAction<Partial<ProvincialParticipant>>) => {
+const reducer = <S,>(state : Partial<S>,action: ChangeValueAction<Partial<S>>) => {
     const {type,value} = action;
     switch (type) {
-        case "actualizar":
+        case "update":
             return {...state,...value};
         default:
             return {...state};
@@ -73,7 +73,7 @@ const reducer = (state : Partial<ProvincialParticipant>,action: ChangeValueActio
 
 
 const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) => {
-    const [provincialFilters,dispatchProvincialFilters] = useReducer(reducer,{});
+    const [provincialFilters,dispatchProvincialFilters] = useReducer(reducer<ProvincialParticipant>,{});
     //Participants
     const participantIsFilterCompliant = (participant: ProvincialParticipant, filter: Partial<ProvincialParticipant>) => {
         const {nivel,nombre,apellido,colegio} = filter;
@@ -187,13 +187,13 @@ const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) 
                 <SelectResultCategory category="Participante" value={(provincialFilters.nombre && provincialFilters.apellido)?participantName(provincialFilters.nombre,provincialFilters.apellido):undefined} setValue={(option?: string) => {
                     const participantForOption = participants.find(participant => participantName(participant.nombre,participant.apellido) === option);
                     if(participantForOption){
-                        dispatchProvincialFilters({type:"actualizar",value:{nombre:participantForOption.nombre,apellido:participantForOption.apellido}})
+                        dispatchProvincialFilters({type:"update",value:{nombre:participantForOption.nombre,apellido:participantForOption.apellido}})
                     }else{
-                        dispatchProvincialFilters({type:"actualizar",value:{nombre:undefined,apellido:undefined}})
+                        dispatchProvincialFilters({type:"update",value:{nombre:undefined,apellido:undefined}})
                     }
                     }} options={p_names} input={true}/>
-                <SelectResultCategory category="Colegio" value={provincialFilters.colegio} setValue={(option?: School) => dispatchProvincialFilters({type:"actualizar",value:{colegio:option}})} options={p_schools} input={true}/>
-                <SelectResultCategory category="Nivel" value={provincialFilters.nivel} setValue={(option? : number) =>dispatchProvincialFilters({type:"actualizar",value:{nivel:option}})} options={p_levels} clear={true}/>
+                <SelectResultCategory category="Colegio" value={provincialFilters.colegio} setValue={(option?: School) => dispatchProvincialFilters({type:"update",value:{colegio:option}})} options={p_schools} input={true}/>
+                <SelectResultCategory category="Nivel" value={provincialFilters.nivel} setValue={(option? : number) =>dispatchProvincialFilters({type:"update",value:{nivel:option}})} options={p_levels} clear={true}/>
         </form>
         <Table 
             values={filteredParticipants} 
