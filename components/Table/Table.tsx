@@ -16,20 +16,21 @@ interface TableProps<S extends object>{
     testInfo?: string,
     make_element?: (result : S,index : number) => JSX.Element,
     process_data?: (dataPoint : S) => Array<string>
+    center_columns?: Array<number>
 }
 
 const defaultDataProcessor = <S extends object>(dataPoint : S) => {
     return Object.values(dataPoint);
 }
 
-const defaultMakeElement = <S extends object>(result : S,index : number) => {
+const defaultMakeElement = <S extends object>(result : S,index : number, center_columns : Array<number>| undefined = []) => {
     return(
         <tr key={index}>
-            {Object.values(result).map((cell,sub_index) => <td key={`${index}-${sub_index}`}>{cell}</td>)}
+            {Object.values(result).map((cell,sub_index) => <td key={`${index}-${sub_index}`} className={center_columns.includes(index)?styles.center_align:""}>{cell}</td>)}
         </tr>)
 }
 
-const Table = <S extends object,>({values,allValues,headers,Card,elements_per_page,download,downloadHeaders,make_element = defaultMakeElement,process_data = defaultDataProcessor,testInfo="esta instancia"}:TableProps<S>) => {
+const Table = <S extends object,>({values,allValues,headers,Card,elements_per_page,download,downloadHeaders,make_element = defaultMakeElement,process_data = defaultDataProcessor,testInfo="esta instancia",center_columns = []}:TableProps<S>) => {
     //PAGINATION
     const [page,setPage] = useState(0);
     const page_size = elements_per_page?elements_per_page:values.length
@@ -82,7 +83,7 @@ const Table = <S extends object,>({values,allValues,headers,Card,elements_per_pa
             <table className={styles.values_table}>
                 <thead>
                     <tr>
-                        {headers.map((header,index) => <td key={index}>{header}</td>)}
+                        {headers.map((header,index) => <td key={index} className={center_columns.includes(index)?styles.center_align:""} >{header}</td>)}
                     </tr>
                 </thead>
                 <tbody>

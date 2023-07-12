@@ -60,7 +60,7 @@ const ResultTable = ({results,testInfo}:{results : Array<TestQueryResults>, test
         participante: new Participant(result.participacion.participante.nombre,result.participacion.participante.apellido)
         });
     })
-    const headers = ["Nivel","Participante","Colegio"].concat(Array.from({ length: filterableResults[0].cantidad_problemas }, (value, index) => `P${index + 1}`),["Total","Aprobado"])
+    const headers = ["Participante","Nivel","Colegio"].concat(Array.from({ length: filterableResults[0].cantidad_problemas }, (value, index) => `P${index + 1}`),["Total","Aprobado"])
     const downloadHeaders = ["Nivel","Nombre","Apellido","Colegio"].concat(Array.from({ length: filterableResults[0].cantidad_problemas }, (value, index) => `P${index + 1}`),["Total","Aprobado"])
     //FILTERING
     const [resultFilter,updateFilter,filtered_results,options] = useFilter(filterableResults)
@@ -80,6 +80,7 @@ const ResultTable = ({results,testInfo}:{results : Array<TestQueryResults>, test
                     process_data={make_download_element}
                     make_element={make_element}
                     testInfo={testInfo}
+                    center_columns={[1]}
                 />:
                 <ErrorMessage status={400}/>}
             <p className={styles.disclaimer}>Si hay algún error en el nombre/apellido de algún participante, o algún error en el nombre de algún colegio, por favor mandar un mail a: <a href="mailto:omasanisidro.devs@gmail.com">omasanisidro.devs@gmail.com</a></p>
