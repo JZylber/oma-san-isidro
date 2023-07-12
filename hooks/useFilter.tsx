@@ -41,24 +41,27 @@ const useFilter = <S extends Record<string,Filterables>>(values: S[]) => {
     const update = (newValue : Partial<S> ) => {
         dispatch({type:"update",value: newValue});
     }
-    let options : Partial<Record<keyof S,Filterables[]>> = {};
-    Object.keys(values[0]).forEach((key) => {
-        const stateWithoutKey = {...state,[key as keyof S]:undefined}
-        if(typeof values[0][key as keyof S] !== "object"){
-            options[key as keyof S] = Array.from(new Set(values.filter((value) => filterFunction(value,stateWithoutKey)).map((value) => value[key as keyof S])));
-        } else {
-            const uniqueValues = values
-                .filter((value) => filterFunction(value,stateWithoutKey))
-                .map((value) => value[key as keyof S] as Filterable<any>)
-                .filter((value,index,self) => self.findIndex((v) => v.isFilteredBy(value)) === index);
-            const genericValues = uniqueValues
-                .map((value) => value.generic)
-                .filter((value) => value !== undefined)
-                .filter((value,index,self) => self.findIndex((v) => v.isFilteredBy(value)) === index);
-            options[key as keyof S] = uniqueValues.concat(genericValues);
+    let options : Record<keyof S,Filterables[]> = Object.fromEntries(
+        Object.keys(values[0]).map(
+          ((key) => {
+            const stateWithoutKey = {...state,[key as keyof S]:undefined}
+            if(typeof values[0][key as keyof S] !== "object"){
+                return [key as keyof S,Array.from(new Set(values.filter((value) => filterFunction(value,stateWithoutKey)).map((value) => value[key as keyof S])))];
+            } else {
+                const uniqueValues = values
+                    .filter((value) => filterFunction(value,stateWithoutKey))
+                    .map((value) => value[key as keyof S] as Filterable<any>)
+                    .filter((value,index,self) => self.findIndex((v) => v.isFilteredBy(value)) === index);
+                const genericValues = uniqueValues
+                    .map((value) => value.generic)
+                    .filter((value) => value !== undefined)
+                    .filter((value,index,self) => self.findIndex((v) => v.isFilteredBy(value)) === index);
+                return [key as keyof S,uniqueValues.concat(genericValues)];
+            }
         }
-        
-    });
+        )
+      )
+    );
     return [state,update,filteredValues,options] as const;
 };
 
