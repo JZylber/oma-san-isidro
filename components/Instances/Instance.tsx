@@ -2,9 +2,10 @@ import styles from "./Instance.module.scss";
 import {useEffect, useState } from "react";
 import { Instance } from "./InstanceMenu";
 import Loader from "../Loader/Loader";
-import Venues, { DropPoint, Participant, Venue } from "./Venues";
+import Venues, { DropPoint, Venue, VenueParticipant } from "./Venues";
 import { getDateFromJSON } from "../../lib/aux_functions";
 import Provincial, { ProvincialParticipant } from "./Provincial";
+import { Participant, School } from "../../hooks/types";
 
 interface InstanceProps {
     competition: string,
@@ -12,34 +13,58 @@ interface InstanceProps {
 }
 
 interface RegionalInstance {
-    venues: Venue[];
+    venues: VenueInput[];
     dropPoints: DropPoint[];
-    participants: Participant[];
+    participants: ParticipantInput[];
     auth_max_date?: Date;
 }
- interface ProvincialInstance {
-    participants : ProvincialParticipant[],
+interface ProvincialParticipantInput {
+    nombre: string,
+    apellido: string,
+    nivel: number,
+    colegio: {nombre: string, sede?: string}
+}
+interface ProvincialInstance {
+    participants : ProvincialParticipantInput[],
     auth_max_date?: Date;
- }
+}
+export interface ParticipantInput{
+    nombre: string;
+    apellido: string;
+    colegio: {nombre: string, sede?: string};
+    nivel: number;
+    sede: string;
+}
+
+export interface VenueInput{
+    colegio: {nombre: string, sede?: string};
+    nombre: string;
+    direccion: string;
+    localidad: string;
+    aclaracion?: string;
+}
 
 const months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
 
 const displayInstance = (instance: string, competition: string, instanceData: RegionalInstance | ProvincialInstance | undefined) => {
     if(instance === "PROVINCIAL" &&  instanceData && "participants" in instanceData){
         const provincialInstance = instanceData as ProvincialInstance;
-        return <Provincial competition={competition} participants={provincialInstance.participants} auth_max_date={provincialInstance.auth_max_date}/>
+        const participants : ProvincialParticipant[] = provincialInstance.participants.map((participant) => {return{nivel: participant.nivel, participante: new Participant(participant.nombre,participant.apellido), colegio: new School(participant.colegio.nombre,participant.colegio.sede)}});
+        return <Provincial competition={competition} participants={participants} auth_max_date={provincialInstance.auth_max_date}/>
     }
     else if(instance === "NACIONAL"){
         return <span className={styles.text}>Proximamente...</span>
     }
     else if(instanceData && "venues" in instanceData ){
         const regionalInstance = instanceData as RegionalInstance;
+        const venues : Venue[] = regionalInstance.venues.map((venue) => {return{nombre: venue.nombre, direccion: venue.direccion, localidad: venue.localidad, colegio: new School(venue.colegio.nombre,venue.colegio.sede), aclaracion: venue.aclaracion?venue.aclaracion:""}});
+        const participants : VenueParticipant[] = regionalInstance.participants.map((participant) => {return {...participant,colegio: new School(participant.colegio.nombre,participant.colegio.sede),participante: new Participant(participant.nombre,participant.apellido)}});
         return <Venues 
         instance={instance}
         type={competition}
-        venues={regionalInstance.venues} 
+        venues={venues} 
         dropPoints={regionalInstance.dropPoints} 
-        participants={regionalInstance.participants} 
+        participants={participants} 
         auth_max_date={regionalInstance.auth_max_date}/>
     }
     else{

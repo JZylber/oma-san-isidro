@@ -10,14 +10,6 @@ import ParticipantCard from "./ParticipantCard";
 import { Filterables, Participant, School } from "../../hooks/types";
 import useFilter from "../../hooks/useFilter";
 
-export interface VenueInput{
-    colegio: {nombre: string, sede?: string};
-    nombre: string;
-    direccion: string;
-    localidad: string;
-    aclaracion?: string;
-}
-
 export interface DropPoint {
     localidad: string,
     nombre?: string,
@@ -25,20 +17,12 @@ export interface DropPoint {
     aclaracion?: string,
 }
 
-export interface ParticipantInput{
-    nombre: string;
-    apellido: string;
-    colegio: {nombre: string, sede?: string};
-    nivel: number;
-    sede: string;
-}
-
 interface VenueProps {
     type: string;
     instance: string;
-    venues: VenueInput[];
+    venues: Venue[];
     dropPoints: DropPoint[];
-    participants: ParticipantInput[];
+    participants: VenueParticipant[];
     auth_max_date?: Date;
 }
 
@@ -86,13 +70,11 @@ const makeParticipantElement = (participant : VenueParticipant,index : number) =
 
 const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants}:VenueProps) => {
     //Venues
-    const hasDisclaimers = venues.reduce((disclaimers : number,venue: VenueInput) => {
-        return disclaimers + (venue.aclaracion !== null?1:0);
+    const hasDisclaimers = venues.reduce((disclaimers : number,venue: Venue) => {
+        return disclaimers + (venue.aclaracion !== ""?1:0);
     },0) > 0;
-    const newVenues : Venue[] = venues.map((venue) => {return {nombre: venue.nombre,direccion: venue.direccion, localidad: venue.localidad,colegio: new School(venue.colegio.nombre,venue.colegio.sede),aclaracion: venue.aclaracion?venue.aclaracion:""}});
-    const newParticipants = participants.map((participant) => {return {...participant,colegio: new School(participant.colegio.nombre,participant.colegio.sede),participante: new Participant(participant.nombre,participant.apellido)}});
-    const [venueFilter,updateVenueFilter,filteredVenues,venueOptions] = useFilter<Venue>(newVenues);
-    const [participantFilter,updateParticipantFilter,filteredParticipants,participantOptions] = useFilter<VenueParticipant>(newParticipants);
+    const [venueFilter,updateVenueFilter,filteredVenues,venueOptions] = useFilter<Venue>(venues);
+    const [participantFilter,updateParticipantFilter,filteredParticipants,participantOptions] = useFilter<VenueParticipant>(participants);
     const participant_headers = ["Nivel","Participante","Colegio","Sede"];
     const venue_headers = ["Colegio","Sede","Dirección","Localidad"];
     if(hasDisclaimers) {
@@ -123,7 +105,7 @@ const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants}:Ven
             </form>
             <Table 
                 values={filteredVenues}
-                allValues={newVenues} 
+                allValues={venues} 
                 headers={venue_headers} 
                 Card={VenueCard} 
                 elements_per_page={10}
@@ -138,7 +120,7 @@ const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants}:Ven
             </form>
             <Table 
                 values={filteredParticipants} 
-                allValues={newParticipants} 
+                allValues={participants} 
                 headers={participant_headers} 
                 Card={ParticipantCard} 
                 elements_per_page={50} 

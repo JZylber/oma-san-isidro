@@ -11,16 +11,9 @@ import { Filterables, Participant, School } from "../../hooks/types";
 
 interface ProvincialProps {
     competition: string,
-    participants: ProvincialParticipantInput[];
+    participants: ProvincialParticipant[];
     auth_max_date?: Date;
 };
-
-interface ProvincialParticipantInput {
-    nombre: string,
-    apellido: string,
-    nivel: number,
-    colegio: {nombre: string, sede?: string}
-}
 
 export interface ProvincialParticipant extends Record<string,Filterables> {
     participante: Participant,
@@ -55,9 +48,8 @@ const downloadFile = (filename: string) => {
 
 
 const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) => {
-    const newParticipants : ProvincialParticipant[] = participants.map((participant) => {return{nivel: participant.nivel, participante: new Participant(participant.nombre,participant.apellido), colegio: new School(participant.colegio.nombre,participant.colegio.sede)}});
     //Participants
-    const [state,update,filteredValues,options] = useFilter(newParticipants);
+    const [state,update,filteredValues,options] = useFilter(participants);
     const participant_headers = ["Nivel","Participante","Colegio"];
     const downloadParticipantHeaders = ["Nivel","Nombre","Apellido","Colegio"]
     return(
@@ -159,7 +151,7 @@ const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) 
         </form>
         <Table 
             values={filteredValues} 
-            allValues={newParticipants} 
+            allValues={participants} 
             headers={participant_headers} 
             Card={ProvincialParticipantCard} 
             elements_per_page={20} 
