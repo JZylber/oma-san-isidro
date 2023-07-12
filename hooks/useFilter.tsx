@@ -23,7 +23,7 @@ const useFilter = <S extends Record<string,Filterables>>(values: S[]) => {
         for(let key in filter){
             const property = value[key];
             if(typeof property !== "object"){
-                if(value[key] !== filter[key]){
+                if(filter[key] && value[key] !== filter[key]){
                     return false;
                 }else{
                     return true;
