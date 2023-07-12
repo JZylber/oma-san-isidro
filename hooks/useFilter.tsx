@@ -41,7 +41,7 @@ const useFilter = <S extends Record<string,Filterables>>(values: S[]) => {
     const update = (newValue : Partial<S> ) => {
         dispatch({type:"update",value: newValue});
     }
-    let options : Record<keyof S,Filterables[]> = Object.fromEntries(
+    let options : {[key in keyof S]:S[key][]} = Object.fromEntries(
         Object.keys(values[0]).map(
           ((key) => {
             const stateWithoutKey = {...state,[key as keyof S]:undefined}

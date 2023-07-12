@@ -118,8 +118,8 @@ const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants}:Ven
             <p className={styles.text}>Presentarse <span className={styles.bold}>13:30 hs</span>. ¡No se olviden de las autorizaciones!</p>
             <h3 className={styles.section_subtitle}>Colegios por sede</h3>
             <form className={styles.form}>
-                <SelectResultCategory category="Colegio" value={venueFilter.colegio} setValue={(option?: School) => updateVenueFilter({colegio: option})} options={venueOptions.colegio as School[]} input={true}/>
-                <SelectResultCategory category="Sede" value={venueFilter.nombre} setValue={(option?: string) => updateVenueFilter({nombre: option})} options={venueOptions.nombre as string[]} input={true}/>
+                <SelectResultCategory category="Colegio" value={venueFilter.colegio} setValue={(option?: School) => updateVenueFilter({colegio: option})} options={venueOptions.colegio} input={true}/>
+                <SelectResultCategory category="Sede" value={venueFilter.nombre} setValue={(option?: string) => updateVenueFilter({nombre: option})} options={venueOptions.nombre} input={true}/>
             </form>
             <Table 
                 values={filteredVenues}
@@ -131,10 +131,10 @@ const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants}:Ven
                 />
             <h3 className={styles.section_subtitle}>Alumnos por sede</h3>
             <form className={styles.form}>
-                <SelectResultCategory category="Participante" value={participantFilter.participante} setValue={(option?: Participant) => updateParticipantFilter({participante: option})} options={participantOptions.participante as Participant[]} input={true}/>
-                <SelectResultCategory category="Colegio" value={participantFilter.colegio} setValue={(option?: School) => updateParticipantFilter({colegio: option})} options={participantOptions.colegio as School[]} input={true}/>
-                <SelectResultCategory category="Sede" value={participantFilter.sede} setValue={(option?: string) => updateParticipantFilter({sede:option})} options={participantOptions.sede as string[]} input={true}/>
-                <SelectResultCategory category="Nivel" value={participantFilter.nivel} setValue={(option? : number) => updateParticipantFilter({nivel:option})} options={participantOptions.nivel as number[]} clear={true}/>
+                <SelectResultCategory category="Participante" value={participantFilter.participante} setValue={(option?: Participant) => updateParticipantFilter({participante: option})} options={participantOptions.participante} input={true}/>
+                <SelectResultCategory category="Colegio" value={participantFilter.colegio} setValue={(option?: School) => updateParticipantFilter({colegio: option})} options={participantOptions.colegio} input={true}/>
+                <SelectResultCategory category="Sede" value={participantFilter.sede} setValue={(option?: string) => updateParticipantFilter({sede:option})} options={participantOptions.sede} input={true}/>
+                <SelectResultCategory category="Nivel" value={participantFilter.nivel} setValue={(option? : number) => updateParticipantFilter({nivel:option})} options={participantOptions.nivel} clear={true}/>
             </form>
             <Table 
                 values={filteredParticipants} 
