@@ -49,13 +49,11 @@ const downloadFile = (filename: string) => {
 
 const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) => {
     //Participants
-    const excluded_participants = [new Participant("Mateo","Perez Lerner")]
-    let filteredParticipants = participants.filter((element) => !excluded_participants.some((excluded) => element.participante.isFilteredBy(excluded)));
-    const [state,update,filteredValues,options] = useFilter(filteredParticipants);
+    const [state,update,filteredValues,options] = useFilter(participants);
     const participant_headers = ["Nivel","Participante","Colegio"];
     const downloadParticipantHeaders = ["Nivel","Nombre","Apellido","Colegio"]
     return(
-        (filteredParticipants.length > 0 && auth_max_date) ?
+        (participants.length > 0 && auth_max_date) ?
         <>
         <p className={styles.text}>Los alumnos que aprobaron el zonal pasan al regional participen o no del provincial.</p>
         <Collapsable title="Inscripción">
@@ -153,7 +151,7 @@ const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) 
         </form>
         <Table 
             values={filteredValues} 
-            allValues={filteredParticipants} 
+            allValues={participants} 
             headers={participant_headers} 
             Card={ProvincialParticipantCard} 
             elements_per_page={20} 
