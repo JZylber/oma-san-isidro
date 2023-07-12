@@ -43,7 +43,7 @@ const make_download_element = (result : Result) => {
     const present = result.presente;
     const clarification = result.aclaracion;
     const hasPoints = present && !clarification;
-    return([level,name,surname,school].concat(hasPoints?points.map((point) => point.toString()):[],[total,passed?"Si":(!present?"Ausente":(clarification?clarification:"No"))]))
+    return([level,name,surname,school].concat(hasPoints?points.map((point) => point.toString()):Array.from({length: result.cantidad_problemas},() => "-"),[total,passed?"Si":(!present?"Ausente":(clarification?clarification:"No"))]))
 }
 
 const ResultTable = ({results,testInfo}:{results : Array<TestQueryResults>, testInfo: string}) => {
