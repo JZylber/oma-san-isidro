@@ -2,8 +2,6 @@ import Link from "next/link";
 import styles from "./Venues.module.scss";
 import Image from "next/image";
 import SelectResultCategory from "../ResultsPage/SelectResultCategory";
-import { useState } from "react";
-import { removeRepeatedSchools } from "../ResultsPage/ResultTable";
 import Table from "../Table/Table";
 import VenueCard from "./VenueCard";
 import ParticipantCard from "./ParticipantCard";

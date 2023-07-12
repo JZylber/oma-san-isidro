@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { Filterable, Filterables } from "./types";
+import { Filterable, FilterableObject, Filterables } from "./types";
 
 interface ChangeValueAction<S> {
     type: string,
@@ -17,7 +17,7 @@ const reducer = <S,>(state : Partial<S>,action: ChangeValueAction<Partial<S>>) =
     }
 };
 
-const useFilter = <S extends Record<string,Filterables>>(values: S[]) => {
+const useFilter = <S extends FilterableObject>(values: S[]) => {
     const [state,dispatch] = useReducer(reducer<S>,{});
     const filterFunction = (value: S,filter: Partial<S>) => {
         const isFilterCompliant = Object.keys(filter).every((key) => 

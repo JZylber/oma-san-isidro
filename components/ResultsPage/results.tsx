@@ -14,31 +14,6 @@ const normalizeString = (str: string) => {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
 
-/*const sortByNames = (a: TestQueryResults, b: TestQueryResults) => {
-    const surnameA = normalizeString(a.participacion.participante.apellido);
-    const surnameB = normalizeString(b.participacion.participante.apellido);
-    if (surnameA < surnameB) {
-        return -1;
-    }
-    else if (surnameA > surnameB) {
-        return 1;
-    }
-    else if (surnameA === surnameB) {
-        const nameA = normalizeString(a.participacion.participante.nombre);
-        const nameB = normalizeString(b.participacion.participante.nombre);
-        if (nameA < nameB) {    
-            return -1;
-        }
-        else if (nameA > nameB) {
-            return 1;
-        }
-        else {
-            return 0;
-        }
-    }
-};*/
-
-
 const Results = ({competition,availableResults} : ResultProps) => {
     const [isLoading,setIsLoading] = useState(false);
     const [results,setResults] = useState<Array<TestQueryResults> | undefined>();
