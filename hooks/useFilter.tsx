@@ -22,20 +22,19 @@ const useFilter = <S extends Record<string,Filterables>>(values: S[]) => {
     const filterFunction = (value: S,filter: Partial<S>) => {
         for(let key in filter){
             const property = value[key];
-            if(typeof property !== "object"){
-                if(filter[key] && value[key] !== filter[key]){
-                    return false;
-                }else{
-                    return true;
-                }
-            } else {
-                const filterable = property as Filterable<any>;
-                if(filterable.isFilteredBy(filter[key])){
-                    return false;
+            if(filter[key] !== undefined){
+                if(typeof property !== "object"){
+                    if(value[key] !== filter[key]){
+                        return false;
+                    }
                 } else {
-                    return true;
+                    const filterable = property as Filterable<any>;
+                    if(filterable.isFilteredBy(filter[key])){
+                        return false;
+                    }
                 }
             }
+            return true;
         }
         return true;
     }
