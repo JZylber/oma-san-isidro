@@ -1,16 +1,16 @@
 import styles from "./Card.module.scss";
 import ExpandArrow from "../../public/images/menuArrow.svg"
 import { useState } from "react";
-import { Participant, participantName, schoolName } from "./Venues";
 import { CardType } from "../Table/types";
+import { VenueParticipant } from "./Venues";
 
-const ParticipantCard: CardType<Participant> = ({value}) => {
-    const {nivel,nombre,apellido,colegio,sede} = value;
+const ParticipantCard: CardType<VenueParticipant> = ({value}) => {
+    const {nivel,participante,colegio,sede} = value;
     const [expanded, setExpanded] = useState(false);
     return(
         <div className={styles.container} onClick={() => setExpanded(!expanded)}>
             <div className={styles.info}>
-                <p className={styles.name}>{participantName(nombre,apellido)}</p>
+                <p className={styles.name}>{participante.toString()}</p>
                 <div className={styles.category}>
                         <p className={styles.title}>Rinde en:</p>
                         <p className={styles.value}>{sede}</p>
@@ -22,7 +22,7 @@ const ParticipantCard: CardType<Participant> = ({value}) => {
                     </div>
                     <div className={styles.category}>
                         <p className={styles.title}>Colegio</p>
-                        <p className={styles.value}>{schoolName(colegio)}</p>
+                        <p className={styles.value}>{colegio.toString()}</p>
                     </div>
                 </div>}
             </div>

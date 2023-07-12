@@ -2,20 +2,11 @@ import Link from "next/link";
 import styles from "./Venues.module.scss";
 import Image from "next/image";
 import SelectResultCategory from "../ResultsPage/SelectResultCategory";
-import { useState } from "react";
-import { School } from "../ResultsPage/resultsTypes";
-import { removeRepeatedSchools } from "../ResultsPage/ResultTable";
 import Table from "../Table/Table";
 import VenueCard from "./VenueCard";
 import ParticipantCard from "./ParticipantCard";
-
-export interface Venue{
-    colegio: School;
-    nombre: string;
-    direccion: string;
-    localidad: string;
-    aclaracion?: string;
-}
+import { Filterables, Participant, School } from "../../hooks/types";
+import useFilter from "../../hooks/useFilter";
 
 export interface DropPoint {
     localidad: string,
@@ -24,46 +15,34 @@ export interface DropPoint {
     aclaracion?: string,
 }
 
-export interface Participant{
-    nombre: string;
-    apellido: string;
-    colegio: School;
-    nivel: number;
-    sede: string;
-}
-
 interface VenueProps {
     type: string;
     instance: string;
     venues: Venue[];
     dropPoints: DropPoint[];
-    participants: Participant[];
+    participants: VenueParticipant[];
     auth_max_date?: Date;
 }
 
-interface VenueFilters{
-    colegio?: School;
-    sede?: string;
+export interface Venue extends Record<string,Filterables> {
+    nombre: string;
+    direccion: string;
+    localidad: string;
+    colegio: School;
+    aclaracion: string;
 }
 
-interface ParticipantFilters{
-    nivel?: number;
-    nombreApellido?: string;
-    colegio?: School;
-    sede?: string;
+export interface VenueParticipant extends Record<string,Filterables> {
+    nivel: number;
+    sede: string;
+    colegio: School;
+    participante: Participant;
 }
 
-export const schoolName = (school: School) => {
-    return(school.nombre + (school.sede?`-${school.sede}`:""))
-}
-
-export const participantName = (nombre: string, apellido: string) => {
-    return(`${nombre} ${apellido}`)
-}
 const makeVenueElement = (venue : Venue,index : number,clarifications?: boolean) => {
     return(
         <tr key={index}>
-            <td>{schoolName(venue.colegio)}</td>
+            <td>{venue.colegio.toString()}</td>
             <td>{venue.nombre}</td>
             <td>{venue.direccion}</td>
             <td>{venue.localidad}</td>
@@ -71,63 +50,34 @@ const makeVenueElement = (venue : Venue,index : number,clarifications?: boolean)
         </tr>)
 }
 
-const downloadParticipantData = (participant : Participant):Array<string> => {
-    return([participant.nivel.toString(),participant.nombre,participant.apellido,schoolName(participant.colegio),participant.sede])
+const downloadParticipantData = (participant : VenueParticipant):Array<string> => {
+    return([participant.nivel.toString(),participant.participante.name,participant.participante.surname,participant.colegio.toString(),participant.sede])
 }
 
 const downloadParticipantHeaders = ["Nivel","Nombre","Apellido","Colegio","Sede"]
 
-const makeParticipantElement = (participant : Participant,index : number) => {
+const makeParticipantElement = (participant : VenueParticipant,index : number) => {
     return(
         <tr key={index}>
             <td>{participant.nivel}</td>
-            <td>{participantName(participant.nombre,participant.apellido)}</td>
-            <td>{schoolName(participant.colegio)}</td>
+            <td>{participant.participante.toString()}</td>
+            <td>{participant.colegio.toString()}</td>
             <td>{participant.sede}</td>
         </tr>)
-}
-export const availableOptions = <S extends object,F extends object>(results: Array<S>, category: string, filters: F, filterCompliance: (arg:S,filter:F)=> boolean):Array<S> => {
-    return results.filter((element: S) => {return(filterCompliance(element,{...filters,[category]:undefined}))});
 }
 
 const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants}:VenueProps) => {
     //Venues
-    const [venueFilters,setVenueFilters] = useState<VenueFilters>({colegio: undefined, sede: undefined});
-    const [participantFilters,setParticipantFilters] = useState<ParticipantFilters>({nivel: undefined, nombreApellido:undefined,colegio: undefined, sede: undefined});
-    const venueIsFilterCompliant = (venue: Venue, filter: VenueFilters) => {
-        const {colegio,sede} = filter;
-        const isSchool = (colegio? (venue.colegio.nombre === colegio.nombre) && (colegio.sede?venue.colegio.sede === colegio.sede:true) : true);
-        const isVenue = (sede? venue.nombre === sede : true);
-        return isSchool && isVenue;
-    }
     const hasDisclaimers = venues.reduce((disclaimers : number,venue: Venue) => {
-        return disclaimers + (venue.aclaracion !== null?1:0);
+        return disclaimers + (venue.aclaracion !== ""?1:0);
     },0) > 0;
-    const filteredVenues = venues.filter((element) => venueIsFilterCompliant(element,venueFilters));
-    const v_availableSchools = filteredVenues.map(venue => venue.colegio);
-    let v_schools : Array<School> = removeRepeatedSchools(v_availableSchools);
-    const v_genericSchools: Array<School> =removeRepeatedSchools(v_schools.filter((school) => school.sede).map((school) => {return({nombre: school.nombre})}));
-    v_schools = v_schools.concat(v_genericSchools);
-    const v_venue_names = Array.from(new Set(filteredVenues.map(venue => venue.nombre)));
-    const venue_headers = ["Colegio","Sede","Dirección","Localidad"].concat(hasDisclaimers?["Aclaración"]:[]); 
-    //Participants
-    const participantIsFilterCompliant = (participant: Participant, filter: ParticipantFilters) => {
-        const {nivel,nombreApellido,colegio,sede} = filter;
-        const isParticipant = ((nombreApellido)? nombreApellido === participantName(participant.nombre,participant.apellido): true);
-        const isLevel = (nivel? participant.nivel === nivel : true);
-        const isSchool = (colegio? (participant.colegio.nombre === colegio.nombre) && (colegio.sede?participant.colegio.sede === colegio.sede:true) : true);
-        const isVenue = (sede? participant.sede === sede : true);
-        return isParticipant && isLevel && isSchool && isVenue;
+    const [venueFilter,updateVenueFilter,filteredVenues,venueOptions] = useFilter<Venue>(venues);
+    const [participantFilter,updateParticipantFilter,filteredParticipants,participantOptions] = useFilter<VenueParticipant>(participants);
+    const participant_headers = ["Nivel","Participante","Colegio","Sede"];
+    const venue_headers = ["Colegio","Sede","Dirección","Localidad"];
+    if(hasDisclaimers) {
+        venue_headers.push("Aclaración");
     }
-    const filteredParticipants = participants.filter((element) => participantIsFilterCompliant(element,participantFilters));
-    const p_availableSchools = filteredParticipants.map(participant => participant.colegio);
-    let p_schools : Array<School> = removeRepeatedSchools(p_availableSchools);
-    const p_genericSchools: Array<School> =removeRepeatedSchools(p_schools.filter((school) => school.sede).map((school) => {return({nombre: school.nombre})}));
-    p_schools = p_schools.concat(p_genericSchools);
-    const p_venue_names = Array.from(new Set(filteredParticipants.map(participant => participant.sede)));
-    const p_levels = Array.from(new Set(availableOptions(participants,"nivel",participantFilters,participantIsFilterCompliant).map(participant => participant.nivel)));
-    const p_names = Array.from(new Set(filteredParticipants.map(participant => participantName(participant.nombre,participant.apellido))));
-    const participant_headers = ["Nivel","Participante","Colegio","Sede"]; 
     return(
         <>
             {dropPoints.length > 0 &&
@@ -148,8 +98,8 @@ const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants}:Ven
             <p className={styles.text}>Presentarse <span className={styles.bold}>13:30 hs</span>. ¡No se olviden de las autorizaciones!</p>
             <h3 className={styles.section_subtitle}>Colegios por sede</h3>
             <form className={styles.form}>
-                <SelectResultCategory category="Colegio" value={venueFilters.colegio} setValue={(option?: School) => {setVenueFilters({...venueFilters,colegio: option})}} options={v_schools} input={true}/>
-                <SelectResultCategory category="Sede" value={venueFilters.sede} setValue={(option?: string) => {setVenueFilters({...venueFilters,sede: option})}} options={v_venue_names} input={true}/>
+                <SelectResultCategory category="Colegio" value={venueFilter.colegio} setValue={(option?: School) => updateVenueFilter({colegio: option})} options={venueOptions.colegio} input={true}/>
+                <SelectResultCategory category="Sede" value={venueFilter.nombre} setValue={(option?: string) => updateVenueFilter({nombre: option})} options={venueOptions.nombre} input={true}/>
             </form>
             <Table 
                 values={filteredVenues}
@@ -161,10 +111,10 @@ const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants}:Ven
                 />
             <h3 className={styles.section_subtitle}>Alumnos por sede</h3>
             <form className={styles.form}>
-                <SelectResultCategory category="Participante" value={participantFilters.nombreApellido} setValue={(option?: string) => {setParticipantFilters({...participantFilters,nombreApellido: option})}} options={p_names} input={true}/>
-                <SelectResultCategory category="Colegio" value={participantFilters.colegio} setValue={(option?: School) => {setParticipantFilters({...participantFilters,colegio: option})}} options={p_schools} input={true}/>
-                <SelectResultCategory category="Sede" value={participantFilters.sede} setValue={(option?: string) => {setParticipantFilters({...participantFilters,sede: option})}} options={p_venue_names} input={true}/>
-                <SelectResultCategory category="Nivel" value={participantFilters.nivel} setValue={(option? : number) => {setParticipantFilters({...participantFilters,nivel: option})}} options={p_levels} clear={true}/>
+                <SelectResultCategory category="Participante" value={participantFilter.participante} setValue={(option?: Participant) => updateParticipantFilter({participante: option})} options={participantOptions.participante} input={true}/>
+                <SelectResultCategory category="Colegio" value={participantFilter.colegio} setValue={(option?: School) => updateParticipantFilter({colegio: option})} options={participantOptions.colegio} input={true}/>
+                <SelectResultCategory category="Sede" value={participantFilter.sede} setValue={(option?: string) => updateParticipantFilter({sede:option})} options={participantOptions.sede} input={true}/>
+                <SelectResultCategory category="Nivel" value={participantFilter.nivel} setValue={(option? : number) => updateParticipantFilter({nivel:option})} options={participantOptions.nivel} clear={true}/>
             </form>
             <Table 
                 values={filteredParticipants} 
