@@ -53,8 +53,8 @@ const ResultTable = ({results,testInfo}:{results : Array<TestQueryResults>, test
         aclaracion: result.aclaracion?result.aclaracion:"",
         aprobado: result.aprobado,
         resultados: new Problems(
-            result.resultados.slice(0,-1).map((result) => new Problem(Number(result[0]),(result.match(/-/g)||[]).length)),
-            Number(result.resultados[-1])),
+            result.resultados.slice(0,-1).map((result) => new Problem(result[0]?Number(result[0]):0,(result.match(/-/g)||[]).length)),
+            Number(result.resultados.slice(-1))),
         nivel: result.participacion.nivel,
         colegio: new School(result.participacion.colegio.nombre,result.participacion.colegio.sede),
         participante: new Participant(result.participacion.participante.nombre,result.participacion.participante.apellido)
