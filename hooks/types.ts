@@ -36,7 +36,7 @@ export class Problem implements Filterable<Problem> {
         return this.value?(this.value === element.value && this.minus === element.minus):true;
     }
     toString(): string {
-        return `${this.value?this.value:''}${"-".repeat(this.minus)}`;
+        return `${this.value !== undefined?this.value:''}${"-".repeat(this.minus)}`;
     }
 }
 
