@@ -44,7 +44,8 @@ const useFilter = <S extends Record<string,Filterables>>(values: S[]) => {
     }
     let options : Partial<Record<keyof S,Filterables[]>> = {};
     Object.keys(values[0]).forEach((key) => {
-        options[key as keyof S] = Array.from(new Set(values.filter((value) => filterFunction(value,{...state,key:undefined})).map((value) => value[key as keyof S])));
+        const stateWithoutKey = {...state,[key as keyof S]:undefined}
+        options[key as keyof S] = Array.from(new Set(values.filter((value) => filterFunction(value,stateWithoutKey)).map((value) => value[key as keyof S])));
     });
     return {state,update,filteredValues,options};
 };
