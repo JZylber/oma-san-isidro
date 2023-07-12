@@ -1,184 +1,88 @@
-import { useState } from "react";
-import { ResultFilter, School, TestQueryResults } from "./resultsTypes";
+import {Result, TestQueryResults } from "./resultsTypes";
 import styles from "./ResultTable.module.scss"
-import SelectIcon from "../../public/images/menuSelectIcon.svg";
-import Arrow from "../../public/images/newsArrow.svg"
 import ErrorMessage from "./ErrorMessage";
 import ResultFilterForm from "./resultFilterForm";
-import DownloadPopup from "./ExportResults/DownloadModal";
+import { Participant, Problem, Problems, School } from "../../hooks/types";
+import useFilter from "../../hooks/useFilter";
+import Table from "../Table/Table";
 import ResultCard from "./Mobile/ResultCard";
 
-export const participantName = (result: TestQueryResults) => {
-    return(`${result.participacion.participante.nombre} ${result.participacion.participante.apellido}`)
+const make_element = (result : Result,index : number) => {
+    const participant = result.participante.toString();
+    const school = result.colegio.toString();
+    const level = result.nivel;
+    const points = result.resultados.problems;
+    const total = result.resultados.total;
+    const passed = result.aprobado;
+    const present = result.presente;
+    const clarification = result.aclaracion;
+    const hasPoints = present && !clarification;
+    return(
+        <tr key={index}>
+            <td>{participant}</td>
+            <td className={styles.center_align}>{level}</td>
+            <td>{school}</td>
+            {result.cantidad_problemas>0 && (hasPoints ? 
+                <>
+                {points.map((point,index) => <td key={index} className={styles.center_align}>{point.toString()}</td>)}
+                <td className={styles.center_align}>{total}</td>
+                </>:
+                <td colSpan={result.cantidad_problemas + 1} className={styles.center_align}>{present?clarification:"Ausente"}</td>)}
+            <td className={styles.center_align}>{passed?"Si":"No"}</td>
+        </tr>)
 }
 
-export const schoolName = (result: TestQueryResults) => {
-    return(result.participacion.colegio.nombre + (result.participacion.colegio.sede?`-${result.participacion.colegio.sede}`:""))
-}
-
-export const removeRepeatedSchools = (schools : School []) => {
-    return schools.filter((value, index, self) =>
-        index === self.findIndex((t) => (
-            t.nombre === value.nombre && t.sede === value.sede && t.localidad === value.localidad
-  ))
-)
+const make_download_element = (result : Result) => {
+    const name = result.participante.name;
+    const surname = result.participante.surname;
+    const school = result.colegio.toString();
+    const level = result.nivel.toString();
+    const points = result.resultados.problems;
+    const total = result.resultados.total.toString();
+    const passed = result.aprobado;
+    const present = result.presente;
+    const clarification = result.aclaracion;
+    const hasPoints = present && !clarification;
+    return([level,name,surname,school].concat(hasPoints?points.map((point) => point.toString()):Array.from({length: result.cantidad_problemas},() => "-"),[total,passed?"Si":(!present?"Ausente":(clarification?clarification:"No"))]))
 }
 
 const ResultTable = ({results,testInfo}:{results : Array<TestQueryResults>, testInfo: string}) => {
-    const numberOfProblems = results[0].prueba.cantidad_problemas;
-    const starting_filters : ResultFilter = {participante: undefined,colegio: undefined,nivel: undefined,aprobado: undefined}
-    const [filters,setFilters] = useState<ResultFilter>(starting_filters)
-
-    const updateFilter = (category: string, newValue: undefined | string | boolean | number | School) => {
-        setFilters({...filters,[category]:newValue})
-        setPage(0);
-    }
-
-    const isFilterCompliant = (result: TestQueryResults, filters: ResultFilter) => {
-        const name = !filters.participante || participantName(result) === (filters.participante)
-        const school = !filters.colegio || ((filters.colegio.nombre === result.participacion.colegio.nombre) && (!filters.colegio.sede || filters.colegio.sede === result.participacion.colegio.sede))
-        const level = !filters.nivel || filters.nivel === result.participacion.nivel
-        const passed = filters.aprobado === undefined || filters.aprobado === result.aprobado
-        return(name && school && level && passed) 
-    }
-
-    const filter_results = (results: Array<TestQueryResults>, filters: ResultFilter) => {
-        return results.filter((result) => isFilterCompliant(result,filters));
-    };
-
-    const make_element = (result : TestQueryResults,index : number) => {
-        const participant = participantName(result)
-        const school = schoolName(result);
-        const level = result.participacion.nivel;
-        const points = result.resultados;
-        const passed = result.aprobado;
-        const present = result.presente;
-        const clarification = result.aclaracion;
-        const hasPoints = present && !clarification;
-        return(
-            <tr key={index}>
-                <td>{participant}</td>
-                <td className={styles.center_align}>{level}</td>
-                <td>{school}</td>
-                {numberOfProblems>0 && (hasPoints ? points.map((point,index) => <td key={index} className={styles.center_align}>{point}</td>): <td colSpan={numberOfProblems + 1} className={styles.center_align}>{present?clarification:"Ausente"}</td>)}
-                <td className={styles.center_align}>{passed?"Si":"No"}</td>
-            </tr>)
-    }
+    const filterableResults : Array<Result> = results.map((result) => {return({
+        cantidad_problemas: result.prueba.cantidad_problemas,
+        presente: result.presente,
+        aclaracion: result.aclaracion?result.aclaracion:"",
+        aprobado: result.aprobado,
+        resultados: new Problems(
+            result.resultados.slice(0,-1).map((result) => new Problem(Number(result[0]),(result.match(/-/g)||[]).length)),
+            Number(result.resultados.slice(-1))),
+        nivel: result.participacion.nivel,
+        colegio: new School(result.participacion.colegio.nombre,result.participacion.colegio.sede),
+        participante: new Participant(result.participacion.participante.nombre,result.participacion.participante.apellido)
+        });
+    })
+    const headers = ["Participante","Nivel","Colegio"].concat(Array.from({ length: filterableResults[0].cantidad_problemas }, (value, index) => `P${index + 1}`),["Total","Aprobado"])
+    const downloadHeaders = ["Nivel","Nombre","Apellido","Colegio"].concat(Array.from({ length: filterableResults[0].cantidad_problemas }, (value, index) => `P${index + 1}`),["Total","Aprobado"])
     //FILTERING
-    let filtered_results = filter_results(results,filters);
-    const availableOptions = (results: Array<TestQueryResults>, category: string, filters: ResultFilter):Array<TestQueryResults> => {
-        return filter_results(results,{...filters,[category]:undefined})
-    }
-
-    let schools : Array<School> = removeRepeatedSchools(availableOptions(results,"colegio",filters).map((result) => result.participacion.colegio));
-    const genericSchools: Array<School> =removeRepeatedSchools(schools.filter((school) => school.sede).map((school) => {return({nombre: school.nombre})}));
-    schools = schools.concat(genericSchools);
-    const names : Array<string> = Array.from(new Set(availableOptions(results,"participante",filters).map((result) => participantName(result))));
-    const levels: Array<number> = Array.from(new Set(availableOptions(results,"nivel",filters).map((result) => result.participacion.nivel)));
-    const passed: Array<boolean> = Array.from(new Set(availableOptions(results,"aprobado",filters).map((result) => result.aprobado)));
-    //PAGINATION
-    const [page,setPage] = useState(0);
-    const page_size = 50
-    let max_pages =  Math.ceil(filtered_results.length / page_size) - 1;
-    let firstResult = page * page_size
-    let lastResult = Math.min((page + 1)*page_size,filtered_results.length)
-    const results_in_page = filtered_results.slice(firstResult,lastResult)
-    const nextPage = () => {
-        if(page<max_pages){
-            setPage(page + 1);
-        }
-    }
-    const prevPage = () => {
-        if(page > 0){
-            setPage(page - 1);
-        }
-    }
-    const pagination = 
-        <div className={styles.pagination}>
-            <p>Mostrando {firstResult + 1}-{lastResult} de {filtered_results.length}</p>
-            <div className={[styles.prev,page===0 && styles.greyed].join(" ")} onClick={prevPage}><SelectIcon/></div>
-            <div className={[styles.next,page===max_pages && styles.greyed].join(" ")} onClick={nextPage}><SelectIcon/></div>
-        </div>
-    const mobile_pagination = 
-        <div className={styles.mobile_pagination}>
-            <p>Mostrando {firstResult + 1}-{lastResult} de {filtered_results.length}</p>
-            <div className={styles.page_select}>
-                <div className={[styles.prev,page===0 && styles.greyed].join(" ")} onClick={prevPage}><SelectIcon/></div>
-                <div className={styles.pages}>
-                    {page >= 2 && <div className={styles.item} onClick={() => setPage(0)}>{1}</div>}
-                    {page >= 3 && <div className={styles.item}>...</div>}
-                    {page >= 1 && <div className={styles.item} onClick={() => setPage(page - 1)}>{page}</div>}
-                    <div className={[styles.item,styles.selected].join(" ")}>{page + 1}</div>
-                    {(max_pages - page) >= 1 && <div className={styles.item} onClick={() => setPage(page + 1)}>{page + 2}</div>}
-                    {(max_pages - page) >= 3 && <div className={styles.item}>...</div>}
-                    {(max_pages - page) >= 2 && <div className={styles.item} onClick={() => setPage(max_pages)}>{max_pages + 1}</div>}
-                </div>
-                <div className={[styles.next,page===max_pages && styles.greyed].join(" ")} onClick={nextPage}><SelectIcon/></div>
-            </div>
-        </div>
-    //Download Modal
-    const [openDownloadPopup,setOpenDownloadPopup] = useState(false);
-    const make_table = (results? : Array<TestQueryResults>) => {
-        if(results){
-            return(
-                <table className={styles.result_table}>
-                    <thead>
-                        <tr>
-                            <td>Participante</td>
-                            <td className={styles.center_align}>Nivel</td>
-                            <td>Colegio</td>
-                            {numberOfProblems > 0 &&
-                                <>
-                                {Array.from(new Array(numberOfProblems), (x, i) => i + 1).map((number) => <td key={number} className={styles.center_align}>{`P${number}`}</td>)}
-                                <td className={styles.center_align}>Total</td>
-                                </>
-                            }
-                            <td className={styles.center_align}>Aprobado</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {results.map((result,index) => make_element(result,index))}
-                    </tbody>
-                </table>)
-        } else {
-            return(
-                <span>Elija un año e instancia y luego haga click en buscar resultados</span>
-            )
-        }
-    }
-    const table =
-    <>
-    {mobile_pagination}
-    <div className={styles.table_header}>
-        <div className={styles.downloadButton} onClick={() => setOpenDownloadPopup(true)}>
-            <span>Descargar</span>
-            <div className={styles.arrow}>
-                <Arrow/>
-            </div>
-        </div>
-        {pagination}
-    </div>
-    <div className={styles.results}>
-        {make_table(results_in_page)}
-    </div>
-    <div className={styles.mobile_results}>
-        {results_in_page.map((result,idx) => <ResultCard key={idx} result={result}/>)}
-    </div>
-    <div className={styles.table_footer}>
-        {pagination}
-    </div>
-    </>
+    const [resultFilter,updateFilter,filtered_results,options] = useFilter(filterableResults)
+    
     return(
         <>
-            <ResultFilterForm filters={filters} updateFilter={updateFilter} schools={schools} names={names} levels={levels} passed={passed}/>
-            {filtered_results.length > 0?table:<ErrorMessage status={400}/>}
-            <DownloadPopup 
-                open={openDownloadPopup} 
-                setOpen={setOpenDownloadPopup}
-                testInfo={testInfo}
-                results={results}
-                filteredResults={filtered_results}
-            />
+            <ResultFilterForm filters={resultFilter} updateFilter={updateFilter} schools={options.colegio} names={options.participante} levels={options.nivel} passed={options.aprobado}/>
+            {filtered_results.length > 0?
+                <Table 
+                    values={filtered_results} 
+                    allValues={filterableResults} 
+                    headers={headers} 
+                    Card={ResultCard} 
+                    elements_per_page={50} 
+                    download={true}
+                    downloadHeaders={downloadHeaders}
+                    process_data={make_download_element}
+                    make_element={make_element}
+                    testInfo={testInfo}
+                    center_columns={[1]}
+                />:
+                <ErrorMessage status={400}/>}
             <p className={styles.disclaimer}>Si hay algún error en el nombre/apellido de algún participante, o algún error en el nombre de algún colegio, por favor mandar un mail a: <a href="mailto:omasanisidro.devs@gmail.com">omasanisidro.devs@gmail.com</a></p>
         </>
     )

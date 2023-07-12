@@ -1,3 +1,5 @@
+import { FilterableObject, Participant, Problems, School } from "../../hooks/types"
+
 export interface InstanceData {
     nombre: string,
     disponible: boolean,
@@ -32,7 +34,7 @@ export interface TestQueryResults {
         colegio: {
             nombre: string,
             sede: string
-        }
+        },
         participante: {
             nombre: string,
             apellido : string
@@ -40,17 +42,15 @@ export interface TestQueryResults {
     }
 }
 
-export interface ResultFilter {
-    participante?: string,
-    colegio?: School,
-    nivel?:  number,
-    aprobado?: boolean
-} 
-
-export type School = {
-    nombre : string,
-    sede?: string,
-    localidad?: string
+export interface Result extends FilterableObject {
+    cantidad_problemas: number,
+    presente : boolean,
+    aprobado : boolean,
+    aclaracion : string,
+    resultados : Problems,
+    nivel : number,
+    colegio: School,
+    participante: Participant
 }
 
 export interface OptionFilterProps{

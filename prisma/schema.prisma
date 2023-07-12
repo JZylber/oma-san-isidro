@@ -27,6 +27,7 @@ model Participacion {
   participante               Participante                 @relation(fields: [id_participante], references: [id_participante])
   rinde                      Rinde[]
   ParticipacionSedeInstancia ParticipacionSedeInstancia[]
+  inhabilitaciones             Inhabilitado[]
 }
 
 model Colegio {
@@ -62,6 +63,7 @@ model Prueba {
   puntoinstancia            PuntoInstancia[]
   rinden                    Rinde[]
   sedeinstancia             SedeInstancia[]
+  inhabilitados             Inhabilitado[]
   resultados_disponibles    Boolean          @default(false)
 }
 
@@ -156,6 +158,15 @@ model Problema {
   links_foro  Json   @default("[]")
   id_prueba   Int
   Prueba      Prueba @relation(fields: [id_prueba], references: [id_prueba])
+}
+
+model Inhabilitado {
+  id_inhabilitado Int     @id @default(autoincrement())
+  id_participacion Int
+  Participacion Participacion @relation(fields: [id_participacion], references: [id_participacion])
+  id_prueba Int
+  Prueba Prueba @relation(fields: [id_prueba], references: [id_prueba])
+  motivo          String?
 }
 
 enum INSTANCIA {

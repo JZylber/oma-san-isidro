@@ -309,6 +309,24 @@ const venueDataGenerator = async (competition: string, instance: string) => {
   return({venues: venues,dropPoints: dropPoints,auth_max_date: JSON.parse(JSON.stringify(auth_max_date)),participants: flat_participant_venues})
 }
 
+const getDisabled = async (competition: string, year: number, instance: string) => {
+  const query = await prisma.inhabilitado.findMany({
+    where: {
+      Prueba: {
+        competencia: {
+          tipo: competition,
+          ano: year
+        },
+        instancia: instance as INSTANCIA
+    }
+    },
+    select: {
+      id_participacion: true
+    }
+  })
+  return (query);
+}
+
 const provincialDataGenerator = async (competition: string, instance: string) => {
   const date = new Date();
   const year = date.getFullYear();
@@ -319,6 +337,8 @@ const provincialDataGenerator = async (competition: string, instance: string) =>
     return({...participant,puntos: interescolar_points + Number((participant.resultados as string[])[3])});
   });
   provincialParticipants = provincialParticipants.filter((participant) => participant.puntos >= 5);
+  const disabled = await getDisabled(competition,year,instance);
+  provincialParticipants = provincialParticipants.filter((participant) => !disabled.some((disabled_participant) => disabled_participant.id_participacion === participant.id_participacion));
   const provincialParticipantsNames = provincialParticipants.map((participant) => {return({nombre: participant.participante.nombre, apellido: participant.participante.apellido ,colegio: participant.colegio, nivel: participant.nivel})});
   const auth_max_date = (await getAuthMaxDate(year,competition,instance)).query?.fecha_limite_autorizacion;
   return({participants: provincialParticipantsNames,auth_max_date: JSON.parse(JSON.stringify(auth_max_date))});
