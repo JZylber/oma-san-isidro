@@ -12,7 +12,7 @@ export class School implements Filterable<School> {
     }
 
     toString(): string {
-        return `${this.name}-${this.venue}`;
+        return `${this.name}${this.venue?`-${this.venue}`:''}`;
     }
 }
 
