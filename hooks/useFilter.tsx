@@ -49,9 +49,13 @@ const useFilter = <S extends Record<string,Filterables>>(values: S[]) => {
         } else {
             const uniqueValues = values
                 .filter((value) => filterFunction(value,stateWithoutKey))
-                .map((value) => value[key as keyof S])
-                .filter((value,index,self) => self.findIndex((v) => (v as Filterable<any>).isFilteredBy(value)) === index);
-            options[key as keyof S] = uniqueValues;
+                .map((value) => value[key as keyof S] as Filterable<any>)
+                .filter((value,index,self) => self.findIndex((v) => v.isFilteredBy(value)) === index);
+            const genericValues = uniqueValues
+                .map((value) => value.generic)
+                .filter((value) => value !== undefined)
+                .filter((value,index,self) => self.findIndex((v) => v.isFilteredBy(value)) === index);
+            options[key as keyof S] = uniqueValues.concat(genericValues);
         }
         
     });

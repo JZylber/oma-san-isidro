@@ -155,6 +155,7 @@ const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) 
         <Collapsable title="Participantes Clasificados">
         <p className={styles.text}>Los participantes que clasifican a la instancia provincial son aquellos que sumen 5 puntos entre las instancias Zonal e {competition === "OMA"?"Intercolegial":"Interescolar"}.</p>
         <form className={styles.form}>
+            <SelectResultCategory category="Participante" value={state.participante} setValue={(option? : Participant) =>update({participante:option})} options={options["participante"] as Participant[]} input={true}/>
             <SelectResultCategory category="Colegio" value={state.colegio} setValue={(option? : School) =>update({colegio:option})} options={options["colegio"] as School[]} input={true}/>
             <SelectResultCategory category="Nivel" value={state.nivel} setValue={(option? : number) =>update({nivel:option})} options={options["nivel"] as number[]} clear={true}/>
         </form>
