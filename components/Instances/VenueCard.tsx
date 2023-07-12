@@ -2,7 +2,7 @@ import styles from "./Card.module.scss";
 import ExpandArrow from "../../public/images/menuArrow.svg"
 import { useState } from "react";
 import { CardType } from "../Table/types";
-import { Venue, schoolName } from "./Venues";
+import { Venue} from "./Venues";
 
 const VenueCard: CardType<Venue> = ({value}) => {
     const {colegio,nombre, direccion, localidad, aclaracion} = value;
@@ -10,7 +10,7 @@ const VenueCard: CardType<Venue> = ({value}) => {
     return(
         <div className={styles.container} onClick={() => setExpanded(!expanded)}>
             <div className={styles.info}>
-                <p className={styles.name}>{schoolName(colegio)}</p>
+                <p className={styles.name}>{colegio.toString()}</p>
                 {aclaracion && <p className={styles.subtext}>({aclaracion})</p>}
                 <div className={styles.category}>
                         <p className={styles.title}>Rinde en:</p>

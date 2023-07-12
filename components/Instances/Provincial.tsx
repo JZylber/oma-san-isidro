@@ -1,7 +1,5 @@
-import { removeRepeatedSchools } from "../ResultsPage/ResultTable";
 import Table from "../Table/Table";
 import styles from "./Provincial.module.scss";
-import { availableOptions, participantName, schoolName } from "./Venues";
 import ProvincialParticipantCard from "./ProvincialCard";
 import SelectResultCategory from "../ResultsPage/SelectResultCategory";
 import Collapsable from "../Collapsable/Collapsable";
@@ -59,7 +57,7 @@ const downloadFile = (filename: string) => {
 const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) => {
     const newParticipants : ProvincialParticipant[] = participants.map((participant) => {return{nivel: participant.nivel, participante: new Participant(participant.nombre,participant.apellido), colegio: new School(participant.colegio.nombre,participant.colegio.sede)}});
     //Participants
-    const {state,update,filteredValues,options} = useFilter(newParticipants);
+    const [state,update,filteredValues,options] = useFilter(newParticipants);
     const participant_headers = ["Nivel","Participante","Colegio"];
     const downloadParticipantHeaders = ["Nivel","Nombre","Apellido","Colegio"]
     return(

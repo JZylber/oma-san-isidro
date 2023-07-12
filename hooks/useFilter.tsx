@@ -59,7 +59,7 @@ const useFilter = <S extends Record<string,Filterables>>(values: S[]) => {
         }
         
     });
-    return {state,update,filteredValues,options};
+    return [state,update,filteredValues,options] as const;
 };
 
 export default useFilter;
