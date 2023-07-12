@@ -20,8 +20,8 @@ const reducer = <S,>(state : Partial<S>,action: ChangeValueAction<Partial<S>>) =
 const useFilter = <S extends Record<string,Filterables>>(values: S[]) => {
     const [state,dispatch] = useReducer(reducer<S>,{});
     const filterFunction = (value: S,filter: Partial<S>) => {
-        for(let key in filter){
-            const property = value[key];
+        const isFilterCompliant = Object.keys(filter).every((key) => 
+        {const property = value[key];
             if(filter[key] !== undefined){
                 if(typeof property !== "object"){
                     if(value[key] !== filter[key]){
@@ -29,14 +29,13 @@ const useFilter = <S extends Record<string,Filterables>>(values: S[]) => {
                     }
                 } else {
                     const filterable = property as Filterable<any>;
-                    if(filterable.isFilteredBy(filter[key])){
+                    if(!filterable.isFilteredBy(filter[key])){
                         return false;
                     }
                 }
             }
-            return true;
-        }
-        return true;
+            return true;})
+        return isFilterCompliant;
     }
     const filteredValues = values.filter((value) => filterFunction(value,state));
     const update = (newValue : Partial<S> ) => {
@@ -45,7 +44,16 @@ const useFilter = <S extends Record<string,Filterables>>(values: S[]) => {
     let options : Partial<Record<keyof S,Filterables[]>> = {};
     Object.keys(values[0]).forEach((key) => {
         const stateWithoutKey = {...state,[key as keyof S]:undefined}
-        options[key as keyof S] = Array.from(new Set(values.filter((value) => filterFunction(value,stateWithoutKey)).map((value) => value[key as keyof S])));
+        if(typeof values[0][key as keyof S] !== "object"){
+            options[key as keyof S] = Array.from(new Set(values.filter((value) => filterFunction(value,stateWithoutKey)).map((value) => value[key as keyof S])));
+        } else {
+            const uniqueValues = values
+                .filter((value) => filterFunction(value,stateWithoutKey))
+                .map((value) => value[key as keyof S])
+                .filter((value,index,self) => self.findIndex((v) => (v as Filterable<any>).isFilteredBy(value)) === index);
+            options[key as keyof S] = uniqueValues;
+        }
+        
     });
     return {state,update,filteredValues,options};
 };

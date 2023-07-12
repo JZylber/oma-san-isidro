@@ -2,6 +2,7 @@ import {RefObject, useCallback, useEffect, useMemo, useRef, useState } from "rea
 import SelectIcon from "../../public/images/menuSelectIcon.svg";
 import { School } from "./resultsTypes";
 import styles from "./SelectResultCategory.module.scss"
+import {Filterables } from "../../hooks/types";
 
 interface SelectResultProps<T>{
     category: string,
@@ -19,7 +20,7 @@ const normalizeString = (str : string) => {
   return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase();
 }
 
-const SelectResultCategory = <T extends string|number|boolean|School,>({category,value,setValue,options,allOptions,input = false,clear=false,buttons=false,sortOptions}:SelectResultProps<T>) => {
+const SelectResultCategory = <T extends Filterables>({category,value,setValue,options,allOptions,input = false,clear=false,buttons=false,sortOptions}:SelectResultProps<T>) => {
     if(buttons && (input || clear)){
       throw Error("SelectResultCategory: Buttons can't be used with input or clear options");
     }
@@ -32,15 +33,12 @@ const SelectResultCategory = <T extends string|number|boolean|School,>({category
         setCanOpen(!canOpen)
     }
     const displayOption = useCallback((option: T) => {
-      if(typeof option === 'number'){
+      if(["number","string"].includes(typeof option)){
         return `${option}`;
-      } else if(typeof option === 'string') {
-        return `${option}`
-      }else if(typeof option === 'boolean') {
+      } else if(typeof option === 'boolean') {
         return option?"Si":"No"
-      }else if (option as School){
-        let school = option as School
-        return `${school.nombre}${school.sede?"-"+school.sede:""}`
+      }else if (typeof option === 'object'){
+        return option.toString();
       }else{
         return "";
       }
