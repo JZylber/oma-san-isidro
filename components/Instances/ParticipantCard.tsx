@@ -1,12 +1,15 @@
 import styles from "./Card.module.scss";
 import ExpandArrow from "../../public/images/menuArrow.svg"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CardType } from "../Table/types";
 import { VenueParticipant } from "./Venues";
 
 const ParticipantCard: CardType<VenueParticipant> = ({value}) => {
     const {nivel,participante,colegio,sede} = value;
     const [expanded, setExpanded] = useState(false);
+    useEffect(() => {
+        setExpanded(false);
+    },[value]);
     return(
         <div className={styles.container} onClick={() => setExpanded(!expanded)}>
             <div className={styles.info}>
