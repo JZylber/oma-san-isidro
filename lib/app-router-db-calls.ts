@@ -60,3 +60,22 @@ export const getInscriptionData = async (type: string, year: number) => {
     const results = query
     return (results);
 };
+
+export const getInstances = async (type: string, year: number) => {
+  const query = await prisma.prueba.findMany({
+    where: {
+      competencia: {
+        tipo: type,
+        ano: year
+      }
+    },
+    orderBy: [{
+      fecha : 'asc'
+    }],
+    select: {
+      instancia: true,
+      fecha: true,
+    }
+  });
+  return (query);
+};
