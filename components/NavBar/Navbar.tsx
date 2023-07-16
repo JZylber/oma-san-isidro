@@ -136,7 +136,7 @@ const showCurrentPageSelected = (menuComponents : Array<menuItem>,currentRoute:s
 
 const reduce = (menuHierarchy: MenuHierarchy, action: MenuAction) => {
   const mainItem = action.mainItem? action.mainItem : 0;
-  const subItem = action.mainItem? action.mainItem : 0;
+  const subItem = action.subItem? action.subItem : 0;
   const route = action.route? action.route : "/";
   switch (action.type) {
     case "selectMainItem":
