@@ -1,4 +1,4 @@
-@use "../../styles/shared.scss" as shared;
+@use "../../../styles/shared.scss" as shared;
 
 .title {
     @include shared.font-unbounded(600);
@@ -71,63 +71,19 @@
     @include shared.font-montserrat(600);
   }
 
+.warning_box_content {
+  @include shared.font-montserrat(400);
+  @include shared.mobile-only {
+      font-size: shared.$mobile-actionable-font-size;
+  }
 
-.warning_box {
-    box-sizing: border-box;
-    border: 2px solid black;
-    border-radius: 9px;
-  
-    @include shared.mobile-only {
-      padding: 38px 16px 34px 16px;
-    }
-    @include shared.tablet-only {
-        padding: 20px;
-    }
-    @include shared.desktop-only {
-        padding: 2 * shared.$desktop-spacing 4 * shared.$desktopXspacing 2 * shared.$desktopXspacing 4 * shared.$desktopXspacing;
-    }
-    h3 {
-        @include shared.font-unbounded(500);
-        @include shared.mobile-only {
-            font-size: 1.3 * shared.$mobile-reading-font-size;
-            width: 100%;
-            margin-bottom: 16px;
-            &:after {
-            content: ":";
-            }
-        }
-        @include shared.not-mobile {
-            align-self: center; 
-            font-size: shared.$desktop-actionable-font-size;
-        }
-    }
-    &_title {
-        display: flex;
-        &_icon {
-            @include shared.mobile-only {
-              display: none;
-            }
-            @include shared.not-mobile{
-              width: 71px;
-              height: 71px;
-            }
-          }
-      }
-    &_content {
-        @include shared.font-montserrat(400);
-        @include shared.mobile-only {
-            font-size: shared.$mobile-actionable-font-size;
-        }
+  @include shared.tablet-only {
+      font-size: shared.$tablet-actionable-font-size;
+  }
 
-        @include shared.tablet-only {
-            font-size: shared.$tablet-actionable-font-size;
-        }
-
-        @include shared.desktop-only {
-            font-size: 0.85*shared.$desktop-actionable-font-size;
-        }
-      }
+  @include shared.desktop-only {
+      font-size: 0.85*shared.$desktop-actionable-font-size;
+  }
 }
-  
   
 

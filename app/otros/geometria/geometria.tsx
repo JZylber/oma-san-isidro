@@ -1,32 +1,18 @@
-import { GetStaticProps, NextPage } from "next";
-import Head from "next/head";
-import { getDatesFromJson, JSONCalendarEvent } from "../../../components/CalendarComponents/CalendarTypes";
+'use client'
+import { CalendarEvent} from "../../../components/CalendarComponents/CalendarTypes";
 import Layout from "../../../components/Layout/Layout";
-import { getCalendarEvents } from "../../../lib/aux_db_calls";
 import styles from "./Geometria.module.scss";
-import Warning from "../../public/images/warning.svg";
 import BankInformation from "../../../components/Inscription/BankInformation";
 import AllDatesBanner from "../../../components/CalendarComponents/DateBanner/NextDatesBanner";
+import Warning from "../../../components/Warning/Warning";
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-    const year = new Date().getFullYear()
-    const available = await getCalendarEvents(year,"Geometría")
-    const newProps = {results: JSON.parse(JSON.stringify(available.results)),year: year}
-    return {
-      props: newProps,
-    };     
+interface GeometryPageProps{
+    events : Array<CalendarEvent>,
+    year : number
 }
 
-
-const Geometry : NextPage<{results : Array<JSONCalendarEvent>,year:number}> = ({results,year}) => {
-    const events = getDatesFromJson(results);
+const GeometryPage = ({events}: GeometryPageProps ) => {
     return(
-        <>
-        <Head>
-            <title>Geometría e Imaginación</title>
-            <meta   name="description"
-                content="Información general del torneo de geometría e imaginación"></meta>
-        </Head>
         <Layout>
                 <h1 className={styles.title}>Torneo de Geometría e Imaginación</h1>
                 <AllDatesBanner dates={events} category="Geometría"/>
@@ -63,15 +49,9 @@ const Geometry : NextPage<{results : Array<JSONCalendarEvent>,year:number}> = ({
                         </ul>
                     </div>
                 </section>
-                <div className={styles.warning_box}>
-                    <div className={styles.warning_box_title}>
-                        <h3>Importante</h3>
-                        <Warning className={styles.warning_box_title_icon} />
-                    </div>
-                    <div className={styles.warning_box_content}>
-                        <p>Como la Primera Ronda del Torneo Geometría e Imaginación es la primera actividad/certamen que participan los alumnos en 2023, se deberán abonar los 3000 pesos por alumno de inscripción anual en el momento de inscribirse a esta. Si esto ocurre, NO se deben abonar luego las inscripciones para OMA o Ñandú.</p>
-                    </div>
-                </div>
+                <Warning>
+                    <p className={styles.warning_box_content}>Como la Primera Ronda del Torneo Geometría e Imaginación es la primera actividad/certamen que participan los alumnos en 2023, se deberán abonar los 3000 pesos por alumno de inscripción anual en el momento de inscribirse a esta. Si esto ocurre, NO se deben abonar luego las inscripciones para OMA o Ñandú.</p>
+                </Warning>
                 <section className={styles.section}>
                     <h3 className={styles.section_title}>Consultas</h3>
                     <div className={styles.section_content}>
@@ -79,7 +59,7 @@ const Geometry : NextPage<{results : Array<JSONCalendarEvent>,year:number}> = ({
                     </div>
                 </section>
         </Layout>        
-        </>)
+       )
 }
 
-export default Geometry
+export default GeometryPage
