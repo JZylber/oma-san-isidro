@@ -98,7 +98,7 @@ const selectMainItem = (
   hierarchy: MenuHierarchy,
   mainCategory: number,
 ) => {
-  return hierarchy.map((element,index) => selectItem(element, index, mainCategory, (item: menuItem,index: number) => selectItem(item,index,0), (item) => unselectItems(item)));
+  return hierarchy.map((element,index) => selectItem(element, index, mainCategory, (item: menuItem,index: number) => selectItem(item,index,element.link?0:-1), (item) => unselectItems(item)));
 };
 
 const selectSubItem = (
