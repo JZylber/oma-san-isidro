@@ -1,3 +1,5 @@
+'use client'
+
 import styles from "./Navbar.module.scss";
 import MenuIcon from "../../public/images/menuIcon.svg";
 import X from "../../public/images/x.svg";
@@ -10,7 +12,7 @@ import {
   showCurrentPageSelected,
 } from "./NavBarRouting";
 import SubMenu from "./TopMenu/SubMenu";
-import { useRouter } from "next/router";
+import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 
 type NavProps = {
     togglePageContent? : () => void,
@@ -50,7 +52,8 @@ export default function NavBar({togglePageContent,onRouteChange}:NavProps){
         
     ];
     const router = useRouter()
-    const [menuHierarchy,setMenuHierarchy] = useState(showCurrentPageSelected(defaultMenuHierarchy,router.pathname));
+    const pathname = usePathname()
+    const [menuHierarchy,setMenuHierarchy] = useState(showCurrentPageSelected(defaultMenuHierarchy,pathname));
     const selectedMainItem = () => {
         const item = menuHierarchy.find((element) => element.selected)
         if(item){
@@ -102,7 +105,7 @@ export default function NavBar({togglePageContent,onRouteChange}:NavProps){
         const itemIndex = menuHierarchy.findIndex((item) => item.text == itemName);
         const item = menuHierarchy[itemIndex]
         if(item){
-            if(item.link && item.link !==  router.pathname){
+            if(item.link && item.link !==  pathname){
                 onRouteChange()
             }
             item.selected = true;
