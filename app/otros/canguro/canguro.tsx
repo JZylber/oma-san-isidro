@@ -1,5 +1,4 @@
-import {NextPage } from "next";
-import Head from "next/head";
+'use client'
 import Layout from "../../../components/Layout/Layout";
 import styles from "./Canguro.module.scss";
 import { Button } from "../../../components/buttons/Button";
@@ -25,14 +24,8 @@ const categories : Category [] = [
     {categoria: "Juvenil",link: "/files/canguro/Juvenil 2023.pdf",medallas: {ORO: "+52",PLATA: "38-51",BRONCE: "28-37"}},
 ]
 
-const Kangaroo : NextPage = () => {
+const KangarooPage = () => {
     return(
-        <>
-        <Head>
-            <title>Canguro</title>
-            <meta   name="description"
-                content="Información general de canguro matemático"></meta>
-        </Head>
         <Layout>
             <h1 className={styles.title}>Canguro Matemático</h1>
             <div className={styles.button_container}>
@@ -74,7 +67,7 @@ const Kangaroo : NextPage = () => {
                 </div>
             </section>
         </Layout>        
-        </>)
+    )
 }
 
-export default Kangaroo
+export default KangarooPage
