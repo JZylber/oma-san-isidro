@@ -1,9 +1,8 @@
 'use client'
-
 import styles from "./Navbar.module.scss";
 import MenuIcon from "../../public/images/menuIcon.svg";
 import X from "../../public/images/x.svg";
-import {useState } from "react";
+import {use, useEffect, useState } from "react";
 import MobileMenu from "./MobileMenu/mobile-menu";
 import TopMenu from "./TopMenu/TopMenu";
 import {
@@ -12,7 +11,7 @@ import {
   showCurrentPageSelected,
 } from "./NavBarRouting";
 import SubMenu from "./TopMenu/SubMenu";
-import { useRouter, usePathname, useSearchParams } from 'next/navigation'
+import { useRouter, usePathname} from 'next/navigation'
 
 type NavProps = {
     togglePageContent? : () => void,
@@ -53,7 +52,12 @@ export default function NavBar({togglePageContent,onRouteChange}:NavProps){
     ];
     const router = useRouter()
     const pathname = usePathname()
-    const [menuHierarchy,setMenuHierarchy] = useState(showCurrentPageSelected(defaultMenuHierarchy,pathname));
+    const [menuHierarchy,setMenuHierarchy] = useState(defaultMenuHierarchy);
+    useEffect(() => {
+      if(pathname){
+        setMenuHierarchy(showCurrentPageSelected(menuHierarchy,pathname))
+      };
+    },[pathname])
     const selectedMainItem = () => {
         const item = menuHierarchy.find((element) => element.selected)
         if(item){
@@ -117,7 +121,7 @@ export default function NavBar({togglePageContent,onRouteChange}:NavProps){
         const item = menuHierarchy[mainItemIndex]
         const subItemIndex = item.subItems.findIndex((subitem) => subitem.text === subItemName)
         const subItem = item.subItems[subItemIndex]
-        if(subItem.link && subItem.link !== router.pathname){
+        if(subItem.link && subItem.link !== pathname){
           onRouteChange();
         }
         setMenuHierarchy(selectItem(menuHierarchy,mainItemIndex,subItemIndex))

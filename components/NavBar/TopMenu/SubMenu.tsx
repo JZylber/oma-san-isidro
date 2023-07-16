@@ -1,5 +1,5 @@
+'use client'
 import Link from "next/link"
-import { useRouter } from "next/router"
 import { Fragment } from "react"
 import { MenuHierarchy } from "../NavBarRouting"
 import styles from './SubMenu.module.scss'
@@ -11,7 +11,6 @@ type SubMenuProps = {
 
 
 const SubMenu = ({items,onSubItemClick} : SubMenuProps) => {
-    const router = useRouter();
     return(
         <div className={styles.wrapper}>
         <ul className={styles.submenu_bar}>
