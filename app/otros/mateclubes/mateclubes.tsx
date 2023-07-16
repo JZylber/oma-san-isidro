@@ -13,6 +13,9 @@ const MathClubs = ({events}:MateclubesProps) => {
         <Layout>
             <h1 className={styles.title}>Mateclubes</h1>
             <AllDatesBanner dates={events} category="Mateclubes"/>
+            <section className={styles.section}> 
+                <p className={styles.main_text}>Para más información mandar un mail a Gloria Sampablo: <a href="mailto:gloriasampablo@gmail.com">gloriasampablo@gmail.com</a></p>
+            </section>
         </Layout>
     )
 }

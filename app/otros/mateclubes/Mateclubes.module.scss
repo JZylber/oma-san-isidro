@@ -14,18 +14,24 @@
     }
   }
 .section{
-    &_title {
-        margin-top: 1.6rem;
-        font-size: shared.$section-title-font-size;
-        @include shared.font-montserrat(400);
-        @include shared.mobile-only {
-          text-align: center;
-        }
-        @include shared.tablet-only {
-          text-align: left;
-        }
-        @include shared.desktop-only {
-          text-align: left;
-        }
-      }
+    margin-top: 1.6rem;
+}
+
+.main_text{
+  @include shared.font-montserrat(300);
+
+  @include shared.mobile-only {
+    font-size: shared.$mobile-reading-font-size;
+  }
+
+  @include shared.tablet-only {
+    font-size: shared.$tablet-reading-font-size;
+  }
+
+  @include shared.desktop-only {
+    font-size: shared.$desktop-reading-font-size;
+  }
+  .bold{
+    @include shared.font-montserrat(500);
+  }
 }
