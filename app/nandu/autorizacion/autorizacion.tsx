@@ -2,7 +2,7 @@
 import { Authorization } from "../../../components/Auth/Auth";
 import Layout from "../../../components/Layout/Layout";
 
-const NanduAuthorization = () => {
+const NanduAuth = () => {
   return (
       <Layout>
         <Authorization type="nandu" />
@@ -10,4 +10,4 @@ const NanduAuthorization = () => {
   );
 };
 
-export default NanduAuthorization;
+export default NanduAuth;

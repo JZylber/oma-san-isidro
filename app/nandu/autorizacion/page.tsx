@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import NanduAuth from "./autorizacion";
 
 export const metadata : Metadata = {
     title: 'Autorización Ñandú',
@@ -6,5 +7,5 @@ export const metadata : Metadata = {
 }
 
 export default function NanduAuthorization() {
-    return(<NanduAuthorization/>)
+    return(<NanduAuth/>)
 }
