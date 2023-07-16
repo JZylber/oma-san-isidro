@@ -1,8 +1,8 @@
 import {NextPage } from "next";
 import Head from "next/head";
-import Layout from "../../components/Layout/Layout";
+import Layout from "../../../components/Layout/Layout";
 import styles from "./Canguro.module.scss";
-import { Button } from "../../components/buttons/Button";
+import { Button } from "../../../components/buttons/Button";
 import Image from "next/image";
 
 interface Medals{

@@ -1,40 +1,32 @@
-import { GetStaticProps, NextPage } from "next";
-import Head from "next/head";
+'use client'
 import { useEffect, useRef, useState } from "react";
-import DateCard from "../../components/CalendarComponents/DateCard/DateCard";
-import DateFilter from "../../components/CalendarComponents/DateFilter/DateFilter";
-import Layout from "../../components/Layout/Layout";
-import MonthSelect from "../../components/CalendarComponents/MonthSelect/MonthSelect";
-import { getCalendarEvents } from "../../lib/aux_db_calls";
+import DateCard from "../../../components/CalendarComponents/DateCard/DateCard";
+import DateFilter from "../../../components/CalendarComponents/DateFilter/DateFilter";
+import Layout from "../../../components/Layout/Layout";
+import MonthSelect from "../../../components/CalendarComponents/MonthSelect/MonthSelect";
 import styles from "./Calendar.module.scss";
-import MonthEvents from "../../components/CalendarComponents/MonthEvents/MonthEvents";
-import { getDatesFromJson, JSONCalendarEvent } from "../../components/CalendarComponents/CalendarTypes";
-import { useRouter } from "next/router";
-import {Button} from "../../components/buttons/Button";
+import MonthEvents from "../../../components/CalendarComponents/MonthEvents/MonthEvents";
+import { CalendarEvent} from "../../../components/CalendarComponents/CalendarTypes";
+import {Button} from "../../../components/buttons/Button";
 import { useReactToPrint } from "react-to-print";
-import CalendarExport from "../../components/CalendarComponents/CalendarExport/CalendarExport";
+import CalendarExport from "../../../components/CalendarComponents/CalendarExport/CalendarExport";
+import { useSearchParams } from "next/navigation";
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-    const year = new Date().getFullYear()
-    const available = await getCalendarEvents(year)
-    const newProps = {results: JSON.parse(JSON.stringify(available.results)),year: year}
-    return {
-      props: newProps,
-    };     
+interface CalendarProps {
+    events : Array<CalendarEvent>,
+    year: number
 }
 
-const Calendar : NextPage<{results : Array<JSONCalendarEvent>,year:number}> = ({results,year}) => {
-    const events = getDatesFromJson(results);
-    const router = useRouter();
-    const query = router.query;
+const CalendarPage = ({events,year}:CalendarProps) => {
+    const searchParams = useSearchParams();
     const [displayedMonth,setDisplayedMonth] = useState(new Date().getMonth());
     const [categories,setCategories] = useState<string []>([]);
     useEffect(() => {
-        if(query["categoria"]){
-            const category = query["categoria"] as string;
+        if(searchParams && searchParams.get("categoria")){
+            const category = searchParams.get("categoria") as string;
             setCategories([category]);
         }
-      }, [query])
+      }, [searchParams])
     const getMonthEvents = (month: number) => {
         let monthEvents = events.filter((event) => event.fecha_inicio.getMonth() === month)
         if(categories.length > 0){
@@ -49,12 +41,6 @@ const Calendar : NextPage<{results : Array<JSONCalendarEvent>,year:number}> = ({
         documentTitle: `Calendario ${year}`
     });
     return(
-        <>
-        <Head>
-            <title>Calendario</title>
-            <meta   name="description"
-                content="Calendario anual de todas las competencias matemáticas del país"></meta>
-        </Head>
         <Layout>
             <h1 className={styles.calendar_title}>Calendario {year}</h1>
             <hr className={styles.divider}></hr>
@@ -75,8 +61,7 @@ const Calendar : NextPage<{results : Array<JSONCalendarEvent>,year:number}> = ({
                 </div>
             </div>
         </Layout>
-        </>
         )
 }
 
-export default Calendar
+export default CalendarPage

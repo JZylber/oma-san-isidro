@@ -1,12 +1,12 @@
 import { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
-import { getDatesFromJson, JSONCalendarEvent } from "../../components/CalendarComponents/CalendarTypes";
-import Layout from "../../components/Layout/Layout";
-import { getCalendarEvents } from "../../lib/aux_db_calls";
+import { getDatesFromJson, JSONCalendarEvent } from "../../../components/CalendarComponents/CalendarTypes";
+import Layout from "../../../components/Layout/Layout";
+import { getCalendarEvents } from "../../../lib/aux_db_calls";
 import styles from "./Geometria.module.scss";
 import Warning from "../../public/images/warning.svg";
-import BankInformation from "../../components/Inscription/BankInformation";
-import AllDatesBanner from "../../components/CalendarComponents/DateBanner/NextDatesBanner";
+import BankInformation from "../../../components/Inscription/BankInformation";
+import AllDatesBanner from "../../../components/CalendarComponents/DateBanner/NextDatesBanner";
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
     const year = new Date().getFullYear()

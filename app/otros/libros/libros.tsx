@@ -1,10 +1,10 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import Layout from "../../components/Layout/Layout";
+import Layout from "../../../components/Layout/Layout";
 import styles from "./Libros.module.scss";
 import Warning from "../../public/images/warning.svg";
 import { useEffect, useState } from "react";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../../components/Loader/Loader";
 import Image from "next/image";
 
 interface Book{

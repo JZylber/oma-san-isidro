@@ -1,11 +1,11 @@
 import { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
-import { getDatesFromJson, JSONCalendarEvent } from "../../components/CalendarComponents/CalendarTypes";
-import DateBanner from "../../components/CalendarComponents/DateBanner/DateBanner";
-import Layout from "../../components/Layout/Layout";
-import { getCalendarEvents } from "../../lib/aux_db_calls";
+import { getDatesFromJson, JSONCalendarEvent } from "../../../components/CalendarComponents/CalendarTypes";
+import DateBanner from "../../../components/CalendarComponents/DateBanner/DateBanner";
+import Layout from "../../../components/Layout/Layout";
+import { getCalendarEvents } from "../../../lib/aux_db_calls";
 import styles from "./Mateclubes.module.scss";
-import AllDatesBanner from "../../components/CalendarComponents/DateBanner/NextDatesBanner";
+import AllDatesBanner from "../../../components/CalendarComponents/DateBanner/NextDatesBanner";
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
     const year = new Date().getFullYear()
