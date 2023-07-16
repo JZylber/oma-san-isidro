@@ -110,15 +110,27 @@ const selectSubItem = (
 }
 
 const showCurrentPageSelected = (menuComponents : Array<menuItem>,currentRoute:string) => {
-  const splitRoute = currentRoute.split("/");
-  const mainCategory = splitRoute[1];
-  const mainCategoryIndex = menuComponents.findIndex((item) => item.link === (String.raw`\${mainCategory}`));
-  if(splitRoute.length >= 2){
-    const subCategory = splitRoute[2];
-    const subCategoryIndex = menuComponents[mainCategoryIndex].subItems.findIndex((item) => item.link === (String.raw`\${mainCategory}\${subCategory}`));
+  let mainCategoryIndex = -1;
+  let subCategoryIndex = -1;
+  menuComponents.forEach((mainCategory,mainIndex) => {
+    if(mainCategory.link === currentRoute){
+      mainCategoryIndex = mainIndex;
+      subCategoryIndex = 0;
+    }else {
+      mainCategory.subItems.forEach((subCategory,subIndex) => {
+        if(subCategory.link === currentRoute){
+          mainCategoryIndex = mainIndex;
+          subCategoryIndex = subIndex;
+        }
+      })
+    }
+  });
+  if(subCategoryIndex >= 0){
     return selectSubItem(menuComponents,mainCategoryIndex,subCategoryIndex);
-  } else {
+  }else if(mainCategoryIndex >= 0){
     return selectMainItem(menuComponents,mainCategoryIndex);
+  }else {
+    return menuComponents;
   }
 }
 
