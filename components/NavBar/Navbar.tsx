@@ -2,7 +2,7 @@
 import styles from "./Navbar.module.scss";
 import MenuIcon from "../../public/images/menuIcon.svg";
 import X from "../../public/images/x.svg";
-import {use, useEffect, useState } from "react";
+import {useEffect, useState } from "react";
 import MobileMenu from "./MobileMenu/mobile-menu";
 import TopMenu from "./TopMenu/TopMenu";
 import {
@@ -11,51 +11,52 @@ import {
   showCurrentPageSelected,
 } from "./NavBarRouting";
 import SubMenu from "./TopMenu/SubMenu";
-import { useRouter, usePathname} from 'next/navigation'
+import {usePathname} from 'next/navigation'
 
 type NavProps = {
     togglePageContent? : () => void,
     onRouteChange: () => void
 };
 
+const defaultMenuHierarchy : Array<menuItem> = [
+  {text: "Inicio",link:"/",selected : false,subItems:[]},
+  {text: "Oma",link:'/oma',selected : false,subItems:[
+      {text: "General",link:'/oma',selected : false,subItems:[]},
+      {text: "Inscripción",link:'/oma/inscripcion',selected : false,subItems:[]},
+      {text: "Autorización",link:'/oma/autorizacion',selected : false,subItems:[]},
+      {text: "Instancias",link:'/oma/instancias',selected : false,subItems:[]},
+      {text: "Reglamento",link:'/oma/reglamento',selected : false,subItems:[]},
+      {text: "Resultados",link:'/oma/resultados',selected : false,subItems:[]},
+      {text: "Problemas",link:'/oma/problemas',selected : false,subItems:[]}
+  ]},
+  {text: "Ñandú",link:'/nandu',selected : false,subItems:[
+      {text: "General",link:'/nandu',selected : false,subItems:[]},
+      {text: "Inscripción",link:'/nandu/inscripcion',selected : false,subItems:[]},
+      {text: "Autorización",link:'/nandu/autorizacion',selected : false,subItems:[]},
+      {text: "Instancias",link:'/nandu/instancias',selected : false,subItems:[]},
+      {text: "Reglamento",link:'/nandu/reglamento',selected : false,subItems:[]},
+      {text: "Resultados",link:'/nandu/resultados',selected : false,subItems:[]},
+      {text: "Problemas",link:'/nandu/problemas',selected : false,subItems:[]}
+  ]},
+  {text: "Otros",link: undefined,selected:false,subItems:[
+    {text: "Internacional",link:"/otros/internacional",selected : false,subItems:[]},
+    {text: "Mateclubes",link:"/otros/mateclubes",selected : false,subItems:[]},
+    {text: "Geometría",link:"/otros/geometria",selected : false,subItems:[]},
+    {text: "Canguro",link:"/otros/canguro",selected : false,subItems:[]},
+    {text: "Calendario",link:"/otros/calendario",selected : false,subItems:[]},
+    {text: "Libros",link:"/otros/libros",selected : false,subItems:[]},
+  ]},
+  
+];
+
+
 export default function NavBar({togglePageContent,onRouteChange}:NavProps){
     let [openFullMenu,setOpenFullMenu] = useState(false);
-    const defaultMenuHierarchy : Array<menuItem> = [
-        {text: "Inicio",link:"/",selected : false,subItems:[]},
-        {text: "Oma",link:'/oma',selected : false,subItems:[
-            {text: "General",link:'/oma',selected : false,subItems:[]},
-            {text: "Inscripción",link:'/oma/inscripcion',selected : false,subItems:[]},
-            {text: "Autorización",link:'/oma/autorizacion',selected : false,subItems:[]},
-            {text: "Instancias",link:'/oma/instancias',selected : false,subItems:[]},
-            {text: "Reglamento",link:'/oma/reglamento',selected : false,subItems:[]},
-            {text: "Resultados",link:'/oma/resultados',selected : false,subItems:[]},
-            {text: "Problemas",link:'/oma/problemas',selected : false,subItems:[]}
-        ]},
-        {text: "Ñandú",link:'/nandu',selected : false,subItems:[
-            {text: "General",link:'/nandu',selected : false,subItems:[]},
-            {text: "Inscripción",link:'/nandu/inscripcion',selected : false,subItems:[]},
-            {text: "Autorización",link:'/nandu/autorizacion',selected : false,subItems:[]},
-            {text: "Instancias",link:'/nandu/instancias',selected : false,subItems:[]},
-            {text: "Reglamento",link:'/nandu/reglamento',selected : false,subItems:[]},
-            {text: "Resultados",link:'/nandu/resultados',selected : false,subItems:[]},
-            {text: "Problemas",link:'/nandu/problemas',selected : false,subItems:[]}
-        ]},
-        {text: "Otros",link: undefined,selected:false,subItems:[
-          {text: "Internacional",link:"/otros/internacional",selected : false,subItems:[]},
-          {text: "Mateclubes",link:"/otros/mateclubes",selected : false,subItems:[]},
-          {text: "Geometría",link:"/otros/geometria",selected : false,subItems:[]},
-          {text: "Canguro",link:"/otros/canguro",selected : false,subItems:[]},
-          {text: "Calendario",link:"/otros/calendario",selected : false,subItems:[]},
-          {text: "Libros",link:"/otros/libros",selected : false,subItems:[]},
-        ]},
-        
-    ];
-    const router = useRouter()
     const pathname = usePathname()
     const [menuHierarchy,setMenuHierarchy] = useState(defaultMenuHierarchy);
     useEffect(() => {
       if(pathname){
-        setMenuHierarchy(showCurrentPageSelected(menuHierarchy,pathname))
+        setMenuHierarchy(showCurrentPageSelected(defaultMenuHierarchy,pathname))
       };
     },[pathname])
     const selectedMainItem = () => {
