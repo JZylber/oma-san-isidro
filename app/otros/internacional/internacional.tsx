@@ -1,5 +1,4 @@
-import { NextPage } from "next";
-import Head from "next/head";
+'use client'
 import Layout from "../../../components/Layout/Layout";
 import styles from "./International.module.scss";
 import dataOMA from "../../../data/internacionalOMA.json"
@@ -11,7 +10,7 @@ const orderBySurname = (a: Array<string | boolean>, b: Array<string | boolean>) 
     return a1.localeCompare(b1);
 };
 
-const Internacional : NextPage = () => {
+const InternationalPage = () => {
     let sortedDataOma = dataOMA;
     sortedDataOma.sort(orderBySurname);
     let sortedDataNandu = dataNandu;
@@ -41,12 +40,6 @@ const Internacional : NextPage = () => {
 
 
     return(
-        <>
-        <Head>
-            <title>Olimpíadas Internacionales</title>
-            <meta   name="description"
-                content="Alumnos de la región que pueden participar en selectivos/competencias internacionales"></meta>
-        </Head>
         <Layout>
             <h1 className={styles.title}>Internacional</h1>
             <p className={styles.description_text}> Alumnos que pueden participar en las selecciones para olimpíadas internacionales 2023</p>
@@ -128,8 +121,7 @@ const Internacional : NextPage = () => {
                 </div>
             </div>
         </Layout>
-        </>
         )
 }
 
-export default Internacional
+export default InternationalPage
