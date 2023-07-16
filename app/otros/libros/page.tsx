@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import BooksPage, { Book } from "./libros";
 
-const metadata: Metadata = {
+export const metadata: Metadata = {
     title: 'Libros',
     description: 'Precios e información de los libros a la venta por OMA',
 }
