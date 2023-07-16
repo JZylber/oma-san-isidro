@@ -1,9 +1,9 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import { Inscripcion, InscriptionData } from "../../components/Inscription/Inscription";
-import Layout from "../../components/Layout/Layout";
-import { getInscriptionData } from "../../lib/aux_db_calls";
-import { getDateFromJSON } from "../../lib/aux_functions";
+import { Inscripcion, InscriptionData } from "../../../components/Inscription/Inscription";
+import Layout from "../../../components/Layout/Layout";
+import { getInscriptionData } from "../../../lib/aux_db_calls";
+import { getDateFromJSON } from "../../../lib/aux_functions";
 
 const competition = "ÑANDÚ"
 

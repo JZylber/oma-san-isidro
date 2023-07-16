@@ -1,9 +1,9 @@
 import {GetStaticProps, NextPage } from "next"
 import Head from "next/head"
-import Layout from "../../components/Layout/Layout"
-import { getDateFromJSON} from "../../lib/aux_functions";
-import { getInstances} from "../../lib/aux_db_calls";
-import Instances from "../../components/Instances/InstanceMenu";
+import Layout from "../../../components/Layout/Layout"
+import { getDateFromJSON} from "../../../lib/aux_functions";
+import { getInstances} from "../../../lib/aux_db_calls";
+import Instances from "../../../components/Instances/InstanceMenu";
 
 const competition = "ÑANDÚ";
 
