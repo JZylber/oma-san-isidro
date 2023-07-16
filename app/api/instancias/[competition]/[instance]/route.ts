@@ -1,6 +1,6 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import prisma from "../../../lib/prisma";
+import prisma from "../../../../../lib/prisma";
 import { INSTANCIA } from "@prisma/client";
+import { NextResponse } from "next/server";
 
 const getInstanceDropPoints = async (type: string, year: number, instance: string) => {
   let ins = instance as INSTANCIA;
@@ -344,29 +344,27 @@ const provincialDataGenerator = async (competition: string, instance: string) =>
   return({participants: provincialParticipantsNames,auth_max_date: JSON.parse(JSON.stringify(auth_max_date))});
 }
 
-export default async function handle(req : NextApiRequest, res : NextApiResponse) {
-    let {instanceData} = req.query
-    instanceData = instanceData as string[]
-    const [competition,instance] = instanceData;
+export async function GET(request: Request,{ params }: { params: { competition: string, instance: string } }) {
+    const {competition,instance} = params;
     if(instance != "PROVINCIAL"){
       try{
         const data = await venueDataGenerator(competition,instance);
-        res.status(200).json(data);
+        return NextResponse.json(data, {status: 200});
       } catch (error) {
         let message = 'Error al obtener los datos de la competencia'
         if (error instanceof Error) message = error.message
-        res.status(500).json({message:message});
+        return NextResponse.json({message:message}, {status: 500});
       }
     }else if(instance === "PROVINCIAL"){
       try{
         const data = await provincialDataGenerator(competition,instance);
-        res.status(200).json(data);
+        return NextResponse.json(data, {status: 200});
       } catch (error) {
         let message = 'Error al obtener los datos de la competencia'
         if (error instanceof Error) message = error.message
-        res.status(500).json({message:message});
+        return NextResponse.json({message:message}, {status: 500});
       }
     }else{
-      res.status(200).json({});
+      return NextResponse.json({}, {status: 200});
     }
   }

@@ -1,7 +1,6 @@
 import { revalidatePath } from "next/cache"
 import { NextResponse } from "next/server";
 
-
 export async function GET(request: Request) {
     try {
         revalidatePath('/oma/resultados');

@@ -5,9 +5,6 @@ import {NextResponse } from "next/server";
 export async function GET(request: Request) {
     const url = new URL(request.url);
     const params = url.searchParams;
-    if (params.get("secret") !== process.env.API_TOKEN) {
-        return NextResponse.json({message: 'Invalid token' },{status: 401})
-    }
     try {
         const ano = params.get("ano");
         const instancia = params.get("instancia");
@@ -70,11 +67,11 @@ export async function GET(request: Request) {
                         }
                     },
                 })
-            NextResponse.json(result, {status: 200})}
+            return NextResponse.json(result, {status: 200})}
         else{
-            NextResponse.json({message: 'Invalid parameters' },{status: 400})
+            return NextResponse.json({message: 'Invalid parameters' },{status: 400})
         }
     } catch (error) {
-        NextResponse.json({message: error},{status: 503});
+        return NextResponse.json({message: error},{status: 503});
     }
 }
