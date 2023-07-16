@@ -8,7 +8,7 @@ interface NanduInstanceProps{
     instances : {instancia: string,fecha: Date}[];
 } 
 
-const NanduInst = ({instances} : NanduInstanceProps) => {
+const NanduInstancePage = ({instances} : NanduInstanceProps) => {
     return(
         <Layout>
             <Instances competition={competition} instances={instances}/>
@@ -16,4 +16,4 @@ const NanduInst = ({instances} : NanduInstanceProps) => {
         )
 }
 
-export default NanduInst
+export default NanduInstancePage

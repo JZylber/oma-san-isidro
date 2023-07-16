@@ -1,6 +1,6 @@
 import { Metadata } from "next"
 import { getInscriptionData } from "../../../lib/app-router-db-calls";
-import NanduIns from "./inscripcion";
+import NanduInscriptionPage from "./inscripcion";
 
 export const metadata : Metadata = {
     title: 'Inscripción Ñandú',
@@ -12,6 +12,6 @@ const competition = "ÑANDÚ"
 export default async function NanduInscription() {
     const year = (new Date()).getFullYear();
     const data = await getInscriptionData(competition,year)
-    return <NanduIns {...data}/>
+    return <NanduInscriptionPage {...data}/>
 
 }

@@ -1,6 +1,6 @@
 import { Metadata } from "next"
 import { getInstances } from "../../../lib/app-router-db-calls";
-import NanduInst from "./instancias";
+import NanduInstancePage from "./instancias";
 
 export const metadata : Metadata = {
     title: 'Instancias Ñandú',
@@ -12,5 +12,5 @@ const competition = "ÑANDÚ";
 export default async function NanduInstances() {
     const year = (new Date()).getFullYear();
     const instances =  await getInstances(competition,year);
-    return <NanduInst instances={instances}/>
+    return <NanduInstancePage instances={instances}/>
 }

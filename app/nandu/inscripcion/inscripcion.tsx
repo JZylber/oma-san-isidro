@@ -10,7 +10,7 @@ interface InscriptionProps {
     link_inscripcion?: string | null
   }
 
-const NanduIns = ({fecha_inscripcion_nacional,fecha_inscripcion_regional,link_inscripcion}:InscriptionProps) => {
+const NanduInscriptionPage = ({fecha_inscripcion_nacional,fecha_inscripcion_regional,link_inscripcion}:InscriptionProps) => {
     const inscription_data = {
         link_inscripcion: link_inscripcion?link_inscripcion:undefined,
         fecha_inscripcion_nacional: fecha_inscripcion_nacional?fecha_inscripcion_nacional:undefined,
@@ -24,4 +24,4 @@ const NanduIns = ({fecha_inscripcion_nacional,fecha_inscripcion_regional,link_in
         )
 }
 
-export default NanduIns
+export default NanduInscriptionPage
