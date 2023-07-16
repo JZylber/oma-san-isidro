@@ -1,17 +1,10 @@
-import { NextPage } from "next";
-import Head from "next/head";
-import Layout from "../components/Layout/Layout";
-import styles from "./styles/Contact.module.scss";
+'use client'
+import styles from "./Contact.module.scss";
+import Layout from "../../components/Layout/Layout";
 
 
-const Contact : NextPage = () => {
+const ContactPage = () => {
     return(
-        <>
-        <Head>
-            <title>Contacto</title>
-            <meta   name="description"
-                    content="Información de contacto de OMA/Ñandú para las distintas localidades de la región"></meta>
-        </Head>
         <Layout>
             <h1 className={styles.title}>Contacto</h1>
             <div className={styles.inquiries}>
@@ -56,8 +49,7 @@ const Contact : NextPage = () => {
                 <p className={styles.mail_text}>Para consultas y feedback sobre la página: <a href="mailto:omasanisidro.devs@gmail.com">omasanisidro.devs@gmail.com</a></p>
             </div>
         </Layout>
-        </>
         )
 }
 
-export default Contact
+export default ContactPage
