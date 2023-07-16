@@ -1,18 +1,12 @@
-import { NextPage } from "next";
-import Head from "next/head";
+'use client';
 import { Authorization } from "../../../components/Auth/Auth";
 import Layout from "../../../components/Layout/Layout";
 
-const NanduAuthorization: NextPage = () => {
+const NanduAuthorization = () => {
   return (
-    <>
-      <Head>
-        <title>Autorización Ñandú</title>
-      </Head>
       <Layout>
         <Authorization type="nandu" />
       </Layout>
-    </>
   );
 };
 
