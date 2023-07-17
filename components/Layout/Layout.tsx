@@ -1,4 +1,4 @@
-import {ReactElement, ReactNode,useState} from "react";
+import {ReactElement, ReactNode, useState} from "react";
 import Footer from "../Footer/Footer";
 import NavBar from '../NavBar/Navbar';
 import styles from './Layout.module.scss';

@@ -9,7 +9,7 @@ import SubMenu from "./TopMenu/SubMenu";
 import {usePathname} from 'next/navigation'
 
 type NavProps = {
-    togglePageContent? : () => void,
+    togglePageContent : () => void,
 };
 
 export type menuItem = {
@@ -22,7 +22,7 @@ export type menuItem = {
 export type MenuHierarchy = Array<menuItem>;
 
 const defaultMenuHierarchy : MenuHierarchy = [
-  {text: "Inicio",link:"/",selected : false,subItems:[]},
+  {text: "Inicio",link:"/",selected : true,subItems:[]},
   {text: "Oma",link:'/oma',selected : false,subItems:[
       {text: "General",link:'/oma',selected : false,subItems:[]},
       {text: "Inscripción",link:'/oma/inscripcion',selected : false,subItems:[]},
@@ -159,7 +159,6 @@ const reduce = (menuHierarchy: MenuHierarchy, action: MenuAction) => {
   const mainItem = action.mainItem? action.mainItem : 0;
   const subItem = action.subItem? action.subItem : 0;
   const route = action.route? action.route : "/";
-  console.log(action);
   switch (action.type) {
     case "selectMainItem":
       return selectMainItem(menuHierarchy, mainItem);
@@ -179,7 +178,6 @@ export default function NavBar({togglePageContent}:NavProps){
     const [previousPathname,setPreviousPathname] = useState(pathname);
     const [menuHierarchy,setMenuHierarchy] = useReducer(reduce,defaultMenuHierarchy);
     useEffect(() => {
-      console.log(noItemsSelected(menuHierarchy))
       if(pathname && pathname !== previousPathname && pathname !== selectedRoute(menuHierarchy)){
         setMenuHierarchy({type:"currentPage",route:pathname});
         setPreviousPathname(pathname);
@@ -206,7 +204,7 @@ export default function NavBar({togglePageContent}:NavProps){
 
     const openCloseMenu = () => {
         setOpenFullMenu(!openFullMenu);
-        togglePageContent && togglePageContent();
+        togglePageContent();
     }
 
     const isNotAtHome = () => {
