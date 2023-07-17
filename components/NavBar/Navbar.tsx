@@ -9,8 +9,7 @@ import SubMenu from "./TopMenu/SubMenu";
 import {usePathname} from 'next/navigation'
 
 type NavProps = {
-    togglePageContent? : () => void,
-    onRouteChange: () => void
+    togglePageContent : () => void,
 };
 
 export type menuItem = {
@@ -23,7 +22,7 @@ export type menuItem = {
 export type MenuHierarchy = Array<menuItem>;
 
 const defaultMenuHierarchy : MenuHierarchy = [
-  {text: "Inicio",link:"/",selected : false,subItems:[]},
+  {text: "Inicio",link:"/",selected : true,subItems:[]},
   {text: "Oma",link:'/oma',selected : false,subItems:[
       {text: "General",link:'/oma',selected : false,subItems:[]},
       {text: "Inscripción",link:'/oma/inscripcion',selected : false,subItems:[]},
@@ -68,6 +67,24 @@ const selectedMainItem = (menuHierarchy: MenuHierarchy) => {
   }
 }
 
+const selectedRoute = (menuHierarchy: MenuHierarchy) => {
+  const item = menuHierarchy.find((element) => element.selected)
+  if(item){
+      const subItem = item.subItems.find((subItem) => subItem.selected)
+      if(subItem){
+          return(subItem.link)
+      }else {
+        return(item.link)
+      }
+  }else {
+      return(undefined)
+  }
+}
+
+const noItemsSelected = (menuHierarchy: MenuHierarchy) => {
+  return menuHierarchy.every((element) => !element.selected && element.subItems.every((subItem) => !subItem.selected));
+}
+
 const getSubitems = (menuHierarchy: MenuHierarchy) => {
   let item = menuHierarchy.find((element) => element.selected);
   if (item) {
@@ -109,6 +126,10 @@ const selectSubItem = (
   return hierarchy.map((element,index) => selectItem(element, index, mainCategory, (item: menuItem,index: number) => selectItem(item,index,subCategory), (item) => unselectItems(item)));
 }
 
+const unselectItemsInHierarchy = (hierarchy: MenuHierarchy) => {
+  return hierarchy.map((element) => {return {...element,selected:false,subItems:element.subItems.map(unselectItems)}});
+}
+
 const showCurrentPageSelected = (menuComponents : Array<menuItem>,currentRoute:string) => {
   let mainCategoryIndex = -1;
   let subCategoryIndex = -1;
@@ -130,7 +151,7 @@ const showCurrentPageSelected = (menuComponents : Array<menuItem>,currentRoute:s
   }else if(mainCategoryIndex >= 0){
     return selectMainItem(menuComponents,mainCategoryIndex);
   }else {
-    return menuComponents;
+    return unselectItemsInHierarchy(menuComponents);
   }
 }
 
@@ -151,24 +172,24 @@ const reduce = (menuHierarchy: MenuHierarchy, action: MenuAction) => {
 }
 
 
-export default function NavBar({togglePageContent,onRouteChange}:NavProps){
+export default function NavBar({togglePageContent}:NavProps){
     let [openFullMenu,setOpenFullMenu] = useState(false);
     const pathname = usePathname()
+    const [previousPathname,setPreviousPathname] = useState(pathname);
     const [menuHierarchy,setMenuHierarchy] = useReducer(reduce,defaultMenuHierarchy);
     useEffect(() => {
-      if(pathname){
+      if(pathname && pathname !== previousPathname && pathname !== selectedRoute(menuHierarchy)){
         setMenuHierarchy({type:"currentPage",route:pathname});
-      };
-    },[pathname])
+        setPreviousPathname(pathname);
+      } 
+    },[pathname,previousPathname,menuHierarchy])
     const clickMainItem = (itemName : string) => {
         const itemIndex = menuHierarchy.findIndex((item) => item.text == itemName);
         const item = menuHierarchy[itemIndex]
         if(item){
-            if(item.link && item.link !==  pathname){
-                onRouteChange()
+            if(!(item.link && item.link !==  previousPathname)){
+              setMenuHierarchy({type: "selectMainItem",mainItem: itemIndex})
             }
-            item.selected = true;
-            setMenuHierarchy({type: "selectMainItem",mainItem: itemIndex})
         }
     }
     const clickSubItem = (mainItemName : string,subItemName: string) => {
@@ -176,15 +197,14 @@ export default function NavBar({togglePageContent,onRouteChange}:NavProps){
         const item = menuHierarchy[mainItemIndex]
         const subItemIndex = item.subItems.findIndex((subitem) => subitem.text === subItemName)
         const subItem = item.subItems[subItemIndex]
-        if(subItem.link && subItem.link !== pathname){
-          onRouteChange();
+        if(!(subItem.link && subItem.link !== previousPathname)){
+          setMenuHierarchy({type: "selectSubItem",mainItem: mainItemIndex,subItem: subItemIndex});
         }
-        setMenuHierarchy({type: "selectSubItem",mainItem: mainItemIndex,subItem: subItemIndex})
     } 
 
     const openCloseMenu = () => {
         setOpenFullMenu(!openFullMenu);
-        togglePageContent && togglePageContent();
+        togglePageContent();
     }
 
     const isNotAtHome = () => {

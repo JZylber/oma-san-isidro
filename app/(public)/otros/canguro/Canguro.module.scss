@@ -1,0 +1,153 @@
+@use "../../../../styles/shared.scss" as shared;
+
+.title {
+    @include shared.font-unbounded(600);
+    @include shared.mobile-only {
+      font-size: 2.4 * shared.$mobile-actionable-font-size;
+      margin-top: 4 * shared.$mobile-spacing;
+      margin-bottom: 2.5 * shared.$mobile-spacing;
+    }
+    @include shared.not-mobile {
+      grid-column: 1/-1;
+      font-size: 2 * shared.$desktop-actionable-font-size;
+      line-height: 2.5;
+    }
+  }
+
+  .button_container{
+    margin-bottom: 1.6rem;
+    @include shared.mobile-only {
+      width: 100%;
+      text-align: center;
+    }
+  
+    @include shared.tablet-only {
+      width: 63.5%;
+      margin-top: 2 * shared.$tablet-spacing;
+    }
+  
+    @include shared.desktop-only {
+      width: 47.5%;
+      margin-top: 4 * shared.$desktop-spacing;
+    }
+    p {
+      @include shared.font-montserrat(400);
+      font-size: 0.6 * shared.$desktop-reading-font-size;
+  
+      @include shared.tablet-only {
+        margin-top: 2 * shared.$tablet-spacing;
+      }
+    }
+  }
+  
+.main_text{
+    @include shared.font-montserrat(300);
+  
+    @include shared.mobile-only {
+      font-size: shared.$mobile-reading-font-size;
+    }
+  
+    @include shared.tablet-only {
+      font-size: shared.$tablet-reading-font-size;
+    }
+  
+    @include shared.desktop-only {
+      font-size: shared.$desktop-reading-font-size;
+    }
+    .bold{
+      @include shared.font-montserrat(500);
+    }
+  }
+
+.problems{
+    &:first-of-type{
+      margin-top: 2.4rem;
+    } 
+    margin-bottom: 2.4rem;
+    .links{
+        display: flex;
+        column-gap: .8rem;
+        @include shared.mobile-only{
+            justify-content: center;
+        }
+        .link{
+            @include shared.font-montserrat(400);
+            display: flex;
+            align-items: center;
+            text-transform: lowercase;
+            transition: all .5s;
+            color: shared.$black;
+            text-decoration: none;
+            @include shared.mobile-only{
+                font-size : shared.$mobile-reading-font-size;
+                line-height: 2.4rem;
+            }
+            @include shared.tablet-only{
+                font-size : shared.$tablet-reading-font-size;
+                line-height: 2.4rem;
+            }
+            @include shared.desktop-only{
+                font-size : shared.$desktop-reading-font-size;
+                line-height: 2.9rem;
+            }
+            &:hover{
+                @include shared.font-weight-transition;
+                @include shared.font-montserrat(500);
+                font-size: x-large;
+            }
+            &:visited{
+                color: purple;
+            }
+        }
+    }
+}
+.section_title{
+  font-size: shared.$section-title-font-size;
+  @include shared.font-unbounded(500);
+  margin-bottom: .8rem;
+  @include shared.mobile-only {
+    text-align: center;
+    line-height: 3 * shared.$mobile-spacing;
+  }
+  @include shared.tablet-only {
+    text-align: left;
+    line-height: 2.25 * shared.$tablet-max-spacing;
+  }
+  @include shared.desktop-only {
+    text-align: left;
+    line-height: 3 * shared.$desktop-spacing;
+  }
+}
+
+.arrow {
+  @include shared.not-desktop {
+    display: none;
+  }
+}
+
+.category_medals{
+  display: flex;
+  @include shared.mobile-only{
+    flex-direction: column;
+    align-items: center;
+  }
+  @include shared.not-mobile{
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+}
+
+.medals{
+  padding-top: .8rem;
+  padding-bottom: .8rem;
+}
+
+.category{
+  font-size: 0.85*shared.$section-title-font-size;
+  @include shared.font-unbounded(500);
+}
+
+.medal{
+  @extend .main_text
+}

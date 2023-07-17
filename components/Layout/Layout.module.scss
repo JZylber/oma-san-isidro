@@ -4,7 +4,7 @@
     display: flex;
     width: 100%;
     height: 100%;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     min-height: 100vh;
@@ -25,18 +25,5 @@
     @include shared.desktop-only{
         width: 80%;
         max-width: 1200px;
-    }
-}
-
-.grid {
-    @include shared.not-mobile{
-        display: grid;
-        grid-template-rows: max-content max-content max-content max-content;
-    }
-    @include shared.tablet-only{
-        @include shared.tablet-columns;
-    }
-    @include shared.desktop-only{
-        @include shared.desktop-columns;
     }
 }
