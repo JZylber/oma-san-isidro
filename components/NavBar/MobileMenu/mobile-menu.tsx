@@ -1,6 +1,5 @@
 import MenuArrow from '../../../public/images/menuArrow.svg';
 import styles from './mobile-menu.module.scss';
-import { useRouter } from 'next/router'
 import { ReactElement, useState } from "react";
 import Link from 'next/link';
 import { MenuHierarchy, menuItem } from '../Navbar';
@@ -16,20 +15,13 @@ const ConditionalWrapper = ({ condition, wrapper, children }:{condition: boolean
     condition ? wrapper(children) : children;
 
 const MobileMenu= ({closeMenu,menuHierarchy} : mobileMenuProps) => {
-
-    const router = useRouter();
-    
     const [hierarchy,setHierarchy] = useState(menuHierarchy);
-
     //Rutina para ir al link de un item correspondiente o abrir/cerrar su submenu
     const selectMainItem = (name : string) => {
-        let currentRoute = router.pathname;
         let newHierarchy : MenuHierarchy = hierarchy.map((item) => {
-            if (item.text == name){
-                if(item.link != null){
-                    if(item.link == currentRoute){
-                        closeMenu();
-                    }
+            if (item.text === name){
+                if(item.link != null && item.subItems.length === 0){
+                    closeMenu();
                 }
                 let newItem : menuItem = item;
                 newItem.selected = !newItem.selected;
@@ -44,15 +36,12 @@ const MobileMenu= ({closeMenu,menuHierarchy} : mobileMenuProps) => {
     }
     //Rutina para ir al link de un subitem correspondiente
     const selectSubItem = (mainItem: string, subItem: string) => {
-        let currentRoute = router.pathname;
         let item : menuItem | undefined = hierarchy.find((menuItem) => menuItem.text == mainItem);
         if(item){
             let selectedSubitem : menuItem | undefined = item.subItems.find((menuSubItem) => menuSubItem.text == subItem)
             if(selectedSubitem){
                 if(selectedSubitem.link){
-                    if(selectedSubitem.link == currentRoute){
-                        closeMenu();
-                    }
+                    closeMenu();
                 }
             }
         }
