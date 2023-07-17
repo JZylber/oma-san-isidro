@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import styles from "./resultFinderForm.module.scss"
-import {InstanceData, yearTests } from "./resultsTypes"
+import {yearTests} from "./resultsTypes"
 import SelectResultCategory from "./SelectResultCategory";
-import { useRouter } from "next/router";
+import {useSearchParams } from "next/navigation";
 
 type FormProps = {
     availableResults: Array<yearTests>,
@@ -29,14 +29,15 @@ const sortInstances = (ins_a : string, ins_b : string) => {
 }
     
 const ResultFinderForm = ({availableResults,searchResults,clearResults} : FormProps) => {
-    const router = useRouter();
-    const [checkRoute,setCheckRoute] = useState(false);
+    const query = useSearchParams();
+    const [checkRoute,setCheckRoute] = useState<boolean>(false);
     const resultYears =  availableResults.map((yearTests) => yearTests.ano);
     
     const [searchParameters,setSearchParameters] = useState<searchParametersType>({año: undefined,instancia:undefined});
     useEffect(() => {
-        if(!checkRoute){
-            const {año,instancia} = router.query;
+        if(!checkRoute && query){
+            const año = query.get("año");
+            const instancia = query.get("instancia");
             if(año && instancia){
                 const instance = instancia as string;
                 const year = Number(año);
@@ -46,7 +47,7 @@ const ResultFinderForm = ({availableResults,searchResults,clearResults} : FormPr
                 }
             }
         setCheckRoute(true);}
-      }, [checkRoute,router,searchResults,setSearchParameters,availableResults,resultYears]);
+      }, [checkRoute,query,searchResults,setSearchParameters,availableResults,resultYears]);
     let possibleInstances = searchParameters.año?(availableResults.find((result) => result.ano === searchParameters.año) as yearTests).pruebas:[];
     const instances = possibleInstances.map((instance) => instance.nombre);
     const handleSubmit = () => {

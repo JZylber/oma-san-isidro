@@ -28,7 +28,7 @@ const Results = ({competition,availableResults} : ResultProps) => {
     };
     const getResults = useCallback(async (year : number,instance : string, type: string)=> {
         try {
-            let searchedResults = await fetch(`/api/results?secret=${process.env.API_TOKEN}&ano=${year}&instancia=${instance}&competencia=${type}`)
+            let searchedResults = await fetch(`/api/resultados?ano=${year}&instancia=${instance}&competencia=${type}`)
                 .then((response) => {
                     if(response.ok){
                         return(response.json())}

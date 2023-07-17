@@ -41,7 +41,9 @@ const useFilter = <S extends FilterableObject>(values: S[]) => {
     const update = (newValue : Partial<S> ) => {
         dispatch({type:"update",value: newValue});
     }
-    let options : {[key in keyof S]:S[key][]} = Object.fromEntries(
+    let options : {[key in keyof S]:S[key][]} = 
+    Object.fromEntries(
+        values.length >0? 
         Object.keys(values[0]).map(
           ((key) => {
             const stateWithoutKey = {...state,[key as keyof S]:undefined}
@@ -60,8 +62,7 @@ const useFilter = <S extends FilterableObject>(values: S[]) => {
             }
         }
         )
-      )
-    );
+      ):[]);
     return [state,update,filteredValues,options] as const;
 };
 

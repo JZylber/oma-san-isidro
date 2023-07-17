@@ -2,14 +2,14 @@ import MenuArrow from '../../../public/images/menuArrow.svg';
 import styles from './mobile-menu.module.scss';
 import { useRouter } from 'next/router'
 import { ReactElement, useState } from "react";
-import { menuItem, showCurrentPageSelected } from '../NavBarRouting';
 import Link from 'next/link';
+import { MenuHierarchy, menuItem } from '../Navbar';
 
 
 
 type mobileMenuProps = {
     closeMenu : () => void,
-    menuHierarchy : Array<menuItem>
+    menuHierarchy : MenuHierarchy
 }
 
 const ConditionalWrapper = ({ condition, wrapper, children }:{condition: boolean, wrapper: (children: ReactElement) => ReactElement, children: ReactElement}) => 
@@ -24,7 +24,7 @@ const MobileMenu= ({closeMenu,menuHierarchy} : mobileMenuProps) => {
     //Rutina para ir al link de un item correspondiente o abrir/cerrar su submenu
     const selectMainItem = (name : string) => {
         let currentRoute = router.pathname;
-        let newHierarchy : Array<menuItem> = hierarchy.map((item) => {
+        let newHierarchy : MenuHierarchy = hierarchy.map((item) => {
             if (item.text == name){
                 if(item.link != null){
                     if(item.link == currentRoute){

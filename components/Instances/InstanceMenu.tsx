@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import styles from "./InstanceMenu.module.scss";
 import InstanceData from "./Instance";
-import { useRouter } from "next/router";
+import {useSearchParams } from "next/navigation";
 
 export interface Instance {
     instancia: string,
@@ -33,14 +33,13 @@ const getInitialInstance = (instances: Instance[],query: string | undefined) => 
 }
 
 const Instances = ({competition,instances}: InstanceMenuProps) => {
-    const router = useRouter();
-    const {query} = router
-    const [currentInstance,setCurrentInstance] = useState<number>(getInitialInstance(instances,query.instancia as string));
+    const query = useSearchParams()
+    const [currentInstance,setCurrentInstance] = useState<number>(getInitialInstance(instances,query?query.get("instancia") as string:undefined));
     useEffect(() => {
-        if(query.instancia){
-            setCurrentInstance(getInitialInstance(instances,query.instancia as string));
+        if(query && query.get("instancia")){
+            setCurrentInstance(getInitialInstance(instances,query.get("instancia") as string));
         }
-    },[query.instancia,instances])
+    },[query,instances])
     return(
         <>
         <h1 className={styles.title}>Instancias</h1>

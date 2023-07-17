@@ -1,7 +1,7 @@
 import { Fragment} from 'react';
-import { MenuHierarchy, menuItem} from '../NavBarRouting';
 import NavBarItem from './NavBarItem';
 import styles from './TopMenu.module.scss';
+import { MenuHierarchy, menuItem } from '../Navbar';
 
 type topMenuProps = {
   menuHierarchy: MenuHierarchy;

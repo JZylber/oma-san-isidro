@@ -17,7 +17,7 @@ const Home = ({competition,dates}:HomeProps) => {
         <AllDatesBanner dates={dates} category={competition}/>
         <section className={styles.section}>
             <h2 className={styles.sectionTitle}>Próxima instancia</h2>
-            <p className={styles.section_text}>Para información de la próxima instancia como los puntos de entrega de autorizaciones, o los colegios asignados para rendir la prueba, podés ir a la sección <Link href={`/${competition === "OMA"?"oma":"nandu"}/instancias`} className={styles.link}>instancias</Link><div className={styles.icon}><Image src="/images/pageLinkIcon.svg" fill={true} alt=""/></div>.</p>
+            <div className={styles.section_text}>Para información de la próxima instancia como los puntos de entrega de autorizaciones, o los colegios asignados para rendir la prueba, podés ir a la sección <Link href={`/${competition === "OMA"?"oma":"nandu"}/instancias`} className={styles.link}>instancias</Link><div className={styles.icon}><Image src="/images/pageLinkIcon.svg" fill={true} alt=""/></div>.</div>
         </section>
         <section className={styles.section}>
             <h2 className={styles.sectionTitle}>Niveles</h2>

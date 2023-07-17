@@ -55,7 +55,7 @@ const displayInstance = (instance: string, competition: string, instanceData: Re
     else if(instance === "NACIONAL"){
         return <span className={styles.text}>Proximamente...</span>
     }
-    else if(instanceData && "venues" in instanceData ){
+    else if(instanceData && "venues" in instanceData){
         const regionalInstance = instanceData as RegionalInstance;
         const venues : Venue[] = regionalInstance.venues.map((venue) => {return{nombre: venue.nombre, direccion: venue.direccion, localidad: venue.localidad, colegio: new School(venue.colegio.nombre,venue.colegio.sede), aclaracion: venue.aclaracion?venue.aclaracion:""}});
         const participants : VenueParticipant[] = regionalInstance.participants.map((participant) => {return {...participant,colegio: new School(participant.colegio.nombre,participant.colegio.sede),participante: new Participant(participant.nombre,participant.apellido)}});
