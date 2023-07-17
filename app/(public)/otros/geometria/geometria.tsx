@@ -1,6 +1,5 @@
 'use client'
 import { CalendarEvent} from "../../../../components/CalendarComponents/CalendarTypes";
-import Layout from "../../../../components/Layout/Layout";
 import styles from "./Geometria.module.scss";
 import BankInformation from "../../../../components/Inscription/BankInformation";
 import AllDatesBanner from "../../../../components/CalendarComponents/DateBanner/NextDatesBanner";
