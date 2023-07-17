@@ -1,5 +1,4 @@
 'use client'
-import Layout from "../../../../components/Layout/Layout"
 import Instances from "../../../../components/Instances/InstanceMenu";
 
 const competition = "ÑANDÚ";
@@ -9,11 +8,7 @@ interface NanduInstanceProps{
 } 
 
 const NanduInstancePage = ({instances} : NanduInstanceProps) => {
-    return(
-        <Layout>
-            <Instances competition={competition} instances={instances}/>
-        </Layout>
-        )
+    return(<Instances competition={competition} instances={instances}/>)
 }
 
 export default NanduInstancePage

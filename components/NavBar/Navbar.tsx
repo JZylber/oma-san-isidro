@@ -68,6 +68,10 @@ const selectedMainItem = (menuHierarchy: MenuHierarchy) => {
   }
 }
 
+const noItemsSelected = (menuHierarchy: MenuHierarchy) => {
+  return menuHierarchy.every((element) => !element.selected && element.subItems.every((subItem) => !subItem.selected));
+}
+
 const getSubitems = (menuHierarchy: MenuHierarchy) => {
   let item = menuHierarchy.find((element) => element.selected);
   if (item) {
@@ -138,6 +142,7 @@ const reduce = (menuHierarchy: MenuHierarchy, action: MenuAction) => {
   const mainItem = action.mainItem? action.mainItem : 0;
   const subItem = action.subItem? action.subItem : 0;
   const route = action.route? action.route : "/";
+  console.log(action);
   switch (action.type) {
     case "selectMainItem":
       return selectMainItem(menuHierarchy, mainItem);
@@ -156,10 +161,10 @@ export default function NavBar({togglePageContent,onRouteChange}:NavProps){
     const pathname = usePathname()
     const [menuHierarchy,setMenuHierarchy] = useReducer(reduce,defaultMenuHierarchy);
     useEffect(() => {
-      if(pathname){
+      if(pathname && noItemsSelected(menuHierarchy)){
         setMenuHierarchy({type:"currentPage",route:pathname});
       };
-    },[pathname])
+    },[pathname,menuHierarchy])
     const clickMainItem = (itemName : string) => {
         const itemIndex = menuHierarchy.findIndex((item) => item.text == itemName);
         const item = menuHierarchy[itemIndex]

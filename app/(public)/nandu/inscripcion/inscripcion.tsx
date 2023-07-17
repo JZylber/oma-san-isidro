@@ -16,12 +16,7 @@ const NanduInscriptionPage = ({fecha_inscripcion_nacional,fecha_inscripcion_regi
         fecha_inscripcion_nacional: fecha_inscripcion_nacional?fecha_inscripcion_nacional:undefined,
         fecha_inscripcion_regional: fecha_inscripcion_regional?fecha_inscripcion_regional:undefined
     }
-    return(
-        
-        <Layout>
-            <Inscripcion type={competition} data={inscription_data}/>
-        </Layout>
-        )
+    return(<Inscripcion type={competition} data={inscription_data}/>)
 }
 
 export default NanduInscriptionPage
