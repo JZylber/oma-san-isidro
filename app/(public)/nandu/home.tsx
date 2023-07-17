@@ -1,7 +1,7 @@
 'use client'
-import Layout from "../../components/Layout/Layout";
-import Home from "../../components/Homes/Home";
-import {CalendarEvent} from "../../components/CalendarComponents/CalendarTypes";
+import Layout from "../../../components/Layout/Layout";
+import Home from "../../../components/Homes/Home";
+import {CalendarEvent} from "../../../components/CalendarComponents/CalendarTypes";
 
 interface HomeProps {
     events : Array<CalendarEvent>,
@@ -9,12 +9,9 @@ interface HomeProps {
 
 const NanduHome = ({events}:HomeProps) => {
     return(
-        <>
-        
         <Layout>
             <Home competition="Ñandú" dates={events}/>
         </Layout>
-        </>
         )
 }
 

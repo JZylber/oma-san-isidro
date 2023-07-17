@@ -5,7 +5,7 @@ import Layout from "../../../components/Layout/Layout";
 
 const ContactPage = () => {
     return(
-        <Layout>
+        <>
             <h1 className={styles.title}>Contacto</h1>
             <div className={styles.inquiries}>
                 <h3 className={styles.category_title}>Consultas por Zonas</h3>
@@ -48,7 +48,7 @@ const ContactPage = () => {
                 <h3 className={styles.category_title}>Desarrolladores</h3>
                 <p className={styles.mail_text}>Para consultas y feedback sobre la página: <a href="mailto:omasanisidro.devs@gmail.com">omasanisidro.devs@gmail.com</a></p>
             </div>
-        </Layout>
+        </>
         )
 }
 

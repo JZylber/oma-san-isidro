@@ -1,7 +1,7 @@
 'use client'
-import Layout from "../../../components/Layout/Layout";
+import Layout from "../../../../components/Layout/Layout";
 import styles from "./Canguro.module.scss";
-import { Button } from "../../../components/buttons/Button";
+import { Button } from "../../../../components/buttons/Button";
 import Image from "next/image";
 
 interface Medals{
@@ -26,7 +26,7 @@ const categories : Category [] = [
 
 const KangarooPage = () => {
     return(
-        <Layout>
+        <>
             <h1 className={styles.title}>Canguro Matemático</h1>
             <div className={styles.button_container}>
                 <Button content="Resultados" onClick={() => window.location.href = "https://www.oma.org.ar/canguro/editar.html"}>
@@ -66,7 +66,7 @@ const KangarooPage = () => {
                 })}
                 </div>
             </section>
-        </Layout>        
+        </>        
     )
 }
 

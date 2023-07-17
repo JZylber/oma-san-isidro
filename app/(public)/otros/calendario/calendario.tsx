@@ -1,15 +1,15 @@
 'use client'
 import { useEffect, useRef, useState } from "react";
-import DateCard from "../../../components/CalendarComponents/DateCard/DateCard";
-import DateFilter from "../../../components/CalendarComponents/DateFilter/DateFilter";
-import Layout from "../../../components/Layout/Layout";
-import MonthSelect from "../../../components/CalendarComponents/MonthSelect/MonthSelect";
+import DateCard from "../../../../components/CalendarComponents/DateCard/DateCard";
+import DateFilter from "../../../../components/CalendarComponents/DateFilter/DateFilter";
+import Layout from "../../../../components/Layout/Layout";
+import MonthSelect from "../../../../components/CalendarComponents/MonthSelect/MonthSelect";
 import styles from "./Calendar.module.scss";
-import MonthEvents from "../../../components/CalendarComponents/MonthEvents/MonthEvents";
-import { CalendarEvent} from "../../../components/CalendarComponents/CalendarTypes";
-import {Button} from "../../../components/buttons/Button";
+import MonthEvents from "../../../../components/CalendarComponents/MonthEvents/MonthEvents";
+import { CalendarEvent} from "../../../../components/CalendarComponents/CalendarTypes";
+import {Button} from "../../../../components/buttons/Button";
 import { useReactToPrint } from "react-to-print";
-import CalendarExport from "../../../components/CalendarComponents/CalendarExport/CalendarExport";
+import CalendarExport from "../../../../components/CalendarComponents/CalendarExport/CalendarExport";
 import { useSearchParams } from "next/navigation";
 
 interface CalendarProps {
@@ -41,7 +41,7 @@ const CalendarPage = ({events,year}:CalendarProps) => {
         documentTitle: `Calendario ${year}`
     });
     return(
-        <Layout>
+        <>
             <h1 className={styles.calendar_title}>Calendario {year}</h1>
             <hr className={styles.divider}></hr>
             <MonthSelect displayedMonth={displayedMonth} setDisplayedMonth={setDisplayedMonth}/>
@@ -60,7 +60,7 @@ const CalendarPage = ({events,year}:CalendarProps) => {
                     <CalendarExport year={year} events={months.map((name,number) => {return({name: name, events: getMonthEvents(number)}) })}/>
                 </div>
             </div>
-        </Layout>
+        </>
         )
 }
 

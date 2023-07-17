@@ -1,4 +1,17 @@
-@use "../styles/shared.scss" as shared;
+@use "../../styles/shared.scss" as shared;
+
+.grid {
+  @include shared.not-mobile{
+      display: grid;
+      grid-template-rows: max-content max-content max-content max-content;
+  }
+  @include shared.tablet-only{
+      @include shared.tablet-columns;
+  }
+  @include shared.desktop-only{
+      @include shared.desktop-columns;
+  }
+}
 
 .sectionTitle {
   font-size: shared.$section-title-font-size;

@@ -1,14 +1,13 @@
 'use client'
-import Faq from "../components/FAQ/Faq";
-import News from "../components/News/News";
-import Title from "../components/Title/Title";
+import Faq from "../../components/FAQ/Faq";
+import News from "../../components/News/News";
+import Title from "../../components/Title/Title";
 import styles from "./Home.module.scss";
-import MainNandu from "../public/images/mainNandu.svg";
-import Layout from "../components/Layout/Layout";
-import {NewsItemData} from "../components/News/NewsTypes";
-import DateBanner from "../components/CalendarComponents/DateBanner/DateBanner";
-import { CalendarEvent} from "../components/CalendarComponents/CalendarTypes";
-import HomeModal from "../components/Popups/HomeModal";
+import MainNandu from "../../public/images/mainNandu.svg";
+import {NewsItemData} from "../../components/News/NewsTypes";
+import DateBanner from "../../components/CalendarComponents/DateBanner/DateBanner";
+import { CalendarEvent} from "../../components/CalendarComponents/CalendarTypes";
+import HomeModal from "../../components/Popups/HomeModal";
 import {useState } from "react";
 
 
@@ -20,8 +19,7 @@ interface HomeProps {
 const Home = ({news,events}: HomeProps) => {
   const [openModal,setOpenModal] = useState(false)
   return (
-    <>
-      <Layout grid={true}>
+    <div className={styles.grid}>
         <HomeModal open={openModal} setOpen={setOpenModal}/>
         <Title />
 
@@ -47,8 +45,7 @@ const Home = ({news,events}: HomeProps) => {
           <h3 className={styles.sectionTitle}>Preguntas Frecuentes</h3>
           <Faq />
         </section>
-      </Layout>
-    </>
+    </div>
   );
 };
 export default Home;

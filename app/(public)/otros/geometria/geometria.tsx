@@ -1,10 +1,10 @@
 'use client'
-import { CalendarEvent} from "../../../components/CalendarComponents/CalendarTypes";
-import Layout from "../../../components/Layout/Layout";
+import { CalendarEvent} from "../../../../components/CalendarComponents/CalendarTypes";
+import Layout from "../../../../components/Layout/Layout";
 import styles from "./Geometria.module.scss";
-import BankInformation from "../../../components/Inscription/BankInformation";
-import AllDatesBanner from "../../../components/CalendarComponents/DateBanner/NextDatesBanner";
-import Warning from "../../../components/Warning/Warning";
+import BankInformation from "../../../../components/Inscription/BankInformation";
+import AllDatesBanner from "../../../../components/CalendarComponents/DateBanner/NextDatesBanner";
+import Warning from "../../../../components/Warning/Warning";
 
 interface GeometryPageProps{
     events : Array<CalendarEvent>,
@@ -13,7 +13,7 @@ interface GeometryPageProps{
 
 const GeometryPage = ({events}: GeometryPageProps ) => {
     return(
-        <Layout>
+        <>
                 <h1 className={styles.title}>Torneo de Geometría e Imaginación</h1>
                 <AllDatesBanner dates={events} category="Geometría"/>
                 <section className={styles.section}>
@@ -58,7 +58,7 @@ const GeometryPage = ({events}: GeometryPageProps ) => {
                         <p>Para más información, escribir a <a href="mailto:roxana.magistrali@gmail.com">roxana.magistrali@gmail.com</a></p>
                     </div>
                 </section>
-        </Layout>        
+        </>  
        )
 }
 

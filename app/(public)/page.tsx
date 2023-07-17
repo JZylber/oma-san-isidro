@@ -1,7 +1,13 @@
-import { NewsItemData } from "../components/News/NewsTypes";
-import { getCalendarEvents } from "../lib/app-router-db-calls";
+import { NewsItemData } from "../../components/News/NewsTypes";
+import { getCalendarEvents } from "../../lib/app-router-db-calls";
 import Home from "./home-page";
-import prisma from "../lib/prisma";
+import prisma from "../../lib/prisma";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'OMA San Isidro',
+  description: 'Página principal de la Secretaría Regional Buenos Aires Norte de la Olimpíadas Matemáticas Argentinas',
+}
 
 const getNews = async () => {
     const query = await prisma.noticias.findMany(

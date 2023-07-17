@@ -1,13 +1,8 @@
-import { Metadata } from 'next'
+'use client'
 import {Montserrat, Unbounded } from 'next/font/google'
-import '../styles/globals.scss';
+import '../../styles/globals.scss';
+import Layout from '../../components/Layout/Layout';
 
-
- 
-export const metadata: Metadata = {
-  title: 'OMA San Isidro',
-  description: 'Página principal de la Secretaría Regional Buenos Aires Norte de la Olimpíadas Matemáticas Argentinas',
-}
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -31,7 +26,9 @@ export default function RootLayout({
       <html lang="en" className={`${montserrat.variable} ${unbounded.variable}`}>
         <body>
             <div id="modal-root"></div>
-            {children}
+            <Layout>
+              {children}
+            </Layout>
         </body>
       </html>
     )

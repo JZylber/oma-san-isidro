@@ -1,8 +1,8 @@
 'use client'
-import Layout from "../../../components/Layout/Layout";
+import Layout from "../../../../components/Layout/Layout";
 import styles from "./International.module.scss";
-import dataOMA from "../../../data/internacionalOMA.json"
-import dataNandu from "../../../data/internacionalNandu.json"
+import dataOMA from "../../../../data/internacionalOMA.json"
+import dataNandu from "../../../../data/internacionalNandu.json"
 
 const orderBySurname = (a: Array<string | boolean>, b: Array<string | boolean>) => {
     let a1 = a[1] as string;
@@ -40,7 +40,7 @@ const InternationalPage = () => {
 
 
     return(
-        <Layout>
+        <>
             <h1 className={styles.title}>Internacional</h1>
             <p className={styles.description_text}> Alumnos que pueden participar en las selecciones para olimpíadas internacionales 2023</p>
             <div className={[styles.rounded_box,styles.middle_columns].join(" ")}>
@@ -120,7 +120,7 @@ const InternationalPage = () => {
                     </table>
                 </div>
             </div>
-        </Layout>
+        </>
         )
 }
 

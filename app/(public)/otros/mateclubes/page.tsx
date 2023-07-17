@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { getCalendarEvents } from "../../../lib/app-router-db-calls";
+import { getCalendarEvents } from "../../../../lib/app-router-db-calls";
 import MathClubs from "./mateclubes";
 
 

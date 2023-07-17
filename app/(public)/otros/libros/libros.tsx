@@ -1,5 +1,5 @@
 'use client'
-import Layout from "../../../components/Layout/Layout";
+import Layout from "../../../../components/Layout/Layout";
 import styles from "./Libros.module.scss";
 import Image from "next/image";
 
@@ -22,7 +22,7 @@ const renderBook = (book: Book,idx: number) => {
 
 const BooksPage = ({books}:{books:Book[]}) => {
     return(
-        <Layout>
+        <>
             <h1 className={styles.title}>Libros a la venta</h1>
             <div className={styles.warning_box}>
                     <div className={styles.warning_box_title}>
@@ -51,7 +51,7 @@ const BooksPage = ({books}:{books:Book[]}) => {
                     </tbody>
                 </table>
             </div>
-        </Layout>        
+        </>        
     )
 }
 
