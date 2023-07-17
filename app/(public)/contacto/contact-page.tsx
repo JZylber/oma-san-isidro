@@ -1,6 +1,6 @@
 'use client'
 import styles from "./Contact.module.scss";
-import Layout from "../../components/Layout/Layout";
+import Layout from "../../../components/Layout/Layout";
 
 
 const ContactPage = () => {

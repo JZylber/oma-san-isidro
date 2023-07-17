@@ -1,6 +1,6 @@
 'use client'
-import Layout from "../../../components/Layout/Layout";
-import Problems from "../../../components/Problems/Problems";
+import Layout from "../../../../components/Layout/Layout";
+import Problems from "../../../../components/Problems/Problems";
 
 const NanduProblemsPage = () => {
     return(

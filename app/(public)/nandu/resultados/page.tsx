@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import NanduResultsPage from "./resultados";
-import { yearTests } from "../../../components/ResultsPage/resultsTypes";
-import { getAvailableResults } from "../../../lib/app-router-db-calls";
+import { yearTests } from "../../../../components/ResultsPage/resultsTypes";
+import { getAvailableResults } from "../../../../lib/app-router-db-calls";
 
 export const metadata : Metadata = {
     title: 'Resultados Ñandú',

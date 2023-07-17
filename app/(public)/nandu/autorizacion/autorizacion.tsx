@@ -1,6 +1,6 @@
 'use client';
-import { Authorization } from "../../../components/Auth/Auth";
-import Layout from "../../../components/Layout/Layout";
+import { Authorization } from "../../../../components/Auth/Auth";
+import Layout from "../../../../components/Layout/Layout";
 
 const NanduAuth = () => {
   return (

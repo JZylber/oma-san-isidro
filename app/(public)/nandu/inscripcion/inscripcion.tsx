@@ -1,6 +1,6 @@
 'use client'
-import { Inscripcion} from "../../../components/Inscription/Inscription";
-import Layout from "../../../components/Layout/Layout";
+import { Inscripcion} from "../../../../components/Inscription/Inscription";
+import Layout from "../../../../components/Layout/Layout";
 
 const competition = "ÑANDÚ"
 

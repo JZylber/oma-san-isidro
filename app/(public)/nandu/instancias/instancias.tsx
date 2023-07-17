@@ -1,6 +1,6 @@
 'use client'
-import Layout from "../../../components/Layout/Layout"
-import Instances from "../../../components/Instances/InstanceMenu";
+import Layout from "../../../../components/Layout/Layout"
+import Instances from "../../../../components/Instances/InstanceMenu";
 
 const competition = "ÑANDÚ";
 
