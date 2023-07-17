@@ -4,11 +4,7 @@ import Results from "../../../../components/ResultsPage/results"
 import { yearTests } from "../../../../components/ResultsPage/resultsTypes"
 
 const NanduResultsPage = ({results}:{results: Array<yearTests>}) => {
-    return(
-        <Layout>
-            <Results competition="Ñandú" availableResults={results}/>
-        </Layout>
-        )
+    return(<Results competition="Ñandú" availableResults={results}/>)
 }
 
 export default NanduResultsPage
