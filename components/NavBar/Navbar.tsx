@@ -68,6 +68,20 @@ const selectedMainItem = (menuHierarchy: MenuHierarchy) => {
   }
 }
 
+const selectedRoute = (menuHierarchy: MenuHierarchy) => {
+  const item = menuHierarchy.find((element) => element.selected)
+  if(item){
+      const subItem = item.subItems.find((subItem) => subItem.selected)
+      if(subItem){
+          return(subItem.link)
+      }else {
+        return(item.link)
+      }
+  }else {
+      return(undefined)
+  }
+}
+
 const noItemsSelected = (menuHierarchy: MenuHierarchy) => {
   return menuHierarchy.every((element) => !element.selected && element.subItems.every((subItem) => !subItem.selected));
 }
@@ -113,6 +127,10 @@ const selectSubItem = (
   return hierarchy.map((element,index) => selectItem(element, index, mainCategory, (item: menuItem,index: number) => selectItem(item,index,subCategory), (item) => unselectItems(item)));
 }
 
+const unselectItemsInHierarchy = (hierarchy: MenuHierarchy) => {
+  return hierarchy.map((element) => {return {...element,selected:false,subItems:element.subItems.map(unselectItems)}});
+}
+
 const showCurrentPageSelected = (menuComponents : Array<menuItem>,currentRoute:string) => {
   let mainCategoryIndex = -1;
   let subCategoryIndex = -1;
@@ -134,7 +152,7 @@ const showCurrentPageSelected = (menuComponents : Array<menuItem>,currentRoute:s
   }else if(mainCategoryIndex >= 0){
     return selectMainItem(menuComponents,mainCategoryIndex);
   }else {
-    return menuComponents;
+    return unselectItemsInHierarchy(menuComponents);
   }
 }
 
@@ -142,7 +160,6 @@ const reduce = (menuHierarchy: MenuHierarchy, action: MenuAction) => {
   const mainItem = action.mainItem? action.mainItem : 0;
   const subItem = action.subItem? action.subItem : 0;
   const route = action.route? action.route : "/";
-  console.log(action);
   switch (action.type) {
     case "selectMainItem":
       return selectMainItem(menuHierarchy, mainItem);
@@ -159,12 +176,15 @@ const reduce = (menuHierarchy: MenuHierarchy, action: MenuAction) => {
 export default function NavBar({togglePageContent,onRouteChange}:NavProps){
     let [openFullMenu,setOpenFullMenu] = useState(false);
     const pathname = usePathname()
+    const [previousPathname,setPreviousPathname] = useState(pathname);
     const [menuHierarchy,setMenuHierarchy] = useReducer(reduce,defaultMenuHierarchy);
     useEffect(() => {
-      if(pathname && noItemsSelected(menuHierarchy)){
+      console.log("pathname",pathname);
+      if(pathname && pathname !== previousPathname && pathname !== selectedRoute(menuHierarchy)){
         setMenuHierarchy({type:"currentPage",route:pathname});
+        setPreviousPathname(pathname);
       };
-    },[pathname,menuHierarchy])
+    },[pathname,previousPathname,menuHierarchy])
     const clickMainItem = (itemName : string) => {
         const itemIndex = menuHierarchy.findIndex((item) => item.text == itemName);
         const item = menuHierarchy[itemIndex]

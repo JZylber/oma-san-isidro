@@ -1,5 +1,4 @@
 'use client'
-import Layout from "../../../../components/Layout/Layout";
 import styles from "./Libros.module.scss";
 import Image from "next/image";
 
@@ -47,7 +46,7 @@ const BooksPage = ({books}:{books:Book[]}) => {
                         </tr>
                     </thead>
                     <tbody className={styles.table_body}>
-                        {books. map(renderBook)}
+                        {books.map(renderBook)}
                     </tbody>
                 </table>
             </div>
