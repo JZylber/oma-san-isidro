@@ -1,6 +1,5 @@
 'use client'
-import Layout from "../../../components/Layout/Layout"
-import Instances from "../../../components/Instances/InstanceMenu";
+import Instances from "../../../../components/Instances/InstanceMenu";
 
 const competition = "OMA";
 
@@ -9,11 +8,7 @@ interface OMAInstanceProps{
 } 
 
 const OMAInstancePage = ({instances} : OMAInstanceProps) => {
-    return(
-        <Layout>
-            <Instances competition={competition} instances={instances}/>
-        </Layout>
-        )
+    return(<Instances competition={competition} instances={instances}/>)
 }
 
 export default OMAInstancePage

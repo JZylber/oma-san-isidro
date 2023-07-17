@@ -1,12 +1,8 @@
 'use client';
-import { Authorization } from "../../../components/Auth/Auth";
-import Layout from "../../../components/Layout/Layout";
+import { Authorization } from "../../../../components/Auth/Auth";
 
 const OMAAuth = () => {
-  return (
-      <Layout>
-        <Authorization type="oma" />
-      </Layout>
+  return (<Authorization type="oma" />
   );
 };
 

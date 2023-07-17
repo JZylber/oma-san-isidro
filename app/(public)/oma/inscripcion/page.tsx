@@ -1,5 +1,5 @@
 import { Metadata } from "next"
-import { getInscriptionData } from "../../../lib/app-router-db-calls";
+import { getInscriptionData } from "../../../../lib/app-router-db-calls";
 import OMAInscriptionPage from "./inscripcion";
 
 export const metadata : Metadata = {
