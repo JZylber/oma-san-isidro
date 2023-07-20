@@ -102,7 +102,7 @@ const InstanceData = ({competition,instance}:InstanceProps) => {
     return(
         <>
         <h2 className={styles.title}>{instancia[0] + instancia.slice(1).toLocaleLowerCase()}</h2>
-        <h3 className={styles.subtitle}>{`${fecha.getDate()} de ${months[fecha.getMonth()]}`}</h3>
+        <h3 className={styles.subtitle}>{`${fecha.getUTCDate()} de ${months[fecha.getMonth()]}`}</h3>
         {instanceIsLoading ?<Loader/>:
         instanceData && displayInstance(instancia,competition,instanceData)}
         </>
