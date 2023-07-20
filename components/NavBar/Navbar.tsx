@@ -131,7 +131,7 @@ const unselectItemsInHierarchy = (hierarchy: MenuHierarchy) => {
 }
 
 const showCurrentPageSelected = (menuComponents : Array<menuItem>,currentRoute:string) => {
-  if(noItemsSelected(menuComponents)){
+  if(selectedRoute(menuComponents) !== currentRoute){
     let mainCategoryIndex = -1;
     let subCategoryIndex = -1;
     menuComponents.forEach((mainCategory,mainIndex) => {
@@ -152,7 +152,7 @@ const showCurrentPageSelected = (menuComponents : Array<menuItem>,currentRoute:s
     }else if(mainCategoryIndex >= 0){
       return selectMainItem(menuComponents,mainCategoryIndex);
     }else {
-      return menuComponents;
+      return unselectItemsInHierarchy(menuComponents);
     }
   }else{
     return menuComponents;
