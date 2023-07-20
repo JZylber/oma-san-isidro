@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
     try {
-        revalidatePath('/calendario');
+        revalidatePath('/otros/calendario');
         revalidatePath('/');
         return NextResponse.json({revalidated: true})
       } catch (err) {
