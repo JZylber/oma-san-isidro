@@ -17,7 +17,7 @@ const CalendarExport = ({year,events}: CalendarExportProps) => {
                     <Fragment key={month_idx}>
                     <h2>{month.name}</h2>
                     <ul>
-                        {month.events.map((event,idx) => <li key={`${month_idx}-${idx}`}>{event.fecha_inicio.getDate()}{event.fecha_fin?"-"+event.fecha_fin.getDate():""} ({event.tipo}) {event.texto}</li>)}
+                        {month.events.map((event,idx) => <li key={`${month_idx}-${idx}`}>{event.fecha_inicio.getUTCDate()}{event.fecha_fin?"-"+event.fecha_fin.getUTCDate():""} ({event.tipo}) {event.texto}</li>)}
                     </ul>
                     </Fragment>)
                 } else {

@@ -25,7 +25,7 @@ const DateBanner = ({dates,displayAmount = 3,displayCategory,ignoreCurrentDate=f
     const months = ["ENE","FEB","MAR","ABR","MAY","JUN","JUL","AGO","SEP","OCT","NOV","DIC"]
     const getEndDate = (cevent : CalendarEvent) => {
         if(cevent.fecha_fin){
-            return(` - ${cevent.fecha_fin.getDate()}`)
+            return(` - ${cevent.fecha_fin.getUTCDate()}`)
         } else {
             return("")
         }
@@ -33,7 +33,7 @@ const DateBanner = ({dates,displayAmount = 3,displayCategory,ignoreCurrentDate=f
     const renderDate = (date:CalendarEvent,idx : number,dates: CalendarEvent []) => {
         return(
         <div className={[styles.container_entry].join(" ")} key={idx}>
-            <div className={styles.date}><span>{`${date.fecha_inicio.getDate()} ${getEndDate(date)} ${months[date.fecha_inicio.getMonth()]}`}</span></div>
+            <div className={styles.date}><span>{`${date.fecha_inicio.getUTCDate()} ${getEndDate(date)} ${months[date.fecha_inicio.getMonth()]}`}</span></div>
             <div className={styles.event}>{date.texto}</div>
             <div className={styles.type_container}>
                 {showCategory && <div className={styles.type}>{date.tipo}</div>}

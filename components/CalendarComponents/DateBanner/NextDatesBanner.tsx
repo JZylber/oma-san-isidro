@@ -29,7 +29,7 @@ const NextDatesBanner = ({dates,category}:DateBannerProps) => {
                     return(
                         <div className={styles.event} key={idx}>
                             <span className={styles.text}>{date.texto}</span>
-                            <span className={styles.date}>{`${date.fecha_inicio.getDate()} ${months[date.fecha_inicio.getMonth()]}`}</span>
+                            <span className={styles.date}>{`${date.fecha_inicio.getUTCDate()} ${months[date.fecha_inicio.getMonth()]}`}</span>
                         </div>
                     )})}
             </div>
