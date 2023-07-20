@@ -22,7 +22,7 @@ export type menuItem = {
 export type MenuHierarchy = Array<menuItem>;
 
 const defaultMenuHierarchy : MenuHierarchy = [
-  {text: "Inicio",link:"/",selected : true,subItems:[]},
+  {text: "Inicio",link:"/",selected : false,subItems:[]},
   {text: "Oma",link:'/oma',selected : false,subItems:[
       {text: "General",link:'/oma',selected : false,subItems:[]},
       {text: "Inscripción",link:'/oma/inscripcion',selected : false,subItems:[]},
@@ -131,27 +131,31 @@ const unselectItemsInHierarchy = (hierarchy: MenuHierarchy) => {
 }
 
 const showCurrentPageSelected = (menuComponents : Array<menuItem>,currentRoute:string) => {
-  let mainCategoryIndex = -1;
-  let subCategoryIndex = -1;
-  menuComponents.forEach((mainCategory,mainIndex) => {
-    if(mainCategory.link === currentRoute){
-      mainCategoryIndex = mainIndex;
-      subCategoryIndex = 0;
+  if(noItemsSelected(menuComponents)){
+    let mainCategoryIndex = -1;
+    let subCategoryIndex = -1;
+    menuComponents.forEach((mainCategory,mainIndex) => {
+      if(mainCategory.link === currentRoute){
+        mainCategoryIndex = mainIndex;
+        subCategoryIndex = 0;
+      }else {
+        mainCategory.subItems.forEach((subCategory,subIndex) => {
+          if(subCategory.link === currentRoute){
+            mainCategoryIndex = mainIndex;
+            subCategoryIndex = subIndex;
+          }
+        })
+      }
+    });
+    if(subCategoryIndex >= 0){
+      return selectSubItem(menuComponents,mainCategoryIndex,subCategoryIndex);
+    }else if(mainCategoryIndex >= 0){
+      return selectMainItem(menuComponents,mainCategoryIndex);
     }else {
-      mainCategory.subItems.forEach((subCategory,subIndex) => {
-        if(subCategory.link === currentRoute){
-          mainCategoryIndex = mainIndex;
-          subCategoryIndex = subIndex;
-        }
-      })
+      return menuComponents;
     }
-  });
-  if(subCategoryIndex >= 0){
-    return selectSubItem(menuComponents,mainCategoryIndex,subCategoryIndex);
-  }else if(mainCategoryIndex >= 0){
-    return selectMainItem(menuComponents,mainCategoryIndex);
-  }else {
-    return unselectItemsInHierarchy(menuComponents);
+  }else{
+    return menuComponents;
   }
 }
 
@@ -175,29 +179,21 @@ const reduce = (menuHierarchy: MenuHierarchy, action: MenuAction) => {
 export default function NavBar({togglePageContent}:NavProps){
     let [openFullMenu,setOpenFullMenu] = useState(false);
     const pathname = usePathname()
-    const [previousPathname,setPreviousPathname] = useState(pathname);
     const [menuHierarchy,setMenuHierarchy] = useReducer(reduce,defaultMenuHierarchy);
     useEffect(() => {
-      if(pathname && pathname !== previousPathname && pathname !== selectedRoute(menuHierarchy)){
-        setMenuHierarchy({type:"currentPage",route:pathname});
-        setPreviousPathname(pathname);
-      } 
-    },[pathname,previousPathname,menuHierarchy])
+        setMenuHierarchy({type: "currentPage",route: pathname});
+    },[pathname])
     const clickMainItem = (itemName : string) => {
         const itemIndex = menuHierarchy.findIndex((item) => item.text == itemName);
-        const item = menuHierarchy[itemIndex]
-        if(item){
-            if(!(item.link && item.link !==  previousPathname)){
+        if(itemIndex >= 0){
               setMenuHierarchy({type: "selectMainItem",mainItem: itemIndex})
-            }
         }
     }
     const clickSubItem = (mainItemName : string,subItemName: string) => {
         const mainItemIndex = menuHierarchy.findIndex((item) => item.text === mainItemName);
         const item = menuHierarchy[mainItemIndex]
         const subItemIndex = item.subItems.findIndex((subitem) => subitem.text === subItemName)
-        const subItem = item.subItems[subItemIndex]
-        if(!(subItem.link && subItem.link !== previousPathname)){
+        if(mainItemIndex >= 0 && subItemIndex >= 0){
           setMenuHierarchy({type: "selectSubItem",mainItem: mainItemIndex,subItem: subItemIndex});
         }
     } 
