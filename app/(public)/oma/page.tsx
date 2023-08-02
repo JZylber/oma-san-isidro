@@ -8,7 +8,7 @@ export const metadata : Metadata = {
 }
 
 export default async function Oma() {
-    const events = await getCalendarEvents(new Date().getFullYear(), "Ñandú");
+    const events = await getCalendarEvents(new Date().getFullYear(), "OMA");
     const dates = events.map((event) => {return{...event,fecha_fin: event.fecha_fin?event.fecha_fin:undefined}});
     return <OMAHome events={dates}/>
 }
