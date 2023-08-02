@@ -256,7 +256,7 @@ const passingParticipantsWScore = async (type: string, year: number, instance: s
   return ({results});
 };
 
-const getAuthMaxDate = async (year: number,competition: string, instance: string) => {
+const getInstanceData = async (year: number,competition: string, instance: string) => {
   let ins = instance as INSTANCIA;
   const query = await prisma.prueba.findFirst({
     where: {
@@ -268,11 +268,13 @@ const getAuthMaxDate = async (year: number,competition: string, instance: string
       
   },
   select: {
-    fecha_limite_autorizacion: true
+    fecha_limite_autorizacion: true,
+    hora_ingreso: true
   }  
   })
-  return ({query});
+  return (query);
 }
+
 
 const getPreviousInstance =  (competition: string,instance: string) => {
   if(instance === 'NACIONAL') return 'REGIONAL';
@@ -288,9 +290,9 @@ const venueDataGenerator = async (competition: string, instance: string) => {
   const date = new Date();
   const year = date.getFullYear();
   const previous_instance = getPreviousInstance(competition,instance);
-  const {dropPoints,venues,participants,auth_max_date} = await Promise.all([getInstanceDropPoints(competition,year,instance),getInstanceVenues(competition,year,instance),previous_instance?passingParticipants(competition,year,previous_instance):getParticipants(competition,year),getAuthMaxDate(year,competition,instance)])
-      .then(([dropPoints,venues,participants,auth_max_date]) => {
-        return ({dropPoints:dropPoints.results,venues:venues.results,participants:participants.results,auth_max_date:auth_max_date.query?.fecha_limite_autorizacion})
+  const {dropPoints,venues,participants,auth_max_date,time} = await Promise.all([getInstanceDropPoints(competition,year,instance),getInstanceVenues(competition,year,instance),previous_instance?passingParticipants(competition,year,previous_instance):getParticipants(competition,year),getInstanceData(year,competition,instance)])
+      .then(([dropPoints,venues,participants,instance_data]) => {
+        return ({dropPoints:dropPoints.results,venues:venues.results,participants:participants.results,auth_max_date:instance_data?.fecha_limite_autorizacion,time:instance_data?.hora_ingreso})
       });
   const participant_venues = participants.map((participant) => {
         let venue = venues.find((venue) => 
@@ -306,7 +308,7 @@ const venueDataGenerator = async (competition: string, instance: string) => {
         return({...participant,venue: venue?.nombre});
       });
   const flat_participant_venues = participant_venues.map((participant) => {return({nombre: participant.participante.nombre, apellido: participant.participante.apellido ,colegio: participant.colegio, sede: participant.venue, nivel: participant.nivel})});
-  return({venues: venues,dropPoints: dropPoints,auth_max_date: JSON.parse(JSON.stringify(auth_max_date)),participants: flat_participant_venues})
+  return({venues: venues,dropPoints: dropPoints,auth_max_date: JSON.parse(JSON.stringify(auth_max_date)),time: JSON.parse(JSON.stringify(time)),participants: flat_participant_venues})
 }
 
 const getDisabled = async (competition: string, year: number, instance: string) => {
@@ -340,7 +342,7 @@ const provincialDataGenerator = async (competition: string, instance: string) =>
   const disabled = await getDisabled(competition,year,instance);
   provincialParticipants = provincialParticipants.filter((participant) => !disabled.some((disabled_participant) => disabled_participant.id_participacion === participant.id_participacion));
   const provincialParticipantsNames = provincialParticipants.map((participant) => {return({nombre: participant.participante.nombre, apellido: participant.participante.apellido ,colegio: participant.colegio, nivel: participant.nivel})});
-  const auth_max_date = (await getAuthMaxDate(year,competition,instance)).query?.fecha_limite_autorizacion;
+  const auth_max_date = (await getInstanceData(year,competition,instance))?.fecha_limite_autorizacion;
   return({participants: provincialParticipantsNames,auth_max_date: JSON.parse(JSON.stringify(auth_max_date))});
 }
 

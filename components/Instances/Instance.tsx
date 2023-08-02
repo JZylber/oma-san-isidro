@@ -3,13 +3,13 @@ import {useEffect, useState } from "react";
 import { Instance } from "./InstanceMenu";
 import Loader from "../Loader/Loader";
 import Venues, { DropPoint, Venue, VenueParticipant } from "./Venues";
-import { getDateFromJSON } from "../../lib/aux_functions";
+import { getDateFromJSON, getTimeFromJSON } from "../../lib/aux_functions";
 import Provincial, { ProvincialParticipant } from "./Provincial";
 import { Participant, School } from "../../hooks/types";
 
 interface InstanceProps {
     competition: string,
-    instance: Instance
+    instance: Instance,
 }
 
 interface RegionalInstance {
@@ -17,6 +17,7 @@ interface RegionalInstance {
     dropPoints: DropPoint[];
     participants: ParticipantInput[];
     auth_max_date?: Date;
+    time: Date;
 }
 interface ProvincialParticipantInput {
     nombre: string,
@@ -65,7 +66,8 @@ const displayInstance = (instance: string, competition: string, instanceData: Re
         venues={venues} 
         dropPoints={regionalInstance.dropPoints} 
         participants={participants} 
-        auth_max_date={regionalInstance.auth_max_date}/>
+        auth_max_date={regionalInstance.auth_max_date}
+        time={regionalInstance.time}/>
     }
     else{
         return <span className={styles.text}>Proximamente...</span>
@@ -90,6 +92,9 @@ const InstanceData = ({competition,instance}:InstanceProps) => {
                 }});
             if(response.auth_max_date){
                 response.auth_max_date = getDateFromJSON(response.auth_max_date);
+            }
+            if(response.time){
+                response.time = getTimeFromJSON(response.time);
             }
             setInstanceData(response);
             setInstanceIsLoading(false);
