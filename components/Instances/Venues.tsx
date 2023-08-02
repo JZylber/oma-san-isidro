@@ -22,6 +22,7 @@ interface VenueProps {
     dropPoints: DropPoint[];
     participants: VenueParticipant[];
     auth_max_date?: Date;
+    time : Date;
 }
 
 export interface Venue extends Record<string,Filterables> {
@@ -66,7 +67,7 @@ const makeParticipantElement = (participant : VenueParticipant,index : number) =
         </tr>)
 }
 
-const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants}:VenueProps) => {
+const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants,time}:VenueProps) => {
     //Venues
     const hasDisclaimers = venues.reduce((disclaimers : number,venue: Venue) => {
         return disclaimers + (venue.aclaracion !== ""?1:0);
@@ -95,7 +96,7 @@ const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants}:Ven
             {venues.length > 0 &&
             <>
             <h2 className={styles.section_title}>Sedes</h2>
-            <p className={styles.text}>Presentarse <span className={styles.bold}>13:30 hs</span>. ¡No se olviden de las autorizaciones!</p>
+            <p className={styles.text}>Presentarse <span className={styles.bold}>{`${time.getHours()}:${time.getMinutes()}`} hs</span>. ¡No se olviden de las autorizaciones!</p>
             <h3 className={styles.section_subtitle}>Colegios por sede</h3>
             <form className={styles.form}>
                 <SelectResultCategory category="Colegio" value={venueFilter.colegio} setValue={(option?: School) => updateVenueFilter({colegio: option})} options={venueOptions.colegio} input={true}/>
