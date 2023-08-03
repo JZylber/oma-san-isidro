@@ -1,8 +1,17 @@
 @use "../../styles/shared.scss" as shared;
 
 .grid{
+    @include shared.mobile-only{
+        display: none;
+    }
+    margin: 2rem 0rem 2rem 0rem;
     display: flex;
     column-gap: 1rem;
+    max-width: 100%;
+    overflow: scroll;
+    border: 2px solid #000000;
+    border-radius: 9px;
+    padding: .75rem;
 }
 
 .column{
@@ -10,4 +19,15 @@
     flex-direction: column-reverse;
     row-gap: 2rem;
     align-items: center;
+    &Header{
+        position: sticky;
+        width: 100%;
+        @include shared.font-unbounded(600);
+        font-size: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 3rem;
+        border-top: 1px solid gray;
+    }
 }

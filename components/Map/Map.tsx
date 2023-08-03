@@ -32,14 +32,19 @@ const data : Array<Array<Array<MapItem>>> = [
         [{school: new School("Los Molinos"),level:2},{school: new School("La Asunción de la Virgen"),level:1},{school: new School("Newman"),level:3}],
         [{school: new School("Northlands","Olivos"),level:2},{school: new School("Los Molinos"),level:1},{school: new School("Cardenal Pironio"),level:3},{school: new School("Holy Cross","Mujeres"),level:2}]
     ],
+    [   
+        [{school: new School("Northlands","Olivos"),level:2},{school: new School("San Carlos"),level:1},{school: new School("El Buen Ayre"),level:3}],
+        [{school: new School("Cruz del Sur"),level:2}]
+    ],
 ]
 
 const Map = ({competition}:MapProps) => {
     return(
         <div className={styles.grid}>
-            {data.map((column) => {
+            {data.map((column,index) => {
                 return(
                     <div className={styles.column}>
+                        <div className={styles.columnHeader}>{index+1}</div>
                         {column.map((row) => {
                             return(<ParticipantTable participants={row}/>)
                         })}
