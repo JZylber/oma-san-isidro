@@ -6,9 +6,6 @@
 }
 
 .grid{
-    @include shared.mobile-only{
-        display: none;
-    }
     display: flex;
     column-gap: 1rem;
     padding: .75rem;
@@ -47,9 +44,6 @@
 }
 
 .values {
-    @include shared.mobile-only{
-        display: none;
-    }
     border: 2px solid #000000;
     box-sizing: border-box;
     border-radius: 9px;

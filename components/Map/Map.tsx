@@ -137,6 +137,27 @@ const data : Array<Array<Array<MapItem>>> = [
         [{school: new School("San Juan el Precursor"),level:2},{school: new School("San Carlos"),level:1},{school: new School("Tarbut"),level:3},{school: new School("Todos los Santos"),level:2}],
         [{school: new School("Northlands","Olivos"),level:2},{school: new School("Los Molinos"),level:1},{school: new School("Newman"),level:3},{school: new School("San Lucas","Olivos"),level:2}],
     ],
+    [
+        [{school: new School("Santa Teresa del Niño Jesús"),level:2}],
+        [{school: new School("Santa Inés"),level:2}],
+        [{school: new School("Santa Maria de las Lomas"),level:2}],
+        [{school: new School("Santa Teresa del Niño Jesús"),level:2}],
+        [{school: new School("San Lucas","Olivos"),level:2}],
+        [{school: new School("Santa Maria de las Lomas"),level:2}],
+        [{school: new School("Pilgrims College","San Isidro"),level:3}],
+        [{school: new School("Santa Teresa del Niño Jesús"),level:2}],
+        [{school: new School("Santa Inés"),level:2}],
+        [{school: new School("Pilgrims College","San Isidro"),level:3}],
+        [{school: new School("Santa Maria de las Lomas"),level:2}],
+        [{school: new School("Santa Teresa del Niño Jesús"),level:2}],
+        [{school: new School("Pilgrims College","San Isidro"),level:3}],
+        [{school: new School("Santa Inés"),level:2}],
+        [{school: new School("Saint Nicholas School"),level:2}],
+        [{school: new School("Pilgrims College","San Isidro"),level:3}],
+    ],
+    [
+        [{school: new School("San Gregorio"),level:3}],
+    ],
 ];
 
 const countParticipantsOfLevel = (participants: MapItem[],level:number) => {
