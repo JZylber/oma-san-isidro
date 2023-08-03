@@ -16,7 +16,18 @@ export interface MapItem extends FilterableObject {
 const data : Array<Array<Array<MapItem>>> = [
     [   
         [{school: new School("Mariano Moreno"),level:2}],
-        [{school: new School("San Ignacio"),level:2}]
+        [{school: new School("San Ignacio"),level:2}],
+        [{school: new School("San Gregorio"),level:2}],
+        [{school: new School("Marín"),level:2}],
+        [{school: new School("San Ignacio"),level:2}],
+        [{school: new School("Mariano Moreno"),level:2}],
+        [{school: new School("Piaget"),level:2}],
+        [{school: new School("San Gregorio"),level:2}],
+        [{school: new School("Mariano Moreno"),level:2}],
+        [{school: new School("Piaget"),level:2}],
+        [{school: new School("El Buen Ayre"),level:2}],
+        [{school: new School("Marín"),level:2}],
+        [{school: new School("San Gregorio"),level:2}],
     ],
     [   
         [{school: new School("Pilgrims College","San Isidro"),level:2},{school: new School("Santa Maria de las Lomas"),level:1}],
