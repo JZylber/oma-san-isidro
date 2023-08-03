@@ -38,13 +38,25 @@ const data : Array<Array<Array<MapItem>>> = [
         [{school: new School("Northlands","Olivos"),level:2},{school: new School("San Carlos"),level:1},{school: new School("El Buen Ayre"),level:3}],
         [{school: new School("Cruz del Sur"),level:2}]
     ],
-]
+];
+
+const countParticipantsOfLevel = (participants: MapItem[],level:number) => {
+    return(participants.filter((item) => item.level === level).length);
+}
+
+const participantsInColumn = (column:MapItem[],selected: MapItem[]) => {
+    const selectedInColumn = selected.filter((item) => column.includes(item));
+    const participantsPerLevel = [1,2,3].map((level) => countParticipantsOfLevel(selectedInColumn,level));
+    return(participantsPerLevel);
+};
 
 const Map = ({competition}:MapProps) => {
     const flattenedData = data.flat(2);
+    const columns = data.map((column) => column.flat(1));
     const [schoolFilter,updateFilter,filtered_schools,options] = useFilter(flattenedData);
+    const participantsPerColumn = columns.map((column,index) => [index + 1,...participantsInColumn(column,filtered_schools)]).filter((column) => column.slice(1).some((value) => value !== 0));
+    const someSelected = Object.values(schoolFilter).some((value) => value !== undefined);
     const isSelected = (item:MapItem) => {
-        const someSelected = Object.values(schoolFilter).some((value) => value !== undefined);
         return(someSelected && filtered_schools.includes(item))
     }
     return(
@@ -54,17 +66,41 @@ const Map = ({competition}:MapProps) => {
             <SelectResultCategory category="Nivel" value={schoolFilter.level} setValue={(option?: number) => updateFilter({level: option})} options={options.level.sort()} clear={true}/>
         </form>
         <div className={styles.grid}>
-            {data.map((column,index) => {
+            {data.map((column,column_index) => {
+                const columnIsSelected = someSelected && participantsPerColumn.some((column) => column[0] === column_index + 1);
                 return(
-                    <div className={styles.column}>
-                        <div className={styles.columnHeader}>{index+1}</div>
-                        {column.map((row) => {
-                            return(<ParticipantTable participants={row} isSelected={isSelected}/>)
+                    <div key={column_index} className={styles.column}>
+                        <div className={[styles.columnHeader,columnIsSelected?styles.selected:""].join(" ")}>{column_index+1}</div>
+                        {column.map((row, row_index) => {
+                            return(<ParticipantTable key={`${column_index}-${row_index}`} participants={row} isSelected={isSelected}/>)
                         })}
                     </div>
                 )
             })
             }
+        </div>
+        <div className={styles.values}>
+            <table className={styles.values_table}>
+                <thead>
+                    <tr>
+                        <th>Fila</th>
+                        <th>Nivel 1</th>
+                        <th>Nivel 2</th>
+                        <th>Nivel 3</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {participantsPerColumn.map((column) => {
+                        return(
+                            <tr>
+                                {column.map((value) => {
+                                    return(<td className={styles.center_align}>{value}</td>)
+                                })}
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </table>
         </div>
         </>
     )};

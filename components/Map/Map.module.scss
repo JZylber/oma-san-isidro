@@ -12,6 +12,8 @@
     margin: 2rem 0rem 2rem 0rem;
     display: flex;
     column-gap: 1rem;
+    position: relative;
+    width: 100%;
     max-width: 100%;
     overflow: scroll;
     border: 2px solid #000000;
@@ -35,5 +37,107 @@
         align-items: center;
         min-height: 3rem;
         border-top: 1px solid gray;
+    }
+}
+
+.selected{
+    background-color: shared.$light-blue;
+    border: 2px solid #000000;
+    border-radius: 9px;
+}
+
+.values {
+    @include shared.mobile-only{
+        display: none;
+    }
+    border: 2px solid #000000;
+    box-sizing: border-box;
+    border-radius: 9px;
+    overflow: hidden;
+    margin-top: 1.6rem;
+}
+.values_table {
+    width: 100%;
+    border-collapse: collapse;
+    tr {
+        &:not(:last-child){
+            border-bottom: 2px solid shared.$black;
+        }
+    }
+    td, th {
+        &:not(:last-child){
+            border-right: 2px solid shared.$black;
+        }
+    }
+    thead {
+        background-color: shared.$light-blue;
+        border-bottom: 2px solid shared.$black;
+        @include shared.font-unbounded(500);
+        font-size: 2rem;
+        tr{
+            height: 5rem;
+        }
+        tr td {
+            &:first-child{
+                @include shared.tablet-only{
+                    padding: 1.6rem .8rem 1.6rem 2rem;
+                }
+                @include shared.desktop-only{
+                    padding: 1.6rem 2rem 1.6rem 4.4rem;
+                }
+            }
+            &:last-child{
+                @include shared.tablet-only{
+                    padding: 1.6rem 2rem 1.6rem .8rem;
+                }
+                @include shared.desktop-only{
+                    padding: 1.6rem 4.4rem 1.6rem 2rem;
+                }
+            }
+            &:not(:last-child):not(:first-child) {
+                @include shared.tablet-only{
+                    padding: 1.6rem .8rem 1.6rem .8rem;
+                }
+                @include shared.desktop-only{
+                    padding: 1.6rem 2rem 1.6rem 2rem;
+                }   
+            }        
+        }
+    } 
+    tbody {
+        @include shared.font-montserrat(500);
+        font-size: 2rem;
+        tr td {
+            &:first-child{
+                @include shared.tablet-only{
+                    padding: 1.6rem .8rem 1.6rem 2rem;
+                }
+                @include shared.desktop-only{
+                    padding: 1.6rem 2rem 1.6rem 4.4rem;
+                }
+            }
+            &:last-child{
+                @include shared.tablet-only{
+                    padding: 1.6rem 2rem 1.6rem .8rem;
+                }
+                @include shared.desktop-only{
+                    padding: 1.6rem 4.4rem 1.6rem 2rem;
+                }
+            }
+            &:not(:last-child):not(:first-child) {
+                @include shared.tablet-only{
+                    padding: 1.6rem .8rem 1.6rem .8rem;
+                }
+                @include shared.desktop-only{
+                    padding: 1.6rem 2rem 1.6rem 2rem;
+                }
+            }  
+        }
+        tr:hover{
+            background-color: shared.$light-blue;
+        } 
+    }
+    .center_align{
+        text-align: center;
     }
 }

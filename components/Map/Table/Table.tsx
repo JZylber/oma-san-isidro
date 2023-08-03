@@ -10,8 +10,8 @@ interface TableProps {
 const ParticipantTable = ({participants,isSelected}:TableProps) => {
     return(
         <div className={styles[`table${participants.length}`]}>
-            {participants.map((participant) => {
-                return(<Participant participant={participant} selected={isSelected(participant)}/>)
+            {participants.map((participant,index) => {
+                return(<Participant key={index} participant={participant} selected={isSelected(participant)}/>)
             })}
         </div>
     )}
