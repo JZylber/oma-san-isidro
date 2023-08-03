@@ -1,0 +1,22 @@
+@use "../../../styles/shared.scss" as shared;
+
+.table{
+    &1{
+        display: flex;
+    }
+    &2{
+        display: flex;
+        flex-direction: column;
+        row-gap: .75rem;
+    }
+    &3{
+        display: flex;
+        flex-direction: column;
+        row-gap: .75rem;
+    }
+    &4{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+}
