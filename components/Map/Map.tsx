@@ -32,7 +32,7 @@ const data : Array<Array<Array<MapItem>>> = [
     ],
     [   
         [{school: new School("Los Molinos"),level:2},{school: new School("La Asunción de la Virgen"),level:1},{school: new School("Newman"),level:3}],
-        [{school: new School("Northlands","Olivos"),level:2},{school: new School("Los Molinos"),level:1},{school: new School("Cardenal Pironio"),level:3},{school: new School("Holy Cross","Mujeres"),level:2}]
+        [{school: new School("Northlands","Olivos"),level:2},{school: new School("Los Molinos"),level:1},{school: new School("Cardenal Pironio"),level:3},{school: new School("Holy Cross"),level:2}]
     ],
     [   
         [{school: new School("Northlands","Olivos"),level:2},{school: new School("San Carlos"),level:1},{school: new School("El Buen Ayre"),level:3}],
@@ -43,6 +43,10 @@ const data : Array<Array<Array<MapItem>>> = [
 const Map = ({competition}:MapProps) => {
     const flattenedData = data.flat(2);
     const [schoolFilter,updateFilter,filtered_schools,options] = useFilter(flattenedData);
+    const isSelected = (item:MapItem) => {
+        const someSelected = Object.values(schoolFilter).some((value) => value !== undefined);
+        return(someSelected && filtered_schools.includes(item))
+    }
     return(
         <>
         <form className={styles.form}>
@@ -55,7 +59,7 @@ const Map = ({competition}:MapProps) => {
                     <div className={styles.column}>
                         <div className={styles.columnHeader}>{index+1}</div>
                         {column.map((row) => {
-                            return(<ParticipantTable participants={row}/>)
+                            return(<ParticipantTable participants={row} isSelected={isSelected}/>)
                         })}
                     </div>
                 )
