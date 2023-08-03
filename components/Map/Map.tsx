@@ -1,4 +1,6 @@
-import { School } from "../../hooks/types";
+import { FilterableObject, School } from "../../hooks/types";
+import useFilter from "../../hooks/useFilter";
+import SelectResultCategory from "../ResultsPage/SelectResultCategory";
 import styles from "./Map.module.scss";
 import ParticipantTable from "./Table/Table";
 
@@ -6,7 +8,7 @@ interface MapProps {
    competition: string;
 }
 
-export interface MapItem {
+export interface MapItem extends FilterableObject {
     school: School;
     level: number;
 }
@@ -39,7 +41,14 @@ const data : Array<Array<Array<MapItem>>> = [
 ]
 
 const Map = ({competition}:MapProps) => {
+    const flattenedData = data.flat(2);
+    const [schoolFilter,updateFilter,filtered_schools,options] = useFilter(flattenedData);
     return(
+        <>
+        <form className={styles.form}>
+            <SelectResultCategory category="Colegio" value={schoolFilter.school} setValue={(option?: School) => updateFilter({school: option})} options={options.school} input={true}/>
+            <SelectResultCategory category="Nivel" value={schoolFilter.level} setValue={(option?: number) => updateFilter({level: option})} options={options.level.sort()} clear={true}/>
+        </form>
         <div className={styles.grid}>
             {data.map((column,index) => {
                 return(
@@ -53,6 +62,7 @@ const Map = ({competition}:MapProps) => {
             })
             }
         </div>
+        </>
     )};
 
 export default Map;

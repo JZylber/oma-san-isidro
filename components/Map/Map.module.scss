@@ -1,5 +1,10 @@
 @use "../../styles/shared.scss" as shared;
 
+.form{
+    display: flex;
+    margin: 2rem 0rem 2rem 0rem;
+}
+
 .grid{
     @include shared.mobile-only{
         display: none;
@@ -12,6 +17,7 @@
     border: 2px solid #000000;
     border-radius: 9px;
     padding: .75rem;
+    justify-content: center;
 }
 
 .column{
