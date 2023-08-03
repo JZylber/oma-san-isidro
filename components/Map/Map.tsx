@@ -169,8 +169,8 @@ const Map = ({competition}:MapProps) => {
                 {data.map((column,column_index) => {
                     const columnIsSelected = someSelected && participantsPerColumn.some((column) => column[0] === column_index + 1);
                     return(
-                        <div key={column_index} className={styles.column}>
-                            <div className={[styles.columnHeader,columnIsSelected?styles.selected:""].join(" ")}>{column_index+1}</div>
+                        <div key={column_index} className={[styles.column,columnIsSelected?styles.selected:""].join(" ")}>
+                            <div className={[styles.columnHeader].join(" ")}>{column_index+1}</div>
                             {column.map((row, row_index) => {
                                 return(<ParticipantTable key={`${column_index}-${row_index}`} participants={row} isSelected={isSelected}/>)
                             })}
