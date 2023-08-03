@@ -65,19 +65,21 @@ const Map = ({competition}:MapProps) => {
             <SelectResultCategory category="Colegio" value={schoolFilter.school} setValue={(option?: School) => updateFilter({school: option})} options={options.school} input={true}/>
             <SelectResultCategory category="Nivel" value={schoolFilter.level} setValue={(option?: number) => updateFilter({level: option})} options={options.level.sort()} clear={true}/>
         </form>
-        <div className={styles.grid}>
-            {data.map((column,column_index) => {
-                const columnIsSelected = someSelected && participantsPerColumn.some((column) => column[0] === column_index + 1);
-                return(
-                    <div key={column_index} className={styles.column}>
-                        <div className={[styles.columnHeader,columnIsSelected?styles.selected:""].join(" ")}>{column_index+1}</div>
-                        {column.map((row, row_index) => {
-                            return(<ParticipantTable key={`${column_index}-${row_index}`} participants={row} isSelected={isSelected}/>)
-                        })}
-                    </div>
-                )
-            })
-            }
+        <div className={styles.gridContainer}>
+            <div className={styles.grid}>
+                {data.map((column,column_index) => {
+                    const columnIsSelected = someSelected && participantsPerColumn.some((column) => column[0] === column_index + 1);
+                    return(
+                        <div key={column_index} className={styles.column}>
+                            <div className={[styles.columnHeader,columnIsSelected?styles.selected:""].join(" ")}>{column_index+1}</div>
+                            {column.map((row, row_index) => {
+                                return(<ParticipantTable key={`${column_index}-${row_index}`} participants={row} isSelected={isSelected}/>)
+                            })}
+                        </div>
+                    )
+                })
+                }
+            </div>
         </div>
         <div className={styles.values}>
             <table className={styles.values_table}>
@@ -90,11 +92,11 @@ const Map = ({competition}:MapProps) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {participantsPerColumn.map((column) => {
+                    {participantsPerColumn.map((column,column_index) => {
                         return(
-                            <tr>
-                                {column.map((value) => {
-                                    return(<td className={styles.center_align}>{value}</td>)
+                            <tr key={column_index}>
+                                {column.map((value,row_index) => {
+                                    return(<td className={styles.center_align} key={row_index}>{value}</td>)
                                 })}
                             </tr>
                         )
