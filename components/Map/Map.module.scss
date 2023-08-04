@@ -21,7 +21,7 @@
         border: 2px solid #000000;
         border-radius: 9px;
         overflow: scroll;
-        max-height: 80vh;
+        max-height: 75vh;
     }
 }
 
@@ -44,6 +44,19 @@
         align-items: center;
         min-height: 3rem;
         border-top: 1px solid gray;
+        .textSurround{
+            aspect-ratio: 1/1;
+            height: 2.75rem;
+            box-sizing: content-box;
+            border-radius: 50%;
+            background-color: shared.$white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .select{
+            filter: invert(1);
+        }
     }
 }
 
@@ -51,6 +64,7 @@
     background-color: #D0D0D0;
     border-radius: 9px;
 }
+
 
 .values {
     border: 2px solid #000000;
