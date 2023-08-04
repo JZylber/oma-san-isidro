@@ -123,7 +123,7 @@ const data : Array<Array<Array<MapItem>>> = [
         [{school: new School("Pilgrims College","San Isidro"),level:2},{school: new School("Goethe"),level:1}],
         [{school: new School("Pilgrims College","Pacheco"),level:2},{school: new School("Northlands","Nordelta"),level:1}],
         [{school: new School("Michael Ham","Nordelta"),level:2},{school: new School("Goethe"),level:1}],
-        [{school: new School("Pilgrims College","San Isidro"),level:3},{school: new School("Labardén"),level:1}],
+        [{school: new School("Pilgrims College","San Isidro"),level:2},{school: new School("Labardén"),level:1}],
         [{school: new School("Michael Ham","Vicente López"),level:2},{school: new School("Goethe"),level:1}],
     ],
     [
@@ -172,7 +172,7 @@ const data : Array<Array<Array<MapItem>>> = [
     ],
     [
         [{school: new School("Los Molinos"),level:2},{school: new School("Pilgrims College","San Isidro"),level:1},{school: new School("Northlands","Nordelta"),level:3}],
-        [{school: new School("Michael Ham","Nordelta"),level:2},{school: new School("Northlands","Olivos"),level:1},{school: new School("Labardén","Nordelta"),level:3}],
+        [{school: new School("Michael Ham","Nordelta"),level:2},{school: new School("Northlands","Olivos"),level:1},{school: new School("Labardén"),level:3}],
         [{school: new School("Tarbut"),level:2},{school: new School("La Salle"),level:1},{school: new School("San Juan el Precursor"),level:3}],
         [{school: new School("San Lucas","Olivos"),level:1},{school: new School("Northlands","Nordelta"),level:2},{school: new School("Tarbut"),level:3}],
         [{school: new School("San Juan el Precursor"),level:2},{school: new School("Northlands","Olivos"),level:1},{school: new School("San Lucas","Olivos"),level:3}],
@@ -190,7 +190,7 @@ const data : Array<Array<Array<MapItem>>> = [
         [{school: new School("Santa Teresa"),level:2},{school: new School("San Gregorio"),level:1}],
         [{school: new School("La Asunción de la Virgen"),level:2},{school: new School("San Ignacio"),level:1}],
         [{school: new School("San Pedro"),level:2},{school: new School("Tarbut"),level:1}],
-        [{school: new School("Santa Marcos"),level:2},{school: new School("San Jorge Norte"),level:1}],
+        [{school: new School("San Marcos"),level:2},{school: new School("San Jorge Norte"),level:1}],
         [{school: new School("San Jorge Norte"),level:2},{school: new School("San Ignacio"),level:1}],
         [{school: new School("Santa Teresa"),level:2},{school: new School("Tarbut"),level:1}],
         [{school: new School("La Asunción de la Virgen"),level:2},{school: new School("San Ignacio"),level:1}],
@@ -299,7 +299,7 @@ const Map = ({competition}:MapProps) => {
                         return(
                             <tr key={column_index}>
                                 {column.map((value,row_index) => {
-                                    return(<td className={styles.center_align} key={row_index}>{value}</td>)
+                                    return(<td className={styles.center_align} key={row_index}>{value !== 0?value:""}</td>)
                                 })}
                             </tr>
                         )
