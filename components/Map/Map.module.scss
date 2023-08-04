@@ -122,3 +122,8 @@
         text-align: center;
     }
 }
+
+.row{
+    @include shared.font-unbounded(500);
+    background-color: shared.$light-blue;
+}

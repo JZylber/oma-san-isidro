@@ -290,10 +290,10 @@ const Map = ({competition}:MapProps) => {
             <table className={styles.values_table}>
                 <thead>
                     <tr>
-                        <th>Fila</th>
-                        <th>Nivel 1</th>
-                        <th>Nivel 2</th>
-                        <th>Nivel 3</th>
+                        <th style={{width: "17.5%"}}>Fila</th>
+                        <th style={{width: "27.5%"}}>Nivel 1</th>
+                        <th style={{width: "27.5%"}}>Nivel 2</th>
+                        <th style={{width: "27.5%"}}>Nivel 3</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -301,7 +301,7 @@ const Map = ({competition}:MapProps) => {
                         return(
                             <tr key={column_index}>
                                 {column.map((value,row_index) => {
-                                    return(<td className={styles.center_align} key={row_index}>{value !== 0?value:""}</td>)
+                                    return(<td className={[styles.center_align,row_index === 0?styles.row:""].join(" ")} key={row_index}>{value !== 0?value:""}</td>)
                                 })}
                             </tr>
                         )
