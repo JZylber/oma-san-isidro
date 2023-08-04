@@ -7,6 +7,7 @@ import VenueCard from "./VenueCard";
 import ParticipantCard from "./ParticipantCard";
 import { Filterables, Participant, School } from "../../hooks/types";
 import useFilter from "../../hooks/useFilter";
+import Map from "../Map/Map";
 
 export interface DropPoint {
     localidad: string,
@@ -122,13 +123,19 @@ const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants,time
                 allValues={participants} 
                 headers={participant_headers} 
                 Card={ParticipantCard} 
-                elements_per_page={50} 
+                elements_per_page={20} 
                 download={true}
                 downloadHeaders={downloadParticipantHeaders}
                 process_data={downloadParticipantData}
                 make_element={makeParticipantElement}
                 testInfo={`${type == "OMA"?"OMA":"Nandú"} ${instance} ${(new Date).getFullYear()}`}
             />
+            {instance === "REGIONAL" && type !== "OMA" && 
+            <>
+                <h2 className={styles.section_title}>Mapa</h2>
+                <p className={styles.text}>Para organizarnos mejor, ponemos público el mapa. El día de la instancia nos pueden ayudar sabiendo los lugares asignados a cada colegio.</p>
+                <Map competition={type}/>
+            </>}
         </>}
         {dropPoints.length === 0 && venues.length === 0 && <p className={styles.text}>Proximamente...</p>}
         </>
