@@ -32,7 +32,6 @@ const data : Array<Array<Array<MapItem>>> = [
         [{school: new School("Piaget"),level:2}],
         [{school: new School("Marín"),level:2}],
         [{school: new School("El Buen Ayre"),level:2}],
-        [{school: new School("Centro Cultural Italiano"),level:2}],
     ],
     [   
         [{school: new School("Pilgrims College","San Isidro"),level:2},{school: new School("Santa Maria de las Lomas"),level:1}],
@@ -49,7 +48,6 @@ const data : Array<Array<Array<MapItem>>> = [
         [{school: new School("Los Molinos"),level:2},{school: new School("San Juan el Precursor"),level:1}],
     ],
     [   
-        [{school: new School("Participación Individual"),level:3}],
         [{school: new School("San Gregorio"),level:3}],
         [{school: new School("San Luis"),level:3}],
         [{school: new School("Santa Inés"),level:3}],
@@ -97,11 +95,10 @@ const data : Array<Array<Array<MapItem>>> = [
     [   
         [{school: new School("Northlands","Olivos"),level:2},{school: new School("San Carlos"),level:1},{school: new School("El Buen Ayre"),level:3}],
         [{school: new School("Cruz del Sur"),level:2}],
-        [{school: new School("Centro Cultural Italiano"),level:2}],
         [{school: new School("Newman"),level:2}],
         [{school: new School("Dardo Rocha"),level:2}],
         [{school: new School("Learning"),level:2}],
-        [{school: new School("Centro Cultural Italiano"),level:2}],
+        [{school: new School("Participación Individual"),level:2}],
         [{school: new School("Cruz del Sur"),level:2}],
         [{school: new School("Alessandro Manzoni"),level:2}],
         [{school: new School("Newman"),level:2}],
