@@ -93,7 +93,7 @@ const Table = <S extends object,>({values,allValues,headers,Card,elements_per_pa
     }
     return(
         <>  
-            {elements_per_page && mobile_pagination}
+            {elements_per_page && max_pages > 1 && mobile_pagination}
             {elements_per_page && <div className={styles["table_header"+(download?"_with_download":"")]}>
                 {download && <div className={styles.downloadButton} onClick={() => setOpenDownloadPopup(true)}>
                     <span>Descargar</span>
@@ -101,7 +101,7 @@ const Table = <S extends object,>({values,allValues,headers,Card,elements_per_pa
                         <Arrow/>
                     </div>
                 </div>}
-                {pagination}
+                {max_pages > 1 && pagination}
             </div>}
             <div className={styles.values}>
                 {make_table(values_in_page,headers)}
@@ -109,7 +109,7 @@ const Table = <S extends object,>({values,allValues,headers,Card,elements_per_pa
             <div className={styles.mobile_values}>
                 {values_in_page.map((result,idx) => <Card key={idx} value={result}/>)}
             </div>
-            {elements_per_page && <div className={styles.table_footer}>
+            {elements_per_page && max_pages > 1 && <div className={styles.table_footer}>
                 {pagination}
             </div>}
             <DownloadPopup 
