@@ -60,8 +60,9 @@ const ResultTable = ({results,testInfo}:{results : Array<TestQueryResults>, test
         participante: new Participant(result.participacion.participante.nombre,result.participacion.participante.apellido)
         });
     })
-    const headers = ["Participante","Nivel","Colegio"].concat(Array.from({ length: filterableResults[0].cantidad_problemas }, (value, index) => `P${index + 1}`),["Total","Aprobado"])
-    const downloadHeaders = ["Nivel","Nombre","Apellido","Colegio"].concat(Array.from({ length: filterableResults[0].cantidad_problemas }, (value, index) => `P${index + 1}`),["Total","Aprobado"])
+    const problem_amount = filterableResults[0].cantidad_problemas;
+    const headers = ["Participante","Nivel","Colegio"].concat(Array.from({ length: problem_amount }, (value, index) => `P${index + 1}`),["Total","Aprobado"])
+    const downloadHeaders = ["Nivel","Nombre","Apellido","Colegio"].concat(Array.from({ length: problem_amount }, (value, index) => `P${index + 1}`),["Total","Aprobado"])
     //FILTERING
     const [resultFilter,updateFilter,filtered_results,options] = useFilter(filterableResults)
     
