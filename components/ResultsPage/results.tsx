@@ -5,6 +5,7 @@ import ResultFinderForm from "./resultFinderForm"
 import styles from "./results.module.scss"
 import {ResultProps,TestQueryResults } from "./resultsTypes"
 import ResultTable from "./ResultTable"
+import ProvincialResultTable from "./ProvincialTable"
 
 interface NetworkError extends Error {
     status: number;
@@ -14,10 +15,16 @@ const normalizeString = (str: string) => {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
 
+export interface TestInfo{
+    competition: string;
+    instance: string;
+    year: number;
+}
+
 const Results = ({competition,availableResults} : ResultProps) => {
     const [isLoading,setIsLoading] = useState(false);
     const [results,setResults] = useState<Array<TestQueryResults> | undefined>();
-    const [testInfo,setTestInfo] = useState<string>("");
+    const [testInfo,setTestInfo] = useState<TestInfo>({competition: "",instance: "",year: 0});
     const [status,setStatus] = useState(200);
     const nameAsDB = (name: string) => {
         if(name == "Ñandú"){
@@ -36,7 +43,7 @@ const Results = ({competition,availableResults} : ResultProps) => {
                         throw {name: "NetworkError", message: "No se encontraron resultados",status: response.status};  
                     }})
                 .catch((error) => {throw error});
-            setTestInfo(`${competition} ${instance.slice(0,1)}${instance.slice(1).toLocaleLowerCase()} ${year}`)
+            setTestInfo({competition: competition,instance: instance,year: year});
             setStatus(200);
             //searchedResults.sort(sortByNames);
             setResults(searchedResults);
@@ -62,7 +69,12 @@ const Results = ({competition,availableResults} : ResultProps) => {
     const displayResults = (results?: TestQueryResults[]) => {
         if(results !== undefined && status === 200){
             if(results.length > 0){
-                return(<ResultTable results={results} testInfo={testInfo}/>);
+                if(testInfo.instance === "PROVINCIAL"){
+                    return(<ProvincialResultTable results={results} testInfo={testInfo}/>)
+                }
+                else{
+                    return(<ResultTable results={results} testInfo={testInfo}/>);
+                }
             } else {
                 return(<ErrorMessage status={400}/>)
             }
