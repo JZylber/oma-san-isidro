@@ -14,9 +14,8 @@ const ProvincialResultCard : CardType<ProvincialResult> = ({value}) => {
         <div className={styles.container} onClick={() => setExpanded(!expanded)}>
             <div className={styles.info}>
                 <p className={styles.name}>{participante.toString()}</p>
-                <div className={styles.category}>
-                        <p className={styles.title}>Premio:</p>
-                        <p className={styles.value}>{resultado}</p>
+                <div className={styles.passed}>
+                        <span>{resultado}</span>
                     </div>
                 {expanded && <div className={styles.extra_information}>
                     <div className={styles.category}>
