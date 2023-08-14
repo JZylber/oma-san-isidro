@@ -60,9 +60,10 @@ const ProvincialResultTable = ({results,testInfo}:{results : Array<TestQueryResu
     return(
         <>
             <form className={styles.form}>
-                <SelectResultCategory category="Participante" value={resultFilter.participante} setValue={(option?: Participant) => updateFilter({participante: option})} options={options.participante} input={true}/>
-                <SelectResultCategory category="Colegio" value={resultFilter.colegio} setValue={(option?: School) => updateFilter({colegio: option})} options={options.colegio} input={true}/>
-                <SelectResultCategory category="Premio" value={resultFilter.resultado} setValue={(option?: string) => updateFilter({resultado: option})} options={options.resultado} clear={true}/>
+                <SelectResultCategory category="Participante" value={resultFilter.participante} setValue={(option?: Participant) => updateFilter({participante: option})} options={options.participante} input/>
+                <SelectResultCategory category="Colegio" value={resultFilter.colegio} setValue={(option?: School) => updateFilter({colegio: option})} options={options.colegio} input/>
+                <SelectResultCategory category="Nivel" value={resultFilter.nivel} setValue={(option?: number) => updateFilter({nivel: option})} options={options.nivel} clear/>
+                <SelectResultCategory category="Premio" value={resultFilter.resultado} setValue={(option?: string) => updateFilter({resultado: option})} options={options.resultado} clear/>
             </form>
             {filtered_results.length > 0?
                 <Table 
