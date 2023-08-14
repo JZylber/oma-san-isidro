@@ -6,6 +6,7 @@ import { Participant, Problem, Problems, School } from "../../hooks/types";
 import useFilter from "../../hooks/useFilter";
 import Table from "../Table/Table";
 import ResultCard from "./Mobile/ResultCard";
+import { TestInfo } from "./results";
 
 const make_element = (result : Result,index : number) => {
     const participant = result.participante.toString();
@@ -46,7 +47,9 @@ const make_download_element = (result : Result) => {
     return([level,name,surname,school].concat(hasPoints?points.map((point) => point.toString()):Array.from({length: result.cantidad_problemas},() => "-"),[total,passed?"Si":(!present?"Ausente":(clarification?clarification:"No"))]))
 }
 
-const ResultTable = ({results,testInfo}:{results : Array<TestQueryResults>, testInfo: string}) => {
+const ResultTable = ({results,testInfo}:{results : Array<TestQueryResults>, testInfo: TestInfo}) => {
+    const{competition,instance,year} = testInfo;
+    const strTestInfo = `${competition} ${testInfo.instance.slice(0,1)}${instance.slice(1).toLocaleLowerCase()} ${year}`
     const filterableResults : Array<Result> = results.map((result) => {return({
         cantidad_problemas: result.prueba.cantidad_problemas,
         presente: result.presente,
@@ -61,7 +64,9 @@ const ResultTable = ({results,testInfo}:{results : Array<TestQueryResults>, test
         });
     })
     const problem_amount = filterableResults[0].cantidad_problemas;
-    const headers = ["Participante","Nivel","Colegio"].concat(Array.from({ length: problem_amount }, (value, index) => `P${index + 1}`),["Total","Aprobado"])
+
+    let headers = ["Participante","Nivel","Colegio"].concat(Array.from({ length: problem_amount }, (value, index) => `P${index + 1}`),["Total","Aprobado"]);
+    
     const downloadHeaders = ["Nivel","Nombre","Apellido","Colegio"].concat(Array.from({ length: problem_amount }, (value, index) => `P${index + 1}`),["Total","Aprobado"])
     //FILTERING
     const [resultFilter,updateFilter,filtered_results,options] = useFilter(filterableResults)
@@ -80,7 +85,7 @@ const ResultTable = ({results,testInfo}:{results : Array<TestQueryResults>, test
                     downloadHeaders={downloadHeaders}
                     process_data={make_download_element}
                     make_element={make_element}
-                    testInfo={testInfo}
+                    testInfo={strTestInfo}
                     center_columns={[1]}
                 />:
                 <ErrorMessage status={400}/>}

@@ -245,3 +245,11 @@
     @include shared.font-montserrat(500);
     font-size: 1.6rem;
 }
+
+.form{
+    display: flex;
+    margin-top: 1.2rem;
+    @include shared.mobile-only {
+      flex-direction: column;
+    }
+  }
