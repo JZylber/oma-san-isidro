@@ -24,6 +24,7 @@ interface VenueProps {
     participants: VenueParticipant[];
     auth_max_date?: Date;
     time : Date;
+    duration: number;
 }
 
 export interface Venue extends Record<string,Filterables> {
@@ -68,7 +69,7 @@ const makeParticipantElement = (participant : VenueParticipant,index : number) =
         </tr>)
 }
 
-const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants,time}:VenueProps) => {
+const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants,time,duration}:VenueProps) => {
     //Venues
     const hasDisclaimers = venues.reduce((disclaimers : number,venue: Venue) => {
         return disclaimers + (venue.aclaracion !== ""?1:0);
@@ -80,6 +81,7 @@ const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants,time
     if(hasDisclaimers) {
         venue_headers.push("Aclaración");
     }
+    const durationStr = `${Math.floor(duration/60)}:${duration%60 < 10?"0":""}${duration%60}`;
     return(
         <>
             {dropPoints.length > 0 &&
@@ -97,7 +99,7 @@ const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants,time
             {venues.length > 0 &&
             <>
             <h2 className={styles.section_title}>Sedes</h2>
-            <p className={styles.text}>Presentarse <span className={styles.bold}>{`${time.getHours()}:${time.getMinutes()}`} hs</span>. ¡No se olviden de las autorizaciones!</p>
+            <p className={styles.text}>Presentarse <span className={styles.bold}>{`${time.getHours()}:${time.getMinutes()}`} hs</span>. ¡No se olviden de las autorizaciones! La prueba comienza a las 14:00hs y tiene una duración de <span className={styles.bold}>{durationStr} hs</span></p>
             <h3 className={styles.section_subtitle}>Colegios por sede</h3>
             <form className={styles.form}>
                 <SelectResultCategory category="Colegio" value={venueFilter.colegio} setValue={(option?: School) => updateVenueFilter({colegio: option})} options={venueOptions.colegio} input={true}/>

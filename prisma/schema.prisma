@@ -58,6 +58,7 @@ model Prueba {
   id_competencia            Int
   cantidad_problemas        Int              @default(3)
   fecha_limite_autorizacion DateTime?        @db.Date
+  duracion                  Int              @map("duración") @default(120)
   problemas                 Problema[]
   competencia               Competencia      @relation(fields: [id_competencia], references: [id_competencia])
   puntoinstancia            PuntoInstancia[]

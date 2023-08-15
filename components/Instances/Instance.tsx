@@ -18,6 +18,7 @@ interface RegionalInstance {
     participants: ParticipantInput[];
     auth_max_date?: Date;
     time: Date;
+    duration: number;
 }
 interface ProvincialParticipantInput {
     nombre: string,
@@ -67,7 +68,8 @@ const displayInstance = (instance: string, competition: string, instanceData: Re
         dropPoints={regionalInstance.dropPoints} 
         participants={participants} 
         auth_max_date={regionalInstance.auth_max_date}
-        time={regionalInstance.time}/>
+        time={regionalInstance.time}
+        duration={regionalInstance.duration}/>
     }
     else{
         return <span className={styles.text}>Proximamente...</span>
