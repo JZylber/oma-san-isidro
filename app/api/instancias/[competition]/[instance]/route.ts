@@ -269,7 +269,8 @@ const getInstanceData = async (year: number,competition: string, instance: strin
   },
   select: {
     fecha_limite_autorizacion: true,
-    hora_ingreso: true
+    hora_ingreso: true,
+    duracion: true,
   }  
   })
   return (query);
@@ -290,9 +291,9 @@ const venueDataGenerator = async (competition: string, instance: string) => {
   const date = new Date();
   const year = date.getFullYear();
   const previous_instance = getPreviousInstance(competition,instance);
-  const {dropPoints,venues,participants,auth_max_date,time} = await Promise.all([getInstanceDropPoints(competition,year,instance),getInstanceVenues(competition,year,instance),previous_instance?passingParticipants(competition,year,previous_instance):getParticipants(competition,year),getInstanceData(year,competition,instance)])
+  const {dropPoints,venues,participants,auth_max_date,time,duration} = await Promise.all([getInstanceDropPoints(competition,year,instance),getInstanceVenues(competition,year,instance),previous_instance?passingParticipants(competition,year,previous_instance):getParticipants(competition,year),getInstanceData(year,competition,instance)])
       .then(([dropPoints,venues,participants,instance_data]) => {
-        return ({dropPoints:dropPoints.results,venues:venues.results,participants:participants.results,auth_max_date:instance_data?.fecha_limite_autorizacion,time:instance_data?.hora_ingreso})
+        return ({dropPoints:dropPoints.results,venues:venues.results,participants:participants.results,auth_max_date:instance_data?.fecha_limite_autorizacion,time:instance_data?.hora_ingreso,duration:instance_data?.duracion})
       });
   const participant_venues = participants.map((participant) => {
         let venue = venues.find((venue) => 
@@ -308,7 +309,7 @@ const venueDataGenerator = async (competition: string, instance: string) => {
         return({...participant,venue: venue?.nombre});
       });
   const flat_participant_venues = participant_venues.map((participant) => {return({nombre: participant.participante.nombre, apellido: participant.participante.apellido ,colegio: participant.colegio, sede: participant.venue, nivel: participant.nivel})});
-  return({venues: venues,dropPoints: dropPoints,auth_max_date: JSON.parse(JSON.stringify(auth_max_date)),time: JSON.parse(JSON.stringify(time)),participants: flat_participant_venues})
+  return({venues: venues,dropPoints: dropPoints,auth_max_date: JSON.parse(JSON.stringify(auth_max_date)),time: JSON.parse(JSON.stringify(time)),participants: flat_participant_venues,duration: duration});
 }
 
 const getDisabled = async (competition: string, year: number, instance: string) => {
