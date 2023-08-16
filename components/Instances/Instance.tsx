@@ -8,6 +8,7 @@ import Provincial, { ProvincialParticipant } from "./Provincial";
 import { Participant, School } from "../../hooks/types";
 import { INSTANCIA } from "@prisma/client";
 import VenueInfo from "./VenueInfo";
+import ProvincialInfo from "./ProvincialInfo";
 
 interface InstanceProps {
     competition: string,
@@ -70,7 +71,8 @@ const InstanceData = ({competition,instance}:InstanceProps) => {
         <>
         <h2 className={styles.title}>{instancia[0] + instancia.slice(1).toLocaleLowerCase()}</h2>
         <h3 className={styles.subtitle}>{`${fecha.getUTCDate()} de ${months[fecha.getMonth()]}`}</h3>
-        {instancia === "PROVINCIAL" && <span className={styles.text}>Proximamente...</span>}
+        {instancia === "PROVINCIAL" && competition=="OMA" && <span className={styles.text}>Proximamente...</span>}
+        {instancia === "PROVINCIAL" && competition=="ÑANDÚ" && <ProvincialInfo competition={competition}/>}
         {instancia === "NACIONAL" && <span className={styles.text}>Proximamente...</span>}
         {instancia !== "PROVINCIAL" && instancia !== "NACIONAL" && 
             <VenueInfo 

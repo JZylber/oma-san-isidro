@@ -324,6 +324,41 @@ const venueDataGenerator = async (competition: string, instance: INSTANCIA) => {
     duration: duration});
 }
 
+const getDisabled = async (competition: string, year: number, instance: string) => {
+  const query = await prisma.inhabilitado.findMany({
+    where: {
+      Prueba: {
+        competencia: {
+          tipo: competition,
+          ano: year
+        },
+        instancia: instance as INSTANCIA
+    }
+    },
+    select: {
+      id_participacion: true
+    }
+  })
+  return (query);
+}
+
+const provincialDataGenerator = async (competition: string, instance: INSTANCIA) => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const {interescolar,zonal} = await Promise.all([passingParticipantsWScore(competition,year,competition === "OMA"?'INTERCOLEGIAL':'INTERESCOLAR'),passingParticipantsWScore(competition,year,'ZONAL')]).then(([interescolar, zonal]) => {return({interescolar: interescolar,zonal: zonal})});
+  let provincialParticipants = zonal.map((participant) => {
+    let interescolar_participant = interescolar.find((interescolar_participant) => interescolar_participant.id_participacion === participant.id_participacion);
+    let interescolar_points = interescolar_participant?.resultados?Number((interescolar_participant.resultados as string[])[3]):0;
+    return({...participant,puntos: interescolar_points + Number((participant.resultados as string[])[3])});
+  });
+  provincialParticipants = provincialParticipants.filter((participant) => participant.puntos >= 5);
+  const disabled = await getDisabled(competition,year,instance);
+  provincialParticipants = provincialParticipants.filter((participant) => !disabled.some((disabled_participant) => disabled_participant.id_participacion === participant.id_participacion));
+  const provincialParticipantsNames = provincialParticipants.map((participant) => {return({nombre: participant.participante.nombre, apellido: participant.participante.apellido ,colegio: participant.colegio, nivel: participant.nivel})});
+  const auth_max_date = (await getInstanceData(year,competition,instance))?.fecha_limite_autorizacion;
+  return({participants: provincialParticipantsNames,auth_max_date: auth_max_date?auth_max_date:undefined});
+}
+
 
 const INSTANCE = z.nativeEnum(INSTANCIA);
 
@@ -339,5 +374,15 @@ export const instanceRouter = router({
       const {competition,instance} = input;
       return venueDataGenerator(competition,instance);
     }),     
-
+  provincialInstance: publicProcedure
+    .input(
+      z.object({
+        competition: z.string(),
+        instance: INSTANCE,
+      }),
+    )
+    .query(({input}) => {
+      const {competition,instance} = input;
+      return provincialDataGenerator(competition,instance);
+    }),
 });
