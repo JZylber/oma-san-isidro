@@ -1,18 +1,14 @@
 import { useEffect, useState } from "react";
 import styles from "./resultFinderForm.module.scss"
-import {yearTests} from "./resultsTypes"
+import {TestInfo, yearTests} from "./resultsTypes"
 import SelectResultCategory from "./SelectResultCategory";
 import {useSearchParams } from "next/navigation";
+import { INSTANCIA } from "@prisma/client";
 
 type FormProps = {
     availableResults: Array<yearTests>,
-    searchResults : (year: number, instance: string) => void;
-    clearResults: () => void;
-}
-
-interface searchParametersType {
-    año: number|undefined, 
-    instancia: string|undefined
+    data: Partial<TestInfo>,
+    setData: (data: Partial<TestInfo>) => void,
 }
 
 const capitalize = (str : string) => {
@@ -28,12 +24,10 @@ const sortInstances = (ins_a : string, ins_b : string) => {
     return(ordered_instances.indexOf(ins_a) - ordered_instances.indexOf(ins_b)); 
 }
     
-const ResultFinderForm = ({availableResults,searchResults,clearResults} : FormProps) => {
+const ResultFinderForm = ({availableResults,data,setData} : FormProps) => {
     const query = useSearchParams();
     const [checkRoute,setCheckRoute] = useState<boolean>(false);
     const resultYears =  availableResults.map((yearTests) => yearTests.ano);
-    
-    const [searchParameters,setSearchParameters] = useState<searchParametersType>({año: undefined,instancia:undefined});
     useEffect(() => {
         if(!checkRoute && query){
             const año = query.get("año");
@@ -42,37 +36,27 @@ const ResultFinderForm = ({availableResults,searchResults,clearResults} : FormPr
                 const instance = instancia as string;
                 const year = Number(año);
                 if(resultYears.includes(year) && availableResults.find((result) => result.ano === year)?.pruebas.find((instance) => instance.nombre === instancia))  {
-                    setSearchParameters({año:year,instancia:instance});
-                    searchResults(year,instance);
+                    setData({año:year,instancia:(instance.toUpperCase()) as INSTANCIA});
                 }
             }
         setCheckRoute(true);}
-      }, [checkRoute,query,searchResults,setSearchParameters,availableResults,resultYears]);
-    let possibleInstances = searchParameters.año?(availableResults.find((result) => result.ano === searchParameters.año) as yearTests).pruebas:[];
+      }, [checkRoute,query,setData,availableResults,resultYears]);
+    let possibleInstances = data.año?(availableResults.find((result) => result.ano === data.año) as yearTests).pruebas:[];
     const instances = possibleInstances.map((instance) => instance.nombre);
-    const handleSubmit = () => {
-        const {año,instancia} = searchParameters;
-        if(año && instancia){
-            searchResults(año,instancia);
-        }
-    }
     const setYear = (value? : number) => {
-        setSearchParameters({año:value,instancia:undefined});
-        clearResults();
+        setData({año:value,instancia:undefined})
     }
-
     const setInstance = (value? : string) => {
-        setSearchParameters({...searchParameters,instancia:value?.toLocaleUpperCase()})
-        clearResults();
+        setData({instancia:(value?.toUpperCase()) as INSTANCIA})
     }
 
     return(
     <form className={styles.form}>
-        <SelectResultCategory category="Año" value={searchParameters.año} setValue={setYear} options={resultYears}/>
-        <SelectResultCategory category="Instancia" value={capitalizeIfNotUndefined(searchParameters.instancia)} setValue={setInstance} options={instances.map(capitalize)} sortOptions={sortInstances}/>
-        <div onClick={handleSubmit} className={styles.searchButton}>
+        <SelectResultCategory category="Año" value={data.año} setValue={setYear} options={resultYears}/>
+        <SelectResultCategory category="Instancia" value={capitalizeIfNotUndefined(data.instancia)} setValue={setInstance} options={instances.map(capitalize)} sortOptions={sortInstances}/>
+        {/*<div onClick={handleSubmit} className={styles.searchButton}>
             <span>Buscar</span>
-        </div>
+        </div>*/}
     </form>)
 }
 
