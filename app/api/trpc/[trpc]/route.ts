@@ -1,8 +1,21 @@
-import * as trpcNext from '@trpc/server/adapters/next';
-import { appRouter } from '../../../../server/routers/_app';
-// export API handler
-// @see https://trpc.io/docs/server/adapters
-export default trpcNext.createNextApiHandler({
-  router: appRouter,
-  createContext: () => ({}),
-});
+import {
+  FetchCreateContextFnOptions,
+  fetchRequestHandler,
+} from "@trpc/server/adapters/fetch";
+import { appRouter } from "../../../../server/routers/_app";
+
+const handler = (request: Request) => {
+  console.log(`incoming request ${request.url}`);
+  return fetchRequestHandler({
+    endpoint: "/api/trpc",
+    req: request,
+    router: appRouter,
+    createContext: function (
+      opts: FetchCreateContextFnOptions
+    ): object | Promise<object> {
+      return {};
+    },
+  });
+};
+
+export { handler as GET, handler as POST };

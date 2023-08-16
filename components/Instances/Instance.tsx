@@ -6,6 +6,8 @@ import Venues, { DropPoint, Venue, VenueParticipant } from "./Venues";
 import { getDateFromJSON, getTimeFromJSON } from "../../lib/aux_functions";
 import Provincial, { ProvincialParticipant } from "./Provincial";
 import { Participant, School } from "../../hooks/types";
+import { INSTANCIA } from "@prisma/client";
+import VenueInfo from "./VenueInfo";
 
 interface InstanceProps {
     competition: string,
@@ -57,61 +59,24 @@ const displayInstance = (instance: string, competition: string, instanceData: Re
     else if(instance === "NACIONAL"){
         return <span className={styles.text}>Proximamente...</span>
     }
-    else if(instanceData && "venues" in instanceData){
-        const regionalInstance = instanceData as RegionalInstance;
-        const venues : Venue[] = regionalInstance.venues.map((venue) => {return{nombre: venue.nombre, direccion: venue.direccion, localidad: venue.localidad, colegio: new School(venue.colegio.nombre,venue.colegio.sede), aclaracion: venue.aclaracion?venue.aclaracion:""}});
-        const participants : VenueParticipant[] = regionalInstance.participants.map((participant) => {return {...participant,colegio: new School(participant.colegio.nombre,participant.colegio.sede),participante: new Participant(participant.nombre,participant.apellido)}});
-        return <Venues 
-        instance={instance}
-        type={competition}
-        venues={venues} 
-        dropPoints={regionalInstance.dropPoints} 
-        participants={participants} 
-        auth_max_date={regionalInstance.auth_max_date}
-        time={regionalInstance.time}
-        duration={regionalInstance.duration}/>
-    }
     else{
         return <span className={styles.text}>Proximamente...</span>
     }
 };
 
 const InstanceData = ({competition,instance}:InstanceProps) => {
-    const [instanceIsLoading,setInstanceIsLoading] = useState<boolean>(false);
     const {instancia,fecha} = instance;
-    const [instanceData,setInstanceData] = useState<ProvincialInstance | RegionalInstance | undefined>(undefined);
-    useEffect(()=>{
-        setInstanceData(undefined);
-    },
-    [competition,instance])
-    useEffect(()=>{
-        const fetchInstanceData = async () => {
-            let response = await fetch(`/api/instancias/${competition}/${instancia}`).then((response) => {
-                if(response.ok){
-                    return(response.json())}
-                else{
-                    throw {name: "NetworkError", message: "No se encontraron datos",status: response.status,response: response};  
-                }});
-            if(response.auth_max_date){
-                response.auth_max_date = getDateFromJSON(response.auth_max_date);
-            }
-            if(response.time){
-                response.time = getTimeFromJSON(response.time);
-            }
-            setInstanceData(response);
-            setInstanceIsLoading(false);
-        }
-        if(instanceData === undefined){
-            setInstanceIsLoading(true);
-            fetchInstanceData();
-        }
-    },[instanceData,competition,instancia]);
     return(
         <>
         <h2 className={styles.title}>{instancia[0] + instancia.slice(1).toLocaleLowerCase()}</h2>
         <h3 className={styles.subtitle}>{`${fecha.getUTCDate()} de ${months[fecha.getMonth()]}`}</h3>
-        {instanceIsLoading ?<Loader/>:
-        instanceData && displayInstance(instancia,competition,instanceData)}
+        {instancia === "PROVINCIAL" && <span className={styles.text}>Proximamente...</span>}
+        {instancia === "NACIONAL" && <span className={styles.text}>Proximamente...</span>}
+        {instancia !== "PROVINCIAL" && instancia !== "NACIONAL" && 
+            <VenueInfo 
+            instance={instancia as INSTANCIA}
+            competition={competition}/>
+        }
         </>
     )
 }
