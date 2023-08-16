@@ -1,3 +1,4 @@
+import { INSTANCIA } from "@prisma/client"
 import { FilterableObject, Participant, Problems, School } from "../../hooks/types"
 
 export interface InstanceData {
@@ -64,4 +65,10 @@ export interface TypedFilterProps{
     values : Array<string>,
     category_name: string
     update_filter: (newValue : string) => void;
+}
+
+export interface TestInfo{
+    competencia: string;
+    instancia: INSTANCIA;
+    año: number;
 }

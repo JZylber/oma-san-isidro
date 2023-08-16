@@ -3,29 +3,12 @@ import Loader from "../Loader/Loader"
 import ErrorMessage from "./ErrorMessage"
 import ResultFinderForm from "./resultFinderForm"
 import styles from "./results.module.scss"
-import {ResultProps,TestQueryResults } from "./resultsTypes"
-import ResultTable from "./ResultTable"
-import ProvincialResultTable from "./ProvincialTable"
-
-interface NetworkError extends Error {
-    status: number;
-}
-
-const normalizeString = (str: string) => {  
-    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-}
-
-export interface TestInfo{
-    competition: string;
-    instance: string;
-    year: number;
-}
+import {ResultProps,TestInfo,TestQueryResults } from "./resultsTypes"
+import { INSTANCIA } from "@prisma/client"
+import LoadResults from "./loadResults"
 
 const Results = ({competition,availableResults} : ResultProps) => {
-    const [isLoading,setIsLoading] = useState(false);
-    const [results,setResults] = useState<Array<TestQueryResults> | undefined>();
-    const [testInfo,setTestInfo] = useState<TestInfo>({competition: "",instance: "",year: 0});
-    const [status,setStatus] = useState(200);
+    const [testInfo,setTestInfo] = useState<TestInfo | null>(null);
     const nameAsDB = (name: string) => {
         if(name == "Ñandú"){
             return("ÑANDÚ")
@@ -33,56 +16,17 @@ const Results = ({competition,availableResults} : ResultProps) => {
             return("OMA")
         }
     };
-    const getResults = useCallback(async (year : number,instance : string, type: string)=> {
-        try {
-            let searchedResults = await fetch(`/api/resultados?ano=${year}&instancia=${instance}&competencia=${type}`)
-                .then((response) => {
-                    if(response.ok){
-                        return(response.json())}
-                    else{
-                        throw {name: "NetworkError", message: "No se encontraron resultados",status: response.status};  
-                    }})
-                .catch((error) => {throw error});
-            setTestInfo({competition: competition,instance: instance,year: year});
-            setStatus(200);
-            //searchedResults.sort(sortByNames);
-            setResults(searchedResults);
-        } catch (error) {
-            let networkError = error as NetworkError;
-            if(networkError){
-                setStatus(networkError.status);
-            } else{
-                setStatus(600);
-            }
-        } finally {
-            setIsLoading(false);
-        }
-    },[competition,setIsLoading,setTestInfo,setResults]);
     const searchResults = useCallback((year : number, instance: string) => {
-        getResults(year,instance,nameAsDB(competition));
-        setIsLoading(true);
-    },[competition,getResults]);
+        setTestInfo({competencia: nameAsDB(competition), año: year, instancia: instance as INSTANCIA});
+    },[competition,setTestInfo]);
 
     const clearResults = () => {
-        setResults(undefined);
+        setTestInfo(null);
     };
-    const displayResults = (results?: TestQueryResults[]) => {
-        if(results !== undefined && status === 200){
-            if(results.length > 0){
-                if(testInfo.instance === "PROVINCIAL"){
-                    return(<ProvincialResultTable results={results} testInfo={testInfo}/>)
-                }
-                else{
-                    return(<ResultTable results={results} testInfo={testInfo}/>);
-                }
-            } else {
-                return(<ErrorMessage status={400}/>)
-            }
-           
-        } else if(status !== 200){
-            return(<ErrorMessage status={status}/>)
-        }
-        else{
+    const displayResults = () => {
+        if(testInfo){
+            return(<LoadResults {...testInfo}/>)
+        } else{
             return(<span className={styles.infoText}>Selecciona año e instancia para poder ejecutar una búsqueda.</span>)
         }
     };
@@ -92,7 +36,7 @@ const Results = ({competition,availableResults} : ResultProps) => {
         <p className={styles.competition}>{competition.toLocaleLowerCase()}</p>
         <h1 className={styles.title}>Resultados</h1>
         <ResultFinderForm availableResults={availableResults} searchResults={searchResults} clearResults={clearResults}/>
-        {isLoading ? <Loader/> : displayResults(results)}
+        {displayResults()}
         </>
     );
 }
