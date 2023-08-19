@@ -1,7 +1,7 @@
 import { router, publicProcedure } from '../trpc';
 import { z } from 'zod';
-import prisma from "../../lib/prisma";
 import { INSTANCIA } from "@prisma/client";
+import { prisma } from '../db';
 
 const INSTANCE = z.nativeEnum(INSTANCIA);
 

@@ -1,7 +1,7 @@
 import { router, publicProcedure } from '../trpc';
 import { z } from 'zod';
-import prisma from "../../lib/prisma";
 import { INSTANCIA } from "@prisma/client";
+import { prisma } from '../db';
 
 const getInstanceDropPoints = async (type: string, year: number, instance: INSTANCIA) => {
   const query = await prisma.prueba.findFirst({
