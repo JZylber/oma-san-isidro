@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { getCalendarEvents } from "../../../../lib/app-router-db-calls";
+import { getCalendarEvents } from "../../../../server/app-router-db-calls";
 import GeometryPage from "./geometria";
 
 export const metadata: Metadata = {

@@ -1,10 +1,9 @@
-import {Result, TestQueryResults } from "./resultsTypes";
+import {Result, TestInfo, TestQueryResults } from "./resultsTypes";
 import styles from "./ResultTable.module.scss"
 import ErrorMessage from "./ErrorMessage";
 import { FilterableObject, Participant, School } from "../../hooks/types";
 import useFilter from "../../hooks/useFilter";
 import Table from "../Table/Table";
-import { TestInfo } from "./results";
 import SelectResultCategory from "./SelectResultCategory";
 import ProvincialResultCard from "./Mobile/ProvincialCard";
 
@@ -25,7 +24,7 @@ const make_element = (result : ProvincialResult,index : number) => {
             <td>{participant}</td>
             <td className={styles.center_align}>{level}</td>
             <td>{school}</td>
-            <td className={styles.center_align}>{price}</td>
+            <td>{price}</td>
         </tr>)
 }
 
@@ -41,8 +40,8 @@ const make_download_element = (result : ProvincialResult) => {
 }
 
 const ProvincialResultTable = ({results,testInfo}:{results : Array<TestQueryResults>, testInfo: TestInfo}) => {
-    const{competition,instance,year} = testInfo;
-    const strTestInfo = `${competition} ${testInfo.instance.slice(0,1)}${instance.slice(1).toLocaleLowerCase()} ${year}`
+    const{competencia,año,instancia} = testInfo;
+    const strTestInfo = `${competencia} ${testInfo.instancia.slice(0,1)}${instancia.slice(1).toLocaleLowerCase()} ${año}`
     const filterableResults : Array<ProvincialResult> = results.map((result) => {return({
         resultado: result.resultados[0],
         nivel: result.participacion.nivel,

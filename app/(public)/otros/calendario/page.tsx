@@ -1,6 +1,6 @@
 import { Metadata } from "next"
 import CalendarPage from "./calendario"
-import { getCalendarEvents } from "../../../../lib/app-router-db-calls"
+import { getCalendarEvents } from "../../../../server/app-router-db-calls"
 
 export const metadata: Metadata = {
     title: 'Calendario',

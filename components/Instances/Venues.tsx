@@ -17,7 +17,7 @@ export interface DropPoint {
 }
 
 interface VenueProps {
-    type: string;
+    competition: string;
     instance: string;
     venues: Venue[];
     dropPoints: DropPoint[];
@@ -69,7 +69,7 @@ const makeParticipantElement = (participant : VenueParticipant,index : number) =
         </tr>)
 }
 
-const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants,time,duration}:VenueProps) => {
+const Venues = ({competition,instance,dropPoints,venues,auth_max_date,participants,time,duration}:VenueProps) => {
     //Venues
     const hasDisclaimers = venues.reduce((disclaimers : number,venue: Venue) => {
         return disclaimers + (venue.aclaracion !== ""?1:0);
@@ -87,7 +87,7 @@ const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants,time
             {dropPoints.length > 0 &&
                 <>
                 <h2 className={styles.section_title}>Autorizaciones</h2>
-                <p className={styles.text}>Las autorizaciones se pueden conseguir <Link href={type == "OMA"?"/oma/autorizacion":"/nandu/autorizacion"}>aquí<div className={styles.icon}><Image src="/images/pageLinkIcon.svg" fill={true} alt=""/></div></Link> y deben estar <span className={styles.bold}>completas</span> con las <span className={styles.bold}>firmas y sellos correspondientes</span>. Estas se pueden entregar hasta el <span className={styles.bold}>{auth_max_date?`${auth_max_date.getDate()}/${auth_max_date.getMonth() + 1}`:"(A definir)"}</span> en los siguientes puntos:</p>
+                <p className={styles.text}>Las autorizaciones se pueden conseguir <Link href={competition == "OMA"?"/oma/autorizacion":"/nandu/autorizacion"}>aquí<div className={styles.icon}><Image src="/images/pageLinkIcon.svg" fill={true} alt=""/></div></Link> y deben estar <span className={styles.bold}>completas</span> con las <span className={styles.bold}>firmas y sellos correspondientes</span>. Estas se pueden entregar hasta el <span className={styles.bold}>{auth_max_date?`${auth_max_date.getDate()}/${auth_max_date.getMonth() + 1}`:"(A definir)"}</span> en los siguientes puntos:</p>
                 <ul className={styles.dropPoints}>
                     {dropPoints.map((dropPoint, index) => {
                         const {localidad, nombre, direccion, aclaracion} = dropPoint;
@@ -130,13 +130,13 @@ const Venues = ({type,instance,dropPoints,venues,auth_max_date,participants,time
                 downloadHeaders={downloadParticipantHeaders}
                 process_data={downloadParticipantData}
                 make_element={makeParticipantElement}
-                testInfo={`${type == "OMA"?"OMA":"Nandú"} ${instance} ${(new Date).getFullYear()}`}
+                testInfo={`${competition == "OMA"?"OMA":"Nandú"} ${instance} ${(new Date).getFullYear()}`}
             />
-            {instance === "REGIONAL" && type !== "OMA" && 
+            {instance === "REGIONAL" && competition !== "OMA" && 
             <>
                 <h2 className={styles.section_title}>Mapa</h2>
                 <p className={styles.text}>Para organizarnos mejor, ponemos público el mapa. El día de la instancia nos pueden ayudar sabiendo los lugares asignados a cada colegio.</p>
-                <Map competition={type}/>
+                <Map competition={competition}/>
             </>}
         </>}
         {dropPoints.length === 0 && venues.length === 0 && <p className={styles.text}>Proximamente...</p>}

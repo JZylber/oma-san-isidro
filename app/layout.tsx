@@ -1,5 +1,8 @@
+'use client'
+
 import {Montserrat, Unbounded } from 'next/font/google'
 import '../styles/globals.scss';
+import { trpc } from '../utils/trpc';
 
 
 const montserrat = Montserrat({
@@ -15,11 +18,11 @@ const unbounded = Unbounded({
 })
 
 
-export default function RootLayout({
+const RootLayout = ({
     children,
   }: {
     children: React.ReactNode
-  }) {
+  }) => {
     return (
       <html lang="en" className={`${montserrat.variable} ${unbounded.variable}`}>
         <body>
@@ -29,3 +32,5 @@ export default function RootLayout({
       </html>
     )
   }
+
+export default trpc.withTRPC(RootLayout);

@@ -1,28 +1,30 @@
+import { router, publicProcedure } from '../trpc';
+import { z } from 'zod';
 import { INSTANCIA } from "@prisma/client";
-import prisma from "../../../lib/prisma";
-import {NextResponse } from "next/server";
+import { prisma } from '../db';
 
-export async function GET(request: Request) {
-    const url = new URL(request.url);
-    const params = url.searchParams;
-    try {
-        const ano = params.get("ano");
-        const instancia = params.get("instancia");
-        const competencia = params.get("competencia");
-        if(ano && instancia && competencia){
-            const year = Number(ano as string)
-            const instance = instancia as INSTANCIA
-            const type = competencia as string
-            const result = await prisma.rinde.findMany(
+const INSTANCE = z.nativeEnum(INSTANCIA);
+
+export const resultRouter = router({
+    getResults: publicProcedure
+        .input(z.object({
+            año: z.number(),
+            instancia: INSTANCE,
+            competencia: z.string(),
+        }),
+        )
+        .query(async ({input}) => {
+            const {año,instancia,competencia} = input;
+            const results = await prisma.rinde.findMany(
                 {   
                     where : {
                             prueba : {
                                 AND : [
-                                    {instancia : instance},
+                                    {instancia : instancia},
                                     {competencia : {
                                         AND : [
-                                            {ano : year},
-                                            {tipo: type},
+                                            {ano : año},
+                                            {tipo: competencia},
                                     ]}},
                                 ],
                             },
@@ -67,11 +69,20 @@ export async function GET(request: Request) {
                         }
                     },
                 })
-            return NextResponse.json(result, {status: 200})}
-        else{
-            return NextResponse.json({message: 'Invalid parameters' },{status: 400})
-        }
-    } catch (error) {
-        return NextResponse.json({message: error},{status: 503});
-    }
-}
+            const cleanedResults = results.map((result) => {
+                return {
+                    ...result,
+                    aclaracion: result.aclaracion ? result.aclaracion : undefined,
+                    resultados: result.resultados as string[],
+                    participacion: {
+                        ...result.participacion,
+                        colegio: {
+                            ...result.participacion.colegio,
+                            sede: result.participacion.colegio.sede ? result.participacion.colegio.sede : "",
+                        }
+                    }
+                }
+            })
+            return cleanedResults;
+          }),
+});

@@ -1,4 +1,4 @@
-import {Result, TestQueryResults } from "./resultsTypes";
+import {Result, TestInfo, TestQueryResults } from "./resultsTypes";
 import styles from "./ResultTable.module.scss"
 import ErrorMessage from "./ErrorMessage";
 import ResultFilterForm from "./resultFilterForm";
@@ -6,7 +6,6 @@ import { Participant, Problem, Problems, School } from "../../hooks/types";
 import useFilter from "../../hooks/useFilter";
 import Table from "../Table/Table";
 import ResultCard from "./Mobile/ResultCard";
-import { TestInfo } from "./results";
 
 const make_element = (result : Result,index : number) => {
     const participant = result.participante.toString();
@@ -48,8 +47,8 @@ const make_download_element = (result : Result) => {
 }
 
 const ResultTable = ({results,testInfo}:{results : Array<TestQueryResults>, testInfo: TestInfo}) => {
-    const{competition,instance,year} = testInfo;
-    const strTestInfo = `${competition} ${testInfo.instance.slice(0,1)}${instance.slice(1).toLocaleLowerCase()} ${year}`
+    const{competencia,año,instancia} = testInfo;
+    const strTestInfo = `${competencia} ${testInfo.instancia.slice(0,1)}${instancia.slice(1).toLocaleLowerCase()} ${año}`
     const filterableResults : Array<Result> = results.map((result) => {return({
         cantidad_problemas: result.prueba.cantidad_problemas,
         presente: result.presente,

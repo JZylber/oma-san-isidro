@@ -1,4 +1,4 @@
-import prisma from "./prisma";
+import { prisma } from "./db";
 
 export const getCalendarEvents = async (year:number,type?: string) => {
     let query = []; 
