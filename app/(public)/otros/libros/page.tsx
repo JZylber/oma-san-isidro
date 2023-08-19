@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import BooksPage, { Book } from "./libros";
-import prisma from "../../../../lib/prisma";
+import { prisma } from "../../../../server/db";
 
 export const metadata: Metadata = {
     title: 'Libros',
