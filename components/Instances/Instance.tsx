@@ -1,9 +1,6 @@
 import styles from "./Instance.module.scss";
-import {useEffect, useState } from "react";
 import { Instance } from "./InstanceMenu";
-import Loader from "../Loader/Loader";
-import Venues, { DropPoint, Venue, VenueParticipant } from "./Venues";
-import { getDateFromJSON, getTimeFromJSON } from "../../lib/aux_functions";
+import { DropPoint} from "./Venues";
 import Provincial, { ProvincialParticipant } from "./Provincial";
 import { Participant, School } from "../../hooks/types";
 import { INSTANCIA } from "@prisma/client";
