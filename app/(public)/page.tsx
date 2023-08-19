@@ -1,5 +1,5 @@
 import { NewsItemData } from "../../components/News/NewsTypes";
-import { getCalendarEvents } from "../../lib/app-router-db-calls";
+import { getCalendarEvents } from "../../server/app-router-db-calls";
 import { prisma } from "../../server/db";
 import Home from "./home-page";
 import { Metadata } from "next";

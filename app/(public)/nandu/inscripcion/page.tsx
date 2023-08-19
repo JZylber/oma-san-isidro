@@ -1,5 +1,5 @@
 import { Metadata } from "next"
-import { getInscriptionData } from "../../../../lib/app-router-db-calls";
+import { getInscriptionData } from "../../../../server/app-router-db-calls";
 import NanduInscriptionPage from "./inscripcion";
 
 export const metadata : Metadata = {
