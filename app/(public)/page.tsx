@@ -1,7 +1,7 @@
 import { NewsItemData } from "../../components/News/NewsTypes";
 import { getCalendarEvents } from "../../lib/app-router-db-calls";
+import { prisma } from "../../server/db";
 import Home from "./home-page";
-import prisma from "../../lib/prisma";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
