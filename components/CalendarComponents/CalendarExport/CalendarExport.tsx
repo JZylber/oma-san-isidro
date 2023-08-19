@@ -1,6 +1,6 @@
 import styles from "./CalendarExport.module.scss";
 import {CalendarEvent} from "../CalendarTypes";
-import { Fragment, RefObject } from "react";
+import { Fragment} from "react";
 
 interface CalendarExportProps{
     year: number,
