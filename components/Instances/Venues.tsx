@@ -8,6 +8,7 @@ import ParticipantCard from "./ParticipantCard";
 import { Filterables, Participant, School } from "../../hooks/types";
 import useFilter from "../../hooks/useFilter";
 import Map from "../Map/Map";
+import { Competition } from "../../server/app-router-db-calls";
 
 export interface DropPoint {
     localidad: string,
@@ -17,7 +18,7 @@ export interface DropPoint {
 }
 
 interface VenueProps {
-    competition: string;
+    competition: Competition;
     instance: string;
     venues: Venue[];
     dropPoints: DropPoint[];

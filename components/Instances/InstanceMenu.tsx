@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import styles from "./InstanceMenu.module.scss";
 import InstanceData from "./Instance";
 import {useSearchParams } from "next/navigation";
+import { Competition } from "../../server/app-router-db-calls";
 
 export interface Instance {
     instancia: string,
@@ -9,7 +10,7 @@ export interface Instance {
 }
 
 interface InstanceMenuProps {
-    competition:string, 
+    competition:Competition, 
     instances: Instance[]
 }
 

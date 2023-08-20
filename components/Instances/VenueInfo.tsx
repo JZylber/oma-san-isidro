@@ -3,8 +3,9 @@ import { trpc } from "../../utils/trpc";
 import Loader from "../Loader/Loader";
 import Venues from "./Venues";
 import { Participant, School } from "../../hooks/types";
+import { Competition } from "../../server/app-router-db-calls";
 
-const VenueInfo = ({competition,instance}:{competition: string, instance: INSTANCIA}) => {
+const VenueInfo = ({competition,instance}:{competition: Competition, instance: INSTANCIA}) => {
     const venueData = trpc.instance.regionalInstance.useQuery({competition: competition,instance: instance});
     if(venueData.isLoading){
         return <Loader/>

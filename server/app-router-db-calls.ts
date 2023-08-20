@@ -1,5 +1,7 @@
 import { prisma } from "./db";
 
+export type Competition = "OMA" | "ÑANDÚ"
+
 export const getCalendarEvents = async (year:number,type?: string) => {
     let query = []; 
     if(type){
