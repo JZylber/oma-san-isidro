@@ -132,7 +132,7 @@ const Venues = ({competition,instance,dropPoints,venues,auth_max_date,participan
                 make_element={makeParticipantElement}
                 testInfo={`${competition == "OMA"?"OMA":"Nandú"} ${instance} ${(new Date).getFullYear()}`}
             />
-            {instance === "REGIONAL" && competition !== "OMA" && 
+            {instance === "REGIONAL" && 
             <>
                 <h2 className={styles.section_title}>Mapa</h2>
                 <p className={styles.text}>Para organizarnos mejor, ponemos público el mapa. El día de la instancia nos pueden ayudar sabiendo los lugares asignados a cada colegio.</p>

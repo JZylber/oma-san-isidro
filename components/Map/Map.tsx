@@ -2,6 +2,7 @@ import { FilterableObject, School } from "../../hooks/types";
 import useFilter from "../../hooks/useFilter";
 import SelectResultCategory from "../ResultsPage/SelectResultCategory";
 import styles from "./Map.module.scss";
+import MapData from "./MapFromJson";
 import ParticipantTable from "./Table/Table";
 
 interface MapProps {
@@ -13,7 +14,7 @@ export interface MapItem extends FilterableObject {
     level: number;
 }
 
-const data : Array<Array<Array<MapItem>>> = [
+const tempData : Array<Array<Array<MapItem>>> = [
     [   
         [{school: new School("Mariano Moreno"),level:2}],
         [{school: new School("San Ignacio"),level:2}],
@@ -251,6 +252,7 @@ const participantsInColumn = (column:MapItem[],selected: MapItem[]) => {
 };
 
 const Map = ({competition}:MapProps) => {
+    const data = competition === "OMA"?MapData("Regional","OMA"):tempData;
     const flattenedData = data.flat(2);
     const columns = data.map((column) => column.flat(1));
     const [schoolFilter,updateFilter,filtered_schools,options] = useFilter(flattenedData);
