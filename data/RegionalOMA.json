@@ -1,7 +1,5 @@
 [
     [
-        [],
-        [],
         [
             {
                 "school": {
@@ -166,8 +164,6 @@
         ]
     ],
     [
-        [],
-        [],
         [
             {
                 "school": {
@@ -544,7 +540,6 @@
                 "level": 2
             }
         ],
-        [],
         [
             {
                 "school": {
@@ -562,7 +557,7 @@
             },
             {
                 "school": {
-                    "name": "MichaelHam",
+                    "name": "Michael Ham",
                     "venue": "Nordelta"
                 },
                 "level": 2
@@ -614,7 +609,6 @@
                 "level": 2
             }
         ],
-        [],
         [
             {
                 "school": {
@@ -632,13 +626,12 @@
             },
             {
                 "school": {
-                    "name": "MichaelHam",
+                    "name": "Michael Ham",
                     "venue": "Nordelta"
                 },
                 "level": 2
             }
         ],
-        [],
         [
             {
                 "school": {
@@ -679,13 +672,12 @@
             },
             {
                 "school": {
-                    "name": "MichaelHam",
+                    "name": "Michael Ham",
                     "venue": "Nordelta"
                 },
                 "level": 2
             }
         ],
-        [],
         [
             {
                 "school": {
@@ -734,7 +726,6 @@
         ]
     ],
     [
-        [],
         [
             {
                 "school": {
@@ -878,7 +869,6 @@
                 "level": 1
             }
         ],
-        [],
         [
             {
                 "school": {
@@ -955,7 +945,6 @@
                 "level": 1
             }
         ],
-        [],
         [
             {
                 "school": {
@@ -1002,7 +991,6 @@
                 "level": 1
             }
         ],
-        [],
         [
             {
                 "school": {
@@ -1019,7 +1007,6 @@
                 "level": 2
             }
         ],
-        [],
         [
             {
                 "school": {
@@ -1038,7 +1025,6 @@
         ]
     ],
     [
-        [],
         [
             {
                 "school": {
@@ -1071,7 +1057,6 @@
                 "level": 2
             }
         ],
-        [],
         [
             {
                 "school": {
@@ -1338,7 +1323,7 @@
         [
             {
                 "school": {
-                    "name": "MichaelHam",
+                    "name": "Michael Ham",
                     "venue": "Nordelta"
                 },
                 "level": 1
@@ -1374,7 +1359,7 @@
         [
             {
                 "school": {
-                    "name": "MichaelHam",
+                    "name": "Michael Ham",
                     "venue": "Nordelta"
                 },
                 "level": 1
@@ -1557,12 +1542,7 @@
                 },
                 "level": 2
             }
-        ],
-        [],
-        [],
-        [],
-        [],
-        []
+        ]
     ],
     [
         [
@@ -1651,7 +1631,7 @@
             },
             {
                 "school": {
-                    "name": "MichaelHam",
+                    "name": "Michael Ham",
                     "venue": "Nordelta"
                 },
                 "level": 2
@@ -1773,7 +1753,7 @@
             },
             {
                 "school": {
-                    "name": "MichaelHam",
+                    "name": "Michael Ham",
                     "venue": "Nordelta"
                 },
                 "level": 2
@@ -1792,12 +1772,7 @@
                 },
                 "level": 1
             }
-        ],
-        [],
-        [],
-        [],
-        [],
-        []
+        ]
     ],
     [
         [
@@ -1863,7 +1838,6 @@
                 "level": 1
             }
         ],
-        [],
         [
             {
                 "school": {
@@ -1944,12 +1918,7 @@
                 },
                 "level": 1
             }
-        ],
-        [],
-        [],
-        [],
-        [],
-        []
+        ]
     ],
     [
         [
@@ -2021,7 +1990,6 @@
                 "level": 1
             }
         ],
-        [],
         [
             {
                 "school": {
@@ -2188,7 +2156,6 @@
                 "level": 1
             }
         ],
-        [],
         [
             {
                 "school": {
@@ -2265,7 +2232,6 @@
                 "level": 1
             }
         ],
-        [],
         [
             {
                 "school": {
@@ -2399,7 +2365,6 @@
                 "level": 2
             }
         ],
-        [],
         [
             {
                 "school": {
@@ -2463,13 +2428,12 @@
             },
             {
                 "school": {
-                    "name": "MichaelHam",
+                    "name": "Michael Ham",
                     "venue": "Nordelta"
                 },
                 "level": 2
             }
         ],
-        [],
         [
             {
                 "school": {
@@ -2495,7 +2459,6 @@
         ]
     ],
     [
-        [],
         [
             {
                 "school": {
@@ -2512,7 +2475,6 @@
                 "level": 2
             }
         ],
-        [],
         [
             {
                 "school": {
@@ -2800,13 +2762,12 @@
             },
             {
                 "school": {
-                    "name": "MichaelHam",
+                    "name": "Michael Ham",
                     "venue": "Nordelta"
                 },
                 "level": 2
             }
         ],
-        [],
         [
             {
                 "school": {
@@ -2876,7 +2837,6 @@
                 "level": 2
             }
         ],
-        [],
         [
             {
                 "school": {
@@ -3459,7 +3419,7 @@
         [
             {
                 "school": {
-                    "name": "MichaelHam",
+                    "name": "Michael Ham",
                     "venue": "Nordelta"
                 },
                 "level": 1
@@ -3504,7 +3464,7 @@
         [
             {
                 "school": {
-                    "name": "MichaelHam",
+                    "name": "Michael Ham",
                     "venue": "Nordelta"
                 },
                 "level": 1
@@ -3540,7 +3500,7 @@
         [
             {
                 "school": {
-                    "name": "MichaelHam",
+                    "name": "Michael Ham",
                     "venue": "Nordelta"
                 },
                 "level": 1
@@ -3576,7 +3536,7 @@
         [
             {
                 "school": {
-                    "name": "MichaelHam",
+                    "name": "Michael Ham",
                     "venue": "Nordelta"
                 },
                 "level": 1
