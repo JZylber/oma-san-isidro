@@ -100,7 +100,7 @@ const Venues = ({competition,instance,dropPoints,venues,auth_max_date,participan
             {venues.length > 0 &&
             <>
             <Collapsable title="Sedes">
-                <p className={styles.text}>Presentarse <span className={styles.bold}>{`${time.getHours()}:${time.getMinutes()}`} hs</span>. ¡No se olviden de las autorizaciones! La prueba comienza a las 14:00hs y tiene una duración de <span className={styles.bold}>{durationStr} hs</span></p>
+                <p className={styles.text}>Presentarse <span className={styles.bold}>{`${time.getUTCHours()}:${time.getUTCMinutes()}`} hs</span>. ¡No se olviden de las autorizaciones! La prueba comienza a las 14:00hs y tiene una duración de <span className={styles.bold}>{durationStr} hs</span></p>
                 <Collapsable title="Colegios por Sede">
                 <form className={styles.form}>
                     <SelectResultCategory category="Colegio" value={venueFilter.colegio} setValue={(option?: School) => updateVenueFilter({colegio: option})} options={venueOptions.colegio} input={true}/>
