@@ -2917,6 +2917,22 @@
         [
             {
                 "school": {
+                    "name": "Todos los Santos",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Mar\u00edn",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
                     "name": "Santa In\u00e9s",
                     "venue": null
                 },
