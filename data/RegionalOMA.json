@@ -362,7 +362,7 @@
             {
                 "school": {
                     "name": "Pilgrims College",
-                    "venue": null
+                    "venue": "San Isidro"
                 },
                 "level": 1
             }
@@ -398,7 +398,7 @@
             {
                 "school": {
                     "name": "Pilgrims College",
-                    "venue": null
+                    "venue": "Pacheco"
                 },
                 "level": 1
             }
@@ -434,7 +434,7 @@
             {
                 "school": {
                     "name": "Pilgrims College",
-                    "venue": null
+                    "venue": "San Isidro"
                 },
                 "level": 1
             }
@@ -534,7 +534,7 @@
         [
             {
                 "school": {
-                    "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
+                    "name": "Santa Teresa",
                     "venue": null
                 },
                 "level": 2
@@ -590,7 +590,7 @@
             {
                 "school": {
                     "name": "Pilgrims College",
-                    "venue": null
+                    "venue": "San Isidro"
                 },
                 "level": 3
             },
@@ -649,7 +649,7 @@
             },
             {
                 "school": {
-                    "name": "Santa Teresa",
+                    "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
                     "venue": null
                 },
                 "level": 2
@@ -946,10 +946,10 @@
             },
             {
                 "school": {
-                    "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
+                    "name": "LIBRE",
                     "venue": null
                 },
-                "level": 3
+                "level": 0
             },
             {
                 "school": {
@@ -1835,7 +1835,7 @@
             {
                 "school": {
                     "name": "Pilgrims College",
-                    "venue": null
+                    "venue": "San Isidro"
                 },
                 "level": 1
             }
@@ -1862,7 +1862,7 @@
             {
                 "school": {
                     "name": "Pilgrims College",
-                    "venue": null
+                    "venue": "Pacheco"
                 },
                 "level": 1
             }
@@ -1889,7 +1889,7 @@
             {
                 "school": {
                     "name": "Pilgrims College",
-                    "venue": null
+                    "venue": "San Isidro"
                 },
                 "level": 1
             }
@@ -1916,7 +1916,7 @@
             {
                 "school": {
                     "name": "Pilgrims College",
-                    "venue": null
+                    "venue": "Pacheco"
                 },
                 "level": 1
             }
@@ -1943,7 +1943,7 @@
             {
                 "school": {
                     "name": "Pilgrims College",
-                    "venue": null
+                    "venue": "San Isidro"
                 },
                 "level": 1
             }
@@ -1970,7 +1970,7 @@
             {
                 "school": {
                     "name": "Pilgrims College",
-                    "venue": null
+                    "venue": "Pacheco"
                 },
                 "level": 1
             }
@@ -2584,7 +2584,7 @@
             {
                 "school": {
                     "name": "Pilgrims College",
-                    "venue": null
+                    "venue": "Pacheco"
                 },
                 "level": 2
             }
@@ -2664,7 +2664,7 @@
             {
                 "school": {
                     "name": "Pilgrims College",
-                    "venue": null
+                    "venue": "San Isidro"
                 },
                 "level": 2
             }
@@ -2728,7 +2728,7 @@
             {
                 "school": {
                     "name": "Pilgrims College",
-                    "venue": null
+                    "venue": "Pacheco"
                 },
                 "level": 2
             }
@@ -2831,7 +2831,7 @@
             {
                 "school": {
                     "name": "Holy Cross",
-                    "venue": "Mujeres"
+                    "venue": "Varones"
                 },
                 "level": 1
             },
@@ -3433,7 +3433,7 @@
             {
                 "school": {
                     "name": "Pilgrims College",
-                    "venue": null
+                    "venue": "Pacheco"
                 },
                 "level": 2
             }
@@ -3478,7 +3478,7 @@
             {
                 "school": {
                     "name": "Pilgrims College",
-                    "venue": null
+                    "venue": "San Isidro"
                 },
                 "level": 2
             }
@@ -3514,7 +3514,7 @@
             {
                 "school": {
                     "name": "Pilgrims College",
-                    "venue": null
+                    "venue": "Pacheco"
                 },
                 "level": 2
             }
