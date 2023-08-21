@@ -9,6 +9,7 @@ import { Filterables, Participant, School } from "../../hooks/types";
 import useFilter from "../../hooks/useFilter";
 import Map from "../Map/Map";
 import { Competition } from "../../server/app-router-db-calls";
+import Collapsable from "../Collapsable/Collapsable";
 
 export interface DropPoint {
     localidad: string,
@@ -84,10 +85,9 @@ const Venues = ({competition,instance,dropPoints,venues,auth_max_date,participan
     }
     const durationStr = `${Math.floor(duration/60)}:${duration%60 < 10?"0":""}${duration%60}`;
     return(
-        <>
+        <>  
             {dropPoints.length > 0 &&
-                <>
-                <h2 className={styles.section_title}>Autorizaciones</h2>
+                <Collapsable title="Autorizaciones">
                 <p className={styles.text}>Las autorizaciones se pueden conseguir <Link href={competition == "OMA"?"/oma/autorizacion":"/nandu/autorizacion"}>aquí<div className={styles.icon}><Image src="/images/pageLinkIcon.svg" fill={true} alt=""/></div></Link> y deben estar <span className={styles.bold}>completas</span> con las <span className={styles.bold}>firmas y sellos correspondientes</span>. Estas se pueden entregar hasta el <span className={styles.bold}>{auth_max_date?`${auth_max_date.getDate()}/${auth_max_date.getMonth() + 1}`:"(A definir)"}</span> en los siguientes puntos:</p>
                 <ul className={styles.dropPoints}>
                     {dropPoints.map((dropPoint, index) => {
@@ -95,50 +95,52 @@ const Venues = ({competition,instance,dropPoints,venues,auth_max_date,participan
                         return(<li className={styles.text} key={index}><span className={styles.bold}>{localidad}: </span>{nombre?`${nombre} - `:""}{direccion}{aclaracion?` (${aclaracion})`:""}</li>)
                     })}
                 </ul>
-                </>
+                </Collapsable>
             }
             {venues.length > 0 &&
             <>
-            <h2 className={styles.section_title}>Sedes</h2>
-            <p className={styles.text}>Presentarse <span className={styles.bold}>{`${time.getHours()}:${time.getMinutes()}`} hs</span>. ¡No se olviden de las autorizaciones! La prueba comienza a las 14:00hs y tiene una duración de <span className={styles.bold}>{durationStr} hs</span></p>
-            <h3 className={styles.section_subtitle}>Colegios por sede</h3>
-            <form className={styles.form}>
-                <SelectResultCategory category="Colegio" value={venueFilter.colegio} setValue={(option?: School) => updateVenueFilter({colegio: option})} options={venueOptions.colegio} input={true}/>
-                <SelectResultCategory category="Sede" value={venueFilter.nombre} setValue={(option?: string) => updateVenueFilter({nombre: option})} options={venueOptions.nombre} input={true}/>
-            </form>
-            <Table 
-                values={filteredVenues}
-                allValues={venues} 
-                headers={venue_headers} 
-                Card={VenueCard} 
-                elements_per_page={10}
-                make_element={hasDisclaimers?(result,index) => makeVenueElement(result,index,true):makeVenueElement}
+            <Collapsable title="Sedes">
+                <p className={styles.text}>Presentarse <span className={styles.bold}>{`${time.getHours()}:${time.getMinutes()}`} hs</span>. ¡No se olviden de las autorizaciones! La prueba comienza a las 14:00hs y tiene una duración de <span className={styles.bold}>{durationStr} hs</span></p>
+                <Collapsable title="Colegios por Sede">
+                <form className={styles.form}>
+                    <SelectResultCategory category="Colegio" value={venueFilter.colegio} setValue={(option?: School) => updateVenueFilter({colegio: option})} options={venueOptions.colegio} input={true}/>
+                    <SelectResultCategory category="Sede" value={venueFilter.nombre} setValue={(option?: string) => updateVenueFilter({nombre: option})} options={venueOptions.nombre} input={true}/>
+                </form>
+                <Table 
+                    values={filteredVenues}
+                    allValues={venues} 
+                    headers={venue_headers} 
+                    Card={VenueCard} 
+                    elements_per_page={10}
+                    make_element={hasDisclaimers?(result,index) => makeVenueElement(result,index,true):makeVenueElement}
+                    />
+                </Collapsable>
+                <Collapsable title="Participantes por Sede">
+                <form className={styles.form}>
+                    <SelectResultCategory category="Participante" value={participantFilter.participante} setValue={(option?: Participant) => updateParticipantFilter({participante: option})} options={participantOptions.participante} input={true}/>
+                    <SelectResultCategory category="Colegio" value={participantFilter.colegio} setValue={(option?: School) => updateParticipantFilter({colegio: option})} options={participantOptions.colegio} input={true}/>
+                    <SelectResultCategory category="Sede" value={participantFilter.sede} setValue={(option?: string) => updateParticipantFilter({sede:option})} options={participantOptions.sede} input={true}/>
+                    <SelectResultCategory category="Nivel" value={participantFilter.nivel} setValue={(option? : number) => updateParticipantFilter({nivel:option})} options={participantOptions.nivel} clear={true}/>
+                </form>
+                <Table 
+                    values={filteredParticipants} 
+                    allValues={participants} 
+                    headers={participant_headers} 
+                    Card={ParticipantCard} 
+                    elements_per_page={20} 
+                    download={true}
+                    downloadHeaders={downloadParticipantHeaders}
+                    process_data={downloadParticipantData}
+                    make_element={makeParticipantElement}
+                    testInfo={`${competition == "OMA"?"OMA":"Nandú"} ${instance} ${(new Date).getFullYear()}`}
                 />
-            <h3 className={styles.section_subtitle}>Alumnos por sede</h3>
-            <form className={styles.form}>
-                <SelectResultCategory category="Participante" value={participantFilter.participante} setValue={(option?: Participant) => updateParticipantFilter({participante: option})} options={participantOptions.participante} input={true}/>
-                <SelectResultCategory category="Colegio" value={participantFilter.colegio} setValue={(option?: School) => updateParticipantFilter({colegio: option})} options={participantOptions.colegio} input={true}/>
-                <SelectResultCategory category="Sede" value={participantFilter.sede} setValue={(option?: string) => updateParticipantFilter({sede:option})} options={participantOptions.sede} input={true}/>
-                <SelectResultCategory category="Nivel" value={participantFilter.nivel} setValue={(option? : number) => updateParticipantFilter({nivel:option})} options={participantOptions.nivel} clear={true}/>
-            </form>
-            <Table 
-                values={filteredParticipants} 
-                allValues={participants} 
-                headers={participant_headers} 
-                Card={ParticipantCard} 
-                elements_per_page={20} 
-                download={true}
-                downloadHeaders={downloadParticipantHeaders}
-                process_data={downloadParticipantData}
-                make_element={makeParticipantElement}
-                testInfo={`${competition == "OMA"?"OMA":"Nandú"} ${instance} ${(new Date).getFullYear()}`}
-            />
+                </Collapsable>
+            </Collapsable>
             {instance === "REGIONAL" && 
-            <>
-                <h2 className={styles.section_title}>Mapa</h2>
+            <Collapsable title="Mapa">
                 <p className={styles.text}>Para organizarnos mejor, ponemos público el mapa. El día de la instancia nos pueden ayudar sabiendo los lugares asignados a cada colegio.</p>
                 <Map competition={competition}/>
-            </>}
+            </Collapsable>}
         </>}
         {dropPoints.length === 0 && venues.length === 0 && <p className={styles.text}>Proximamente...</p>}
         </>
