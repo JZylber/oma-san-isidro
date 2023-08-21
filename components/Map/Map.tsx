@@ -59,7 +59,7 @@ const Map = ({competition}:MapProps) => {
         </div>
         <form className={styles.form}>
             <SelectResultCategory category="Colegio" value={schoolFilter.school} setValue={(option?: School) => updateFilter({school: option})} options={options.school} input={true}/>
-            <SelectResultCategory category="Nivel" value={schoolFilter.level} setValue={(option?: number) => updateFilter({level: option})} options={options.level.sort()} clear={true}/>
+            <SelectResultCategory category="Nivel" value={schoolFilter.level} setValue={(option?: number) => updateFilter({level: option})} options={options.level.filter((option) => option!==0).sort()} clear={true}/>
         </form>
         <div className={styles.values}>
             <table className={styles.values_table}>
