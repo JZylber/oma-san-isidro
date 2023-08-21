@@ -1,0 +1,3110 @@
+[
+    [
+        [
+            {
+                "school": {
+                    "name": "Mariano Moreno",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Ignacio",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Gregorio",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Mar\u00edn",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Ignacio",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Mariano Moreno",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Piaget",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Gregorio",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Mariano Moreno",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Piaget",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "LIBRE",
+                    "venue": null
+                },
+                "level": 0
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Mar\u00edn",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Gregorio",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "El Buen Ayre",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Piaget",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Mar\u00edn",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "El Buen Ayre",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "LIBRE",
+                    "venue": null
+                },
+                "level": 0
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "school": {
+                    "name": "Pilgrims College",
+                    "venue": "San Isidro"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Santa Mar\u00eda de las Lomas",
+                    "venue": null
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Michael Ham",
+                    "venue": "Vicente L\u00f3pez"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "San Lucas",
+                    "venue": "Olivos"
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Santa Mar\u00eda de las Lomas",
+                    "venue": null
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Michael Ham",
+                    "venue": "Vicente L\u00f3pez"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Nordelta"
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Pilgrims College",
+                    "venue": "San Isidro"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Santa Mar\u00eda de las Lomas",
+                    "venue": null
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Los Molinos",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "San Lucas",
+                    "venue": "Olivos"
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Pilgrims College",
+                    "venue": "San Isidro"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Santa Mar\u00eda de las Lomas",
+                    "venue": null
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Michael Ham",
+                    "venue": "Vicente L\u00f3pez"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Nordelta"
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Santa Mar\u00eda de las Lomas",
+                    "venue": null
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Pilgrims College",
+                    "venue": "San Isidro"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "San Lucas",
+                    "venue": "Olivos"
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Michael Ham",
+                    "venue": "Vicente L\u00f3pez"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Santa Mar\u00eda de las Lomas",
+                    "venue": null
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Los Molinos",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "San Juan el Precursor",
+                    "venue": null
+                },
+                "level": 1
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "school": {
+                    "name": "San Gregorio",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Luis",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Santa In\u00e9s",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Pilgrims College",
+                    "venue": "Pacheco"
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Saint Nicholas",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Participaci\u00f3n Individual",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Michael Ham",
+                    "venue": "Nordelta"
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Gregorio",
+                    "venue": null
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Nuestra Se\u00f1ora de la Unidad",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Michael Ham",
+                    "venue": "Vicente L\u00f3pez"
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Lucas",
+                    "venue": "Nordelta"
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Michael Ham",
+                    "venue": "Nordelta"
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Jorge",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Nuestra Se\u00f1ora de la Unidad",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Michael Ham",
+                    "venue": "Vicente L\u00f3pez"
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Mariano Moreno",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Ignacio",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Mar\u00edn",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "school": {
+                    "name": "Michael Ham",
+                    "venue": "Nordelta"
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Olivos"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "San Carlos",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "El Buen Ayre",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Labard\u00e9n",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Centro Cultural Italiano",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Holy Cross",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Olivos"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "San Carlos",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Labard\u00e9n",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Juan el Precursor",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Holy Cross",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "El Buen Ayre",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Tarbut",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "San Carlos",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Holy Cross",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Olivos"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Labard\u00e9n",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "El Buen Ayre",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Tarbut",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Holy Cross",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Dardo Rocha",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Learning",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Olivos"
+                },
+                "level": 2
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "school": {
+                    "name": "Los Molinos",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Asunci\u00f3n de la Virgen",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Newman",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Olivos"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Los Molinos",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Cardenal Pironio",
+                    "venue": null
+                },
+                "level": 3
+            },
+            {
+                "school": {
+                    "name": "Holy Cross",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Juan el Precursor",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "San Carlos",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Los Molinos",
+                    "venue": null
+                },
+                "level": 3
+            },
+            {
+                "school": {
+                    "name": "San Lucas",
+                    "venue": "Olivos"
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Olivos"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "San Juan el Precursor",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
+                    "venue": null
+                },
+                "level": 3
+            },
+            {
+                "school": {
+                    "name": "La Salle",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Tarbut",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Los Molinos",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Cardenal Pironio",
+                    "venue": null
+                },
+                "level": 3
+            },
+            {
+                "school": {
+                    "name": "San Carlos",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Olivos"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Saint Nicholas",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Goethe",
+                    "venue": null
+                },
+                "level": 3
+            },
+            {
+                "school": {
+                    "name": "Holy Cross",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Juan el Precursor",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "San Lucas",
+                    "venue": "Olivos"
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Pilgrims College",
+                    "venue": "San Isidro"
+                },
+                "level": 3
+            },
+            {
+                "school": {
+                    "name": "Santa In\u00e9s",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Cardenal Pironio",
+                    "venue": null
+                },
+                "level": 3
+            },
+            {
+                "school": {
+                    "name": "San Carlos",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Olivos"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Los Molinos",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
+                    "venue": null
+                },
+                "level": 3
+            },
+            {
+                "school": {
+                    "name": "Holy Cross",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Labard\u00e9n",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Tarbut",
+                    "venue": null
+                },
+                "level": 3
+            },
+            {
+                "school": {
+                    "name": "La Salle",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Olivos"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Saint Nicholas",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Pilgrims College",
+                    "venue": "San Isidro"
+                },
+                "level": 3
+            },
+            {
+                "school": {
+                    "name": "San Carlos",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Juan el Precursor",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Los Molinos",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Tarbut",
+                    "venue": null
+                },
+                "level": 3
+            },
+            {
+                "school": {
+                    "name": "La Salle",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Olivos"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "San Carlos",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "El Buen Ayre",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Cruz del Sur",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Newman",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Dardo Rocha",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Learning",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Participaci\u00f3n Individual",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Cruz del Sur",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "LIBRE",
+                    "venue": null
+                },
+                "level": 0
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Newman",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Learning",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Cruz del Sur",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "LIBRE",
+                    "venue": null
+                },
+                "level": 0
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Newman",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Learning",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "LIBRE",
+                    "venue": null
+                },
+                "level": 0
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Santa Mar\u00eda de las Lomas",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "school": {
+                    "name": "San Juan el Precursor",
+                    "venue": null
+                },
+                "level": 3
+            },
+            {
+                "school": {
+                    "name": "San Jorge",
+                    "venue": null
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Michael Ham",
+                    "venue": "Nordelta"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Labard\u00e9n",
+                    "venue": null
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Pilgrims College",
+                    "venue": "San Isidro"
+                },
+                "level": 3
+            },
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Nordelta"
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Michael Ham",
+                    "venue": "Vicente L\u00f3pez"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Goethe",
+                    "venue": null
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Pilgrims College",
+                    "venue": "Pacheco"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Nordelta"
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Michael Ham",
+                    "venue": "Nordelta"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Labard\u00e9n",
+                    "venue": null
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Pilgrims College",
+                    "venue": "San Isidro"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Goethe",
+                    "venue": null
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Pilgrims College",
+                    "venue": "Pacheco"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Nordelta"
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Michael Ham",
+                    "venue": "Nordelta"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Goethe",
+                    "venue": null
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Pilgrims College",
+                    "venue": "San Isidro"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Labard\u00e9n",
+                    "venue": null
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Michael Ham",
+                    "venue": "Vicente L\u00f3pez"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Goethe",
+                    "venue": null
+                },
+                "level": 1
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Nordelta"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Goethe",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Tarbut",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Tarbut",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Saint Nicholas",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Cardenal Pironio",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Juan el Precursor",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Holy Cross",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Newman",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Labard\u00e9n",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "San Juan el Precursor",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Cardenal Pironio",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Tarbut",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Saint Nicholas",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Florida Day School",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Juan el Precursor",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Holy Cross",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Newman",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Labard\u00e9n",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "San Juan el Precursor",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
+                    "venue": null
+                },
+                "level": 3
+            },
+            {
+                "school": {
+                    "name": "San Lucas",
+                    "venue": "Olivos"
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Juan el Precursor",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "San Carlos",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Tarbut",
+                    "venue": null
+                },
+                "level": 3
+            },
+            {
+                "school": {
+                    "name": "Todos los Santos",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Olivos"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Los Molinos",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Newman",
+                    "venue": null
+                },
+                "level": 3
+            },
+            {
+                "school": {
+                    "name": "San Lucas",
+                    "venue": "Olivos"
+                },
+                "level": 2
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "school": {
+                    "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Santa In\u00e9s",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Santa Mar\u00eda de las Lomas",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Lucas",
+                    "venue": "Olivos"
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Santa Mar\u00eda de las Lomas",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Pilgrims College",
+                    "venue": "San Isidro"
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Santa In\u00e9s",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Pilgrims College",
+                    "venue": "San Isidro"
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Santa Mar\u00eda de las Lomas",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Pilgrims College",
+                    "venue": "San Isidro"
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Santa In\u00e9s",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Nicol\u00e1s",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Pilgrims College",
+                    "venue": "San Isidro"
+                },
+                "level": 3
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "school": {
+                    "name": "San Gregorio",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Olivos"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Newman",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Los Molinos",
+                    "venue": null
+                },
+                "level": 3
+            },
+            {
+                "school": {
+                    "name": "Pilgrims College",
+                    "venue": "Pacheco"
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Tarbut",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "LIBRE",
+                    "venue": null
+                },
+                "level": 0
+            },
+            {
+                "school": {
+                    "name": "Goethe",
+                    "venue": null
+                },
+                "level": 3
+            },
+            {
+                "school": {
+                    "name": "San Carlos",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Olivos"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Los Molinos",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Newman",
+                    "venue": null
+                },
+                "level": 3
+            },
+            {
+                "school": {
+                    "name": "La Salle",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Juan el Precursor",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Newman",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
+                    "venue": null
+                },
+                "level": 3
+            },
+            {
+                "school": {
+                    "name": "Pilgrims College",
+                    "venue": "Pacheco"
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Olivos"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Learning",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Los Molinos",
+                    "venue": null
+                },
+                "level": 3
+            },
+            {
+                "school": {
+                    "name": "Holy Cross",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Tarbut",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "San Juan el Precursor",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Newman",
+                    "venue": null
+                },
+                "level": 3
+            },
+            {
+                "school": {
+                    "name": "San Carlos",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Olivos"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Newman",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
+                    "venue": null
+                },
+                "level": 3
+            },
+            {
+                "school": {
+                    "name": "La Salle",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Juan el Precursor",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Learning",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Los Molinos",
+                    "venue": null
+                },
+                "level": 3
+            },
+            {
+                "school": {
+                    "name": "Holy Cross",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Tarbut",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "San Juan el Precursor",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Newman",
+                    "venue": null
+                },
+                "level": 3
+            },
+            {
+                "school": {
+                    "name": "San Carlos",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Olivos"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Newman",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
+                    "venue": null
+                },
+                "level": 3
+            },
+            {
+                "school": {
+                    "name": "La Salle",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Juan el Precursor",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Learning",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Los Molinos",
+                    "venue": null
+                },
+                "level": 3
+            },
+            {
+                "school": {
+                    "name": "Holy Cross",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Olivos"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Manzoni",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Newman",
+                    "venue": null
+                },
+                "level": 3
+            },
+            {
+                "school": {
+                    "name": "San Carlos",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "school": {
+                    "name": "Los Molinos",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Pilgrims College",
+                    "venue": "San Isidro"
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Nordelta"
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Michael Ham",
+                    "venue": "Nordelta"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Olivos"
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Labard\u00e9n",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Tarbut",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "La Salle",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "San Juan el Precursor",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Lucas",
+                    "venue": "Olivos"
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Nordelta"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Tarbut",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Juan el Precursor",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Olivos"
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "San Lucas",
+                    "venue": "Olivos"
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Nordelta"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "La Salle",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Goethe",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Tarbut",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Centro Cultural Italiano",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "La Salle",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Labard\u00e9n",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "La Salle",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Nordelta"
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Juan el Precursor",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Centro Cultural Italiano",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Goethe",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "school": {
+                    "name": "Michael Ham",
+                    "venue": "Vicente L\u00f3pez"
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Pilgrims College",
+                    "venue": "Pacheco"
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Santa Teresa",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "San Gregorio",
+                    "venue": null
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Santa Mar\u00eda del Luj\u00e1n",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "San Jorge",
+                    "venue": null
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Lincoln",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Pilgrims College",
+                    "venue": "San Isidro"
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Jorge",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Tarbut",
+                    "venue": null
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Santa Teresa",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "San Gregorio",
+                    "venue": null
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Asunci\u00f3n de la Virgen",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "San Ignacio",
+                    "venue": null
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Pedro",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Tarbut",
+                    "venue": null
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Marcos",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "San Jorge",
+                    "venue": null
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Jorge",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "San Ignacio",
+                    "venue": null
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Santa Teresa",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Tarbut",
+                    "venue": null
+                },
+                "level": 1
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Asunci\u00f3n de la Virgen",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "San Ignacio",
+                    "venue": null
+                },
+                "level": 1
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "school": {
+                    "name": "Labard\u00e9n",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Olivos"
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "San Lucas",
+                    "venue": "Olivos"
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Tarbut",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Mart\u00edn y Omar",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Nordelta"
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Los Molinos",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Michael Ham",
+                    "venue": "Nordelta"
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "San Juan el Precursor",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Labard\u00e9n",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Mar\u00edn",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "San Lucas",
+                    "venue": "Olivos"
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Michael Ham",
+                    "venue": "Vicente L\u00f3pez"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Pilgrims College",
+                    "venue": "San Isidro"
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Nordelta"
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Los Molinos",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Mart\u00edn y Omar",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Labard\u00e9n",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Labard\u00e9n",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Michael Ham",
+                    "venue": "Nordelta"
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "San Lucas",
+                    "venue": "Olivos"
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Michael Ham",
+                    "venue": "Vicente L\u00f3pez"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Mar\u00edn",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "La Salle",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Los Molinos",
+                    "venue": null
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Michael Ham",
+                    "venue": "Nordelta"
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "San Juan el Precursor",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "school": {
+                    "name": "Pilgrims College",
+                    "venue": "San Isidro"
+                },
+                "level": 2
+            },
+            {
+                "school": {
+                    "name": "Michael Ham",
+                    "venue": "Vicente L\u00f3pez"
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "La Salle",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Felipe",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Nicol\u00e1s",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Goethe",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Felipe",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Nicol\u00e1s",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Goethe",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Felipe",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Santa In\u00e9s",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Goethe",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Nicol\u00e1s",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Felipe",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Goethe",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Saint Nicholas",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Lucas",
+                    "venue": "Olivos"
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Felipe",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Goethe",
+                    "venue": null
+                },
+                "level": 2
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Lucas",
+                    "venue": "Olivos"
+                },
+                "level": 2
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "school": {
+                    "name": "Santa In\u00e9s",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Santa Teresa",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "San Felipe",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Pedro",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Santa Mar\u00eda de las Lomas",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Marcos",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Olivos"
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Santa In\u00e9s",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Santa Teresa",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "San Felipe",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Santa Mar\u00eda de las Lomas",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Piaget",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "San Felipe",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Participaci\u00f3n Individual",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Olivos"
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Mariano Moreno",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Santa Teresa",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "El Buen Ayre",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Santa Mar\u00eda de las Lomas",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Florida Day School",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "San Felipe",
+                    "venue": null
+                },
+                "level": 3
+            }
+        ],
+        [
+            {
+                "school": {
+                    "name": "Cruz del Sur",
+                    "venue": null
+                },
+                "level": 1
+            },
+            {
+                "school": {
+                    "name": "Northlands",
+                    "venue": "Olivos"
+                },
+                "level": 3
+            }
+        ]
+    ]
+]

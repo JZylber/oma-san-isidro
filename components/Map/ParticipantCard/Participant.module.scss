@@ -27,6 +27,18 @@
         white-space: nowrap;
         text-overflow: ellipsis;  
     }
+    &Special{
+        padding-top: .5rem;
+        padding-bottom: .5rem;
+        padding-left: .75rem;
+        padding-right: .75rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;  
+    }
     &:hover{
         @include shared.font-montserrat(600);
         width: fit-content;

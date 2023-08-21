@@ -6,9 +6,10 @@ import { Participant, School } from "../../hooks/types";
 import { INSTANCIA } from "@prisma/client";
 import VenueInfo from "./VenueInfo";
 import ProvincialInfo from "./ProvincialInfo";
+import { Competition } from "../../server/app-router-db-calls";
 
 interface InstanceProps {
-    competition: string,
+    competition: Competition,
     instance: Instance,
 }
 
