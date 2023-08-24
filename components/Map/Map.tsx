@@ -1,3 +1,4 @@
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { FilterableObject, School } from "../../hooks/types";
 import useFilter from "../../hooks/useFilter";
 import { Competition } from "../../server/app-router-db-calls";
@@ -5,6 +6,7 @@ import SelectResultCategory from "../ResultsPage/SelectResultCategory";
 import styles from "./Map.module.scss";
 import MapData from "./MapFromJson";
 import ParticipantTable from "./Table/Table";
+import { relative } from "path";
 
 interface MapProps {
    competition: Competition;
@@ -39,7 +41,12 @@ const Map = ({competition}:MapProps) => {
     const freePlacesSelected = schoolFilter.school?.name === "LIBRE";
     return(
         <>
-        <div className={styles.gridContainer}>
+        <TransformWrapper
+            initialScale={0.75}
+            minScale={0.2}
+            maxScale={2}
+        >
+            <TransformComponent wrapperClass={styles.gridContainer}>
             <div className={styles.grid}>
                 {data.map((column,column_index) => {
                     const columnIsSelected = someSelected && participantsPerColumn.some((column) => column[0] === column_index + 1);
@@ -56,6 +63,10 @@ const Map = ({competition}:MapProps) => {
                 })
                 }
             </div>
+            </TransformComponent>
+        </TransformWrapper>
+        <div className={styles.gridContainer}>
+            
         </div>
         <form className={styles.form}>
             <SelectResultCategory category="Colegio" value={schoolFilter.school} setValue={(option?: School) => updateFilter({school: option})} options={options.school} input={true}/>
