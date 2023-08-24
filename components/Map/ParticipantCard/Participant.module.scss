@@ -47,5 +47,5 @@
 }
 
 .selected{
-    background-color: shared.$light-blue;
+    filter:invert(1);
 }
