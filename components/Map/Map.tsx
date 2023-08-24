@@ -41,30 +41,32 @@ const Map = ({competition}:MapProps) => {
     const freePlacesSelected = schoolFilter.school?.name === "LIBRE";
     return(
         <>
-        <TransformWrapper
-            initialScale={0.75}
-            minScale={0.2}
-            maxScale={2}
-        >
-            <TransformComponent wrapperClass={styles.gridContainer}>
-            <div className={styles.grid}>
-                {data.map((column,column_index) => {
-                    const columnIsSelected = someSelected && participantsPerColumn.some((column) => column[0] === column_index + 1);
-                    return(
-                        <div key={column_index} className={[styles.column,columnIsSelected?styles.selected:""].join(" ")}>
-                            <div className={styles.columnHeader}>
-                                <div>{column_index+1}</div>
+        <div style={{margin:"2rem 0rem 2rem 0rem"}}>
+            <TransformWrapper
+                initialScale={0.75}
+                minScale={0.2}
+                maxScale={2}
+            >
+                <TransformComponent wrapperClass={styles.gridContainer}>
+                <div className={styles.grid}>
+                    {data.map((column,column_index) => {
+                        const columnIsSelected = someSelected && participantsPerColumn.some((column) => column[0] === column_index + 1);
+                        return(
+                            <div key={column_index} className={[styles.column,columnIsSelected?styles.selected:""].join(" ")}>
+                                <div className={styles.columnHeader}>
+                                    <div>{column_index+1}</div>
+                                </div>
+                                {column.map((row, row_index) => {
+                                    return(<ParticipantTable key={`${column_index}-${row_index}`} participants={row} isSelected={isSelected}/>)
+                                })}
                             </div>
-                            {column.map((row, row_index) => {
-                                return(<ParticipantTable key={`${column_index}-${row_index}`} participants={row} isSelected={isSelected}/>)
-                            })}
-                        </div>
-                    )
-                })
-                }
-            </div>
-            </TransformComponent>
-        </TransformWrapper>
+                        )
+                    })
+                    }
+                </div>
+                </TransformComponent>
+            </TransformWrapper>
+        </div>
         <form className={styles.form}>
             <SelectResultCategory category="Colegio" value={schoolFilter.school} setValue={(option?: School) => updateFilter({school: option})} options={options.school} input={true}/>
             <SelectResultCategory category="Nivel" value={schoolFilter.level} setValue={(option?: number) => updateFilter({level: option})} options={options.level.filter((option) => option!==0).sort()} clear={true}/>
