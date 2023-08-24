@@ -24,7 +24,7 @@ const getInitialInstance = (instances: Instance[],query: string | undefined) => 
     const index = instances.findIndex((instance) => 
     {
         let date = new Date(instance.fecha);
-        date.setDate(date.getDate() - 1);
+        date.setDate(date.getDate() + 1);
         return date > new Date();
     });
     if(index !== -1){
