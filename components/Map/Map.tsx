@@ -65,9 +65,6 @@ const Map = ({competition}:MapProps) => {
             </div>
             </TransformComponent>
         </TransformWrapper>
-        <div className={styles.gridContainer}>
-            
-        </div>
         <form className={styles.form}>
             <SelectResultCategory category="Colegio" value={schoolFilter.school} setValue={(option?: School) => updateFilter({school: option})} options={options.school} input={true}/>
             <SelectResultCategory category="Nivel" value={schoolFilter.level} setValue={(option?: number) => updateFilter({level: option})} options={options.level.filter((option) => option!==0).sort()} clear={true}/>
