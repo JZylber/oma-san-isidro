@@ -267,6 +267,7 @@ const getInstanceData = async (year: number,competition: string, instance: INSTA
     fecha_limite_autorizacion: true,
     hora_ingreso: true,
     duracion: true,
+    criterio_habilitacion: true
   }  
   })
   return (query);
@@ -344,17 +345,18 @@ const getDisabled = async (competition: string, year: number, instance: string) 
 const provincialDataGenerator = async (competition: string, instance: INSTANCIA) => {
   const date = new Date();
   const year = date.getFullYear();
-  const {interescolar,zonal} = await Promise.all([passingParticipantsWScore(competition,year,competition === "OMA"?'INTERCOLEGIAL':'INTERESCOLAR'),passingParticipantsWScore(competition,year,'ZONAL')]).then(([interescolar, zonal]) => {return({interescolar: interescolar,zonal: zonal})});
+  const {interescolar,zonal,data} = await Promise.all([passingParticipantsWScore(competition,year,competition === "OMA"?'INTERCOLEGIAL':'INTERESCOLAR'),passingParticipantsWScore(competition,year,'ZONAL'),getInstanceData(year,competition,instance)]).then(([interescolar, zonal, data]) => {return({interescolar: interescolar,zonal: zonal, data: data})});
   let provincialParticipants = zonal.map((participant) => {
     let interescolar_participant = interescolar.find((interescolar_participant) => interescolar_participant.id_participacion === participant.id_participacion);
     let interescolar_points = interescolar_participant?.resultados?Number((interescolar_participant.resultados as string[])[3]):0;
     return({...participant,puntos: interescolar_points + Number((participant.resultados as string[])[3])});
   });
-  provincialParticipants = provincialParticipants.filter((participant) => participant.puntos >= 5);
+  const criteria = data?.criterio_habilitacion?data.criterio_habilitacion as number[]:[5,5,5];
+  provincialParticipants = provincialParticipants.filter((participant) => participant.puntos >= criteria[participant.nivel - 1]);
   const disabled = await getDisabled(competition,year,instance);
   provincialParticipants = provincialParticipants.filter((participant) => !disabled.some((disabled_participant) => disabled_participant.id_participacion === participant.id_participacion));
   const provincialParticipantsNames = provincialParticipants.map((participant) => {return({nombre: participant.participante.nombre, apellido: participant.participante.apellido ,colegio: participant.colegio, nivel: participant.nivel})});
-  const auth_max_date = (await getInstanceData(year,competition,instance))?.fecha_limite_autorizacion;
+  const auth_max_date = data?.fecha_limite_autorizacion;
   return({participants: provincialParticipantsNames,auth_max_date: auth_max_date?auth_max_date:undefined});
 }
 

@@ -55,6 +55,39 @@ const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) 
     return(
         (participants.length > 0 && auth_max_date) ?
         <>
+        {competition == "OMA"?
+        <>
+        <p className={styles.text}>Este año, para el certamen provincial <span className={styles.bold}>NO CONTAREMOS</span> con el Hotel 13 de Julio de la ciudad de Mar del Plata (lugar histórico en dónde se desarrollaron estos encuentros).</p>
+        <p className={styles.text}>Estamos evaluando diferentes propuestas de alojamiento y de espacios para el desarrollo del Certamen en la Ciudad de Villa Gesell.</p>
+        <p className={styles.text}>No habrá un único hotel para el alojamiento de las delegaciones.</p>
+        <p className={styles.text}>Tendremos un espacio para el desarrollo de las diferentes actividades programadas que vale la pena recordar: Como es habitual en la Olimpíada Matemática, <span className={styles.bold}>ESTE CERTAMEN ES VOLUNTARIO PERO UNA VEZ TOMADO EL COMPROMISO DE PARTICIPAR, TODAS LAS ACTIVIDADES PROGRAMADAS SON OBLIGATORIAS,</span> ya que los alumnos se están ausentando del colegio por asistir a este encuentro de carácter académico.</p>
+        <Collapsable title="Participantes Clasificados">
+        <p className={styles.text}>En el presente año estarán habilitados para participar de este certamen:</p>
+        <ul className={[styles.text,styles.list].join(" ")}>
+            <li>En el <span className={styles.bold}>NIVEL 1</span> los alumnos que suman <span className={styles.bold}>6 PUNTOS</span>, entre el Intercolegial y el Zonal.</li>
+            <li>Para el <span className={styles.bold}>NIVEL 2 y 3</span> los alumnos que suman <span className={styles.bold}>5 PUNTOS</span>, entre el Intercolegial y el Zonal.</li>
+        </ul>
+        <p className={[styles.text,styles.bold].join(" ")}>Esta decisión fue tomada por el Comité Olímpico que es quien define en todas las instancias quienes califican para competir en las siguientes rondas.</p>
+        <form className={styles.form}>
+            <SelectResultCategory category="Participante" value={state.participante} setValue={(option? : Participant) =>update({participante:option})} options={options["participante"]} input={true}/>
+            <SelectResultCategory category="Colegio" value={state.colegio} setValue={(option? : School) =>update({colegio:option})} options={options["colegio"]} input={true}/>
+            <SelectResultCategory category="Nivel" value={state.nivel} setValue={(option? : number) =>update({nivel:option})} options={options["nivel"]} clear={true}/>
+        </form>
+        <Table 
+            values={filteredValues} 
+            allValues={participants} 
+            headers={participant_headers} 
+            Card={ProvincialParticipantCard} 
+            elements_per_page={20} 
+            download={true}
+            downloadHeaders={downloadParticipantHeaders}
+            process_data={downloadParticipantData}
+            make_element={makeParticipantElement}
+            testInfo={`${competition == "OMA"?"OMA":"Nandú"} Provincial ${(new Date).getFullYear()}`}
+        />
+        </Collapsable>
+        </>:
+        <>
         <p className={styles.text}>Los alumnos que aprobaron el zonal pasan al regional participen o no del provincial.</p>
         <Collapsable title="Inscripción">
             <p className={styles.text}>Los colegios deberán comunicar antes del <span className={styles.bold}>{`${auth_max_date.getDate()} de ${months[auth_max_date.getMonth()]}`}</span> la nómina de personas que viajan, por correo electrónico a: <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a></p>
@@ -172,7 +205,9 @@ const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) 
             </ul>
             <p className={styles.text}>Ante cualquier irregularidad o muestra de inconducta las personas involucradas serán sancionadas debiendo regresar de inmediato a su lugar de origen.</p>
         </Collapsable>
-        </>:
+        </>}
+        </>
+        :
         <p className={styles.text}>Proximamente...</p>
            
     )
