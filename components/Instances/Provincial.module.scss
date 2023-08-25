@@ -17,11 +17,15 @@
     & + .text{
       margin-top: 1.2rem;
     }
+}
 
 .bold{
       @include shared.font-montserrat(500);
     }
-  }
+
+.list{
+    list-style-position: inside;
+}
 
 .subtitle{
     @include shared.font-unbounded(500);
