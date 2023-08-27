@@ -856,10 +856,10 @@
             },
             {
                 "school": {
-                    "name": "Santa Teresa",
+                    "name": "LIBRE",
                     "venue": null
                 },
-                "level": 3
+                "level": 0
             },
             {
                 "school": {
@@ -2183,10 +2183,10 @@
             },
             {
                 "school": {
-                    "name": "Santa Teresa",
+                    "name": "LIBRE",
                     "venue": null
                 },
-                "level": 3
+                "level": 0
             },
             {
                 "school": {
@@ -2303,10 +2303,10 @@
             },
             {
                 "school": {
-                    "name": "Sworn",
+                    "name": "LIBRE",
                     "venue": null
                 },
-                "level": 3
+                "level": 0
             },
             {
                 "school": {
@@ -2381,7 +2381,7 @@
             },
             {
                 "school": {
-                    "name": "Labard\u00e9n",
+                    "name": "Santa Teresa",
                     "venue": null
                 },
                 "level": 3
@@ -2519,7 +2519,7 @@
             },
             {
                 "school": {
-                    "name": "Labard\u00e9n",
+                    "name": "Sworn",
                     "venue": null
                 },
                 "level": 3
@@ -2761,10 +2761,10 @@
             },
             {
                 "school": {
-                    "name": "Labard\u00e9n",
+                    "name": "LIBRE",
                     "venue": null
                 },
-                "level": 3
+                "level": 0
             },
             {
                 "school": {
@@ -2831,7 +2831,7 @@
             {
                 "school": {
                     "name": "Holy Cross",
-                    "venue": "Mujeres"
+                    "venue": "Varones"
                 },
                 "level": 1
             },
@@ -2853,7 +2853,7 @@
             },
             {
                 "school": {
-                    "name": "Labard\u00e9n",
+                    "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
                     "venue": null
                 },
                 "level": 3
@@ -2877,7 +2877,7 @@
             {
                 "school": {
                     "name": "Holy Cross",
-                    "venue": "Varones"
+                    "venue": "Mujeres"
                 },
                 "level": 1
             },
@@ -2922,7 +2922,7 @@
             },
             {
                 "school": {
-                    "name": "Labard\u00e9n",
+                    "name": "Santa Teresa",
                     "venue": null
                 },
                 "level": 3
