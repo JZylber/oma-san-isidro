@@ -91,7 +91,6 @@ const Table = <S extends object,>({values,allValues,headers,Card,elements_per_pa
                 </tbody>
             </table>)
     }
-    console.log(firstResult,lastResult);
     return(
         <>  
             {elements_per_page && max_pages > 1 && mobile_pagination}
