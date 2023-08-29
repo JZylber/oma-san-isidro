@@ -34,17 +34,17 @@ const Table = <S extends object,>({values,allValues,headers,Card,elements_per_pa
     //PAGINATION
     const [page,setPage] = useState(0);
     const page_size = elements_per_page?elements_per_page:values.length
-    let max_pages =  Math.ceil(values.length / page_size) - 1;
+    let max_pages =  Math.ceil(values.length / page_size);
     useEffect(() => {
-        if(page > max_pages){
-            setPage(max_pages);
+        if(page > max_pages - 1){
+            setPage(max_pages - 1);
         }
     },[page,max_pages])
     let firstResult = page * page_size
     let lastResult = Math.min((page + 1)*page_size,values.length)
     const values_in_page = values.slice(firstResult,lastResult)
     const nextPage = () => {
-        if(page<max_pages){
+        if(page< max_pages - 1){
             setPage(page + 1);
         }
     }
@@ -57,7 +57,7 @@ const Table = <S extends object,>({values,allValues,headers,Card,elements_per_pa
         <div className={styles.pagination}>
             <p>Mostrando {firstResult + 1}-{lastResult} de {values.length}</p>
             <div className={[styles.prev,page===0 && styles.greyed].join(" ")} onClick={prevPage}><SelectIcon/></div>
-            <div className={[styles.next,page===max_pages && styles.greyed].join(" ")} onClick={nextPage}><SelectIcon/></div>
+            <div className={[styles.next,page===(max_pages - 1) && styles.greyed].join(" ")} onClick={nextPage}><SelectIcon/></div>
         </div>
     const mobile_pagination = 
         <div className={styles.mobile_pagination}>
@@ -91,6 +91,7 @@ const Table = <S extends object,>({values,allValues,headers,Card,elements_per_pa
                 </tbody>
             </table>)
     }
+    console.log(firstResult,lastResult);
     return(
         <>  
             {elements_per_page && max_pages > 1 && mobile_pagination}
