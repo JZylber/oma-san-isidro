@@ -52,45 +52,13 @@ const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) 
     const [state,update,filteredValues,options] = useFilter(participants);
     const participant_headers = ["Nivel","Participante","Colegio"];
     const downloadParticipantHeaders = ["Nivel","Nombre","Apellido","Colegio"]
+    const isOma = competition === "OMA";
     return(
         (participants.length > 0 && auth_max_date) ?
         <>
-        {competition == "OMA"?
-        <>
-        <p className={styles.text}>Este año, para el certamen provincial <span className={styles.bold}>NO CONTAREMOS</span> con el Hotel 13 de Julio de la ciudad de Mar del Plata (lugar histórico en dónde se desarrollaron estos encuentros).</p>
-        <p className={styles.text}>Estamos evaluando diferentes propuestas de alojamiento y de espacios para el desarrollo del Certamen en la Ciudad de Villa Gesell.</p>
-        <p className={styles.text}>No habrá un único hotel para el alojamiento de las delegaciones.</p>
-        <p className={styles.text}>Tendremos un espacio para el desarrollo de las diferentes actividades programadas que vale la pena recordar: Como es habitual en la Olimpíada Matemática, <span className={styles.bold}>ESTE CERTAMEN ES VOLUNTARIO PERO UNA VEZ TOMADO EL COMPROMISO DE PARTICIPAR, TODAS LAS ACTIVIDADES PROGRAMADAS SON OBLIGATORIAS,</span> ya que los alumnos se están ausentando del colegio por asistir a este encuentro de carácter académico.</p>
-        <Collapsable title="Participantes Clasificados">
-        <p className={styles.text}>En el presente año estarán habilitados para participar de este certamen:</p>
-        <ul className={[styles.text,styles.list].join(" ")}>
-            <li>En el <span className={styles.bold}>NIVEL 1</span> los alumnos que suman <span className={styles.bold}>6 PUNTOS</span>, entre el Intercolegial y el Zonal.</li>
-            <li>Para el <span className={styles.bold}>NIVEL 2 y 3</span> los alumnos que suman <span className={styles.bold}>5 PUNTOS</span>, entre el Intercolegial y el Zonal.</li>
-        </ul>
-        <p className={[styles.text,styles.bold].join(" ")}>Esta decisión fue tomada por el Comité Olímpico que es quien define en todas las instancias quienes califican para competir en las siguientes rondas.</p>
-        <form className={styles.form}>
-            <SelectResultCategory category="Participante" value={state.participante} setValue={(option? : Participant) =>update({participante:option})} options={options["participante"]} input={true}/>
-            <SelectResultCategory category="Colegio" value={state.colegio} setValue={(option? : School) =>update({colegio:option})} options={options["colegio"]} input={true}/>
-            <SelectResultCategory category="Nivel" value={state.nivel} setValue={(option? : number) =>update({nivel:option})} options={options["nivel"]} clear={true}/>
-        </form>
-        <Table 
-            values={filteredValues} 
-            allValues={participants} 
-            headers={participant_headers} 
-            Card={ProvincialParticipantCard} 
-            elements_per_page={20} 
-            download={true}
-            downloadHeaders={downloadParticipantHeaders}
-            process_data={downloadParticipantData}
-            make_element={makeParticipantElement}
-            testInfo={`${competition == "OMA"?"OMA":"Nandú"} Provincial ${(new Date).getFullYear()}`}
-        />
-        </Collapsable>
-        </>:
-        <>
-        <p className={styles.text}>Los alumnos que aprobaron el zonal pasan al regional participen o no del provincial.</p>
+        {!isOma && <p className={styles.text}>Los alumnos que aprobaron el zonal pasan al regional participen o no del provincial.</p>}
         <Collapsable title="Inscripción">
-            <p className={styles.text}>Los colegios deberán comunicar antes del <span className={styles.bold}>{`${auth_max_date.getDate()} de ${months[auth_max_date.getMonth()]}`}</span> la nómina de personas que viajan, por correo electrónico a: <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a></p>
+            <p className={styles.text}>Los colegios deberán comunicar antes del <span className={styles.bold}>{`${auth_max_date.getUTCDate()} de ${months[auth_max_date.getUTCMonth()]}`}</span> la nómina de personas que viajan, por correo electrónico a: <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a></p>
             <h4 className={styles.section_title}>Datos que deben enviar para la inscripción:</h4>
             <ul className={styles.text}>
                 <li>Nombre y apellido de los alumnos que participan.</li>
@@ -105,20 +73,20 @@ const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) 
             </Warning>
         </Collapsable>
         <Collapsable title="Información general y programa">
-            <p className={styles.text}>El encuentro de la <span className={styles.bold}>Olimpíada Regional Ñandú Metropolitana</span> se realizará en la ciudad de Mar del Plata los días 9, 10 y 11 de agosto. Cada delegación se trasladará por su cuenta y riesgo, con sus profesores acompañantes según las pautas establecidas <span className={styles.bold}>(máximo 8 alumnos por cada docente)</span>. También, como en años anteriores, nos ocuparemos del alojamiento y concentración de aquellas delegaciones que lo soliciten en la Secretaría Regional de la Olimpíada correspondiente.</p>
+            <p className={styles.text}>El encuentro de la <span className={styles.bold}>Olimpíada Regional {isOma?"Urbana":"Ñandú"} Metropolitana</span> se realizará en la ciudad de {isOma?"Villa Gesell":"Mar del Plata"} los días {isOma?"27, 28 y 29 de septiembre":"9, 10 y 11 de agosto"}. Cada delegación se trasladará por su cuenta y riesgo, con sus profesores acompañantes según las pautas establecidas <span className={styles.bold}>(máximo 8 alumnos por cada docente)</span>. También, como en años anteriores, nos ocuparemos del alojamiento y concentración de aquellas delegaciones que lo soliciten.</p>
             <p className={styles.text}>El alojamiento de las delegaciones que lo soliciten será en Hoteles de la mencionada ciudad  en habitaciones compartidas con otros participantes del encuentro. La reserva del alojamiento se hace contra entrega de las planillas debidamente cumplimentadas.</p>
             <h4 className={styles.section_title}>Programa</h4>
             <ul className={styles.text}>
-                <li><span className={styles.bold}>Acreditación:</span> Miércoles 9 de agosto de 15:00 a 20:00 horas en el hotel asignado a su delegación</li>
-                <li><span className={styles.bold}>Prueba escrita:</span> Jueves 10 de agosto a las 9:00 horas, Salón Colón - NH Gran Hotel Provincial - Mar del Plata</li>
-                <li><span className={styles.bold}>Exposición Oral y Premiación:</span> Viernes 11 de agosto a las 9:00 horas, Salón de las Américas - NH Gran Hotel Provincial - Mar del Plata</li>
+                <li><span className={styles.bold}>Acreditación:</span> {isOma?"Miércoles 27 de septiembre":"Miércoles 9 de agosto"} de 15:00 a 20:00 horas en el hotel asignado a su delegación</li>
+                <li><span className={styles.bold}>Prueba escrita:</span> {isOma?"Jueves 28 de septiembre a las 9:00 horas, Polideportivo Municipal Villa Gesell":"Jueves 10 de agosto a las 9:00 horas, Salón Colón - NH Gran Hotel Provincial - Mar del Plata"}</li>
+                <li><span className={styles.bold}>Exposición Oral y Premiación:</span> {isOma?"Viernes 29 de septiembre a las 9:00 horas, Polideportivo Municipal Villa Gesell ":"Viernes 11 de agosto a las 9:00 horas, Salón de las Américas - NH Gran Hotel Provincial - Mar del Plata"}</li>
             </ul>
         </Collapsable>
         <Collapsable title="Aranceles">
         <ul className={styles.text}>
-            <li><span className={styles.bold}>Participantes y/o acompañantes que se alojen en el hotel propuesto por la olimpíada:</span> $69.000. Incluye desde la cena del día miércoles 9 al almuerzo del viernes 11 (incluye una bebida por comida).</li>
-            <li><span className={styles.bold}>Participantes que NO se alojen en el hotel propuesto por la olimpíada:</span> $23.000.</li>
-            <li><span className={styles.bold}>Acompañantes que NO se alojen en el hotel propuesto por la olimpíada:</span> $18.000. (menores de 3 años no pagan)</li>
+            <li><span className={styles.bold}>Participantes y/o acompañantes que se alojen en el hotel propuesto por la olimpíada:</span> {isOma?"$85.000":"$69.000"}. Incluye desde la cena del día miércoles {isOma?27:9} al almuerzo del viernes {isOma?29:11} (incluye una bebida por comida).</li>
+            <li><span className={styles.bold}>Participantes que NO se alojen en el hotel propuesto por la olimpíada:</span> {isOma?"$29.000":"$23.000"}.</li>
+            <li><span className={styles.bold}>Acompañantes que NO se alojen en el hotel propuesto por la olimpíada:</span> {isOma?"$23.000":"$18.000"}. (menores de 3 años no pagan)</li>
             <li><span className={styles.bold}>Tarjeta de premiación:</span> $6.000. Solo es necesaria la tarjeta para aquellos que no están acreditados como acompañantes y que participarán únicamente de la premiación. Deben inscribirse junto con los otros participantes en la planilla. Menores de 3 años no pagan. <span className={styles.bold}>CUPOS LIMITADOS</span></li>
         </ul>
         <Warning>
@@ -138,7 +106,7 @@ const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) 
             <p className={styles.text}>Si necesitan factura electrónica o factura C, por favor completar la planilla y enviar a <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a> junto con el comprobante de pago.</p>
             <div className={styles.documentation}>
                 <div className={styles.button}>
-                    <Button content="Planilla Facturación" onClick={() => downloadFile("/provincial/nandu/PedidoFactura.xlsx")}>
+                    <Button content="Planilla Facturación" onClick={() => downloadFile(`/provincial/${isOma?"oma":"nandu"}/PedidoFactura.xlsx`)}>
                         <div className={styles.arrow}>
                             <Image src="/images/newsArrow.svg" width={30} height={40} alt="Descargar"/>
                         </div>
@@ -156,14 +124,14 @@ const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) 
             <p className={styles.text}>La documentación debe ser entregada en la acreditación.</p>
             <div className={styles.documentation}>
                 <div className={styles.button}>
-                    <Button content="Autorización" onClick={() => downloadFile("/provincial/nandu/Autorización.docx")}>
+                    <Button content="Autorización" onClick={() => downloadFile(`/provincial/${isOma?"oma":"nandu"}/Autorización.docx`)}>
                         <div className={styles.arrow}>
                             <Image src="/images/newsArrow.svg" width={30} height={40} alt="Descargar"/>
                         </div>
                     </Button>
                 </div>
                 <div className={styles.button}>
-                    <Button content="Compromiso" onClick={() => downloadFile("/provincial/nandu/Compromiso.docx")}>
+                    <Button content="Compromiso" onClick={() => downloadFile(`/provincial/${isOma?"oma":"nandu"}/Compromiso.docx`)}>
                         <div className={styles.arrow}>
                             <Image src="/images/newsArrow.svg" width={30} height={40} alt="Descargar"/>
                         </div>
@@ -176,7 +144,12 @@ const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) 
             <p className={styles.text}> Costo de la tarjeta $6000.- CUPOS LIMITADOS (menores de 3 años no pagan)  </p>
         </Collapsable>
         <Collapsable title="Participantes Clasificados">
-        <p className={styles.text}>Los participantes que clasifican a la instancia provincial son aquellos que sumen 5 puntos entre las instancias Zonal e {competition === "OMA"?"Intercolegial":"Interescolar"}.</p>
+        {isOma?<><p className={styles.text}>En el presente año estarán habilitados para participar de este certamen:</p>
+        <ul className={[styles.text,styles.list].join(" ")}>
+            <li>En el <span className={styles.bold}>NIVEL 1</span> los alumnos que suman <span className={styles.bold}>6 PUNTOS</span>, entre el Intercolegial y el Zonal.</li>
+            <li>Para el <span className={styles.bold}>NIVEL 2 y 3</span> los alumnos que suman <span className={styles.bold}>5 PUNTOS</span>, entre el Intercolegial y el Zonal.</li>
+        </ul>
+        <p className={[styles.text,styles.bold].join(" ")}>Esta decisión fue tomada por el Comité Olímpico que es quien define en todas las instancias quienes califican para competir en las siguientes rondas.</p></>:<p className={styles.text}>Los participantes que clasifican a la instancia provincial son aquellos que sumen 5 puntos entre las instancias Zonal e Interescolar.</p>}
         <form className={styles.form}>
             <SelectResultCategory category="Participante" value={state.participante} setValue={(option? : Participant) =>update({participante:option})} options={options["participante"]} input={true}/>
             <SelectResultCategory category="Colegio" value={state.colegio} setValue={(option? : School) =>update({colegio:option})} options={options["colegio"]} input={true}/>
@@ -192,20 +165,19 @@ const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) 
             downloadHeaders={downloadParticipantHeaders}
             process_data={downloadParticipantData}
             make_element={makeParticipantElement}
-            testInfo={`${competition == "OMA"?"OMA":"Nandú"} Provincial ${(new Date).getFullYear()}`}
+            testInfo={`${competition == "OMA"?"OMA":"Ñandú"} Provincial ${(new Date).getFullYear()}`}
         />
         </Collapsable>
         <Collapsable title="Reglamento">
             <ul className={styles.text}>
-                <li>Toda otra persona (padre, tutor, etc.) que desee integrar la delegación debe comprometerse a cumplir todas las normas establecidas para la delegación.</li> <li>Los que solicitaron alojamiento en las secretarías regionales, podrán hacerlo a partir de las 15:00 horas del día 9 de agosto.</li>
-                <li>Solo podrá asistir a las actividades programadas dentro de los espacios establecidos (esto incluye el ingresar, permanecer y circular por el mismo) quien se acredite debidamente el día 9 de agosto.</li>
+                <li>Toda otra persona (padre, tutor, etc.) que desee integrar la delegación debe comprometerse a cumplir todas las normas establecidas para la delegación.</li> <li>Los que solicitaron alojamiento en las secretarías regionales, podrán hacerlo a partir de las 15:00 horas del día {isOma?"27 de septiembre":"9 de agosto"}.</li>
+                <li>Solo podrá asistir a las actividades programadas dentro de los espacios establecidos (esto incluye el ingresar, permanecer y circular por el mismo) quien se acredite debidamente el día {isOma?"27 de septiembre":"9 de agosto"}.</li>
                 <li>Se recuerda a los responsables de las delegaciones, se alojen o no en el hotel propuesto por la olimpíada, que durante todo el tiempo estarán a cargo de los alumnos y deberán participar de las actividades programadas con sus alumnos</li>
                 <li>Bajo ningún concepto los participantes podrán circular o permanecer fuera de su lugar de alojamiento después de las 00:00 hs</li>
                 <li>Todos deberán abstenerse de: transportar, ingerir o consumir alcohol, bebidas energizantes u otros estimulantes, fumar en los lugares cerrados, como habitaciones, el comedor, o donde se desarrollen las actividades de la competencia</li>
             </ul>
             <p className={styles.text}>Ante cualquier irregularidad o muestra de inconducta las personas involucradas serán sancionadas debiendo regresar de inmediato a su lugar de origen.</p>
         </Collapsable>
-        </>}
         </>
         :
         <p className={styles.text}>Proximamente...</p>
