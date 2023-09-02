@@ -58,7 +58,7 @@ const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) 
         <>
         {!isOma && <p className={styles.text}>Los alumnos que aprobaron el zonal pasan al regional participen o no del provincial.</p>}
         <Collapsable title="Inscripción">
-            <p className={styles.text}>Los colegios deberán comunicar antes del <span className={styles.bold}>{`${auth_max_date.getUTCDate()} de ${months[auth_max_date.getUTCMonth()]}`}</span> la nómina de personas que viajan, por correo electrónico a: <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a></p>
+            <p className={styles.text}>Los colegios deberán comunicar antes del <span className={styles.bold}>{`${auth_max_date.getUTCDate()} de ${months[auth_max_date.getUTCMonth()]}`}</span> la nómina de personas que viajan, por correo electrónico a: {isOma?<a href="mailto:gloriasampablo@gmail.com">gloriasampablo@gmail.com</a>:<a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a>}</p>
             <h4 className={styles.section_title}>Datos que deben enviar para la inscripción:</h4>
             <ul className={styles.text}>
                 <li>Nombre y apellido de los alumnos que participan.</li>
@@ -90,7 +90,7 @@ const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) 
             <li><span className={styles.bold}>Tarjeta de premiación:</span> $6.000. Solo es necesaria la tarjeta para aquellos que no están acreditados como acompañantes y que participarán únicamente de la premiación. Deben inscribirse junto con los otros participantes en la planilla. Menores de 3 años no pagan. <span className={styles.bold}>CUPOS LIMITADOS</span></li>
         </ul>
         <Warning>
-            <p className={styles.text}>Los aranceles antes mencionados, pueden ser ajustados debido a la situación económica financiera del país, que puede hacer variar nuestros costos. Quienes quieran asegurarse estos aranceles pueden hacer su depósito o trasferencia en los próximos días, enviando el comprobante a <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a>. En caso de tener que variar los aranceles lo avisaremos oportunamente.</p>
+            <p className={styles.text}>Los aranceles antes mencionados, pueden ser ajustados debido a la situación económica financiera del país, que puede hacer variar nuestros costos. Quienes quieran asegurarse estos aranceles pueden hacer su depósito o trasferencia en los próximos días, enviando el comprobante a {isOma?<a href="mailto:gloriasampablo@gmail.com">gloriasampablo@gmail.com</a>:<a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a>}. En caso de tener que variar los aranceles lo avisaremos oportunamente.</p>
         </Warning>
         </Collapsable>
         <Collapsable title="Pago">
@@ -103,7 +103,7 @@ const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) 
                 <li><span className={styles.bold}>CUIT: </span>30-67928383-5</li>
             </ul>
             <p className={styles.text}>Recordamos que para la acreditación deben presentar el <span className={styles.bold}>ORIGINAL</span> de dicho depósito.</p>
-            <p className={styles.text}>Si necesitan factura electrónica o factura C, por favor completar la planilla y enviar a <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a> junto con el comprobante de pago.</p>
+            <p className={styles.text}>Si necesitan factura electrónica o factura C, por favor completar la planilla y enviar a {isOma?<a href="mailto:gloriasampablo@gmail.com">gloriasampablo@gmail.com</a>:<a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a>} junto con el comprobante de pago.</p>
             <div className={styles.documentation}>
                 <div className={styles.button}>
                     <Button content="Planilla Facturación" onClick={() => downloadFile(`/provincial/${isOma?"oma":"nandu"}/PedidoFactura.xlsx`)}>
