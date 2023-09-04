@@ -69,11 +69,11 @@ const Table = <S extends object,>({values,allValues,headers,Card,elements_per_pa
                     {page >= 3 && <div className={styles.item}>...</div>}
                     {page >= 1 && <div className={styles.item} onClick={() => setPage(page - 1)}>{page}</div>}
                     <div className={[styles.item,styles.selected].join(" ")}>{page + 1}</div>
-                    {(max_pages - page) >= 1 && <div className={styles.item} onClick={() => setPage(page + 1)}>{page + 2}</div>}
-                    {(max_pages - page) >= 3 && <div className={styles.item}>...</div>}
-                    {(max_pages - page) >= 2 && <div className={styles.item} onClick={() => setPage(max_pages)}>{max_pages + 1}</div>}
+                    {(max_pages - page) >= 2 && <div className={styles.item} onClick={() => setPage(page + 1)}>{page + 2}</div>}
+                    {(max_pages - page) >= 4 && <div className={styles.item}>...</div>}
+                    {(max_pages - page) >= 3 && <div className={styles.item} onClick={() => setPage(max_pages - 1)}>{max_pages}</div>}
                 </div>
-                <div className={[styles.next,page===max_pages && styles.greyed].join(" ")} onClick={nextPage}><SelectIcon/></div>
+                <div className={[styles.next,page===(max_pages-1) && styles.greyed].join(" ")} onClick={nextPage}><SelectIcon/></div>
             </div>
         </div>
     //DOWNLOAD
