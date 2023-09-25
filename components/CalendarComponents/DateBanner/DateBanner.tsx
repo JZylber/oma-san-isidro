@@ -38,7 +38,7 @@ const DateBanner = ({dates,displayAmount = 3,displayCategory,ignoreCurrentDate=f
             <div className={styles.type_container}>
                 {showCategory && <div className={styles.type}>{date.tipo}</div>}
                 {idx === dates.length-1 && 
-                <Link href={`/otros/calendario${category_filter}`} className={styles.link_tag}>
+                <Link href={`/otros/calendario${category_filter}`}>
                     <div className={styles.small_link}>
                         <div className={styles.small_link_image}><PageLink/></div>
                         <span>Ver calendario completo</span>

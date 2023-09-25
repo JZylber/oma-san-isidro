@@ -17,7 +17,7 @@ const NextDatesBanner = ({dates,category}:DateBannerProps) => {
         <section>
             <div className={styles.header}>
                 <span className={styles.title}>Fechas</span>
-                <Link href={`/otros/calendario?categoria=${category}`} className={[banner_styles.link_tag,styles.header_link].join(" ")}>
+                <Link href={`/otros/calendario?categoria=${category}`} className={styles.header_link}>
                     <div className={banner_styles.small_link}>
                         <div className={banner_styles.small_link_image}><Image src="/images/pageLinkIcon.svg" fill={true} alt=""/></div>
                         <span>Ver calendario {category}</span>
