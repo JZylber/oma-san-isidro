@@ -10,13 +10,15 @@ interface MateclubesProps {
 }
 
 const MathClubs = ({events}:MateclubesProps) => {
-    const downloadForm = () => {
+    const downloadForm = (filename:string) => {
+        const downloadFunction = () => {
         const link = document.createElement("a");
-        link.href = `/files/SEDES MATECLUBES REGIÓN SAN ISIDRO 2023.xlsx`;
+        link.href = `/files/${filename}`;
         link.target = `_blank`;
         document.body.appendChild(link);
         link.click();
-        document.body.removeChild(link);
+        document.body.removeChild(link);}
+        return downloadFunction;
       };
     return(
         <>
@@ -32,9 +34,14 @@ const MathClubs = ({events}:MateclubesProps) => {
                 <p className={styles.text}>Si lo desean pueden llevar algo para merienda</p>
                 <p className={styles.text}>La prueba dura 2 horas, comienza a las 14, por favor presentarse media hora antes del inicio</p>
                 <h3 className={styles.section_subtitle}>Sedes</h3>
-                <p className={styles.text}>A continuación pueden descargar la planilla con la distribución de colegios por sede:</p>
+                <p className={styles.text}>A continuación pueden descargar las planillas con la distribución de colegios por sede:</p>
+                <div className={styles.buttons}>
                 <div className={styles.button_container}>
-                    <Button content="Sedes" onClick={downloadForm}><Image className={styles.arrow} width={30} height={30} src='/images/newsArrow.svg' alt="Ícono de descarga"/></Button>
+                    <Button content="Sedes San Isidro" onClick={downloadForm("SEDES MATECLUBES REGIÓN SAN ISIDRO 2023.xlsx")}><Image className={styles.arrow} width={30} height={30} src='/images/newsArrow.svg' alt="Ícono de descarga"/></Button>
+                </div>
+                <div className={styles.button_container}>
+                    <Button content="Sedes Tigre" onClick={downloadForm("SEDES MATECLUBES EN TIGRE.xlsx")}><Image className={styles.arrow} width={30} height={30} src='/images/newsArrow.svg' alt="Ícono de descarga"/></Button>
+                </div>
                 </div>
             </section>
             <section className={styles.section}>

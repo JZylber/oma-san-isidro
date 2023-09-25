@@ -76,6 +76,13 @@
     }
   }
 
+.buttons{
+  display: flex;
+  column-gap: 2rem;
+  @include shared.mobile-only{
+    flex-direction: column;
+  }
+}  
 .button_container{
     @include shared.mobile-only {
       width: 100%;
@@ -83,12 +90,12 @@
     }
   
     @include shared.tablet-only {
-      width: 63.5%;
+      width: 50%;
       margin-top: 2 * shared.$tablet-spacing;
     }
   
     @include shared.desktop-only {
-      width: 47.5%;
+      width: 40%;
       margin-top: 4 * shared.$desktop-spacing;
     }
   }
