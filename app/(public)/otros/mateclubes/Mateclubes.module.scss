@@ -13,25 +13,92 @@
       line-height: 2.5;
     }
   }
-.section{
-    margin-top: 1.6rem;
+
+.section + .section{
+  margin-top: 2rem;
 }
 
-.main_text{
-  @include shared.font-montserrat(300);
-
-  @include shared.mobile-only {
-    font-size: shared.$mobile-reading-font-size;
+.section_title {
+    @include shared.font-unbounded(500);
+    margin: 1.6rem 0rem 1.6rem 0rem;
+    @include shared.mobile-only {
+      text-align: center;
+      font-size: 2.4rem;
+    }
+    @include shared.tablet-only {
+      text-align: left;
+      font-size: 2.2rem;
+    }
+    @include shared.desktop-only {
+      text-align: left;
+      font-size: 3.4rem;
+    }
+  }
+  
+.section_subtitle{
+    @include shared.font-unbounded(500);
+    margin: 1.2rem 0rem 1.2rem 0rem;
+    @include shared.mobile-only {
+      text-align: center;
+      font-size: 2rem;
+    }
+    @include shared.tablet-only {
+      text-align: left;
+      font-size: 1.6rem;
+    }
+    @include shared.desktop-only {
+      text-align: left;
+      font-size: 2.6rem;
+    }
+  }
+  
+  .dropPoints{
+    margin-top: .8rem;
+    margin-bottom: .8rem;
+    margin-left: 3.2rem 
+  };  
+  .text{
+    @include shared.font-montserrat(300);
+  
+    @include shared.mobile-only {
+      font-size: shared.$mobile-reading-font-size;
+    }
+  
+    @include shared.tablet-only {
+      font-size: shared.$tablet-reading-font-size;
+    }
+  
+    @include shared.desktop-only {
+      font-size: shared.$desktop-reading-font-size;
+    }
+    .bold{
+      @include shared.font-montserrat(500);
+    }
   }
 
-  @include shared.tablet-only {
-    font-size: shared.$tablet-reading-font-size;
+.button_container{
+    @include shared.mobile-only {
+      width: 100%;
+      text-align: center;
+    }
+  
+    @include shared.tablet-only {
+      width: 63.5%;
+      margin-top: 2 * shared.$tablet-spacing;
+    }
+  
+    @include shared.desktop-only {
+      width: 47.5%;
+      margin-top: 4 * shared.$desktop-spacing;
+    }
   }
-
-  @include shared.desktop-only {
-    font-size: shared.$desktop-reading-font-size;
-  }
-  .bold{
-    @include shared.font-montserrat(500);
-  }
+  
+.arrow{
+    @include shared.not-desktop{
+      display: none;
+    }
+    @include shared.desktop-only{
+      display: block;
+      transform: rotate(90deg);
+    }
 }
