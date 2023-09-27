@@ -55,7 +55,12 @@ const ResultTable = ({results,testInfo}:{results : Array<TestQueryResults>, test
         aclaracion: result.aclaracion?result.aclaracion:"",
         aprobado: result.aprobado,
         resultados: new Problems(
-            result.resultados.slice(0,-1).map((result) => new Problem(Number(result[0]),(result.match(/-/g)||[]).length)),
+            result.resultados.slice(0,-1).map((result) => {
+                const cleanValue = result.replace("-","");
+                const minusCount = (result.match(/-/g)||[]).length;
+                const numericValue = cleanValue==="1/2"?0.5:Number(cleanValue);
+                return new Problem(numericValue,minusCount)}
+            ),
             Number(result.resultados.slice(-1))),
         nivel: result.participacion.nivel,
         colegio: new School(result.participacion.colegio.nombre,result.participacion.colegio.sede),
