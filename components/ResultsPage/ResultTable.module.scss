@@ -1,5 +1,23 @@
 @use '../../styles/shared.scss' as shared;
 
+.container{
+    border-top: 2px solid rgba(0, 0, 0, 0.5);
+    @include shared.mobile-only{
+        margin-top: 3.2rem;
+        padding-top: 4rem;
+        margin-bottom: 5.2rem;
+    }
+    @include shared.not-mobile{
+        margin-top: 3rem;
+        padding-top: 4rem;
+        margin-bottom: 7.2rem;
+    }
+}
+
+.revision{
+    margin-bottom: 2rem !important;
+}
+
 .results {
     @include shared.mobile-only{
         display: none;
@@ -238,6 +256,19 @@
     @include shared.not-mobile{
         display: none;
     }
+}
+
+.text{
+    @include shared.font-montserrat(500);
+    font-size: 1.6rem;
+}
+
+.text + .text{
+    margin-top: 1.2rem;
+}
+
+.list{
+    margin-left: 1.2rem;
 }
 
 .disclaimer{

@@ -1,18 +1,5 @@
 @use '../../styles/shared.scss' as shared;
 
-.container{
-    border-top: 2px solid rgba(0, 0, 0, 0.5);
-    @include shared.mobile-only{
-        margin-top: 3.2rem;
-        padding-top: 4rem;
-        margin-bottom: 5.2rem;
-    }
-    @include shared.not-mobile{
-        margin-top: 3rem;
-        padding-top: 4rem;
-        margin-bottom: 7.2rem;
-    }
-}
 .icon{
     width: 19px;
     height: 17px;

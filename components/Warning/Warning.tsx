@@ -3,12 +3,13 @@ import styles from "./Warning.module.scss"
 
 interface WarningProps {
     title?: string,
-    children: React.ReactNode
+    className?: string,
+    children?: React.ReactNode
 }
 
-const Warning = ({title = "Importante",children}: WarningProps) => {
+const Warning = ({title = "Importante",className,children}: WarningProps) => {
     return(
-        <div className={styles.container}>
+        <div className={`${styles.container} ${className}`}>
             <div className={styles.title_container}>
                 <div className={styles.icon}>
                     <Image src="/images/warning.svg" alt="Warning icon" fill={true}/>
@@ -16,7 +17,6 @@ const Warning = ({title = "Importante",children}: WarningProps) => {
                 <p className={styles.title}>{title}</p>
             </div>
             <div className={styles.message}>
-                
                 <div className={styles.message_body_container}>
                     {children}
                 </div>
