@@ -87,7 +87,7 @@ const ResultTable = ({results,testInfo}:{results : Array<TestQueryResults>, test
                             <li>Apellido y Nombre</li>
                             <li>Especificar el problema que creen tener bien y que el jurado no lo consideró</li>
                         </ul>
-                        <p className={styles.text}>Se reciben únicamente x mail a <a href="mailto:marita@oma.org.ar">marita@oma.org.ar</a></p>
+                        <p className={styles.text}>Se reciben únicamente por mail a <a href="mailto:marita@oma.org.ar">marita@oma.org.ar</a></p>
                     </Warning>}
             <ResultFilterForm filters={resultFilter} updateFilter={updateFilter} schools={options.colegio} names={options.participante} levels={options.nivel} passed={options.aprobado}/>
             {filtered_results.length > 0?
