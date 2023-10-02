@@ -1,4 +1,4 @@
-import {Result, TestInfo, TestQueryResults } from "./resultsTypes";
+import {TestInfo, TestQueryResults } from "./resultsTypes";
 import styles from "./ResultTable.module.scss"
 import ErrorMessage from "./ErrorMessage";
 import { FilterableObject, Participant, School } from "../../hooks/types";
@@ -57,7 +57,7 @@ const ProvincialResultTable = ({results,testInfo}:{results : Array<TestQueryResu
     const [resultFilter,updateFilter,filtered_results,options] = useFilter(filterableResults)
     
     return(
-        <>
+        <div className={styles.container}>
             <form className={styles.form}>
                 <SelectResultCategory category="Participante" value={resultFilter.participante} setValue={(option?: Participant) => updateFilter({participante: option})} options={options.participante} input/>
                 <SelectResultCategory category="Colegio" value={resultFilter.colegio} setValue={(option?: School) => updateFilter({colegio: option})} options={options.colegio} input/>
@@ -80,7 +80,7 @@ const ProvincialResultTable = ({results,testInfo}:{results : Array<TestQueryResu
                 />:
                 <ErrorMessage status={400}/>}
             <p className={styles.disclaimer}>Si hay algún error en el nombre/apellido de algún participante, o algún error en el nombre de algún colegio, por favor mandar un mail a: <a href="mailto:omasanisidro.devs@gmail.com">omasanisidro.devs@gmail.com</a></p>
-        </>
+        </div>
     )
 }
 
