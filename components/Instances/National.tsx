@@ -8,6 +8,9 @@ import { Button } from "../buttons/Button";
 import Image from "next/image";
 import useFilter from "../../hooks/useFilter";
 import { Filterables, Participant, School } from "../../hooks/types";
+import { INSTANCIA } from "@prisma/client";
+import { trpc } from "../../utils/trpc";
+import Loader from "../Loader/Loader";
 
 interface NationalProps {
     competition: string,
@@ -47,7 +50,7 @@ const downloadFile = (filename: string) => {
 
 
 
-const National = ({competition, participants,auth_max_date}: NationalProps) => {
+const NationalInfo = ({competition, participants,auth_max_date}: NationalProps) => {
     //Participants
     const [state,update,filteredValues,options] = useFilter(participants);
     const participant_headers = ["Nivel","Participante","Colegio"];
@@ -144,12 +147,7 @@ const National = ({competition, participants,auth_max_date}: NationalProps) => {
             <p className={styles.text}> Costo de la tarjeta $6000.- CUPOS LIMITADOS (menores de 3 años no pagan)  </p>
         </Collapsable>
         <Collapsable title="Participantes Clasificados">
-        {isOma?<><p className={styles.text}>En el presente año estarán habilitados para participar de este certamen:</p>
-        <ul className={[styles.text,styles.list].join(" ")}>
-            <li>En el <span className={styles.bold}>NIVEL 1</span> los alumnos que suman <span className={styles.bold}>6 PUNTOS</span>, entre el Intercolegial y el Zonal.</li>
-            <li>Para el <span className={styles.bold}>NIVEL 2 y 3</span> los alumnos que suman <span className={styles.bold}>5 PUNTOS</span>, entre el Intercolegial y el Zonal.</li>
-        </ul>
-        <p className={[styles.text,styles.bold].join(" ")}>Esta decisión fue tomada por el Comité Olímpico que es quien define en todas las instancias quienes califican para competir en las siguientes rondas.</p></>:<p className={styles.text}>Los participantes que clasifican a la instancia provincial son aquellos que sumen 5 puntos entre las instancias Zonal e Interescolar.</p>}
+        <p className={styles.text}>Los participantes que clasifican a la instancia nacional son aquellos que hayan aprobado la instancia regional.</p>
         <form className={styles.form}>
             <SelectResultCategory category="Participante" value={state.participante} setValue={(option? : Participant) =>update({participante:option})} options={options["participante"]} input={true}/>
             <SelectResultCategory category="Colegio" value={state.colegio} setValue={(option? : School) =>update({colegio:option})} options={options["colegio"]} input={true}/>
@@ -184,5 +182,31 @@ const National = ({competition, participants,auth_max_date}: NationalProps) => {
            
     )
 }
+
+const National = ({competition}:{competition: string}) => {
+    const instance = INSTANCIA.NACIONAL;
+    const venueData = trpc.instance.nationalInstance.useQuery({competition: competition,instance: instance});
+    if(venueData.isLoading){
+        return <Loader/>
+    } else if(venueData.isSuccess){
+        const data = {
+            competition: competition,
+            auth_max_date: venueData.data.auth_max_date,
+            participants: venueData.data.participants.map((participant) => {
+                return {
+                    participante: new Participant(participant.nombre,participant.apellido),
+                    colegio: new School(participant.colegio.nombre,participant.colegio.sede?participant.colegio.sede:undefined),
+                    nivel: participant.nivel,
+                }
+
+            }),
+        }
+        return <NationalInfo 
+            {...data}/>
+    }
+    else{
+        return <div>Error</div>
+    }
+};
 
 export default National

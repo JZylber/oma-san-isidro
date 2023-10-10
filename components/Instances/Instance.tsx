@@ -5,6 +5,7 @@ import { INSTANCIA } from "@prisma/client";
 import VenueInfo from "./VenueInfo";
 import ProvincialInfo from "./ProvincialInfo";
 import { Competition } from "../../server/app-router-db-calls";
+import National from "./National";
 
 interface InstanceProps {
     competition: Competition,
@@ -36,7 +37,7 @@ const InstanceData = ({competition,instance}:InstanceProps) => {
         <h2 className={styles.title}>{instancia[0] + instancia.slice(1).toLocaleLowerCase()}</h2>
         <h3 className={styles.subtitle}>{`${fecha.getUTCDate()} de ${months[fecha.getMonth()]}`}</h3>
         {instancia === "PROVINCIAL" && <ProvincialInfo competition={competition}/>}
-        {instancia === "NACIONAL" && <span className={styles.text}>Proximamente...</span>}
+        {instancia === "NACIONAL" && <National competition={competition}/>}
         {instancia !== "PROVINCIAL" && instancia !== "NACIONAL" && 
             <VenueInfo 
             instance={instancia as INSTANCIA}
