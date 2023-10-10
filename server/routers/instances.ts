@@ -360,7 +360,15 @@ const provincialDataGenerator = async (competition: string, instance: INSTANCIA)
   return({participants: provincialParticipantsNames,auth_max_date: auth_max_date?auth_max_date:undefined});
 }
 
-
+const nationalDataGenerator = async (competition: string, instance: INSTANCIA) => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const {passing,disabled,data} = await Promise.all([passingParticipants(competition,year,'REGIONAL'),getDisabled(competition,year,instance),getInstanceData(year,competition,instance)]).then(([passing,disabled,data]) => {return({passing: passing,disabled: disabled,data: data})});
+  const nationalParticipants = passing.filter((participant) => !disabled.some((disabled_participant) => disabled_participant.id_participacion === participant.id_participacion));
+  const nationalParticipantsNames = nationalParticipants.map((participant) => {return({nombre: participant.participante.nombre, apellido: participant.participante.apellido ,colegio: participant.colegio, nivel: participant.nivel})});
+  const auth_max_date = data?.fecha_limite_autorizacion;
+  return({participants: nationalParticipantsNames,auth_max_date: auth_max_date?auth_max_date:undefined});
+}
 const INSTANCE = z.nativeEnum(INSTANCIA);
 
 export const instanceRouter = router({
@@ -386,4 +394,15 @@ export const instanceRouter = router({
       const {competition,instance} = input;
       return provincialDataGenerator(competition,instance);
     }),
+  nationalInstance: publicProcedure
+  .input(
+    z.object({
+      competition: z.string(),
+      instance: INSTANCE,
+    }),
+  )
+  .query(({input}) => {
+    const {competition,instance} = input;
+    return nationalDataGenerator(competition,instance);
+  }),
 });

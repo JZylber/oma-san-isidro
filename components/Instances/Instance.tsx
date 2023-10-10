@@ -1,8 +1,6 @@
 import styles from "./Instance.module.scss";
 import { Instance } from "./InstanceMenu";
 import { DropPoint} from "./Venues";
-import Provincial, { ProvincialParticipant } from "./Provincial";
-import { Participant, School } from "../../hooks/types";
 import { INSTANCIA } from "@prisma/client";
 import VenueInfo from "./VenueInfo";
 import ProvincialInfo from "./ProvincialInfo";
@@ -13,24 +11,6 @@ interface InstanceProps {
     instance: Instance,
 }
 
-interface RegionalInstance {
-    venues: VenueInput[];
-    dropPoints: DropPoint[];
-    participants: ParticipantInput[];
-    auth_max_date?: Date;
-    time: Date;
-    duration: number;
-}
-interface ProvincialParticipantInput {
-    nombre: string,
-    apellido: string,
-    nivel: number,
-    colegio: {nombre: string, sede?: string}
-}
-interface ProvincialInstance {
-    participants : ProvincialParticipantInput[],
-    auth_max_date?: Date;
-}
 export interface ParticipantInput{
     nombre: string;
     apellido: string;
