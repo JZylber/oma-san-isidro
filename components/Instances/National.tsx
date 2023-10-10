@@ -67,8 +67,8 @@ const NationalInfo = ({competition, participants,auth_max_date}: NationalProps) 
                 <li>Nombre, apellido y número de documento del o los acompañantes, indicando si es docente o familiar.</li>
                 <li>Indicar si se hospedan por medio de la olimpíada o por su cuenta.</li>
                 <li>En caso de solicitar sólo tarjeta para la premiación, indicar nombre y apellido y número de documento de la persona para la cual se solicita.</li>
-                <li>Dieta de participantes y acompañantes (vegano,vegetariano,etc)</li>
-                <li>Si el viernes 27 se quedan a almorzar o se retiran con una vianda</li>
+                <li>Dieta de participantes y acompañantes (vegano, vegetariano, etc).</li>
+                <li>Si el viernes 27 se quedan a almorzar o se retiran con una vianda.</li>
             </ul>
             <Warning>
                 <p className={styles.text}>Recordamos a los colegios que son ellos los responsables de enviar la inscripción de sus alumnos, informando a los padres sobre el desarrollo de las actividades del Torneo, ya que los alumnos participan representando a la escuela.</p>
