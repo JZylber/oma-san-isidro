@@ -59,7 +59,6 @@ const NationalInfo = ({competition, participants,auth_max_date}: NationalProps) 
     return(
         (participants.length > 0 && auth_max_date) ?
         <>
-        {!isOma && <p className={styles.text}>Los alumnos que aprobaron el zonal pasan al regional participen o no del provincial.</p>}
         <Collapsable title="Inscripción">
             <p className={styles.text}>Los colegios deberán comunicar antes del <span className={styles.bold}>{`${auth_max_date.getUTCDate()} de ${months[auth_max_date.getUTCMonth()]}`}</span> la nómina de personas que viajan, por correo electrónico a: <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a></p>
             <h4 className={styles.section_title}>Datos que deben enviar para la inscripción:</h4>
@@ -108,7 +107,7 @@ const NationalInfo = ({competition, participants,auth_max_date}: NationalProps) 
             <p className={styles.text}>Si necesitan factura electrónica o factura C, por favor completar la planilla y enviar a {isOma?<a href="mailto:gloriasampablo@gmail.com">gloriasampablo@gmail.com</a>:<a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a>} junto con el comprobante de pago.</p>
             <div className={styles.documentation}>
                 <div className={styles.button}>
-                    <Button content="Planilla Facturación" onClick={() => downloadFile(`/provincial/${isOma?"oma":"nandu"}/PedidoFactura.xlsx`)}>
+                    <Button content="Planilla Facturación" onClick={() => downloadFile(`/nacional/${isOma?"oma":"nandu"}/PedidoFactura.xlsx`)}>
                         <div className={styles.arrow}>
                             <Image src="/images/newsArrow.svg" width={30} height={40} alt="Descargar"/>
                         </div>
@@ -129,14 +128,14 @@ const NationalInfo = ({competition, participants,auth_max_date}: NationalProps) 
             <p className={styles.text}>La documentación debe ser entregada en la acreditación.</p>
             <div className={styles.documentation}>
                 <div className={styles.button}>
-                    <Button content="Autorización" onClick={() => downloadFile(`/provincial/${isOma?"oma":"nandu"}/Autorización.docx`)}>
+                    <Button content="Autorización" onClick={() => downloadFile(`/nacional/${isOma?"oma":"nandu"}/Autorización.docx`)}>
                         <div className={styles.arrow}>
                             <Image src="/images/newsArrow.svg" width={30} height={40} alt="Descargar"/>
                         </div>
                     </Button>
                 </div>
                 <div className={styles.button}>
-                    <Button content="Compromiso" onClick={() => downloadFile(`/provincial/${isOma?"oma":"nandu"}/Compromiso.docx`)}>
+                    <Button content="Compromiso" onClick={() => downloadFile(`/nacional/${isOma?"oma":"nandu"}/Compromiso.docx`)}>
                         <div className={styles.arrow}>
                             <Image src="/images/newsArrow.svg" width={30} height={40} alt="Descargar"/>
                         </div>
@@ -146,7 +145,6 @@ const NationalInfo = ({competition, participants,auth_max_date}: NationalProps) 
         </Collapsable>
         <Collapsable title="Premiación">
             <p className={styles.text}>Para evitar inconvenientes y malos entendidos, podrán participar en el acto de premiación solo las personas debidamente acreditadas portando credencial o “tarjeta de invitación individual”. Se aclara que, indefectiblemente, todas aquellas personas que deseen adquirir las tarjetas de invitación individual para el Acto de premiación deben estar inscriptas con nombre, apellido y documento en la planilla.</p> 
-            <p className={styles.text}> Costo de la tarjeta $4000.- CUPOS LIMITADOS (menores de 3 años no pagan)  </p>
         </Collapsable>
         <Collapsable title="Participantes Clasificados">
         <p className={styles.text}>Los participantes que clasifican a la instancia nacional son aquellos que hayan aprobado la instancia regional.</p>
@@ -165,7 +163,7 @@ const NationalInfo = ({competition, participants,auth_max_date}: NationalProps) 
             downloadHeaders={downloadParticipantHeaders}
             process_data={downloadParticipantData}
             make_element={makeParticipantElement}
-            testInfo={`${competition == "OMA"?"OMA":"Ñandú"} Provincial ${(new Date).getFullYear()}`}
+            testInfo={`${competition == "OMA"?"OMA":"Ñandú"} Nacional ${(new Date).getFullYear()}`}
         />
         </Collapsable>
         <Collapsable title="Reglamento">
