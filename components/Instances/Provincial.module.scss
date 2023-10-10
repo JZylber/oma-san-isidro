@@ -1,5 +1,12 @@
 @use '../../styles/shared.scss' as shared;
 
+.list{
+    margin-left: 1.6rem;
+    li + li {
+      margin-top: 0.8rem;
+    }  
+}
+
 .text{
     @include shared.font-montserrat(300);
   

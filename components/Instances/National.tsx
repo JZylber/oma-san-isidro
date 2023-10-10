@@ -61,36 +61,35 @@ const NationalInfo = ({competition, participants,auth_max_date}: NationalProps) 
         <>
         {!isOma && <p className={styles.text}>Los alumnos que aprobaron el zonal pasan al regional participen o no del provincial.</p>}
         <Collapsable title="Inscripción">
-            <p className={styles.text}>Los colegios deberán comunicar antes del <span className={styles.bold}>{`${auth_max_date.getUTCDate()} de ${months[auth_max_date.getUTCMonth()]}`}</span> la nómina de personas que viajan, por correo electrónico a: {isOma?<a href="mailto:gloriasampablo@gmail.com">gloriasampablo@gmail.com</a>:<a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a>}</p>
+            <p className={styles.text}>Los colegios deberán comunicar antes del <span className={styles.bold}>{`${auth_max_date.getUTCDate()} de ${months[auth_max_date.getUTCMonth()]}`}</span> la nómina de personas que viajan, por correo electrónico a: <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a></p>
             <h4 className={styles.section_title}>Datos que deben enviar para la inscripción:</h4>
-            <ul className={styles.text}>
+            <ul className={`${styles.text} ${styles.list}`}>
                 <li>Nombre y apellido de los alumnos que participan.</li>
                 <li>Nombre, apellido y número de documento del o los acompañantes, indicando si es docente o familiar.</li>
                 <li>Indicar si se hospedan por medio de la olimpíada o por su cuenta.</li>
                 <li>En caso de solicitar sólo tarjeta para la premiación, indicar nombre y apellido y número de documento de la persona para la cual se solicita.</li>
             </ul>
-            <p className={styles.text}><span className={styles.bold}>Cuando tengamos el Hotel asignado para nuestra delegación, se informará por acá y esto no se puede hacer hasta no tener todas las inscripciones.</span></p>
             <Warning>
                 <p className={styles.text}>Recordamos a los colegios que son ellos los responsables de enviar la inscripción de sus alumnos, informando a los padres sobre el desarrollo de las actividades del Torneo, ya que los alumnos participan representando a la escuela.</p>
                 <p className={styles.text}>La Secretaría Regional no puede atender a los padres, ni corresponde que lo haga.</p>
             </Warning>
         </Collapsable>
         <Collapsable title="Información general y programa">
-            <p className={styles.text}>El encuentro de la <span className={styles.bold}>Olimpíada Regional {isOma?"Urbana":"Ñandú"} Metropolitana</span> se realizará en la ciudad de {isOma?"Villa Gesell":"Mar del Plata"} los días {isOma?"27, 28 y 29 de septiembre":"9, 10 y 11 de agosto"}. Cada delegación se trasladará por su cuenta y riesgo, con sus profesores acompañantes según las pautas establecidas <span className={styles.bold}>(máximo 8 alumnos por cada docente)</span>. También, como en años anteriores, nos ocuparemos del alojamiento y concentración de aquellas delegaciones que lo soliciten.</p>
-            <p className={styles.text}>El alojamiento de las delegaciones que lo soliciten será en Hoteles de la mencionada ciudad  en habitaciones compartidas con otros participantes del encuentro. La reserva del alojamiento se hace contra entrega de las planillas debidamente cumplimentadas.</p>
+            <p className={styles.text}>El encuentro de la <span className={styles.bold}>Olimpíada Nacional {isOma?"Oma":"Ñandú"}</span> se realizará en la ciudad de La Falda, Córdoba los días {isOma?"27, 28 y 29 de septiembre":"24 al 27 de octubre en hotel FATSA (Otto A. Calace. Güemes 198 - (03548)422123)"}. Cada delegación se trasladará por su cuenta y riesgo, con sus profesores acompañantes según las pautas establecidas <span className={styles.bold}>(máximo 8 alumnos por cada docente)</span>. También, como en años anteriores, nos ocuparemos del alojamiento y concentración de aquellas delegaciones que lo soliciten.</p>
+            <p className={styles.text}>El alojamiento de las delegaciones que lo soliciten será en el Hotel FATSA de la mencionada ciudad en habitaciones compartidas con otros participantes del encuentro, hasta completar su capacidad, luego serán derivados a otros hoteles de la ciudad. La reserva del alojamiento se hace contra entrega de las planillas debidamente cumplimentadas.</p>
             <h4 className={styles.section_title}>Programa</h4>
-            <ul className={styles.text}>
-                <li><span className={styles.bold}>Acreditación:</span> {isOma?"Miércoles 27 de septiembre":"Miércoles 9 de agosto"} de 15:00 a 20:00 horas en el hotel asignado a su delegación</li>
-                <li><span className={styles.bold}>Prueba escrita:</span> {isOma?"Jueves 28 de septiembre a las 9:00 horas, Polideportivo Municipal Villa Gesell":"Jueves 10 de agosto a las 9:00 horas, Salón Colón - NH Gran Hotel Provincial - Mar del Plata"}</li>
-                <li><span className={styles.bold}>Exposición Oral y Premiación:</span> {isOma?"Viernes 29 de septiembre a las 9:00 horas, Polideportivo Municipal Villa Gesell ":"Viernes 11 de agosto a las 9:00 horas, Salón de las Américas - NH Gran Hotel Provincial - Mar del Plata"}</li>
+            <ul className={`${styles.text} ${styles.list}`}>
+                <li><span className={styles.bold}>Acreditación:</span> {isOma?"Miércoles 27 de septiembre":"Martes 24 de octubre"} de 15:00 a 20:00 horas en el <span className={styles.bold}>Hotel FATSA</span></li>
+                <li><span className={styles.bold}>Prueba escrita:</span> {isOma?"Jueves 28 de septiembre a las 9:00 horas, Polideportivo Municipal Villa Gesell":<>Miércoles 25 y Jueves 26 de octubre a las 9:30 horas, en el microestadio del <span className={styles.bold}>Hotel FATSA</span></>}</li>
+                <li><span className={styles.bold}>Exposición Oral y Premiación:</span> {isOma?"Viernes 29 de septiembre a las 9:00 horas, Polideportivo Municipal Villa Gesell ":<>Viernes 27 de octubre a de 9:00 a 12:00 horas en el microestadio del <span className={styles.bold}>Hotel FATSA</span></>}</li>
             </ul>
         </Collapsable>
         <Collapsable title="Aranceles">
-        <ul className={styles.text}>
-            <li><span className={styles.bold}>Participantes y/o acompañantes que se alojen en el hotel propuesto por la olimpíada:</span> {isOma?"$85.000":"$69.000"}. Incluye desde la cena del día miércoles {isOma?27:9} al almuerzo del viernes {isOma?29:11} (incluye una bebida por comida).</li>
-            <li><span className={styles.bold}>Participantes que NO se alojen en el hotel propuesto por la olimpíada:</span> {isOma?"$29.000":"$23.000"}.</li>
-            <li><span className={styles.bold}>Acompañantes que NO se alojen en el hotel propuesto por la olimpíada:</span> {isOma?"$23.000":"$18.000"}. (menores de 3 años no pagan)</li>
-            <li><span className={styles.bold}>Tarjeta de premiación:</span> $6.000. Solo es necesaria la tarjeta para aquellos que no están acreditados como acompañantes y que participarán únicamente de la premiación. Deben inscribirse junto con los otros participantes en la planilla. Menores de 3 años no pagan. <span className={styles.bold}>CUPOS LIMITADOS</span></li>
+        <ul className={`${styles.text} ${styles.list}`}>
+            <li><span className={styles.bold}>Participantes y/o acompañantes que se alojen en el hotel propuesto por la olimpíada:</span> {isOma?"$85.000":"$97.000"}. Incluye desde la cena del día martes {isOma?27:24} al almuerzo del viernes {isOma?29:27} (incluye una bebida por comida).</li>
+            <li><span className={styles.bold}>Participantes que NO se alojen en el hotel propuesto por la olimpíada:</span> {isOma?"$29.000":"$37.000"}. <span className={styles.bold}>Incluye los almuerzos y meriendas de los días de las pruebas escritas (miércoles 25 y jueves 26).</span></li>
+            <li><span className={styles.bold}>Acompañantes que NO se alojen en el hotel propuesto por la olimpíada:</span> {isOma?"$23.000":"$30.000"}. <span className={styles.bold}>Incluye los almuerzos y meriendas de los días de las pruebas escritas (miércoles 25 y jueves 26).</span> </li>
+            <li><span className={styles.bold}>Tarjeta de premiación:</span> $4.000. Solo es necesaria la tarjeta para aquellos que no están acreditados como acompañantes y que participarán únicamente de la premiación. Deben inscribirse junto con los otros participantes en la planilla.</li>
         </ul>
         <Warning>
             <p className={styles.text}>Los aranceles antes mencionados, pueden ser ajustados debido a la situación económica financiera del país, que puede hacer variar nuestros costos. Quienes quieran asegurarse estos aranceles pueden hacer su depósito o trasferencia en los próximos días, enviando el comprobante a {isOma?<a href="mailto:gloriasampablo@gmail.com">gloriasampablo@gmail.com</a>:<a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a>}. En caso de tener que variar los aranceles lo avisaremos oportunamente.</p>
@@ -98,7 +97,7 @@ const NationalInfo = ({competition, participants,auth_max_date}: NationalProps) 
         </Collapsable>
         <Collapsable title="Pago">
             <p className={styles.text}>El pago se hace depositando o transfieriendo a la siguiente cuenta de la Fundación Olimpíada Matemática Argentina:</p>
-            <ul className={styles.text}>
+            <ul className={`${styles.text} ${styles.list}`}>
                 <li><span className={styles.bold}>BANCO HSBC</span> (Cuenta Corriente) Sucursal Los Arcos (ex Salguero).</li>
                 <li><span className={styles.bold}>N° Cuenta: </span>6093228419</li>
                 <li><span className={styles.bold}>CBU: </span>1500609900060932284196</li>
@@ -116,10 +115,13 @@ const NationalInfo = ({competition, participants,auth_max_date}: NationalProps) 
                     </Button>
                 </div>
             </div>
+            <Warning>
+            <p className={styles.text}>En el hotel contratado, luego de confirmar el 18 de octubre las plazas reservadas, deberán abonarse aunque no se ocupen.</p>
+            </Warning>
         </Collapsable>
         <Collapsable title="Documentación">
             <p className={styles.text}>La documentación exigida incluye:</p>
-            <ul className={styles.text}>
+            <ul className={`${styles.text} ${styles.list}`}>
                 <li>AUTORIZACIÓN de cada alumno (se utilizará la autorización que se descarga debajo)</li>
                 <li>DOCUMENTO original de cada alumno.</li>
                 <li>COMPROMISO de cada acompañante DOCENTE, PADRE, TUTOR (se utilizará el compromiso que se descarga debajo)</li>
@@ -144,7 +146,7 @@ const NationalInfo = ({competition, participants,auth_max_date}: NationalProps) 
         </Collapsable>
         <Collapsable title="Premiación">
             <p className={styles.text}>Para evitar inconvenientes y malos entendidos, podrán participar en el acto de premiación solo las personas debidamente acreditadas portando credencial o “tarjeta de invitación individual”. Se aclara que, indefectiblemente, todas aquellas personas que deseen adquirir las tarjetas de invitación individual para el Acto de premiación deben estar inscriptas con nombre, apellido y documento en la planilla.</p> 
-            <p className={styles.text}> Costo de la tarjeta $6000.- CUPOS LIMITADOS (menores de 3 años no pagan)  </p>
+            <p className={styles.text}> Costo de la tarjeta $4000.- CUPOS LIMITADOS (menores de 3 años no pagan)  </p>
         </Collapsable>
         <Collapsable title="Participantes Clasificados">
         <p className={styles.text}>Los participantes que clasifican a la instancia nacional son aquellos que hayan aprobado la instancia regional.</p>
@@ -167,9 +169,9 @@ const NationalInfo = ({competition, participants,auth_max_date}: NationalProps) 
         />
         </Collapsable>
         <Collapsable title="Reglamento">
-            <ul className={styles.text}>
-                <li>Toda otra persona (padre, tutor, etc.) que desee integrar la delegación debe comprometerse a cumplir todas las normas establecidas para la delegación.</li> <li>Los que solicitaron alojamiento en las secretarías regionales, podrán hacerlo a partir de las 15:00 horas del día {isOma?"27 de septiembre":"9 de agosto"}.</li>
-                <li>Solo podrá asistir a las actividades programadas dentro de los espacios establecidos (esto incluye el ingresar, permanecer y circular por el mismo) quien se acredite debidamente el día {isOma?"27 de septiembre":"9 de agosto"}.</li>
+            <ul className={`${styles.text} ${styles.list}`}>
+                <li>Toda otra persona (padre, tutor, etc.) que desee integrar la delegación debe comprometerse a cumplir todas las normas establecidas para la delegación.</li>
+                <li>Solo podrá asistir a las actividades programadas dentro de los espacios establecidos (esto incluye el ingresar, permanecer y circular por el mismo) quien se acredite debidamente el día {isOma?"27 de septiembre":"24 de octubre"}.</li>
                 <li>Se recuerda a los responsables de las delegaciones, se alojen o no en el hotel propuesto por la olimpíada, que durante todo el tiempo estarán a cargo de los alumnos y deberán participar de las actividades programadas con sus alumnos</li>
                 <li>Bajo ningún concepto los participantes podrán circular o permanecer fuera de su lugar de alojamiento después de las 00:00 hs</li>
                 <li>Todos deberán abstenerse de: transportar, ingerir o consumir alcohol, bebidas energizantes u otros estimulantes, fumar en los lugares cerrados, como habitaciones, el comedor, o donde se desarrollen las actividades de la competencia</li>
