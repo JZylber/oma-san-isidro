@@ -128,14 +128,14 @@ const NationalInfo = ({competition, participants,auth_max_date}: NationalProps) 
             <p className={styles.text}>La documentación debe ser entregada en la acreditación.</p>
             <div className={styles.documentation}>
                 <div className={styles.button}>
-                    <Button content="Autorización" onClick={() => downloadFile(`/nacional/${isOma?"oma":"nandu"}/Autorización.docx`)}>
+                    <Button content="Autorización" onClick={() => downloadFile(`/nacional/${isOma?"oma":"nandu"}/Autorización.doc`)}>
                         <div className={styles.arrow}>
                             <Image src="/images/newsArrow.svg" width={30} height={40} alt="Descargar"/>
                         </div>
                     </Button>
                 </div>
                 <div className={styles.button}>
-                    <Button content="Compromiso" onClick={() => downloadFile(`/nacional/${isOma?"oma":"nandu"}/Compromiso.docx`)}>
+                    <Button content="Compromiso" onClick={() => downloadFile(`/nacional/${isOma?"oma":"nandu"}/Compromiso.doc`)}>
                         <div className={styles.arrow}>
                             <Image src="/images/newsArrow.svg" width={30} height={40} alt="Descargar"/>
                         </div>
