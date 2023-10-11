@@ -70,6 +70,7 @@ const NationalInfo = ({competition, participants,auth_max_date}: NationalProps) 
                 <li>Dieta de participantes y acompañantes (vegano, vegetariano, etc).</li>
                 <li>Si el viernes 27 se quedan a almorzar o se retiran con una vianda.</li>
             </ul>
+            <p className={styles.text}><span className={styles.bold}>Se ruega enviar toda la documentación junta:</span> los datos pedidos anteriormente, el comprobante de pago, y el pedido de la factura electrónica (si fuese necesaria).</p>
             <Warning>
                 <p className={styles.text}>Recordamos a los colegios que son ellos los responsables de enviar la inscripción de sus alumnos, informando a los padres sobre el desarrollo de las actividades del Torneo, ya que los alumnos participan representando a la escuela.</p>
                 <p className={styles.text}>La Secretaría Regional no puede atender a los padres, ni corresponde que lo haga.</p>
@@ -116,6 +117,7 @@ const NationalInfo = ({competition, participants,auth_max_date}: NationalProps) 
                     </Button>
                 </div>
             </div>
+            <p className={styles.text}><span className={styles.bold}>Se ruega enviar toda la documentación junta:</span> el comprobante de pago, el pedido de la factura electrónica (si fuese necesaria) y los datos necesarios para la inscripción.</p>
             <Warning>
             <p className={styles.text}>En el hotel contratado, luego de confirmar el 18 de octubre las plazas reservadas, deberán abonarse aunque no se ocupen.</p>
             </Warning>
