@@ -89,6 +89,19 @@ const ResultTable = ({results,testInfo}:{results : Array<TestQueryResults>, test
                         </ul>
                         <p className={styles.text}>Se reciben únicamente por mail a <a href="mailto:marita@oma.org.ar">marita@oma.org.ar</a></p>
                     </Warning>}
+            {instancia === "REGIONAL" && competencia === "OMA" &&
+                    <Warning title="Importante" className={styles.revision}>
+                        <p className={`${styles.text} ${styles.bold}`}>OMA todavía no cargó muchos de los resultados de nivel 2. Chequear periódicamente a partir de este jueves.</p>
+                        <p className={styles.text}>Se aceptan revisiones hasta el viernes <span>27/10</span>. Recordar enviar:</p>
+                        <ul className={`${styles.text} ${styles.list}`}>
+                            <li>Número de región (OMA San Isidro es 53)</li>
+                            <li>Nivel</li>
+                            <li>Apellido y Nombre</li>
+                            <li>Especificar el problema que creen tener bien y que el jurado no lo consideró</li>
+                            <li>Justificación (que es lo que el alumno cree haber hecho bien o que el Jurado no tuvo en cuenta)</li>
+                        </ul>
+                        <p className={styles.text}><span className={styles.bold}>No se revisarán pedidos sin justificación.</span> Se reciben únicamente por mail a <a href="mailto:omapruebas@gmail.com">omapruebas@gmail.com</a></p>
+                    </Warning>}
             <ResultFilterForm filters={resultFilter} updateFilter={updateFilter} schools={options.colegio} names={options.participante} levels={options.nivel} passed={options.aprobado}/>
             {filtered_results.length > 0?
                 <Table 
