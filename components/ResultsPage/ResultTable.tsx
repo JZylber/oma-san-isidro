@@ -90,8 +90,7 @@ const ResultTable = ({results,testInfo}:{results : Array<TestQueryResults>, test
                         <p className={styles.text}>Se reciben únicamente por mail a <a href="mailto:marita@oma.org.ar">marita@oma.org.ar</a></p>
                     </Warning>}
             {instancia === "REGIONAL" && competencia === "OMA" &&
-                    <Warning title="Importante" className={styles.revision}>
-                        <p className={`${styles.text} ${styles.bold}`}>OMA todavía no cargó muchos de los resultados de nivel 2. Chequear periódicamente a partir de este jueves.</p>
+                    <Warning title="Pedidos de Revisión" className={styles.revision}>
                         <p className={styles.text}>Se aceptan revisiones hasta el viernes <span>27/10</span>. Recordar enviar:</p>
                         <ul className={`${styles.text} ${styles.list}`}>
                             <li>Número de región (OMA San Isidro es 53)</li>
