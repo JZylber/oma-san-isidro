@@ -60,8 +60,34 @@ const NationalInfo = ({competition, participants,auth_max_date}: NationalProps) 
         (participants.length > 0 && auth_max_date) ?
         <>
         <Collapsable title="Inscripción">
-            <p className={styles.text}>Los colegios deberán comunicar antes del <span className={styles.bold}>{`${auth_max_date.getUTCDate()} de ${months[auth_max_date.getUTCMonth()]}`}</span> la nómina de personas que viajan, por correo electrónico a: <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a></p>
-            <h4 className={styles.section_title}>Datos que deben enviar para la inscripción:</h4>
+            <p className={styles.text}>Los colegios deberán comunicar antes del <span className={styles.bold}>{`${auth_max_date.getUTCDate()} de ${months[auth_max_date.getUTCMonth()]}`}</span> la nómina de personas que viajan,{isOma && <><span className={styles.bold}> completando la planilla de inscripción</span> y enviándola</>} por correo electrónico a: <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a></p>
+            {isOma?
+            <><h4 className={styles.section_title}>Instructivo para llenar la planilla:</h4>
+            <ul className={`${styles.text} ${styles.list}`}>
+                <li><span className={styles.bold}>Región:</span> San Isidro o 53</li>
+                <li><span className={styles.bold}>Colegio:</span> Nombre del Establecimiento del alumno</li>
+                <li><span className={styles.bold}>Localidad:</span> Lugar donde se encuentra el colegio</li>
+                <li><span className={styles.bold}>Nivel:</span> Nivel de Olimpíada del participante (1, 2 ó 3). Para los acompañantes el nivel es 0 (cero).</li>
+                <li><span className={styles.bold}>Sexo:</span> Completar con F (femenino) o M (masculino) (no usar mujer y varón)</li>
+                <li><span className={styles.bold}>Tipo:</span> Usar el siguiente código: A para los alumnos; D para los docentes acompañantes, P para el acompañante familiar y T para los que asistan a la premiación únicamente. En el caso de los familiares, indicar en la columna observaciones el grado de parentesco y de quién.</li>
+                <li><span className={styles.bold}>Alojamiento:</span> Usar el siguiente código: S si se alojan en el hotel propuesto por olimpíadas; N si se alojan por su cuenta.</li>
+                <li><span className={styles.bold}>Dieta:</span> Notificar los celiacos, vegetarianos, veganos, etc.</li>
+                <li><span className={styles.bold}>Vianda almuerzo 17:</span> Usar el siguiente código: S si se retiran con vianda luego de la premiación de olimpíadas; N si almuerzan.</li>
+                <li><span className={styles.bold}>Observaciones:</span> Espacio para aclaraciones como por ejemplo parentesco con el alumno. </li>
+                <li><span className={styles.bold}>Celular del responsable:</span> Número de teléfono celular de contacto del responsable. </li>
+                <li><span className={styles.bold}>Mail:</span> Por favor agregar mail del responsable por cualquier consulta.</li>
+            </ul>
+            <div className={styles.documentation}>
+                <div className={styles.button}>
+                    <Button content="Planilla Inscripción" onClick={() => downloadFile(`/nacional/${isOma?"oma":"nandu"}/PlanillaNacional.xlsx`)}>
+                        <div className={styles.arrow}>
+                            <Image src="/images/newsArrow.svg" width={30} height={40} alt="Descargar"/>
+                        </div>
+                    </Button>
+                </div>
+            </div>
+            </>
+            :<><h4 className={styles.section_title}>Datos que deben enviar para la inscripción:</h4>
             <ul className={`${styles.text} ${styles.list}`}>
                 <li>Nombre y apellido de los alumnos que participan.</li>
                 <li>Nombre, apellido y número de documento del o los acompañantes, indicando si es docente o familiar.</li>
@@ -69,7 +95,7 @@ const NationalInfo = ({competition, participants,auth_max_date}: NationalProps) 
                 <li>En caso de solicitar sólo tarjeta para la premiación, indicar nombre y apellido y número de documento de la persona para la cual se solicita.</li>
                 <li>Dieta de participantes y acompañantes (vegano, vegetariano, etc).</li>
                 <li>Si el viernes {isOma ? 17 : 27} se quedan a almorzar o se retiran con una vianda.</li>
-            </ul>
+            </ul></>}
             <Warning>
                 <p className={styles.text}><span className={styles.bold}>Se ruega enviar toda la documentación junta:</span> los datos pedidos anteriormente, el comprobante de pago, y el pedido de la factura electrónica (si fuese necesaria).</p>
                 <p className={styles.text}>Recordamos a los colegios que son ellos los responsables de enviar la inscripción de sus alumnos, informando a los padres sobre el desarrollo de las actividades del Torneo, ya que los alumnos participan representando a la escuela.</p>
