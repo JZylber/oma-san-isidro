@@ -68,7 +68,7 @@ const NationalInfo = ({competition, participants,auth_max_date}: NationalProps) 
                 <li>Indicar si se hospedan por medio de la olimpíada o por su cuenta.</li>
                 <li>En caso de solicitar sólo tarjeta para la premiación, indicar nombre y apellido y número de documento de la persona para la cual se solicita.</li>
                 <li>Dieta de participantes y acompañantes (vegano, vegetariano, etc).</li>
-                <li>Si el viernes 27 se quedan a almorzar o se retiran con una vianda.</li>
+                <li>Si el viernes {isOma ? 17 : 27} se quedan a almorzar o se retiran con una vianda.</li>
             </ul>
             <Warning>
                 <p className={styles.text}><span className={styles.bold}>Se ruega enviar toda la documentación junta:</span> los datos pedidos anteriormente, el comprobante de pago, y el pedido de la factura electrónica (si fuese necesaria).</p>
@@ -77,25 +77,25 @@ const NationalInfo = ({competition, participants,auth_max_date}: NationalProps) 
             </Warning>
         </Collapsable>
         <Collapsable title="Información general y programa">
-            <p className={styles.text}>El encuentro de la <span className={styles.bold}>Olimpíada Nacional {isOma?"Oma":"Ñandú"}</span> se realizará en la ciudad de La Falda, Córdoba los días {isOma?"27, 28 y 29 de septiembre":"24 al 27 de octubre en hotel FATSA (Otto A. Calace. Güemes 198 - (03548)422123)"}. Cada delegación se trasladará por su cuenta y riesgo, con sus profesores acompañantes según las pautas establecidas <span className={styles.bold}>(máximo 8 alumnos por cada docente)</span>. También, como en años anteriores, nos ocuparemos del alojamiento y concentración de aquellas delegaciones que lo soliciten.</p>
-            <p className={styles.text}>El alojamiento de las delegaciones que lo soliciten será en el Hotel FATSA de la mencionada ciudad en habitaciones compartidas con otros participantes del encuentro, hasta completar su capacidad, luego serán derivados a otros hoteles de la ciudad. La reserva del alojamiento se hace contra entrega de las planillas debidamente cumplimentadas.</p>
+            <p className={styles.text}>El encuentro de la <span className={styles.bold}>Olimpíada Nacional {isOma?"Oma":"Ñandú"}</span> se realizará en la ciudad de La Falda, Córdoba los días {isOma?"13 al 17 de noviembre en el Hotel Edén (Av. Edén 1400)":"24 al 27 de octubre en hotel FATSA (Otto A. Calace. Güemes 198 - (03548)422123)"}. Cada delegación se trasladará por su cuenta y riesgo, con sus profesores acompañantes según las pautas establecidas <span className={styles.bold}>(máximo 8 alumnos por cada docente)</span>. También, como en años anteriores, nos ocuparemos del alojamiento y concentración de aquellas delegaciones que lo soliciten.</p>
+            <p className={styles.text}>El alojamiento de las delegaciones que lo soliciten será en {isOma? "diferentes hoteles":"el Hotel FATSA"} de la ciudad de la falda en habitaciones compartidas con otros participantes del encuentro{!isOma&&", hasta completar su capacidad, luego serán derivados a otros hoteles de la ciudad"}. La reserva del alojamiento se hace contra entrega de las planillas debidamente cumplimentadas.</p>
             <h4 className={styles.section_title}>Programa</h4>
             <ul className={`${styles.text} ${styles.list}`}>
-                <li><span className={styles.bold}>Acreditación:</span> {isOma?"Miércoles 27 de septiembre":"Martes 24 de octubre"} de 15:00 a 20:00 horas en el <span className={styles.bold}>Hotel FATSA</span></li>
-                <li><span className={styles.bold}>Prueba escrita:</span> {isOma?"Jueves 28 de septiembre a las 9:00 horas, Polideportivo Municipal Villa Gesell":<>Miércoles 25 y Jueves 26 de octubre a las 9:30 horas, en el microestadio del <span className={styles.bold}>Hotel FATSA</span></>}</li>
-                <li><span className={styles.bold}>Exposición Oral y Premiación:</span> {isOma?"Viernes 29 de septiembre a las 9:00 horas, Polideportivo Municipal Villa Gesell ":<>Viernes 27 de octubre a de 9:00 a 12:00 horas en el microestadio del <span className={styles.bold}>Hotel FATSA</span></>}</li>
+                <li><span className={styles.bold}>Acreditación:</span> {isOma?<>Lunes 13 de noviembre de 16:00 a 20:00 horas en el <span className={styles.bold}>hotel donde se aloje la delegación de la región</span></>:<>Martes 24 de octubre de 15:00 a 20:00 horas en el <span className={styles.bold}>Hotel FATSA</span></>} </li>
+                <li><span className={styles.bold}>Prueba escrita:</span> {isOma?<>Martes 14 y Miércoles 15 de noviembre a las 9:30hs en el <span className={styles.bold}>Hotel Edén</span></>:<>Miércoles 25 y Jueves 26 de octubre a las 9:30 horas, en el microestadio del <span className={styles.bold}>Hotel FATSA</span></>}</li>
+                <li><span className={styles.bold}>Exposición Oral y Premiación:</span> {isOma?<>Viernes 17 de noviembre a las 9:30hs horas en el <span className={styles.bold}>Hotel Edén</span></>:<>Viernes 27 de octubre a de 9:00 a 12:00 horas en el microestadio del <span className={styles.bold}>Hotel FATSA</span></>}</li>
             </ul>
         </Collapsable>
         <Collapsable title="Aranceles">
         <ul className={`${styles.text} ${styles.list}`}>
-            <li><span className={styles.bold}>Participantes y/o acompañantes que se alojen en el hotel propuesto por la olimpíada:</span> {isOma?"$85.000":"$97.000"}. Incluye desde la cena del día martes {isOma?27:24} al almuerzo del viernes {isOma?29:27} (incluye una bebida por comida).</li>
-            <li><span className={styles.bold}>Participantes que NO se alojen en el hotel propuesto por la olimpíada:</span> {isOma?"$29.000":"$37.000"}. <span className={styles.bold}>Incluye los almuerzos y meriendas de los días de las pruebas escritas (miércoles 25 y jueves 26).</span></li>
-            <li><span className={styles.bold}>Acompañantes que NO se alojen en el hotel propuesto por la olimpíada:</span> {isOma?"$23.000":"$30.000"}. <span className={styles.bold}>Incluye los almuerzos y meriendas de los días de las pruebas escritas (miércoles 25 y jueves 26).</span> </li>
+            <li><span className={styles.bold}>Participantes y/o acompañantes que se alojen en el hotel propuesto por la olimpíada:</span> {isOma?"$120.000":"$97.000"}. Incluye desde la cena del día  {isOma?"lunes 13":"martes 24"} al almuerzo del viernes {isOma?17:27} (incluye una bebida por comida).</li>
+            <li><span className={styles.bold}>Participantes que NO se alojen en el hotel propuesto por la olimpíada:</span> {isOma?"$39.000":"$37.000"}. <span className={styles.bold}>Incluye los almuerzos{!isOma&&<> y meriendas</>} de los días de las pruebas escritas ({isOma?<>martes 14 y miércoles 15</>:<>miércoles 25 y jueves 26</>}).</span></li>
+            <li><span className={styles.bold}>Acompañantes que NO se alojen en el hotel propuesto por la olimpíada:</span> {isOma?"$32.000":"$30.000"}. <span className={styles.bold}>Incluye los almuerzos{!isOma&&<> y meriendas</>} de los días de las pruebas escritas ({isOma?<>martes 14 y miércoles 15</>:<>miércoles 25 y jueves 26</>}).</span> </li>
             <li><span className={styles.bold}>Tarjeta de premiación:</span> $4.000. Solo es necesaria la tarjeta para aquellos que no están acreditados como acompañantes y que participarán únicamente de la premiación. Deben inscribirse junto con los otros participantes en la planilla.</li>
         </ul>
-        <Warning>
-            <p className={styles.text}>Los aranceles antes mencionados, pueden ser ajustados debido a la situación económica financiera del país, que puede hacer variar nuestros costos. Quienes quieran asegurarse estos aranceles pueden hacer su depósito o trasferencia en los próximos días, enviando el comprobante a {isOma?<a href="mailto:gloriasampablo@gmail.com">gloriasampablo@gmail.com</a>:<a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a>}. En caso de tener que variar los aranceles lo avisaremos oportunamente.</p>
-        </Warning>
+        {/*<Warning>
+            <p className={styles.text}>Los aranceles antes mencionados, pueden ser ajustados debido a la situación económica financiera del país, que puede hacer variar nuestros costos. Quienes quieran asegurarse estos aranceles pueden hacer su depósito o trasferencia en los próximos días, enviando el comprobante a <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a>. En caso de tener que variar los aranceles lo avisaremos oportunamente.</p>
+        </Warning>*/}
         </Collapsable>
         <Collapsable title="Pago">
             <p className={styles.text}>El pago se hace depositando o transfieriendo a la siguiente cuenta de la Fundación Olimpíada Matemática Argentina:</p>
@@ -107,7 +107,7 @@ const NationalInfo = ({competition, participants,auth_max_date}: NationalProps) 
                 <li><span className={styles.bold}>CUIT: </span>30-67928383-5</li>
             </ul>
             <p className={styles.text}>Recordamos que para la acreditación deben presentar el <span className={styles.bold}>ORIGINAL</span> de dicho depósito.</p>
-            <p className={styles.text}>Si necesitan factura electrónica o factura C, por favor completar la planilla y enviar a {isOma?<a href="mailto:gloriasampablo@gmail.com">gloriasampablo@gmail.com</a>:<a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a>} junto con el comprobante de pago.</p>
+            <p className={styles.text}>Si necesitan factura electrónica o factura C, por favor completar la planilla y enviar a <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a> junto con el comprobante de pago.</p>
             <div className={styles.documentation}>
                 <div className={styles.button}>
                     <Button content="Planilla Facturación" onClick={() => downloadFile(`/nacional/${isOma?"oma":"nandu"}/PedidoFactura.xlsx`)}>
@@ -119,7 +119,7 @@ const NationalInfo = ({competition, participants,auth_max_date}: NationalProps) 
             </div>
             <Warning>
             <p className={styles.text}><span className={styles.bold}>Se ruega enviar toda la documentación junta:</span> el comprobante de pago, el pedido de la factura electrónica (si fuese necesaria) y los datos necesarios para la inscripción.</p>
-            <p className={styles.text}>En el hotel contratado, luego de confirmar el 18 de octubre las plazas reservadas, deberán abonarse aunque no se ocupen.</p>
+            {!isOma&&<p className={styles.text}>En el hotel contratado, luego de confirmar el 18 de octubre las plazas reservadas, deberán abonarse aunque no se ocupen.</p>}
             </Warning>
         </Collapsable>
         <Collapsable title="Documentación">
