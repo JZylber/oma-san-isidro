@@ -14,7 +14,7 @@ const LoadResults = (props:TestInfo) => {
         return(<ErrorMessage status={results.error.data?.httpStatus}/>)
     } else if(results.isSuccess) {
         if(results.data.length > 0){
-            if(props.instancia === "PROVINCIAL"){
+            if(props.instancia === "PROVINCIAL" || props.instancia === "NACIONAL"){
                 return(<ProvincialResultTable results={results.data} testInfo={props}/>)
             }
             else{
