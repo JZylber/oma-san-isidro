@@ -22,12 +22,12 @@ model Participacion {
   id_participante            Int
   id_colegio                 Int                          @default(1)
   id_competencia             Int
+  inhabilitaciones           Inhabilitado[]
   colegio                    Colegio                      @relation(fields: [id_colegio], references: [id_colegio])
   competencia                Competencia                  @relation(fields: [id_competencia], references: [id_competencia])
   participante               Participante                 @relation(fields: [id_participante], references: [id_participante])
-  rinde                      Rinde[]
   ParticipacionSedeInstancia ParticipacionSedeInstancia[]
-  inhabilitaciones             Inhabilitado[]
+  rinde                      Rinde[]
 }
 
 model Colegio {
@@ -58,26 +58,26 @@ model Prueba {
   id_competencia            Int
   cantidad_problemas        Int              @default(3)
   fecha_limite_autorizacion DateTime?        @db.Date
-  duracion                  Int              @map("duración") @default(120)
+  resultados_disponibles    Boolean          @default(false)
+  hora_ingreso              DateTime         @default(dbgenerated("'13:30:00'::time without time zone")) @db.Time(6)
+  duracion                  Int              @default(120) @map("duración")
+  criterio_habilitacion     Json?            @map("criterio_habilitación")
+  inhabilitados             Inhabilitado[]
   problemas                 Problema[]
   competencia               Competencia      @relation(fields: [id_competencia], references: [id_competencia])
   puntoinstancia            PuntoInstancia[]
   rinden                    Rinde[]
   sedeinstancia             SedeInstancia[]
-  inhabilitados             Inhabilitado[]
-  resultados_disponibles    Boolean          @default(false)
-  hora_ingreso              DateTime         @db.Time @default("2000-01-01T13:30:00Z")
-  criterio_habilitacion     Json?            @map("criterio_habilitación")                         
 }
 
 model Rinde {
   id_rinde         Int           @id @default(autoincrement())
   presente         Boolean
   aprobado         Boolean
-  aclaracion       String?
   resultados       Json
   id_participacion Int
   id_prueba        Int
+  aclaracion       String?
   participacion    Participacion @relation(fields: [id_participacion], references: [id_participacion])
   prueba           Prueba        @relation(fields: [id_prueba], references: [id_prueba])
 }
@@ -123,10 +123,10 @@ model SedeInstancia {
   id_colegio                 Int
   aclaracion                 String?
   niveles                    Int[]                        @default([])
+  ParticipacionSedeInstancia ParticipacionSedeInstancia[]
   colegio                    Colegio                      @relation(fields: [id_colegio], references: [id_colegio])
   prueba                     Prueba                       @relation(fields: [id_prueba], references: [id_prueba])
   sede                       Sede                         @relation(fields: [id_sede], references: [id_sede])
-  ParticipacionSedeInstancia ParticipacionSedeInstancia[]
 }
 
 model ParticipacionSedeInstancia {
@@ -156,20 +156,20 @@ model PuntoInstancia {
 
 model Problema {
   id_problema Int    @id @default(autoincrement())
-  nivel       Int 
+  nivel       Int
   link        String
-  links_foro  Json   @default("[]")
   id_prueba   Int
+  links_foro  Json   @default("[]")
   Prueba      Prueba @relation(fields: [id_prueba], references: [id_prueba])
 }
 
 model Inhabilitado {
-  id_inhabilitado Int     @id @default(autoincrement())
+  id_inhabilitado  Int           @id @default(autoincrement())
   id_participacion Int
-  Participacion Participacion @relation(fields: [id_participacion], references: [id_participacion])
-  id_prueba Int
-  Prueba Prueba @relation(fields: [id_prueba], references: [id_prueba])
-  motivo          String?
+  id_prueba        Int
+  motivo           String?
+  Participacion    Participacion @relation(fields: [id_participacion], references: [id_participacion])
+  Prueba           Prueba        @relation(fields: [id_prueba], references: [id_prueba])
 }
 
 enum INSTANCIA {
