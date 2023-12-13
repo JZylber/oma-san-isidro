@@ -25,7 +25,7 @@ export class Participant implements Filterable<Participant> {
         return this.name === element.name && this.surname === element.surname;
     }
     toString(): string {
-        return `${this.name} ${this.surname}`;
+        return `${this.surname}, ${this.name}`;
     }
 }
 
