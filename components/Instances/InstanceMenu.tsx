@@ -3,6 +3,7 @@ import styles from "./InstanceMenu.module.scss";
 import InstanceData from "./Instance";
 import {useSearchParams } from "next/navigation";
 import { Competition } from "../../server/app-router-db-calls";
+import Pending from "../Pending/pending";
 
 export interface Instance {
     instancia: string,
@@ -52,7 +53,7 @@ const Instances = ({competition,instances}: InstanceMenuProps) => {
             </Fragment>
             )}
         </ul>
-        <InstanceData competition={competition} instance={instances[currentInstance]} />
+        {instances.length > 0 ? <InstanceData competition={competition} instance={instances[currentInstance]}/>:<Pending text="Todavía no hay información de las instancias para este año"/>}
         </>
     )
 }
