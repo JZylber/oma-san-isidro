@@ -19,6 +19,7 @@ const getNews = async () => {
           titulo: true,
           link: true,
           visible: true,
+          agregado: true
         }
       } 
       )
