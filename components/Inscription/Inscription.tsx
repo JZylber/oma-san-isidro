@@ -3,6 +3,7 @@ import Arrow from "../../public/images/newsArrow.svg"
 import styles from "./Inscription.module.scss"
 import BankInformation from "./BankInformation"
 import Link from "next/link"
+import Pending from "../Pending/pending"
 
 export interface InscriptionData {
     fecha_inscripcion_nacional?: Date,
@@ -21,6 +22,7 @@ const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
 
 export const Inscripcion = ( { type,data} : InscriptionProps ) => {
     const name = type === "OMA"?"Oma":"Ñandú"
+    const availableData : boolean = data.fecha_inscripcion_nacional !== undefined || data.fecha_inscripcion_regional !== undefined || data.link_inscripcion !== undefined;
     const {fecha_inscripcion_nacional,fecha_inscripcion_regional,link_inscripcion} = data;
     const downloadForm = () => {
         const link = document.createElement("a");
@@ -30,6 +32,11 @@ export const Inscripcion = ( { type,data} : InscriptionProps ) => {
         link.click();
         document.body.removeChild(link);
       };
+    if(!availableData){
+        return(
+            <Pending text="Todavía no hay información para la inscripción de este año"/>
+        )
+    } else {
     return(
         <>
         <div className={styles.type}>{name}</div>
@@ -94,4 +101,5 @@ export const Inscripcion = ( { type,data} : InscriptionProps ) => {
         </div>
         </>
     )
+    }
 }

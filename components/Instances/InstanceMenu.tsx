@@ -42,6 +42,12 @@ const Instances = ({competition,instances}: InstanceMenuProps) => {
             setCurrentInstance(getInitialInstance(instances,query.get("instancia") as string));
         }
     },[query,instances])
+    const instancesAvailable : boolean = instances.length > 0;
+    if(!instancesAvailable){
+        return(
+            <Pending text="Todavía no hay información de las instancias para este año"/>
+        )
+    } else {
     return(
         <>
         <h1 className={styles.title}>Instancias</h1>
@@ -53,9 +59,10 @@ const Instances = ({competition,instances}: InstanceMenuProps) => {
             </Fragment>
             )}
         </ul>
-        {instances.length > 0 ? <InstanceData competition={competition} instance={instances[currentInstance]}/>:<Pending text="Todavía no hay información de las instancias para este año"/>}
+        <InstanceData competition={competition} instance={instances[currentInstance]}/>
         </>
     )
+    }
 }
 
 export default Instances
