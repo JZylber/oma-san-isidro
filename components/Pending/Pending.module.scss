@@ -1,0 +1,48 @@
+@use "../../styles/shared.scss" as shared;
+
+.pending{
+  &_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2rem;
+  }
+  &_title {
+    @include shared.font-unbounded(600);
+    @include shared.mobile-only {
+      font-size: 2.4 * shared.$mobile-actionable-font-size;
+      margin-top: 2.5 * shared.$mobile-spacing;
+      margin-bottom: 1.5 * shared.$mobile-spacing;
+    }
+  
+    @include shared.not-mobile {
+      font-size: 2 * shared.$desktop-actionable-font-size;
+      margin-bottom: 2.4rem
+    }
+  }
+  &_subtitle{
+    @include shared.font-unbounded(500);
+    @include shared.not-desktop{
+        font-size: 2.4rem;
+        margin-bottom: shared.$mobile-spacing;
+    }
+    @include shared.desktop-only{
+        font-size: 3.4rem;
+        margin-bottom: 2rem;
+    }
+  }
+  &_text{
+    @include shared.font-montserrat(300);
+    @include shared.mobile-only {
+      font-size: shared.$mobile-reading-font-size;
+    }
+  
+    @include shared.tablet-only {
+      font-size: shared.$tablet-reading-font-size;
+    }
+  
+    @include shared.desktop-only {
+      font-size: shared.$desktop-reading-font-size;
+    }
+  }
+}

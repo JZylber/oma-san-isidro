@@ -21,6 +21,7 @@ const DateBanner = ({dates,displayAmount = 3,displayCategory,ignoreCurrentDate=f
         var distanceb = Math.abs(currentDate.getTime() - b.fecha_inicio.getTime());
         return distancea - distanceb;
     });
+    const datesAvailable : boolean = upcomingDates.length > 0;
     const datesToRender = ignoreCurrentDate ? dates : upcomingDates;
     const months = ["ENE","FEB","MAR","ABR","MAY","JUN","JUL","AGO","SEP","OCT","NOV","DIC"]
     const getEndDate = (cevent : CalendarEvent) => {
@@ -49,14 +50,19 @@ const DateBanner = ({dates,displayAmount = 3,displayCategory,ignoreCurrentDate=f
         )
     }
     return(
-        <>
         <div className={[styles.container,!showCategory && styles.container_medium].join(" ")}>
             {displayAmount === 1 && <div className={styles.calendar_icon}><CalendarIcon/></div>}
             <div className={styles.entries}>
-            {datesToRender.filter((date) => (displayCategory === undefined) || (displayCategory === date.tipo)).slice(0,displayAmount).map(renderDate)}
+            {datesAvailable?
+            datesToRender.filter((date) => (displayCategory === undefined) || (displayCategory === date.tipo)).slice(0,displayAmount).map(renderDate):
+            <div className={styles.noDates}> 
+                <div className={styles.event}>
+                    Todavía no hay información sobre próximas fechas
+                </div>
+            </div>
+            }
             </div>
         </div>
-        </>
     )
 }
 

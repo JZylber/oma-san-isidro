@@ -72,3 +72,18 @@
     }
   }
 }
+
+.noNews {
+  @include shared.font-unbounded(500);
+  @include shared.mobile-only {
+    font-size: shared.$mobile-actionable-font-size;
+    margin-top: 2.5 * shared.$mobile-spacing;
+    margin-bottom: 1.5 * shared.$mobile-spacing;
+  }
+
+  @include shared.not-mobile {
+    font-size: shared.$desktop-actionable-font-size;
+    margin-bottom: 2.4rem;
+  }
+  padding-top: 2rem;
+}

@@ -1,11 +1,10 @@
 import styles from "./Instance.module.scss";
-import { Instance } from "./InstanceMenu";
-import { DropPoint} from "./Venues";
 import { INSTANCIA } from "@prisma/client";
 import VenueInfo from "./VenueInfo";
 import ProvincialInfo from "./ProvincialInfo";
 import { Competition } from "../../server/app-router-db-calls";
 import National from "./National";
+import { Instance } from "./InstanceMenu";
 
 interface InstanceProps {
     competition: Competition,
