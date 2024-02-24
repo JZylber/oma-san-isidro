@@ -11,6 +11,7 @@ import {Button} from "../../../../components/buttons/Button";
 import { useReactToPrint } from "react-to-print";
 import CalendarExport from "../../../../components/CalendarComponents/CalendarExport/CalendarExport";
 import { useSearchParams } from "next/navigation";
+import Pending from "../../../../components/Pending/pending";
 
 interface CalendarProps {
     events : Array<CalendarEvent>,
@@ -21,6 +22,7 @@ const CalendarPage = ({events,year}:CalendarProps) => {
     const searchParams = useSearchParams();
     const [displayedMonth,setDisplayedMonth] = useState(new Date().getMonth());
     const [categories,setCategories] = useState<string []>([]);
+    const eventsAvailable : boolean = events.length > 0;
     useEffect(() => {
         if(searchParams && searchParams.get("categoria")){
             const category = searchParams.get("categoria") as string;
@@ -40,6 +42,12 @@ const CalendarPage = ({events,year}:CalendarProps) => {
         content: () => printCalendarRef.current,
         documentTitle: `Calendario ${year}`
     });
+    if(!eventsAvailable){
+        return(
+            <Pending text="Todavía no está disponible el calendario para este año"/>
+        )
+    }
+    else {
     return(
         <>
             <h1 className={styles.calendar_title}>Calendario {year}</h1>
@@ -62,6 +70,7 @@ const CalendarPage = ({events,year}:CalendarProps) => {
             </div>
         </>
         )
+    }
 }
 
 export default CalendarPage
