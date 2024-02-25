@@ -173,6 +173,16 @@ model Inhabilitado {
   Prueba           Prueba        @relation(fields: [id_prueba], references: [id_prueba])
 }
 
+model Usuario {
+  id_usuario Int      @id @default(autoincrement())
+  nombre     String
+  apellido   String
+  email      String   @unique
+  password   String
+  admin      Boolean  @default(false)
+  token      String?
+}
+
 enum INSTANCIA {
   INTERCOLEGIAL
   ZONAL
