@@ -28,7 +28,7 @@ const KangarooPage = () => {
     return(
         <>
             <h1 className={styles.title}>Canguro Matemático</h1>
-            <div className={styles.button_container}>
+            {/*<div className={styles.button_container}>
                 <Button content="Resultados" onClick={() => window.location.href = "https://www.oma.org.ar/canguro/editar.html"}>
                     <Image src="/images/newsArrow.svg" alt="" width={30} height={30} className={styles.arrow} />
                 </Button>
@@ -65,6 +65,12 @@ const KangarooPage = () => {
                     )
                 })}
                 </div>
+            </section>*/}
+            <section className={styles.problems}>
+                    <h2 className={styles.section_title}>21/3 SIN COSTO</h2>
+                    <div className={styles.links}>
+                    <p className={styles.main_text}>En breve pondremos las condiciones para participar</p>
+                    </div>
             </section>
         </>        
     )
