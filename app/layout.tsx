@@ -1,22 +1,6 @@
 'use client'
-
-import {Montserrat, Unbounded } from 'next/font/google'
 import '../styles/globals.scss';
 import { trpc } from '../utils/trpc';
-
-
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  variable: '--font-montserrat',
-  display: 'swap',
-})
- 
-const unbounded = Unbounded({
-  subsets: ['latin'],
-  variable: '--font-unbounded',
-  display: 'swap',
-})
-
 
 const RootLayout = ({
     children,
@@ -24,7 +8,7 @@ const RootLayout = ({
     children: React.ReactNode
   }) => {
     return (
-      <html lang="en" className={`${montserrat.variable} ${unbounded.variable}`}>
+      <html lang="en">
         <body>
             <div id="modal-root"></div>
             {children}

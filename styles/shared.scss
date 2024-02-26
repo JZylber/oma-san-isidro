@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Unbounded:wght@200..900&display=swap');
+
 $black: #000000;
 $light-blue: #D9F5FC;
 $white: #FEFDF3;
@@ -70,13 +72,13 @@ $desktop-reading-font-size: 2rem;
 /*Used Fonts*/
 
 @mixin font-montserrat($weight) {
-    font-family: var(--font-montserrat);
+    font-family: "Montserrat", sans-serif;
     font-style: normal;
     font-weight: $weight;
 }
 
 @mixin font-unbounded($weight) {
-    font-family: var(--font-unbounded);
+    font-family: "Unbounded", sans-serif;
     font-style: normal;
     font-weight: $weight;
 }

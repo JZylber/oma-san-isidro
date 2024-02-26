@@ -2,13 +2,13 @@
 import React, { useState } from 'react';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
+import { Button } from '../../components/buttons/Button';
 
 const LoginPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const router = useRouter();
-    const handleLogin = async (e: React.FormEvent) => {
-        e.preventDefault();
+    const handleLogin = async () => {
         const loginApi = await fetch(`../api/auth`, {
             method: 'POST',
             headers: {
@@ -27,14 +27,14 @@ const LoginPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-md w-full space-y-8">
+        <div className="min-h-screen flex items-center justify-center bg-primary-white py-12 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-lg w-full space-y-32">
                 <div>
-                    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                        Ingresá con tu email y contraseña
-                    </h2>
+                    <h1 className="mt-6 text-center text-6xl font-unbounded text-gray-900">
+                        ¡Bienvenido/a!
+                    </h1>
                 </div>
-                <form className="mt-8 space-y-6" onSubmit={handleLogin}>
+                <form className="space-y-16 font-montserrat text-2xl">
                     <input type="hidden" name="remember" value="true" />
                     <div className="rounded-md shadow-sm -space-y-px">
                         <div>
@@ -47,8 +47,8 @@ const LoginPage: React.FC = () => {
                                 type="email"
                                 autoComplete="email"
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                placeholder="Email address"
+                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10"
+                                placeholder="Email"
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
                             />
@@ -63,21 +63,15 @@ const LoginPage: React.FC = () => {
                                 type="password"
                                 autoComplete="current-password"
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                placeholder="Password"
+                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10"
+                                placeholder="Contraseña"
                                 value={password}
                                 onChange={e => setPassword(e.target.value)}
                             />
                         </div>
                     </div>
-
                     <div>
-                        <button
-                            type="submit"
-                            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        >
-                            Sign in
-                        </button>
+                        <Button content="Ingresar" onClick={handleLogin}/>
                     </div>
                 </form>
             </div>
