@@ -1,237 +1,55 @@
 [
-    [
-        "2",
-        "Schmidt",
-        "Pedro"
-    ],
-    [
-        "2",
-        "Bocalandro",
-        "Julieta"
-    ],
-    [
-        "2",
-        "Carzolio Legeren",
-        "Fatima"
-    ],
-    [
-        "2",
-        "Canale",
-        "Pedro"
-    ],
-    [
-        "2",
-        "Weinbaum",
-        "Jano"
-    ],
-    [
-        "1",
-        "Lazzati",
-        "Valentin Tomas"
-    ],
-    [
-        "1",
-        "Weyersberg",
-        "Andres"
-    ],
-    [
-        "2",
-        "Cristofaro",
-        "Juan Francisco"
-    ],
-    [
-        "2",
-        "Gomez Al Mikati",
-        "Leila Sofia"
-    ],
-    [
-        "3",
-        "Dri",
-        "Kiara"
-    ],
-    [
-        "2",
-        "G\u00f6tz",
-        "Tom\u00e1s"
-    ],
-    [
-        "1",
-        "Beccar Varela",
-        "Adrian"
-    ],
-    [
-        "1",
-        "Tuero",
-        "Matias"
-    ],
-    [
-        "3",
-        "Curet",
-        "Francisco"
-    ],
-    [
-        "3",
-        "Delbosco",
-        "Tom\u00e1s"
-    ],
-    [
-        "1",
-        "Dalma",
-        "Matias"
-    ],
-    [
-        "1",
-        "Dura\u00f1ona",
-        "Juan"
-    ],
-    [
-        "2",
-        "Ledesma Arocena",
-        "Facundo"
-    ],
-    [
-        "3",
-        "Bosch Dodero",
-        "Santos"
-    ],
-    [
-        "3",
-        "Bustillo",
-        "Tom\u00e1s"
-    ],
-    [
-        "3",
-        "Vedoya",
-        "Joaqu\u00edn"
-    ],
-    [
-        "2",
-        "Fiszelew",
-        "Bruno"
-    ],
-    [
-        "1",
-        "Herrera D Miguel",
-        "Mateo"
-    ],
-    [
-        "3",
-        "Lucchetti",
-        "Agust\u00edn"
-    ],
-    [
-        "2",
-        "Romero Herrera Vegas",
-        "Luisa"
-    ],
-    [
-        "2",
-        "Salerno",
-        "Lola"
-    ],
-    [
-        "1",
-        "Hourbeigt",
-        "Agustin"
-    ],
-    [
-        "2",
-        "Anitori",
-        "Juana"
-    ],
-    [
-        "3",
-        "Ortiz",
-        "Manuela"
-    ],
-    [
-        "2",
-        "Deambrosi",
-        "Matteo Benizio"
-    ],
-    [
-        "1",
-        "Dominguez",
-        "Felicitas"
-    ],
-    [
-        "2",
-        "Caniza",
-        "Pedro"
-    ],
-    [
-        "1",
-        "Tlento Lanus",
-        "Jaime"
-    ],
-    [
-        "2",
-        "Abella Ruival",
-        "Nicol\u00e1s"
-    ],
-    [
-        "2",
-        "Molinos",
-        "Jos\u00e9"
-    ],
-    [
-        "3",
-        "Garay Diehl",
-        "Juan Mart\u00edn"
-    ],
-    [
-        "1",
-        "Chighizola",
-        "Delfina"
-    ],
-    [
-        "2",
-        "Orti Magnasco",
-        "Felix"
-    ],
-    [
-        "3",
-        "Lagos",
-        "Pablo Francisco"
-    ],
-    [
-        "1",
-        "Arce Salazar",
-        "Delfina"
-    ],
-    [
-        "1",
-        "Righi",
-        "Milagros"
-    ],
-    [
-        "2",
-        "\u00c1lvarez",
-        "Bautista"
-    ],
-    [
-        "3",
-        "P\u00e9rez Lerner",
-        "Juan Ignacio"
-    ],
-    [
-        "1",
-        "Finkielsztain",
-        "Ilan"
-    ],
-    [
-        "1",
-        "Herzfeld",
-        "Milena Yael"
-    ],
-    [
-        "1",
-        "Kapustiansky",
-        "Lucas"
-    ],
-    [
-        "3",
-        "Mejliker",
-        "Marco"
-    ]
+  [1,"Bigio","Olympia Rio",1  ],
+  [1,"Cornejo","Tobías",1  ],
+  [1,"Dates","Antonia",1  ],
+  [1,"De Achaval","Fermin",1  ],
+  [1,"Dellacasa","Sofía",1  ],
+  [1,"Grillo","Julián",1  ],
+  [1,"Kaplun","Cristóbal",1  ],
+  [1,"Loginova","Alisa",1  ],
+  [1,"Meyer","Olivia Catalina",1  ],
+  [1,"Müller","Wladimiro",1  ],
+  [1,"Orella","Santos",1  ],
+  [1,"Saccol Vives","Francisco",1  ],
+  [1,"Vincent","Tomás",1  ],
+  [1,"Viramonte","Pedro",1  ],
+  [1,"Xu","Dillan",1  ],
+  [1,"Ygartua","Delfina Allegra",1  ],
+  [2,"Actis","Santino Ezequiel",2  ],
+  [2,"Agosta","Tomás",1  ],
+  [2,"Costa","Lucila Denise",1  ],
+  [2,"Dalma","Matias",1  ],
+  [2,"Dragan","Lisandro",1  ],
+  [2,"Dudin","Lev",1  ],
+  [2,"Faraone","Benicio Federico",1  ],
+  [2,"Finkielsztain","Ilan",1  ],
+  [2,"Giangrande","Felipe",1  ],
+  [2,"Grand Poncet","Bautista",1  ],
+  [2,"Herzfeld","Milena Yael",1  ],
+  [2,"Iribarren","Bautista",1  ],
+  [2,"Lazzati","Valentin Tomas",1  ],
+  [2,"Lopez Montes","Pedro",1  ],
+  [2,"Martin","Lucas",1  ],
+  [2,"Retik","David",1  ],
+  [2,"Ryba","Tomer Sami",1  ],
+  [2,"Sade","Idan",1  ],
+  [2,"San Martín","Florencia",1  ],
+  [2,"Suffriti","Delfina",1  ],
+  [2,"Trasancos","Mateo",1  ],
+  [2,"Weyersberg","Andres",1  ],
+  [2,"Wilenski Colombo","Benjamín",1  ],
+  [2,"Wright","Miguel",1  ],
+  [2,"Zambonini Sanchez","Juan Martín",1  ],
+  [3,"Baravalle Hastings","Lara",2  ],
+  [3,"Benatuil","Lucila",2  ],
+  [3,"Canale","Pedro",2  ],
+  [3,"Contepomi","Silvestre",2  ],
+  [3,"Cristofaro","Juan Francisco",2  ],
+  [3,"Deambrosi","Matteo Benizio",1  ],
+  [3,"Fiszelew","Bruno",2  ],
+  [3,"Grynszpancholc","Thomas",1  ],
+  [3,"Kreszes","Tomas",2  ],
+  [3,"Mendez Huergo","Federico",1  ],
+  [3,"Miguens","Faustino",1  ],
+  [3,"Popovsky","Andres Uriel",2  ]
 ]

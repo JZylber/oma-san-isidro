@@ -3,17 +3,20 @@ import styles from "./International.module.scss";
 import dataOMA from "../../../../data/internacionalOMA.json"
 import dataNandu from "../../../../data/internacionalNandu.json"
 
-const orderBySurname = (a: Array<string | boolean>, b: Array<string | boolean>) => {
+const orderByLevelAndSurname = (a: Array<string | boolean | number>, b: Array<string | boolean | number>) => {
+    let a0 = a[0] as number;
+    let b0 = b[0] as number;
     let a1 = a[1] as string;
     let b1 = b[1] as string;
-    return a1.localeCompare(b1);
+    if(a0 !== b0) return a0 - b0;
+    else return a1.localeCompare(b1);
 };
 
 const InternationalPage = () => {
     let sortedDataOma = dataOMA;
-    sortedDataOma.sort(orderBySurname);
+    sortedDataOma.sort(orderByLevelAndSurname);
     let sortedDataNandu = dataNandu;
-    sortedDataNandu.sort(orderBySurname);
+    sortedDataNandu.sort(orderByLevelAndSurname);
     const renderOMAparticipant = (omaParticipant : Array<string | boolean>,idx:number) => {
         const [level,surname,name,t1,t2,t3,t4] = omaParticipant;
         return(
@@ -27,13 +30,14 @@ const InternationalPage = () => {
                 <td>{t4?"Si":""}</td>
             </tr>)
     }
-    const renderNanduparticipant = (omaParticipant : Array<string | boolean>,idx:number) => {
-        const [level,surname,name] = omaParticipant;
+    const renderNanduparticipant = (omaParticipant : Array<string | boolean | number>,idx:number) => {
+        const [level,surname,name,may_level] = omaParticipant;
         return(
             <tr key={idx}>
                 <td className={styles.right_align}>{level}</td>
                 <td>{surname}</td>
                 <td>{name}</td>
+                <td className={styles.right_align}>{may_level}</td>
             </tr>)
     }
 
@@ -111,6 +115,7 @@ const InternationalPage = () => {
                                 <th>Nivel</th>
                                 <th>Apellido</th>
                                 <th>Nombre</th>
+                                <th>Mayo</th>
                             </tr>
                         </thead>
                         <tbody className={styles.table_body}>
