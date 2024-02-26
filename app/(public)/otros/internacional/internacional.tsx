@@ -1,5 +1,4 @@
 'use client'
-import Layout from "../../../../components/Layout/Layout";
 import styles from "./International.module.scss";
 import dataOMA from "../../../../data/internacionalOMA.json"
 import dataNandu from "../../../../data/internacionalNandu.json"
@@ -42,29 +41,29 @@ const InternationalPage = () => {
     return(
         <>
             <h1 className={styles.title}>Internacional</h1>
-            <p className={styles.description_text}> Alumnos que pueden participar en las selecciones para olimpíadas internacionales 2023</p>
+            <p className={styles.description_text}> Alumnos que pueden participar en las selecciones para olimpíadas internacionales 2024</p>
             <div className={[styles.rounded_box,styles.middle_columns].join(" ")}>
                 <h3>Pretorneo de las Ciudades</h3>
-                <p>Participan los alumnos de OMA que en el 2022 llegaron por lo menos al Regional y los alumnos de  3° Nivel de Ñandú invitados por la OMA</p>
+                <p>Participan los alumnos de OMA que en el 2023 llegaron por lo menos al Regional y los alumnos de  3° Nivel de Ñandú invitados por la OMA</p>
             </div>
             <div className={styles.category}>
-                <h2 className={styles.category_title}>Alumnos que participaron en OMA en 2022</h2>
+                <h2 className={styles.category_title}>Alumnos que participaron en OMA en 2023</h2>
                 <ul>
                      <li className={styles.tournament}>
                          <h3 className={styles.tournament_name}>Selección Cono Sur</h3>
-                         <p className={styles.tournament_requirements}>Haber llegado a la instancia Nacional de OMA y haber nacido después del 01/01/2007.</p>
+                         <p className={styles.tournament_requirements}>Haber llegado a la instancia Nacional de OMA y haber nacido después del 01/01/2008.</p>
                     </li>
                     <li className={styles.tournament}>
                          <h3 className={styles.tournament_name}>Olimpíada de Mayo</h3>
-                         <p className={styles.tournament_requirements}>Haber aprobado la instancia Regional de OMA y haber nacido después del 01/01/2008.</p>
+                         <p className={styles.tournament_requirements}>Haber aprobado la instancia Regional de OMA y haber nacido después del 01/01/2009. Nivel 1 nacidos a partir del 1/1/2011 y nivel 2 nacidos entre 1/1/2009 y 31/12/2010</p>
                     </li>
                     <li className={styles.tournament}>
                          <h3 className={styles.tournament_name}>Selección IMO</h3>
-                         <p className={styles.tournament_requirements}>Haber aprobado la instancia Nacional de OMA, haber nacido después del 01/01/2003 y ser alumno regular de enseñanza media en el 2023.</p>
+                         <p className={styles.tournament_requirements}>Haber aprobado la instancia Nacional de OMA, haber nacido después del 01/07/2004 y ser alumno regular de enseñanza media en el 2024.</p>
                     </li>
                     <li className={styles.tournament}>
                          <h3 className={styles.tournament_name}>Selección Iberoamericana</h3>
-                         <p className={styles.tournament_requirements}>Haber aprobado la instancia Nacional de OMA, haber nacido después del 01/01/2005 y no haber participado en dos Olimpíadas Iberoamericanas anteriores.</p>
+                         <p className={styles.tournament_requirements}>Haber aprobado la instancia Nacional de OMA, haber nacido después del 01/01/2006 y no haber participado en dos Olimpíadas Iberoamericanas anteriores.</p>
                     </li>
                     <li className={styles.tournament}>
                          <h3 className={styles.tournament_name}>Olimpíada Iraní de Geometría</h3>
@@ -80,7 +79,7 @@ const InternationalPage = () => {
                     </li>
                     <li className={styles.tournament}>
                          <h3 className={styles.tournament_name}>OlimPri</h3>
-                         <p className={styles.tournament_requirements}>Campeones y subcampeones de 1° y 2° Nivel de Ñandú 2022.</p>
+                         <p className={styles.tournament_requirements}>Campeones y subcampeones de 1° y 2° Nivel de Ñandú 2023.</p>
                     </li>
                 </ul>
                 <div className={styles.table_container}>
@@ -103,8 +102,8 @@ const InternationalPage = () => {
                 </div>
             </div>
             <div className={styles.category}>
-                <h2 className={styles.category_title}>Alumnos que participaron en Ñandú en 2022</h2>
-                <p className={styles.description_text}>Pueden Participar en la Olimpíada de Mayo aquellos alumnos que aprobaron el Regional y nacieron después del 01/01/2008</p>
+                <h2 className={styles.category_title}>Alumnos que participaron en Ñandú en 2023</h2>
+                <p className={styles.description_text}>Pueden Participar en la Olimpíada de Mayo aquellos alumnos que aprobaron el Regional y nacieron después del 01/01/2009</p>
                 <div className={[styles.table_container,styles.middle_columns].join(" ")}>
                     <table className={styles.table}>
                         <thead className={styles.table_header}>
