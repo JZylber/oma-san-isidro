@@ -1,13 +1,27 @@
 'use client'
 import React, { useState } from 'react';
+import Cookies from 'js-cookie';
 
 const LoginPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleLogin = (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log(`Email: ${email}, Password: ${password}`);
+        const loginApi = await fetch(`../api/auth`, {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({email: email, password: password}),
+          }).catch(error => {
+            console.error('Error:', error);
+          }) as Response;
+          let result = await loginApi.json();
+          if (result.success && result.token) {
+            Cookies.set('token', result.token);
+          }
     };
 
     return (

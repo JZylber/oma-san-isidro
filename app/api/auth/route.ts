@@ -1,12 +1,12 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '../../../server/db';
 
 /* JWT secret key */
 const KEY = process.env.JWT_KEY as string;
 
-export default async function POST(request : Request) {
+export async function POST(request : NextRequest) {
     const {email, password} = await request.json();
     if (!email || !password) {
         return NextResponse.json(
@@ -30,35 +30,14 @@ export default async function POST(request : Request) {
         userPassword = user.password,
         userName = user.nombre,
         userSurname = user.apellido;
-    bcrypt.compare(password, userPassword).then(isMatch => {
-        /* User matched */
-        if (isMatch) {
-            /* Create JWT Payload */
-            const payload = {
-              id: userId,
-              email: userEmail,
-              nombre: userName,
-              apellido: userSurname,
-            };
-            /* Sign token */
-            jwt.sign(
-              payload,
-              KEY,
-              {
-                expiresIn: 3600, // 1 year in seconds
-              },
-              (err, token) => {
-                /* Send succes with token */
-                return NextResponse.json({
-                  success: true,
-                  token: 'Bearer ' + token,
-                });
-              }
-            );
-        }
-        else {
-            /* Send error with message */
-            return NextResponse.json({ status: 'error', error: 'Usuario o contraseña incorrectas' });
-        }     
-    });
+    const isValid = await bcrypt.compare(password, userPassword);
+    if (isValid) {
+        /* Create token */
+        const token = jwt.sign({ userId, userEmail, userName, userSurname }, KEY, { expiresIn: '1h' });
+        /* Send token */
+        return NextResponse.json({ success: true , token });
+    } else {
+        /* Send error with message */
+        return NextResponse.json({ status: 'error', error: 'Usuario o contraseña incorrectas' });
+    };
 };
