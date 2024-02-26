@@ -154,7 +154,9 @@
 }
 
 .button{
-    width: 75%;
+    @include shared.not-mobile{
+        width: 75%;
+    }
     &_container{
         margin-top: 2rem;
         display: flex;
