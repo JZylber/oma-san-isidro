@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '../../../server/db';
+import { SignJWT } from 'jose';
 
 /* JWT secret key */
 const KEY = process.env.JWT_KEY as string;
@@ -33,7 +33,14 @@ export async function POST(request : NextRequest) {
     const isValid = await bcrypt.compare(password, userPassword);
     if (isValid) {
         /* Create token */
-        const token = jwt.sign({ userId, userEmail, userName, userSurname }, KEY, { expiresIn: '1h' });
+        const iat = Math.floor(Date.now() / 1000);
+        const exp = iat + 60* 60;
+        const token = await new SignJWT({ userId, userEmail, userName, userSurname })
+          .setProtectedHeader({ alg: 'HS256' })
+          .setExpirationTime(exp)
+          .setIssuedAt(iat)
+          .setNotBefore(iat)
+          .sign(new TextEncoder().encode(KEY));
         /* Send token */
         return NextResponse.json({ success: true , token });
     } else {

@@ -1,11 +1,12 @@
 'use client'
 import React, { useState } from 'react';
 import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
 
 const LoginPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    const router = useRouter();
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         const loginApi = await fetch(`../api/auth`, {
@@ -20,7 +21,8 @@ const LoginPage: React.FC = () => {
           }) as Response;
           let result = await loginApi.json();
           if (result.success && result.token) {
-            Cookies.set('token', result.token);
+            Cookies.set('currentUser', result.token, {sameSite: 'strict'});
+            router.push('/dashboard');
           }
     };
 
