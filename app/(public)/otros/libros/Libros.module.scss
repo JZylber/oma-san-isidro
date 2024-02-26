@@ -152,3 +152,22 @@
         }
     }
 }
+
+.button{
+    width: 75%;
+    &_container{
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+    }
+}
+.downloadArrow{
+    @include shared.not-desktop{
+        display: none;
+    }
+    @include shared.desktop-only{
+        transform: rotate(90deg);
+        width: 4rem;
+        height: 4rem;
+    }
+}

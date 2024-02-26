@@ -1,4 +1,5 @@
 'use client'
+import { Button } from "../../../../components/buttons/Button";
 import styles from "./Libros.module.scss";
 import Image from "next/image";
 
@@ -17,6 +18,15 @@ const renderBook = (book: Book,idx: number) => {
             <td>{`$${book.precio}`}</td>}
     </tr>)
 } 
+
+const downloadBooks = () => {
+    const link = document.createElement("a");
+    link.href = `/files/libros.pdf`;
+    link.target = `_blank`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
 
 
 const BooksPage = ({books}:{books:Book[]}) => {
@@ -37,7 +47,7 @@ const BooksPage = ({books}:{books:Book[]}) => {
                         <p>Proximamente: Estamos trabajando para que se puedan encargar libros desde la página. El pago y la entrega van a seguir estando a cargo de las coordinadoras regionales.</p>
                     </div>
             </div>
-            <div className={styles.table_container}>
+            {/*<div className={styles.table_container}>
                 <table className={styles.table}>
                     <thead className={styles.table_header}>
                         <tr>
@@ -49,8 +59,15 @@ const BooksPage = ({books}:{books:Book[]}) => {
                         {books.map(renderBook)}
                     </tbody>
                 </table>
+            </div>*/}
+        <div className={styles.button_container}>
+            <div className={styles.button}>
+                <Button content="Lista de Precios" onClick={downloadBooks}>
+                    <div className={styles.downloadArrow}><Image src="/images/newsArrow.svg" fill={true} alt=""/></div>
+                </Button>
             </div>
-        </>        
+        </div>
+        </>
     )
 }
 
