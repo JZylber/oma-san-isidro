@@ -3,7 +3,7 @@ import styles from "./International.module.scss";
 import dataOMA from "../../../../data/internacionalOMA.json"
 import dataNandu from "../../../../data/internacionalNandu.json"
 
-const orderByLevelAndSurname = (a: Array<string | boolean | number>, b: Array<string | boolean | number>) => {
+const orderByLevelAndSurname = (a: Array<string | boolean | number | null>, b: Array<string | boolean | number | null>) => {
     let a0 = a[0] as number;
     let b0 = b[0] as number;
     let a1 = a[1] as string;
@@ -17,8 +17,8 @@ const InternationalPage = () => {
     sortedDataOma.sort(orderByLevelAndSurname);
     let sortedDataNandu = dataNandu;
     sortedDataNandu.sort(orderByLevelAndSurname);
-    const renderOMAparticipant = (omaParticipant : Array<string | boolean>,idx:number) => {
-        const [level,surname,name,t1,t2,t3,t4] = omaParticipant;
+    const renderOMAparticipant = (omaParticipant : Array<string | boolean | number | null>,idx:number) => {
+        const [level,surname,name,t1,t2,t3,t4,may_level] = omaParticipant;
         return(
             <tr key={idx}>
                 <td className={styles.right_align}>{level}</td>
@@ -28,6 +28,7 @@ const InternationalPage = () => {
                 <td>{t2?"Si":""}</td>
                 <td>{t3?"Si":""}</td>
                 <td>{t4?"Si":""}</td>
+                <td>{may_level&&may_level}</td>
             </tr>)
     }
     const renderNanduparticipant = (omaParticipant : Array<string | boolean | number>,idx:number) => {
@@ -83,7 +84,7 @@ const InternationalPage = () => {
                     </li>
                     <li className={styles.tournament}>
                          <h3 className={styles.tournament_name}>OlimPri</h3>
-                         <p className={styles.tournament_requirements}>Campeones y subcampeones de 1° y 2° Nivel de Ñandú 2023.</p>
+                         <p className={styles.tournament_requirements}>Campeones y subcampeones de 1° y 2° Nivel de Ñandú 2024.</p>
                     </li>
                 </ul>
                 <div className={styles.table_container}>
@@ -93,10 +94,11 @@ const InternationalPage = () => {
                                 <th className={styles.table_column_level}>Nivel</th>
                                 <th className={[styles.table_column_name,styles.sticky_column].join(" ")}>Apellido</th>
                                 <th className={styles.table_column_name}>Nombre</th>
-                                <th className={styles.table_column_tournament}>Mayo</th>
+                                <th className={styles.table_column_tournament}>Aprobado</th>
                                 <th className={styles.table_column_tournament}>Cono Sur</th>
                                 <th className={styles.table_column_tournament}>IMO</th>
                                 <th className={styles.table_column_tournament}>Ibero</th>
+                                <th className={styles.table_column_level}>Mayo</th>
                             </tr>
                         </thead>
                         <tbody className={styles.table_body}>
