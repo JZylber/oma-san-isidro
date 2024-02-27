@@ -67,10 +67,9 @@ const KangarooPage = () => {
                 </div>
             </section>*/}
             <section className={styles.problems}>
-                    <h2 className={styles.section_title}>21/3 SIN COSTO</h2>
-                    <div className={styles.links}>
-                    <p className={styles.main_text}>En breve pondremos las condiciones para participar</p>
-                    </div>
+                    <h2 className={styles.section_title}>21/3 a 14hs</h2>
+                    <p className={styles.main_text}>Este año es SIN COSTO.</p>
+                    <p className={styles.main_text}>Para inscribirse y más información, pueden ir a <a href="https://www.oma.org.ar/canguro">https://www.oma.org.ar/canguro</a></p>
             </section>
         </>        
     )
