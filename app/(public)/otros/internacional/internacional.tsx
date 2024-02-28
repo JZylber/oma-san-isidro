@@ -91,13 +91,13 @@ const InternationalPage = () => {
                     <table className={styles.table}>
                         <thead className={styles.table_header}>
                             <tr>
-                                <th className={styles.table_column_level}>Nivel</th>
+                                <th className={styles.table_column_level}>Nivel (2023)</th>
                                 <th className={[styles.table_column_name,styles.sticky_column].join(" ")}>Apellido</th>
                                 <th className={styles.table_column_name}>Nombre</th>
                                 <th className={styles.table_column_tournament}>Aprobado</th>
-                                <th className={styles.table_column_tournament}>Cono Sur</th>
                                 <th className={styles.table_column_tournament}>IMO</th>
                                 <th className={styles.table_column_tournament}>Ibero</th>
+                                <th className={styles.table_column_tournament}>Cono Sur</th>
                                 <th className={styles.table_column_level}>Nivel Mayo</th>
                             </tr>
                         </thead>
