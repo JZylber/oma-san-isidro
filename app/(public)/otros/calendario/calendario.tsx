@@ -20,7 +20,7 @@ interface CalendarProps {
 
 const CalendarPage = ({events,year}:CalendarProps) => {
     const searchParams = useSearchParams();
-    const [displayedMonth,setDisplayedMonth] = useState(new Date().getMonth());
+    const [displayedMonth,setDisplayedMonth] = useState(new Date().getUTCMonth());
     const [categories,setCategories] = useState<string []>([]);
     const eventsAvailable : boolean = events.length > 0;
     useEffect(() => {
@@ -30,7 +30,7 @@ const CalendarPage = ({events,year}:CalendarProps) => {
         }
       }, [searchParams])
     const getMonthEvents = (month: number) => {
-        let monthEvents = events.filter((event) => event.fecha_inicio.getMonth() === month)
+        let monthEvents = events.filter((event) => event.fecha_inicio.getUTCMonth() === month)
         if(categories.length > 0){
             monthEvents = monthEvents.filter((event) => categories.includes(event.tipo))
         }
