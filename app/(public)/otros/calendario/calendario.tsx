@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState } from "react";
 import DateCard from "../../../../components/CalendarComponents/DateCard/DateCard";
 import DateFilter from "../../../../components/CalendarComponents/DateFilter/DateFilter";
-import Layout from "../../../../components/Layout/Layout";
 import MonthSelect from "../../../../components/CalendarComponents/MonthSelect/MonthSelect";
 import styles from "./Calendar.module.scss";
 import MonthEvents from "../../../../components/CalendarComponents/MonthEvents/MonthEvents";
