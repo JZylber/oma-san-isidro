@@ -21,8 +21,8 @@ export const Authorization = ({ type }: { type: string }) => {
       text: "el alumno que no presente dicha autorizaciones firmada por el padre, madre, tutor o encargado y con la firma y sello del colegio.",
     },
     {
-      important: "No se aceptarán autorizaciones con fechas corregidas",
-      text: "lo tanto deberán presentar la actualizada que puedan bajar aquí.",
+      important: "No se aceptarán autorizaciones con fechas corregidas,",
+      text: "por lo tanto deberán presentar la actualizada que puedan bajar aquí.",
     },
   ];
   const handleClick = () => {
