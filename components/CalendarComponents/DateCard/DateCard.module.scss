@@ -34,6 +34,12 @@
 }
 
 .event_text{
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+    word-wrap: break-word;
+    max-width: 100%;
     @include shared.mobile-only{
         @include shared.font-unbounded(400);
         font-size: 2.4rem;
