@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { INSTANCIA } from "@prisma/client";
 import { prisma } from '../db';
 
-const getInstanceDropPoints = async (type: string, year: number, instance: INSTANCIA) => {
+export const getInstanceDropPoints = async (type: string, year: number, instance: INSTANCIA) => {
   const query = await prisma.prueba.findFirst({
     where: {
       competencia: {
