@@ -4,6 +4,7 @@ import styles from "./Inscription.module.scss"
 import BankInformation from "./BankInformation"
 import Link from "next/link"
 import Pending from "../Pending/pending"
+import { DropPoint } from "../Instances/Venues"
 
 export interface InscriptionData {
     fecha_inscripcion_nacional?: Date,
@@ -14,13 +15,15 @@ export interface InscriptionData {
 interface InscriptionProps {
     type: string,
     data: InscriptionData,
+    authMaxDate?: Date,
+    dropPoints?: Array<DropPoint>
 }
 
 const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
   "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
 ];
 
-export const Inscripcion = ( { type,data} : InscriptionProps ) => {
+export const Inscripcion = ( { type,data,authMaxDate,dropPoints} : InscriptionProps ) => {
     const name = type === "OMA"?"Oma":"Ñandú"
     const availableData : boolean = data.fecha_inscripcion_nacional !== undefined || data.fecha_inscripcion_regional !== undefined || data.link_inscripcion !== undefined;
     const {fecha_inscripcion_nacional,fecha_inscripcion_regional,link_inscripcion} = data;
