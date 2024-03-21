@@ -98,9 +98,16 @@ export const Inscripcion = ( { type,data,authMaxDate,dropPoints} : InscriptionPr
                 </div>
            </div>
            <div className={styles.step_information}>
-            <h1>3. Autorizaciones</h1>
+            <h1>3. Autorizaciones: hasta el {authMaxDate?`${authMaxDate.getUTCDate()} de ${monthNames[authMaxDate.getUTCMonth()].toLocaleLowerCase()}`:"(a determinar)"}</h1>
             
             <p><span className={styles.step_information_bold}>Este año, las autorizaciones se entregan una única vez antes de la primera instancia. Las autorizaciones se encuentran <Link href={type === "OMA"?"/oma/autorizacion":"/nandu/autorizacion"}>acá</Link>.</span></p>
+            <p>Las autorizaciones deben estar <span className={styles.step_information_bold}>completas</span> con las <span className={styles.step_information_bold}>firmas y sellos correspondientes</span>. Estas se pueden entregar hasta el <span className={styles.step_information_bold}>{authMaxDate?`${authMaxDate.getUTCDate()}/${authMaxDate.getUTCMonth() + 1}`:"(A definir)"}</span> en los siguientes puntos:</p>
+            <ul className={styles.dropPoints}>
+                    {dropPoints && dropPoints.map((dropPoint, index) => {
+                        const {localidad, nombre, direccion, aclaracion} = dropPoint;
+                        return(<li className={styles.text} key={index}><span className={styles.bold}>{localidad}: </span>{nombre?`${nombre} - `:""}{direccion}{aclaracion?` (${aclaracion})`:""}</li>)
+                    })}
+            </ul>
            </div>
         </div>
         </>

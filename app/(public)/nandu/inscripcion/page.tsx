@@ -19,5 +19,4 @@ export default async function NanduInscription() {
     const dropPoints = await getInstanceDropPoints(competition,year,firstInstance) as DropPoint[];
     const props = {...data,authMaxDate,dropPoints};
     return <NanduInscriptionPage {...props}/>
-
 }
