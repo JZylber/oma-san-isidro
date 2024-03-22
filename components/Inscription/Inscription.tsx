@@ -105,7 +105,7 @@ export const Inscripcion = ( { type,data,authMaxDate,dropPoints} : InscriptionPr
             <ul className={styles.dropPoints}>
                     {dropPoints && dropPoints.map((dropPoint, index) => {
                         const {localidad, nombre, direccion, aclaracion} = dropPoint;
-                        return(<li className={styles.text} key={index}><span className={styles.bold}>{localidad}: </span>{nombre?`${nombre} - `:""}{direccion}{aclaracion?` (${aclaracion})`:""}</li>)
+                        return(<li className={styles.text} key={index}><span className={styles.step_information_bold}>{localidad}: </span>{nombre?`${nombre} - `:""}{direccion}{aclaracion?` (${aclaracion})`:""}</li>)
                     })}
             </ul>
            </div>
