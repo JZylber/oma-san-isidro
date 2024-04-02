@@ -16,10 +16,12 @@ export interface Book{
 const BooksPage = () => {
     const books = trpc.scraper.getBooks.useQuery();
     if(books.isLoading){
-        return(<Loader/>)
+        return(<Loader/>);
     }
-    else if(books.isSuccess){
-        return(<RenderBooksPage books={books.data}/>)
+    else if(books.isError){
+        throw books.error;
+    } else if(books.isSuccess){
+        return(<RenderBooksPage books={books.data}/>);
     }
 }
 
