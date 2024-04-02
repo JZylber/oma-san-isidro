@@ -1,5 +1,4 @@
 'use client'
-import { Button } from "../../../../components/buttons/Button";
 import Loader from "../../../../components/Loader/Loader";
 import { trpc } from "../../../../utils/trpc";
 import styles from "./Libros.module.scss";
