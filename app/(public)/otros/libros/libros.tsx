@@ -21,6 +21,8 @@ const BooksPage = () => {
         throw books.error;
     } else if(books.isSuccess){
         return(<RenderBooksPage books={books.data}/>);
+    } else {
+        return(<h1>Error</h1>);
     }
 }
 
