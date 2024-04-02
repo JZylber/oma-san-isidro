@@ -1,5 +1,6 @@
 'use client'
 import { Button } from "../../../../components/buttons/Button";
+import Loader from "../../../../components/Loader/Loader";
 import { trpc } from "../../../../utils/trpc";
 import styles from "./Libros.module.scss";
 import Image from "next/image";
@@ -15,11 +16,9 @@ export interface Book{
 const BooksPage = () => {
     const books = trpc.scraper.getBooks.useQuery();
     if(books.isLoading){
-        return(<div>Cargando...</div>)
+        return(<Loader/>)
     }
-    else if(books.isError){
-        return(<div>Error</div>)
-    } else if(books.isSuccess){
+    else if(books.isSuccess){
         return(<RenderBooksPage books={books.data}/>)
     }
 }
