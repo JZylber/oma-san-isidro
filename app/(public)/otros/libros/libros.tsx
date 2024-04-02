@@ -1,35 +1,30 @@
 'use client'
 import { Button } from "../../../../components/buttons/Button";
+import { trpc } from "../../../../utils/trpc";
 import styles from "./Libros.module.scss";
 import Image from "next/image";
 
 export interface Book{
     nombre : string,
+    categoria: string,
     precio: number,
-    descuento: number,
-    nuevo: boolean
+    autores: string[],
+    páginas: number,
 }
 
-const renderBook = (book: Book,idx: number) => {
-    return(<tr key={idx}>
-        <td className={styles.table_body_bookName}><p className={styles.special}>{book.nuevo?"¡NUEVO!":(book.descuento > 0?"¡OFERTA!":"")}</p><p>{book.nombre}</p></td>
-        {book.descuento > 0 ?
-            <td>${Math.ceil(book.precio* (1 - book.descuento)/100)*100} <s style={{opacity: "0.5"}}>${book.precio}</s></td>:
-            <td>{`$${book.precio}`}</td>}
-    </tr>)
-} 
-
-const downloadBooks = () => {
-    const link = document.createElement("a");
-    link.href = `/files/libros.pdf`;
-    link.target = `_blank`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+const BooksPage = () => {
+    const books = trpc.scraper.getBooks.useQuery();
+    if(books.isLoading){
+        return(<div>Cargando...</div>)
+    }
+    else if(books.isError){
+        return(<div>Error</div>)
+    } else if(books.isSuccess){
+        return(<RenderBooksPage books={books.data}/>)
+    }
 }
 
-
-const BooksPage = ({books}:{books:Book[]}) => {
+const RenderBooksPage = ({books}:{books:Book[]}) => {
     return(
         <>
             <h1 className={styles.title}>Libros a la venta</h1>
@@ -47,26 +42,6 @@ const BooksPage = ({books}:{books:Book[]}) => {
                         <p>Proximamente: Estamos trabajando para que se puedan encargar libros desde la página. El pago y la entrega van a seguir estando a cargo de las coordinadoras regionales.</p>
                     </div>
             </div>
-            {/*<div className={styles.table_container}>
-                <table className={styles.table}>
-                    <thead className={styles.table_header}>
-                        <tr>
-                            <th className={styles.book_name_column}>Nombre</th>
-                            <th>Precio</th>
-                        </tr>
-                    </thead>
-                    <tbody className={styles.table_body}>
-                        {books.map(renderBook)}
-                    </tbody>
-                </table>
-            </div>*/}
-        <div className={styles.button_container}>
-            <div className={styles.button}>
-                <Button content="Lista de Precios" onClick={downloadBooks}>
-                    <div className={styles.downloadArrow}><Image src="/images/newsArrow.svg" fill={true} alt=""/></div>
-                </Button>
-            </div>
-        </div>
         </>
     )
 }
