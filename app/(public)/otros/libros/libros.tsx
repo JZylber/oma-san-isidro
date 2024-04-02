@@ -1,4 +1,5 @@
 'use client'
+import BookCard from "../../../../components/Book/book";
 import Loader from "../../../../components/Loader/Loader";
 import { trpc } from "../../../../utils/trpc";
 import styles from "./Libros.module.scss";
@@ -44,6 +45,13 @@ const RenderBooksPage = ({books}:{books:Book[]}) => {
                         </ul>
                         <p>Proximamente: Estamos trabajando para que se puedan encargar libros desde la página. El pago y la entrega van a seguir estando a cargo de las coordinadoras regionales.</p>
                     </div>
+            </div>
+            <div className="grid grid-cols-3 gap-4 my-4">
+                {books.map((book,idx) => {
+                    return(
+                        <BookCard key={idx} {...book}/>
+                    )
+                })}
             </div>
         </>
     )
