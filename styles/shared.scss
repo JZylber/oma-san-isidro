@@ -36,6 +36,7 @@ $tablet-reading-font-size: 1.5rem;
 $desktop-actionable-font-size: 2.4rem;
 $desktop-reading-font-size: 2rem;
 
+
 /*Unified media queries*/
 @mixin mobile-only {
     @media screen and (max-width:767px){
@@ -72,13 +73,13 @@ $desktop-reading-font-size: 2rem;
 /*Used Fonts*/
 
 @mixin font-montserrat($weight) {
-    font-family: var(--font-montserrat);
+    font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: $weight;
 }
 
 @mixin font-unbounded($weight) {
-    font-family: var(--font-unbounded);
+    font-family: 'Unbounded', sans-serif;
     font-style: normal;
     font-weight: $weight;
 }
