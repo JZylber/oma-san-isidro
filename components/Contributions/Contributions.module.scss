@@ -1,0 +1,73 @@
+@use '../../styles/shared.scss' as shared;
+
+.contributionContainer {
+    border: 2px solid black;
+    background-color: shared.$light-blue;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    @include shared.mobile-only{
+        padding: 2.4rem 1.6rem 2.4rem 1.6rem;
+    }
+    @include shared.not-mobile{
+        padding: 3.2rem;
+    }
+}
+
+.title{
+    color: shared.$black;
+    display: flex;
+    text-decoration: underline;
+    @include shared.font-montserrat(600);
+    font-size: 2.4rem;
+    &_image{
+        position: relative;
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        @include shared.mobile-only{
+            order: 1;
+        }
+        @include shared.not-mobile{
+            order: 2;
+        }
+    }
+    span {
+        @include shared.mobile-only{
+            order: 2;
+        }
+        @include shared.not-mobile{
+            order: 1;
+        }
+    }
+}
+
+.contributions_icon{
+    @include shared.mobile-only{
+        display: none;
+    }
+    @include shared.not-mobile{
+        display: inline-block;
+        position: relative;
+        object-fit: cover;
+        aspect-ratio: 1/1;
+        margin-right: 3.2rem;
+    }
+    @include shared.tablet-only{
+        height: 105px;
+    }
+    @include shared.desktop-only{
+        height: 127px;
+    }
+}
+
+.text{
+    @include shared.font-montserrat(300);
+    color: shared.$black;
+    @include shared.mobile-only{
+        font-size: shared.$mobile-reading-font-size;
+    }
+    @include shared.not-mobile{
+        font-size: shared.$desktop-reading-font-size;
+    }
+}

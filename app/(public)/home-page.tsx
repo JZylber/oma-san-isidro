@@ -9,6 +9,7 @@ import DateBanner from "../../components/CalendarComponents/DateBanner/DateBanne
 import { CalendarEvent} from "../../components/CalendarComponents/CalendarTypes";
 import HomeModal from "../../components/Popups/HomeModal";
 import {useState } from "react";
+import Contributions from "../../components/Contributions/Contributions";
 
 
 interface HomeProps {
@@ -33,6 +34,11 @@ const Home = ({news,events}: HomeProps) => {
         <div className={styles.containerImg}>
           <MainNandu className={styles.mainImage} />
         </div>
+
+        {/* Contributions */}
+        <section className={styles.contributionSection}>
+          <Contributions/>
+        </section>
 
         {/* Next Events */}
         <section className={styles.eventSection}>
