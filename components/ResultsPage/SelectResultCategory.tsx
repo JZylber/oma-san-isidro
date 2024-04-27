@@ -1,4 +1,4 @@
-import {RefObject, useCallback, useEffect, useMemo, useRef, useState } from "react"
+import {RefObject, useCallback, useEffect, useRef, useState } from "react"
 import SelectIcon from "../../public/images/menuSelectIcon.svg";
 import styles from "./SelectResultCategory.module.scss"
 import {Filterables } from "../../hooks/types";
