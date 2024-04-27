@@ -115,7 +115,7 @@ const Venues = ({competition,instance,dropPoints,venues,auth_max_date,participan
                     make_element={hasDisclaimers?(result,index) => makeVenueElement(result,index,true):makeVenueElement}
                     />
                 </Collapsable>
-                <Collapsable title="Participantes por Sede">
+                {participants.length > 0 && <Collapsable title="Participantes por Sede">
                 <form className={styles.form}>
                     <SelectResultCategory category="Participante" value={participantFilter.participante} setValue={(option?: Participant) => updateParticipantFilter({participante: option})} options={participantOptions.participante} input={true}/>
                     <SelectResultCategory category="Colegio" value={participantFilter.colegio} setValue={(option?: School) => updateParticipantFilter({colegio: option})} options={participantOptions.colegio} input={true}/>
@@ -134,7 +134,7 @@ const Venues = ({competition,instance,dropPoints,venues,auth_max_date,participan
                     make_element={makeParticipantElement}
                     testInfo={`${competition == "OMA"?"OMA":"Nandú"} ${instance} ${(new Date).getFullYear()}`}
                 />
-                </Collapsable>
+                </Collapsable>}
             </Collapsable>
             {instance === "REGIONAL" && 
             <Collapsable title="Mapa">
