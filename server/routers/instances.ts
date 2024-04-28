@@ -293,16 +293,24 @@ const venueDataGenerator = async (competition: string, instance: INSTANCIA) => {
         return ({dropPoints:dropPoints,venues:venues,participants:participants,auth_max_date:instance_data?.fecha_limite_autorizacion,time:instance_data!.hora_ingreso,duration:instance_data!.duracion})
       });
   const participant_venues = participants.map((participant) => {
-        let venue = venues.find((venue) => 
-          {let isVenue = venue.colegio.nombre === participant.colegio.nombre && venue.colegio.sede === participant.colegio.sede
-           if(venue.niveles.length > 0){
-              return isVenue && venue.niveles.includes(participant.nivel)
-           } else if(venue.participantes.length > 0) {
-              return isVenue && venue.participantes.some((participante) => participante.id_participacion === participant.id_participacion)
-           } else
-              return isVenue
+        let possibleVenues = venues.filter((venue) => venue.colegio.nombre === participant.colegio.nombre && venue.colegio.sede === participant.colegio.sede)
+        let venue;
+        if(possibleVenues.length === 1){
+          venue = possibleVenues[0];
+        } else {
+          let byLevels = possibleVenues.some((ven) => ven.niveles.length > 0);
+          let byParticipations = possibleVenues.some((ven) => ven.participantes.length > 0);
+          if(byParticipations){
+            let possibleVenue = possibleVenues.find((ven) => ven.participantes.some((par) => par.id_participacion === participant.id_participacion));
+            if(possibleVenue){
+              venue = possibleVenue;
+            } else {
+              venue = possibleVenues.find((ven) => ven.participantes.length === 0);
+            }
+          } else if(byLevels){
+            venue = possibleVenues.find((ven) => ven.niveles.includes(participant.nivel));
           }
-        );
+        }
         return({...participant,venue: venue?.nombre});
       });
   const venueData = venues.map((venue) => {
