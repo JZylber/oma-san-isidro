@@ -2,4 +2,48 @@
 
 .container {
     position: absolute;
+    transform: translate(0%,75%);
+    border-radius: 9px;
+    padding: 5px;
+    display: flex;
+    column-gap: 5px;
+    border: 1px solid #000000;
+    z-index: 100;
+    background-color: shared.$light-blue;
+    a {
+        @include shared.font-montserrat(400);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: shared.$black;
+        background-color: shared.$white;
+        padding: 5px;
+        border-radius: 9px;
+        border: 1px solid black;
+        transition: all .5s;
+        width: 25px;
+        height: 25px;
+        
+        @include shared.mobile-only{
+            font-size : shared.$mobile-reading-font-size;
+            line-height: 2.4rem;
+        }
+        @include shared.tablet-only{
+            font-size : shared.$tablet-reading-font-size;
+            line-height: 2.4rem;
+        }
+        @include shared.desktop-only{
+            font-size : shared.$desktop-reading-font-size;
+            line-height: 2.9rem;
+        }
+        &:hover{
+            @include shared.font-weight-transition;
+            @include shared.font-montserrat(500);
+            font-size: x-large;
+        }
+        &:visited{
+            color: purple;
+        }
+    }
 }

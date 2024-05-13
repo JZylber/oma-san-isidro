@@ -19,11 +19,9 @@ const Problems : ({type}: {type: string}) => JSX.Element = ({type}) => {
                         const problemLink = problem[instance];
                         if(problemLink instanceof Array){
                             return(<>
-                            <div className={styles.link} key={idx} onClick={() => setOpenLevels({year:year,instance:instance})}>
-                                {instance}
-                                {openLevels?.year == year && openLevels?.instance == instance && 
+                            <div className={styles.link} key={idx} onClick={() => setOpenLevels({year:year,instance:instance})}>{instance}</div>
+                            {openLevels?.year == year && openLevels?.instance == instance && 
                                 <ProblemLevels problem_links={problemLink} close={() => setOpenLevels(undefined)}/>}
-                            </div>
                             </>)
                         } else{
                         return(
