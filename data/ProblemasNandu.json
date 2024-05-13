@@ -164,5 +164,8 @@
         "Zonal": "https://pvqbkogjtilwnziibxsx.supabase.co/storage/v1/object/public/Problemas/2023/Nandu/Zonal%20Nandu%202023.pdf",
         "Provincial": "https://pvqbkogjtilwnziibxsx.supabase.co/storage/v1/object/public/Problemas/2023/Nandu/Provincial%20Nandu%202023.pdf?t=2023-08-18T18%3A42%3A46.712Z",
         "Regional": "https://pvqbkogjtilwnziibxsx.supabase.co/storage/v1/object/public/Problemas/2023/Nandu/Regional%20Nandu%202023.pdf?t=2023-08-31T18%3A56%3A41.589Z"
+    },
+    "2024": {
+        "Interescolar": ["https://pvqbkogjtilwnziibxsx.supabase.co/storage/v1/object/public/Problemas/2024/Nandu/Interescolar%20Nandu%202024%201.pdf?t=2024-05-13T12%3A53%3A13.954Z", "https://pvqbkogjtilwnziibxsx.supabase.co/storage/v1/object/public/Problemas/2024/Nandu/Interescolar%20Nandu%202024%202.pdf?t=2024-05-13T12%3A53%3A33.309Z","https://pvqbkogjtilwnziibxsx.supabase.co/storage/v1/object/public/Problemas/2024/Nandu/Interescolar%20Nandu%202024%203.pdf?t=2024-05-13T12%3A53%3A40.530Z"]
     }
 }

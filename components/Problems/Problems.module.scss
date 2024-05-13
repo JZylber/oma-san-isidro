@@ -63,6 +63,7 @@
             transition: all .5s;
             color: shared.$black;
             text-decoration: none;
+            position: relative;
             @include shared.mobile-only{
                 font-size : shared.$mobile-reading-font-size;
                 line-height: 2.4rem;
