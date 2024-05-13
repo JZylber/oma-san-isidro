@@ -7,9 +7,8 @@
     padding: 5px;
     display: flex;
     column-gap: 5px;
-    border: 1px solid #000000;
     z-index: 100;
-    background-color: shared.$light-blue;
+    background-color: black;
     a {
         @include shared.font-montserrat(400);
         display: flex;
@@ -20,7 +19,6 @@
         background-color: shared.$white;
         padding: 5px;
         border-radius: 9px;
-        border: 1px solid black;
         transition: all .5s;
         width: 30px;
         height: 30px;
@@ -48,14 +46,15 @@
     }
     &::after{
         content: '';
+        position: absolute;
         top: 0;
         left: 50%;
         width: 0;
         height: 0;
-        border: 20px solid transparent;
-        border-bottom-color: shared.$light-blue;
+        border: 12px solid transparent;
+        border-bottom-color: black;
         border-top: 0;
-        margin-left: -20px;
-        margin-top: -20px;
+        margin-left: -12px;
+        margin-top: -12px;
 }
 }
