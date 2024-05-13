@@ -1,19 +1,21 @@
-import { MouseEvent, MutableRefObject, useEffect, useRef } from "react";
+import {useEffect, useRef } from "react";
 
 const useOutsideClick = (callback: () => void) => {
-    const ref = useRef<HTMLDivElement>();
+    const ref = useRef<HTMLDivElement>(null);
   
     useEffect(() => {
-      const handleClick = (event: MouseEvent) => {
+      const handleClick = (event: MouseEvent | TouchEvent) => {
         if (ref.current && !ref.current.contains(event.target as Node)) {
           callback();
         }
       };
   
-      document.addEventListener('click', handleClick);
+      document.addEventListener('mouseup', handleClick);
+      document.addEventListener('touchend', handleClick);
   
       return () => {
-        document.removeEventListener('click', handleClick);
+        document.removeEventListener('mouseup', handleClick);
+        document.removeEventListener('touchend', handleClick);
       };
     }, [ref]);
   

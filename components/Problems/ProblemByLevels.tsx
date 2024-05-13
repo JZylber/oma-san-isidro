@@ -6,7 +6,7 @@ const ProblemLevels : ({problem_links,close}: {problem_links: string [], close: 
     return(<div className={styles.container} ref={ref}>
         {problem_links.map((link:string,idx:number) => {
             return(
-                <a href={link} target = "_blank" rel="noopener noreferrer" key={idx} onClick={close}>{idx + 1}</a>)
+                <a href={link} target = "_blank" rel="noopener noreferrer" key={idx} onClick={close}>N{idx + 1}</a>)
         })}
     </div>)
 }

@@ -22,8 +22,8 @@
         border-radius: 9px;
         border: 1px solid black;
         transition: all .5s;
-        width: 25px;
-        height: 25px;
+        width: 30px;
+        height: 30px;
         
         @include shared.mobile-only{
             font-size : shared.$mobile-reading-font-size;
