@@ -46,4 +46,16 @@
             color: purple;
         }
     }
+    &::after{
+        content: '';
+        top: 0;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border: 20px solid transparent;
+        border-bottom-color: shared.$light-blue;
+        border-top: 0;
+        margin-left: -20px;
+        margin-top: -20px;
+}
 }

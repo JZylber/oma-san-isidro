@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import styles from "./Problems.module.scss";
 import ProblemLevels from "./ProblemByLevels";
 
@@ -18,11 +18,12 @@ const Problems : ({type}: {type: string}) => JSX.Element = ({type}) => {
                     {Object.keys(problem).map((instance:string,idx:number) => {
                         const problemLink = problem[instance];
                         if(problemLink instanceof Array){
-                            return(<>
-                            <div className={styles.link} key={idx} onClick={() => setOpenLevels({year:year,instance:instance})}>{instance}</div>
-                            {openLevels?.year == year && openLevels?.instance == instance && 
+                            return(
+                            <Fragment key={idx}>
+                                <div className={styles.link} onClick={() => setOpenLevels({year:year,instance:instance})}>{instance}</div>
+                                {openLevels?.year == year && openLevels?.instance == instance && 
                                 <ProblemLevels problem_links={problemLink} close={() => setOpenLevels(undefined)}/>}
-                            </>)
+                            </Fragment>)
                         } else{
                         return(
                             <a className={styles.link} href={problemLink} target="_blank" rel="noopener noreferrer" key={idx} onClick={() => setOpenLevels({year:year,instance:instance})}>{instance}</a>
