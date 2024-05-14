@@ -45,7 +45,7 @@
   }
 }
 
-.eventSection {
+.contributionSection {
   @include shared.mobile-only {
     margin-top: 4.8rem;
   }
@@ -56,12 +56,23 @@
   }
 }
 
-.FAQSection {
+.eventSection {
   @include shared.mobile-only {
     margin-top: 4.8rem;
   }
   @include shared.not-mobile {
     grid-row: 4/5;
+    grid-column: 1/-1;
+    margin-top: 4.8rem;
+  }
+}
+
+.FAQSection {
+  @include shared.mobile-only {
+    margin-top: 4.8rem;
+  }
+  @include shared.not-mobile {
+    grid-row: 5/6;
     grid-column: 1/-1;
     margin-top: 4.8rem;
   }

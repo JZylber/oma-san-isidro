@@ -1,0 +1,60 @@
+@use "../../styles/shared.scss" as shared;
+
+.container {
+    position: absolute;
+    transform: translate(0%,75%);
+    border-radius: 9px;
+    padding: 5px;
+    display: flex;
+    column-gap: 5px;
+    z-index: 100;
+    background-color: black;
+    a {
+        @include shared.font-montserrat(400);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: shared.$black;
+        background-color: shared.$white;
+        padding: 5px;
+        border-radius: 9px;
+        transition: all .5s;
+        width: 30px;
+        height: 30px;
+        
+        @include shared.mobile-only{
+            font-size : shared.$mobile-reading-font-size;
+            line-height: 2.4rem;
+        }
+        @include shared.tablet-only{
+            font-size : shared.$tablet-reading-font-size;
+            line-height: 2.4rem;
+        }
+        @include shared.desktop-only{
+            font-size : shared.$desktop-reading-font-size;
+            line-height: 2.9rem;
+        }
+        &:hover{
+            @include shared.font-weight-transition;
+            @include shared.font-montserrat(500);
+            font-size: x-large;
+        }
+        &:visited{
+            color: purple;
+        }
+    }
+    &::after{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border: 12px solid transparent;
+        border-bottom-color: black;
+        border-top: 0;
+        margin-left: -12px;
+        margin-top: -12px;
+}
+}
