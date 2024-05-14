@@ -28,7 +28,6 @@ const BooksPage = () => {
 }
 
 const RenderBooksPage = ({books}:{books:Book[]}) => {
-    console.log(books);
     return(
         <>
             <h1 className={styles.title}>Libros a la venta</h1>
