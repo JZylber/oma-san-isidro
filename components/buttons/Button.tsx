@@ -1,5 +1,4 @@
 import styles from "./Button.module.scss";
-import NewsArrow from "../../img/newsArrow.svg";
 
 interface ButtonProps {
   content: string;

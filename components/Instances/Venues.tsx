@@ -77,9 +77,9 @@ const Venues = ({competition,instance,dropPoints,venues,auth_max_date,participan
         return disclaimers + (venue.aclaracion !== ""?1:0);
     },0) > 0;
     const [venueFilter,updateVenueFilter,filteredVenues,venueOptions] = useFilter<Venue>(venues);
+    const venue_headers = ["Colegio","Sede","Dirección","Localidad"];
     const [participantFilter,updateParticipantFilter,filteredParticipants,participantOptions] = useFilter<VenueParticipant>(participants);
     const participant_headers = ["Nivel","Participante","Colegio","Sede"];
-    const venue_headers = ["Colegio","Sede","Dirección","Localidad"];
     if(hasDisclaimers) {
         venue_headers.push("Aclaración");
     }
