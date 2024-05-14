@@ -38,7 +38,7 @@ const BooksTable = ({books}:{books:Book[]}) => {
                 })}
             </div>}
         </div>
-        <div className="border-2 border-solid border-black rounded-xl overflow-hidden mt-6">
+        <div className="border-2 border-solid border-black rounded-xl overflow-hidden mt-6 overflow-x-scroll">
             <table className="">
                 <thead className="font-unbounded text-[1.6rem] bg-primary-light-blue border-b-2 border-solid border-black">
                     <tr>
