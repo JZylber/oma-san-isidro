@@ -4,6 +4,7 @@ import { useState } from "react";
 
 const BooksTable = ({books}:{books:Book[]}) => {
     const categories = books.map(book => book.categoria).filter((value, index, self) => self.indexOf(value) === index);
+    let [filter, setFilter] = useState<string[]>([]);
     const [filterMenuOpen, setFilterMenuOpen] = useState(false);
     return (
         <>
@@ -15,12 +16,25 @@ const BooksTable = ({books}:{books:Book[]}) => {
                     <Image className="" src="/images/menuSelectIcon.svg" alt="" width={20} height={20}/>
                 </div>
                 {filterMenuOpen && 
-                categories.map((category,idx) => {
+                categories.filter((value) => !filter.includes(value)).map((category,idx) => {
                     return(
-                        <div className="p-4 border-b-2 border-solid border-black last-of-type:border-b-0" key={idx}>{category}</div>
+                        <div onClick={()=> {setFilter([...filter,category]);setFilterMenuOpen(false);}} className="p-4 border-b-2 border-solid border-black last-of-type:border-b-0" key={idx}>{category}</div>
                     )})
                 }
             </div>
+        </div>
+        <div className="mt-6">
+            {filter.length > 0 && 
+            <div className="flex flex-wrap mt-2">
+                {filter.map((category,idx) => {
+                    return(
+                        <div className="border-2 border-solid border-black bg-primary-light-blue rounded-xl p-4 mr-2 mb-2 flex items-center" key={idx}>
+                            <span className="font-unbounded font-[500] text-[1.6rem] mr-6">{category}</span>
+                            <Image src="/images/x.svg" alt="" width={16} height={16} onClick={() => setFilter(filter.filter((value) => value !== category))}/>
+                        </div>
+                    )
+                })}
+            </div>}
         </div>
         <div className="border-2 border-solid border-black rounded-xl overflow-hidden mt-6">
             <table className="">
@@ -34,7 +48,7 @@ const BooksTable = ({books}:{books:Book[]}) => {
                     </tr>
                 </thead>
                 <tbody className="font-montserrat text-[1.6rem]">
-                {books.map((book,idx) => {
+                {books.filter((book) => filter.length === 0 || filter.includes(book.categoria)).map((book,idx) => {
                     return(
                         <tr className="border-b-2 border-solid border-black last-of-type:border-b-0" key={idx}>
                             <td className="p-2">{book.nombre}</td>
