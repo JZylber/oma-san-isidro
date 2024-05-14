@@ -1,15 +1,17 @@
 import Image from "next/image";
 import type {Book} from "../../app/(public)/otros/libros/libros";
 import { useState } from "react";
+import useOutsideClick from "../../hooks/useOutsideClick";
 
 const BooksTable = ({books}:{books:Book[]}) => {
     const categories = books.map(book => book.categoria).filter((value, index, self) => self.indexOf(value) === index);
     let [filter, setFilter] = useState<string[]>([]);
     const [filterMenuOpen, setFilterMenuOpen] = useState(false);
+    const filterRef = useOutsideClick(() => setFilterMenuOpen(false));
     return (
         <>
-        <div className="relative min-h-[50px] mt-6">
-            <div className="absolute bg-primary-white border-2 border-solid border-black rounded-xl font-unbounded font-[500] text-[1.6rem] w-1/2">
+        <div ref={filterRef} className="relative min-h-[50px] mt-6">
+            <div className="absolute bg-primary-white border-2 border-solid border-black rounded-xl font-unbounded font-[500] text-[1.6rem] w-1/2 overflow-y-scroll max-h-[300px]">
                 <div className={`flex justify-between items-center px-8 py-4 ${filterMenuOpen ? 'border-b-2 border-solid border-black' : ''}`} onClick={() => setFilterMenuOpen(!filterMenuOpen)}>
                     <Image src="/images/filter.svg" alt="" width={30} height={30}/>
                     <span>Filtrar</span>
