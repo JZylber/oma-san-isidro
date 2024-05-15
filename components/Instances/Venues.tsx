@@ -56,10 +56,10 @@ const makeVenueElement = (venue : Venue,index : number,clarifications?: boolean)
 }
 
 const downloadParticipantData = (participant : VenueParticipant):Array<string> => {
-    return([participant.nivel.toString(),participant.participante.name,participant.participante.surname,participant.colegio.toString(),participant.sede])
+    return([participant.colegio.toString(),participant.nivel.toString(),participant.participante.surname,participant.participante.name,participant.sede])
 }
 
-const downloadParticipantHeaders = ["Nivel","Nombre","Apellido","Colegio","Sede"]
+const downloadParticipantHeaders = ["Colegio","Nivel","Apellido","Nombre","Sede"]
 
 const makeParticipantElement = (participant : VenueParticipant,index : number) => {
     return(
