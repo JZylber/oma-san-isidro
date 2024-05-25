@@ -23,7 +23,7 @@ export async function POST(request : NextRequest) {
         return NextResponse.json(
             { success: false },
             {status: 400,
-            statusText: 'Usuario no encontrado'});
+            statusText: 'Usuario o contraseña incorrectas'});
     }
     const userId = user.id_usuario,
         userEmail = user.email,
