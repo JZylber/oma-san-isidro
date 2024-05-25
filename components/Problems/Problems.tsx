@@ -1,8 +1,7 @@
 import styles from "./Problems.module.scss";
 import YearProblems from "./YearProblems";
 
-const Problems : ({type}: {type: string}) => JSX.Element = ({type}) => {  
-    const problems : {[key: string]: {[key:string]: string | string[]}}= require(`../../data/Problemas${type}.json`);
+const Problems : ({type,problems}: {type : string,problems: Record<string,Record<string,string | string []>>}) => JSX.Element = ({type,problems}) => {  
     return(
     <>
         <div className={styles.type}>{type == "OMA"?"Oma":"Ñandú"}</div>
