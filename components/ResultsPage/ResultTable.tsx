@@ -117,7 +117,7 @@ const ResultTable = ({results,testInfo}:{results : Array<TestQueryResults>, test
                     center_columns={[1]}
                 />:
                 <ErrorMessage status={400}/>}
-            <p className={styles.disclaimer}>Si hay algún error en el nombre/apellido de algún participante, o algún error en el nombre de algún colegio, por favor mandar un mail a: <a href="mailto:omasanisidro.devs@gmail.com">omasanisidro.devs@gmail.com</a></p>
+            <p className={styles.disclaimer}>Si hay algún error en el nombre/apellido/nivel de algún participante, o algún error en el nombre de algún colegio, por favor mandar un mail a: <a href="mailto:omasanisidro.devs@gmail.com">omasanisidro.devs@gmail.com</a></p>
         </div>
     )
 }
