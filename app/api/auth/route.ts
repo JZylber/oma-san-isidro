@@ -23,7 +23,7 @@ export async function POST(request : NextRequest) {
         return NextResponse.json(
             { success: false },
             {status: 400,
-            statusText: 'Usuario o contraseña incorrectas'});
+            statusText: 'Usuario o contraseña incorrecto'});
     }
     const userId = user.id_usuario,
         userEmail = user.email,
@@ -45,6 +45,9 @@ export async function POST(request : NextRequest) {
         return NextResponse.json({ success: true , token });
     } else {
         /* Send error with message */
-        return NextResponse.json({ status: 'error', error: 'Usuario o contraseña incorrectas' });
+        return NextResponse.json(
+            { success: false },
+            {status: 400,
+            statusText: 'Usuario o contraseña incorrecto'});
     };
 };

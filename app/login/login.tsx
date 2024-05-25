@@ -7,6 +7,7 @@ import { Button } from '../../components/buttons/Button';
 const LoginPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
     const router = useRouter();
     const handleLogin = async () => {
         const loginApi = await fetch(`../api/auth`, {
@@ -17,9 +18,14 @@ const LoginPage: React.FC = () => {
             },
             body: JSON.stringify({email: email, password: password}),
           }).catch(error => {
-            console.error('Error:', error);
+            setError('Error de conexión');
           }) as Response;
           let result = await loginApi.json();
+          if(loginApi.status !== 200) {  
+            console.log(loginApi);
+            setError(loginApi.statusText);
+            return;
+          }
           if (result.success && result.token) {
             Cookies.set('currentUser', result.token, {sameSite: 'strict'});
             router.push('/dashboard');
@@ -36,7 +42,7 @@ const LoginPage: React.FC = () => {
                 </div>
                 <form className="space-y-16 font-montserrat text-2xl">
                     <input type="hidden" name="remember" value="true" />
-                    <div className="rounded-md shadow-sm -space-y-px">
+                    <div className="rounded-md shadow-sm">
                         <div>
                             <label htmlFor="email-address" className="sr-only">
                                 Email
@@ -70,6 +76,7 @@ const LoginPage: React.FC = () => {
                             />
                         </div>
                     </div>
+                    {error !== '' && <p className="text-red-500 text-center">{error}</p>}
                     <div>
                         <Button content="Ingresar" onClick={handleLogin}/>
                     </div>
