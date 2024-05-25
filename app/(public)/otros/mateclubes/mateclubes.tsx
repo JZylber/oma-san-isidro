@@ -24,7 +24,7 @@ const MathClubs = ({events}:MateclubesProps) => {
         <>
             <h1 className={styles.title}>Mateclubes</h1>
             <AllDatesBanner dates={events} category="Mateclubes"/>
-            <section className={styles.section}>
+            {/*<section className={styles.section}>
                 <h2 className={styles.section_title}>Mateclubes 3era Ronda</h2>
                 <p className={styles.text}>Para la competencia necesitamos:</p>
                 <ul className={styles.dropPoints}>
@@ -46,7 +46,7 @@ const MathClubs = ({events}:MateclubesProps) => {
             </section>
             <section className={styles.section}>
                 <p className={styles.text}>Para más información mandar un mail a Gloria Sampablo: <a href="mailto:gloriasampablo@gmail.com">gloriasampablo@gmail.com</a></p>
-            </section>
+            </section>*/}
         </>
     )
 }

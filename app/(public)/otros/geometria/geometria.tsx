@@ -4,6 +4,7 @@ import styles from "./Geometria.module.scss";
 import BankInformation from "../../../../components/Inscription/BankInformation";
 import AllDatesBanner from "../../../../components/CalendarComponents/DateBanner/NextDatesBanner";
 import Warning from "../../../../components/Warning/Warning";
+import Pending from "../../../../components/Pending/pending";
 
 interface GeometryPageProps{
     events : Array<CalendarEvent>,
@@ -15,7 +16,8 @@ const GeometryPage = ({events}: GeometryPageProps ) => {
         <>
                 <h1 className={styles.title}>Torneo de Geometría e Imaginación</h1>
                 <AllDatesBanner dates={events} category="Geometría"/>
-                <section className={styles.section}>
+                <Pending text="Todavía no hay información sobre la inscripción al torneo de geometría"/>
+                {/*<section className={styles.section}>
                     <h3 className={styles.section_title}>Inscripción</h3>
                     <div className={styles.section_content}>
                         <ol>
@@ -34,7 +36,6 @@ const GeometryPage = ({events}: GeometryPageProps ) => {
                         <p>Les recordamos también que en este TORNEO, el alumno es libre de llevar a la prueba escrita el material que prefiera y crea necesario para resolver los problemas. Siempre les recomendamos utilizar las NOTAS DE GEOMETRÍA que publica la OMA para entrenamiento y material de consulta en las pruebas.</p>
                         <p>En <a href="https://www.oma.org.ar/problemas/index.php/problemas-de-geometria">https://www.oma.org.ar/problemas/index.php/problemas-de-geometria</a> , están los problemas de entrenamiento del 2022 y 2023, (sus respectivas soluciones, como siempre, están en la quinta temporada de Las Leñitas Geométricas), que pueden ser de mucha ayuda.</p>
                         <p>Los alumnos podrán utilizar en las pruebas el GeoGebra en sus computadoras, Tablet o teléfonos, en el modo examen.</p>
-                        {/*<p>La novedad de este año es que proponemos RONDAS al estilo de TORNEO, es decir con la prueba escrita, su posterior discusión y la proclamación de campeones por niveles. Por lo tanto, la actividad durará “todo un día” mañana y tarde. Cada colegio, coordinación intercolegial o delegación zonal deberá informar a la correspondiente Secretaría Regional OMA, en qué lugar (Colegio, Institución, etc.) se realiza la primera y la segunda ronda en este formato de TORNEO. La Ronda Final la organizará OMA.</p>*/}
                     </div>
                 </section>
                 <section className={styles.section}>
@@ -56,7 +57,7 @@ const GeometryPage = ({events}: GeometryPageProps ) => {
                     <div className={styles.section_content}>
                         <p>Para más información, escribir a <a href="mailto:roxana.magistrali@gmail.com">roxana.magistrali@gmail.com</a></p>
                     </div>
-                </section>
+                </section>*/}
         </>  
        )
 }

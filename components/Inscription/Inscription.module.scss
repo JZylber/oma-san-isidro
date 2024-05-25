@@ -103,6 +103,9 @@
   &_bold{
     @include shared.font-montserrat(600);
   }
+  .dropPoints{
+    list-style: none;
+  }
 }
 
 .contact_information{

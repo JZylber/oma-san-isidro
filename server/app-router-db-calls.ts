@@ -1,3 +1,4 @@
+import { INSTANCIA } from "@prisma/client";
 import { prisma } from "./db";
 
 export type Competition = "OMA" | "ÑANDÚ"
@@ -112,3 +113,19 @@ export const getAvailableResults = async (type: string) => {
   query.forEach((prueba) => {years.find((year) => year.ano === prueba.competencia.ano)!.pruebas.push({nombre: prueba.instancia,disponible: prueba.resultados_disponibles})});
   return (years);
 };
+
+export const getAuthMaxDate = async (type: string, year: number, instance: INSTANCIA) => {
+  const query = await prisma.prueba.findFirst({
+    where: {
+      competencia: {
+        tipo: type,
+        ano: year
+      },
+      instancia: instance
+    },
+    select: {
+      fecha_limite_autorizacion: true
+    }
+  });
+  return (query);
+}

@@ -3,6 +3,7 @@ import OMALogo from "../../public/images/logoOMA.svg";
 import Link from "next/link";
 
 const Footer = () => {
+  const year = new Date().getFullYear();
   return (
     <footer className={styles.footer}>
       <div className={styles.footer_secretary}>
@@ -40,7 +41,7 @@ const Footer = () => {
         </div>
       </div>
       <div className={styles.footer_credits}>
-        <p>© 2022 Joaquín Aldrey y Julián Zylber.</p>
+        <p>© {year} Joaquín Aldrey y Julián Zylber.</p>
         <p>Todos los derechos reservados.</p>
       </div>
     </footer>

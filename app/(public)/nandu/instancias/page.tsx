@@ -1,5 +1,5 @@
 import { Metadata } from "next"
-import { getInstances } from "../../../../server/app-router-db-calls";
+import {getInstances } from "../../../../server/app-router-db-calls";
 import NanduInstancePage from "./instancias";
 
 export const metadata : Metadata = {

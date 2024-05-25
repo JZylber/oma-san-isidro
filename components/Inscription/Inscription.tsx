@@ -4,6 +4,7 @@ import styles from "./Inscription.module.scss"
 import BankInformation from "./BankInformation"
 import Link from "next/link"
 import Pending from "../Pending/pending"
+import { DropPoint } from "../Instances/Venues"
 
 export interface InscriptionData {
     fecha_inscripcion_nacional?: Date,
@@ -14,13 +15,15 @@ export interface InscriptionData {
 interface InscriptionProps {
     type: string,
     data: InscriptionData,
+    authMaxDate?: Date,
+    dropPoints?: Array<DropPoint>
 }
 
 const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
   "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
 ];
 
-export const Inscripcion = ( { type,data} : InscriptionProps ) => {
+export const Inscripcion = ( { type,data,authMaxDate,dropPoints} : InscriptionProps ) => {
     const name = type === "OMA"?"Oma":"Ñandú"
     const availableData : boolean = data.fecha_inscripcion_nacional !== undefined || data.fecha_inscripcion_regional !== undefined || data.link_inscripcion !== undefined;
     const {fecha_inscripcion_nacional,fecha_inscripcion_regional,link_inscripcion} = data;
@@ -44,16 +47,17 @@ export const Inscripcion = ( { type,data} : InscriptionProps ) => {
         <div className={styles.container}>
             <div className={styles.step_information}>
                 <h1>1. Pago</h1>
-                <p>El pago por alumno este año es de: <span className={styles.step_information_bold}>$3.000</span>.</p>
+                <p>El pago por alumno este año es de: <span className={styles.step_information_bold}>$12.000</span>.</p>
                 <p>Se debe realizar un solo depósito por la totalidad de alumnos inscriptos en la cuenta de la Olimpíada.</p>
-                <p>La inscripción incluye la participación al torneo de geometría. Como este ocurre primero, aquellos alumnos que participen en el torneo de geometría <span className={styles.step_information_bold}>no deben abonar la inscripción a {name}</span>. El costo de inscripción para participar del torneo de geometría solamente es también de $3000.</p>
+                <p>La inscripción incluye la participación al torneo de geometría y al torneo de literatura y matemática. El costo de inscripción para participar solamente de estos torneos es también de $12.000.</p>
                 <BankInformation/>
-                <p>La inscripción a la competencia de Mateclubes es gratuita y se hace desde la página de OMA. Recién se paga en la tercera ronda (que es presencial) y el costo de la competencia es de $6.000 por club. No se exime de pago por haber participado en otro torneo.</p>
+                <p>La inscripción a la competencia de Mateclubes es gratuita y se hace desde la página de OMA. Recién se paga en la tercera ronda (que es presencial) y el costo de la competencia es de $24.000 por club. No se exime de pago por haber participado en otro torneo.</p>
+                <p>El día del certamen se deberá presentar el comprobante <span className={styles.step_information_bold}>original</span> del depósito bancario para poder entregar el recibo correspondiente.</p>
            </div>
            <div className={styles.step_information}>
             <h1>2. Inscripción</h1>
             <p>Los profesores encargados de {name} deben realizar la inscripción que consiste de 2 pasos.</p>
-            <h2>Paso 1: hasta el {fecha_inscripcion_regional?`${fecha_inscripcion_regional.getDate()} de ${monthNames[fecha_inscripcion_regional.getMonth()].toLocaleLowerCase()}`:"(a determinar)"}</h2>
+            <h2>Paso 1: hasta el {fecha_inscripcion_regional?`${fecha_inscripcion_regional.getUTCDate()} de ${monthNames[fecha_inscripcion_regional.getUTCMonth()].toLocaleLowerCase()}`:"(a determinar)"}</h2>
                 <p>Completar la planilla de datos con los datos pedidos:</p>
                 <div className={styles.button_container}>
                     <Button content="Planilla de Datos" onClick={downloadForm}><Arrow className={[styles.arrow,styles.download].join(" ")}/></Button>
@@ -83,7 +87,7 @@ export const Inscripcion = ( { type,data} : InscriptionProps ) => {
                         </ul>
                     </div>
                 </div>
-            <h2>Paso 2: hasta el {fecha_inscripcion_nacional?`${fecha_inscripcion_nacional.getDate()} de ${monthNames[fecha_inscripcion_nacional.getMonth()].toLocaleLowerCase()}`:"(a determinar)"}</h2>
+            <h2>Paso 2: hasta el {fecha_inscripcion_nacional?`${fecha_inscripcion_nacional.getUTCDate()} de ${monthNames[fecha_inscripcion_nacional.getUTCMonth()].toLocaleLowerCase()}`:"(a determinar)"}</h2>
                 <p>Ingresar los datos de los participantes en el siguiente link:</p>
                 <div className={styles.button_container}>
                     <Button content={link_inscripcion?"Link de Inscripción":"(No Disponible)"} onClick={() => {link_inscripcion?window.location.href = link_inscripcion:null}}>
@@ -94,9 +98,16 @@ export const Inscripcion = ( { type,data} : InscriptionProps ) => {
                 </div>
            </div>
            <div className={styles.step_information}>
-            <h1>3. Documentos a presentar en el certamen Intercolegial</h1>
-            <p>El día del certamen se deberá presentar el comprobante <span className={styles.step_information_bold}>original</span> del depósito bancario para poder entregar el recibo correspondiente.</p>
-            <p><span className={styles.step_information_bold}>Además, en esta y en todas las instancias se deben presentar las <Link href={type === "OMA"?"/oma/autorizacion":"/nandu/autorizacion"}>autorizaciones</Link> de los participantes, que se entregan en los lugares indicados en <Link href={type === "OMA"?"/oma/instancias":"/nandu/instancias"}>instancias</Link> antes de la fecha indicada también allí.</span></p>
+            <h1>3. Autorizaciones: hasta el {authMaxDate?`${authMaxDate.getUTCDate()} de ${monthNames[authMaxDate.getUTCMonth()].toLocaleLowerCase()}`:"(a determinar)"}</h1>
+            
+            <p><span className={styles.step_information_bold}>Este año, las autorizaciones se entregan una única vez antes de la primera instancia. Las autorizaciones se encuentran <Link href={type === "OMA"?"/oma/autorizacion":"/nandu/autorizacion"}>acá</Link>.</span></p>
+            <p>Las autorizaciones deben estar <span className={styles.step_information_bold}>completas</span> con las <span className={styles.step_information_bold}>firmas y sellos correspondientes</span>. Estas se pueden entregar hasta el <span className={styles.step_information_bold}>{authMaxDate?`${authMaxDate.getUTCDate()}/${authMaxDate.getUTCMonth() + 1}`:"(A definir)"}</span> en los siguientes puntos:</p>
+            <ul className={styles.dropPoints}>
+                    {dropPoints && dropPoints.map((dropPoint, index) => {
+                        const {localidad, nombre, direccion, aclaracion} = dropPoint;
+                        return(<li className={styles.text} key={index}><span className={styles.step_information_bold}>{localidad}: </span>{nombre?`${nombre} - `:""}{direccion}{aclaracion?` (${aclaracion})`:""}</li>)
+                    })}
+            </ul>
            </div>
         </div>
         </>

@@ -56,10 +56,10 @@ const makeVenueElement = (venue : Venue,index : number,clarifications?: boolean)
 }
 
 const downloadParticipantData = (participant : VenueParticipant):Array<string> => {
-    return([participant.nivel.toString(),participant.participante.name,participant.participante.surname,participant.colegio.toString(),participant.sede])
+    return([participant.colegio.toString(),participant.nivel.toString(),participant.participante.surname,participant.participante.name,participant.sede])
 }
 
-const downloadParticipantHeaders = ["Nivel","Nombre","Apellido","Colegio","Sede"]
+const downloadParticipantHeaders = ["Colegio","Nivel","Apellido","Nombre","Sede"]
 
 const makeParticipantElement = (participant : VenueParticipant,index : number) => {
     return(
@@ -77,9 +77,9 @@ const Venues = ({competition,instance,dropPoints,venues,auth_max_date,participan
         return disclaimers + (venue.aclaracion !== ""?1:0);
     },0) > 0;
     const [venueFilter,updateVenueFilter,filteredVenues,venueOptions] = useFilter<Venue>(venues);
+    const venue_headers = ["Colegio","Sede","Dirección","Localidad"];
     const [participantFilter,updateParticipantFilter,filteredParticipants,participantOptions] = useFilter<VenueParticipant>(participants);
     const participant_headers = ["Nivel","Participante","Colegio","Sede"];
-    const venue_headers = ["Colegio","Sede","Dirección","Localidad"];
     if(hasDisclaimers) {
         venue_headers.push("Aclaración");
     }
@@ -88,7 +88,7 @@ const Venues = ({competition,instance,dropPoints,venues,auth_max_date,participan
         <>  
             {dropPoints.length > 0 &&
                 <Collapsable title="Autorizaciones">
-                <p className={styles.text}>Las autorizaciones se pueden conseguir <Link href={competition == "OMA"?"/oma/autorizacion":"/nandu/autorizacion"}>aquí<div className={styles.icon}><Image src="/images/pageLinkIcon.svg" fill={true} alt=""/></div></Link> y deben estar <span className={styles.bold}>completas</span> con las <span className={styles.bold}>firmas y sellos correspondientes</span>. Estas se pueden entregar hasta el <span className={styles.bold}>{auth_max_date?`${auth_max_date.getDate()}/${auth_max_date.getMonth() + 1}`:"(A definir)"}</span> en los siguientes puntos:</p>
+                <p className={styles.text}>Las autorizaciones se pueden conseguir <Link href={competition == "OMA"?"/oma/autorizacion":"/nandu/autorizacion"}>aquí<div className={styles.icon}><Image src="/images/pageLinkIcon.svg" fill={true} alt=""/></div></Link> y deben estar <span className={styles.bold}>completas</span> con las <span className={styles.bold}>firmas y sellos correspondientes</span>. Estas se pueden entregar hasta el <span className={styles.bold}>{auth_max_date?`${auth_max_date.getUTCDate()}/${auth_max_date.getUTCMonth() + 1}`:"(A definir)"}</span> en los siguientes puntos:</p>
                 <ul className={styles.dropPoints}>
                     {dropPoints.map((dropPoint, index) => {
                         const {localidad, nombre, direccion, aclaracion} = dropPoint;
@@ -115,7 +115,7 @@ const Venues = ({competition,instance,dropPoints,venues,auth_max_date,participan
                     make_element={hasDisclaimers?(result,index) => makeVenueElement(result,index,true):makeVenueElement}
                     />
                 </Collapsable>
-                <Collapsable title="Participantes por Sede">
+                {participants.length > 0 && <Collapsable title="Participantes por Sede">
                 <form className={styles.form}>
                     <SelectResultCategory category="Participante" value={participantFilter.participante} setValue={(option?: Participant) => updateParticipantFilter({participante: option})} options={participantOptions.participante} input={true}/>
                     <SelectResultCategory category="Colegio" value={participantFilter.colegio} setValue={(option?: School) => updateParticipantFilter({colegio: option})} options={participantOptions.colegio} input={true}/>
@@ -134,7 +134,7 @@ const Venues = ({competition,instance,dropPoints,venues,auth_max_date,participan
                     make_element={makeParticipantElement}
                     testInfo={`${competition == "OMA"?"OMA":"Nandú"} ${instance} ${(new Date).getFullYear()}`}
                 />
-                </Collapsable>
+                </Collapsable>}
             </Collapsable>
             {instance === "REGIONAL" && 
             <Collapsable title="Mapa">

@@ -9,6 +9,10 @@ import Image from "next/image";
 export const Authorization = ({ type }: { type: string }) => {
   const specs = [
     {
+      important: "Este año, solo se requiere una autorización para las 3 fechas locales.",
+      text: <>Se entregan antes de la primera instancia en los lugares determinados en <Link href={type == "oma"?"/oma/instancias":"/nandu/instancias"}>instancias<div className={styles.icon}><Image src="/images/pageLinkIcon.svg" fill={true} alt=""/></div></Link>.</>,
+    },
+    {
       important: "Solo autorizaciones oficiales de OMA",
       text: "serán aceptadas. Deben estar completas y con la firma ORIGINAL. Tampoco se aceptarán autorizaciones enviadas por fax o fotocopia",
     },
@@ -17,12 +21,8 @@ export const Authorization = ({ type }: { type: string }) => {
       text: "el alumno que no presente dicha autorizaciones firmada por el padre, madre, tutor o encargado y con la firma y sello del colegio.",
     },
     {
-      important: "La fecha y lugares de entrega de autorizaciones",
-      text: <>de la siguiente instancia se encuentran en <Link href={type == "oma"?"/oma/instancias":"/nandu/instancias"}>instancias<div className={styles.icon}><Image src="/images/pageLinkIcon.svg" fill={true} alt=""/></div></Link>.</>,
-    },
-    {
-      important: "No se aceptarán autorizaciones con fechas corregidas",
-      text: "lo tanto deberán presentar la actualizada que puedan bajar aquí.",
+      important: "No se aceptarán autorizaciones con fechas corregidas,",
+      text: "por lo tanto deberán presentar la actualizada que puedan bajar aquí.",
     },
   ];
   const handleClick = () => {

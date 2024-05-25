@@ -10,7 +10,7 @@ interface CalendarExportProps{
 const CalendarExport = ({year,events}: CalendarExportProps) => {
     return(
         <div className={styles.container}>
-            <h1>Calendario {2023}</h1>
+            <h1>Calendario {year}</h1>
             {events.map((month,month_idx) =>{
                 if(month.events.length > 0){
                     return(

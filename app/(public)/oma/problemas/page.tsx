@@ -7,6 +7,7 @@ const metadata : Metadata = {
 }
 
 export default function OMAProblems() {
-    return(<OMAProblemsPage/>)
+    const problems : Record<string,Record<string,string | string []>> = require("../../../../data/ProblemasOMA.json");
+    return(<OMAProblemsPage problems={problems}/>)
 }
 
