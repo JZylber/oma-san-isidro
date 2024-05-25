@@ -7,6 +7,7 @@ const metadata : Metadata = {
 }
 
 export default function NanduProblems() {
-    return(<NanduProblemsPage/>)
+    const problems : Record<string,Record<string,string | string []>> = require("../../../../data/ProblemasNandu.json");
+    return(<NanduProblemsPage problems={problems}/>)
 }
 
