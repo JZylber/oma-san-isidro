@@ -84,9 +84,47 @@ const Venues = ({competition,instance,dropPoints,venues,auth_max_date,participan
         venue_headers.push("Aclaración");
     }
     const durationStr = `${Math.floor(duration/60)}:${duration%60 < 10?"0":""}${duration%60}`;
+    const hasAuthorizations = dropPoints.length > 0;
+    const venueElement = <>
+    <p className={styles.text}>Presentarse <span className={styles.bold}>{`${time.getUTCHours()}:${time.getUTCMinutes()}`} hs</span>.{hasAuthorizations?" ¡No se olviden de las autorizaciones!":""} La prueba comienza a las 14:00hs y tiene una duración de <span className={styles.bold}>{durationStr} hs</span>.</p>
+    <Collapsable title="Colegios por Sede">
+    <form className={styles.form}>
+        <SelectResultCategory category="Colegio" value={venueFilter.colegio} setValue={(option?: School) => updateVenueFilter({colegio: option})} options={venueOptions.colegio} input={true}/>
+        <SelectResultCategory category="Sede" value={venueFilter.nombre} setValue={(option?: string) => updateVenueFilter({nombre: option})} options={venueOptions.nombre} input={true}/>
+    </form>
+    <Table 
+        values={filteredVenues}
+        allValues={venues} 
+        headers={venue_headers} 
+        Card={VenueCard} 
+        elements_per_page={10}
+        make_element={hasDisclaimers?(result,index) => makeVenueElement(result,index,true):makeVenueElement}
+        />
+    </Collapsable>
+    {participants.length > 0 && <Collapsable title="Participantes por Sede">
+    <form className={styles.form}>
+        <SelectResultCategory category="Participante" value={participantFilter.participante} setValue={(option?: Participant) => updateParticipantFilter({participante: option})} options={participantOptions.participante} input={true}/>
+        <SelectResultCategory category="Colegio" value={participantFilter.colegio} setValue={(option?: School) => updateParticipantFilter({colegio: option})} options={participantOptions.colegio} input={true}/>
+        <SelectResultCategory category="Sede" value={participantFilter.sede} setValue={(option?: string) => updateParticipantFilter({sede:option})} options={participantOptions.sede} input={true}/>
+        <SelectResultCategory category="Nivel" value={participantFilter.nivel} setValue={(option? : number) => updateParticipantFilter({nivel:option})} options={participantOptions.nivel} clear={true}/>
+    </form>
+    <Table 
+        values={filteredParticipants} 
+        allValues={participants} 
+        headers={participant_headers} 
+        Card={ParticipantCard} 
+        elements_per_page={20} 
+        download={true}
+        downloadHeaders={downloadParticipantHeaders}
+        process_data={downloadParticipantData}
+        make_element={makeParticipantElement}
+        testInfo={`${competition == "OMA"?"OMA":"Nandú"} ${instance} ${(new Date).getFullYear()}`}
+    />
+    </Collapsable>}
+    </>
     return(
         <>  
-            {dropPoints.length > 0 &&
+            {hasAuthorizations &&
                 <Collapsable title="Autorizaciones">
                 <p className={styles.text}>Las autorizaciones se pueden conseguir <Link href={competition == "OMA"?"/oma/autorizacion":"/nandu/autorizacion"}>aquí<div className={styles.icon}><Image src="/images/pageLinkIcon.svg" fill={true} alt=""/></div></Link> y deben estar <span className={styles.bold}>completas</span> con las <span className={styles.bold}>firmas y sellos correspondientes</span>. Estas se pueden entregar hasta el <span className={styles.bold}>{auth_max_date?`${auth_max_date.getUTCDate()}/${auth_max_date.getUTCMonth() + 1}`:"(A definir)"}</span> en los siguientes puntos:</p>
                 <ul className={styles.dropPoints}>
@@ -99,43 +137,9 @@ const Venues = ({competition,instance,dropPoints,venues,auth_max_date,participan
             }
             {venues.length > 0 &&
             <>
-            <Collapsable title="Sedes">
-                <p className={styles.text}>Presentarse <span className={styles.bold}>{`${time.getUTCHours()}:${time.getUTCMinutes()}`} hs</span>. ¡No se olviden de las autorizaciones! La prueba comienza a las 14:00hs y tiene una duración de <span className={styles.bold}>{durationStr} hs</span></p>
-                <Collapsable title="Colegios por Sede">
-                <form className={styles.form}>
-                    <SelectResultCategory category="Colegio" value={venueFilter.colegio} setValue={(option?: School) => updateVenueFilter({colegio: option})} options={venueOptions.colegio} input={true}/>
-                    <SelectResultCategory category="Sede" value={venueFilter.nombre} setValue={(option?: string) => updateVenueFilter({nombre: option})} options={venueOptions.nombre} input={true}/>
-                </form>
-                <Table 
-                    values={filteredVenues}
-                    allValues={venues} 
-                    headers={venue_headers} 
-                    Card={VenueCard} 
-                    elements_per_page={10}
-                    make_element={hasDisclaimers?(result,index) => makeVenueElement(result,index,true):makeVenueElement}
-                    />
-                </Collapsable>
-                {participants.length > 0 && <Collapsable title="Participantes por Sede">
-                <form className={styles.form}>
-                    <SelectResultCategory category="Participante" value={participantFilter.participante} setValue={(option?: Participant) => updateParticipantFilter({participante: option})} options={participantOptions.participante} input={true}/>
-                    <SelectResultCategory category="Colegio" value={participantFilter.colegio} setValue={(option?: School) => updateParticipantFilter({colegio: option})} options={participantOptions.colegio} input={true}/>
-                    <SelectResultCategory category="Sede" value={participantFilter.sede} setValue={(option?: string) => updateParticipantFilter({sede:option})} options={participantOptions.sede} input={true}/>
-                    <SelectResultCategory category="Nivel" value={participantFilter.nivel} setValue={(option? : number) => updateParticipantFilter({nivel:option})} options={participantOptions.nivel} clear={true}/>
-                </form>
-                <Table 
-                    values={filteredParticipants} 
-                    allValues={participants} 
-                    headers={participant_headers} 
-                    Card={ParticipantCard} 
-                    elements_per_page={20} 
-                    download={true}
-                    downloadHeaders={downloadParticipantHeaders}
-                    process_data={downloadParticipantData}
-                    make_element={makeParticipantElement}
-                    testInfo={`${competition == "OMA"?"OMA":"Nandú"} ${instance} ${(new Date).getFullYear()}`}
-                />
-                </Collapsable>}
-            </Collapsable>
+            {hasAuthorizations?<Collapsable title="Sedes">
+                {venueElement}
+            </Collapsable>:venueElement}
             {instance === "REGIONAL" && 
             <Collapsable title="Mapa">
                 <p className={styles.text}>Para organizarnos mejor, ponemos público el mapa. El día de la instancia nos pueden ayudar sabiendo los lugares asignados a cada colegio.</p>
