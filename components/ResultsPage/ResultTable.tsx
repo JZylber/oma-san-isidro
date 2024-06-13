@@ -28,7 +28,7 @@ const make_element = (result : Result,index : number) => {
                 {points.map((point,index) => <td key={index} className={styles.center_align}>{point.toString()}</td>)}
                 <td className={styles.center_align}>{total}</td>
                 </>:
-                <td colSpan={result.cantidad_problemas + 1} className={styles.center_align}>{present?clarification:"Ausente"}</td>)}
+                <td colSpan={result.cantidad_problemas + 1} className={styles.center_align}>{clarification?clarification:(present?"":"Ausente")}</td>)}
             <td className={styles.center_align}>{passed?"Si":"No"}</td>
         </tr>)
 }
