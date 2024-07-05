@@ -9,7 +9,7 @@ const InstanceProblems : ({instance,problem_links}: {instance:string,problem_lin
                 <Image src="/images/menuArrow.svg" alt="arrow" width={10} height={10} className={`${open?"rotate-90":""} transition-transform`}/>
                 <span className="font-unbounded font-[400] text-[1.6rem] w-60">{instance}</span>
             </div>
-            {open && <div className="flex flex-col gap-y-4 pl-12">
+            <div className={`flex flex-col gap-y-4 pl-12 ${open?"scale-y-100":"scale-y-0 h-0"} overflow-hidden transition-transform`}>
                 {problem_links.map((problem:string,idx:number) => {
                     return(
                         <a key={idx} href={problem} target="_blank" rel="noreferrer" className="cursor-pointer">
@@ -17,7 +17,7 @@ const InstanceProblems : ({instance,problem_links}: {instance:string,problem_lin
                         </a>
                     );
                 })}
-                </div>}
+                </div>
         </div>
     )
 }
