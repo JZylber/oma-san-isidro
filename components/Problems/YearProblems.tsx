@@ -30,7 +30,7 @@ const YearProblems : ({year,problem_links}: {year:number,problem_links: Record<s
                 <Image src="/images/menuArrow.svg" alt="arrow" width={12} height={12} className={`${open?"rotate-90":""} transition-transform`}/>
                 <span className="font-unbounded font-[500] text-[2.4rem] w-40">{year}</span>
             </div>
-            {open && <div className="flex flex-col gap-y-4 pl-12">
+            <div className={`flex flex-col gap-y-4 pl-12 ${open?"scale-y-100":"scale-y-0 h-0"} overflow-hidden transition-transform`}>
                 {Object.keys(problem_links).map((problem:string,idx:number) => {
                     const link = problem_links[problem];
                     if(typeof link === "string"){
@@ -45,7 +45,7 @@ const YearProblems : ({year,problem_links}: {year:number,problem_links: Record<s
                         );
                     }
                 })}
-                </div>}
+                </div>
         </div>
     )
 }
