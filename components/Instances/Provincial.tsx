@@ -73,21 +73,21 @@ const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) 
             </Warning>
         </Collapsable>
         <Collapsable title="Información general y programa">
-            <p className={styles.text}>El encuentro de la <span className={styles.bold}>Olimpíada Regional {isOma?"Urbana":"Ñandú"} Metropolitana</span> se realizará en la ciudad de {isOma?"Villa Gesell":"Mar del Plata"} los días {isOma?"27, 28 y 29 de septiembre":"9, 10 y 11 de agosto"}. Cada delegación se trasladará por su cuenta y riesgo, con sus profesores acompañantes según las pautas establecidas <span className={styles.bold}>(máximo 8 alumnos por cada docente)</span>. También, como en años anteriores, nos ocuparemos del alojamiento y concentración de aquellas delegaciones que lo soliciten.</p>
+            <p className={styles.text}>El encuentro de la <span className={styles.bold}>Olimpíada Regional {isOma?"Urbana":"Ñandú"} Metropolitana</span> se realizará en la ciudad de {isOma?"Villa Gesell":"Mar del Plata"} los días {isOma?"27, 28 y 29 de septiembre":"14, 15 y 16 de agosto"}. Cada delegación se trasladará por su cuenta y riesgo, con sus profesores acompañantes según las pautas establecidas <span className={styles.bold}>(máximo 8 alumnos por cada docente)</span>. También, como en años anteriores, nos ocuparemos del alojamiento y concentración de aquellas delegaciones que lo soliciten.</p>
             <p className={styles.text}>El alojamiento de las delegaciones que lo soliciten será en Hoteles de la mencionada ciudad  en habitaciones compartidas con otros participantes del encuentro. La reserva del alojamiento se hace contra entrega de las planillas debidamente cumplimentadas.</p>
             <h4 className={styles.section_title}>Programa</h4>
             <ul className={styles.text}>
-                <li><span className={styles.bold}>Acreditación:</span> {isOma?"Miércoles 27 de septiembre":"Miércoles 9 de agosto"} de 15:00 a 20:00 horas en el hotel asignado a su delegación</li>
-                <li><span className={styles.bold}>Prueba escrita:</span> {isOma?"Jueves 28 de septiembre a las 9:00 horas, Polideportivo Municipal Villa Gesell":"Jueves 10 de agosto a las 9:00 horas, Salón Colón - NH Gran Hotel Provincial - Mar del Plata"}</li>
-                <li><span className={styles.bold}>Exposición Oral y Premiación:</span> {isOma?"Viernes 29 de septiembre a las 9:00 horas, Polideportivo Municipal Villa Gesell ":"Viernes 11 de agosto a las 9:00 horas, Salón de las Américas - NH Gran Hotel Provincial - Mar del Plata"}</li>
+                <li><span className={styles.bold}>Acreditación:</span> {isOma?"Miércoles 27 de septiembre":"Miércoles 14 de agosto"} de 15:00 a 20:00 horas en el hotel asignado a su delegación</li>
+                <li><span className={styles.bold}>Prueba escrita:</span> {isOma?"Jueves 28 de septiembre a las 9:00 horas, Polideportivo Municipal Villa Gesell":"Jueves 15 de agosto a las 9:00 horas, Salones Sheraton Hotel - Mar del Plata"}</li>
+                <li><span className={styles.bold}>Exposición Oral y Premiación:</span> {isOma?"Viernes 29 de septiembre a las 9:00 horas, Polideportivo Municipal Villa Gesell ":"Viernes 16 de agosto a las 9:00 horas, Salones Sheraton Hotel - Mar del Plata"}</li>
             </ul>
         </Collapsable>
         <Collapsable title="Aranceles">
         <ul className={styles.text}>
-            <li><span className={styles.bold}>Participantes y/o acompañantes que se alojen en el hotel propuesto por la olimpíada:</span> {isOma?"$85.000":"$69.000"}. Incluye desde la cena del día miércoles {isOma?27:9} al almuerzo del viernes {isOma?29:11} (incluye una bebida por comida).</li>
-            <li><span className={styles.bold}>Participantes que NO se alojen en el hotel propuesto por la olimpíada:</span> {isOma?"$29.000":"$23.000"}.</li>
-            <li><span className={styles.bold}>Acompañantes que NO se alojen en el hotel propuesto por la olimpíada:</span> {isOma?"$23.000":"$18.000"}. (menores de 3 años no pagan)</li>
-            <li><span className={styles.bold}>Tarjeta de premiación:</span> $6.000. Solo es necesaria la tarjeta para aquellos que no están acreditados como acompañantes y que participarán únicamente de la premiación. Deben inscribirse junto con los otros participantes en la planilla. Menores de 3 años no pagan. <span className={styles.bold}>CUPOS LIMITADOS</span></li>
+            <li><span className={styles.bold}>Participantes y/o acompañantes que se alojen en el hotel propuesto por la olimpíada:</span> {isOma?"$85.000":"$235.000"}. Incluye desde la cena del día miércoles {isOma?27:14} al almuerzo del viernes {isOma?29:16} (incluye una bebida por comida).</li>
+            <li><span className={styles.bold}>Participantes que NO se alojen en el hotel propuesto por la olimpíada:</span> {isOma?"$29.000":"$80.000"}.</li>
+            <li><span className={styles.bold}>Acompañantes que NO se alojen en el hotel propuesto por la olimpíada:</span> {isOma?"$23.000":"$60.000"}. (menores de 3 años no pagan)</li>
+            <li><span className={styles.bold}>Tarjeta de premiación:</span> $20.000. Solo es necesaria la tarjeta para aquellos que no están acreditados como acompañantes y que participarán únicamente de la premiación. Deben inscribirse junto con los otros participantes en la planilla. Menores de 3 años no pagan. <span className={styles.bold}>CUPOS LIMITADOS</span></li>
         </ul>
         <Warning>
             <p className={styles.text}>Los aranceles antes mencionados, pueden ser ajustados debido a la situación económica financiera del país, que puede hacer variar nuestros costos. Quienes quieran asegurarse estos aranceles pueden hacer su depósito o trasferencia en los próximos días, enviando el comprobante a {isOma?<a href="mailto:gloriasampablo@gmail.com">gloriasampablo@gmail.com</a>:<a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a>}. En caso de tener que variar los aranceles lo avisaremos oportunamente.</p>
@@ -124,14 +124,14 @@ const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) 
             <p className={styles.text}>La documentación debe ser entregada en la acreditación.</p>
             <div className={styles.documentation}>
                 <div className={styles.button}>
-                    <Button content="Autorización" onClick={() => downloadFile(`/provincial/${isOma?"oma":"nandu"}/Autorización.docx`)}>
+                    <Button content="Autorización" onClick={() => downloadFile(`/provincial/${isOma?"oma":"nandu"}/Autorización.pdf`)}>
                         <div className={styles.arrow}>
                             <Image src="/images/newsArrow.svg" width={30} height={40} alt="Descargar"/>
                         </div>
                     </Button>
                 </div>
                 <div className={styles.button}>
-                    <Button content="Compromiso" onClick={() => downloadFile(`/provincial/${isOma?"oma":"nandu"}/Compromiso.docx`)}>
+                    <Button content="Compromiso" onClick={() => downloadFile(`/provincial/${isOma?"oma":"nandu"}/Compromiso.pdf`)}>
                         <div className={styles.arrow}>
                             <Image src="/images/newsArrow.svg" width={30} height={40} alt="Descargar"/>
                         </div>
@@ -170,8 +170,8 @@ const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) 
         </Collapsable>
         <Collapsable title="Reglamento">
             <ul className={styles.text}>
-                <li>Toda otra persona (padre, tutor, etc.) que desee integrar la delegación debe comprometerse a cumplir todas las normas establecidas para la delegación.</li> <li>Los que solicitaron alojamiento en las secretarías regionales, podrán hacerlo a partir de las 15:00 horas del día {isOma?"27 de septiembre":"9 de agosto"}.</li>
-                <li>Solo podrá asistir a las actividades programadas dentro de los espacios establecidos (esto incluye el ingresar, permanecer y circular por el mismo) quien se acredite debidamente el día {isOma?"27 de septiembre":"9 de agosto"}.</li>
+                <li>Toda otra persona (padre, tutor, etc.) que desee integrar la delegación debe comprometerse a cumplir todas las normas establecidas para la delegación.</li> <li>Los que solicitaron alojamiento en las secretarías regionales, podrán hacerlo a partir de las 15:00 horas del día {isOma?"27 de septiembre":"14 de agosto"}.</li>
+                <li>Solo podrá asistir a las actividades programadas dentro de los espacios establecidos (esto incluye el ingresar, permanecer y circular por el mismo) quien se acredite debidamente el día {isOma?"27 de septiembre":"14 de agosto"}.</li>
                 <li>Se recuerda a los responsables de las delegaciones, se alojen o no en el hotel propuesto por la olimpíada, que durante todo el tiempo estarán a cargo de los alumnos y deberán participar de las actividades programadas con sus alumnos</li>
                 <li>Bajo ningún concepto los participantes podrán circular o permanecer fuera de su lugar de alojamiento después de las 00:00 hs</li>
                 <li>Todos deberán abstenerse de: transportar, ingerir o consumir alcohol, bebidas energizantes u otros estimulantes, fumar en los lugares cerrados, como habitaciones, el comedor, o donde se desarrollen las actividades de la competencia</li>
