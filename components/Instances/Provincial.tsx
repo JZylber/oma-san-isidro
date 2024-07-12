@@ -141,7 +141,7 @@ const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) 
         </Collapsable>
         <Collapsable title="Premiación">
             <p className={styles.text}>Para evitar inconvenientes y malos entendidos, podrán participar en el acto de premiación solo las personas debidamente acreditadas portando credencial o “tarjeta de invitación individual”. Se aclara que, indefectiblemente, todas aquellas personas que deseen adquirir las tarjetas de invitación individual para el Acto de premiación deben estar inscriptas con nombre, apellido y documento en la planilla.</p> 
-            <p className={styles.text}> Costo de la tarjeta $6000.- CUPOS LIMITADOS (menores de 3 años no pagan)  </p>
+            <p className={styles.text}> Costo de la tarjeta $20000.- CUPOS LIMITADOS (menores de 3 años no pagan)  </p>
         </Collapsable>
         <Collapsable title="Participantes Clasificados">
         {isOma?<><p className={styles.text}>En el presente año estarán habilitados para participar de este certamen:</p>
