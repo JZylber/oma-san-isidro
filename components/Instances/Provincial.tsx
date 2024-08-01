@@ -73,8 +73,16 @@ const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) 
             </Warning>
         </Collapsable>
         <Collapsable title="Información general y programa">
-            <p className={styles.text}>El encuentro de la <span className={styles.bold}>Olimpíada Regional {isOma?"Urbana":"Ñandú"} Metropolitana</span> se realizará en la ciudad de {isOma?"Villa Gesell":"Mar del Plata"} los días {isOma?"27, 28 y 29 de septiembre":"14, 15 y 16 de agosto"}. Cada delegación se trasladará por su cuenta y riesgo, con sus profesores acompañantes según las pautas establecidas <span className={styles.bold}>(máximo 8 alumnos por cada docente)</span>. También, como en años anteriores, nos ocuparemos del alojamiento y concentración de aquellas delegaciones que lo soliciten.</p>
-            <p className={styles.text}>El alojamiento de las delegaciones que lo soliciten será en Hoteles de la mencionada ciudad  en habitaciones compartidas con otros participantes del encuentro. La reserva del alojamiento se hace contra entrega de las planillas debidamente cumplimentadas.</p>
+            <p className={styles.text}>El encuentro de la <span className={styles.bold}>Olimpíada Regional {isOma?"Urbana":"Ñandú"} Metropolitana</span> se realizará en la ciudad de {isOma?"Villa Gesell":"Mar del Plata"} los días {isOma?"27, 28 y 29 de septiembre":"14, 15 y 16 de agosto"}. Cada delegación se trasladará por su cuenta y riesgo, con sus profesores acompañantes según las pautas establecidas <span className={styles.bold}>(máximo 8 alumnos por cada docente)</span>. También, como en años anteriores, nos ocuparemos del alojamiento y concentración de aquellas delegaciones que lo soliciten.</p> 
+            {isOma?<p className={styles.text}>El alojamiento de las delegaciones que lo soliciten será en Hoteles de la mencionada ciudad en habitaciones compartidas con otros participantes del encuentro. La reserva del alojamiento se hace contra entrega de las planillas debidamente cumplimentadas.</p>:<><p className={styles.text}>El alojamiento en la ciudad de Mar del Plata será en los hoteles:</p>
+            <ul className={styles.text}>
+                <li>Estocolmo (Santa Fe 2070)</li>
+                <li>Garden (Moreno 2393)</li>
+                <li>Novi (H. Yrigoyen 1311)</li>
+                <li>ATILRA o 10 de Septiembre (3 de Febrero 2975)</li>
+                <li>Nuevo Ostende (H. Yrigoyen 1737)</li>
+            </ul>
+            <p className={styles.text}>Actividades en salones del Hotel Sheraton. La organización <span className={styles.bold}>NO CONTEMPLA</span> alojamiento en el Hotel Sheraton, allí sólo se desarrollarán las actividades académicas.</p></>}
             <h4 className={styles.section_title}>Programa</h4>
             <ul className={styles.text}>
                 <li><span className={styles.bold}>Acreditación:</span> {isOma?"Miércoles 27 de septiembre":"Miércoles 14 de agosto"} de 15:00 a 20:00 horas en el hotel asignado a su delegación</li>
