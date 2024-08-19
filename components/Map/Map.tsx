@@ -6,7 +6,6 @@ import SelectResultCategory from "../ResultsPage/SelectResultCategory";
 import styles from "./Map.module.scss";
 import MapData from "./MapFromJson";
 import ParticipantTable from "./Table/Table";
-import { relative } from "path";
 
 interface MapProps {
    competition: Competition;
