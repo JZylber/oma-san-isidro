@@ -142,8 +142,9 @@ const Venues = ({competition,instance,dropPoints,venues,auth_max_date,participan
             </Collapsable>:venueElement}
             {instance === "REGIONAL" && 
             <Collapsable title="Mapa">
-                <p className={styles.text}>Para organizarnos mejor, ponemos público el mapa. El día de la instancia nos pueden ayudar sabiendo los lugares asignados a cada colegio.</p>
-                <Map competition={competition}/>
+                {false?
+                <><p className={styles.text}>Para organizarnos mejor, ponemos público el mapa. El día de la instancia nos pueden ayudar sabiendo los lugares asignados a cada colegio.</p>
+                <Map competition={competition}/></>:<p className={styles.text}>Proximamente...</p>}
             </Collapsable>}
         </>}
         {dropPoints.length === 0 && venues.length === 0 && <p className={styles.text}>Proximamente...</p>}
