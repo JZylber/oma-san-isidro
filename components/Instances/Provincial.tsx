@@ -111,7 +111,7 @@ const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) 
                 <li><span className={styles.bold}>CUIT: </span>30-67928383-5</li>
             </ul>
             <p className={styles.text}>Recordamos que para la acreditación deben presentar el <span className={styles.bold}>ORIGINAL</span> de dicho depósito.</p>
-            <p className={styles.text}>Si necesitan factura electrónica o factura C, por favor completar la planilla y enviar a {isOma?<a href="mailto:gloriasampablo@gmail.com">gloriasampablo@gmail.com</a>:<a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a>} junto con el comprobante de pago. También se puede hacer en el momento de la acreditación llevando la planilla completa y el comprobante de pago.</p>
+            <p className={styles.text}>Si necesitan factura electrónica o factura C, por favor completar la planilla y enviar a <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a> junto con el comprobante de pago. También se puede hacer en el momento de la acreditación llevando la planilla completa y el comprobante de pago.</p>
             <p className={styles.text}>Los recibos son entregados en el momento de la acreditación a la persona que la efectúa (docente, pariente, etc.). Por eso, se recomienda no perder el recibo y entregarlo a quien corresponda a su regreso. No podemos anular y rehacer recibos o facturas sin la presentación del original. Para todo tipo de reclamo hay un plazo de 30 días</p>
             <div className={styles.documentation}>
                 <div className={styles.button}>
