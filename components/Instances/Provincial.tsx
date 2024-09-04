@@ -133,14 +133,14 @@ const Provincial = ({competition, participants,auth_max_date}: ProvincialProps) 
             <p className={styles.text}>La documentación debe ser entregada en la acreditación.</p>
             <div className={styles.documentation}>
                 <div className={styles.button}>
-                    <Button content="Autorización" onClick={() => downloadFile(`/provincial/${isOma?"oma":"nandu"}/Autorización.pdf`)}>
+                    <Button content="Autorización" onClick={() => downloadFile(`/provincial/${isOma?"oma/Autorización.docx":"nandu/Autorización.pdf"}`)}>
                         <div className={styles.arrow}>
                             <Image src="/images/newsArrow.svg" width={30} height={40} alt="Descargar"/>
                         </div>
                     </Button>
                 </div>
                 <div className={styles.button}>
-                    <Button content="Compromiso" onClick={() => downloadFile(`/provincial/${isOma?"oma":"nandu"}/Compromiso.pdf`)}>
+                    <Button content="Compromiso" onClick={() => downloadFile(`/provincial/${isOma?"oma/Compromiso.docx":"nandu/Compromiso.pdf"}`)}>
                         <div className={styles.arrow}>
                             <Image src="/images/newsArrow.svg" width={30} height={40} alt="Descargar"/>
                         </div>
