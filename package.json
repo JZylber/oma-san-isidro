@@ -38,6 +38,7 @@
     "react-dom": "^18.2.0",
     "react-scripts": "^5.0.1",
     "react-to-print": "^2.14.12",
+    "react-tooltip": "^5.28.0",
     "react-zoom-pan-pinch": "^3.1.0",
     "sass": "^1.57.1",
     "superjson": "^1.13.1",
