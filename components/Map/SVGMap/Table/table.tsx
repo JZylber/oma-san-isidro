@@ -1,32 +1,173 @@
-import Participant from "../Participant/participant"
+import Participant from "../Participant/participant";
 
+export interface ParticipantData {
+  school: { name: string; acronym: string };
+  level?: number;
+}
 
 interface MapTableProps {
-    type: "square" | "round",
-    number: number,
+  type: "individual" | "square" | "round";
+  participants: ParticipantData[];
+  selected: boolean[];
+  startingId: number;
 }
 
-const MapTable = ({type,number}:MapTableProps) => {
-    const backgroundColor = "#FEFDF3";
-    const color = "#000000"
-    const size = 200;
-    const participantSize = 300;
-    if(type == "round"){
+const MapTable = ({
+  type,
+  participants,
+  selected,
+  startingId,
+}: MapTableProps) => {
+  const backgroundColor = "#FEFDF3";
+  const color = "#000000";
+  const size = 200;
+  const participantSize = 300;
+  if (type == "round") {
+    const coordinates = [
+      [500 - participantSize / 2, 800 - participantSize / 2],
+      [796.410161514 - participantSize / 2, 300 - participantSize / 2],
+      [203.589838486 - participantSize / 2, 300 - participantSize / 2],
+    ];
     return (
-        <svg width={size} height={size} viewBox="0 0 1000 1000" overflow="visible">
-            <circle cx="500" cy="500" r="400" stroke={color} strokeWidth="20" fill={backgroundColor} />
-            <foreignObject x={500 - participantSize/2 } y={900 -participantSize/2} width={participantSize} height={participantSize} overflow="visible">
-            <Participant id="3" school={{name:"Jorge Luis Borges",acronym:"JLB"}} level={3} size={participantSize} />
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 1000 1000"
+        overflow="visible"
+      >
+        <circle
+          cx="500"
+          cy="500"
+          r="300"
+          stroke={color}
+          strokeWidth="20"
+          fill={backgroundColor}
+        />
+        {participants.map((participant, index) => {
+          return (
+            <foreignObject
+              key={index}
+              x={coordinates[index][0]}
+              y={coordinates[index][1]}
+              width={participantSize}
+              height={participantSize}
+              overflow="visible"
+            >
+              <Participant
+                id={(startingId + index).toString()}
+                school={participant.school}
+                level={participant.level}
+                size={participantSize}
+                selected={selected[index]}
+              />
             </foreignObject>
-            <foreignObject x={846.410161514 - participantSize/2 } y={300 -participantSize/2} width={participantSize} height={participantSize} overflow="visible">
-            <Participant id="2" school={{name:"Saint Nicholas School",acronym:"CSN"}} level={3} size={participantSize} />
+          );
+        })}
+      </svg>
+    );
+  } else if (type === "square") {
+    const coordinates = [
+      [1100 - participantSize / 2, 250 - participantSize / 2],
+      [400 - participantSize / 2, 250 - participantSize / 2],
+      [1100 - participantSize / 2, 750 - participantSize / 2],
+      [400 - participantSize / 2, 750 - participantSize / 2],
+    ];
+    return (
+      <svg
+        width={size * 1.5}
+        height={size}
+        viewBox="0 0 1500 1000"
+        overflow="visible"
+      >
+        <rect
+          x="100"
+          y="250"
+          width="1300"
+          height="500"
+          rx="33.5"
+          fill={backgroundColor}
+          stroke={color}
+          strokeWidth="20"
+        />
+        {participants.map((participant, index) => {
+          return (
+            <foreignObject
+              key={index}
+              x={coordinates[index][0]}
+              y={coordinates[index][1]}
+              width={participantSize}
+              height={participantSize}
+              overflow="visible"
+            >
+              <Participant
+                id={(startingId + index).toString()}
+                school={participant.school}
+                level={participant.level}
+                size={participantSize}
+                selected={selected[index]}
+              />
             </foreignObject>
-            <foreignObject x={153.589838486 - participantSize/2 } y={300 -participantSize/2} width={participantSize} height={participantSize} overflow="visible">
-            <Participant id="1" school={{name:"Florida Day School",acronym:"FDS"}} level={1} size={participantSize}/>
+          );
+        })}
+        {[...Array(4 - participants.length).keys()].map((index) => {
+          return (
+            <foreignObject
+              key={participants.length + index}
+              x={coordinates[participants.length + index][0]}
+              y={coordinates[participants.length + index][1]}
+              width={participantSize}
+              height={participantSize}
+              overflow="visible"
+            >
+              <Participant
+                id={(startingId + participants.length + index).toString()}
+                size={participantSize}
+                selected={selected[participants.length + index]}
+              />
             </foreignObject>
+          );
+        })}
+      </svg>
+    );
+  } else if (type === "individual") {
+    if (participants.length === 1) {
+      return (
+        <svg
+          width={size * 0.6}
+          height={size * 0.6}
+          viewBox="0 0 600 600"
+          overflow="visible"
+        >
+          <rect
+            x="50"
+            y="300"
+            width="500"
+            height="250"
+            rx="33.5"
+            fill={backgroundColor}
+            stroke={color}
+            strokeWidth="20"
+          />
+          <foreignObject
+            x={300 - participantSize / 2}
+            y={300 - participantSize / 2}
+            width={participantSize}
+            height={participantSize}
+            overflow="visible"
+          >
+            <Participant
+              id={startingId.toString()}
+              school={participants[0].school}
+              level={participants[0].level}
+              size={participantSize}
+              selected={selected[0]}
+            />
+          </foreignObject>
         </svg>
-    )}
-    return null;
-}
+      );
+    }
+  }
+  return null;
+};
 
 export default MapTable;
