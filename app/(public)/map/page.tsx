@@ -1,39 +1,97 @@
-import MapTable from "../../../components/Map/SVGMap/Table/table";
+import Row, { TableData } from "../../../components/Map/SVGMap/Row/row";
 
+const data = [
+  {
+    participants: [
+      {
+        school: {
+          name: "Cardenal Pironio",
+          acronym: "CAP",
+        },
+        level: 3,
+      },
+      {
+        school: {
+          name: "Lincoln",
+          acronym: "LIN",
+        },
+        level: 2,
+      },
+      {
+        school: {
+          name: "Jes\u00fas en el Huerto de los Olivos",
+          acronym: "HUE",
+        },
+        level: 1,
+      },
+    ],
+    type: "round",
+  },
+  {
+    participants: [
+      {
+        school: {
+          name: "Santa Teresa",
+          acronym: "STT",
+        },
+        level: 3,
+      },
+      {
+        school: {
+          name: "Jes\u00fas en el Huerto de los Olivos",
+          acronym: "HUE",
+        },
+        level: 2,
+      },
+      {
+        school: {
+          name: "San Juan el Precursor",
+          acronym: "PRE",
+        },
+        level: 1,
+      },
+    ],
+    type: "round",
+  },
+  {
+    participants: [
+      {
+        school: {
+          name: "Sworn",
+          acronym: "SWO",
+        },
+        level: 3,
+      },
+      {
+        school: {
+          name: "Florida Day School",
+          acronym: "FDS",
+        },
+        level: 2,
+      },
+      {
+        school: {
+          name: "Newman",
+          acronym: "NEW",
+        },
+        level: 1,
+      },
+    ],
+    type: "square",
+  },
+  {
+    participants: [
+      {
+        school: {
+          name: "Dardo Rocha",
+          acronym: "DRO",
+        },
+        level: 3,
+      },
+    ],
+    type: "individual",
+  },
+] as TableData[];
 export default async function Map() {
-  return (
-    <>
-      <MapTable
-        type={"round"}
-        participants={[
-          { school: { name: "Andersen", acronym: "AND" }, level: 1 },
-          { school: { name: "Baker", acronym: "BAK" }, level: 2 },
-          { school: { name: "Charlie", acronym: "CHA" }, level: 3 },
-        ]}
-        selected={[true, false, false]}
-        startingId={0}
-      />
-      <MapTable
-        type={"square"}
-        participants={[
-          { school: { name: "Andersen", acronym: "AND" }, level: 1 },
-          { school: { name: "Baker", acronym: "BAK" }, level: 2 },
-          {
-            school: { name: "Asunción de la Virgen", acronym: "ASU" },
-            level: 3,
-          },
-        ]}
-        selected={[true, false, false]}
-        startingId={3}
-      />
-      <MapTable
-        type={"individual"}
-        participants={[
-          { school: { name: "Andersen", acronym: "AND" }, level: 1 },
-        ]}
-        selected={[true]}
-        startingId={6}
-      />
-    </>
-  );
+  return <Row startingId={0} tables={data} />;
 }

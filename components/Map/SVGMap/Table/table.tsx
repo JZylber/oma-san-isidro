@@ -3,21 +3,16 @@ import Participant from "../Participant/participant";
 export interface ParticipantData {
   school: { name: string; acronym: string };
   level?: number;
+  selected?: boolean;
 }
 
 interface MapTableProps {
   type: "individual" | "square" | "round";
   participants: ParticipantData[];
-  selected: boolean[];
   startingId: number;
 }
 
-const MapTable = ({
-  type,
-  participants,
-  selected,
-  startingId,
-}: MapTableProps) => {
+const MapTable = ({ type, participants, startingId }: MapTableProps) => {
   const backgroundColor = "#FEFDF3";
   const color = "#000000";
   const size = 200;
@@ -58,7 +53,7 @@ const MapTable = ({
                 school={participant.school}
                 level={participant.level}
                 size={participantSize}
-                selected={selected[index]}
+                selected={participant.selected}
               />
             </foreignObject>
           );
@@ -104,7 +99,7 @@ const MapTable = ({
                 school={participant.school}
                 level={participant.level}
                 size={participantSize}
-                selected={selected[index]}
+                selected={participant.selected}
               />
             </foreignObject>
           );
@@ -122,7 +117,6 @@ const MapTable = ({
               <Participant
                 id={(startingId + participants.length + index).toString()}
                 size={participantSize}
-                selected={selected[participants.length + index]}
               />
             </foreignObject>
           );
@@ -160,7 +154,7 @@ const MapTable = ({
               school={participants[0].school}
               level={participants[0].level}
               size={participantSize}
-              selected={selected[0]}
+              selected={participants[0].selected}
             />
           </foreignObject>
         </svg>
