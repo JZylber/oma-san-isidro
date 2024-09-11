@@ -1,5 +1,9 @@
-import Participant from "../../../components/Map/SVGMap/Participant/participant";
+import MapTable from "../../../components/Map/SVGMap/Table/table";
+
+
 
 export default async function Map() {
-    return <Participant school={{name:"Florida Day School",acronym:"FDS"}} level={1} size={30}/>;
+    return(
+    <><MapTable type={"round"} number={3}/>
+    </>)
 }
