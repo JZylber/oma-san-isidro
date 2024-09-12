@@ -1,16 +1,25 @@
 import { School } from "../../hooks/types";
 import { Competition } from "../../server/app-router-db-calls";
 import { MapItem } from "./Map";
+import { TableData } from "./SVGMap/Row/row";
+import { ParticipantData } from "./SVGMap/Table/table";
 
-const MapData = (instance:string,competition:Competition) : MapItem[][][]=>{
+export const getMapData = (instance:string,competition:Competition) : TableData[][]=>{
     const jsonData = require(`../../data/${instance}${competition}.json`);
-    const data = jsonData.map((row:any)=>{
-        return row.map((table:any)=>{
-            return table.map((item:any)=>{
-                return {school: new School(item.school.name,item.school.venue?item.school.venue:undefined), level: item.level}});
-            })
-        });
-    return data;
+    return jsonData;
 }
 
-export default MapData;
+export const mapItemFromParticipantData = (data:ParticipantData) : MapItem =>{
+    return {school: new School(data.school.name,data.school.venue?data.school.venue:undefined), level: data.level?data.level:0}
+}
+
+export const getParticipants = (data:TableData[][]) : MapItem[]=>{
+    const participants = data.reduce((acc:MapItem[],row)=>{
+        row.forEach((table)=>{
+            table.participants.forEach((participant)=>{
+                acc.push(mapItemFromParticipantData(participant))
+        })});
+        return acc
+    },[]);
+    return participants;
+}

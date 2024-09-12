@@ -4,8 +4,13 @@ import useFilter from "../../hooks/useFilter";
 import { Competition } from "../../server/app-router-db-calls";
 import SelectResultCategory from "../ResultsPage/SelectResultCategory";
 import styles from "./Map.module.scss";
-import MapData from "./MapFromJson";
 import ParticipantTable from "./Table/Table";
+import {
+  getMapData,
+  getParticipants,
+  mapItemFromParticipantData,
+} from "./MapFromJson";
+import InstanceMap from "./SVGMap/Map/map";
 
 interface MapProps {
   competition: Competition;
@@ -29,60 +34,40 @@ const participantsInColumn = (column: MapItem[], selected: MapItem[]) => {
 };
 
 const Map = ({ competition }: MapProps) => {
-  const data = MapData("Regional", competition);
-  const flattenedData = data.flat(2);
-  const columns = data.map((column) => column.flat(1));
+  const data = getMapData("Regional", competition);
+  const participants = getParticipants(data);
   const [schoolFilter, updateFilter, filtered_schools, options] =
-    useFilter(flattenedData);
-  const participantsPerColumn = columns
-    .map((column, index) => [
-      index + 1,
-      ...participantsInColumn(column, filtered_schools),
-    ])
-    .filter((column) => column.slice(1).some((value) => value !== 0));
-  const someSelected = Object.values(schoolFilter).some(
-    (value) => value !== undefined
-  );
-  const isSelected = (item: MapItem) => {
-    return someSelected && filtered_schools.includes(item);
-  };
-  const freePlacesSelected = schoolFilter.school?.name === "LIBRE";
+    useFilter(participants);
+  if (participants.length !== filtered_schools.length) {
+    data.forEach((row) => {
+      row.forEach((table) => {
+        table.participants.forEach((participant) => {
+          let dataSchool = mapItemFromParticipantData(participant);
+          let correctLevel = schoolFilter.level
+            ? schoolFilter.level === dataSchool.level
+            : true;
+          let correctSchool = schoolFilter.school
+            ? schoolFilter.school.isFilteredBy(dataSchool.school)
+            : true;
+          participant.selected = correctSchool && correctLevel;
+        });
+      });
+    });
+  } else {
+    data.forEach((row) => {
+      row.forEach((table) => {
+        table.participants.forEach((participant) => {
+          participant.selected = false;
+        });
+      });
+    });
+  }
   return (
     <>
       <div style={{ margin: "2rem 0rem 2rem 0rem" }}>
-        <TransformWrapper initialScale={0.75} minScale={0.2} maxScale={2}>
+        <TransformWrapper initialScale={0.25} minScale={0.2} maxScale={2}>
           <TransformComponent wrapperClass={styles.gridContainer}>
-            <div className={styles.grid}>
-              {data.map((column, column_index) => {
-                const columnIsSelected =
-                  someSelected &&
-                  participantsPerColumn.some(
-                    (column) => column[0] === column_index + 1
-                  );
-                return (
-                  <div
-                    key={column_index}
-                    className={[
-                      styles.column,
-                      columnIsSelected ? styles.selected : "",
-                    ].join(" ")}
-                  >
-                    <div className={styles.columnHeader}>
-                      <div>{column_index + 1}</div>
-                    </div>
-                    {column.map((row, row_index) => {
-                      return (
-                        <ParticipantTable
-                          key={`${column_index}-${row_index}`}
-                          participants={row}
-                          isSelected={isSelected}
-                        />
-                      );
-                    })}
-                  </div>
-                );
-              })}
-            </div>
+            <InstanceMap data={data} />
           </TransformComponent>
         </TransformWrapper>
       </div>
@@ -102,7 +87,8 @@ const Map = ({ competition }: MapProps) => {
           clear={true}
         />
       </form>
-      <div className={styles.values}>
+      <div className="h-[200px]"></div>
+      {/*<div className={styles.values}>
         <table className={styles.values_table}>
           <thead>
             <tr>
@@ -168,7 +154,7 @@ const Map = ({ competition }: MapProps) => {
             )}
           </tbody>
         </table>
-      </div>
+      </div>*/}
     </>
   );
 };
