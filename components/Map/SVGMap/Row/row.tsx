@@ -66,6 +66,7 @@ const Row = ({ startingId, tables }: RowProps) => {
       height={height}
       viewBox={`0 0 ${width} ${height}`}
       overflow="visible"
+      xmlns="http://www.w3.org/2000/svg"
     >
       {tables.map((table, index) => {
         participantsDisplayed += table.participants.length;
@@ -81,6 +82,7 @@ const Row = ({ startingId, tables }: RowProps) => {
             x={xPositions[table.type]}
             y={currentHeight - elementHeight}
             overflow="visible"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <MapTable
               type={table.type}

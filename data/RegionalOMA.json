@@ -1,2238 +1,3050 @@
 [
     [
-        [
-            {
-                "school": {
-                    "name": "Henry Ford",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Northlands",
-                    "venue": "Nordelta"
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "San Jorge",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "San Ignacio",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Santa Mar\u00eda de las Lomas",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Saint Nicholas",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Santa In\u00e9s",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Saint Trinnean's",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Northlands",
-                    "venue": "Nordelta"
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "San Marcos",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "San Jorge",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Nuestra Se\u00f1ora de la Unidad",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Asunci\u00f3n de la Virgen",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Pilgrims College",
-                    "venue": "Pacheco"
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Holy Cross",
-                    "venue": "Mujeres"
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "El Buen Ayre",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ]
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "El Buen Ayre",
+                        "venue": null,
+                        "acronym": "BAYR"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Holy Cross",
+                        "venue": "Mujeres",
+                        "acronym": "HCM"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Pilgrims College",
+                        "venue": "Pacheco",
+                        "acronym": "PCPA"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Asunci\u00f3n de la Virgen",
+                        "venue": null,
+                        "acronym": "ASU"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Nuestra Se\u00f1ora de la Unidad",
+                        "venue": null,
+                        "acronym": "UNI"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "San Jorge",
+                        "venue": null,
+                        "acronym": "SJOR"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "San Marcos",
+                        "venue": null,
+                        "acronym": "MARC"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Northlands",
+                        "venue": "Nordelta",
+                        "acronym": "NND"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Saint Trinnean's",
+                        "venue": null,
+                        "acronym": "TRI"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Santa In\u00e9s",
+                        "venue": null,
+                        "acronym": "SINE"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Saint Nicholas",
+                        "venue": null,
+                        "acronym": "CSN"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Santa Mar\u00eda de las Lomas",
+                        "venue": null,
+                        "acronym": "SML"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "San Ignacio",
+                        "venue": null,
+                        "acronym": "SIGN"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "San Jorge",
+                        "venue": null,
+                        "acronym": "SJOR"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Northlands",
+                        "venue": "Nordelta",
+                        "acronym": "NND"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Henry Ford",
+                        "venue": null,
+                        "acronym": "FORD"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        }
     ],
     [
-        [
-            {
-                "school": {
-                    "name": "Goethe",
-                    "venue": null
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Participaci\u00f3n Individual",
+                        "venue": null,
+                        "acronym": "PIND"
+                    },
+                    "level": 1
                 },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "San Ignacio",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Newman",
+                        "venue": null,
+                        "acronym": "NEW"
+                    },
+                    "level": 3
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Lincoln",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Saint Andrew's",
+                        "venue": null,
+                        "acronym": "SAND"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Newman",
+                        "venue": null,
+                        "acronym": "NEW"
+                    },
+                    "level": 1
                 },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Newman",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Cardenal Pironio",
+                        "venue": null,
+                        "acronym": "PIR"
+                    },
+                    "level": 3
                 },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "Jes\u00fas en el Huerto de los Olivos",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "La Salle",
+                        "venue": null,
+                        "acronym": "LAS"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Los Molinos",
+                        "venue": null,
+                        "acronym": "MOL"
+                    },
+                    "level": 1
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "La Salle",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Sworn",
+                        "venue": null,
+                        "acronym": "SWO"
+                    },
+                    "level": 3
                 },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Participaci\u00f3n Individual",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Newman",
+                        "venue": null,
+                        "acronym": "NEW"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "San Juan el Precursor",
+                        "venue": null,
+                        "acronym": "PRE"
+                    },
+                    "level": 1
                 },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "Glasgow",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Florida Day School",
+                        "venue": null,
+                        "acronym": "FDS"
+                    },
+                    "level": 3
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Florida Day School",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Saint Andrew's",
+                        "venue": null,
+                        "acronym": "SAND"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Participaci\u00f3n Individual",
+                        "venue": null,
+                        "acronym": "PIND"
+                    },
+                    "level": 1
                 },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "San Juan el Precursor",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Glasgow",
+                        "venue": null,
+                        "acronym": "GLA"
+                    },
+                    "level": 3
                 },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "Florida Day School",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Florida Day School",
+                        "venue": null,
+                        "acronym": "FDS"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Newman",
+                        "venue": null,
+                        "acronym": "NEW"
+                    },
+                    "level": 1
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Saint Andrew's",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Jes\u00fas en el Huerto de los Olivos",
+                        "venue": null,
+                        "acronym": "HUE"
+                    },
+                    "level": 3
                 },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Los Molinos",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "La Salle",
+                        "venue": null,
+                        "acronym": "LAS"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Goethe",
+                        "venue": null,
+                        "acronym": "GOE"
+                    },
+                    "level": 1
                 },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "Sworn",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "San Ignacio",
+                        "venue": null,
+                        "acronym": "SIGN"
+                    },
+                    "level": 3
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Newman",
-                    "venue": null
-                },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Newman",
-                    "venue": null
-                },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "Cardenal Pironio",
-                    "venue": null
-                },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "La Salle",
-                    "venue": null
-                },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Participaci\u00f3n Individual",
-                    "venue": null
-                },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "Newman",
-                    "venue": null
-                },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Saint Andrew's",
-                    "venue": null
-                },
-                "level": 2
-            }
-        ]
+                {
+                    "school": {
+                        "name": "Lincoln",
+                        "venue": null,
+                        "acronym": "LIN"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        }
     ],
     [
-        [
-            {
-                "school": {
-                    "name": "Santa Teresa",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Nuestra Se\u00f1ora de la Unidad",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "La Salle",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Santos Padres",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Michael Ham",
-                    "venue": "Nordelta"
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "San Luis",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "El Buen Ayre",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Pilgrims College",
-                    "venue": "Pacheco"
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Northlands",
-                    "venue": "Olivos"
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Florida Day School",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Centro Cultural Italiano",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Cardenal Pironio",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Andersen",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "20 de Junio CCI",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Santa Teresa",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ]
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Santa Teresa",
+                        "venue": null,
+                        "acronym": "STT"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "20 de Junio CCI",
+                        "venue": null,
+                        "acronym": "20J"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Andersen",
+                        "venue": null,
+                        "acronym": "AND"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Cardenal Pironio",
+                        "venue": null,
+                        "acronym": "PIR"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Centro Cultural Italiano",
+                        "venue": null,
+                        "acronym": "CCI"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Florida Day School",
+                        "venue": null,
+                        "acronym": "FDS"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Northlands",
+                        "venue": "Olivos",
+                        "acronym": "NOL"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Pilgrims College",
+                        "venue": "Pacheco",
+                        "acronym": "PCPA"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "El Buen Ayre",
+                        "venue": null,
+                        "acronym": "BAYR"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "San Luis",
+                        "venue": null,
+                        "acronym": "SLUI"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Michael Ham",
+                        "venue": "Nordelta",
+                        "acronym": "MHND"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Santos Padres",
+                        "venue": null,
+                        "acronym": "PAD"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "La Salle",
+                        "venue": null,
+                        "acronym": "LAS"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Nuestra Se\u00f1ora de la Unidad",
+                        "venue": null,
+                        "acronym": "UNI"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Santa Teresa",
+                        "venue": null,
+                        "acronym": "STT"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        }
     ],
     [
-        [
-            {
-                "school": {
-                    "name": "Participaci\u00f3n Individual",
-                    "venue": null
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Goethe",
+                        "venue": null,
+                        "acronym": "GOE"
+                    },
+                    "level": 1
                 },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "La Salle",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Asunci\u00f3n de la Virgen",
+                        "venue": null,
+                        "acronym": "ASU"
+                    },
+                    "level": 3
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Los Molinos",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Sworn",
+                        "venue": null,
+                        "acronym": "SWO"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Labard\u00e9n",
+                        "venue": null,
+                        "acronym": "LAB"
+                    },
+                    "level": 1
                 },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Goethe",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "La Salle",
+                        "venue": null,
+                        "acronym": "LAS"
+                    },
+                    "level": 3
                 },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "Michael Ham",
-                    "venue": "Nordelta"
+                {
+                    "school": {
+                        "name": "Northlands",
+                        "venue": "Olivos",
+                        "acronym": "NOL"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Lincoln",
+                        "venue": null,
+                        "acronym": "LIN"
+                    },
+                    "level": 1
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Newman",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Los Molinos",
+                        "venue": null,
+                        "acronym": "MOL"
+                    },
+                    "level": 3
                 },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Jes\u00fas en el Huerto de los Olivos",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Holy Cross",
+                        "venue": "Varones",
+                        "acronym": "HCV"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
+                        "venue": null,
+                        "acronym": "STM"
+                    },
+                    "level": 1
                 },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "La Salle",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Northlands",
+                        "venue": "Nordelta",
+                        "acronym": "NND"
+                    },
+                    "level": 3
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Andersen",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Labard\u00e9n",
+                        "venue": null,
+                        "acronym": "LAB"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Jes\u00fas en el Huerto de los Olivos",
+                        "venue": null,
+                        "acronym": "HUE"
+                    },
+                    "level": 1
                 },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "La Salle",
+                        "venue": null,
+                        "acronym": "LAS"
+                    },
+                    "level": 3
                 },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "Northlands",
-                    "venue": "Nordelta"
+                {
+                    "school": {
+                        "name": "Andersen",
+                        "venue": null,
+                        "acronym": "AND"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Goethe",
+                        "venue": null,
+                        "acronym": "GOE"
+                    },
+                    "level": 1
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Labard\u00e9n",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Michael Ham",
+                        "venue": "Nordelta",
+                        "acronym": "MHND"
+                    },
+                    "level": 3
                 },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Lincoln",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Newman",
+                        "venue": null,
+                        "acronym": "NEW"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Participaci\u00f3n Individual",
+                        "venue": null,
+                        "acronym": "PIND"
+                    },
+                    "level": 1
                 },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "Los Molinos",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "La Salle",
+                        "venue": null,
+                        "acronym": "LAS"
+                    },
+                    "level": 3
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Holy Cross",
-                    "venue": "Varones"
-                },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Labard\u00e9n",
-                    "venue": null
-                },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "La Salle",
-                    "venue": null
-                },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Northlands",
-                    "venue": "Olivos"
-                },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Goethe",
-                    "venue": null
-                },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "Asunci\u00f3n de la Virgen",
-                    "venue": null
-                },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Sworn",
-                    "venue": null
-                },
-                "level": 2
-            }
-        ]
+                {
+                    "school": {
+                        "name": "Los Molinos",
+                        "venue": null,
+                        "acronym": "MOL"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        }
     ],
     [
-        [
-            {
-                "school": {
-                    "name": "Winter Garden",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Los Molinos",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Lincoln",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Labard\u00e9n",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Newman",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "San Luis",
-                    "venue": null
-                },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "San Juan el Precursor",
-                    "venue": null
-                },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Nuestra Se\u00f1ora de la Unidad",
-                    "venue": null
-                },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Michael Ham",
-                    "venue": "Nordelta"
-                },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Mar\u00edn",
-                    "venue": null
-                },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Learning",
-                    "venue": null
-                },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Jorge Luis Borges",
-                    "venue": null
-                },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Goethe",
-                    "venue": null
-                },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Emiliano Edgardo Encalada",
-                    "venue": null
-                },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Centro Cultural Italiano",
-                    "venue": null
-                },
-                "level": 2
-            }
-        ]
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Centro Cultural Italiano",
+                        "venue": null,
+                        "acronym": "CCI"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Emiliano Edgardo Encalada",
+                        "venue": null,
+                        "acronym": "ENC"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Goethe",
+                        "venue": null,
+                        "acronym": "GOE"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Jorge Luis Borges",
+                        "venue": null,
+                        "acronym": "BOR"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Learning",
+                        "venue": null,
+                        "acronym": "LEA"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Mar\u00edn",
+                        "venue": null,
+                        "acronym": "MAR"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Michael Ham",
+                        "venue": "Nordelta",
+                        "acronym": "MHND"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Nuestra Se\u00f1ora de la Unidad",
+                        "venue": null,
+                        "acronym": "UNI"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "San Juan el Precursor",
+                        "venue": null,
+                        "acronym": "PRE"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "San Luis",
+                        "venue": null,
+                        "acronym": "SLUI"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Newman",
+                        "venue": null,
+                        "acronym": "NEW"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Labard\u00e9n",
+                        "venue": null,
+                        "acronym": "LAB"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Lincoln",
+                        "venue": null,
+                        "acronym": "LIN"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
+                        "venue": null,
+                        "acronym": "STM"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Los Molinos",
+                        "venue": null,
+                        "acronym": "MOL"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Winter Garden",
+                        "venue": null,
+                        "acronym": "WGA"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        }
     ],
     [
-        [
-            {
-                "school": {
-                    "name": "Participaci\u00f3n Individual",
-                    "venue": null
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Newman",
+                        "venue": null,
+                        "acronym": "NEW"
+                    },
+                    "level": 1
                 },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "La Salle",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Sworn",
+                        "venue": null,
+                        "acronym": "SWO"
+                    },
+                    "level": 3
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Saint Andrew's",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Florida Day School",
+                        "venue": null,
+                        "acronym": "FDS"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
+                        "venue": null,
+                        "acronym": "STM"
+                    },
+                    "level": 1
                 },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "San Juan el Precursor",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Florida Day School",
+                        "venue": null,
+                        "acronym": "FDS"
+                    },
+                    "level": 3
                 },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "Labard\u00e9n",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Saint Andrew's",
+                        "venue": null,
+                        "acronym": "SAND"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Goethe",
+                        "venue": null,
+                        "acronym": "GOE"
+                    },
+                    "level": 1
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Northlands",
-                    "venue": "Olivos"
+                {
+                    "school": {
+                        "name": "Jes\u00fas en el Huerto de los Olivos",
+                        "venue": null,
+                        "acronym": "HUE"
+                    },
+                    "level": 3
                 },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Los Molinos",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Newman",
+                        "venue": null,
+                        "acronym": "NEW"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Los Molinos",
+                        "venue": null,
+                        "acronym": "MOL"
+                    },
+                    "level": 1
                 },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "La Salle",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "La Salle",
+                        "venue": null,
+                        "acronym": "LAS"
+                    },
+                    "level": 3
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Sworn",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Sworn",
+                        "venue": null,
+                        "acronym": "SWO"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "San Juan el Precursor",
+                        "venue": null,
+                        "acronym": "PRE"
+                    },
+                    "level": 1
                 },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Goethe",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Labard\u00e9n",
+                        "venue": null,
+                        "acronym": "LAB"
+                    },
+                    "level": 3
                 },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "Jes\u00fas en el Huerto de los Olivos",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Northlands",
+                        "venue": "Olivos",
+                        "acronym": "NOL"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Participaci\u00f3n Individual",
+                        "venue": null,
+                        "acronym": "PIND"
+                    },
+                    "level": 1
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Newman",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "La Salle",
+                        "venue": null,
+                        "acronym": "LAS"
+                    },
+                    "level": 3
                 },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
-                    "venue": null
-                },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "Florida Day School",
-                    "venue": null
-                },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Saint Andrew's",
-                    "venue": null
-                },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Newman",
-                    "venue": null
-                },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "Sworn",
-                    "venue": null
-                },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Florida Day School",
-                    "venue": null
-                },
-                "level": 2
-            }
-        ]
+                {
+                    "school": {
+                        "name": "Saint Andrew's",
+                        "venue": null,
+                        "acronym": "SAND"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        }
     ],
     [
-        [
-            {
-                "school": {
-                    "name": "Dardo Rocha",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Cardenal Pironio",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Pilgrims College",
-                    "venue": "Pacheco"
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Northlands",
-                    "venue": "Nordelta"
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Michael Ham",
-                    "venue": "Vicente L\u00f3pez"
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Asunci\u00f3n de la Virgen",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Saint Andrew's",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Holy Cross",
-                    "venue": "Varones"
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Glasgow",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "El Buen Ayre",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Dardo Rocha",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Alessandro Manzoni",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "San Juan el Precursor",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Labard\u00e9n",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Lincoln",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ]
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Lincoln",
+                        "venue": null,
+                        "acronym": "LIN"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Labard\u00e9n",
+                        "venue": null,
+                        "acronym": "LAB"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "San Juan el Precursor",
+                        "venue": null,
+                        "acronym": "PRE"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Alessandro Manzoni",
+                        "venue": null,
+                        "acronym": "MANZ"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Dardo Rocha",
+                        "venue": null,
+                        "acronym": "DROC"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "El Buen Ayre",
+                        "venue": null,
+                        "acronym": "BAYR"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Glasgow",
+                        "venue": null,
+                        "acronym": "GLA"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Holy Cross",
+                        "venue": "Varones",
+                        "acronym": "HCV"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Saint Andrew's",
+                        "venue": null,
+                        "acronym": "SAND"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Asunci\u00f3n de la Virgen",
+                        "venue": null,
+                        "acronym": "ASU"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Michael Ham",
+                        "venue": "Vicente L\u00f3pez",
+                        "acronym": "MHVL"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Northlands",
+                        "venue": "Nordelta",
+                        "acronym": "NND"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Pilgrims College",
+                        "venue": "Pacheco",
+                        "acronym": "PCPA"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Cardenal Pironio",
+                        "venue": null,
+                        "acronym": "PIR"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Dardo Rocha",
+                        "venue": null,
+                        "acronym": "DROC"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        }
     ],
     [
-        [
-            {
-                "school": {
-                    "name": "Newman",
-                    "venue": null
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "San Juan el Precursor",
+                        "venue": null,
+                        "acronym": "PRE"
+                    },
+                    "level": 3
                 },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "Saint Nicholas",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Newman",
+                        "venue": null,
+                        "acronym": "NEW"
+                    },
+                    "level": 2
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Cruz del Sur",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Labard\u00e9n",
+                        "venue": null,
+                        "acronym": "LAB"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Saint Nicholas",
+                        "venue": null,
+                        "acronym": "CSN"
+                    },
+                    "level": 3
                 },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Sworn",
+                        "venue": null,
+                        "acronym": "SWO"
+                    },
+                    "level": 2
                 },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "Cardenal Pironio",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Newman",
+                        "venue": null,
+                        "acronym": "NEW"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Saint Andrew's",
+                        "venue": null,
+                        "acronym": "SAND"
+                    },
+                    "level": 3
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Holy Cross",
-                    "venue": "Varones"
+                {
+                    "school": {
+                        "name": "Labard\u00e9n",
+                        "venue": null,
+                        "acronym": "LAB"
+                    },
+                    "level": 2
                 },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Jes\u00fas en el Huerto de los Olivos",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Lincoln",
+                        "venue": null,
+                        "acronym": "LIN"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Henry Ford",
+                        "venue": null,
+                        "acronym": "FORD"
+                    },
+                    "level": 3
                 },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "San Juan el Precursor",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Northlands",
+                        "venue": "Nordelta",
+                        "acronym": "NND"
+                    },
+                    "level": 2
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "La Salle",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
+                        "venue": null,
+                        "acronym": "STM"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "San Eduardo",
+                        "venue": null,
+                        "acronym": "SEDU"
+                    },
+                    "level": 3
                 },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "San Eduardo",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Jes\u00fas en el Huerto de los Olivos",
+                        "venue": null,
+                        "acronym": "HUE"
+                    },
+                    "level": 2
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Jes\u00fas en el Huerto de los Olivos",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Labard\u00e9n",
+                        "venue": null,
+                        "acronym": "LAB"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Jes\u00fas en el Huerto de los Olivos",
+                        "venue": null,
+                        "acronym": "HUE"
+                    },
+                    "level": 1
                 },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "Labard\u00e9n",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "San Juan el Precursor",
+                        "venue": null,
+                        "acronym": "PRE"
+                    },
+                    "level": 3
                 },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Henry Ford",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "La Salle",
+                        "venue": null,
+                        "acronym": "LAS"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
+                        "venue": null,
+                        "acronym": "STM"
+                    },
+                    "level": 1
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Northlands",
-                    "venue": "Nordelta"
+                {
+                    "school": {
+                        "name": "Cardenal Pironio",
+                        "venue": null,
+                        "acronym": "PIR"
+                    },
+                    "level": 3
                 },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Holy Cross",
+                        "venue": "Varones",
+                        "acronym": "HCV"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Newman",
+                        "venue": null,
+                        "acronym": "NEW"
+                    },
+                    "level": 1
                 },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Saint Andrew's",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Saint Nicholas",
+                        "venue": null,
+                        "acronym": "CSN"
+                    },
+                    "level": 3
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Labard\u00e9n",
-                    "venue": null
-                },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "Lincoln",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Saint Nicholas",
-                    "venue": null
-                },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Sworn",
-                    "venue": null
-                },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "Newman",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "San Juan el Precursor",
-                    "venue": null
-                },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Newman",
-                    "venue": null
-                },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "Labard\u00e9n",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ]
+                {
+                    "school": {
+                        "name": "Cruz del Sur",
+                        "venue": null,
+                        "acronym": "CSUR"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        }
     ],
     [
-        [
-            {
-                "school": {
-                    "name": "Santa Teresa",
-                    "venue": null
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "San Jorge",
+                        "venue": null,
+                        "acronym": "SJOR"
+                    },
+                    "level": 3
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Florida Day School",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Florida Day School",
+                        "venue": null,
+                        "acronym": "FDS"
+                    },
+                    "level": 2
                 },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "San Juan el Precursor",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Goethe",
+                        "venue": null,
+                        "acronym": "GOE"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "San Lucas",
+                        "venue": "Nordelta",
+                        "acronym": "SLND"
+                    },
+                    "level": 3
                 },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "San Marcos",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Northlands",
+                        "venue": "Olivos",
+                        "acronym": "NOL"
+                    },
+                    "level": 2
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Pilgrims College",
-                    "venue": "San Isidro"
+                {
+                    "school": {
+                        "name": "Los Molinos",
+                        "venue": null,
+                        "acronym": "MOL"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "San Luis",
+                        "venue": null,
+                        "acronym": "SLUI"
+                    },
+                    "level": 3
                 },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "Participaci\u00f3n Individual",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Andersen",
+                        "venue": null,
+                        "acronym": "AND"
+                    },
+                    "level": 2
                 },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "San Luis",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Labard\u00e9n",
+                        "venue": null,
+                        "acronym": "LAB"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "San Marcos",
+                        "venue": null,
+                        "acronym": "MARC"
+                    },
+                    "level": 3
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Andersen",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Pilgrims College",
+                        "venue": "San Isidro",
+                        "acronym": "PCSI"
+                    },
+                    "level": 2
                 },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "Labard\u00e9n",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Participaci\u00f3n Individual",
+                        "venue": null,
+                        "acronym": "PIND"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Santa Teresa",
+                        "venue": null,
+                        "acronym": "STT"
+                    },
+                    "level": 3
                 },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "San Lucas",
-                    "venue": "Nordelta"
+                {
+                    "school": {
+                        "name": "Florida Day School",
+                        "venue": null,
+                        "acronym": "FDS"
+                    },
+                    "level": 2
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Northlands",
-                    "venue": "Olivos"
+                {
+                    "school": {
+                        "name": "San Juan el Precursor",
+                        "venue": null,
+                        "acronym": "PRE"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
+                        "venue": null,
+                        "acronym": "STM"
+                    },
+                    "level": 1
                 },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "Los Molinos",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Glasgow",
+                        "venue": null,
+                        "acronym": "GLA"
+                    },
+                    "level": 3
                 },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "San Jorge",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Saint Andrew's",
+                        "venue": null,
+                        "acronym": "SAND"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Labard\u00e9n",
+                        "venue": null,
+                        "acronym": "LAB"
+                    },
+                    "level": 1
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Florida Day School",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Asunci\u00f3n de la Virgen",
+                        "venue": null,
+                        "acronym": "ASU"
+                    },
+                    "level": 3
                 },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "Goethe",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ]
+                {
+                    "school": {
+                        "name": "San Marcos",
+                        "venue": null,
+                        "acronym": "MARC"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Pilgrims College",
+                        "venue": "San Isidro",
+                        "acronym": "PCSI"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Santos Padres",
+                        "venue": null,
+                        "acronym": "PAD"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        }
     ],
     [
-        [
-            {
-                "school": {
-                    "name": "San Lucas",
-                    "venue": "Nordelta"
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "San Juan el Precursor",
+                        "venue": null,
+                        "acronym": "PRE"
+                    },
+                    "level": 3
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Santa Teresa",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Saint Andrew's",
+                        "venue": null,
+                        "acronym": "SAND"
+                    },
+                    "level": 2
                 },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "Newman",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Newman",
+                        "venue": null,
+                        "acronym": "NEW"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Saint Nicholas",
+                        "venue": null,
+                        "acronym": "CSN"
+                    },
+                    "level": 3
                 },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Saint Andrew's",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "La Salle",
+                        "venue": null,
+                        "acronym": "LAS"
+                    },
+                    "level": 2
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Northlands",
-                    "venue": "Nordelta"
+                {
+                    "school": {
+                        "name": "Labard\u00e9n",
+                        "venue": null,
+                        "acronym": "LAB"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Henry Ford",
+                        "venue": null,
+                        "acronym": "FORD"
+                    },
+                    "level": 3
                 },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "Santa Teresa",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Newman",
+                        "venue": null,
+                        "acronym": "NEW"
+                    },
+                    "level": 2
                 },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "San Juan el Precursor",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Lincoln",
+                        "venue": null,
+                        "acronym": "LIN"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "San Juan el Precursor",
+                        "venue": null,
+                        "acronym": "PRE"
+                    },
+                    "level": 3
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Labard\u00e9n",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Sworn",
+                        "venue": null,
+                        "acronym": "SWO"
+                    },
+                    "level": 2
                 },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "Los Molinos",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Jes\u00fas en el Huerto de los Olivos",
+                        "venue": null,
+                        "acronym": "HUE"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Santa Teresa",
+                        "venue": null,
+                        "acronym": "STT"
+                    },
+                    "level": 3
                 },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Sworn",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Holy Cross",
+                        "venue": "Varones",
+                        "acronym": "HCV"
+                    },
+                    "level": 2
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Los Molinos",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Newman",
+                        "venue": null,
+                        "acronym": "NEW"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Saint Nicholas",
+                        "venue": null,
+                        "acronym": "CSN"
+                    },
+                    "level": 3
                 },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "La Salle",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "La Salle",
+                        "venue": null,
+                        "acronym": "LAS"
+                    },
+                    "level": 2
                 },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Saint Nicholas",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Santa Teresa",
+                        "venue": null,
+                        "acronym": "STT"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Sworn",
+                        "venue": null,
+                        "acronym": "SWO"
+                    },
+                    "level": 3
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "La Salle",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Los Molinos",
+                        "venue": null,
+                        "acronym": "MOL"
+                    },
+                    "level": 2
                 },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "Santa Teresa",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "La Salle",
+                        "venue": null,
+                        "acronym": "LAS"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "San Juan el Precursor",
+                        "venue": null,
+                        "acronym": "PRE"
+                    },
+                    "level": 3
                 },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Santa Teresa",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Labard\u00e9n",
+                        "venue": null,
+                        "acronym": "LAB"
+                    },
+                    "level": 2
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Holy Cross",
-                    "venue": "Varones"
+                {
+                    "school": {
+                        "name": "Los Molinos",
+                        "venue": null,
+                        "acronym": "MOL"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Saint Andrew's",
+                        "venue": null,
+                        "acronym": "SAND"
+                    },
+                    "level": 3
                 },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "Newman",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Northlands",
+                        "venue": "Nordelta",
+                        "acronym": "NND"
+                    },
+                    "level": 2
                 },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "San Juan el Precursor",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Santa Teresa",
+                        "venue": null,
+                        "acronym": "STT"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "San Lucas",
+                        "venue": "Nordelta",
+                        "acronym": "SLND"
+                    },
+                    "level": 3
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Sworn",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Santa Teresa",
+                        "venue": null,
+                        "acronym": "STT"
+                    },
+                    "level": 2
                 },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "Jes\u00fas en el Huerto de los Olivos",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Henry Ford",
-                    "venue": null
-                },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Newman",
-                    "venue": null
-                },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "Lincoln",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Saint Nicholas",
-                    "venue": null
-                },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "La Salle",
-                    "venue": null
-                },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "Labard\u00e9n",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "San Juan el Precursor",
-                    "venue": null
-                },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Saint Andrew's",
-                    "venue": null
-                },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "Newman",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ]
+                {
+                    "school": {
+                        "name": "Newman",
+                        "venue": null,
+                        "acronym": "NEW"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        }
     ],
     [
-        [
-            {
-                "school": {
-                    "name": "Henry Ford",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Santa Mar\u00eda de las Lomas",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "San Jorge",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Saint Nicholas",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Santos Padres",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Santa Teresa",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "San Marcos",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Pilgrims College",
-                    "venue": "Pacheco"
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Saint Andrew's",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Centro Cultural Italiano",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Andersen",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "20 de Junio CCI",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Northlands",
-                    "venue": "Nordelta"
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Lincoln",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ]
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Lincoln",
+                        "venue": null,
+                        "acronym": "LIN"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
+                        "venue": null,
+                        "acronym": "STM"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Northlands",
+                        "venue": "Nordelta",
+                        "acronym": "NND"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "20 de Junio CCI",
+                        "venue": null,
+                        "acronym": "20J"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Andersen",
+                        "venue": null,
+                        "acronym": "AND"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Centro Cultural Italiano",
+                        "venue": null,
+                        "acronym": "CCI"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Saint Andrew's",
+                        "venue": null,
+                        "acronym": "SAND"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Pilgrims College",
+                        "venue": "Pacheco",
+                        "acronym": "PCPA"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "San Marcos",
+                        "venue": null,
+                        "acronym": "MARC"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Santa Teresa",
+                        "venue": null,
+                        "acronym": "STT"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Santos Padres",
+                        "venue": null,
+                        "acronym": "PAD"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Saint Nicholas",
+                        "venue": null,
+                        "acronym": "CSN"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "San Jorge",
+                        "venue": null,
+                        "acronym": "SJOR"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Santa Mar\u00eda de las Lomas",
+                        "venue": null,
+                        "acronym": "SML"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Henry Ford",
+                        "venue": null,
+                        "acronym": "FORD"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        }
     ],
     [
-        [
-            {
-                "school": {
-                    "name": "Cardenal Pironio",
-                    "venue": null
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Sworn",
+                        "venue": null,
+                        "acronym": "SWO"
+                    },
+                    "level": 3
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Lincoln",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Northlands",
+                        "venue": "Olivos",
+                        "acronym": "NOL"
+                    },
+                    "level": 2
                 },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "Jes\u00fas en el Huerto de los Olivos",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Goethe",
+                        "venue": null,
+                        "acronym": "GOE"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "San Lucas",
+                        "venue": "Olivos",
+                        "acronym": "SLOL"
+                    },
+                    "level": 3
                 },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Santa Teresa",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Cruz del Sur",
+                        "venue": null,
+                        "acronym": "CSUR"
+                    },
+                    "level": 2
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Jes\u00fas en el Huerto de los Olivos",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Jes\u00fas en el Huerto de los Olivos",
+                        "venue": null,
+                        "acronym": "HUE"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Santa Teresa",
+                        "venue": null,
+                        "acronym": "STT"
+                    },
+                    "level": 3
                 },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "San Juan el Precursor",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "San Lucas",
+                        "venue": "Olivos",
+                        "acronym": "SLOL"
+                    },
+                    "level": 2
                 },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Sworn",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Newman",
+                        "venue": null,
+                        "acronym": "NEW"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Sworn",
+                        "venue": null,
+                        "acronym": "SWO"
+                    },
+                    "level": 3
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Florida Day School",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Saint Andrew's",
+                        "venue": null,
+                        "acronym": "SAND"
+                    },
+                    "level": 2
                 },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "Newman",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
+                        "venue": null,
+                        "acronym": "STM"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "San Marcos",
+                        "venue": null,
+                        "acronym": "MARC"
+                    },
+                    "level": 3
                 },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Dardo Rocha",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Northlands",
+                        "venue": "Nordelta",
+                        "acronym": "NND"
+                    },
+                    "level": 2
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Newman",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Goethe",
+                        "venue": null,
+                        "acronym": "GOE"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Santa Teresa",
+                        "venue": null,
+                        "acronym": "STT"
+                    },
+                    "level": 3
                 },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "Lincoln",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Santos Padres",
+                        "venue": null,
+                        "acronym": "PAD"
+                    },
+                    "level": 2
                 },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Santa Teresa",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Labard\u00e9n",
+                        "venue": null,
+                        "acronym": "LAB"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Dardo Rocha",
+                        "venue": null,
+                        "acronym": "DROC"
+                    },
+                    "level": 3
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Santos Padres",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Newman",
+                        "venue": null,
+                        "acronym": "NEW"
+                    },
+                    "level": 2
                 },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "Labard\u00e9n",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Lincoln",
+                        "venue": null,
+                        "acronym": "LIN"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Sworn",
+                        "venue": null,
+                        "acronym": "SWO"
+                    },
+                    "level": 3
                 },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "San Marcos",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Florida Day School",
+                        "venue": null,
+                        "acronym": "FDS"
+                    },
+                    "level": 2
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Northlands",
-                    "venue": "Nordelta"
+                {
+                    "school": {
+                        "name": "Newman",
+                        "venue": null,
+                        "acronym": "NEW"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Santa Teresa",
+                        "venue": null,
+                        "acronym": "STT"
+                    },
+                    "level": 3
                 },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "Goethe",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Jes\u00fas en el Huerto de los Olivos",
+                        "venue": null,
+                        "acronym": "HUE"
+                    },
+                    "level": 2
                 },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Sworn",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "San Juan el Precursor",
+                        "venue": null,
+                        "acronym": "PRE"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Cardenal Pironio",
+                        "venue": null,
+                        "acronym": "PIR"
+                    },
+                    "level": 3
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Saint Andrew's",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Lincoln",
+                        "venue": null,
+                        "acronym": "LIN"
+                    },
+                    "level": 2
                 },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Santa Teresa",
-                    "venue": null
-                },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "San Lucas",
-                    "venue": "Olivos"
-                },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "Newman",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "San Lucas",
-                    "venue": "Olivos"
-                },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Cruz del Sur",
-                    "venue": null
-                },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "Jes\u00fas en el Huerto de los Olivos",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Sworn",
-                    "venue": null
-                },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Northlands",
-                    "venue": "Olivos"
-                },
-                "level": 2
-            },
-            {
-                "school": {
-                    "name": "Goethe",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ]
+                {
+                    "school": {
+                        "name": "Jes\u00fas en el Huerto de los Olivos",
+                        "venue": null,
+                        "acronym": "HUE"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "square"
+        }
     ],
     [
-        [
-            {
-                "school": {
-                    "name": "Henry Ford",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Santos Padres",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "La Salle",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Pilgrims College",
-                    "venue": "San Isidro"
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Henry Ford",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "San Luis",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Saint Nicholas",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "La Salle",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "San Jorge",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Northlands",
-                    "venue": "Olivos"
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Michael Ham",
-                    "venue": "Nordelta"
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Mar\u00edn",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Dardo Rocha",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Los Molinos",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
-                    "venue": null
-                },
-                "level": 1
-            }
-        ]
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
+                        "venue": null,
+                        "acronym": "STM"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Los Molinos",
+                        "venue": null,
+                        "acronym": "MOL"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Dardo Rocha",
+                        "venue": null,
+                        "acronym": "DROC"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Mar\u00edn",
+                        "venue": null,
+                        "acronym": "MAR"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Michael Ham",
+                        "venue": "Nordelta",
+                        "acronym": "MHND"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Northlands",
+                        "venue": "Olivos",
+                        "acronym": "NOL"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "San Jorge",
+                        "venue": null,
+                        "acronym": "SJOR"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "La Salle",
+                        "venue": null,
+                        "acronym": "LAS"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Saint Nicholas",
+                        "venue": null,
+                        "acronym": "CSN"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "San Luis",
+                        "venue": null,
+                        "acronym": "SLUI"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Henry Ford",
+                        "venue": null,
+                        "acronym": "FORD"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Pilgrims College",
+                        "venue": "San Isidro",
+                        "acronym": "PCSI"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "La Salle",
+                        "venue": null,
+                        "acronym": "LAS"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Santos Padres",
+                        "venue": null,
+                        "acronym": "PAD"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Henry Ford",
+                        "venue": null,
+                        "acronym": "FORD"
+                    },
+                    "level": 1
+                }
+            ],
+            "type": "individual"
+        }
     ],
     [
-        [
-            {
-                "school": {
-                    "name": "Lincoln",
-                    "venue": null
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Newman",
+                        "venue": null,
+                        "acronym": "NEW"
+                    },
+                    "level": 1
                 },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "Northlands",
-                    "venue": "Olivos"
+                {
+                    "school": {
+                        "name": "Cardenal Pironio",
+                        "venue": null,
+                        "acronym": "PIR"
+                    },
+                    "level": 3
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Pilgrims College",
-                    "venue": "San Isidro"
+                {
+                    "school": {
+                        "name": "La Salle",
+                        "venue": null,
+                        "acronym": "LAS"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Goethe",
+                        "venue": null,
+                        "acronym": "GOE"
+                    },
+                    "level": 1
                 },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Newman",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Jes\u00fas en el Huerto de los Olivos",
+                        "venue": null,
+                        "acronym": "HUE"
+                    },
+                    "level": 3
                 },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "La Salle",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "San Marcos",
+                        "venue": null,
+                        "acronym": "MARC"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Lincoln",
+                        "venue": null,
+                        "acronym": "LIN"
+                    },
+                    "level": 1
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "San Lucas",
-                    "venue": "Olivos"
+                {
+                    "school": {
+                        "name": "La Salle",
+                        "venue": null,
+                        "acronym": "LAS"
+                    },
+                    "level": 3
                 },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Goethe",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Santa Teresa",
+                        "venue": null,
+                        "acronym": "STT"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
+                        "venue": null,
+                        "acronym": "STM"
+                    },
+                    "level": 1
                 },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "San Juan el Precursor",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Northlands",
+                        "venue": "Nordelta",
+                        "acronym": "NND"
+                    },
+                    "level": 3
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Santos Padres",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Cardenal Pironio",
+                        "venue": null,
+                        "acronym": "PIR"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Goethe",
+                        "venue": null,
+                        "acronym": "GOE"
+                    },
+                    "level": 1
                 },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Santa Teresa del Ni\u00f1o Jes\u00fas",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "San Juan el Precursor",
+                        "venue": null,
+                        "acronym": "PRE"
+                    },
+                    "level": 3
                 },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "Northlands",
-                    "venue": "Nordelta"
+                {
+                    "school": {
+                        "name": "Santos Padres",
+                        "venue": null,
+                        "acronym": "PAD"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Newman",
+                        "venue": null,
+                        "acronym": "NEW"
+                    },
+                    "level": 1
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Cardenal Pironio",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "La Salle",
+                        "venue": null,
+                        "acronym": "LAS"
+                    },
+                    "level": 3
                 },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Lincoln",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "San Lucas",
+                        "venue": "Olivos",
+                        "acronym": "SLOL"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        },
+        {
+            "participants": [
+                {
+                    "school": {
+                        "name": "Lincoln",
+                        "venue": null,
+                        "acronym": "LIN"
+                    },
+                    "level": 1
                 },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "La Salle",
-                    "venue": null
+                {
+                    "school": {
+                        "name": "Northlands",
+                        "venue": "Olivos",
+                        "acronym": "NOL"
+                    },
+                    "level": 3
                 },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "Santa Teresa",
-                    "venue": null
-                },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Goethe",
-                    "venue": null
-                },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "Jes\u00fas en el Huerto de los Olivos",
-                    "venue": null
-                },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "San Marcos",
-                    "venue": null
-                },
-                "level": 2
-            }
-        ],
-        [
-            {
-                "school": {
-                    "name": "Newman",
-                    "venue": null
-                },
-                "level": 1
-            },
-            {
-                "school": {
-                    "name": "Cardenal Pironio",
-                    "venue": null
-                },
-                "level": 3
-            },
-            {
-                "school": {
-                    "name": "La Salle",
-                    "venue": null
-                },
-                "level": 2
-            }
-        ]
+                {
+                    "school": {
+                        "name": "Pilgrims College",
+                        "venue": "San Isidro",
+                        "acronym": "PCSI"
+                    },
+                    "level": 2
+                }
+            ],
+            "type": "round"
+        }
     ]
 ]

@@ -29,6 +29,7 @@ const MapTable = ({ type, participants, startingId }: MapTableProps) => {
         height={size}
         viewBox="0 0 1000 1000"
         overflow="visible"
+        xmlns="http://www.w3.org/2000/svg"
       >
         <circle
           cx="500"
@@ -73,6 +74,7 @@ const MapTable = ({ type, participants, startingId }: MapTableProps) => {
         height={size}
         viewBox="0 0 1500 1000"
         overflow="visible"
+        xmlns="http://www.w3.org/2000/svg"
       >
         <rect
           x="100"
@@ -131,6 +133,7 @@ const MapTable = ({ type, participants, startingId }: MapTableProps) => {
           height={size * 0.6}
           viewBox="0 0 600 600"
           overflow="visible"
+          xmlns="http://www.w3.org/2000/svg"
         >
           <rect
             x="50"
