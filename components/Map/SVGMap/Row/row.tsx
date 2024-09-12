@@ -14,8 +14,8 @@ interface RowProps {
   tables: TableData[];
 }
 
-const Row = ({ startingId, tables }: RowProps) => {
-  const width = tables.reduce((acc, table) => {
+export const rowWidth = (tables: TableData[]) => {
+  return tables.reduce((acc, table) => {
     if (table.type === "round") {
       return Math.max(roundTableDimensions.x + 50, acc);
     }
@@ -27,7 +27,10 @@ const Row = ({ startingId, tables }: RowProps) => {
     }
     return acc;
   }, 0);
-  const height = tables.reduce((acc, table) => {
+};
+
+export const rowHeight = (tables: TableData[]) => {
+  return tables.reduce((acc, table) => {
     if (table.type === "round") {
       return roundTableDimensions.y + acc;
     }
@@ -39,6 +42,17 @@ const Row = ({ startingId, tables }: RowProps) => {
     }
     return acc;
   }, 0);
+};
+
+export const rowParticipants = (tables: TableData[]) => {
+  return tables.reduce((acc, table) => {
+    return acc + table.participants.length;
+  }, 0);
+};
+
+const Row = ({ startingId, tables }: RowProps) => {
+  const width = rowWidth(tables);
+  const height = rowHeight(tables);
   let participantsDisplayed = 0;
   let currentHeight = 0;
   let xPositions = {
@@ -79,18 +93,18 @@ const Row = ({ startingId, tables }: RowProps) => {
         );
       })}
       <line
-        x1="0.5"
+        x1="0"
         y1={height}
-        x2="0.5"
+        x2="0"
         y2="0"
         stroke="gray"
         strokeWidth={1}
         strokeDasharray="30,30"
       />
       <line
-        x1={width - 0.5}
+        x1={width}
         y1={height}
-        x2={width - 0.5}
+        x2={width}
         y2="0"
         stroke="gray"
         strokeWidth={1}

@@ -4,6 +4,7 @@ import { Tooltip } from "react-tooltip";
 interface School {
   name: string;
   acronym: string;
+  venue?: string;
 }
 
 interface ParticipantProps {
@@ -26,7 +27,7 @@ const Participant = ({
   return (
     <div className="relative" style={{ width: size, height: size }}>
       <svg
-        data-tooltip-id={id}
+        data-tooltip-id={level && school ? id : "-1"}
         width="100%"
         height="100%"
         viewBox="0 0 400 400"
@@ -87,7 +88,9 @@ const Participant = ({
               style={{ fontSize: `${size / 3}px` }}
             >
               <span className="pr-6">{level}</span>
-              <span className="pl-6">{school.name}</span>
+              <span className="pl-6">{`${school.name}${
+                school.venue ? `- ${school.venue}` : ""
+              }`}</span>
             </div>
           </Tooltip>
         </foreignObject>

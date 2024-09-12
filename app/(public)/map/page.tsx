@@ -1,3 +1,4 @@
+import InstanceMap from "../../../components/Map/SVGMap/Map/map";
 import Row, { TableData } from "../../../components/Map/SVGMap/Row/row";
 
 const data = [
@@ -20,7 +21,7 @@ const data = [
       {
         school: {
           name: "Jes\u00fas en el Huerto de los Olivos",
-          acronym: "HUE",
+          acronym: "HUER",
         },
         level: 1,
       },
@@ -85,6 +86,7 @@ const data = [
         school: {
           name: "Dardo Rocha",
           acronym: "DRO",
+          venue: "CABA",
         },
         level: 3,
       },
@@ -92,6 +94,8 @@ const data = [
     type: "individual",
   },
 ] as TableData[];
+
+const map = [data, data.slice(0, 2)];
 export default async function Map() {
-  return <Row startingId={0} tables={data} />;
+  return <InstanceMap data={map} />;
 }

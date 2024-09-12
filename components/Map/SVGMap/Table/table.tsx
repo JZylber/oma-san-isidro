@@ -1,7 +1,7 @@
 import Participant from "../Participant/participant";
 
 export interface ParticipantData {
-  school: { name: string; acronym: string };
+  school: { name: string; acronym: string; venue?: string };
   level?: number;
   selected?: boolean;
 }
