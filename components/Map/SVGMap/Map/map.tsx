@@ -14,8 +14,7 @@ const InstanceMap = ({ data }: { data: TableData[][] }) => {
     return rowWidth(row) + acc;
   }, 0);
   let participantsDisplayed = 0;
-  let currentWidth = mapWidth;
-  const reversedData = data.slice().reverse();
+  let currentWidth = 0;
   let participantId = 0;
   return (
     <>
@@ -27,21 +26,22 @@ const InstanceMap = ({ data }: { data: TableData[][] }) => {
         xmlns="http://www.w3.org/2000/svg"
         data-tooltip-id="-10"
       >
-        {reversedData.map((row, index) => {
+        {data.map((row, index) => {
           const rowW = rowWidth(row);
           const rowH = rowHeight(row);
-          currentWidth -= rowW;
+          const x = currentWidth;
           const y = mapHeight - rowH;
           const id = participantsDisplayed;
+          currentWidth += rowW;
           participantsDisplayed += rowParticipants(row);
           return (
-            <g key={index} transform={`translate(${currentWidth},${y})`}>
-              <Row startingId={id} tables={row} />
+            <g key={index} transform={`translate(${x},${y})`}>
+              <Row startingId={id} tables={row} rowNumber={index + 1} />
             </g>
           );
         })}
       </svg>
-      {reversedData.map((row) => {
+      {data.map((row) => {
         return row.map((table) => {
           return table.participants.map((participant) => {
             let id = participantId;

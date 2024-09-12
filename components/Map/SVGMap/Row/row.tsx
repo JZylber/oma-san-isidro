@@ -10,9 +10,12 @@ export interface TableData {
 }
 
 interface RowProps {
+  rowNumber: number;
   startingId: number;
   tables: TableData[];
 }
+
+const labelHeight = 100;
 
 export const rowWidth = (tables: TableData[]) => {
   return tables.reduce((acc, table) => {
@@ -41,7 +44,7 @@ export const rowHeight = (tables: TableData[]) => {
       return individualTableSize.y + acc;
     }
     return acc;
-  }, 0);
+  }, labelHeight);
 };
 
 export const rowParticipants = (tables: TableData[]) => {
@@ -50,7 +53,14 @@ export const rowParticipants = (tables: TableData[]) => {
   }, 0);
 };
 
-const Row = ({ startingId, tables }: RowProps) => {
+export const hasSelectedParticipant = (tables: TableData[]) => {
+  return tables.some((table) => {
+    return table.participants.some((participant) => participant.selected);
+  });
+};
+
+const Row = ({ startingId, tables, rowNumber }: RowProps) => {
+  const isSelected = hasSelectedParticipant(tables);
   const width = rowWidth(tables);
   const height = rowHeight(tables);
   let participantsDisplayed = 0;
@@ -68,6 +78,28 @@ const Row = ({ startingId, tables }: RowProps) => {
       overflow="visible"
       xmlns="http://www.w3.org/2000/svg"
     >
+      <defs>
+        <pattern
+          id="pattern"
+          width="8"
+          height="10"
+          patternUnits="userSpaceOnUse"
+          patternTransform="rotate(45 50 50)"
+        >
+          <line stroke="#D9F5FC" stroke-width="7px" y2="10" />
+        </pattern>
+      </defs>
+      {isSelected && (
+        <rect
+          x="0"
+          y="0"
+          width="100%"
+          height="100%"
+          fill="url(#pattern)"
+          stroke="#D9F5FC"
+          stroke-width="1px"
+        />
+      )}
       {tables.map((table, index) => {
         participantsDisplayed += table.participants.length;
         let elementHeight = table.type === "round" ? roundTableDimensions.y : 0;
@@ -112,6 +144,25 @@ const Row = ({ startingId, tables }: RowProps) => {
         strokeWidth={1}
         strokeDasharray="30,30"
       />
+      <rect
+        x="0"
+        y={height - labelHeight + 25}
+        width="100%"
+        height={labelHeight - 25}
+        fill={isSelected ? "#D9F5FC" : "#FEFDF3"}
+        stroke="#000000"
+        strokeWidth={1}
+      />
+      <foreignObject
+        x="0"
+        y={height - labelHeight + 25}
+        width="100%"
+        height={labelHeight - 25}
+      >
+        <div className="flex justify-center items-center h-full font-montserrat font-bold text-[48px]">
+          <span>{rowNumber}</span>
+        </div>
+      </foreignObject>
     </svg>
   );
 };
