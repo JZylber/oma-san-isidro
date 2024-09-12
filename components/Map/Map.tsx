@@ -85,27 +85,43 @@ const Map = ({ competition }: MapProps) => {
           </thead>
           <tbody>
             {data.map((column, column_index) => {
-              return (
-                <tr key={column_index}>
-                  <td className={[styles.center_align, styles.row].join(" ")}>
-                    {column_index + 1}
-                  </td>
-                  {[1, 2, 3].map((level, row_index) => {
-                    let value = column.reduce((acc, table) => {
-                      acc =
-                        acc +
-                        participantsOfLevelInTable(table, schoolFilter, level);
-                      return acc;
-                    }, 0);
-                    console.log(value);
-                    return (
-                      <td className={styles.center_align} key={row_index}>
-                        {value !== 0 ? value : ""}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
+              if (
+                column.some((table) =>
+                  [1, 2, 3].some(
+                    (level) =>
+                      participantsOfLevelInTable(table, schoolFilter, level) !==
+                      0
+                  )
+                )
+              ) {
+                return (
+                  <tr key={column_index}>
+                    <td className={[styles.center_align, styles.row].join(" ")}>
+                      {column_index + 1}
+                    </td>
+                    {[1, 2, 3].map((level, row_index) => {
+                      let value = column.reduce((acc, table) => {
+                        acc =
+                          acc +
+                          participantsOfLevelInTable(
+                            table,
+                            schoolFilter,
+                            level
+                          );
+                        return acc;
+                      }, 0);
+                      console.log(value);
+                      return (
+                        <td className={styles.center_align} key={row_index}>
+                          {value !== 0 ? value : ""}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                );
+              } else {
+                return null;
+              }
             })}
           </tbody>
         </table>
