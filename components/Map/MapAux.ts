@@ -23,3 +23,21 @@ export const getParticipants = (data:TableData[][]) : MapItem[]=>{
     },[]);
     return participants;
 }
+
+export const participantIsSelected = (participant:ParticipantData,filter:Partial<MapItem>) : boolean =>{
+    let dataSchool = mapItemFromParticipantData(participant);
+    let correctLevel = filter.level
+    ? filter.level === dataSchool.level
+    : true;
+    let correctSchool = filter.school
+    ? filter.school.isFilteredBy(dataSchool.school)
+    : true;
+    return correctSchool && correctLevel;
+}
+
+export const participantsOfLevelInTable = (data:TableData,filter:Partial<MapItem>,level:number) : number=>{
+    let compliantParticipants = data.participants.filter((participant) => {
+    return participantIsSelected(participant, filter) && participant.level === level;
+    })
+    return compliantParticipants.length;
+}

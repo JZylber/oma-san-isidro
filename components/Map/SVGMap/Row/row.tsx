@@ -86,7 +86,7 @@ const Row = ({ startingId, tables, rowNumber }: RowProps) => {
           patternUnits="userSpaceOnUse"
           patternTransform="rotate(45 50 50)"
         >
-          <line stroke="#D9F5FC" stroke-width="7px" y2="10" />
+          <line stroke="#D9F5FC" strokeWidth="7px" y2="10" />
         </pattern>
       </defs>
       {isSelected && (
@@ -97,7 +97,7 @@ const Row = ({ startingId, tables, rowNumber }: RowProps) => {
           height="100%"
           fill="url(#pattern)"
           stroke="#D9F5FC"
-          stroke-width="1px"
+          strokeWidth="1px"
         />
       )}
       {tables.map((table, index) => {

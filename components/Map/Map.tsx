@@ -9,7 +9,9 @@ import {
   getMapData,
   getParticipants,
   mapItemFromParticipantData,
-} from "./MapFromJson";
+  participantIsSelected,
+  participantsOfLevelInTable,
+} from "./MapAux";
 import InstanceMap from "./SVGMap/Map/map";
 
 interface MapProps {
@@ -21,18 +23,6 @@ export interface MapItem extends FilterableObject {
   level: number;
 }
 
-const countParticipantsOfLevel = (participants: MapItem[], level: number) => {
-  return participants.filter((item) => item.level === level).length;
-};
-
-const participantsInColumn = (column: MapItem[], selected: MapItem[]) => {
-  const selectedInColumn = selected.filter((item) => column.includes(item));
-  const participantsPerLevel = [0, 1, 2, 3].map((level) =>
-    countParticipantsOfLevel(selectedInColumn, level)
-  );
-  return participantsPerLevel;
-};
-
 const Map = ({ competition }: MapProps) => {
   const data = getMapData("Regional", competition);
   const participants = getParticipants(data);
@@ -42,14 +32,10 @@ const Map = ({ competition }: MapProps) => {
     data.forEach((row) => {
       row.forEach((table) => {
         table.participants.forEach((participant) => {
-          let dataSchool = mapItemFromParticipantData(participant);
-          let correctLevel = schoolFilter.level
-            ? schoolFilter.level === dataSchool.level
-            : true;
-          let correctSchool = schoolFilter.school
-            ? schoolFilter.school.isFilteredBy(dataSchool.school)
-            : true;
-          participant.selected = correctSchool && correctLevel;
+          participant.selected = participantIsSelected(
+            participant,
+            schoolFilter
+          );
         });
       });
     });
@@ -87,74 +73,43 @@ const Map = ({ competition }: MapProps) => {
           clear={true}
         />
       </form>
-      <div className="h-[200px]"></div>
-      {/*<div className={styles.values}>
+      <div className={styles.values}>
         <table className={styles.values_table}>
           <thead>
             <tr>
               <th style={{ width: "17.5%" }}>Fila</th>
-              {!freePlacesSelected ? (
-                <>
-                  <th style={{ width: "27.5%" }}>Nivel 1</th>
-                  <th style={{ width: "27.5%" }}>Nivel 2</th>
-                  <th style={{ width: "27.5%" }}>Nivel 3</th>
-                </>
-              ) : (
-                <th style={{ width: "82.5%" }}>Lugares</th>
-              )}
+              <th style={{ width: "27.5%" }}>Nivel 1</th>
+              <th style={{ width: "27.5%" }}>Nivel 2</th>
+              <th style={{ width: "27.5%" }}>Nivel 3</th>
             </tr>
           </thead>
           <tbody>
-            {freePlacesSelected ? (
-              <>
-                {participantsPerColumn.map((column, column_index) => {
-                  return (
-                    <tr key={column_index}>
-                      {column.slice(0, 2).map((value, row_index) => {
-                        return (
-                          <td
-                            className={[
-                              styles.center_align,
-                              row_index === 0 ? styles.row : "",
-                            ].join(" ")}
-                            key={row_index}
-                          >
-                            {value !== 0 ? value : ""}
-                          </td>
-                        );
-                      })}
-                    </tr>
-                  );
-                })}
-              </>
-            ) : (
-              <>
-                {participantsPerColumn.map((column, column_index) => {
-                  return (
-                    <tr key={column_index}>
-                      {[column[0]]
-                        .concat(column.slice(2))
-                        .map((value, row_index) => {
-                          return (
-                            <td
-                              className={[
-                                styles.center_align,
-                                row_index === 0 ? styles.row : "",
-                              ].join(" ")}
-                              key={row_index}
-                            >
-                              {value !== 0 ? value : ""}
-                            </td>
-                          );
-                        })}
-                    </tr>
-                  );
-                })}
-              </>
-            )}
+            {data.map((column, column_index) => {
+              return (
+                <tr key={column_index}>
+                  <td className={[styles.center_align, styles.row].join(" ")}>
+                    {column_index + 1}
+                  </td>
+                  {[1, 2, 3].map((level, row_index) => {
+                    let value = column.reduce((acc, table) => {
+                      acc =
+                        acc +
+                        participantsOfLevelInTable(table, schoolFilter, level);
+                      return acc;
+                    }, 0);
+                    console.log(value);
+                    return (
+                      <td className={styles.center_align} key={row_index}>
+                        {value !== 0 ? value : ""}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
           </tbody>
         </table>
-      </div>*/}
+      </div>
     </>
   );
 };
