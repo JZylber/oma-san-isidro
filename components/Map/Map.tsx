@@ -1,18 +1,21 @@
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import {
+  TransformWrapper,
+  TransformComponent,
+  useControls,
+} from "react-zoom-pan-pinch";
 import { FilterableObject, School } from "../../hooks/types";
 import useFilter from "../../hooks/useFilter";
 import { Competition } from "../../server/app-router-db-calls";
 import SelectResultCategory from "../ResultsPage/SelectResultCategory";
 import styles from "./Map.module.scss";
-import ParticipantTable from "./Table/Table";
 import {
   getMapData,
   getParticipants,
-  mapItemFromParticipantData,
   participantIsSelected,
   participantsOfLevelInTable,
 } from "./MapAux";
 import InstanceMap from "./SVGMap/Map/map";
+import Image from "next/image";
 
 interface MapProps {
   competition: Competition;
@@ -48,11 +51,57 @@ const Map = ({ competition }: MapProps) => {
       });
     });
   }
+  const Controls = () => {
+    const { zoomIn, zoomOut, resetTransform } = useControls();
+    return (
+      <div className="flex absolute right-2 bottom-2 z-10 gap-x-4">
+        <div
+          className="size-20 flex justify-center items-center border-black border-2 rounded-[9px] cursor-pointer bg-primary-light-blue"
+          onClick={() => zoomIn()}
+        >
+          <Image src="/images/plus.svg" alt="zoom in" width={30} height={30} />
+        </div>
+        <div
+          className="size-20 flex justify-center items-center border-black border-2 rounded-[9px] cursor-pointer bg-primary-light-blue"
+          onClick={() => zoomOut()}
+        >
+          <Image
+            src="/images/minus.svg"
+            alt="zoom out"
+            width={30}
+            height={30}
+          />
+        </div>
+        <div
+          className="size-20 flex justify-center items-center border-black border-2 rounded-[9px] cursor-pointer bg-primary-light-blue"
+          onClick={() => resetTransform()}
+        >
+          <Image
+            src="/images/reset_map.svg"
+            alt="reset"
+            width={30}
+            height={30}
+          />
+        </div>
+      </div>
+    );
+  };
   return (
     <>
-      <div style={{ margin: "2rem 0rem 2rem 0rem" }}>
-        <TransformWrapper initialScale={0.25} minScale={0.2} maxScale={2}>
-          <TransformComponent wrapperClass={styles.gridContainer}>
+      <div
+        style={{ margin: "2rem 0rem 2rem 0rem" }}
+        className={styles.gridContainer}
+      >
+        <TransformWrapper
+          initialScale={0.3}
+          initialPositionX={0}
+          initialPositionY={0}
+          minScale={0.2}
+          maxScale={2}
+          smooth
+        >
+          <Controls />
+          <TransformComponent wrapperClass="max-h-[75vh] max-w-full">
             <InstanceMap data={data} />
           </TransformComponent>
         </TransformWrapper>
@@ -110,7 +159,6 @@ const Map = ({ competition }: MapProps) => {
                           );
                         return acc;
                       }, 0);
-                      console.log(value);
                       return (
                         <td className={styles.center_align} key={row_index}>
                           {value !== 0 ? value : ""}
