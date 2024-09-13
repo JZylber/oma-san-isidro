@@ -36,6 +36,7 @@ model Colegio {
   nombre          String
   sede            String?
   localidad       String?
+  acr_nimo        String          @unique @map("acrónimo")
   participaciones Participacion[]
   sede_instancia  SedeInstancia[]
 }
@@ -124,6 +125,7 @@ model SedeInstancia {
   id_colegio                 Int
   aclaracion                 String?
   niveles                    Int[]                        @default([])
+  mapa                       Json?
   ParticipacionSedeInstancia ParticipacionSedeInstancia[]
   colegio                    Colegio                      @relation(fields: [id_colegio], references: [id_colegio])
   prueba                     Prueba                       @relation(fields: [id_prueba], references: [id_prueba])
@@ -171,6 +173,16 @@ model Inhabilitado {
   motivo           String?
   Participacion    Participacion @relation(fields: [id_participacion], references: [id_participacion])
   Prueba           Prueba        @relation(fields: [id_prueba], references: [id_prueba])
+}
+
+model Usuario {
+  id_usuario Int     @id @default(autoincrement())
+  nombre     String
+  apellido   String
+  email      String  @unique
+  password   String
+  admin      Boolean @default(false)
+  token      String?
 }
 
 enum INSTANCIA {
