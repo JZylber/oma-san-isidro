@@ -3,9 +3,10 @@ import MapTable, { ParticipantData } from "../Table/table";
 const roundTableDimensions = { x: 200, y: 200 };
 const squareTableSize = { x: 300, y: 200 };
 const individualTableSize = { x: 120, y: 120 };
+const pairTableSize = { x: 200, y: 120 };
 
 export interface TableData {
-  type: "individual" | "square" | "round";
+  type: "individual" | "square" | "round" | "pair";
   participants: ParticipantData[];
 }
 
@@ -28,6 +29,9 @@ export const rowWidth = (tables: TableData[]) => {
     if (table.type === "individual") {
       return Math.max(individualTableSize.x + 50, acc);
     }
+    if (table.type === "pair") {
+      return Math.max(pairTableSize.x + 50, acc);
+    }
     return acc;
   }, 0);
 };
@@ -42,6 +46,9 @@ export const rowHeight = (tables: TableData[]) => {
     }
     if (table.type === "individual") {
       return individualTableSize.y + acc;
+    }
+    if (table.type === "pair") {
+      return pairTableSize.y + acc;
     }
     return acc;
   }, labelHeight);
@@ -69,6 +76,7 @@ const Row = ({ startingId, tables, rowNumber }: RowProps) => {
     round: width / 2 - roundTableDimensions.x / 2,
     square: width / 2 - squareTableSize.x / 2,
     individual: width / 2 - individualTableSize.x / 2,
+    pair: width / 2 - pairTableSize.x / 2,
   };
   return (
     <svg
@@ -107,6 +115,7 @@ const Row = ({ startingId, tables, rowNumber }: RowProps) => {
           table.type === "square" ? squareTableSize.y : elementHeight;
         elementHeight =
           table.type === "individual" ? individualTableSize.y : elementHeight;
+        elementHeight = table.type === "pair" ? pairTableSize.y : elementHeight;
         currentHeight += elementHeight;
         return (
           <svg

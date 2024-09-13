@@ -28,6 +28,7 @@ export interface MapItem extends FilterableObject {
 
 const Map = ({ competition }: MapProps) => {
   const data = getMapData("Regional", competition);
+  console.log(data);
   const participants = getParticipants(data);
   const [schoolFilter, updateFilter, filtered_schools, options] =
     useFilter(participants);

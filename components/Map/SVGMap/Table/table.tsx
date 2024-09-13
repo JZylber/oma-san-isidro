@@ -7,7 +7,7 @@ export interface ParticipantData {
 }
 
 interface MapTableProps {
-  type: "individual" | "square" | "round";
+  type: "individual" | "square" | "round" | "pair";
   participants: ParticipantData[];
   startingId: number;
 }
@@ -18,11 +18,31 @@ const MapTable = ({ type, participants, startingId }: MapTableProps) => {
   const size = 200;
   const participantSize = 300;
   if (type == "round") {
-    const coordinates = [
-      [500 - participantSize / 2, 800 - participantSize / 2],
-      [796.410161514 - participantSize / 2, 300 - participantSize / 2],
-      [203.589838486 - participantSize / 2, 300 - participantSize / 2],
-    ];
+    const coordinates =
+      participants.length === 3
+        ? [
+            [500 - participantSize / 2, 800 - participantSize / 2],
+            [796.410161514 - participantSize / 2, 300 - participantSize / 2],
+            [203.589838486 - participantSize / 2, 300 - participantSize / 2],
+          ]
+        : [
+            [
+              217.157287525 - participantSize / 2,
+              217.157287525 - participantSize / 2,
+            ],
+            [
+              710.128795527 - participantSize / 2,
+              217.157287525 - participantSize / 2,
+            ],
+            [
+              217.157287525 - participantSize / 2,
+              710.128795527 - participantSize / 2,
+            ],
+            [
+              710.128795527 - participantSize / 2,
+              710.128795527 - participantSize / 2,
+            ],
+          ];
     return (
       <svg
         width={size}
@@ -150,7 +170,6 @@ const MapTable = ({ type, participants, startingId }: MapTableProps) => {
             y={300 - participantSize / 2}
             width={participantSize}
             height={participantSize}
-            overflow="visible"
           >
             <Participant
               id={startingId.toString()}
@@ -163,6 +182,50 @@ const MapTable = ({ type, participants, startingId }: MapTableProps) => {
         </svg>
       );
     }
+  } else if (type === "pair") {
+    const coordinates = [
+      [250 - participantSize / 2, 300 - participantSize / 2],
+      [750 - participantSize / 2, 300 - participantSize / 2],
+    ];
+    return (
+      <svg
+        width={size}
+        height={size * 0.6}
+        viewBox="0 0 1000 600"
+        overflow="visible"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect
+          x="50"
+          y="300"
+          width="900"
+          height="250"
+          rx="33.5"
+          fill={backgroundColor}
+          stroke={color}
+          strokeWidth="20"
+        />
+        {participants.map((participant, index) => {
+          return (
+            <foreignObject
+              key={index}
+              x={coordinates[index][0]}
+              y={coordinates[index][1]}
+              width={participantSize}
+              height={participantSize}
+            >
+              <Participant
+                id={(startingId + index).toString()}
+                school={participant.school}
+                level={participant.level}
+                size={participantSize}
+                selected={participant.selected}
+              />
+            </foreignObject>
+          );
+        })}
+      </svg>
+    );
   }
   return null;
 };
