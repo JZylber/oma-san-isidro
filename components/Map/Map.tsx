@@ -101,6 +101,14 @@ const Map = ({ competition }: MapProps) => {
           smooth
         >
           <Controls />
+          {(schoolFilter.school || schoolFilter.level) && (
+            <div className="absolute top-2 left-2 z-10 p-4 border-black border-2 rounded-[9px] w-fit bg-primary-white font-montserrat text-xl">
+              {schoolFilter.school && (
+                <p>Colegio: {schoolFilter.school.toString()}</p>
+              )}
+              {schoolFilter.level && <p>Nivel: {schoolFilter.level}</p>}
+            </div>
+          )}
           <TransformComponent wrapperClass="max-h-[75vh] max-w-full">
             <InstanceMap data={data} />
           </TransformComponent>
