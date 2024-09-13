@@ -79,7 +79,7 @@ const Participant = ({
       {school && (
         <foreignObject x="2.5" y="2.5" width="395" height="90">
           <div
-            className="flex justify-center items-center font-unbounded h-full text-[80px]"
+            className="flex justify-center items-center font-montserrat h-full text-[80px]"
             style={{ color: color }}
           >
             <span>{school.acronym}</span>
