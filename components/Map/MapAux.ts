@@ -30,7 +30,7 @@ export const participantIsSelected = (participant:ParticipantData,filter:Partial
     ? filter.level === dataSchool.level
     : true;
     let correctSchool = filter.school
-    ? filter.school.isFilteredBy(dataSchool.school)
+    ? dataSchool.school.isFilteredBy(filter.school)
     : true;
     return correctSchool && correctLevel;
 }
