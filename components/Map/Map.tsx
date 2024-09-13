@@ -102,11 +102,18 @@ const Map = ({ competition }: MapProps) => {
         >
           <Controls />
           {(schoolFilter.school || schoolFilter.level) && (
-            <div className="absolute top-2 left-2 z-10 p-4 border-black border-2 rounded-[9px] w-fit bg-primary-white font-montserrat text-xl">
+            <div className="absolute top-2 left-2 z-10 p-4 border-black border-2 rounded-[9px] w-fit bg-primary-white font-montserrat text-[16px]">
               {schoolFilter.school && (
-                <p>Colegio: {schoolFilter.school.toString()}</p>
+                <p>
+                  <span className="font-bold">Colegio:</span>{" "}
+                  {schoolFilter.school.toString()}
+                </p>
               )}
-              {schoolFilter.level && <p>Nivel: {schoolFilter.level}</p>}
+              {schoolFilter.level && (
+                <p>
+                  <span className="font-bold">Nivel:</span> {schoolFilter.level}
+                </p>
+              )}
             </div>
           )}
           <TransformComponent wrapperClass="max-h-[75vh] max-w-full">
