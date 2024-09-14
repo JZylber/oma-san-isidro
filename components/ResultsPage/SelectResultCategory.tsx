@@ -152,7 +152,11 @@ const SelectResultCategory = <T extends Filterables>({
                   ].join(" ")}
                   value={tempValue}
                   onChange={(event) => {
-                    setTempValue(event.target.value);
+                    let newTempValue = event.target.value;
+                    setTempValue(newTempValue);
+                    if (newTempValue === "") {
+                      cleanFilter();
+                    }
                     setCanOpen(true);
                   }}
                 />
