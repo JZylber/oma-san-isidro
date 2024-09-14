@@ -1,3 +1,4 @@
+import { MouseEventHandler } from "react";
 import Row, {
   rowHeight,
   rowParticipants,
@@ -6,7 +7,13 @@ import Row, {
 } from "../Row/row";
 import { Tooltip } from "react-tooltip";
 
-const InstanceMap = ({ data }: { data: TableData[][] }) => {
+const InstanceMap = ({
+  data,
+  onClick,
+}: {
+  data: TableData[][];
+  onClick?: MouseEventHandler<SVGSVGElement>;
+}) => {
   let mapHeight = data.reduce((acc, row) => {
     return Math.max(rowHeight(row), acc);
   }, 0);
@@ -22,9 +29,8 @@ const InstanceMap = ({ data }: { data: TableData[][] }) => {
         width={mapWidth}
         height={mapHeight}
         viewBox={`0 0 ${mapWidth} ${mapHeight}`}
-        overflow="visible"
         xmlns="http://www.w3.org/2000/svg"
-        data-tooltip-id="-10"
+        onClick={onClick ? onClick : undefined}
       >
         {data.map((row, index) => {
           const rowW = rowWidth(row);
