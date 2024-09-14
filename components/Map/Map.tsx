@@ -11,11 +11,13 @@ import styles from "./Map.module.scss";
 import {
   getMapData,
   getParticipants,
+  mapItemFromParticipantData,
   participantIsSelected,
   participantsOfLevelInTable,
 } from "./MapAux";
 import InstanceMap from "./SVGMap/Map/map";
 import Image from "next/image";
+import { MouseEventHandler, useCallback } from "react";
 
 interface MapProps {
   competition: Competition;
@@ -28,7 +30,6 @@ export interface MapItem extends FilterableObject {
 
 const Map = ({ competition }: MapProps) => {
   const data = getMapData("Regional", competition);
-  console.log(data);
   const participants = getParticipants(data);
   const [schoolFilter, updateFilter, filtered_schools, options] =
     useFilter(participants);
@@ -52,6 +53,31 @@ const Map = ({ competition }: MapProps) => {
       });
     });
   }
+  const clickMap: MouseEventHandler<SVGSVGElement> = (event) => {
+    let participant: SVGAElement | HTMLElement = event.target as SVGAElement;
+    if (!(schoolFilter.school || schoolFilter.level)) {
+      while (participant !== null && !participant.dataset.tooltipId) {
+        participant = participant.parentElement as HTMLElement;
+      }
+      if (!participant) return;
+      else {
+        participant = participant as SVGAElement;
+        let id = parseInt(participant.dataset.tooltipId as string);
+        let currentId = 0;
+        data.forEach((row) => {
+          row.forEach((table) => {
+            table.participants.forEach((participant) => {
+              if (currentId === id) {
+                let mapItem = mapItemFromParticipantData(participant);
+                updateFilter({ school: mapItem.school });
+              }
+              currentId++;
+            });
+          });
+        });
+      }
+    }
+  };
   const Controls = () => {
     const { zoomIn, zoomOut, resetTransform } = useControls();
     return (
@@ -118,10 +144,11 @@ const Map = ({ competition }: MapProps) => {
             </div>
           )}
           <TransformComponent wrapperClass="max-h-[75vh] max-w-full">
-            <InstanceMap data={data} />
+            <InstanceMap data={data} onClick={clickMap} />
           </TransformComponent>
         </TransformWrapper>
       </div>
+
       <form className={styles.form}>
         <SelectResultCategory
           category="Colegio"
