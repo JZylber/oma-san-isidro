@@ -128,17 +128,38 @@ const Map = ({ competition }: MapProps) => {
         >
           <Controls />
           {(schoolFilter.school || schoolFilter.level) && (
-            <div className="absolute top-2 left-2 z-10 p-4 border-black border-2 rounded-[9px] w-fit bg-primary-white font-montserrat text-[16px]">
+            <div className="absolute top-2 left-2 z-10 px-4 py-2 border-black border-2 rounded-[9px] w-fit flex flex-col bg-primary-white font-montserrat text-[16px] divide-y-2 divide-primary-light-blue">
               {schoolFilter.school && (
-                <p>
-                  <span className="font-bold">Colegio:</span>{" "}
-                  {schoolFilter.school.toString()}
-                </p>
+                <div className="flex justify-between py-2">
+                  <p>
+                    <span className="font-bold">Colegio:</span>{" "}
+                    {schoolFilter.school.toString()}
+                  </p>
+                  <Image
+                    src="/images/x.svg"
+                    alt="clean school filter"
+                    width={20}
+                    height={20}
+                    onClick={() => updateFilter({ school: undefined })}
+                    className="pl-4 cursor-pointer"
+                  />
+                </div>
               )}
               {schoolFilter.level && (
-                <p>
-                  <span className="font-bold">Nivel:</span> {schoolFilter.level}
-                </p>
+                <div className="flex justify-between py-2">
+                  <p>
+                    <span className="font-bold">Nivel:</span>{" "}
+                    {schoolFilter.level}
+                  </p>
+                  <Image
+                    src="/images/x.svg"
+                    alt="clean level filter"
+                    width={20}
+                    height={20}
+                    onClick={() => updateFilter({ level: undefined })}
+                    className="pl-4 cursor-pointer"
+                  />
+                </div>
               )}
             </div>
           )}
