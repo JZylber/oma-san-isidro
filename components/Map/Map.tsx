@@ -55,27 +55,26 @@ const Map = ({ competition }: MapProps) => {
   }
   const clickMap: MouseEventHandler<SVGSVGElement> = (event) => {
     let participant: SVGAElement | HTMLElement = event.target as SVGAElement;
-    if (!(schoolFilter.school || schoolFilter.level)) {
-      while (participant !== null && !participant.dataset.tooltipId) {
-        participant = participant.parentElement as HTMLElement;
-      }
-      if (!participant) return;
-      else {
-        participant = participant as SVGAElement;
-        let id = parseInt(participant.dataset.tooltipId as string);
-        let currentId = 0;
-        data.forEach((row) => {
-          row.forEach((table) => {
-            table.participants.forEach((participant) => {
-              if (currentId === id) {
-                let mapItem = mapItemFromParticipantData(participant);
-                updateFilter({ school: mapItem.school });
-              }
-              currentId++;
-            });
+
+    while (participant !== null && !participant.dataset.tooltipId) {
+      participant = participant.parentElement as HTMLElement;
+    }
+    if (!participant) return;
+    else {
+      participant = participant as SVGAElement;
+      let id = parseInt(participant.dataset.tooltipId as string);
+      let currentId = 0;
+      data.forEach((row) => {
+        row.forEach((table) => {
+          table.participants.forEach((participant) => {
+            if (currentId === id) {
+              let mapItem = mapItemFromParticipantData(participant);
+              updateFilter({ school: mapItem.school });
+            }
+            currentId++;
           });
         });
-      }
+      });
     }
   };
   const Controls = () => {
