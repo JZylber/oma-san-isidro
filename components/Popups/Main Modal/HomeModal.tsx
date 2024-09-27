@@ -3,6 +3,7 @@ import { Button } from "../../buttons/Button";
 
 import styles from "./HomeModal.module.scss";
 import Modal from "../Modal";
+import Image from "next/image";
 
 interface HomeModalProps {
   open: boolean;
@@ -13,7 +14,16 @@ const HomeModal = ({ open, setOpen }: HomeModalProps) => {
   return (
     <Modal open={open}>
       <div className={styles.modal_content}>
-        <h1>IMPORTANTE</h1>
+        <div className="flex items-center">
+          <Image
+            src="/images/warning.svg"
+            alt="Warning icon"
+            height={64}
+            width={64}
+            className="shrink-0 hidden lg:block"
+          />
+          <h1 className="w-fit">IMPORTANTE</h1>
+        </div>
         <p>
           Estamos al tanto de que hay faltantes en los resultados del regional
           ñandú, especialmente en el nivel 3.
