@@ -139,9 +139,11 @@ const NationalInfo = ({
             vegetarianos, veganos, etc.
           </li>
           <li>
-            <span className={styles.bold}>Vianda almuerzo 17:</span> Usar el
-            siguiente código: S si se retiran con vianda luego de la premiación
-            de olimpíadas; N si almuerzan.
+            <span className={styles.bold}>
+              Vianda almuerzo {isOma ? 17 : 23}:
+            </span>{" "}
+            Usar el siguiente código: S si se retiran con vianda luego de la
+            premiación de olimpíadas; N si almuerzan.
           </li>
           <li>
             <span className={styles.bold}>Observaciones:</span> Espacio para
