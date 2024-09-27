@@ -1,18 +1,7 @@
-import { jwtVerify } from 'jose';
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import {verifyToken} from './utils/tokenVerification';
 
-
-const SECRET_KEY = process.env.JWT_KEY as string;
-
-async function verifyToken(jwtToken: string) {
-  try {
-    return await jwtVerify(jwtToken, new TextEncoder().encode(SECRET_KEY));
-  } catch (e) {
-    console.log('e:', e);
-    return null;
-  }
-}
  
 export async function middleware(request: NextRequest) {
   const currentUser = request.cookies.get('currentUser')?.value;
