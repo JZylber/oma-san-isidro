@@ -34,7 +34,7 @@ export async function POST(request : NextRequest) {
     if (isValid) {
         /* Create token */
         const iat = Math.floor(Date.now() / 1000);
-        const exp = iat + 60* 60;
+        const exp = iat + 60 * 60;
         const token = await new SignJWT({ userId, userEmail, userName, userSurname })
           .setProtectedHeader({ alg: 'HS256' })
           .setExpirationTime(exp)

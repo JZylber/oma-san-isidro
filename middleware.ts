@@ -14,9 +14,9 @@ async function verifyToken(jwtToken: string) {
   }
 }
  
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const currentUser = request.cookies.get('currentUser')?.value;
-  const validToken = currentUser ? verifyToken(currentUser) : null;
+  const validToken = currentUser ? await verifyToken(currentUser) : null;
   if (!validToken) {
     return NextResponse.redirect(new URL('/login', request.url))
   }
