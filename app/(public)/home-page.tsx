@@ -17,7 +17,7 @@ interface HomeProps {
 }
 
 const Home = ({ news, events }: HomeProps) => {
-  const [openModal, setOpenModal] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
   return (
     <div className={styles.grid}>
       <HomeModal open={openModal} setOpen={setOpenModal} />
