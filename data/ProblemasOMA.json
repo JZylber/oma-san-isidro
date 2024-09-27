@@ -178,6 +178,21 @@
       "https://pvqbkogjtilwnziibxsx.supabase.co/storage/v1/object/public/Problemas/2024/Oma/Intercolegial_OMA_2024_1.pdf",
       "https://pvqbkogjtilwnziibxsx.supabase.co/storage/v1/object/public/Problemas/2024/Oma/Intercolegial_OMA_2024_2.pdf",
       "https://pvqbkogjtilwnziibxsx.supabase.co/storage/v1/object/public/Problemas/2024/Oma/Intercolegial_OMA_2024_3.pdf"
+    ],
+    "Zonal": [
+      "https://pvqbkogjtilwnziibxsx.supabase.co/storage/v1/object/public/Problemas/2024/Oma/Zonal_2024_OMA_1.pdf",
+      "https://pvqbkogjtilwnziibxsx.supabase.co/storage/v1/object/public/Problemas/2024/Oma/Zonal_2024_OMA_2.pdf",
+      "https://pvqbkogjtilwnziibxsx.supabase.co/storage/v1/object/public/Problemas/2024/Oma/Zonal_2024_OMA_3.pdf"
+    ],
+    "Regional": [
+      "https://pvqbkogjtilwnziibxsx.supabase.co/storage/v1/object/public/Problemas/2024/Oma/Regional_OMA_2024_1.pdf",
+      "https://pvqbkogjtilwnziibxsx.supabase.co/storage/v1/object/public/Problemas/2024/Oma/Regional_OMA_2024_2.pdf",
+      "https://pvqbkogjtilwnziibxsx.supabase.co/storage/v1/object/public/Problemas/2024/Oma/Regional_OMA_2024_3.pdf"
+    ],
+    "Provincial": [
+      "https://pvqbkogjtilwnziibxsx.supabase.co/storage/v1/object/public/Problemas/2024/Oma/Provincial_OMA_2024_1.pdf",
+      "https://pvqbkogjtilwnziibxsx.supabase.co/storage/v1/object/public/Problemas/2024/Oma/Provincial_OMA_2024_2.pdf",
+      "https://pvqbkogjtilwnziibxsx.supabase.co/storage/v1/object/public/Problemas/2024/Oma/Provincial_OMA_2024_3.pdf"
     ]
   }
 }

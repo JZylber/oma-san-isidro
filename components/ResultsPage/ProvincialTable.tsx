@@ -16,7 +16,7 @@ export interface ProvincialResult extends FilterableObject{
     aprobado: boolean
 }
 
-
+const resultHierarchy = ["Campeón","Primer Subcampeón","Segundo Subcampeón","Mención Especial","Mención"];
 
 const ProvincialResultTable = ({results,testInfo,passed}:{results : Array<TestQueryResults>, testInfo: TestInfo, passed?: boolean}) => {
     const{competencia,año,instancia} = testInfo;
@@ -28,7 +28,19 @@ const ProvincialResultTable = ({results,testInfo,passed}:{results : Array<TestQu
         participante: new Participant(result.participacion.participante.nombre,result.participacion.participante.apellido),
         aprobado: result.aprobado
         });
-    })
+
+    }).sort((a,b) => {
+        if(a.nivel === b.nivel){
+            if(a.resultado === b.resultado){
+                return a.participante.surname.localeCompare(b.participante.surname)
+            } else {
+                console.log(a.resultado,resultHierarchy.indexOf(a.resultado),resultHierarchy.indexOf(b.resultado), b.resultado)
+                return resultHierarchy.indexOf(a.resultado) - resultHierarchy.indexOf(b.resultado)
+            }
+        } else {
+            return a.nivel - b.nivel;
+        };
+});
     const make_element = (result : ProvincialResult,index : number) => {
         const participant = result.participante.toString();
         const school = result.colegio.toString();
