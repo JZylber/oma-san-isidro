@@ -129,17 +129,28 @@ const ResultTable = ({
 
   return (
     <div className={styles.container}>
-      {/*instancia === "REGIONAL" && competencia === "ÑANDÚ" &&
-                    <Warning title="Pedidos de Revisión" className={styles.revision}>
-                        <p className={styles.text}>OMA recibirá dudas y pedido de revisiones hasta el <span>13/10</span>. Recordar enviar:</p>
-                        <ul className={`${styles.text} ${styles.list}`}>
-                            <li>Número de región (OMA San Isidro es 53)</li>
-                            <li>Nivel</li>
-                            <li>Apellido y Nombre</li>
-                            <li>Especificar el problema que creen tener bien y que el jurado no lo consideró</li>
-                        </ul>
-                        <p className={styles.text}>Se reciben únicamente por mail a <a href="mailto:marita@oma.org.ar">marita@oma.org.ar</a></p>
-                    </Warning>*/}
+      {instancia === "REGIONAL" &&
+        competencia === "ÑANDÚ" &&
+        testInfo.año === new Date().getUTCFullYear() && (
+          <Warning title="Pedidos de Revisión" className={styles.revision}>
+            <p className={styles.text}>
+              OMA recibirá dudas y pedido de revisiones hasta el{" "}
+              <span>9/10</span>. Recordar enviar:
+            </p>
+            <ul className={`${styles.text} ${styles.list}`}>
+              <li>Nivel</li>
+              <li>Apellido y Nombre</li>
+              <li>
+                Especificar el problema que creen tener bien y que el jurado no
+                lo consideró
+              </li>
+            </ul>
+            <p className={styles.text}>
+              Se reciben únicamente por mail a{" "}
+              <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a>
+            </p>
+          </Warning>
+        )}
       {/*instancia === "REGIONAL" && competencia === "OMA" && (
         <Warning title="Pedidos de Revisión" className={styles.revision}>
           <p className={styles.text}>
