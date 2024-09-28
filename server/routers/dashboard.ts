@@ -4,14 +4,7 @@ import { INSTANCE } from "../types";
 import { getPreviousInstance, getResults, passingParticipants } from "./results/results_db_calls";
 import { INSTANCIA } from "@prisma/client";
 
-export const dashboardRouter = router({
-    getResults: protectedProcedure.input(z.object({
-        año: z.number(),
-        instancia: INSTANCE,
-        competencia: z.string(),
-    }),
-    ).query(async ({ctx,input}) => {
-        const { año, instancia, competencia } = input;
+const getEditableResults = async (competencia: string, año: number, instancia: INSTANCIA) => {
         const prevInstance = getPreviousInstance(competencia,instancia) as INSTANCIA;
         const participants = await passingParticipants(competencia,año,prevInstance);
         const results = await getResults(competencia,año,instancia);
@@ -35,5 +28,18 @@ export const dashboardRouter = router({
             }
         })
         return participantsWithResults;
+}
+
+export type EditableResult =  Awaited<ReturnType<typeof getEditableResults>>[0];
+
+
+export const dashboardRouter = router({
+    getResults: protectedProcedure.input(z.object({
+        año: z.number(),
+        instancia: INSTANCE,
+        competencia: z.string(),
     }),
-});
+    ).query(async ({ctx,input}) => {
+        const {año, instancia, competencia} = input;
+        return getEditableResults(competencia,año,instancia);
+})});
