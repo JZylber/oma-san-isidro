@@ -2,6 +2,7 @@ import { router, publicProcedure } from '../trpc';
 import { z } from 'zod';
 import { INSTANCIA } from "@prisma/client";
 import { prisma } from '../db';
+import { getParticipants, getPreviousInstance, passingParticipants } from './results/results_db_calls';
 
 export const getInstanceDropPoints = async (type: string, year: number, instance: INSTANCIA) => {
   const query = await prisma.prueba.findFirst({
@@ -92,106 +93,7 @@ const getInstanceVenues = async (type: string, year: number, instance: INSTANCIA
   return (results);
   };
 
-const getParticipants = async (competition: string,year: number) => {
-  const query = await prisma.participacion.findMany({
-    where: {
-      competencia: {
-        tipo: competition,
-        ano: year
-      }
-    },
-    orderBy: [
-      {nivel: 'asc'},
-      {
-        participante: {
-          apellido: 'asc'
-        }
-      },
-      {
-        participante: {
-          nombre: 'asc'
-        }
-      }
-    ],
-    select: {
-      id_participacion: true,
-      participante: {
-        select: {
-          nombre: true,
-          apellido: true
-        }
-      },
-      colegio: {
-        select: {
-          nombre: true,
-          sede: true
-        }
-      },
-      nivel: true
-    }
-  });
-  const results = query;
-  return (results);
-};
 
-const passingParticipants = async (type: string, year: number, instance: INSTANCIA) => {
-  const query = await prisma.prueba.findFirst({
-  where: {
-    competencia: {
-      tipo: type,
-      ano: year
-    },
-    instancia: instance,
-  },
-  select: {
-    rinden: {
-      where: {
-        aprobado: true
-      },
-      orderBy: [
-      {participacion: {
-        nivel: 'asc'
-      }},  
-      {
-        participacion: {
-          participante: {
-            apellido: 'asc'
-          }
-        }
-      },
-      {
-        participacion: {
-          participante: {
-            nombre: 'asc'
-          }
-        }
-      }],
-      select: {
-        participacion: {
-          select: {
-            id_participacion: true,
-            participante: {
-              select: {
-                nombre: true,
-                apellido: true
-              }
-            },
-            colegio: {
-              select: {
-                nombre: true,
-                sede: true
-              }
-            },
-            nivel: true
-          }
-        }
-      }
-    }
-  }
-  });
-  const results = query?query.rinden.map((participation) => participation.participacion):[];
-  return (results);
-};
 
 const passingParticipantsWScore = async (type: string, year: number, instance: INSTANCIA) => {
   const query = await prisma.prueba.findFirst({
@@ -274,15 +176,7 @@ const getInstanceData = async (year: number,competition: string, instance: INSTA
 }
 
 
-const getPreviousInstance =  (competition: string,instance: INSTANCIA) => {
-  if(instance === 'NACIONAL') return 'REGIONAL' as INSTANCIA;
-  if(instance === 'REGIONAL') return 'ZONAL' as INSTANCIA;
-  if(instance === 'ZONAL'){
-    if(competition === "OMA") return 'INTERCOLEGIAL' as INSTANCIA;
-    else return 'INTERESCOLAR' as INSTANCIA
-  };
-  return undefined;
-}
+
 
 const venueDataGenerator = async (competition: string, instance: INSTANCIA) => {
   const date = new Date();
