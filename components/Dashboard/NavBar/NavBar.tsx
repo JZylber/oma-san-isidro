@@ -6,7 +6,7 @@ import NavBarLink from "./NavBarLink";
 const DashboardNavBar = () => {
   const pathname = usePathname();
   return (
-    <nav className="w-1/5 flex flex-col pl-4 py-4 gap-y-4 bg-primary-light-blue border-r border-primary-black">
+    <nav className="w-1/6 flex flex-col pl-4 py-4 gap-y-4 bg-primary-light-blue border-r border-primary-black">
       <NavBarLink href="/dashboard" selected={pathname === "/dashboard"}>
         Inicio
       </NavBarLink>

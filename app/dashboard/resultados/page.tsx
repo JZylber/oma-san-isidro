@@ -2,6 +2,7 @@
 
 import { INSTANCIA } from "@prisma/client";
 import { trpc } from "../../../utils/trpc";
+import Image from "next/image";
 
 interface Result {
   id_participacion: number;
@@ -57,30 +58,37 @@ const displayResult = (
   numberOfProblems: number
 ) => {
   if (result === null) {
-    return <td colSpan={numberOfProblems + 2}>sin resultados</td>;
+    return (
+      <td className="p-2 text-center" colSpan={numberOfProblems + 2}>
+        sin resultados
+      </td>
+    );
   }
   if (result.aclaracion) {
     return (
       <>
-        <td colSpan={numberOfProblems + 1}>{result.aclaracion}</td>
-        <td>{displayBoolean(result.aprobado)}</td>
+        <td className="p-2 text-center" colSpan={numberOfProblems + 1}>
+          {result.aclaracion}
+        </td>
+        <td className="p-2 text-center">{displayBoolean(result.aprobado)}</td>
       </>
     );
   }
   if (!result.presente) {
     return (
-      <>
-        <td colSpan={numberOfProblems + 1}>ausente</td>
-        <td>{displayBoolean(result.aprobado)}</td>
-      </>
+      <td className="p-2 text-center" colSpan={numberOfProblems + 2}>
+        ausente
+      </td>
     );
   }
   return (
     <>
       {Object.values(result.puntaje).map((score, i) => (
-        <td key={i}>{score}</td>
+        <td className="p-2 text-center" key={i}>
+          {score}
+        </td>
       ))}
-      <td>{displayBoolean(result.aprobado)}</td>
+      <td className="p-2 text-center">{displayBoolean(result.aprobado)}</td>
     </>
   );
 };
@@ -93,42 +101,57 @@ const DashboardResultsTable = ({
   numberOfProblems: number;
 }) => {
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Nivel</th>
-          <th>Apellido</th>
-          <th>Nombre</th>
-          <th>DNI</th>
-          <th>Colegio</th>
-          <th>Sede</th>
-          {numberOfProblems > 0 ? (
-            <>
-              {Array.from({ length: numberOfProblems }).map((_, i) => (
-                <th key={i}>P{i + 1}</th>
-              ))}
-              <th>Total</th>
-              <th>Aprobado</th>
-            </>
-          ) : (
-            <th>Resultado</th>
-          )}
-        </tr>
-      </thead>
-      <tbody>
-        {results.map((result) => (
-          <tr key={result.id_participacion}>
-            <td>{result.nivel}</td>
-            <td>{result.participante.apellido}</td>
-            <td>{result.participante.nombre}</td>
-            <td>{result.participante.dni}</td>
-            <td>{result.colegio.nombre}</td>
-            <td>{result.colegio.sede}</td>
-            {displayResult(result.resultados, numberOfProblems)}
+    <div className="border border-black rounded-xl overflow-hidden w-full">
+      <table className="w-full border-collapse">
+        <thead className="bg-primary-light-blue border-b border-black">
+          <tr className="font-unbounded text-2xl">
+            <th className="p-2">Nivel</th>
+            <th className="p-2">Apellido</th>
+            <th className="p-2">Nombre</th>
+            <th className="p-2">DNI</th>
+            <th className="p-2">Colegio</th>
+            {numberOfProblems > 0 ? (
+              <>
+                {Array.from({ length: numberOfProblems }).map((_, i) => (
+                  <th key={i}>P{i + 1}</th>
+                ))}
+                <th className="p-2">Total</th>
+                <th className="p-2">Aprobado</th>
+              </>
+            ) : (
+              <th className="p-2">Resultado</th>
+            )}
+            <th></th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody className="font-montserrat text-xl divide-y">
+          {results.map((result) => (
+            <tr key={result.id_participacion}>
+              <td className="p-2 text-center">{result.nivel}</td>
+              <td className="p-2">{result.participante.apellido}</td>
+              <td className="p-2">{result.participante.nombre}</td>
+              <td className="p-2 text-center">{result.participante.dni}</td>
+              <td className="p-2">{result.colegio.nombre}</td>
+              {displayResult(result.resultados, numberOfProblems)}
+              <td className="p-2 flex justify-center items-center gap-x-4">
+                <Image
+                  src="/icons/edit.svg"
+                  alt="editar"
+                  width={20}
+                  height={20}
+                />
+                <Image
+                  src="/icons/delete.svg"
+                  alt="eliminar"
+                  width={20}
+                  height={20}
+                />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 
