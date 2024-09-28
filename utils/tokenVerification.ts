@@ -1,6 +1,13 @@
-import { jwtDecrypt, jwtVerify } from "jose";
+import { jwtDecrypt, JWTDecryptResult, jwtVerify } from "jose";
 
 const SECRET_KEY = process.env.JWT_KEY as string;
+
+export interface TokenPayload {
+    userId: number;
+    userEmail: string;
+    userName: string;
+    userSurname: string;
+    }
 
 export async function verifyToken(jwtToken: string) {
   try {
@@ -11,7 +18,7 @@ export async function verifyToken(jwtToken: string) {
   }
 }
 
-export async function decryptToken(jwtToken: string) {
-    const token = await jwtDecrypt(jwtToken, new TextEncoder().encode(SECRET_KEY));
-    return token;
-    }
+export async function getTokenPayload(jwtToken: string) {
+    const { payload, protectedHeader } = await jwtDecrypt<JWTDecryptResult<TokenPayload>>(jwtToken, new TextEncoder().encode(SECRET_KEY));
+    return payload.payload as TokenPayload;
+}

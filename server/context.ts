@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { verifyToken, decryptToken } from '../utils/tokenVerification';
+import { verifyToken, getTokenPayload } from '../utils/tokenVerification';
 export async function createContext({
   req,
   res,
@@ -14,7 +14,7 @@ export async function createContext({
       if (!validUser) {
         return null;
       } else {
-        return await decryptToken(currentUser);
+        return await getTokenPayload(currentUser);
       }
     }
     return null;
