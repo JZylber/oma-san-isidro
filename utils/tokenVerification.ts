@@ -17,8 +17,3 @@ export async function verifyToken(jwtToken: string) {
     return null;
   }
 }
-
-export async function getTokenPayload(jwtToken: string) {
-    const { payload, protectedHeader } = await jwtDecrypt<JWTDecryptResult<TokenPayload>>(jwtToken, new TextEncoder().encode(SECRET_KEY));
-    return payload.payload as TokenPayload;
-}
