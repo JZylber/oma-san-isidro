@@ -81,14 +81,16 @@ const DashboardResultsTableRow = ({
         />
         <Image src="/icons/delete.svg" alt="eliminar" width={20} height={20} />
       </td>
-      <ResultModal
-        result={result}
-        open={edit}
-        onConfirm={() => {
-          setEdit(false);
-        }}
-        close={() => setEdit(false)}
-      />
+      {result.resultados && (
+        <ResultModal
+          result={result}
+          open={edit}
+          onConfirm={() => {
+            setEdit(false);
+          }}
+          close={() => setEdit(false)}
+        />
+      )}
     </tr>
   );
 };
