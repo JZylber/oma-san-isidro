@@ -4,10 +4,12 @@ function Modal({
   openModal,
   closeModal,
   children,
+  className = "",
 }: {
   openModal: boolean;
   closeModal: () => void;
   children: React.ReactNode;
+  className?: string;
 }) {
   const ref = useRef<HTMLDialogElement | null>(null);
 
@@ -20,7 +22,7 @@ function Modal({
   }, [openModal]);
 
   return (
-    <dialog ref={ref} onCancel={closeModal}>
+    <dialog ref={ref} onCancel={closeModal} className={className}>
       {children}
     </dialog>
   );

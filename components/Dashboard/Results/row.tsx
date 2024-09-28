@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { EditableResult } from "../../../server/routers/dashboard";
+import ResultModal from "../../Popups/ResultModal/ResultModal";
+import { useState } from "react";
 
 const displayBoolean = (value: boolean) => {
   return value ? "Sí" : "No";
@@ -57,6 +59,7 @@ const DashboardResultsTableRow = ({
   result: EditableResult;
   numberOfProblems: number;
 }) => {
+  const [edit, setEdit] = useState(false);
   return (
     <tr key={result.id_participacion}>
       <td className="p-2 text-center">{result.nivel}</td>
@@ -66,9 +69,26 @@ const DashboardResultsTableRow = ({
       <td className="p-2">{result.colegio.nombre}</td>
       {displayResult(result.resultados, numberOfProblems)}
       <td className="p-2 flex justify-center items-center gap-x-4">
-        <Image src="/icons/edit.svg" alt="editar" width={20} height={20} />
+        <Image
+          src="/icons/edit.svg"
+          alt="editar"
+          width={20}
+          height={20}
+          className="cursor-pointer"
+          onClick={() => {
+            setEdit(true);
+          }}
+        />
         <Image src="/icons/delete.svg" alt="eliminar" width={20} height={20} />
       </td>
+      <ResultModal
+        result={result}
+        open={edit}
+        onConfirm={() => {
+          setEdit(false);
+        }}
+        close={() => setEdit(false)}
+      />
     </tr>
   );
 };
