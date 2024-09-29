@@ -1,7 +1,7 @@
 import { protectedProcedure, router } from "../trpc";
 import { z } from 'zod';
 import { INSTANCE } from "../types";
-import { getPreviousInstance, getResults, modifyResult, passingParticipants } from "./results/results_db_calls";
+import { deleteResult, getPreviousInstance, getResults, modifyResult, newResult, passingParticipants } from "./results/results_db_calls";
 import { INSTANCIA } from "@prisma/client";
 
 const getEditableResults = async (competencia: string, año: number, instancia: INSTANCIA) => {
@@ -54,5 +54,19 @@ export const dashboardRouter = router({
     })).mutation(async ({ctx,input}) => {
         const {id_rinde, puntaje, aprobado, presente, aclaracion} = input;
         return await modifyResult(id_rinde, puntaje, aprobado, presente, aclaracion);
+    }),
+    newResult: protectedProcedure.input(z.object({
+        id_participacion: z.number(),
+        id_prueba: z.number(),
+        puntaje: z.array(z.string()),
+        aprobado: z.boolean(),
+        presente: z.boolean(),
+        aclaracion: z.string().nullable(),
+    })).mutation(async ({ctx,input}) => {
+        const {id_participacion, id_prueba, puntaje, aprobado, presente, aclaracion} = input;
+        return await newResult(id_participacion, id_prueba, puntaje, aprobado, presente, aclaracion);
+    }),
+    deleteResult: protectedProcedure.input(z.number()).mutation(async ({ctx,input}) => {
+        return await deleteResult(input);
     }),
 });

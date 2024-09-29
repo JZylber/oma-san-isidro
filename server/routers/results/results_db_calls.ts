@@ -175,3 +175,26 @@ export const modifyResult = async (id_rinde: number, score: string[], approved: 
     });
     return result;
 }
+
+export const newResult = async (id_participation: number, id_test: number, score: string[], approved: boolean, present: boolean, clarification: string | null) => {
+    const result = await prisma.rinde.create({
+        data: {
+            id_participacion: id_participation,
+            id_prueba: id_test,
+            resultados: score,
+            aprobado: approved,
+            presente: present,
+            aclaracion: clarification
+        }
+    });
+    return result;
+}
+
+export const deleteResult = async (id_rinde: number) => {
+    const result = await prisma.rinde.delete({
+        where: {
+            id_rinde: id_rinde
+        }
+    });
+    return result;
+};

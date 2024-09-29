@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { EditableResult } from "../../../server/routers/dashboard";
 import Modal from "../Modal";
 import Image from "next/image";
+import ActionButton from "../../buttons/ActionButton/ActionButton";
 
 const initialState = (
   resultados: EditableResult["resultados"],
@@ -25,12 +26,14 @@ const ResultModal = ({
   open,
   close,
   onConfirm,
+  addNewResult = false,
 }: {
   result: EditableResult;
   numberOfProblems: number;
   open: boolean;
   close: () => void;
   onConfirm: (newResult: EditableResult["resultados"]) => void;
+  addNewResult?: boolean;
 }) => {
   const [newResults, setNewResults] = useState(
     initialState(result.resultados, numberOfProblems)
@@ -42,11 +45,11 @@ const ResultModal = ({
     <Modal
       openModal={open}
       closeModal={close}
-      className="px-4 pt-4 pb-8 ml-auto h-screen max-h-screen border-l border-black bg-primary-white"
+      className="px-4 pt-4 pb-8 ml-auto h-screen max-h-screen border-l border-black bg-primary-white max-w-xl"
     >
       <div className="flex flex-col gap-y-6 h-full">
-        <h2 className="font-unbounded text-6xl py-2 border-b">
-          Editar Resultado
+        <h2 className="font-unbounded text-6xl py-2 border-b text-center">
+          {addNewResult ? "Agregar" : "Editar"} Resultado
         </h2>
         <div className="flex flex-col font-montserrat gap-y">
           <h3 className="text-xl">Nombre y Apellido</h3>
@@ -69,7 +72,11 @@ const ResultModal = ({
           <div className="flex gap-x-2">
             {newResults.puntaje.map((score, i, arr) => {
               return (
-                <div className="flex flex-col">
+                <div
+                  className={`flex flex-col ${
+                    i === arr.length - 1 ? "ml-auto" : ""
+                  }`}
+                >
                   <h3 className="text-xl">
                     {i === arr.length - 1 ? "Total" : `P${i + 1}`}
                   </h3>
@@ -113,7 +120,9 @@ const ResultModal = ({
           />
         </div>
         <div className="flex flex-col font-montserrat gap-y">
-          <h3 className="text-xl">Aclaración</h3>
+          <h3 className="text-xl">
+            Aclaración (solo para casos especiales como aprobados condicionales)
+          </h3>
           <div className="flex gap-x-2 items-center">
             <input
               className="text-3xl p-2 border border-black rounded-lg grow"
@@ -136,18 +145,10 @@ const ResultModal = ({
           </div>
         </div>
         <div className="flex justify-end gap-x-8 mt-auto">
-          <button
-            className="flex justify-center items-center border border-black rounded-lg w-36 h-16 text-2xl"
-            onClick={close}
-          >
-            Cancelar
-          </button>
-          <button
-            className="flex justify-center items-center border border-black rounded-lg w-36 h-16 text-2xl bg-primary-light-blue"
-            onClick={() => onConfirm(newResults)}
-          >
-            Guardar
-          </button>
+          <ActionButton onClick={close}>Cancelar</ActionButton>
+          <ActionButton onClick={() => onConfirm(newResults)} important>
+            {addNewResult ? "Agregar" : "Guardar"}
+          </ActionButton>
         </div>
       </div>
     </Modal>
