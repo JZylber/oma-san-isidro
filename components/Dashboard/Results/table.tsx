@@ -11,7 +11,7 @@ const DashboardResultsTable = ({
   results: EditableResult[];
   testData: Testdata;
 }) => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   return (
     <div className="border border-black rounded-xl overflow-hidden w-full">
       <table className="w-full border-collapse">
