@@ -6,8 +6,7 @@ import { INSTANCIA } from "@prisma/client";
 
 const getEditableResults = async (competencia: string, año: number, instancia: INSTANCIA) => {
         const prevInstance = getPreviousInstance(competencia,instancia) as INSTANCIA;
-        const participants = await passingParticipants(competencia,año,prevInstance);
-        const results = await getResults(competencia,año,instancia);
+        const [participants,results] = await Promise.all([passingParticipants(competencia,año,prevInstance),getResults(competencia,año,instancia)]);
         const participantsWithResults = participants.map(participant => {
             const result = results.find(result => result.participacion.id_participacion === participant.id_participacion);
             if (result) {
