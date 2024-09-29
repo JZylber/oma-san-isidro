@@ -3,6 +3,7 @@ import { EditableResult } from "../../../server/routers/dashboard";
 import ResultModal from "../../Popups/ResultModal/ResultModal";
 import { useState } from "react";
 import { trpc } from "../../../utils/trpc";
+import { Testdata } from "../../../app/dashboard/resultados/page";
 
 const displayBoolean = (value: boolean) => {
   return value ? "Sí" : "No";
@@ -55,10 +56,10 @@ const displayResult = (
 
 const DashboardResultsTableRow = ({
   result,
-  numberOfProblems,
+  testData,
 }: {
   result: EditableResult;
-  numberOfProblems: number;
+  testData: Testdata;
 }) => {
   const [edit, setEdit] = useState(false);
   const editResult = trpc.dashboard.editResult.useMutation();
@@ -69,7 +70,7 @@ const DashboardResultsTableRow = ({
       <td className="p-2">{result.participante.nombre}</td>
       <td className="p-2 text-center">{result.participante.dni}</td>
       <td className="p-2">{result.colegio.nombre}</td>
-      {displayResult(result.resultados, numberOfProblems)}
+      {displayResult(result.resultados, testData.numberOfProblems)}
       <td className="p-2 flex justify-center items-center gap-x-4">
         <Image
           src="/icons/edit.svg"
@@ -86,7 +87,7 @@ const DashboardResultsTableRow = ({
 
       <ResultModal
         result={result}
-        numberOfProblems={numberOfProblems}
+        numberOfProblems={testData.numberOfProblems}
         open={edit}
         onConfirm={(newResults: EditableResult["resultados"]) => {
           if (result.id_rinde && newResults) {

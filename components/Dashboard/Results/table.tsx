@@ -1,12 +1,13 @@
+import { Testdata } from "../../../app/dashboard/resultados/page";
 import { EditableResult } from "../../../server/routers/dashboard";
 import DashboardResultsTableRow from "./row";
 
 const DashboardResultsTable = ({
   results,
-  numberOfProblems,
+  testData,
 }: {
   results: EditableResult[];
-  numberOfProblems: number;
+  testData: Testdata;
 }) => {
   return (
     <div className="border border-black rounded-xl overflow-hidden w-full">
@@ -18,11 +19,13 @@ const DashboardResultsTable = ({
             <th className="p-2">Nombre</th>
             <th className="p-2">DNI</th>
             <th className="p-2">Colegio</th>
-            {numberOfProblems > 0 ? (
+            {testData.numberOfProblems > 0 ? (
               <>
-                {Array.from({ length: numberOfProblems }).map((_, i) => (
-                  <th key={i}>P{i + 1}</th>
-                ))}
+                {Array.from({ length: testData.numberOfProblems }).map(
+                  (_, i) => (
+                    <th key={i}>P{i + 1}</th>
+                  )
+                )}
                 <th className="p-2">Total</th>
                 <th className="p-2">Aprobado</th>
               </>
@@ -34,10 +37,7 @@ const DashboardResultsTable = ({
         </thead>
         <tbody className="font-montserrat text-xl divide-y">
           {results.map((result) => (
-            <DashboardResultsTableRow
-              result={result}
-              numberOfProblems={numberOfProblems}
-            />
+            <DashboardResultsTableRow result={result} testData={testData} />
           ))}
         </tbody>
       </table>
