@@ -29,10 +29,9 @@ const displayResult = (
   if (result.aclaracion) {
     return (
       <>
-        <td className="p-2 text-center" colSpan={numberOfProblems + 1}>
+        <td className="p-2 text-center" colSpan={numberOfProblems + 2}>
           {result.aclaracion.toLocaleUpperCase()}
         </td>
-        <td className="p-2 text-center">{displayBoolean(result.aprobado)}</td>
       </>
     );
   }

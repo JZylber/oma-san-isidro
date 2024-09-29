@@ -3,6 +3,7 @@
 import { INSTANCIA } from "@prisma/client";
 import { trpc } from "../../../utils/trpc";
 import DashboardResultsTable from "../../../components/Dashboard/Results/table";
+import Loader from "../../../components/Loader/Loader";
 
 export interface Testdata {
   id: number;
@@ -16,12 +17,22 @@ const DashboardResultsPage = () => {
     competencia: "ÑANDÚ",
   });
   const testData = { id: 22, numberOfProblems: 3 } as Testdata;
-  if (results.isLoading) {
-    return <span>Cargando...</span>;
-  } else if (results.isError) {
-    return <span>{results.error.data?.httpStatus}</span>;
-  } else if (results.isSuccess)
-    return <DashboardResultsTable results={results.data} testData={testData} />;
+  return (
+    <div className="min-h-full flex flex-col">
+      {results.isLoading && (
+        <div className="grow flex items-center justify-center">
+          <Loader />
+        </div>
+      )}
+      {results.isError && (
+        <div className="grow flex items-center justify-center">
+          <span>{results.error.data?.httpStatus}</span>
+        </div>
+      )}
+      {results.isSuccess && (
+        <DashboardResultsTable results={results.data} testData={testData} />
+      )}
+    </div>
+  );
 };
-
 export default DashboardResultsPage;
