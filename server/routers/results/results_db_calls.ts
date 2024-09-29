@@ -146,6 +146,7 @@ export const  getResults = async (competition: string, year: number, instance: I
                         cantidad_problemas: true,
                     }
                 },
+                id_rinde: true,
                 presente: true,
                 aprobado: true,
                 aclaracion: true,
@@ -159,3 +160,18 @@ export const  getResults = async (competition: string, year: number, instance: I
         })
     return results;
   }
+
+export const modifyResult = async (id_rinde: number, score: string[], approved: boolean, present: boolean, clarification: string | null) => {
+    const result = await prisma.rinde.update({
+        where: {
+            id_rinde: id_rinde
+        },
+        data: {
+            resultados: score,
+            aprobado: approved,
+            presente: present,
+            aclaracion: clarification
+        }
+    });
+    return result;
+}

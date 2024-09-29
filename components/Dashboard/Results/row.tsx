@@ -2,6 +2,7 @@ import Image from "next/image";
 import { EditableResult } from "../../../server/routers/dashboard";
 import ResultModal from "../../Popups/ResultModal/ResultModal";
 import { useState } from "react";
+import { trpc } from "../../../utils/trpc";
 
 const displayBoolean = (value: boolean) => {
   return value ? "Sí" : "No";
@@ -19,7 +20,7 @@ const displayResult = (
   if (result === null) {
     return (
       <td className="p-2 text-center" colSpan={numberOfProblems + 2}>
-        sin resultados
+        SIN RESULTADOS
       </td>
     );
   }
@@ -27,7 +28,7 @@ const displayResult = (
     return (
       <>
         <td className="p-2 text-center" colSpan={numberOfProblems + 1}>
-          {result.aclaracion}
+          {result.aclaracion.toLocaleUpperCase()}
         </td>
         <td className="p-2 text-center">{displayBoolean(result.aprobado)}</td>
       </>
@@ -36,7 +37,7 @@ const displayResult = (
   if (!result.presente) {
     return (
       <td className="p-2 text-center" colSpan={numberOfProblems + 2}>
-        ausente
+        AUSENTE
       </td>
     );
   }
@@ -60,6 +61,7 @@ const DashboardResultsTableRow = ({
   numberOfProblems: number;
 }) => {
   const [edit, setEdit] = useState(false);
+  const editResult = trpc.dashboard.editResult.useMutation();
   return (
     <tr key={result.id_participacion}>
       <td className="p-2 text-center">{result.nivel}</td>
@@ -81,16 +83,26 @@ const DashboardResultsTableRow = ({
         />
         <Image src="/icons/delete.svg" alt="eliminar" width={20} height={20} />
       </td>
-      {result.resultados && (
-        <ResultModal
-          result={result}
-          open={edit}
-          onConfirm={() => {
-            setEdit(false);
-          }}
-          close={() => setEdit(false)}
-        />
-      )}
+
+      <ResultModal
+        result={result}
+        numberOfProblems={numberOfProblems}
+        open={edit}
+        onConfirm={(newResults: EditableResult["resultados"]) => {
+          if (result.id_rinde && newResults) {
+            editResult.mutate({
+              id_rinde: result.id_rinde,
+              puntaje: newResults.puntaje,
+              aprobado: newResults.aprobado,
+              presente: newResults.presente,
+              aclaracion: newResults.aclaracion,
+            });
+            result.resultados = newResults;
+          }
+          setEdit(false);
+        }}
+        close={() => setEdit(false)}
+      />
     </tr>
   );
 };

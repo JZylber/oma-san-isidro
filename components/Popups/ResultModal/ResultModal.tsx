@@ -3,20 +3,40 @@ import { EditableResult } from "../../../server/routers/dashboard";
 import Modal from "../Modal";
 import Image from "next/image";
 
+const initialState = (
+  resultados: EditableResult["resultados"],
+  cantidadProblemas: number
+) => {
+  if (resultados === null) {
+    return {
+      puntaje: Array(cantidadProblemas + 1).fill("0"),
+      aprobado: false,
+      presente: false,
+      aclaracion: null,
+    };
+  } else {
+    return resultados;
+  }
+};
+
 const ResultModal = ({
   result,
+  numberOfProblems,
   open,
   close,
   onConfirm,
 }: {
   result: EditableResult;
+  numberOfProblems: number;
   open: boolean;
   close: () => void;
-  onConfirm: () => void;
+  onConfirm: (newResult: EditableResult["resultados"]) => void;
 }) => {
-  const [newResults, setNewResults] = useState(result.resultados!);
+  const [newResults, setNewResults] = useState(
+    initialState(result.resultados, numberOfProblems)
+  );
   useEffect(() => {
-    setNewResults(result.resultados!);
+    setNewResults(initialState(result.resultados, numberOfProblems));
   }, [close]);
   return (
     <Modal
@@ -124,7 +144,7 @@ const ResultModal = ({
           </button>
           <button
             className="flex justify-center items-center border border-black rounded-lg w-36 h-16 text-2xl bg-primary-light-blue"
-            onClick={onConfirm}
+            onClick={() => onConfirm(newResults)}
           >
             Guardar
           </button>
