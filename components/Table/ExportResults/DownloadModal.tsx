@@ -1,10 +1,4 @@
-import {
-  Dispatch,
-  MutableRefObject,
-  SetStateAction,
-  useRef,
-  useState,
-} from "react";
+import { Dispatch, MutableRefObject, SetStateAction, useState } from "react";
 import Modal from "../../Popups/Modal";
 import styles from "./DownloadModal.module.scss";
 import X from "../../../public/images/x.svg";
@@ -51,7 +45,11 @@ const DownloadPopup = ({
     setGeneratingExport(false);
   };
   return (
-    <Modal openModal={open} closeModal={() => setOpen(false)}>
+    <Modal
+      openModal={open}
+      closeModal={() => setOpen(false)}
+      className="m-auto bg-transparent"
+    >
       <div
         className={[
           styles.container,

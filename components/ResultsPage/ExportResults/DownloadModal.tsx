@@ -58,7 +58,11 @@ const DownloadPopup = ({
     setGeneratingExport(false);
   };
   return (
-    <Modal openModal={open} closeModal={() => setOpen(false)}>
+    <Modal
+      openModal={open}
+      closeModal={() => setOpen(false)}
+      className="m-auto bg-transparent"
+    >
       <div
         className={[
           styles.container,

@@ -75,7 +75,11 @@ const ResultFilterForm = ({
         </form>
       )}
       {isMobile && (
-        <Modal openModal={openFilters} closeModal={() => setOpenFilters(false)}>
+        <Modal
+          openModal={openFilters}
+          closeModal={() => setOpenFilters(false)}
+          className="m-auto bg-transparent"
+        >
           <form className={styles.filter_modal}>
             <div className={styles.close}>
               <X
