@@ -40,7 +40,7 @@ const ResultModal = ({
   );
   useEffect(() => {
     setNewResults(initialState(result.resultados, numberOfProblems));
-  }, [close]);
+  }, [close, result.resultados, numberOfProblems]);
   return (
     <Modal
       openModal={open}
@@ -76,6 +76,7 @@ const ResultModal = ({
                   className={`flex flex-col ${
                     i === arr.length - 1 ? "ml-auto" : ""
                   }`}
+                  key={i}
                 >
                   <h3 className="text-xl">
                     {i === arr.length - 1 ? "Total" : `P${i + 1}`}

@@ -39,8 +39,9 @@ const DashboardResultsTable = ({
           </tr>
         </thead>
         <tbody className="font-montserrat text-xl divide-y">
-          {results.map((result) => (
+          {results.map((result, i) => (
             <DashboardResultsTableRow
+              key={i}
               result={result}
               testData={testData}
               isUpdating={(updating) => {
