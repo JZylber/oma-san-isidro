@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { Testdata } from "../../../app/dashboard/resultados/page";
 import { EditableResult } from "../../../server/routers/dashboard";
+import ModalLoader from "../../Popups/ModalLoader/ModalLoader";
 import DashboardResultsTableRow from "./row";
 
 const DashboardResultsTable = ({
@@ -9,6 +11,7 @@ const DashboardResultsTable = ({
   results: EditableResult[];
   testData: Testdata;
 }) => {
+  const [loading, setLoading] = useState(true);
   return (
     <div className="border border-black rounded-xl overflow-hidden w-full">
       <table className="w-full border-collapse">
@@ -37,10 +40,17 @@ const DashboardResultsTable = ({
         </thead>
         <tbody className="font-montserrat text-xl divide-y">
           {results.map((result) => (
-            <DashboardResultsTableRow result={result} testData={testData} />
+            <DashboardResultsTableRow
+              result={result}
+              testData={testData}
+              isUpdating={(updating) => {
+                setLoading(updating);
+              }}
+            />
           ))}
         </tbody>
       </table>
+      <ModalLoader isOpen={loading} />
     </div>
   );
 };

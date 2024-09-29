@@ -58,9 +58,11 @@ const displayResult = (
 const DashboardResultsTableRow = ({
   result,
   testData,
+  isUpdating,
 }: {
   result: EditableResult;
   testData: Testdata;
+  isUpdating: (updating: boolean) => void;
 }) => {
   const [edit, setEdit] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -69,34 +71,51 @@ const DashboardResultsTableRow = ({
     id: result.id_rinde,
   });
   const hasResults = testResult.results !== null && testResult.id !== null;
-  const editResult = trpc.dashboard.editResult.useMutation();
-  const newResult = trpc.dashboard.newResult.useMutation();
-  const deleteResult = trpc.dashboard.deleteResult.useMutation();
-  if (newResult.isSuccess) {
-    const results = {
-      puntaje: newResult.data.resultados as string[],
-      aprobado: newResult.data.aprobado,
-      presente: newResult.data.presente,
-      aclaracion: newResult.data.aclaracion,
-    };
-    const resultId = newResult.data.id_rinde;
-    setTestResult({ id: resultId, results: results });
-    newResult.reset();
-  }
-  if (editResult.isSuccess) {
-    const results = {
-      puntaje: editResult.data.resultados as string[],
-      aprobado: editResult.data.aprobado,
-      presente: editResult.data.presente,
-      aclaracion: editResult.data.aclaracion,
-    };
-    setTestResult({ id: testResult.id, results: results });
-    editResult.reset();
-  }
-  if (deleteResult.isSuccess) {
-    setTestResult({ id: null, results: null });
-    deleteResult.reset();
-  }
+  const editResult = trpc.dashboard.editResult.useMutation({
+    onMutate: () => {
+      isUpdating(true);
+    },
+    onSettled: () => {
+      isUpdating(false);
+    },
+    onSuccess: (data) => {
+      const results = {
+        puntaje: data.resultados as string[],
+        aprobado: data.aprobado,
+        presente: data.presente,
+        aclaracion: data.aclaracion,
+      };
+      setTestResult({ id: testResult.id, results: results });
+    },
+  });
+  const newResult = trpc.dashboard.newResult.useMutation({
+    onMutate: () => {
+      isUpdating(true);
+    },
+    onSettled: () => {
+      isUpdating(false);
+    },
+    onSuccess: (data) => {
+      const results = {
+        puntaje: data.resultados as string[],
+        aprobado: data.aprobado,
+        presente: data.presente,
+        aclaracion: data.aclaracion,
+      };
+      setTestResult({ id: data.id_rinde, results: results });
+    },
+  });
+  const deleteResult = trpc.dashboard.deleteResult.useMutation({
+    onMutate: () => {
+      isUpdating(true);
+    },
+    onSettled: () => {
+      isUpdating(false);
+    },
+    onSuccess: () => {
+      setTestResult({ id: null, results: null });
+    },
+  });
   return (
     <tr key={result.id_participacion}>
       <td className="p-2 text-center">{result.nivel}</td>
@@ -143,6 +162,7 @@ const DashboardResultsTableRow = ({
         addNewResult={!hasResults}
         onConfirm={(newResults: EditableResult["resultados"]) => {
           if (hasResults && newResults) {
+            isUpdating(true);
             editResult.mutate({
               id_rinde: testResult.id!,
               puntaje: newResults.puntaje,
@@ -151,6 +171,7 @@ const DashboardResultsTableRow = ({
               aclaracion: newResults.aclaracion,
             });
           } else if (!hasResults && newResults) {
+            isUpdating(true);
             newResult.mutate({
               id_participacion: result.id_participacion,
               id_prueba: testData.id,
