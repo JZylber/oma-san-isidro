@@ -3,8 +3,8 @@ import { EditableResult } from "../../../server/routers/dashboard";
 import ResultModal from "../../Popups/ResultModal/ResultModal";
 import { useState } from "react";
 import { trpc } from "../../../utils/trpc";
-import { Testdata } from "../../../app/dashboard/resultados/page";
 import ConfirmModal from "../../Popups/ConfirmModal/ConfirmModal";
+import { Testdata } from "../../../server/app-router-db-calls";
 
 const displayBoolean = (value: boolean) => {
   return value ? "Sí" : "No";
@@ -122,7 +122,7 @@ const DashboardResultsTableRow = ({
       <td className="p-2">{result.participante.nombre}</td>
       <td className="p-2 text-center">{result.participante.dni}</td>
       <td className="p-2">{result.colegio.nombre}</td>
-      {displayResult(testResult.results, testData.numberOfProblems)}
+      {displayResult(testResult.results, testData.cantidad_problemas)}
       <td className="p-2 flex justify-center items-center gap-x-4">
         <Image
           src={hasResults ? "/icons/edit.svg" : "/icons/add.svg"}
@@ -156,7 +156,7 @@ const DashboardResultsTableRow = ({
             id_rinde: testResult.id,
           } as EditableResult
         }
-        numberOfProblems={testData.numberOfProblems}
+        numberOfProblems={testData.cantidad_problemas}
         open={edit}
         addNewResult={!hasResults}
         onConfirm={(newResults: EditableResult["resultados"]) => {
