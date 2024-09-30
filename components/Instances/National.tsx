@@ -301,7 +301,7 @@ const NationalInfo = ({
               {isOma ? (
                 <>martes 14 y miércoles 15</>
               ) : (
-                <>lunes 20 y martes 21</>
+                <>lunes 21 y martes 23</>
               )}
               ).
             </span>
@@ -318,7 +318,7 @@ const NationalInfo = ({
               {isOma ? (
                 <>martes 14 y miércoles 15</>
               ) : (
-                <>lunes 20 y martes 21</>
+                <>lunes 21 y martes 22</>
               )}
               ).
             </span>{" "}
