@@ -70,32 +70,48 @@ const ResultModal = ({
         </div>
         <div className="flex flex-col font-montserrat gap-y">
           <div className="flex gap-x-2">
-            {newResults.puntaje.map((score, i, arr) => {
-              return (
-                <div
-                  className={`flex flex-col ${
-                    i === arr.length - 1 ? "ml-auto" : ""
-                  }`}
-                  key={i}
-                >
-                  <h3 className="text-xl">
-                    {i === arr.length - 1 ? "Total" : `P${i + 1}`}
-                  </h3>
-                  <input
-                    className="text-3xl text-right p-2 border border-black rounded-lg w-24"
-                    value={score}
-                    onChange={(e) => {
-                      setNewResults({
-                        ...newResults,
-                        puntaje: newResults.puntaje.map((s, j) =>
-                          i === j ? e.target.value : s
-                        ),
-                      });
-                    }}
-                  />
-                </div>
-              );
-            })}
+            {numberOfProblems > 0 ? (
+              newResults.puntaje.map((score, i, arr) => {
+                return (
+                  <div
+                    className={`flex flex-col ${
+                      i === arr.length - 1 ? "ml-auto" : ""
+                    }`}
+                    key={i}
+                  >
+                    <h3 className="text-xl">
+                      {i === arr.length - 1 ? "Total" : `P${i + 1}`}
+                    </h3>
+                    <input
+                      className="text-3xl text-right p-2 border border-black rounded-lg w-24"
+                      value={score}
+                      onChange={(e) => {
+                        setNewResults({
+                          ...newResults,
+                          puntaje: newResults.puntaje.map((s, j) =>
+                            i === j ? e.target.value : s
+                          ),
+                        });
+                      }}
+                    />
+                  </div>
+                );
+              })
+            ) : (
+              <div className="flex flex-col">
+                <h3 className="text-xl">Resultado</h3>
+                <input
+                  className="text-3xl text-right p-2 border border-black rounded-lg w-24"
+                  value={newResults.puntaje[0]}
+                  onChange={(e) => {
+                    setNewResults({
+                      ...newResults,
+                      puntaje: [e.target.value],
+                    });
+                  }}
+                />
+              </div>
+            )}
           </div>
         </div>
         <div className="flex font-montserrat gap-x-2 items-center">

@@ -123,7 +123,7 @@ const DashboardResultsTable = ({ testData }: DashboardResultsTableProps) => {
       instancia: testData.instancia,
       competencia: testData.competencia,
     },
-    { notifyOnChangeProps: "all" }
+    { notifyOnChangeProps: "all", refetchInterval: 0 }
   );
   return (
     <div className="min-h-full flex flex-col">

@@ -21,7 +21,10 @@ const displayResult = (
 ) => {
   if (result === null) {
     return (
-      <td className="p-2 text-center" colSpan={numberOfProblems + 2}>
+      <td
+        className="p-2 text-center"
+        colSpan={numberOfProblems > 0 ? numberOfProblems + 2 : 1}
+      >
         SIN RESULTADOS
       </td>
     );
@@ -29,7 +32,10 @@ const displayResult = (
   if (result.aclaracion) {
     return (
       <>
-        <td className="p-2 text-center" colSpan={numberOfProblems + 2}>
+        <td
+          className="p-2 text-center"
+          colSpan={numberOfProblems > 0 ? numberOfProblems + 2 : 1}
+        >
           {result.aclaracion.toLocaleUpperCase()}
         </td>
       </>
@@ -37,7 +43,10 @@ const displayResult = (
   }
   if (!result.presente) {
     return (
-      <td className="p-2 text-center" colSpan={numberOfProblems + 2}>
+      <td
+        className="p-2 text-center"
+        colSpan={numberOfProblems > 0 ? numberOfProblems + 2 : 1}
+      >
         AUSENTE
       </td>
     );
@@ -49,7 +58,9 @@ const displayResult = (
           {score}
         </td>
       ))}
-      <td className="p-2 text-center">{displayBoolean(result.aprobado)}</td>
+      {numberOfProblems > 0 && (
+        <td className="p-2 text-center">{displayBoolean(result.aprobado)}</td>
+      )}
     </>
   );
 };
