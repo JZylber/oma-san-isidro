@@ -1,34 +1,23 @@
 "use client";
 import React, { useState } from "react";
-import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { Button } from "../../components/buttons/Button";
+import useAuth from "hooks/useAuth";
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const { login } = useAuth();
   const router = useRouter();
   const handleLogin = async () => {
-    const loginApi = (await fetch(`../api/auth`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email: email, password: password }),
-    }).catch((error) => {
-      setError("Error de conexión");
-    })) as Response;
-    let result = await loginApi.json();
-    if (loginApi.status !== 200) {
-      console.log(loginApi);
-      setError(loginApi.statusText);
-      return;
-    }
-    if (result.success && result.token) {
-      Cookies.set("currentUser", result.token, { sameSite: "strict" });
-      router.push("/dashboard");
+    try {
+      const user = await login(email, password);
+      if (user) {
+        router.push("/dashboard");
+      }
+    } catch (error) {
+      setError("Usuario o contraseña incorrecto");
     }
   };
 
