@@ -76,6 +76,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       apellido: "",
       rol: "",
     });
+    Cookies.remove("currentUser");
   };
 
   const register = async (

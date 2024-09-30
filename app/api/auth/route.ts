@@ -28,7 +28,12 @@ export async function POST(request: NextRequest) {
   const isValid = await bcrypt.compare(password, userPassword);
   if (isValid) {
     /* Create token */
-    const token = await createToken({ userId, role: "admin" });
+    const token = await createToken({
+      userId,
+      nombre: user.nombre,
+      apellido: user.apellido,
+      role: "admin",
+    });
     /* Send token */
     return NextResponse.json({
       success: true,

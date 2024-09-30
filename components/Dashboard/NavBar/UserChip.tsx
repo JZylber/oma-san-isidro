@@ -1,10 +1,28 @@
-import Cookies from "js-cookie";
+import useAuth from "hooks/useAuth";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const UserChip = () => {
-  const user = Cookies.get("currentUser");
-  console.log(user);
+  const { user, logout } = useAuth();
+  const router = useRouter();
+  const handleLogout = () => {
+    logout();
+    router.push("/login");
+  };
   return (
-    <div className="mt-auto flex bg-transparent border border-primary-black"></div>
+    <div className="mt-auto flex justify-between items-center bg-transparent border border-primary-black p-4 mr-4 rounded-lg">
+      <span className="font-unbounded text-2xl">
+        {user.nombre} {user.apellido}
+      </span>
+      <Image
+        src="/icons/logout.svg"
+        alt="logout"
+        width={24}
+        height={24}
+        onClick={handleLogout}
+        className="cursor-pointer"
+      />
+    </div>
   );
 };
 
