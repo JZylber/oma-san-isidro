@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import NavBarLink from "./NavBarLink";
+import UserChip from "./UserChip";
 
 const DashboardNavBar = () => {
   const pathname = usePathname();
@@ -28,6 +29,7 @@ const DashboardNavBar = () => {
       >
         Usuarios
       </NavBarLink>
+      <UserChip />
     </nav>
   );
 };
