@@ -22,6 +22,12 @@ const DashboardNavBar = () => {
       >
         Noticias
       </NavBarLink>
+      <NavBarLink
+        href="/dashboard/usuarios"
+        selected={pathname === "/dashboard/usuarios"}
+      >
+        Usuarios
+      </NavBarLink>
     </nav>
   );
 };
