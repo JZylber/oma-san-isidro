@@ -7,73 +7,104 @@ import DashboardResultsTableRow from "./row";
 import { trpc } from "../../../utils/trpc";
 import { Testdata } from "../../../server/app-router-db-calls";
 import Loader from "../../Loader/Loader";
-import ResultFinderForm from "../../ResultsPage/resultFinderForm";
-import { TestInfo, yearTests } from "../../ResultsPage/resultsTypes";
+import { TestInfo } from "../../ResultsPage/resultsTypes";
+import Select from "../../common/Select";
+import { INSTANCIA } from "@prisma/client";
 
 const reducer = (state: Partial<TestInfo>, action: Partial<TestInfo>) => {
+  console.log(action);
   return { ...state, ...action };
 };
 
-const DashboardResults = ({
-  competencia,
-  tests,
-}: {
-  competencia: string;
-  tests: Testdata[];
-}) => {
-  const [testInfo, dispatch] = useReducer(reducer, {
-    competencia: competencia,
-  });
-  const availableResults = useMemo(
-    () =>
-      tests.reduce((acc, test) => {
-        const year = acc.find((y) => y.ano === test.año);
-        if (year) {
-          year.pruebas.push({
-            nombre: test.instancia,
-            disponible: test.resultados_disponibles,
-          });
-        } else {
-          acc.push({
-            ano: test.año,
-            pruebas: [
-              {
-                nombre: test.instancia,
-                disponible: test.resultados_disponibles,
-              },
-            ],
-          });
-        }
-        return acc;
-      }, [] as yearTests[]),
-    [tests]
-  );
+const DashboardResults = ({ tests }: { tests: Testdata[] }) => {
+  const dataTree = useMemo(() => {
+    return tests.reduce((acc, test) => {
+      let competencia = acc[test.competencia];
+      if (!competencia) {
+        acc[test.competencia] = {};
+        competencia = acc[test.competencia];
+      }
+      let año = competencia[test.año];
+      if (!año) {
+        competencia[test.año] = {};
+        año = competencia[test.año];
+      }
+      año[test.instancia] = test;
+      return acc;
+    }, {} as Record<string, any>);
+  }, [tests]);
+  const [testInfo, dispatch] = useReducer(reducer, {});
+
   return (
     <>
-      <ResultFinderForm
-        availableResults={availableResults}
-        data={testInfo}
-        setData={dispatch}
-      />
-      {testInfo.año && !testInfo.instancia && (
+      <div className="flex gap-x-4 pb-8 border-b border-black mb-4">
+        <Select
+          label="Competencia"
+          options={Object.keys(dataTree)}
+          value={testInfo.competencia ? testInfo.competencia : ""}
+          onChange={(selected) =>
+            selected !== ""
+              ? dispatch({
+                  competencia: selected,
+                  año: undefined,
+                  instancia: undefined,
+                })
+              : dispatch({
+                  competencia: undefined,
+                  año: undefined,
+                  instancia: undefined,
+                })
+          }
+        />
+        <Select
+          label="Año"
+          options={
+            testInfo.competencia
+              ? Object.keys(dataTree[testInfo.competencia])
+              : []
+          }
+          value={testInfo.año ? testInfo.año.toString() : ""}
+          onChange={(selected) =>
+            selected !== ""
+              ? dispatch({ año: parseInt(selected), instancia: undefined })
+              : dispatch({ año: undefined, instancia: undefined })
+          }
+        />
+        <Select
+          label="Instancia"
+          options={
+            testInfo.competencia && testInfo.año
+              ? Object.keys(dataTree[testInfo.competencia][testInfo.año])
+              : []
+          }
+          value={testInfo.instancia ? testInfo.instancia : ""}
+          onChange={(selected) =>
+            selected !== ""
+              ? dispatch({ instancia: selected as INSTANCIA })
+              : dispatch({ instancia: undefined })
+          }
+        />
+      </div>
+      {!testInfo.competencia && !testInfo.año && !testInfo.instancia && (
+        <span className="font-montserrat text-3xl">
+          Selecciona OMA o ÑANDÚ.
+        </span>
+      )}
+      {testInfo.competencia && testInfo.año && !testInfo.instancia && (
         <span className="font-montserrat text-3xl">
           Selecciona una instancia para ver resultados.
         </span>
       )}
-      {!testInfo.año && !testInfo.instancia && (
+      {testInfo.competencia && !testInfo.año && !testInfo.instancia && (
         <span className="font-montserrat text-3xl">
           Selecciona año e instancia para poder ejecutar una búsqueda.
         </span>
       )}
-      {testInfo.año && testInfo.instancia && (
+      {testInfo.competencia && testInfo.año && testInfo.instancia && (
         <DashboardResultsTable
-          competencia={competencia}
+          competencia={testInfo.competencia}
           testData={
-            tests.find(
-              (test) =>
-                test.año === testInfo.año &&
-                test.instancia === testInfo.instancia
-            )!
+            dataTree[testInfo.competencia][testInfo.año][testInfo.instancia]
           }
         />
       )}
