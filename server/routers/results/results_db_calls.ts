@@ -54,7 +54,7 @@ export const getPreviousInstance =  (competition: string,instance: INSTANCIA) =>
     return (results);
   };
   
-  export const passingParticipants = async (type: string, year: number, instance: INSTANCIA) => {
+  export const getPassingParticipants = async (type: string, year: number, instance: INSTANCIA) => {
     const query = await prisma.prueba.findFirst({
     where: {
       competencia: {
@@ -113,6 +113,120 @@ export const getPreviousInstance =  (competition: string,instance: INSTANCIA) =>
     const results = query?query.rinden.map((participation) => participation.participacion):[];
     return (results);
   };
+
+  export const getInstanceData = async (year: number,competition: string, instance: INSTANCIA) => {
+    const query = await prisma.prueba.findFirst({
+      where: {
+        competencia: {
+          tipo : competition,
+          ano: year
+        },
+        instancia: instance
+        
+    },
+    select: {
+      fecha_limite_autorizacion: true,
+      hora_ingreso: true,
+      duracion: true,
+      criterio_habilitacion: true
+    }  
+    })
+    return (query);
+  }
+  
+
+  const getPassingParticipantsWithScore = async (type: string, year: number, instance: INSTANCIA) => {
+    const query = await prisma.prueba.findFirst({
+    where: {
+      competencia: {
+        tipo: type,
+        ano: year
+      },
+      instancia: instance,
+    },
+    select: {
+      rinden: {
+        where: {
+          aprobado: true
+        },
+        orderBy: [
+        {participacion: {
+          nivel: 'asc'
+        }},  
+        {
+          participacion: {
+            participante: {
+              apellido: 'asc'
+            }
+          }
+        },
+        {
+          participacion: {
+            participante: {
+              nombre: 'asc'
+            }
+          }
+        }],
+        select: {
+          resultados: true,
+          participacion: {
+            select: {
+              id_participacion: true,
+              participante: {
+                select: {
+                  nombre: true,
+                  apellido: true,
+                  dni: true
+                }
+              },
+              colegio: {
+                select: {
+                  nombre: true,
+                  sede: true
+                }
+              },
+              nivel: true
+            }
+          }
+        }
+      }
+    }
+    });
+    const results = query?query.rinden.map((participation) => {return{...participation.participacion,resultados: participation.resultados}}):[];
+    return (results);
+  };
+
+  export const getDisabled = async (competition: string, year: number, instance: string) => {
+    const query = await prisma.inhabilitado.findMany({
+      where: {
+        Prueba: {
+          competencia: {
+            tipo: competition,
+            ano: year
+          },
+          instancia: instance as INSTANCIA
+      }
+      },
+      select: {
+        id_participacion: true
+      }
+    })
+    return (query);
+  }
+
+export const getProvincialParticipants = async (competition: string, year: number) => {
+  const {interescolar,zonal,data} = await Promise.all([getPassingParticipantsWithScore(competition,year,competition === "OMA"?'INTERCOLEGIAL':'INTERESCOLAR'),getPassingParticipantsWithScore(competition,year,'ZONAL'),getInstanceData(year,competition,"PROVINCIAL")]).then(([interescolar, zonal, data]) => {return({interescolar: interescolar,zonal: zonal, data: data})});
+  let provincialParticipants = zonal.map((participant) => {
+    let interescolar_participant = interescolar.find((interescolar_participant) => interescolar_participant.id_participacion === participant.id_participacion);
+    let interescolar_points = interescolar_participant?.resultados?Number((interescolar_participant.resultados as string[])[3]):0;
+    return({...participant,puntos: interescolar_points + Number((participant.resultados as string[])[3])});
+  });
+  const criteria = data?.criterio_habilitacion?data.criterio_habilitacion as number[]:[5,5,5];
+  provincialParticipants = provincialParticipants.filter((participant) => participant.puntos >= criteria[participant.nivel - 1]);
+  const disabled = await getDisabled(competition,year,"PROVINCIAL");
+  provincialParticipants = provincialParticipants.filter((participant) => !disabled.some((disabled_participant) => disabled_participant.id_participacion === participant.id_participacion));
+  return provincialParticipants
+}
 
 export const  getResults = async (competition: string, year: number, instance: INSTANCIA) => {
     const results = await prisma.rinde.findMany(
@@ -198,3 +312,5 @@ export const deleteResult = async (id_rinde: number) => {
     });
     return result;
 };
+
+export type Participant = Awaited<ReturnType<typeof getParticipants>>[0];

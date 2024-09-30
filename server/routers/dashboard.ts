@@ -1,13 +1,21 @@
 import { protectedProcedure, router } from "../trpc";
 import { z } from 'zod';
 import { INSTANCE } from "../types";
-import { deleteResult, getPreviousInstance, getResults, modifyResult, newResult, passingParticipants } from "./results/results_db_calls";
+import { deleteResult, getParticipants, getPassingParticipants, getPreviousInstance, getProvincialParticipants, getResults, modifyResult, newResult, Participant} from "./results/results_db_calls";
 import { INSTANCIA } from "@prisma/client";
 
 const getEditableResults = async (competencia: string, año: number, instancia: INSTANCIA) => {
         const prevInstance = getPreviousInstance(competencia,instancia) as INSTANCIA;
-        const [participants,results] = await Promise.all([passingParticipants(competencia,año,prevInstance),getResults(competencia,año,instancia)]);
-        const participantsWithResults = participants.map(participant => {
+        let participants: Participant[];
+        if(prevInstance) participants = await getPassingParticipants(competencia,año,prevInstance)
+        if(!prevInstance && (instancia === "INTERCOLEGIAL" || instancia === "INTERESCOLAR")){
+            participants = await getParticipants(competencia,año);
+        }
+        if(!prevInstance && instancia === "PROVINCIAL" ) {
+            participants = await getProvincialParticipants(competencia,año);
+        } 
+        const results = await getResults(competencia,año,instancia);
+        const participantsWithResults = participants!.map(participant => {
             const result = results.find(result => result.participacion.id_participacion === participant.id_participacion);
             if (result) {
                 return {
