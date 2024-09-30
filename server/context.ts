@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server';
-import { verifyToken} from '../utils/tokenVerification';
+import { verifyToken} from '../utils/token';
 export async function createTRPCContext({
   req,
 }: {req: NextRequest}) {

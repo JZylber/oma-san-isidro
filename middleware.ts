@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from 'next/server'
-import {verifyToken} from './utils/tokenVerification';
+import {verifyToken} from './utils/token';
 
  
 export async function middleware(request: NextRequest) {

@@ -1,10 +1,9 @@
 import bcrypt from 'bcryptjs';
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '../../../server/db';
+import { prisma } from 'server/db';
 import { SignJWT } from 'jose';
+import { createToken } from 'utils/token';
 
-/* JWT secret key */
-const KEY = process.env.JWT_KEY as string;
 
 export async function POST(request : NextRequest) {
     const {email, password} = await request.json();
@@ -25,24 +24,14 @@ export async function POST(request : NextRequest) {
             {status: 400,
             statusText: 'Usuario o contraseña incorrecto'});
     }
-    const userId = user.id_usuario,
-        userEmail = user.email,
-        userPassword = user.password,
-        userName = user.nombre,
-        userSurname = user.apellido;
+    const userId = user.id_usuario;
+    const userPassword = user.password;
     const isValid = await bcrypt.compare(password, userPassword);
     if (isValid) {
         /* Create token */
-        const iat = Math.floor(Date.now() / 1000);
-        const exp = iat + 60 * 60 * 24;
-        const token = await new SignJWT({ userId, userEmail, userName, userSurname })
-          .setProtectedHeader({ alg: 'HS256' })
-          .setExpirationTime(exp)
-          .setIssuedAt(iat)
-          .setNotBefore(iat)
-          .sign(new TextEncoder().encode(KEY));
+        const token = await createToken({ userId, role: 'admin' });
         /* Send token */
-        return NextResponse.json({ success: true , token });
+        return NextResponse.json({ success: true , token: token, credentials: { name: user.nombre, apellido: user.apellido, role: 'admin' }});
     } else {
         /* Send error with message */
         return NextResponse.json(
