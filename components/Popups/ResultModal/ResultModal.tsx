@@ -39,8 +39,8 @@ const ResultModal = ({
     initialState(result.resultados, numberOfProblems)
   );
   useEffect(() => {
-    setNewResults(initialState(result.resultados, numberOfProblems));
-  }, [close, result.resultados, numberOfProblems]);
+    if (!open) setNewResults(initialState(result.resultados, numberOfProblems));
+  }, [open, result.resultados, numberOfProblems]);
   return (
     <Modal
       openModal={open}
