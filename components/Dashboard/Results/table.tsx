@@ -33,8 +33,9 @@ const DashboardResults = ({ tests }: { tests: Testdata[] }) => {
       return acc;
     }, {} as Record<string, any>);
   }, [tests]);
-  const [testInfo, dispatch] = useReducer(reducer, {});
 
+  const [testInfo, dispatch] = useReducer(reducer, {});
+  console.log(testInfo);
   return (
     <>
       <div className="flex gap-x-4 pb-8 border-b border-black mb-4">
@@ -102,7 +103,6 @@ const DashboardResults = ({ tests }: { tests: Testdata[] }) => {
       )}
       {testInfo.competencia && testInfo.año && testInfo.instancia && (
         <DashboardResultsTable
-          competencia={testInfo.competencia}
           testData={
             dataTree[testInfo.competencia][testInfo.año][testInfo.instancia]
           }
@@ -113,19 +113,18 @@ const DashboardResults = ({ tests }: { tests: Testdata[] }) => {
 };
 
 interface DashboardResultsTableProps {
-  competencia: string;
   testData: Testdata;
 }
 
-const DashboardResultsTable = ({
-  competencia,
-  testData,
-}: DashboardResultsTableProps) => {
-  const results = trpc.dashboard.getResults.useQuery({
-    año: testData.año,
-    instancia: testData.instancia,
-    competencia: competencia,
-  });
+const DashboardResultsTable = ({ testData }: DashboardResultsTableProps) => {
+  const results = trpc.dashboard.getResults.useQuery(
+    {
+      año: testData.año,
+      instancia: testData.instancia,
+      competencia: testData.competencia,
+    },
+    { notifyOnChangeProps: "all" }
+  );
   return (
     <div className="min-h-full flex flex-col">
       {results.isLoading && (
