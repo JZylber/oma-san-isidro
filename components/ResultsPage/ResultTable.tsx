@@ -134,20 +134,11 @@ const ResultTable = ({
         testInfo.año === new Date().getUTCFullYear() && (
           <Warning title="Pedidos de Revisión" className={styles.revision}>
             <p className={styles.text}>
-              OMA recibirá dudas y pedido de revisiones hasta el{" "}
-              <span>9/10</span>. Recordar enviar:
-            </p>
-            <ul className={`${styles.text} ${styles.list}`}>
-              <li>Nivel</li>
-              <li>Apellido y Nombre</li>
-              <li>
-                Especificar el problema que creen tener bien y que el jurado no
-                lo consideró
-              </li>
-            </ul>
-            <p className={styles.text}>
-              Se reciben únicamente por mail a{" "}
-              <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a>
+              Para hacer un pedido de revisión completar el siguiente
+              formulario:{" "}
+              <a href="https://forms.gle/j3iPSo6sR4fGbU8Z8">
+                https://forms.gle/j3iPSo6sR4fGbU8Z8
+              </a>
             </p>
           </Warning>
         )}
