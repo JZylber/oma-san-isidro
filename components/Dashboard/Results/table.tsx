@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useReducer, useState } from "react";
+import React, { useMemo, useReducer, useState } from "react";
 import { EditableResult } from "../../../server/routers/dashboard";
 import ModalLoader from "../../Popups/ModalLoader/ModalLoader";
 import DashboardResultsTableRow from "./row";
@@ -10,6 +10,8 @@ import Loader from "../../Loader/Loader";
 import { TestInfo } from "../../ResultsPage/resultsTypes";
 import Select from "../../common/Select";
 import { INSTANCIA } from "@prisma/client";
+import ResultModal from "../../Popups/ResultModal/ResultModal";
+import ConfirmModal from "../../Popups/ConfirmModal/ConfirmModal";
 
 const reducer = (state: Partial<TestInfo>, action: Partial<TestInfo>) => {
   console.log(action);
@@ -35,7 +37,6 @@ const DashboardResults = ({ tests }: { tests: Testdata[] }) => {
   }, [tests]);
 
   const [testInfo, dispatch] = useReducer(reducer, {});
-  console.log(testInfo);
   return (
     <>
       <div className="flex gap-x-4 pb-8 border-b border-black mb-4">
@@ -155,6 +156,79 @@ const DashboardResultsTableDisplay = ({
   testData: Testdata;
 }) => {
   const [loading, setLoading] = useState(false);
+  const [edit, setEdit] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [result, setResult] = useState<EditableResult>({} as EditableResult);
+  const hasResults =
+    result.resultados !== null && result.id_participacion !== null;
+  const editResult = trpc.dashboard.editResult.useMutation({
+    onMutate: () => {
+      setLoading(true);
+    },
+    onSettled: () => {
+      setLoading(false);
+    },
+    onSuccess: (data) => {
+      const newResults = {
+        puntaje: data.resultados as string[],
+        aprobado: data.aprobado,
+        presente: data.presente,
+        aclaracion: data.aclaracion,
+      };
+      results.find((r) => r.id_rinde === data.id_rinde)!.resultados =
+        newResults;
+    },
+  });
+  const newResult = trpc.dashboard.newResult.useMutation({
+    onMutate: () => {
+      setLoading(true);
+    },
+    onSettled: () => {
+      setLoading(false);
+    },
+    onSuccess: (data) => {
+      const newResults = {
+        puntaje: data.resultados as string[],
+        aprobado: data.aprobado,
+        presente: data.presente,
+        aclaracion: data.aclaracion,
+      };
+      const oldResult = results.find(
+        (r) => r.id_participacion === data.id_participacion
+      );
+      if (oldResult) {
+        oldResult.resultados = newResults;
+        oldResult.id_rinde = data.id_rinde;
+      }
+      setResult({} as EditableResult);
+    },
+  });
+  const deleteResult = trpc.dashboard.deleteResult.useMutation({
+    onMutate: () => {
+      setLoading(true);
+    },
+    onSettled: () => {
+      setLoading(false);
+    },
+    onSuccess: (data) => {
+      const oldResult = results.find(
+        (r) => r.id_participacion === data.id_participacion
+      );
+      if (oldResult) {
+        oldResult.resultados = null;
+        oldResult.id_rinde = null;
+      }
+      setResult({} as EditableResult);
+    },
+  });
+  const editResultHandler = (result: EditableResult) => {
+    setResult(result);
+    setEdit(true);
+  };
+  const deleteResultHandler = (result: EditableResult) => {
+    setResult(result);
+    setConfirmDelete(true);
+  };
   return (
     <div className="border border-black rounded-xl overflow-hidden w-full">
       <table className="w-full border-collapse">
@@ -187,13 +261,66 @@ const DashboardResultsTableDisplay = ({
               key={i}
               result={result}
               testData={testData}
-              isUpdating={(updating) => {
-                setLoading(updating);
-              }}
+              editResult={() => editResultHandler(result)}
+              deleteResult={() => deleteResultHandler(result)}
             />
           ))}
         </tbody>
       </table>
+      <ResultModal
+        result={result}
+        numberOfProblems={testData.cantidad_problemas}
+        open={edit}
+        addNewResult={!hasResults}
+        onConfirm={(newResults: EditableResult["resultados"]) => {
+          if (hasResults && newResults) {
+            setLoading(true);
+            editResult.mutate({
+              id_rinde: result.id_rinde,
+              puntaje: newResults.puntaje,
+              aprobado: newResults.aprobado,
+              presente: newResults.presente,
+              aclaracion: newResults.aclaracion,
+            });
+          } else if (!hasResults && newResults) {
+            setLoading(true);
+            newResult.mutate({
+              id_participacion: result.id_participacion,
+              id_prueba: testData.id,
+              puntaje: newResults.puntaje,
+              aprobado: newResults.aprobado,
+              presente: newResults.presente,
+              aclaracion: newResults.aclaracion,
+            });
+          }
+          setEdit(false);
+        }}
+        close={() => setEdit(false)}
+      />
+      <ConfirmModal
+        open={confirmDelete}
+        close={() => setConfirmDelete(false)}
+        onCancel={() => {
+          setConfirmDelete(false);
+        }}
+        onConfirm={() => {
+          deleteResult.mutate(result.id_rinde!);
+          setConfirmDelete(false);
+        }}
+      >
+        <div className="px-4 text-2xl font-montserrat">
+          <p>
+            ¿Estás seguro/a que deseas eliminar el resultado de{" "}
+            {result.participante && (
+              <span className="font-semibold">
+                {result.participante.nombre} {result.participante.apellido}
+              </span>
+            )}
+            ?
+          </p>
+          <p> Esta acción no se puede deshacer.</p>
+        </div>
+      </ConfirmModal>
       <ModalLoader isOpen={loading} />
     </div>
   );

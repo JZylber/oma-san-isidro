@@ -10,11 +10,6 @@ export type User = {
   rol: string;
 };
 
-type LoginCredentials = {
-  email: string;
-  password: string;
-};
-
 export type UserContextType = {
   user: User;
   login: (email: string, password: string) => Promise<User | Error>;

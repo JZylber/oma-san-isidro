@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { EditableResult } from "../../../server/routers/dashboard";
 import Modal from "../Modal";
 import Image from "next/image";
@@ -8,7 +8,7 @@ const initialState = (
   resultados: EditableResult["resultados"],
   cantidadProblemas: number
 ) => {
-  if (resultados === null) {
+  if (!resultados) {
     return {
       puntaje: Array(cantidadProblemas + 1).fill("0"),
       aprobado: false,
@@ -39,8 +39,8 @@ const ResultModal = ({
     initialState(result.resultados, numberOfProblems)
   );
   useEffect(() => {
-    if (!open) setNewResults(initialState(result.resultados, numberOfProblems));
-  }, [open, result.resultados, numberOfProblems]);
+    setNewResults(initialState(result.resultados, numberOfProblems));
+  }, [result.resultados, numberOfProblems]);
   return (
     <Modal
       openModal={open}
@@ -51,23 +51,29 @@ const ResultModal = ({
         <h2 className="font-unbounded text-6xl py-2 border-b text-center">
           {addNewResult ? "Agregar" : "Editar"} Resultado
         </h2>
-        <div className="flex flex-col font-montserrat gap-y">
-          <h3 className="text-xl">Nombre y Apellido</h3>
-          <p className="text-3xl">
-            {result.participante.nombre} {result.participante.apellido}
-          </p>
-        </div>
-        <div className="flex flex-col font-montserrat gap-y">
-          <h3 className="text-xl">DNI</h3>
-          <p className="text-3xl">{result.participante.dni}</p>
-        </div>
-        <div className="flex flex-col font-montserrat gap-y">
-          <h3 className="text-xl">Colegio</h3>
-          <p className="text-3xl">
-            {result.colegio.nombre}
-            {result.colegio.sede ? `-${result.colegio.sede}` : ""}
-          </p>
-        </div>
+        {result.participante && (
+          <>
+            <div className="flex flex-col font-montserrat gap-y">
+              <h3 className="text-xl">Nombre y Apellido</h3>
+              <p className="text-3xl">
+                {result.participante.nombre} {result.participante.apellido}
+              </p>
+            </div>
+            <div className="flex flex-col font-montserrat gap-y">
+              <h3 className="text-xl">DNI</h3>
+              <p className="text-3xl">{result.participante.dni}</p>
+            </div>
+          </>
+        )}
+        {result.colegio && (
+          <div className="flex flex-col font-montserrat gap-y">
+            <h3 className="text-xl">Colegio</h3>
+            <p className="text-3xl">
+              {result.colegio.nombre}
+              {result.colegio.sede ? `-${result.colegio.sede}` : ""}
+            </p>
+          </div>
+        )}
         <div className="flex flex-col font-montserrat gap-y">
           <div className="flex gap-x-2">
             {numberOfProblems > 0 ? (
