@@ -1,6 +1,7 @@
 import Cookies from "js-cookie";
 import { ReactNode, createContext, useState } from "react";
 import { loginAPI } from "utils/apiCalls";
+import { trpc } from "utils/trpc";
 
 export type User = {
   id: number;
@@ -54,7 +55,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     apellido: "",
     rol: "",
   });
-
+  const userData = trpc.users.getUserCredentials.useQuery(undefined, {
+    enabled: user.id === -1 && Cookies.get("currentUser") !== undefined,
+  });
+  if (userData.isSuccess && userData.data && user.id === -1) {
+    setUser(userData.data as User);
+  }
   const setToken = (token: string) => {
     Cookies.set("currentUser", token, { sameSite: "strict" });
   };

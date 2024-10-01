@@ -12,4 +12,7 @@ export const userRouter = router({
       },
     });
   }),
+  getUserCredentials: protectedProcedure.query(async ({ ctx }) => {
+    return ctx.user;
+  }),
 });
