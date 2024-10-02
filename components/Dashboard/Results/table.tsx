@@ -302,8 +302,13 @@ const DashboardResultsTableDisplay = ({
         grid
         tableClassName={
           testData.cantidad_problemas > 0
-            ? "grid-cols-[1fr_4fr_4fr_1fr_4fr_repeat(4,1fr)_2fr_2fr]"
-            : "grid-cols-[100px_1fr_1fr_100px_1fr_1fr_120px_200px]"
+            ? "grid-cols-[1fr_4fr_4fr_1.5fr_4fr_repeat(var(--problems),1fr)_2fr_2fr]"
+            : "grid-cols-[1fr_4fr_4fr_1.5fr_4fr_4fr_2fr]"
+        }
+        style={
+          {
+            "--problems": testData.cantidad_problemas + 1,
+          } as React.CSSProperties
         }
         elements_per_page={25}
       />

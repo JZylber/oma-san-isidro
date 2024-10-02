@@ -94,8 +94,10 @@ const DashboardResultsTableRow = ({
       <div className="text-center py-4 px-2">{result.nivel}</div>
       <div className="py-4 px-2 truncate">{result.participante.apellido}</div>
       <div className="py-4 px-2 truncate">{result.participante.nombre}</div>
-      <div className="py-4 px-2 text-center">{result.participante.dni}</div>
-      <div className="py-4 px-2 truncate">{result.colegio.nombre}</div>
+      <div className="py-4 px-2">{result.participante.dni}</div>
+      <div className="py-4 px-2 truncate">{`${result.colegio.nombre}${
+        result.colegio.sede ? "-" + result.colegio.sede : ""
+      }`}</div>
       {displayResult(result.resultados, testData.cantidad_problemas)}
       <div className="py-4 px-2">
         <div className="flex justify-center items-center gap-x-4 w-full h-full">

@@ -9,6 +9,7 @@ interface TableProps<S extends object> {
   values: Array<S>;
   allValues: Array<S>;
   headers: Array<string>;
+  style?: React.CSSProperties;
   Card?: CardType<S>;
   grid?: boolean;
   elements_per_page?: number;
@@ -53,6 +54,7 @@ const Table = <S extends object>({
   download,
   downloadHeaders,
   tableClassName = "",
+  style = {},
   grid = false,
   make_element = defaultMakeElement,
   process_data = defaultDataProcessor,
@@ -161,7 +163,7 @@ const Table = <S extends object>({
         <div
           className={`grid ${tableClassName} place-content-stretch divide-y text-2xl w-full`}
         >
-          <div className="grid grid-cols-subgrid place-content-stretch bg-primary-light-blue font-unbounded col-span-full">
+          <div className="grid grid-cols-subgrid place-content-stretch bg-primary-light-blue font-unbounded col-span-full border-b-2 border-black">
             {headers.map((header, index) => (
               <div
                 key={index}
@@ -229,8 +231,10 @@ const Table = <S extends object>({
           {max_pages > 1 && pagination}
         </div>
       )}
-      <div className={styles.values}>{make_table(values_in_page, headers)}</div>
-      <div className={styles.mobile_values}>
+      <div className={styles.values} style={style}>
+        {make_table(values_in_page, headers)}
+      </div>
+      <div className={styles.mobile_values} style={style}>
         {Card &&
           values_in_page.map((result, idx) => (
             <Card key={idx} value={result} />

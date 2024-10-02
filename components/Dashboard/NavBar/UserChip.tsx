@@ -11,7 +11,7 @@ const UserChip = () => {
   };
   if (user.id === -1) return null;
   return (
-    <div className="mt-auto flex justify-between items-center bg-transparent border-2 border-primary-black p-4 mr-4 rounded-lg">
+    <div className="mt-auto flex gap-x-4 justify-between items-center bg-transparent border-2 border-primary-black p-4 mr-4 rounded-lg">
       <span className="font-unbounded text-2xl">
         {user.nombre} {user.apellido}
       </span>
