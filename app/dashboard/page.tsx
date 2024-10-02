@@ -12,8 +12,8 @@ export default function OMALogin() {
         Dashboard OMA San Isidro
       </h1>
       <p className="font-montserrat text-4xl w-fit">
-        ¡Hola Elena! Para usar seleccioná del menú de la derecha la categoría
-        que quieras editar.
+        ¡Hola! Para usar seleccioná del menú de la izquuierda la categoría que
+        quieras editar.
       </p>
     </div>
   );

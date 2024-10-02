@@ -11,7 +11,7 @@ const ActionButton = ({
 }: ActionButtonProps) => {
   return (
     <button
-      className={`flex justify-center items-center border border-black rounded-lg w-36 h-16 font-montserrat text-2xl ${
+      className={`flex justify-center items-center border-2 border-b-4 border-black rounded-xl w-36 h-16 font-montserrat text-2xl ${
         important ? "bg-primary-light-blue" : ""
       }`}
       onClick={onClick}

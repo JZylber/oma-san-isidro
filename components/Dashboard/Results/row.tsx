@@ -19,7 +19,7 @@ const displayResult = (
   if (result === null) {
     return (
       <td
-        className="p-2 text-center"
+        className="text-center"
         colSpan={numberOfProblems > 0 ? numberOfProblems + 2 : 1}
       >
         SIN RESULTADOS
@@ -30,7 +30,7 @@ const displayResult = (
     return (
       <>
         <td
-          className="p-2 text-center"
+          className="text-center"
           colSpan={numberOfProblems > 0 ? numberOfProblems + 2 : 1}
         >
           {result.aclaracion.toLocaleUpperCase()}
@@ -41,7 +41,7 @@ const displayResult = (
   if (!result.presente) {
     return (
       <td
-        className="p-2 text-center"
+        className="text-center"
         colSpan={numberOfProblems > 0 ? numberOfProblems + 2 : 1}
       >
         AUSENTE
@@ -51,12 +51,12 @@ const displayResult = (
   return (
     <>
       {Object.values(result.puntaje).map((score, i) => (
-        <td className="p-2 text-center" key={i}>
+        <td className="w-fit text-center" key={i}>
           {score}
         </td>
       ))}
       {numberOfProblems > 0 && (
-        <td className="p-2 text-center">{displayBoolean(result.aprobado)}</td>
+        <td className="w-fit text-center">{displayBoolean(result.aprobado)}</td>
       )}
     </>
   );
@@ -76,32 +76,34 @@ const DashboardResultsTableRow = ({
   const hasResults =
     result.resultados !== null && result.id_participacion !== null;
   return (
-    <tr className="text-2xl" key={result.id_participacion}>
-      <td className="p-2 text-center">{result.nivel}</td>
-      <td className="p-2">{result.participante.apellido}</td>
-      <td className="p-2">{result.participante.nombre}</td>
-      <td className="p-2 text-center">{result.participante.dni}</td>
-      <td className="p-2">{result.colegio.nombre}</td>
+    <tr key={result.id_participacion}>
+      <td className="text-center w-fit">{result.nivel}</td>
+      <td className="p truncate">{result.participante.apellido}</td>
+      <td className="p truncate">{result.participante.nombre}</td>
+      <td className="p text-center">{result.participante.dni}</td>
+      <td className="p truncate">{result.colegio.nombre}</td>
       {displayResult(result.resultados, testData.cantidad_problemas)}
-      <td className="p-2 flex justify-center items-center gap-x-4">
-        <Image
-          src={hasResults ? "/icons/edit.svg" : "/icons/add.svg"}
-          alt="editar"
-          width={24}
-          height={24}
-          className="cursor-pointer"
-          onClick={editResult}
-        />
-        {hasResults && (
+      <td className="p">
+        <div className="flex justify-center items-center gap-x-4 w-full h-full">
           <Image
-            src="/icons/delete.svg"
-            alt="eliminar"
+            src={hasResults ? "/icons/edit.svg" : "/icons/add.svg"}
+            alt="editar"
             width={24}
             height={24}
-            onClick={deleteResult}
             className="cursor-pointer"
+            onClick={editResult}
           />
-        )}
+          {hasResults && (
+            <Image
+              src="/icons/delete.svg"
+              alt="eliminar"
+              width={24}
+              height={24}
+              onClick={deleteResult}
+              className="cursor-pointer"
+            />
+          )}
+        </div>
       </td>
     </tr>
   );

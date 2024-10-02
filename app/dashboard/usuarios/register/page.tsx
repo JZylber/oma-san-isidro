@@ -13,6 +13,11 @@ const RegisterPage = () => {
     const apellido = form["apellido"].value;
     const email = form["email"].value;
     const password = form["password"].value;
+    const passwordConfirmation = form["passwordConfirmation"].value;
+    if (password !== passwordConfirmation) {
+      alert("Las contraseñas no coinciden");
+      return;
+    }
     register.mutate({
       nombre,
       apellido,
@@ -29,6 +34,12 @@ const RegisterPage = () => {
         name="password"
         type="password"
         placeholder="Contraseña"
+        required
+      />
+      <input
+        name="passwordConfirmation"
+        type="password"
+        placeholder="Confirmar contraseña"
         required
       />
       <button type="submit">registrarse</button>
