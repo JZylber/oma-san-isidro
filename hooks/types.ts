@@ -65,11 +65,13 @@ export class Problems implements Filterable<Problems> {
 
 export type Filterables = string | number | boolean | Filterable<any>;
 
-export type ObjectWithFilterables = {
-  filterable: Record<string, Filterables>;
+export type FilterObject = Record<string, Filterables>;
+
+export type ObjectWithFilterables<S extends FilterObject> = {
+  filterable: S;
   payload: any;
 };
 
-export type FilterObject = Record<string, Filterables>;
-
-export type FilterableObject = FilterObject | ObjectWithFilterables;
+export type FilterableObject<S extends FilterObject> =
+  | S
+  | ObjectWithFilterables<S>;

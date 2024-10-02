@@ -7,16 +7,21 @@ import DashboardResultsTableRow from "./row";
 import { trpc } from "../../../utils/trpc";
 import { Testdata } from "../../../server/app-router-db-calls";
 import Loader from "../../Loader/Loader";
-import { TestInfo } from "../../ResultsPage/resultsTypes";
+import { Result, TestInfo } from "../../ResultsPage/resultsTypes";
 import Select from "../../common/Select";
 import { INSTANCIA } from "@prisma/client";
 import ResultModal from "../../Popups/ResultModal/ResultModal";
 import ConfirmModal from "../../Popups/ConfirmModal/ConfirmModal";
 import useFilter from "hooks/useFilter";
-import { FilterableObject, School } from "hooks/types";
+import {
+  FilterableObject,
+  ObjectWithFilterables,
+  Participant,
+  School,
+} from "hooks/types";
+import ResultFilterForm from "components/ResultsPage/resultFilterForm";
 
 const reducer = (state: Partial<TestInfo>, action: Partial<TestInfo>) => {
-  console.log(action);
   return { ...state, ...action };
 };
 
@@ -166,14 +171,19 @@ const DashboardResultsTableDisplay = ({
   const filterableResults = results.map((r) => {
     return {
       filterable: {
-        level: r.nivel,
-        school: new School(
+        nivel: r.nivel,
+        colegio: new School(
           r.colegio.nombre,
           r.colegio.sede ? r.colegio.sede : undefined
         ),
+        participante: new Participant(
+          r.participante.nombre,
+          r.participante.apellido
+        ),
+        aprobado: r.resultados ? r.resultados.aprobado : false,
       },
       payload: r,
-    } as FilterableObject;
+    } as ObjectWithFilterables<any>;
   });
   const [resultFilter, updateFilter, filtered_results, options] =
     useFilter(filterableResults);
@@ -248,99 +258,111 @@ const DashboardResultsTableDisplay = ({
     setConfirmDelete(true);
   };
   return (
-    <div className="border border-black rounded-xl overflow-hidden w-full">
-      <table className="w-full border-collapse">
-        <thead className="bg-primary-light-blue border-b border-black">
-          <tr className="font-unbounded text-2xl">
-            <th className="p-2">Nivel</th>
-            <th className="p-2">Apellido</th>
-            <th className="p-2">Nombre</th>
-            <th className="p-2">DNI</th>
-            <th className="p-2">Colegio</th>
-            {testData.cantidad_problemas > 0 ? (
-              <>
-                {Array.from({ length: testData.cantidad_problemas }).map(
-                  (_, i) => (
-                    <th key={i}>P{i + 1}</th>
-                  )
-                )}
-                <th className="p-2">Total</th>
-                <th className="p-2">Aprobado</th>
-              </>
-            ) : (
-              <th className="p-2">Resultado</th>
-            )}
-            <th></th>
-          </tr>
-        </thead>
-        <tbody className="font-montserrat text-xl divide-y">
-          {results.map((result, i) => (
-            <DashboardResultsTableRow
-              key={i}
-              result={result}
-              testData={testData}
-              editResult={() => editResultHandler(result)}
-              deleteResult={() => deleteResultHandler(result)}
-            />
-          ))}
-        </tbody>
-      </table>
-      <ResultModal
-        result={result}
-        numberOfProblems={testData.cantidad_problemas}
-        open={edit}
-        addNewResult={!hasResults}
-        onConfirm={(newResults: EditableResult["resultados"]) => {
-          if (hasResults && newResults) {
-            setLoading(true);
-            editResult.mutate({
-              id_rinde: result.id_rinde,
-              puntaje: newResults.puntaje,
-              aprobado: newResults.aprobado,
-              presente: newResults.presente,
-              aclaracion: newResults.aclaracion,
-            });
-          } else if (!hasResults && newResults) {
-            setLoading(true);
-            newResult.mutate({
-              id_participacion: result.id_participacion,
-              id_prueba: testData.id,
-              puntaje: newResults.puntaje,
-              aprobado: newResults.aprobado,
-              presente: newResults.presente,
-              aclaracion: newResults.aclaracion,
-            });
-          }
-          setEdit(false);
-        }}
-        close={() => setEdit(false)}
-      />
-      <ConfirmModal
-        open={confirmDelete}
-        close={() => setConfirmDelete(false)}
-        onCancel={() => {
-          setConfirmDelete(false);
-        }}
-        onConfirm={() => {
-          deleteResult.mutate(result.id_rinde!);
-          setConfirmDelete(false);
-        }}
-      >
-        <div className="px-4 text-2xl font-montserrat">
-          <p>
-            ¿Estás seguro/a que deseas eliminar el resultado de{" "}
-            {result.participante && (
-              <span className="font-semibold">
-                {result.participante.nombre} {result.participante.apellido}
-              </span>
-            )}
-            ?
-          </p>
-          <p> Esta acción no se puede deshacer.</p>
-        </div>
-      </ConfirmModal>
-      <ModalLoader isOpen={loading} />
-    </div>
+    <>
+      <div className="mb-8">
+        <ResultFilterForm
+          filters={resultFilter}
+          updateFilter={updateFilter}
+          schools={options.colegio}
+          levels={options.nivel}
+          names={options.participante}
+          passed={options.aprobado}
+        />
+      </div>
+      <div className="border border-black rounded-xl overflow-hidden w-full">
+        <table className="w-full border-collapse">
+          <thead className="bg-primary-light-blue border-b border-black">
+            <tr className="font-unbounded text-2xl">
+              <th className="p-2">Nivel</th>
+              <th className="p-2">Apellido</th>
+              <th className="p-2">Nombre</th>
+              <th className="p-2">DNI</th>
+              <th className="p-2">Colegio</th>
+              {testData.cantidad_problemas > 0 ? (
+                <>
+                  {Array.from({ length: testData.cantidad_problemas }).map(
+                    (_, i) => (
+                      <th key={i}>P{i + 1}</th>
+                    )
+                  )}
+                  <th className="p-2">Total</th>
+                  <th className="p-2">Aprobado</th>
+                </>
+              ) : (
+                <th className="p-2">Resultado</th>
+              )}
+              <th></th>
+            </tr>
+          </thead>
+          <tbody className="font-montserrat text-xl divide-y">
+            {filtered_results.map((result, i) => (
+              <DashboardResultsTableRow
+                key={i}
+                result={result.payload!}
+                testData={testData}
+                editResult={() => editResultHandler(result.payload)}
+                deleteResult={() => deleteResultHandler(result)}
+              />
+            ))}
+          </tbody>
+        </table>
+        <ResultModal
+          result={result}
+          numberOfProblems={testData.cantidad_problemas}
+          open={edit}
+          addNewResult={!hasResults}
+          onConfirm={(newResults: EditableResult["resultados"]) => {
+            if (hasResults && newResults) {
+              setLoading(true);
+              editResult.mutate({
+                id_rinde: result.id_rinde,
+                puntaje: newResults.puntaje,
+                aprobado: newResults.aprobado,
+                presente: newResults.presente,
+                aclaracion: newResults.aclaracion,
+              });
+            } else if (!hasResults && newResults) {
+              setLoading(true);
+              newResult.mutate({
+                id_participacion: result.id_participacion,
+                id_prueba: testData.id,
+                puntaje: newResults.puntaje,
+                aprobado: newResults.aprobado,
+                presente: newResults.presente,
+                aclaracion: newResults.aclaracion,
+              });
+            }
+            setEdit(false);
+          }}
+          close={() => setEdit(false)}
+        />
+        <ConfirmModal
+          open={confirmDelete}
+          close={() => setConfirmDelete(false)}
+          onCancel={() => {
+            setConfirmDelete(false);
+          }}
+          onConfirm={() => {
+            deleteResult.mutate(result.id_rinde!);
+            setConfirmDelete(false);
+          }}
+        >
+          <div className="px-4 text-2xl font-montserrat">
+            <p>
+              ¿Estás seguro/a que deseas eliminar el resultado de{" "}
+              {result.participante && (
+                <span className="font-semibold">
+                  {result.participante.nombre} {result.participante.apellido}
+                </span>
+              )}
+              ?
+            </p>
+            <p> Esta acción no se puede deshacer.</p>
+          </div>
+        </ConfirmModal>
+        <ModalLoader isOpen={loading} />
+      </div>
+    </>
   );
 };
 

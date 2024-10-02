@@ -25,17 +25,17 @@ const reducer = <S,>(
   }
 };
 
-const isObjectWPayload = (
-  object: FilterableObject
-): object is ObjectWithFilterables => {
+const isObjectWPayload = <S extends FilterObject>(
+  object: FilterableObject<S>
+): object is ObjectWithFilterables<S> => {
   return (
     object.hasOwnProperty("payload") && object.hasOwnProperty("filterable")
   );
 };
 
-const useFilter = <S extends FilterableObject>(values: S[]) => {
-  const [state, dispatch] = useReducer(reducer<FilterObject>, {});
-  const filterFunction = (value: S, filter: Partial<FilterObject>) => {
+const useFilter = <S extends FilterObject>(values: FilterableObject<S>[]) => {
+  const [state, dispatch] = useReducer(reducer<S>, {});
+  const filterFunction = (value: S, filter: Partial<S>) => {
     const isFilterCompliant = Object.keys(filter).every((key) => {
       const property = isObjectWPayload(value)
         ? value.filterable[key]
@@ -58,29 +58,44 @@ const useFilter = <S extends FilterableObject>(values: S[]) => {
   };
   const filteredValues = values.filter((value) =>
     isObjectWPayload(value)
-      ? filterFunction(value, state)
+      ? filterFunction(value.filterable, state)
       : filterFunction(value, state)
   );
-  const update = (newValue: Partial<FilterObject>) => {
+  const update = (newValue: Partial<S>) => {
     dispatch({ type: "update", value: newValue });
   };
   let options: { [key in keyof S]: S[key][] } = Object.fromEntries(
     values.length > 0
-      ? Object.keys(values[0]).map((key) => {
+      ? Object.keys(
+          isObjectWPayload(values[0])
+            ? (values[0].filterable as S)
+            : (values[0] as S)
+        ).map((key) => {
           const stateWithoutKey = { ...state, [key as keyof S]: undefined };
-          if (typeof values[0][key as keyof S] !== "object") {
+          if (
+            (isObjectWPayload(values[0])
+              ? typeof values[0].filterable[key as keyof S] !== "object"
+              : typeof values[0][key as keyof S]) !== "object"
+          ) {
             return [
               key as keyof S,
               Array.from(
                 new Set(
                   values
+                    .map((value) =>
+                      isObjectWPayload(value) ? value.filterable : value
+                    )
                     .filter((value) => filterFunction(value, stateWithoutKey))
                     .map((value) => value[key as keyof S])
                 )
               ),
             ];
           } else {
-            const uniqueValues = values
+            const uniqueValues = (
+              isObjectWPayload(values[0])
+                ? (values.map((v) => v.filterable) as S[])
+                : (values as S[])
+            )
               .filter((value) => filterFunction(value, stateWithoutKey))
               .map((value) => value[key as keyof S] as Filterable<any>)
               .filter(

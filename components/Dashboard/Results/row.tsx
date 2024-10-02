@@ -76,7 +76,7 @@ const DashboardResultsTableRow = ({
   const hasResults =
     result.resultados !== null && result.id_participacion !== null;
   return (
-    <tr key={result.id_participacion}>
+    <tr className="text-2xl" key={result.id_participacion}>
       <td className="p-2 text-center">{result.nivel}</td>
       <td className="p-2">{result.participante.apellido}</td>
       <td className="p-2">{result.participante.nombre}</td>
@@ -87,8 +87,8 @@ const DashboardResultsTableRow = ({
         <Image
           src={hasResults ? "/icons/edit.svg" : "/icons/add.svg"}
           alt="editar"
-          width={20}
-          height={20}
+          width={24}
+          height={24}
           className="cursor-pointer"
           onClick={editResult}
         />
@@ -96,8 +96,8 @@ const DashboardResultsTableRow = ({
           <Image
             src="/icons/delete.svg"
             alt="eliminar"
-            width={20}
-            height={20}
+            width={24}
+            height={24}
             onClick={deleteResult}
             className="cursor-pointer"
           />
