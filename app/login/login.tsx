@@ -16,7 +16,6 @@ const LoginPage: React.FC = () => {
     setLoading(true);
     try {
       const user = await login(email, password);
-      console.log(user);
       if (user) {
         router.push("/dashboard");
       }
