@@ -20,6 +20,7 @@ import {
   School,
 } from "hooks/types";
 import ResultFilterForm from "components/ResultsPage/resultFilterForm";
+import Table from "components/Table/Table";
 
 const reducer = (state: Partial<TestInfo>, action: Partial<TestInfo>) => {
   return { ...state, ...action };
@@ -269,101 +270,98 @@ const DashboardResultsTableDisplay = ({
           passed={options.aprobado}
         />
       </div>
-      <div className="border-2 border-black rounded-xl overflow-hidden w-full">
-        <table className="w-full border-collapse">
-          <thead className="bg-primary-light-blue border-b-2 border-black">
-            <tr className="font-unbounded text-2xl">
-              <th className="p-2">Nivel</th>
-              <th className="p-2">Apellido</th>
-              <th className="p-2">Nombre</th>
-              <th className="p-2">DNI</th>
-              <th className="p-2">Colegio</th>
-              {testData.cantidad_problemas > 0 ? (
-                <>
-                  {Array.from({ length: testData.cantidad_problemas }).map(
-                    (_, i) => (
-                      <th className="p-2" key={i}>
-                        P{i + 1}
-                      </th>
-                    )
-                  )}
-                  <th className="p-2">Total</th>
-                  <th className="p-2">Aprobado</th>
-                </>
-              ) : (
-                <th className="p-2">Resultado</th>
-              )}
-              <th></th>
-            </tr>
-          </thead>
-          <tbody className="font-montserrat text-xl divide-y">
-            {filtered_results.map((result, i) => (
-              <DashboardResultsTableRow
-                key={i}
-                result={result.payload!}
-                testData={testData}
-                editResult={() => editResultHandler(result.payload)}
-                deleteResult={() => deleteResultHandler(result)}
-              />
-            ))}
-          </tbody>
-        </table>
-        <ResultModal
-          result={result}
-          numberOfProblems={testData.cantidad_problemas}
-          open={edit}
-          addNewResult={!hasResults}
-          onConfirm={(newResults: EditableResult["resultados"]) => {
-            if (hasResults && newResults) {
-              setLoading(true);
-              editResult.mutate({
-                id_rinde: result.id_rinde,
-                puntaje: newResults.puntaje,
-                aprobado: newResults.aprobado,
-                presente: newResults.presente,
-                aclaracion: newResults.aclaracion,
-              });
-            } else if (!hasResults && newResults) {
-              setLoading(true);
-              newResult.mutate({
-                id_participacion: result.id_participacion,
-                id_prueba: testData.id,
-                puntaje: newResults.puntaje,
-                aprobado: newResults.aprobado,
-                presente: newResults.presente,
-                aclaracion: newResults.aclaracion,
-              });
-            }
-            setEdit(false);
-          }}
-          close={() => setEdit(false)}
-        />
-        <ConfirmModal
-          open={confirmDelete}
-          close={() => setConfirmDelete(false)}
-          onCancel={() => {
-            setConfirmDelete(false);
-          }}
-          onConfirm={() => {
-            deleteResult.mutate(result.id_rinde!);
-            setConfirmDelete(false);
-          }}
-        >
-          <div className="px-4 text-2xl font-montserrat">
-            <p>
-              ¿Estás seguro/a que deseas eliminar el resultado de{" "}
-              {result.participante && (
-                <span className="font-semibold">
-                  {result.participante.nombre} {result.participante.apellido}
-                </span>
-              )}
-              ?
-            </p>
-            <p> Esta acción no se puede deshacer.</p>
-          </div>
-        </ConfirmModal>
-        <ModalLoader isOpen={loading} />
-      </div>
+      <Table
+        allValues={filterableResults.map((r) => r.payload)}
+        values={filtered_results}
+        headers={
+          testData.cantidad_problemas > 0
+            ? [
+                "Nivel",
+                "Apellido",
+                "Nombre",
+                "DNI",
+                "Colegio",
+                ...Array.from({ length: testData.cantidad_problemas }).map(
+                  (_, i) => `P${i + 1}`
+                ),
+                "Total",
+                "Aprobado",
+                "",
+              ]
+            : ["Nivel", "Apellido", "Nombre", "DNI", "Colegio", "Resultado", ""]
+        }
+        make_element={(result, index) => (
+          <DashboardResultsTableRow
+            key={index}
+            result={result.payload}
+            testData={testData}
+            editResult={() => editResultHandler(result.payload)}
+            deleteResult={() => deleteResultHandler(result.payload)}
+          />
+        )}
+        grid
+        tableClassName={
+          testData.cantidad_problemas > 0
+            ? "grid-cols-[1fr_4fr_4fr_1fr_4fr_repeat(4,1fr)_2fr_2fr]"
+            : "grid-cols-[100px_1fr_1fr_100px_1fr_1fr_120px_200px]"
+        }
+        elements_per_page={25}
+      />
+      <ResultModal
+        result={result}
+        numberOfProblems={testData.cantidad_problemas}
+        open={edit}
+        addNewResult={!hasResults}
+        onConfirm={(newResults: EditableResult["resultados"]) => {
+          if (hasResults && newResults) {
+            setLoading(true);
+            editResult.mutate({
+              id_rinde: result.id_rinde,
+              puntaje: newResults.puntaje,
+              aprobado: newResults.aprobado,
+              presente: newResults.presente,
+              aclaracion: newResults.aclaracion,
+            });
+          } else if (!hasResults && newResults) {
+            setLoading(true);
+            newResult.mutate({
+              id_participacion: result.id_participacion,
+              id_prueba: testData.id,
+              puntaje: newResults.puntaje,
+              aprobado: newResults.aprobado,
+              presente: newResults.presente,
+              aclaracion: newResults.aclaracion,
+            });
+          }
+          setEdit(false);
+        }}
+        close={() => setEdit(false)}
+      />
+      <ConfirmModal
+        open={confirmDelete}
+        close={() => setConfirmDelete(false)}
+        onCancel={() => {
+          setConfirmDelete(false);
+        }}
+        onConfirm={() => {
+          deleteResult.mutate(result.id_rinde!);
+          setConfirmDelete(false);
+        }}
+      >
+        <div className="px-4 text-2xl font-montserrat">
+          <p>
+            ¿Estás seguro/a que deseas eliminar el resultado de{" "}
+            {result.participante && (
+              <span className="font-semibold">
+                {result.participante.nombre} {result.participante.apellido}
+              </span>
+            )}
+            ?
+          </p>
+          <p> Esta acción no se puede deshacer.</p>
+        </div>
+      </ConfirmModal>
+      <ModalLoader isOpen={loading} />
     </>
   );
 };

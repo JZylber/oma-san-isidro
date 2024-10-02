@@ -7,7 +7,7 @@ import UserChip from "./UserChip";
 const DashboardNavBar = () => {
   const pathname = usePathname();
   return (
-    <nav className="w-1/6 flex flex-col pl-4 py-4 gap-y-4 bg-primary-light-blue border-r-2 border-primary-black">
+    <nav className="w-[24rem] shrink-0 flex flex-col pl-4 py-4 gap-y-4 bg-primary-light-blue border-r-2 border-primary-black">
       <NavBarLink href="/dashboard" selected={pathname === "/dashboard"}>
         Inicio
       </NavBarLink>

@@ -10,6 +10,7 @@ interface TableProps<S extends object> {
   allValues: Array<S>;
   headers: Array<string>;
   Card?: CardType<S>;
+  grid?: boolean;
   elements_per_page?: number;
   download?: boolean;
   downloadHeaders?: Array<string>;
@@ -52,6 +53,7 @@ const Table = <S extends object>({
   download,
   downloadHeaders,
   tableClassName = "",
+  grid = false,
   make_element = defaultMakeElement,
   process_data = defaultDataProcessor,
   testInfo = "esta instancia",
@@ -154,8 +156,36 @@ const Table = <S extends object>({
   //DOWNLOAD
   const [openDownloadPopup, setOpenDownloadPopup] = useState(false);
   const make_table = (values: Array<S>, headers: Array<string>) => {
+    if (grid) {
+      return (
+        <div
+          className={`grid ${tableClassName} place-content-stretch divide-y text-2xl w-full`}
+        >
+          <div className="grid grid-cols-subgrid place-content-stretch bg-primary-light-blue font-unbounded col-span-full">
+            {headers.map((header, index) => (
+              <div
+                key={index}
+                className={`flex items-center justify-center px-3 py-6`}
+              >
+                {header}
+              </div>
+            ))}
+          </div>
+          {values.map((result, index) => {
+            return (
+              <div
+                key={index}
+                className="grid grid-cols-subgrid place-content-stretch font-montserrat col-span-full"
+              >
+                {make_element(result, index)}
+              </div>
+            );
+          })}
+        </div>
+      );
+    }
     return (
-      <table className={`${tableClassName} ${styles.values_table}`}>
+      <table className={`${styles.values_table} ${tableClassName}`}>
         <thead>
           <tr>
             {headers.map((header, index) => (

@@ -18,45 +18,59 @@ const displayResult = (
 ) => {
   if (result === null) {
     return (
-      <td
-        className="text-center"
-        colSpan={numberOfProblems > 0 ? numberOfProblems + 2 : 1}
+      <div
+        className="text-center col-[span_var(--span)] py-4 px-2"
+        style={
+          {
+            "--span": numberOfProblems > 0 ? numberOfProblems + 2 : 1,
+          } as React.CSSProperties
+        }
       >
         SIN RESULTADOS
-      </td>
+      </div>
     );
   }
   if (result.aclaracion) {
     return (
       <>
-        <td
-          className="text-center"
-          colSpan={numberOfProblems > 0 ? numberOfProblems + 2 : 1}
+        <div
+          className="text-center col-[span_var(--span)] py-4 px-2"
+          style={
+            {
+              "--span": numberOfProblems > 0 ? numberOfProblems + 2 : 1,
+            } as React.CSSProperties
+          }
         >
           {result.aclaracion.toLocaleUpperCase()}
-        </td>
+        </div>
       </>
     );
   }
   if (!result.presente) {
     return (
-      <td
-        className="text-center"
-        colSpan={numberOfProblems > 0 ? numberOfProblems + 2 : 1}
+      <div
+        className="text-center col-[span_var(--span)] py-4 px-2"
+        style={
+          {
+            "--span": numberOfProblems > 0 ? numberOfProblems + 2 : 1,
+          } as React.CSSProperties
+        }
       >
         AUSENTE
-      </td>
+      </div>
     );
   }
   return (
     <>
       {Object.values(result.puntaje).map((score, i) => (
-        <td className="w-fit text-center" key={i}>
+        <div className="text-center py-4 px-2" key={i}>
           {score}
-        </td>
+        </div>
       ))}
       {numberOfProblems > 0 && (
-        <td className="w-fit text-center">{displayBoolean(result.aprobado)}</td>
+        <div className="text-center py-4 px-2">
+          {displayBoolean(result.aprobado)}
+        </div>
       )}
     </>
   );
@@ -76,14 +90,14 @@ const DashboardResultsTableRow = ({
   const hasResults =
     result.resultados !== null && result.id_participacion !== null;
   return (
-    <tr key={result.id_participacion}>
-      <td className="text-center w-fit">{result.nivel}</td>
-      <td className="p truncate">{result.participante.apellido}</td>
-      <td className="p truncate">{result.participante.nombre}</td>
-      <td className="p text-center">{result.participante.dni}</td>
-      <td className="p truncate">{result.colegio.nombre}</td>
+    <>
+      <div className="text-center py-4 px-2">{result.nivel}</div>
+      <div className="py-4 px-2 truncate">{result.participante.apellido}</div>
+      <div className="py-4 px-2 truncate">{result.participante.nombre}</div>
+      <div className="py-4 px-2 text-center">{result.participante.dni}</div>
+      <div className="py-4 px-2 truncate">{result.colegio.nombre}</div>
       {displayResult(result.resultados, testData.cantidad_problemas)}
-      <td className="p">
+      <div className="py-4 px-2">
         <div className="flex justify-center items-center gap-x-4 w-full h-full">
           <Image
             src={hasResults ? "/icons/edit.svg" : "/icons/add.svg"}
@@ -104,8 +118,8 @@ const DashboardResultsTableRow = ({
             />
           )}
         </div>
-      </td>
-    </tr>
+      </div>
+    </>
   );
 };
 
