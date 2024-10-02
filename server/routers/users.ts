@@ -10,6 +10,7 @@ export const userRouter = router({
         nombre: true,
         apellido: true,
         email: true,
+        rol: true,
       },
     });
   }),

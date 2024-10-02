@@ -25,13 +25,14 @@ const UserEditPage = () => {
       <Table
         values={users.data}
         allValues={users.data}
-        headers={["Nombre", "Apellido", "Email"]}
+        headers={["Nombre", "Apellido", "Email", "Rol"]}
         make_element={(user, index) => {
           return (
             <tr key={index}>
               <td>{user.nombre}</td>
               <td>{user.apellido}</td>
               <td>{user.email}</td>
+              <td>{user.rol}</td>
             </tr>
           );
         }}
