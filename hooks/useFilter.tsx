@@ -56,11 +56,11 @@ const useFilter = <S extends FilterObject>(values: FilterableObject<S>[]) => {
     });
     return isFilterCompliant;
   };
-  const filteredValues = values.filter((value) =>
-    isObjectWPayload(value)
-      ? filterFunction(value.filterable, state)
-      : filterFunction(value, state)
-  );
+  const filteredValues = isObjectWPayload(values[0])
+    ? (values.filter((value) =>
+        filterFunction(value.filterable as S, state)
+      ) as ObjectWithFilterables<S>[])
+    : (values.filter((value) => filterFunction(value as S, state)) as S[]);
   const update = (newValue: Partial<S>) => {
     dispatch({ type: "update", value: newValue });
   };

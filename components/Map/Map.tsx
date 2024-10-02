@@ -3,7 +3,7 @@ import {
   TransformComponent,
   useControls,
 } from "react-zoom-pan-pinch";
-import { FilterableObject, School } from "../../hooks/types";
+import { FilterObject, School } from "../../hooks/types";
 import useFilter from "../../hooks/useFilter";
 import { Competition } from "../../server/app-router-db-calls";
 import SelectResultCategory from "../ResultsPage/SelectResultCategory";
@@ -17,13 +17,13 @@ import {
 } from "./MapAux";
 import InstanceMap from "./SVGMap/Map/map";
 import Image from "next/image";
-import { MouseEventHandler, useCallback } from "react";
+import React, { MouseEventHandler } from "react";
 
 interface MapProps {
   competition: Competition;
 }
 
-export interface MapItem extends FilterableObject {
+export interface MapItem extends FilterObject {
   school: School;
   level: number;
 }
