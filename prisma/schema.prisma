@@ -181,7 +181,7 @@ model Usuario {
   apellido   String
   email      String  @unique
   password   String
-  admin      Boolean @default(false)
+  rol        ROL     @default(STUDENT)
   token      String?
 }
 
@@ -192,4 +192,11 @@ enum INSTANCIA {
   REGIONAL
   NACIONAL
   INTERESCOLAR
+}
+
+enum ROL {
+  ADMIN
+  SCHOOL_REP
+  TEACHER
+  STUDENT
 }

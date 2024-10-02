@@ -30,7 +30,7 @@ export const trpc = createTRPCNext<AppRouter>({
           // You can pass any HTTP headers you wish here
           async headers() {
             return {
-              // authorization: getAuthCookie(),
+              authorization: opts.ctx?.req?.headers ? opts.ctx.req.headers.authorization : '',
             };
           },
         }),

@@ -2,6 +2,7 @@ import { router, publicProcedure } from '../trpc';
 import { z } from 'zod';
 import { INSTANCIA } from "@prisma/client";
 import { prisma } from '../db';
+import { getParticipants, getPreviousInstance, getPassingParticipants, getInstanceData, getDisabled, getProvincialParticipants } from './results/results_db_calls';
 
 export const getInstanceDropPoints = async (type: string, year: number, instance: INSTANCIA) => {
   const query = await prisma.prueba.findFirst({
@@ -92,203 +93,12 @@ const getInstanceVenues = async (type: string, year: number, instance: INSTANCIA
   return (results);
   };
 
-const getParticipants = async (competition: string,year: number) => {
-  const query = await prisma.participacion.findMany({
-    where: {
-      competencia: {
-        tipo: competition,
-        ano: year
-      }
-    },
-    orderBy: [
-      {nivel: 'asc'},
-      {
-        participante: {
-          apellido: 'asc'
-        }
-      },
-      {
-        participante: {
-          nombre: 'asc'
-        }
-      }
-    ],
-    select: {
-      id_participacion: true,
-      participante: {
-        select: {
-          nombre: true,
-          apellido: true
-        }
-      },
-      colegio: {
-        select: {
-          nombre: true,
-          sede: true
-        }
-      },
-      nivel: true
-    }
-  });
-  const results = query;
-  return (results);
-};
-
-const passingParticipants = async (type: string, year: number, instance: INSTANCIA) => {
-  const query = await prisma.prueba.findFirst({
-  where: {
-    competencia: {
-      tipo: type,
-      ano: year
-    },
-    instancia: instance,
-  },
-  select: {
-    rinden: {
-      where: {
-        aprobado: true
-      },
-      orderBy: [
-      {participacion: {
-        nivel: 'asc'
-      }},  
-      {
-        participacion: {
-          participante: {
-            apellido: 'asc'
-          }
-        }
-      },
-      {
-        participacion: {
-          participante: {
-            nombre: 'asc'
-          }
-        }
-      }],
-      select: {
-        participacion: {
-          select: {
-            id_participacion: true,
-            participante: {
-              select: {
-                nombre: true,
-                apellido: true
-              }
-            },
-            colegio: {
-              select: {
-                nombre: true,
-                sede: true
-              }
-            },
-            nivel: true
-          }
-        }
-      }
-    }
-  }
-  });
-  const results = query?query.rinden.map((participation) => participation.participacion):[];
-  return (results);
-};
-
-const passingParticipantsWScore = async (type: string, year: number, instance: INSTANCIA) => {
-  const query = await prisma.prueba.findFirst({
-  where: {
-    competencia: {
-      tipo: type,
-      ano: year
-    },
-    instancia: instance,
-  },
-  select: {
-    rinden: {
-      where: {
-        aprobado: true
-      },
-      orderBy: [
-      {participacion: {
-        nivel: 'asc'
-      }},  
-      {
-        participacion: {
-          participante: {
-            apellido: 'asc'
-          }
-        }
-      },
-      {
-        participacion: {
-          participante: {
-            nombre: 'asc'
-          }
-        }
-      }],
-      select: {
-        resultados: true,
-        participacion: {
-          select: {
-            id_participacion: true,
-            participante: {
-              select: {
-                nombre: true,
-                apellido: true
-              }
-            },
-            colegio: {
-              select: {
-                nombre: true,
-                sede: true
-              }
-            },
-            nivel: true
-          }
-        }
-      }
-    }
-  }
-  });
-  const results = query?query.rinden.map((participation) => {return{...participation.participacion,resultados: participation.resultados}}):[];
-  return (results);
-};
-
-const getInstanceData = async (year: number,competition: string, instance: INSTANCIA) => {
-  const query = await prisma.prueba.findFirst({
-    where: {
-      competencia: {
-        tipo : competition,
-        ano: year
-      },
-      instancia: instance
-      
-  },
-  select: {
-    fecha_limite_autorizacion: true,
-    hora_ingreso: true,
-    duracion: true,
-    criterio_habilitacion: true
-  }  
-  })
-  return (query);
-}
-
-
-const getPreviousInstance =  (competition: string,instance: INSTANCIA) => {
-  if(instance === 'NACIONAL') return 'REGIONAL' as INSTANCIA;
-  if(instance === 'REGIONAL') return 'ZONAL' as INSTANCIA;
-  if(instance === 'ZONAL'){
-    if(competition === "OMA") return 'INTERCOLEGIAL' as INSTANCIA;
-    else return 'INTERESCOLAR' as INSTANCIA
-  };
-  return undefined;
-}
 
 const venueDataGenerator = async (competition: string, instance: INSTANCIA) => {
   const date = new Date();
   const year = date.getFullYear();
   const previous_instance = getPreviousInstance(competition,instance);
-  const {dropPoints,venues,participants,auth_max_date,time,duration} = await Promise.all([getInstanceDropPoints(competition,year,instance),getInstanceVenues(competition,year,instance),previous_instance?passingParticipants(competition,year,previous_instance):getParticipants(competition,year),getInstanceData(year,competition,instance)])
+  const {dropPoints,venues,participants,auth_max_date,time,duration} = await Promise.all([getInstanceDropPoints(competition,year,instance),getInstanceVenues(competition,year,instance),previous_instance?getPassingParticipants(competition,year,previous_instance):getParticipants(competition,year),getInstanceData(year,competition,instance)])
       .then(([dropPoints,venues,participants,instance_data]) => {
         return ({dropPoints:dropPoints,venues:venues,participants:participants,auth_max_date:instance_data?.fecha_limite_autorizacion,time:instance_data!.hora_ingreso,duration:instance_data!.duracion})
       });
@@ -332,37 +142,11 @@ const venueDataGenerator = async (competition: string, instance: INSTANCIA) => {
     duration: duration});
 }
 
-const getDisabled = async (competition: string, year: number, instance: string) => {
-  const query = await prisma.inhabilitado.findMany({
-    where: {
-      Prueba: {
-        competencia: {
-          tipo: competition,
-          ano: year
-        },
-        instancia: instance as INSTANCIA
-    }
-    },
-    select: {
-      id_participacion: true
-    }
-  })
-  return (query);
-}
-
 const provincialDataGenerator = async (competition: string, instance: INSTANCIA) => {
   const date = new Date();
   const year = date.getFullYear();
-  const {interescolar,zonal,data} = await Promise.all([passingParticipantsWScore(competition,year,competition === "OMA"?'INTERCOLEGIAL':'INTERESCOLAR'),passingParticipantsWScore(competition,year,'ZONAL'),getInstanceData(year,competition,instance)]).then(([interescolar, zonal, data]) => {return({interescolar: interescolar,zonal: zonal, data: data})});
-  let provincialParticipants = zonal.map((participant) => {
-    let interescolar_participant = interescolar.find((interescolar_participant) => interescolar_participant.id_participacion === participant.id_participacion);
-    let interescolar_points = interescolar_participant?.resultados?Number((interescolar_participant.resultados as string[])[3]):0;
-    return({...participant,puntos: interescolar_points + Number((participant.resultados as string[])[3])});
-  });
-  const criteria = data?.criterio_habilitacion?data.criterio_habilitacion as number[]:[5,5,5];
-  provincialParticipants = provincialParticipants.filter((participant) => participant.puntos >= criteria[participant.nivel - 1]);
-  const disabled = await getDisabled(competition,year,instance);
-  provincialParticipants = provincialParticipants.filter((participant) => !disabled.some((disabled_participant) => disabled_participant.id_participacion === participant.id_participacion));
+  const data = await getInstanceData(year,competition,instance);
+  const provincialParticipants = await getProvincialParticipants(competition,year);
   const provincialParticipantsNames = provincialParticipants.map((participant) => {return({nombre: participant.participante.nombre, apellido: participant.participante.apellido ,colegio: participant.colegio, nivel: participant.nivel})});
   const auth_max_date = data?.fecha_limite_autorizacion;
   return({participants: provincialParticipantsNames,auth_max_date: auth_max_date?auth_max_date:undefined});
@@ -371,7 +155,7 @@ const provincialDataGenerator = async (competition: string, instance: INSTANCIA)
 const nationalDataGenerator = async (competition: string, instance: INSTANCIA) => {
   const date = new Date();
   const year = date.getFullYear();
-  const {passing,disabled,data} = await Promise.all([passingParticipants(competition,year,'REGIONAL'),getDisabled(competition,year,instance),getInstanceData(year,competition,instance)]).then(([passing,disabled,data]) => {return({passing: passing,disabled: disabled,data: data})});
+  const {passing,disabled,data} = await Promise.all([getPassingParticipants(competition,year,'REGIONAL'),getDisabled(competition,year,instance),getInstanceData(year,competition,instance)]).then(([passing,disabled,data]) => {return({passing: passing,disabled: disabled,data: data})});
   const nationalParticipants = passing.filter((participant) => !disabled.some((disabled_participant) => disabled_participant.id_participacion === participant.id_participacion));
   const nationalParticipantsNames = nationalParticipants.map((participant) => {return({nombre: participant.participante.nombre, apellido: participant.participante.apellido ,colegio: participant.colegio, nivel: participant.nivel})});
   const auth_max_date = data?.fecha_limite_autorizacion;

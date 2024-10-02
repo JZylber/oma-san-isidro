@@ -129,3 +129,23 @@ export const getAuthMaxDate = async (type: string, year: number, instance: INSTA
   });
   return (query);
 }
+
+export const getAllTests = async () => {
+  const query = await prisma.prueba.findMany({
+    select: {
+      id_prueba: true,
+      instancia: true,
+      resultados_disponibles: true,
+      cantidad_problemas: true,
+      competencia: {
+        select: {
+          tipo: true,
+          ano: true
+        }
+      }
+    }
+  });
+  return (query.map((prueba) => {return {id: prueba.id_prueba, instancia: prueba.instancia, año: prueba.competencia.ano, resultados_disponibles: prueba.resultados_disponibles, cantidad_problemas: prueba.cantidad_problemas, competencia: prueba.competencia.tipo}}));
+}
+
+export type Testdata = Awaited<ReturnType<typeof getAllTests>>[0 ];
