@@ -12,6 +12,8 @@ import Select from "../../common/Select";
 import { INSTANCIA } from "@prisma/client";
 import ResultModal from "../../Popups/ResultModal/ResultModal";
 import ConfirmModal from "../../Popups/ConfirmModal/ConfirmModal";
+import useFilter from "hooks/useFilter";
+import { FilterableObject, School } from "hooks/types";
 
 const reducer = (state: Partial<TestInfo>, action: Partial<TestInfo>) => {
   console.log(action);
@@ -39,53 +41,55 @@ const DashboardResults = ({ tests }: { tests: Testdata[] }) => {
   const [testInfo, dispatch] = useReducer(reducer, {});
   return (
     <>
-      <div className="flex gap-x-4 pb-8 border-b border-black mb-4">
-        <Select
-          label="Competencia"
-          options={Object.keys(dataTree)}
-          value={testInfo.competencia ? testInfo.competencia : ""}
-          onChange={(selected) =>
-            selected !== ""
-              ? dispatch({
-                  competencia: selected,
-                  año: undefined,
-                  instancia: undefined,
-                })
-              : dispatch({
-                  competencia: undefined,
-                  año: undefined,
-                  instancia: undefined,
-                })
-          }
-        />
-        <Select
-          label="Año"
-          options={
-            testInfo.competencia
-              ? Object.keys(dataTree[testInfo.competencia])
-              : []
-          }
-          value={testInfo.año ? testInfo.año.toString() : ""}
-          onChange={(selected) =>
-            selected !== ""
-              ? dispatch({ año: parseInt(selected), instancia: undefined })
-              : dispatch({ año: undefined, instancia: undefined })
-          }
-        />
-        <Select
-          label="Instancia"
-          options={
-            testInfo.competencia && testInfo.año
-              ? Object.keys(dataTree[testInfo.competencia][testInfo.año])
-              : []
-          }
-          value={testInfo.instancia ? testInfo.instancia : ""}
-          onChange={(selected) =>
-            selected !== ""
-              ? dispatch({ instancia: selected as INSTANCIA })
-              : dispatch({ instancia: undefined })
-          }
-        />
+      <div className="pb-8 border-b border-black mb-4 w-full">
+        <div className="flex gap-x-4 w-3/4">
+          <Select
+            label="Competencia"
+            options={Object.keys(dataTree)}
+            value={testInfo.competencia ? testInfo.competencia : ""}
+            onChange={(selected) =>
+              selected !== ""
+                ? dispatch({
+                    competencia: selected,
+                    año: undefined,
+                    instancia: undefined,
+                  })
+                : dispatch({
+                    competencia: undefined,
+                    año: undefined,
+                    instancia: undefined,
+                  })
+            }
+          />
+          <Select
+            label="Año"
+            options={
+              testInfo.competencia
+                ? Object.keys(dataTree[testInfo.competencia])
+                : []
+            }
+            value={testInfo.año ? testInfo.año.toString() : ""}
+            onChange={(selected) =>
+              selected !== ""
+                ? dispatch({ año: parseInt(selected), instancia: undefined })
+                : dispatch({ año: undefined, instancia: undefined })
+            }
+          />
+          <Select
+            label="Instancia"
+            options={
+              testInfo.competencia && testInfo.año
+                ? Object.keys(dataTree[testInfo.competencia][testInfo.año])
+                : []
+            }
+            value={testInfo.instancia ? testInfo.instancia : ""}
+            onChange={(selected) =>
+              selected !== ""
+                ? dispatch({ instancia: selected as INSTANCIA })
+                : dispatch({ instancia: undefined })
+            }
+          />
+        </div>
       </div>
       {!testInfo.competencia && !testInfo.año && !testInfo.instancia && (
         <span className="font-montserrat text-3xl">
@@ -159,6 +163,20 @@ const DashboardResultsTableDisplay = ({
   const [edit, setEdit] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [result, setResult] = useState<EditableResult>({} as EditableResult);
+  const filterableResults = results.map((r) => {
+    return {
+      filterable: {
+        level: r.nivel,
+        school: new School(
+          r.colegio.nombre,
+          r.colegio.sede ? r.colegio.sede : undefined
+        ),
+      },
+      payload: r,
+    } as FilterableObject;
+  });
+  const [resultFilter, updateFilter, filtered_results, options] =
+    useFilter(filterableResults);
   const hasResults =
     result.resultados !== null && result.id_participacion !== null;
   const editResult = trpc.dashboard.editResult.useMutation({
