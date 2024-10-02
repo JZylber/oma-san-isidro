@@ -269,9 +269,9 @@ const DashboardResultsTableDisplay = ({
           passed={options.aprobado}
         />
       </div>
-      <div className="border border-black rounded-xl overflow-hidden w-full">
+      <div className="border-2 border-black rounded-xl overflow-hidden w-full">
         <table className="w-full border-collapse">
-          <thead className="bg-primary-light-blue border-b border-black">
+          <thead className="bg-primary-light-blue border-b-2 border-black">
             <tr className="font-unbounded text-2xl">
               <th className="p-2">Nivel</th>
               <th className="p-2">Apellido</th>

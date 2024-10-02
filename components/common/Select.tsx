@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const Select = <T extends string | number | readonly string[]>({
   options,
   value,
@@ -14,20 +16,29 @@ const Select = <T extends string | number | readonly string[]>({
       {label && (
         <label className="font-montserrat text-xl font-semibold">{label}</label>
       )}
-      <select
-        value={value}
-        onChange={(e) => onChange(e.target.value as T)}
-        className="font-unbounded block w-full px-4 py-2 text-2xl bg-primary-white border border-primary-black rounded-md"
-      >
-        <option value="" disabled selected hidden>
-          -
-        </option>
-        {options.map((option, i) => (
-          <option key={i} value={option}>
-            {option}
+      <div className="relative">
+        <select
+          value={value}
+          onChange={(e) => onChange(e.target.value as T)}
+          className="font-unbounded block w-full pl-6 pr-12 py-4 text-2xl bg-primary-white border-2 border-primary-black rounded-xl appearance-none"
+        >
+          <option value="" disabled selected hidden>
+            -
           </option>
-        ))}
-      </select>
+          {options.map((option, i) => (
+            <option key={i} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+        <Image
+          src={"/images/menuSelectIcon.svg"}
+          width={16}
+          height={16}
+          alt=""
+          className="pointer-events-none absolute z-10 top-1/2 right-4 transform -translate-y-1/2"
+        />
+      </div>
     </div>
   );
 };

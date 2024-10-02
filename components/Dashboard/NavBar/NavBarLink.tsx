@@ -12,9 +12,9 @@ const NavBarLink = ({
   return (
     <Link
       href={href}
-      className={`font-unbounded text-4xl p-4  -mr-px rounded-l-xl hover:font-bold transition-[font-weight] ${
+      className={`font-unbounded text-4xl p-4 -mr-[2px] rounded-l-xl hover:font-bold transition-[font-weight] ${
         selected
-          ? "bg-primary-white border-y border-l border-primary-black"
+          ? "bg-primary-white border-y-2 border-l-2 border-primary-black"
           : ""
       }`}
     >
