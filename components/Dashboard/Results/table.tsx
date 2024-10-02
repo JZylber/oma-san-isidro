@@ -136,7 +136,7 @@ const DashboardResultsTable = ({ testData }: DashboardResultsTableProps) => {
     { notifyOnChangeProps: "all", refetchInterval: 0 }
   );
   return (
-    <div className="min-h-full flex flex-col">
+    <div className="grow flex flex-col">
       {results.isLoading && (
         <div className="grow flex items-center justify-center">
           <Loader />
@@ -282,7 +282,9 @@ const DashboardResultsTableDisplay = ({
                 <>
                   {Array.from({ length: testData.cantidad_problemas }).map(
                     (_, i) => (
-                      <th key={i}>P{i + 1}</th>
+                      <th className="p-2" key={i}>
+                        P{i + 1}
+                      </th>
                     )
                   )}
                   <th className="p-2">Total</th>
