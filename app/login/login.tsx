@@ -3,21 +3,27 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "../../components/buttons/Button";
 import useAuth from "hooks/useAuth";
+import Loader from "components/Loader/Loader";
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const { login } = useAuth();
   const router = useRouter();
   const handleLogin = async () => {
+    setLoading(true);
     try {
       const user = await login(email, password);
+      console.log(user);
       if (user) {
         router.push("/dashboard");
       }
     } catch (error) {
       setError("Usuario o contraseña incorrecto");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -70,6 +76,7 @@ const LoginPage: React.FC = () => {
             <Button content="Ingresar" onClick={handleLogin} />
           </div>
         </form>
+        {loading && <Loader />}
       </div>
     </div>
   );
