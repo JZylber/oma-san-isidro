@@ -17,9 +17,7 @@ const Select = <T extends string | number | readonly string[]>({
   const ref = useOutsideClick(() => setOpen(false));
   return (
     <div className={`flex grow basis-0 flex-col gap-y-2`} ref={ref}>
-      {label && (
-        <label className="font-montserrat text-xl font-semibold">{label}</label>
-      )}
+      {label && <label className="font-montserrat text-2xl">{label}</label>}
 
       <div
         onClick={() => setOpen(!open)}
