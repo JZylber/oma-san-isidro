@@ -73,9 +73,9 @@ const useFilter = <S extends FilterObject>(values: FilterableObject<S>[]) => {
         ).map((key) => {
           const stateWithoutKey = { ...state, [key as keyof S]: undefined };
           if (
-            (isObjectWPayload(values[0])
+            isObjectWPayload(values[0])
               ? typeof values[0].filterable[key as keyof S] !== "object"
-              : typeof values[0][key as keyof S]) !== "object"
+              : typeof values[0][key as keyof S] !== "object"
           ) {
             return [
               key as keyof S,
