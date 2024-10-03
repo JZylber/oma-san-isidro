@@ -1,6 +1,7 @@
 interface ActionButtonProps {
   children: React.ReactNode;
   onClick: () => void;
+  type?: "button" | "submit" | "reset";
   important?: boolean;
   className?: string;
 }
@@ -9,6 +10,7 @@ const ActionButton = ({
   children,
   important = false,
   onClick,
+  type = "button",
   className = "",
 }: ActionButtonProps) => {
   return (
@@ -17,6 +19,7 @@ const ActionButton = ({
         important ? "bg-primary-light-blue" : ""
       } ${className}`}
       onClick={onClick}
+      type={type}
     >
       {children}
     </button>
