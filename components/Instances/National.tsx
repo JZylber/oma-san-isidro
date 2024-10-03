@@ -589,7 +589,11 @@ const National = ({ competition }: { competition: string }) => {
         };
       }),
     };
-    return <NationalInfo {...data} />;
+    return data.participants.length > 0 && data.auth_max_date ? (
+      <NationalInfo {...data} />
+    ) : (
+      <p className="font-montserrat text-5xl py-6">Proximamente...</p>
+    );
   } else {
     return <div>Error</div>;
   }
