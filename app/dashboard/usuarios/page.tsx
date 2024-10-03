@@ -5,7 +5,8 @@ import React from "react";
 import { trpc } from "utils/trpc";
 import Table from "components/Table/Table";
 import Loader from "components/Loader/Loader";
-import { CardType } from "components/Table/types";
+import ActionButton from "components/buttons/ActionButton/ActionButton";
+import Image from "next/image";
 
 const UserEditPage = () => {
   const users = trpc.users.getUsers.useQuery();
@@ -21,7 +22,7 @@ const UserEditPage = () => {
   }
 
   return (
-    <>
+    <div className="flex flex-col gap-y-4">
       <Table
         values={users.data}
         allValues={users.data}
@@ -37,12 +38,18 @@ const UserEditPage = () => {
           );
         }}
       />
-      <button>
-        <Link href={"/dashboard/usuarios/register"}>
-          registrar nuevo usuario
-        </Link>
-      </button>
-    </>
+
+      <Link href={"/dashboard/usuarios/register"}>
+        <ActionButton
+          onClick={() => {}}
+          important
+          className="!w-[120px] flex justify-around items-center"
+        >
+          <Image src="/icons/add.svg" alt="sumar" width={24} height={24} />
+          <span className="font-unbounded">NUEVO</span>
+        </ActionButton>
+      </Link>
+    </div>
   );
 };
 
