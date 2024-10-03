@@ -37,7 +37,7 @@ box-border ${
           alt=""
         />
         <div
-          className={`absolute flex flex-col top-[calc(100%+2px)] -left-[2px] overflow-hidden z-10 w-[calc(100%+4px)] bg-primary-white rounded-b-xl divide-y-2 max-h-0 ${
+          className={`absolute flex flex-col top-[calc(100%+2px)] -left-[2px] overflow-hidden z-10 w-[calc(100%+4px)] bg-primary-white rounded-b-xl divide-y-2 max-h-0 transition-[max-height] ${
             open &&
             "!max-h-[300px] overflow-y-scroll border-x-2 border-b-2 border-black"
           }`}
