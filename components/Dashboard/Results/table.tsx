@@ -13,14 +13,10 @@ import { INSTANCIA } from "@prisma/client";
 import ResultModal from "../../Popups/ResultModal/ResultModal";
 import ConfirmModal from "../../Popups/ConfirmModal/ConfirmModal";
 import useFilter from "hooks/useFilter";
-import {
-  FilterableObject,
-  ObjectWithFilterables,
-  Participant,
-  School,
-} from "hooks/types";
+import { ObjectWithFilterables, Participant, School } from "hooks/types";
 import ResultFilterForm from "components/ResultsPage/resultFilterForm";
 import Table from "components/Table/Table";
+import ActionTab from "./actionTab";
 
 const reducer = (state: Partial<TestInfo>, action: Partial<TestInfo>) => {
   return { ...state, ...action };
@@ -260,6 +256,7 @@ const DashboardResultsTableDisplay = ({
   };
   return (
     <>
+      <ActionTab testData={testData} />
       <div className="mb-8">
         <ResultFilterForm
           filters={resultFilter}

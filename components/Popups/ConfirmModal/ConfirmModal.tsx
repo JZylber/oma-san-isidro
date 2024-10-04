@@ -20,7 +20,7 @@ const ConfirmModal = ({
     <Modal
       openModal={open}
       closeModal={close}
-      className="max-w-xl border border-black rounded-lg bg-primary-white m-auto"
+      className="max-w-xl border-2 border-black rounded-xl bg-primary-white m-auto"
     >
       <div className="flex flex-col gap-y-2 py-4">
         {children}
