@@ -2,17 +2,21 @@ import ActionButton from "components/buttons/ActionButton/ActionButton";
 import WizardProgress from "components/common/wizard/WizardProgress";
 import ConfirmModal from "components/Popups/ConfirmModal/ConfirmModal";
 import Modal from "components/Popups/Modal";
-import useWizard, { WizardState } from "hooks/useWizard";
+import useWizard from "hooks/useWizard";
 import Image from "next/image";
 import React, { useState } from "react";
+import FileUpload from "./fileUpload";
+import ColumnInterpretation from "./columnInterpretation";
+import ParticipantMatching from "./participantMatching";
+import Preview from "./preview";
 
 const WizardModal = ({ open, close }: { open: boolean; close: () => void }) => {
   const [confirmClose, setConfirmClose] = useState(false);
   const states = [
-    { id: "1", component: () => <div>Step 1</div> },
-    { id: "2", component: () => <div>Step 2</div> },
-    { id: "3", component: () => <div>Step 3</div> },
-    { id: "4", component: () => <div>Step 4</div> },
+    { id: "1", component: FileUpload },
+    { id: "2", component: ColumnInterpretation },
+    { id: "3", component: ParticipantMatching },
+    { id: "4", component: Preview },
   ];
   const [currentStep, currentStepIndex, nextStep, previousStep] =
     useWizard(states);
@@ -45,7 +49,7 @@ const WizardModal = ({ open, close }: { open: boolean; close: () => void }) => {
                 className="w-2/3"
               />
             </div>
-            {<currentStep.component />}
+            <div className="px-8">{<currentStep.component />}</div>
             {currentStepIndex < states.length && (
               <div className="flex justify-around w-full mt-auto py-8 border-t">
                 <ActionButton

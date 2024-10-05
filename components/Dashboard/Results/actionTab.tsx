@@ -1,7 +1,7 @@
 import ActionButton from "components/buttons/ActionButton/ActionButton";
 import Image from "next/image";
 import { Testdata } from "server/app-router-db-calls";
-import WizardModal from "./wizardModal";
+import WizardModal from "./wizardModal/wizardModal";
 import { useState } from "react";
 
 const ActionTab = ({ testData }: { testData: Testdata }) => {
