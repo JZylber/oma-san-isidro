@@ -1,17 +1,26 @@
+import WizardProgress from "components/common/wizard/WizardProgress";
 import ConfirmModal from "components/Popups/ConfirmModal/ConfirmModal";
 import Modal from "components/Popups/Modal";
+import useWizard, { WizardState } from "hooks/useWizard";
 import Image from "next/image";
 import React, { useState } from "react";
-import { set } from "zod";
 
 const WizardModal = ({ open, close }: { open: boolean; close: () => void }) => {
   const [confirmClose, setConfirmClose] = useState(false);
+  const states = [
+    { id: "1", component: () => <div>Step 1</div> },
+    { id: "2", component: () => <div>Step 2</div> },
+    { id: "3", component: () => <div>Step 3</div> },
+    { id: "4", component: () => <div>Step 4</div> },
+  ] as WizardState[];
+  const [currentStep, currentStepIndex, nextStep, previousStep] =
+    useWizard(states);
   return (
     <>
       <Modal
         openModal={open}
         closeModal={() => {}}
-        className="border-2 border-primary-black rounded-xl w-3/4 h-5/6 m-auto"
+        className="border-2 bg-primary-white border-primary-black rounded-xl w-3/4 h-5/6 m-auto"
       >
         <div className="p-8 flex justify-between items-center border-b">
           <h1 className="font-unbounded text-4xl">
@@ -25,7 +34,16 @@ const WizardModal = ({ open, close }: { open: boolean; close: () => void }) => {
             onClick={() => setConfirmClose(true)}
           />
         </div>
-        <section className="flex flex-col gap-y-4"></section>
+        <section className="flex flex-col gap-y-4">
+          <div className="flex justify-center py-8">
+            <WizardProgress
+              steps={states.length}
+              currentStep={currentStepIndex}
+              clickStep={(step) => previousStep(step)}
+              className="w-2/3"
+            />
+          </div>
+        </section>
       </Modal>
       <ConfirmModal
         open={confirmClose}
