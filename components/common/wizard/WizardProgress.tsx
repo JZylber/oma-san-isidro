@@ -21,7 +21,9 @@ const WizardProgress = ({
             onClick={() => clickStep(i)}
             className={`h-20 w-20 box-border relative flex justify-center items-center shrink-0 rounded-xl border-2 border-primary-black font-unbounded text-4xl ${
               i < currentStep
-                ? "cursor-pointer bg-primary-light-blue"
+                ? currentStep === steps
+                  ? "pointer-events-none bg-primary-light-blue"
+                  : "cursor-pointer bg-primary-light-blue"
                 : "pointer-events-none bg-primary-white"
             }`}
           >

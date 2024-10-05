@@ -20,7 +20,8 @@ const useWizard = (states: WizardState[]) => {
       else setCurrentStepIndex(currentStepIndex - 1);
     }
   };
-  const currentStep = states[currentStepIndex];
+  const currentStep =
+    states[Math.max(0, Math.min(currentStepIndex, states.length - 1))];
   return [currentStep, currentStepIndex, nextStep, previousStep] as const;
 };
 
