@@ -9,9 +9,22 @@ import Preview from "./preview";
 import useWizard from "hooks/useWizard";
 import { EditableResult } from "server/routers/dashboard";
 
+export interface NewResults {
+  dni: string;
+  problems: string[];
+  result: string;
+  total: string;
+  name?: string;
+  lastName?: string;
+  level?: string;
+  aproved: boolean;
+  present: boolean;
+  clarification?: string;
+}
+
 interface WizardData {
   currentResults: EditableResult[];
-  newResults: any[];
+  newResults: Partial<NewResults>[];
 }
 
 export interface WizardStateProps {
@@ -40,7 +53,10 @@ const WizardModal = ({
   ];
   const [currentState, wizardData, nextStep, previousStep] = useWizard({
     states: states.length,
-    initialData: { currentResults: initialData, newResults: [] as any[] },
+    initialData: {
+      currentResults: initialData,
+      newResults: [] as Partial<NewResults>[],
+    },
   });
   return (
     <>

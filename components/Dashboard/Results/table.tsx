@@ -8,7 +8,7 @@ import { trpc } from "../../../utils/trpc";
 import { Testdata } from "../../../server/app-router-db-calls";
 import Loader from "../../Loader/Loader";
 import { TestInfo } from "../../ResultsPage/resultsTypes";
-import Select from "../../common/Select";
+import Select from "../../common/form/Select";
 import { INSTANCIA } from "@prisma/client";
 import ResultModal from "../../Popups/ResultModal/ResultModal";
 import ConfirmModal from "../../Popups/ConfirmModal/ConfirmModal";

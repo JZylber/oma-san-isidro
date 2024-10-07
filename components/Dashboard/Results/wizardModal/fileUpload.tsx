@@ -1,7 +1,7 @@
-import InputFile from "components/common/InputFile";
+import InputFile from "components/common/form/InputFile";
 import React, { FormEventHandler, useEffect, useState } from "react";
 import WizardForm from "./wizardForm";
-import { WizardStateProps } from "./wizardModal";
+import { NewResults, WizardStateProps } from "./wizardModal";
 import { read, utils } from "xlsx";
 import Image from "next/image";
 import Warning from "components/Warning/Warning";
@@ -131,7 +131,7 @@ const FileUpload = ({
         );
     }, 0);
   };
-  const validateFile = () => {
+  const validateFile = (): NewResults[] | null => {
     if (!file) {
       setErrors(["No se ha seleccionado un archivo"]);
       return null;
@@ -161,7 +161,6 @@ const FileUpload = ({
     const data = fileData.map((d: any, index: number) => {
       try {
         const newResults = {
-          rawData: d,
           dni: d[keys.dni!],
           problems: keys.p!.map((p) => d[p]),
           result: d[keys.result!],
