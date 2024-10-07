@@ -118,8 +118,7 @@ const ColumnInterpretation = ({
   numberOfStates,
   currentStepIndex,
 }: WizardStateProps) => {
-  if (!data) return null;
-  const { newResults } = data;
+  const { newResults } = data!;
   const resultValues: (string | undefined)[] = Array.from(
     newResults.reduce((acc, result) => {
       acc.add(result.result);

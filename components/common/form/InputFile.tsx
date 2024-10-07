@@ -28,7 +28,7 @@ const InputFile = ({ types, getFile }: InputFileProps) => {
     if (!file) {
       setFileReaderProgress(0), getFile(null);
     }
-  }, [file, setFileReaderProgress]);
+  }, [file, setFileReaderProgress, getFile]);
   const reader = new FileReader();
   reader.onloadend = () => {
     const fileBuffer = reader.result as ArrayBuffer;
