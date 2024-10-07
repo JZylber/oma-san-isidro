@@ -1,8 +1,22 @@
-const ColumnInterpretation = () => {
+import WizardForm from "./wizardForm";
+import { WizardStateProps } from "./wizardModal";
+
+const ColumnInterpretation = ({
+  data,
+  nextStep,
+  previousStep,
+  numberOfStates,
+  currentStepIndex,
+}: WizardStateProps) => {
   return (
-    <div>
+    <WizardForm
+      nextStep={nextStep}
+      previousStep={previousStep}
+      numberOfStates={numberOfStates}
+      currentStepIndex={currentStepIndex}
+    >
       <p>Interpretación de columnas</p>
-    </div>
+    </WizardForm>
   );
 };
 

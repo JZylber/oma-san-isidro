@@ -1,26 +1,30 @@
 import ActionButton from "components/buttons/ActionButton/ActionButton";
 import WizardProgress from "components/common/wizard/WizardProgress";
+import next from "next";
 import { ReactNode } from "react";
 
-interface WizardFormProps {
-  nextStep: () => void;
+interface WizardFormProps<S> {
+  nextStep: (data: S) => void;
   previousStep: (step?: number) => void;
-  stateN: number;
+  numberOfStates: number;
   currentStepIndex: number;
   children: ReactNode;
 }
 
-const WizardForm = ({
+const WizardForm = <S,>({
   nextStep,
   previousStep,
-  stateN,
+  numberOfStates: stateN,
   currentStepIndex,
   children,
-}: WizardFormProps) => {
+}: WizardFormProps<S>) => {
   return (
     <form
-      onSubmit={nextStep}
-      className="flex flex-col gap-y-4 grow overflow-y-scroll"
+      onSubmit={(e) => {
+        e.preventDefault();
+        nextStep({} as S);
+      }}
+      className="flex flex-col gap-y-4 overflow-y-scroll min-h-full"
       noValidate
     >
       <div className="flex justify-center py-8">

@@ -6,7 +6,19 @@ import FileUpload from "./fileUpload";
 import ColumnInterpretation from "./columnInterpretation";
 import ParticipantMatching from "./participantMatching";
 import Preview from "./preview";
-import Wizard from "components/common/wizard/Wizard";
+import useWizard from "hooks/useWizard";
+
+interface WizardData {
+  [key: string]: any;
+}
+
+export interface WizardStateProps {
+  data?: WizardData;
+  nextStep: (stepData: WizardData) => void;
+  previousStep: (step?: number) => void;
+  numberOfStates: number;
+  currentStepIndex: number;
+}
 
 const WizardModal = ({ open, close }: { open: boolean; close: () => void }) => {
   const [confirmClose, setConfirmClose] = useState(false);
@@ -16,6 +28,10 @@ const WizardModal = ({ open, close }: { open: boolean; close: () => void }) => {
     { id: "3", component: ParticipantMatching },
     { id: "4", component: Preview },
   ];
+  const [currentState, wizardData, nextStep, previousStep] = useWizard({
+    states: states.length,
+    initialData: {} as WizardData,
+  });
   return (
     <>
       <Modal
@@ -36,7 +52,25 @@ const WizardModal = ({ open, close }: { open: boolean; close: () => void }) => {
               onClick={() => setConfirmClose(true)}
             />
           </div>
-          <Wizard states={[FileUpload]} />
+          <div className="flex-grow">
+            {states.map((state, index) => {
+              if (currentState === index) {
+                const Component = state.component;
+                return (
+                  <Component
+                    key={state.id}
+                    numberOfStates={states.length}
+                    data={wizardData[index]}
+                    nextStep={nextStep}
+                    previousStep={previousStep}
+                    currentStepIndex={currentState}
+                  />
+                );
+              } else {
+                return null;
+              }
+            })}
+          </div>
         </div>
       </Modal>
       <ConfirmModal

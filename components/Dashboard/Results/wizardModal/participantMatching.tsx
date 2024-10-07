@@ -1,5 +1,23 @@
-const ParticipantMatching = () => {
-  return <div>Cruzar participantes</div>;
+import WizardForm from "./wizardForm";
+import { WizardStateProps } from "./wizardModal";
+
+const ParticipantMatching = ({
+  data,
+  nextStep,
+  previousStep,
+  numberOfStates,
+  currentStepIndex,
+}: WizardStateProps) => {
+  return (
+    <WizardForm
+      nextStep={nextStep}
+      previousStep={previousStep}
+      numberOfStates={numberOfStates}
+      currentStepIndex={currentStepIndex}
+    >
+      <p>Emparejamiento de participantes</p>
+    </WizardForm>
+  );
 };
 
 export default ParticipantMatching;

@@ -1,24 +1,24 @@
 import InputFile from "components/common/InputFile";
 import { useState } from "react";
 import WizardForm from "./wizardForm";
-import { WizardStateProps } from "components/common/wizard/Wizard";
+import { WizardStateProps } from "./wizardModal";
 
-const FileUpload = <S,>({
-  initialData,
+const FileUpload = ({
+  data,
   nextStep,
   previousStep,
-  stateN,
+  numberOfStates,
   currentStepIndex,
-}: WizardStateProps<S>) => {
+}: WizardStateProps) => {
   const [file, setFile] = useState<{ file: Blob; type: string } | null>(null);
   return (
     <WizardForm
-      nextStep={() => nextStep(initialData)}
+      nextStep={nextStep}
       previousStep={previousStep}
-      stateN={stateN}
+      numberOfStates={numberOfStates}
       currentStepIndex={currentStepIndex}
     >
-      <div className="flex flex-col gap-y-4">
+      <div className="flex flex-col gap-y-4 px-8">
         <h2 className="text-center font-unbounded text-6xl pt-4 pb-8">
           Subir Archivo
         </h2>
