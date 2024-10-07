@@ -7,7 +7,7 @@ import DashboardResultsTableRow from "./row";
 import { trpc } from "../../../utils/trpc";
 import { Testdata } from "../../../server/app-router-db-calls";
 import Loader from "../../Loader/Loader";
-import { Result, TestInfo } from "../../ResultsPage/resultsTypes";
+import { TestInfo } from "../../ResultsPage/resultsTypes";
 import Select from "../../common/Select";
 import { INSTANCIA } from "@prisma/client";
 import ResultModal from "../../Popups/ResultModal/ResultModal";
@@ -256,7 +256,7 @@ const DashboardResultsTableDisplay = ({
   };
   return (
     <>
-      <ActionTab testData={testData} />
+      <ActionTab testData={testData} results={results} />
       <div className="mb-8">
         <ResultFilterForm
           filters={resultFilter}

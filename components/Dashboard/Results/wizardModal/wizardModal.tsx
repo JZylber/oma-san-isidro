@@ -7,9 +7,11 @@ import ColumnInterpretation from "./columnInterpretation";
 import ParticipantMatching from "./participantMatching";
 import Preview from "./preview";
 import useWizard from "hooks/useWizard";
+import { EditableResult } from "server/routers/dashboard";
 
 interface WizardData {
-  [key: string]: any;
+  currentResults: EditableResult[];
+  newResults: any;
 }
 
 export interface WizardStateProps {
@@ -20,7 +22,15 @@ export interface WizardStateProps {
   currentStepIndex: number;
 }
 
-const WizardModal = ({ open, close }: { open: boolean; close: () => void }) => {
+const WizardModal = ({
+  open,
+  close,
+  initialData,
+}: {
+  open: boolean;
+  close: () => void;
+  initialData: EditableResult[];
+}) => {
   const [confirmClose, setConfirmClose] = useState(false);
   const states = [
     { id: "1", component: FileUpload },
@@ -30,7 +40,7 @@ const WizardModal = ({ open, close }: { open: boolean; close: () => void }) => {
   ];
   const [currentState, wizardData, nextStep, previousStep] = useWizard({
     states: states.length,
-    initialData: {} as WizardData,
+    initialData: { currentResults: initialData, newResults: [] },
   });
   return (
     <>

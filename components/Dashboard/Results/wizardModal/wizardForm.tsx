@@ -1,6 +1,5 @@
 import ActionButton from "components/buttons/ActionButton/ActionButton";
 import WizardProgress from "components/common/wizard/WizardProgress";
-import next from "next";
 import { ReactNode } from "react";
 
 interface WizardFormProps<S> {

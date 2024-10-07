@@ -3,8 +3,15 @@ import Image from "next/image";
 import { Testdata } from "server/app-router-db-calls";
 import WizardModal from "./wizardModal/wizardModal";
 import { useState } from "react";
+import { EditableResult } from "server/routers/dashboard";
 
-const ActionTab = ({ testData }: { testData: Testdata }) => {
+const ActionTab = ({
+  testData,
+  results,
+}: {
+  testData: Testdata;
+  results: EditableResult[];
+}) => {
   const [openFileUploadModal, setFileUploadModal] = useState(false);
   return (
     <div className="w-full flex py-4">
@@ -24,6 +31,7 @@ const ActionTab = ({ testData }: { testData: Testdata }) => {
       <WizardModal
         open={openFileUploadModal}
         close={() => setFileUploadModal(false)}
+        initialData={results}
       />
     </div>
   );
