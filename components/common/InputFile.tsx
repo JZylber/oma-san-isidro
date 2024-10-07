@@ -1,12 +1,11 @@
 import ActionButton from "components/buttons/ActionButton/ActionButton";
 import WarningModal from "components/Popups/WarningModal/WarningModal";
-import Warning from "components/Warning/Warning";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 interface InputFileProps {
   types: string[];
-  getFile: (file: Blob, type: string) => void;
+  getFile: (file: { file: ArrayBuffer; type: string } | null) => void;
 }
 
 const InputFile = ({ types, getFile }: InputFileProps) => {
@@ -26,12 +25,14 @@ const InputFile = ({ types, getFile }: InputFileProps) => {
     }
   };
   useEffect(() => {
-    if (!file) setFileReaderProgress(0);
+    if (!file) {
+      setFileReaderProgress(0), getFile(null);
+    }
   }, [file, setFileReaderProgress]);
   const reader = new FileReader();
   reader.onloadend = () => {
-    const blob = new Blob([reader.result as string]);
-    getFile(blob, file?.name.split(".").pop() as string);
+    const fileBuffer = reader.result as ArrayBuffer;
+    getFile({ file: fileBuffer, type: file?.name.split(".").pop() as string });
     setFileReaderProgress(100);
   };
   reader.onprogress = (e) => {
@@ -41,7 +42,7 @@ const InputFile = ({ types, getFile }: InputFileProps) => {
     }
   };
   if (file && fileReaderProgress === 0) {
-    reader.readAsDataURL(file);
+    reader.readAsArrayBuffer(file);
   }
   return (
     <>
