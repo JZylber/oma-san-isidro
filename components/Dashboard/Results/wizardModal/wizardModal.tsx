@@ -11,7 +11,7 @@ import { EditableResult } from "server/routers/dashboard";
 
 interface WizardData {
   currentResults: EditableResult[];
-  newResults: any;
+  newResults: any[];
 }
 
 export interface WizardStateProps {
@@ -40,7 +40,7 @@ const WizardModal = ({
   ];
   const [currentState, wizardData, nextStep, previousStep] = useWizard({
     states: states.length,
-    initialData: { currentResults: initialData, newResults: [] },
+    initialData: { currentResults: initialData, newResults: [] as any[] },
   });
   return (
     <>

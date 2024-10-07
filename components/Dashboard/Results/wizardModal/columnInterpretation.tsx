@@ -8,9 +8,10 @@ const ColumnInterpretation = ({
   numberOfStates,
   currentStepIndex,
 }: WizardStateProps) => {
+  console.log(data);
   return (
     <WizardForm
-      nextStep={nextStep}
+      nextStep={(e) => {}}
       previousStep={previousStep}
       numberOfStates={numberOfStates}
       currentStepIndex={currentStepIndex}

@@ -10,7 +10,7 @@ const ParticipantMatching = ({
 }: WizardStateProps) => {
   return (
     <WizardForm
-      nextStep={nextStep}
+      nextStep={(e) => {}}
       previousStep={previousStep}
       numberOfStates={numberOfStates}
       currentStepIndex={currentStepIndex}

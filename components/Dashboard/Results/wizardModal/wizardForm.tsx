@@ -1,9 +1,9 @@
 import ActionButton from "components/buttons/ActionButton/ActionButton";
 import WizardProgress from "components/common/wizard/WizardProgress";
-import { ReactNode } from "react";
+import { FormEventHandler, ReactNode } from "react";
 
 interface WizardFormProps<S> {
-  nextStep: (data: S) => void;
+  nextStep: FormEventHandler<HTMLFormElement>;
   previousStep: (step?: number) => void;
   numberOfStates: number;
   currentStepIndex: number;
@@ -19,10 +19,7 @@ const WizardForm = <S,>({
 }: WizardFormProps<S>) => {
   return (
     <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        nextStep({} as S);
-      }}
+      onSubmit={nextStep}
       className="flex flex-col gap-y-4 overflow-y-scroll min-h-full"
       noValidate
     >
