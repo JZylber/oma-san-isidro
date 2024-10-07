@@ -1,14 +1,12 @@
-import ActionButton from "components/buttons/ActionButton/ActionButton";
-import WizardProgress from "components/common/wizard/WizardProgress";
 import ConfirmModal from "components/Popups/ConfirmModal/ConfirmModal";
 import Modal from "components/Popups/Modal";
-import useWizard from "hooks/useWizard";
 import Image from "next/image";
 import React, { useState } from "react";
 import FileUpload from "./fileUpload";
 import ColumnInterpretation from "./columnInterpretation";
 import ParticipantMatching from "./participantMatching";
 import Preview from "./preview";
+import Wizard from "components/common/wizard/Wizard";
 
 const WizardModal = ({ open, close }: { open: boolean; close: () => void }) => {
   const [confirmClose, setConfirmClose] = useState(false);
@@ -18,8 +16,6 @@ const WizardModal = ({ open, close }: { open: boolean; close: () => void }) => {
     { id: "3", component: ParticipantMatching },
     { id: "4", component: Preview },
   ];
-  const [currentStep, currentStepIndex, nextStep, previousStep] =
-    useWizard(states);
   return (
     <>
       <Modal
@@ -40,39 +36,7 @@ const WizardModal = ({ open, close }: { open: boolean; close: () => void }) => {
               onClick={() => setConfirmClose(true)}
             />
           </div>
-          <section className="flex flex-col gap-y-4 grow overflow-y-scroll">
-            <div className="flex justify-center py-8">
-              <WizardProgress
-                steps={states.length}
-                currentStep={currentStepIndex}
-                clickStep={(step) => previousStep(step)}
-                className="w-2/3"
-              />
-            </div>
-            <div className="px-8">{<currentStep.component />}</div>
-            {currentStepIndex < states.length && (
-              <div className="flex justify-around w-full mt-auto py-8 border-t">
-                <ActionButton
-                  onClick={previousStep}
-                  className={
-                    currentStepIndex === 0
-                      ? "opacity-25 pointer-events-none"
-                      : ""
-                  }
-                >
-                  Anterior
-                </ActionButton>
-                <ActionButton
-                  onClick={nextStep}
-                  important={currentStepIndex === states.length - 1}
-                >
-                  {currentStepIndex === states.length - 1
-                    ? "Finalizar"
-                    : "Siguiente"}
-                </ActionButton>
-              </div>
-            )}
-          </section>
+          <Wizard states={[FileUpload]} />
         </div>
       </Modal>
       <ConfirmModal

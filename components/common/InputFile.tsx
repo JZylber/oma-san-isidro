@@ -2,15 +2,17 @@ import ActionButton from "components/buttons/ActionButton/ActionButton";
 import WarningModal from "components/Popups/WarningModal/WarningModal";
 import Warning from "components/Warning/Warning";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface InputFileProps {
   types: string[];
+  getFile: (file: Blob, type: string) => void;
 }
 
-const InputFile = ({ types }: InputFileProps) => {
+const InputFile = ({ types, getFile }: InputFileProps) => {
   const [file, setFile] = useState<File | null>(null);
   const [openWarning, setOpenWarning] = useState(false);
+  const [fileReaderProgress, setFileReaderProgress] = useState(0);
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
@@ -23,6 +25,24 @@ const InputFile = ({ types }: InputFileProps) => {
       setOpenWarning(true);
     }
   };
+  useEffect(() => {
+    if (!file) setFileReaderProgress(0);
+  }, [file, setFileReaderProgress]);
+  const reader = new FileReader();
+  reader.onloadend = () => {
+    const blob = new Blob([reader.result as string]);
+    getFile(blob, file?.name.split(".").pop() as string);
+    setFileReaderProgress(100);
+  };
+  reader.onprogress = (e) => {
+    if (e.lengthComputable) {
+      const progress = Math.round((e.loaded / e.total) * 100);
+      setFileReaderProgress(progress);
+    }
+  };
+  if (file && fileReaderProgress === 0) {
+    reader.readAsDataURL(file);
+  }
   return (
     <>
       <div
@@ -70,17 +90,39 @@ const InputFile = ({ types }: InputFileProps) => {
           </>
         )}
         {file && (
-          <div className="flex justify-around items-center w-full">
-            <Image src="/icons/file.svg" width={80} height={80} alt="file" />
-            <p className="font-montserrat text-4xl">{file.name}</p>
+          <div className="flex px-12 items-center w-full gap-x-8">
             <Image
-              src="/images/x.svg"
-              width={24}
-              height={24}
-              alt="close"
-              onClick={() => setFile(null)}
-              className="cursor-pointer"
+              src="/icons/file.svg"
+              width={80}
+              height={80}
+              alt="file"
+              className="shink-0"
             />
+            <div className="flex flex-col justify-around grow h-full">
+              <p className="font-montserrat text-4xl">{file.name}</p>
+              {fileReaderProgress < 100 && (
+                <div className="w-full h-4 bg-primary-white rounded-full overflow-hidden">
+                  <div
+                    className="bg-primary-black h-full"
+                    style={{ width: `${fileReaderProgress}%` }}
+                  ></div>
+                </div>
+              )}
+            </div>
+            {fileReaderProgress === 100 ? (
+              <Image
+                src="/images/x.svg"
+                width={20}
+                height={20}
+                alt="close"
+                onClick={() => setFile(null)}
+                className={`cursor-pointer`}
+              />
+            ) : (
+              <span className="font-montserrat text-4xl shrink-0">
+                {fileReaderProgress}%
+              </span>
+            )}
           </div>
         )}
       </div>
