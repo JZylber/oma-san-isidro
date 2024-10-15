@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer } from "react";
 import { NewResults, Result2Add, Result2Modify } from "../wizardModal";
 import { EditableResult } from "server/routers/dashboard";
 import Image from "next/image";
+import Switch from "components/common/form/Switch";
 
 interface Results2UpdateProps {
   newResults: NewResults[];
@@ -22,9 +23,11 @@ const bool2Icon = (bool: boolean, width: number = 12, height: number = 12) => {
 const displayResult = ({
   result: [currentResult, newResult, overwrite],
   data,
+  overwriteResult,
 }: {
   result: [Result2Modify, Result2Modify, boolean];
   data: EditableResult[];
+  overwriteResult: (id_participacion: number, value: boolean) => void;
 }) => {
   const participant = data.find(
     (d) => d.id_participacion === currentResult.id_participacion
@@ -49,7 +52,13 @@ const displayResult = ({
                   : "justify-center"
               }`}
             >
-              <span className="shrink-0">{p}</span>
+              <span
+                className={`shrink-0 ${
+                  !overwrite && newResult.puntaje[i] !== p ? "font-bold" : ""
+                }`}
+              >
+                {p}
+              </span>
               {newResult.puntaje[i] !== p ? (
                 <>
                   <Image
@@ -59,7 +68,9 @@ const displayResult = ({
                     alt="arrow"
                     className="shrink-0"
                   />
-                  <span className="shrink-0">{newResult.puntaje[i]}</span>
+                  <span className={`shrink-0 ${overwrite ? "font-bold" : ""}`}>
+                    {newResult.puntaje[i]}
+                  </span>
                 </>
               ) : (
                 ""
@@ -76,7 +87,15 @@ const displayResult = ({
               : "justify-center"
           }`}
         >
-          {bool2Icon(currentResult.aprobado)}
+          {bool2Icon(
+            currentResult.aprobado,
+            newResult.aprobado !== currentResult.aprobado && !overwrite
+              ? 24
+              : 12,
+            newResult.aprobado !== currentResult.aprobado && !overwrite
+              ? 24
+              : 12
+          )}
           {newResult.aprobado !== currentResult.aprobado ? (
             <>
               <Image
@@ -85,7 +104,11 @@ const displayResult = ({
                 height={12}
                 alt="arrow"
               />
-              {bool2Icon(newResult.aprobado)}
+              {bool2Icon(
+                newResult.aprobado,
+                overwrite ? 24 : 12,
+                overwrite ? 24 : 12
+              )}
             </>
           ) : (
             ""
@@ -100,7 +123,15 @@ const displayResult = ({
               : "justify-center"
           }`}
         >
-          {bool2Icon(currentResult.presente)}
+          {bool2Icon(
+            currentResult.presente,
+            newResult.presente !== currentResult.presente && !overwrite
+              ? 24
+              : 12,
+            newResult.presente !== currentResult.presente && !overwrite
+              ? 24
+              : 12
+          )}
           {newResult.presente !== currentResult.presente ? (
             <>
               <Image
@@ -109,7 +140,11 @@ const displayResult = ({
                 height={12}
                 alt="arrow"
               />
-              {bool2Icon(newResult.presente)}
+              {bool2Icon(
+                newResult.presente,
+                overwrite ? 24 : 12,
+                overwrite ? 24 : 12
+              )}
             </>
           ) : (
             ""
@@ -124,7 +159,15 @@ const displayResult = ({
               : "justify-center"
           }`}
         >
-          {currentResult.aclaracion ? currentResult.aclaracion : "-"}
+          <span
+            className={`${
+              !overwrite && newResult.aclaracion !== currentResult.aclaracion
+                ? "font-bold"
+                : ""
+            }`}
+          >
+            {currentResult.aclaracion ? currentResult.aclaracion : "-"}
+          </span>
           {newResult.aclaracion !== currentResult.aclaracion ? (
             <>
               <Image
@@ -133,16 +176,63 @@ const displayResult = ({
                 height={12}
                 alt="arrow"
               />
-              {newResult.aclaracion ? newResult.aclaracion : "-"}
+              <span className={`${overwrite ? "font-bold" : ""}`}>
+                {newResult.aclaracion ? newResult.aclaracion : "-"}
+              </span>
             </>
           ) : (
             ""
           )}
         </div>
       </td>
-      <td className="py-2 px-1">{overwrite}</td>
+      <td className="py-2 px-1">
+        <div className="flex items-center justify-center">
+          <Switch
+            defaultChecked={overwrite}
+            onChange={(e) => {
+              overwriteResult(currentResult.id_participacion, e.target.checked);
+            }}
+          />
+        </div>
+      </td>
     </>
   );
+};
+
+interface OverwriteResultAction {
+  type: "OVERWRITE_RESULT";
+  payload: {
+    id_participacion: number;
+    value: boolean;
+  };
+}
+
+interface SetResults2ModifyAction {
+  type: "SET_RESULTS2_MODIFY";
+  payload: [Result2Modify, Result2Modify, boolean][];
+}
+
+const result2ModifyReducer = (
+  state: [Result2Modify, Result2Modify, boolean][],
+  action: OverwriteResultAction | SetResults2ModifyAction
+) => {
+  switch (action.type) {
+    case "OVERWRITE_RESULT":
+      return state.map((result) => {
+        if (result[0].id_participacion === action.payload.id_participacion) {
+          return [result[0], result[1], action.payload.value] as [
+            Result2Modify,
+            Result2Modify,
+            boolean
+          ];
+        }
+        return result;
+      });
+    case "SET_RESULTS2_MODIFY":
+      return action.payload;
+    default:
+      return state;
+  }
 };
 
 const Results2Update = ({
@@ -150,30 +240,19 @@ const Results2Update = ({
   currentResults,
 }: Results2UpdateProps) => {
   const cantidadDeProblemas = 3;
-  const [classifiedResults, setClassifiedResults] = useState<{
-    results2Modify: [Result2Modify, Result2Modify, boolean][];
-    results2Add: Result2Add[];
-  }>({ results2Modify: [], results2Add: [] });
+  const [results2Modify, dispatch] = useReducer(
+    result2ModifyReducer,
+    [] as [Result2Modify, Result2Modify, boolean][]
+  );
   useEffect(() => {
     const results2Modify: [Result2Modify, Result2Modify, boolean][] = [];
-    const results2Add: Result2Add[] = [];
     newResults.forEach((result) => {
       const currentResult = currentResults.find((r) => {
         return r.participante.dni === result.dni;
       });
       if (!currentResult) return;
       const oldResult = currentResult.resultados;
-      if (!oldResult) {
-        results2Add.push({
-          dni: result.dni,
-          puntaje: [...result.problems, result.total].map((r) =>
-            r !== undefined ? r.toString() : ""
-          ),
-          aprobado: result.approved,
-          presente: result.present,
-          aclaracion: result.clarification ? result.clarification : null,
-        });
-      } else {
+      if (oldResult) {
         const oldResultJSON = JSON.stringify(oldResult);
         const newResult = {
           puntaje: [...result.problems, result.total].map((r) =>
@@ -198,11 +277,8 @@ const Results2Update = ({
         ]);
       }
     });
-    setClassifiedResults({
-      results2Modify,
-      results2Add,
-    });
-  }, [newResults, currentResults, setClassifiedResults]);
+    dispatch({ type: "SET_RESULTS2_MODIFY", payload: results2Modify });
+  }, [newResults, currentResults, dispatch]);
   return (
     <>
       <h3 className="font-unbounded text-3xl mt-8">RESULTADOS A MODIFICAR</h3>
@@ -233,10 +309,19 @@ const Results2Update = ({
             </tr>
           </thead>
           <tbody className="divide-y">
-            {classifiedResults.results2Modify.map((result, i) => {
+            {results2Modify.map((result, i) => {
               return (
                 <tr key={i} className="text-xl">
-                  {displayResult({ result, data: currentResults })}
+                  {displayResult({
+                    result,
+                    data: currentResults,
+                    overwriteResult: (id_participacion, value) => {
+                      dispatch({
+                        type: "OVERWRITE_RESULT",
+                        payload: { id_participacion, value },
+                      });
+                    },
+                  })}
                 </tr>
               );
             })}
