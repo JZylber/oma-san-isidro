@@ -1,7 +1,8 @@
 import Checkbox from "components/common/form/CheckBox";
-import WizardForm from "./wizardForm";
-import { WizardStateProps } from "./wizardModal";
-import { useReducer } from "react";
+import WizardForm from "../wizardForm";
+import { NewResults, WizardStateProps } from "../wizardModal";
+import { useEffect, useReducer, useState } from "react";
+import Results2Update from "./results2Update";
 
 const defaultValues = (value?: string): [boolean, boolean, string | null] => {
   switch (value?.toString().toLocaleLowerCase()) {
@@ -137,6 +138,23 @@ const ColumnInterpretation = ({
       };
     })
   );
+
+  const [resultsFromFile, setResultsFromFile] = useState<NewResults[]>([]);
+  useEffect(() => {
+    setResultsFromFile(
+      newResults.map((result) => {
+        const { approved, present, clarification } = results.find(
+          (r) => r.value === result.result
+        ) as Result;
+        return {
+          ...result,
+          approved,
+          present,
+          clarification,
+        } as NewResults;
+      })
+    );
+  }, [results, setResultsFromFile, newResults]);
   return (
     <WizardForm
       nextStep={(e) => {}}
@@ -182,6 +200,10 @@ const ColumnInterpretation = ({
             </tbody>
           </table>
         </div>
+        <Results2Update
+          newResults={resultsFromFile}
+          currentResults={data!.currentResults}
+        />
       </div>
     </WizardForm>
   );

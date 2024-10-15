@@ -3,21 +3,37 @@ import Modal from "components/Popups/Modal";
 import Image from "next/image";
 import React, { useState } from "react";
 import FileUpload from "./fileUpload";
-import ColumnInterpretation from "./columnInterpretation";
+import ColumnInterpretation from "./phase2/columnInterpretation";
 import ParticipantMatching from "./participantMatching";
 import Preview from "./preview";
 import useWizard from "hooks/useWizard";
 import { EditableResult } from "server/routers/dashboard";
 
+export interface Result2Modify {
+  id_participacion: number;
+  puntaje: string[];
+  aprobado: boolean;
+  presente: boolean;
+  aclaracion: string | null;
+}
+
+export interface Result2Add {
+  dni: number;
+  puntaje: string[];
+  aprobado: boolean;
+  presente: boolean;
+  aclaracion: string | null;
+}
+
 export interface NewResults {
-  dni: string;
+  dni: number;
   problems: string[];
   result: string;
   total: string;
   name?: string;
   lastName?: string;
   level?: string;
-  aproved: boolean;
+  approved: boolean;
   present: boolean;
   clarification?: string;
 }
@@ -25,6 +41,8 @@ export interface NewResults {
 interface WizardData {
   currentResults: EditableResult[];
   newResults: Partial<NewResults>[];
+  results2Modify: Result2Modify[];
+  results2Add: Result2Add[];
 }
 
 export interface WizardStateProps {
@@ -56,6 +74,8 @@ const WizardModal = ({
     initialData: {
       currentResults: initialData,
       newResults: [] as Partial<NewResults>[],
+      results2Modify: [] as Result2Modify[],
+      results2Add: [] as Result2Add[],
     },
   });
   return (

@@ -219,6 +219,8 @@ const FileUpload = ({
       nextStep({
         currentResults: data!.currentResults,
         newResults: validation,
+        results2Modify: data!.results2Modify,
+        results2Add: data!.results2Add,
       });
     }
   };

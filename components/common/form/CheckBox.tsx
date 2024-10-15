@@ -16,7 +16,7 @@ const Checkbox = ({ width, height, ...props }: CheckboxProps) => {
         ref={ref}
         type="checkbox"
         {...props}
-        className="absolute pointer-cursor w-full h-full opacity-0"
+        className="absolute cursor-pointer w-full h-full opacity-0"
       />
       <Image
         src={`/icons/${
