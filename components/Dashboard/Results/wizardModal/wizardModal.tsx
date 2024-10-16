@@ -4,7 +4,6 @@ import Image from "next/image";
 import React, { useState } from "react";
 import FileUpload from "./fileUpload";
 import ColumnInterpretation from "./phase2/columnInterpretation";
-import ParticipantMatching from "./participantMatching";
 import Preview from "./preview";
 import useWizard from "hooks/useWizard";
 import { EditableResult } from "server/routers/dashboard";
@@ -66,8 +65,7 @@ const WizardModal = ({
   const states = [
     { id: "1", component: FileUpload },
     { id: "2", component: ColumnInterpretation },
-    { id: "3", component: ParticipantMatching },
-    { id: "4", component: Preview },
+    { id: "3", component: Preview },
   ];
   const [currentState, wizardData, nextStep, previousStep] = useWizard({
     states: states.length,

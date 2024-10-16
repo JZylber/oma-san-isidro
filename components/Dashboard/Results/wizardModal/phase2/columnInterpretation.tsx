@@ -1,8 +1,14 @@
 import Checkbox from "components/common/form/CheckBox";
 import WizardForm from "../wizardForm";
-import { NewResults, WizardStateProps } from "../wizardModal";
+import {
+  NewResults,
+  Result2Add,
+  Result2Modify,
+  WizardStateProps,
+} from "../wizardModal";
 import { useEffect, useReducer, useState } from "react";
 import Results2Update from "./results2Update";
+import processResults from "./resultProcessing";
 
 const defaultValues = (value?: string): [boolean, boolean, string | null] => {
   switch (value?.toString().toLocaleLowerCase()) {
@@ -112,6 +118,58 @@ const resultReducer = (state: Result[], action: UpdateResultAction) => {
   }
 };
 
+interface OverwriteResultAction {
+  type: "OVERWRITE_RESULT";
+  payload: {
+    id_participacion: number;
+    value: boolean;
+  };
+}
+
+interface SetOverwriteAllAction {
+  type: "SET_OVERWRITE_ALL";
+  payload: boolean;
+}
+
+interface SetResults2ModifyAction {
+  type: "SET_RESULTS2_MODIFY";
+  payload: [Result2Modify, Result2Modify, boolean][];
+}
+
+const result2ModifyReducer = (
+  state: [Result2Modify, Result2Modify, boolean][],
+  action:
+    | OverwriteResultAction
+    | SetResults2ModifyAction
+    | SetOverwriteAllAction
+) => {
+  switch (action.type) {
+    case "OVERWRITE_RESULT":
+      return state.map((result) => {
+        if (result[0].id_participacion === action.payload.id_participacion) {
+          return [result[0], result[1], action.payload.value] as [
+            Result2Modify,
+            Result2Modify,
+            boolean
+          ];
+        }
+        return result;
+      });
+    case "SET_OVERWRITE_ALL":
+      return state.map((result) => {
+        return [result[0], result[1], action.payload] as [
+          Result2Modify,
+          Result2Modify,
+          boolean
+        ];
+      });
+    case "SET_RESULTS2_MODIFY":
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 const ColumnInterpretation = ({
   data,
   nextStep,
@@ -138,22 +196,34 @@ const ColumnInterpretation = ({
       };
     })
   );
-
   const [resultsFromFile, setResultsFromFile] = useState<NewResults[]>([]);
+  const [results2Modify, dispatchResults2Modify] = useReducer(
+    result2ModifyReducer,
+    []
+  );
+  const [results2Add, setResults2Add] = useState<Result2Add[]>([]);
   useEffect(() => {
-    setResultsFromFile(
-      newResults.map((result) => {
-        const { approved, present, clarification } = results.find(
-          (r) => r.value === result.result
-        ) as Result;
-        return {
-          ...result,
-          approved,
-          present,
-          clarification,
-        } as NewResults;
-      })
+    const res = newResults.map((result) => {
+      const { approved, present, clarification } = results.find(
+        (r) => r.value === result.result
+      ) as Result;
+      return {
+        ...result,
+        approved,
+        present,
+        clarification,
+      } as NewResults;
+    });
+    const { results2Modify, results2Add } = processResults(
+      res,
+      data!.currentResults
     );
+    setResultsFromFile(res);
+    dispatchResults2Modify({
+      type: "SET_RESULTS2_MODIFY",
+      payload: results2Modify,
+    });
+    setResults2Add(results2Add);
   }, [results, setResultsFromFile, newResults]);
   return (
     <WizardForm
@@ -201,8 +271,9 @@ const ColumnInterpretation = ({
           </table>
         </div>
         <Results2Update
-          newResults={resultsFromFile}
+          results2Modify={results2Modify}
           currentResults={data!.currentResults}
+          dispatch={dispatchResults2Modify}
         />
       </div>
     </WizardForm>
