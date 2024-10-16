@@ -1,5 +1,5 @@
 import { useEffect, useReducer } from "react";
-import { NewResults, Result2Add, Result2Modify } from "../wizardModal";
+import { NewResults, Result2Modify } from "../wizardModal";
 import { EditableResult } from "server/routers/dashboard";
 import Image from "next/image";
 import Switch from "components/common/form/Switch";
@@ -188,7 +188,7 @@ const displayResult = ({
       <td className="py-2 px-1">
         <div className="flex items-center justify-center">
           <Switch
-            defaultChecked={overwrite}
+            checked={overwrite}
             onChange={(e) => {
               overwriteResult(currentResult.id_participacion, e.target.checked);
             }}
@@ -207,6 +207,11 @@ interface OverwriteResultAction {
   };
 }
 
+interface SetOverwriteAllAction {
+  type: "SET_OVERWRITE_ALL";
+  payload: boolean;
+}
+
 interface SetResults2ModifyAction {
   type: "SET_RESULTS2_MODIFY";
   payload: [Result2Modify, Result2Modify, boolean][];
@@ -214,7 +219,10 @@ interface SetResults2ModifyAction {
 
 const result2ModifyReducer = (
   state: [Result2Modify, Result2Modify, boolean][],
-  action: OverwriteResultAction | SetResults2ModifyAction
+  action:
+    | OverwriteResultAction
+    | SetResults2ModifyAction
+    | SetOverwriteAllAction
 ) => {
   switch (action.type) {
     case "OVERWRITE_RESULT":
@@ -227,6 +235,14 @@ const result2ModifyReducer = (
           ];
         }
         return result;
+      });
+    case "SET_OVERWRITE_ALL":
+      return state.map((result) => {
+        return [result[0], result[1], action.payload] as [
+          Result2Modify,
+          Result2Modify,
+          boolean
+        ];
       });
     case "SET_RESULTS2_MODIFY":
       return action.payload;
@@ -286,6 +302,18 @@ const Results2Update = ({
         Los siguientes resultados van a ser modificados. Si no querés
         sobreescribirlos, desmarcá la casilla correspondiente.
       </p>
+      <div className="flex items-center py-4 gap-x-4">
+        <p className="font-unbounded text-2xl">SOBREESCRIBIR TODOS</p>{" "}
+        <Switch
+          checked={results2Modify.every((v) => v[2])}
+          onChange={(e) => {
+            dispatch({
+              type: "SET_OVERWRITE_ALL",
+              payload: e.target.checked,
+            });
+          }}
+        />
+      </div>
       <div className="overflow-x-scroll">
         <table className="font-montserrat border-collapse">
           <thead className="border-b-2 border-primary-black text-2xl font-bold">
