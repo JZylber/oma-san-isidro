@@ -7,18 +7,13 @@ const processResults = (
 ) => {
   const results2Modify: [Result2Modify, Result2Modify, boolean][] = [];
   const results2Add: Result2Add[] = [];
+  const unknownParticipants: Array<number> = [];
   newResults.forEach((result) => {
     const currentResult = currentResults.find((r) => {
       return r.participante.dni === result.dni;
     });
     if (!currentResult) {
-      results2Add.push({
-        dni: result.dni,
-        puntaje: result.problems,
-        aprobado: result.approved,
-        presente: result.present,
-        aclaracion: result.clarification ? result.clarification : null,
-      });
+      unknownParticipants.push(result.dni);
       return;
     }
     const oldResult = currentResult.resultados;
@@ -46,8 +41,19 @@ const processResults = (
         true,
       ]);
     }
+    if (!oldResult) {
+      results2Add.push({
+        dni: result.dni,
+        puntaje: [...result.problems, result.total].map((r) =>
+          r !== undefined ? r.toString() : ""
+        ),
+        aprobado: result.approved,
+        presente: result.present,
+        aclaracion: result.clarification ? result.clarification : null,
+      });
+    }
   });
-  return { results2Modify, results2Add };
+  return { results2Modify, results2Add, unknownParticipants };
 };
 
 export default processResults;

@@ -9,6 +9,8 @@ import {
 import { useEffect, useReducer, useState } from "react";
 import Results2Update from "./results2Update";
 import processResults from "./resultProcessing";
+import Results2Add from "./results2Add";
+import Results2AddTable from "./results2Add";
 
 const defaultValues = (value?: string): [boolean, boolean, string | null] => {
   switch (value?.toString().toLocaleLowerCase()) {
@@ -270,11 +272,19 @@ const ColumnInterpretation = ({
             </tbody>
           </table>
         </div>
-        <Results2Update
-          results2Modify={results2Modify}
-          currentResults={data!.currentResults}
-          dispatch={dispatchResults2Modify}
-        />
+        {results2Modify.length > 0 && (
+          <Results2Update
+            results2Modify={results2Modify}
+            currentResults={data!.currentResults}
+            dispatch={dispatchResults2Modify}
+          />
+        )}
+        {results2Add.length > 0 && (
+          <Results2AddTable
+            results={results2Add}
+            currentResults={data!.currentResults}
+          />
+        )}
       </div>
     </WizardForm>
   );
