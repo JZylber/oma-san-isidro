@@ -317,7 +317,7 @@ const NationalInfo = ({
               Incluye los almuerzos {!isOma && "y meriendas"} de los días de las
               pruebas escritas (
               {isOma ? (
-                <>martes 11 y miércoles 12</>
+                <>martes 12 y miércoles 13</>
               ) : (
                 <>lunes 21 y martes 22</>
               )}
