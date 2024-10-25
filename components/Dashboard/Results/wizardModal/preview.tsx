@@ -123,6 +123,7 @@ const Preview = ({
         close={() => setConfirmEnd(false)}
         onCancel={() => setConfirmEnd(false)}
         onConfirm={() => {
+          console.log(data.results2Add);
           updateResults.mutate({
             id_prueba: id,
             Results2Add: data.results2Add.map((r) => ({
@@ -134,6 +135,7 @@ const Preview = ({
               resultados: r.puntaje,
             })),
           });
+          nextStep(data);
           setConfirmEnd(false);
         }}
       >

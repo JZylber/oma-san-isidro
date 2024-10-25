@@ -1,5 +1,4 @@
-import { useEffect, useReducer } from "react";
-import { NewResults, Result2Modify } from "../wizardModal";
+import { Result2Modify } from "../wizardModal";
 import { EditableResult } from "server/routers/dashboard";
 import Image from "next/image";
 import Switch from "components/common/form/Switch";
@@ -29,7 +28,7 @@ const displayResult = ({
 }: {
   result: [Result2Modify, Result2Modify, boolean];
   data: EditableResult[];
-  overwriteResult: (id_participacion: number, value: boolean) => void;
+  overwriteResult: (id_rinde: number, value: boolean) => void;
 }) => {
   const participant = data.find(
     (d) => d.id_rinde === currentResult.id_rinde
@@ -255,10 +254,10 @@ const Results2Update = ({
                   {displayResult({
                     result,
                     data: currentResults,
-                    overwriteResult: (id_participacion, value) => {
+                    overwriteResult: (id_rinde, value) => {
                       dispatch({
                         type: "OVERWRITE_RESULT",
-                        payload: { id_participacion, value },
+                        payload: { id_rinde, value },
                       });
                     },
                   })}

@@ -105,7 +105,15 @@ const WizardModal = ({
                     key={state.id}
                     numberOfStates={states.length}
                     data={wizardData[index]!}
-                    nextStep={nextStep}
+                    nextStep={
+                      index === states.length - 1
+                        ? (data) => {
+                            nextStep(data);
+                            previousStep(0);
+                            close();
+                          }
+                        : nextStep
+                    }
                     previousStep={previousStep}
                     currentStepIndex={currentState}
                   />
