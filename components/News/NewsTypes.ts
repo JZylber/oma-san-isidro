@@ -1,6 +1,6 @@
 export interface NewsItemData {
-    titulo:string,
-    link:string,
-    visible:boolean,
-    agregado:Date
+  titulo: string;
+  link: string;
+  visible: boolean;
+  agregado: string;
 }

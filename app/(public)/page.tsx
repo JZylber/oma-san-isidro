@@ -22,15 +22,16 @@ const getNews = unstable_cache(async () => {
     },
   });
   const results = query;
-  return results;
+  return JSON.stringify(results);
 }, ["news"]);
 
 export default async function Page() {
   const newsData = getNews();
   const eventsData = getCalendarEvents(new Date().getFullYear());
-  let [news, events] = await Promise.all([newsData, eventsData]);
+  let [cachedNews, events] = await Promise.all([newsData, eventsData]);
   const env = process.env.NODE_ENV;
   const vercel_env = process.env.VERCEL_ENV;
+  let news = JSON.parse(cachedNews) as NewsItemData[];
   if (
     env === "production" &&
     (vercel_env ? vercel_env === "production" : true)
