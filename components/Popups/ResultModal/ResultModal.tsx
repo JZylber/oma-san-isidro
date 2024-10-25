@@ -75,7 +75,7 @@ const ResultModal = ({
           </div>
         )}
         <div className="flex flex-col font-montserrat gap-y">
-          <div className="flex gap-x-2">
+          <div className="flex gap-x-2 w-full">
             {numberOfProblems > 0 ? (
               newResults.puntaje.map((score, i, arr) => {
                 return (
@@ -104,10 +104,10 @@ const ResultModal = ({
                 );
               })
             ) : (
-              <div className="flex flex-col">
+              <div className="flex flex-col w-2/3">
                 <h3 className="text-xl">Resultado</h3>
                 <input
-                  className="text-3xl text-right p-2 border border-black rounded-lg w-24"
+                  className="text-3xl p-2 border border-black rounded-lg w-full"
                   value={newResults.puntaje[0]}
                   onChange={(e) => {
                     setNewResults({
