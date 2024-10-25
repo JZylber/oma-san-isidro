@@ -6,11 +6,14 @@ import {
   Result2Modify,
   WizardStateProps,
 } from "../wizardModal";
-import { useEffect, useReducer, useState } from "react";
+import { FormEventHandler, useEffect, useReducer, useState } from "react";
 import Results2Update from "./results2Update";
 import processResults from "./resultProcessing";
 import Results2Add from "./results2Add";
 import Results2AddTable from "./results2Add";
+import ParticipantsNotFoundTable, {
+  ParticipantNotFound,
+} from "./participantsNotFound";
 
 const defaultValues = (value?: string): [boolean, boolean, string | null] => {
   switch (value?.toString().toLocaleLowerCase()) {
@@ -198,7 +201,13 @@ const ColumnInterpretation = ({
       };
     })
   );
-  const [resultsFromFile, setResultsFromFile] = useState<NewResults[]>([]);
+  const [participantsNotFound, setParticipantsNotFound] = useState<{
+    missingResults: ParticipantNotFound[];
+    participantsNotFound: ParticipantNotFound[];
+  }>({
+    missingResults: [],
+    participantsNotFound: [],
+  });
   const [results2Modify, dispatchResults2Modify] = useReducer(
     result2ModifyReducer,
     []
@@ -216,20 +225,43 @@ const ColumnInterpretation = ({
         clarification,
       } as NewResults;
     });
-    const { results2Modify, results2Add } = processResults(
-      res,
-      data!.currentResults
-    );
-    setResultsFromFile(res);
+    const { results2Modify, results2Add, missingResults, unknownParticipants } =
+      processResults(res, data!.currentResults);
     dispatchResults2Modify({
       type: "SET_RESULTS2_MODIFY",
       payload: results2Modify,
     });
     setResults2Add(results2Add);
-  }, [results, setResultsFromFile, newResults]);
+    setParticipantsNotFound({
+      missingResults,
+      participantsNotFound: unknownParticipants,
+    });
+  }, [
+    results,
+    newResults,
+    data,
+    dispatchResults2Modify,
+    setParticipantsNotFound,
+  ]);
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+    nextStep({
+      currentResults: data!.currentResults,
+      newResults: data!.newResults,
+      results2Modify: results2Modify
+        .map((result) => {
+          if (result[2]) {
+            return result[1];
+          }
+          return null;
+        })
+        .filter((result) => result !== null),
+      results2Add: results2Add,
+    });
+  };
   return (
     <WizardForm
-      nextStep={(e) => {}}
+      nextStep={handleSubmit}
       previousStep={previousStep}
       numberOfStates={numberOfStates}
       currentStepIndex={currentStepIndex}
@@ -284,6 +316,10 @@ const ColumnInterpretation = ({
             results={results2Add}
             currentResults={data!.currentResults}
           />
+        )}
+        {(participantsNotFound.missingResults.length > 0 ||
+          participantsNotFound.participantsNotFound.length > 0) && (
+          <ParticipantsNotFoundTable {...participantsNotFound} />
         )}
       </div>
     </WizardForm>

@@ -20,7 +20,7 @@ export async function verifyToken(jwtToken: string) {
 
 export async function createToken(payload: TokenPayload) {
   const iat = Math.floor(Date.now() / 1000);
-  const exp = iat + 60 * 60 * 24;
+  const exp = iat + 60 * 60;
   const token = await new SignJWT({ ...payload })
     .setProtectedHeader({ alg: "HS256" })
     .setExpirationTime(exp)

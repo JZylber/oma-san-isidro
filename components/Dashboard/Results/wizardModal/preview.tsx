@@ -10,7 +10,9 @@ const Preview = ({
 }: WizardStateProps) => {
   return (
     <WizardForm
-      nextStep={(e) => {}}
+      nextStep={(e) => {
+        e.preventDefault();
+      }}
       previousStep={previousStep}
       numberOfStates={numberOfStates}
       currentStepIndex={currentStepIndex}
