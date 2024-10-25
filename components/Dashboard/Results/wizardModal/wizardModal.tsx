@@ -45,7 +45,7 @@ interface WizardData {
 }
 
 export interface WizardStateProps {
-  data?: WizardData;
+  data: WizardData;
   nextStep: (stepData: WizardData) => void;
   previousStep: (step?: number) => void;
   numberOfStates: number;
@@ -104,7 +104,7 @@ const WizardModal = ({
                   <Component
                     key={state.id}
                     numberOfStates={states.length}
-                    data={wizardData[index]}
+                    data={wizardData[index]!}
                     nextStep={nextStep}
                     previousStep={previousStep}
                     currentStepIndex={currentState}

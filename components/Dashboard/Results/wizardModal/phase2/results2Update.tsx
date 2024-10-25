@@ -3,6 +3,7 @@ import { NewResults, Result2Modify } from "../wizardModal";
 import { EditableResult } from "server/routers/dashboard";
 import Image from "next/image";
 import Switch from "components/common/form/Switch";
+import useTestData from "hooks/useTestData";
 
 interface Results2UpdateProps {
   results2Modify: [Result2Modify, Result2Modify, boolean][];
@@ -205,7 +206,7 @@ const Results2Update = ({
   currentResults,
   dispatch,
 }: Results2UpdateProps) => {
-  const cantidadDeProblemas = 3;
+  const { cantidad_problemas } = useTestData();
   return (
     <>
       <h3 className="font-unbounded text-3xl mt-8">RESULTADOS A MODIFICAR</h3>
@@ -233,7 +234,7 @@ const Results2Update = ({
               <th className="px-4 py-2">Nombre</th>
               <th className="px-4 py-2">Apellido</th>
               <th className="px-4 py-2">DNI</th>
-              {Array.from({ length: cantidadDeProblemas }, (_, i) => {
+              {Array.from({ length: cantidad_problemas }, (_, i) => {
                 return (
                   <th key={i} className="px-4 py-2">
                     P{i + 1}

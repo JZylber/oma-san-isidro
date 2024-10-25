@@ -29,7 +29,6 @@ const ParticipantsNotFoundTable = ({
   missingResults: ParticipantNotFound[];
   participantsNotFound: ParticipantNotFound[];
 }) => {
-  const cantidadDeProblemas = 3;
   return (
     <div className="flex">
       <div className="flex flex-col gap-y-4 basis-0 grow">

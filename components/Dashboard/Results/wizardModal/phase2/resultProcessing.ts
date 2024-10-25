@@ -61,7 +61,6 @@ const processResults = (
     }
   });
   currentResults.forEach((result) => {
-    console.log("result:", result);
     const newResult = newResults.find((r) => r.dni === result.participante.dni);
     if (!(newResult || result.resultados)) {
       missingResults.push({

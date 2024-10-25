@@ -15,7 +15,6 @@ import {
   updateResults,
 } from "./results/results_db_calls";
 import { INSTANCIA } from "@prisma/client";
-import { create } from "domain";
 
 const getEditableResults = async (
   competencia: string,

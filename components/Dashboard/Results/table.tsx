@@ -17,8 +17,8 @@ import { ObjectWithFilterables, Participant, School } from "hooks/types";
 import ResultFilterForm from "components/ResultsPage/resultFilterForm";
 import Table from "components/Table/Table";
 import ActionTab from "./actionTab";
-import { router } from "server/trpc";
 import { useRouter } from "next/navigation";
+import { TestProvider } from "contexts/TestContext";
 
 const reducer = (state: Partial<TestInfo>, action: Partial<TestInfo>) => {
   return { ...state, ...action };
@@ -261,7 +261,7 @@ const DashboardResultsTableDisplay = ({
     setConfirmDelete(true);
   };
   return (
-    <>
+    <TestProvider data={testData}>
       <ActionTab testData={testData} results={results} />
       <div className="mb-8">
         <ResultFilterForm
@@ -370,7 +370,7 @@ const DashboardResultsTableDisplay = ({
         </div>
       </ConfirmModal>
       <ModalLoader isOpen={loading} />
-    </>
+    </TestProvider>
   );
 };
 

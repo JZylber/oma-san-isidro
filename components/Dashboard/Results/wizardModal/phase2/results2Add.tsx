@@ -1,5 +1,6 @@
 import { EditableResult } from "server/routers/dashboard";
 import { Result2Add } from "../wizardModal";
+import useTestData from "hooks/useTestData";
 
 const displayResult = ({
   result,
@@ -48,7 +49,7 @@ const Results2AddTable = ({
   results: Result2Add[];
   currentResults: EditableResult[];
 }) => {
-  const cantidadDeProblemas = 3;
+  const { cantidad_problemas } = useTestData();
   return (
     <>
       <h3 className="font-unbounded text-3xl mt-8">RESULTADOS A AGREGAR</h3>
@@ -63,7 +64,7 @@ const Results2AddTable = ({
               <th className="px-4 py-2">Nombre</th>
               <th className="px-4 py-2">Apellido</th>
               <th className="px-4 py-2">DNI</th>
-              {Array.from({ length: cantidadDeProblemas }, (_, i) => {
+              {Array.from({ length: cantidad_problemas }, (_, i) => {
                 return (
                   <th key={i} className="px-4 py-2">
                     P{i + 1}
