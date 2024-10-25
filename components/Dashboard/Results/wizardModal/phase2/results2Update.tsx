@@ -31,7 +31,7 @@ const displayResult = ({
   overwriteResult: (id_participacion: number, value: boolean) => void;
 }) => {
   const participant = data.find(
-    (d) => d.id_participacion === currentResult.id_participacion
+    (d) => d.id_rinde === currentResult.id_rinde
   ) as EditableResult;
   const level = participant.nivel;
   const name = participant.participante.nombre;
@@ -191,7 +191,7 @@ const displayResult = ({
           <Switch
             checked={overwrite}
             onChange={(e) => {
-              overwriteResult(currentResult.id_participacion, e.target.checked);
+              overwriteResult(currentResult.id_rinde, e.target.checked);
             }}
           />
         </div>

@@ -147,7 +147,7 @@ export const dashboardRouter = router({
         ),
         Results2Add: z.array(
           z.object({
-            dni: z.number(),
+            id_participacion: z.number(),
             resultados: z.array(z.string()),
             aprobado: z.boolean(),
             presente: z.boolean(),

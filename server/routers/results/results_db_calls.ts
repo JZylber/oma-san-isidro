@@ -418,7 +418,7 @@ export const updateResults = async (
 
 export const createResults = async (
   results: {
-    dni: number;
+    id_participacion: number;
     resultados: string[];
     aprobado: boolean;
     presente: boolean;
@@ -426,48 +426,11 @@ export const createResults = async (
   }[],
   id_prueba: number
 ) => {
-  const ano = (
-    await prisma.prueba.findFirst({
-      where: {
-        id_prueba: id_prueba,
-      },
-      select: {
-        competencia: {
-          select: {
-            ano: true,
-          },
-        },
-      },
-    })
-  )?.competencia.ano as number;
-  const ids_participaciones = await prisma.participacion.findMany({
-    where: {
-      participante: {
-        dni: {
-          in: results.map((result) => result.dni),
-        },
-      },
-      competencia: {
-        ano: ano,
-      },
-    },
-    select: {
-      participante: {
-        select: {
-          dni: true,
-        },
-      },
-      id_participacion: true,
-    },
-  });
   prisma.rinde.createMany({
     data: results.map((result) => {
       return {
         ...result,
         id_prueba: id_prueba,
-        id_participacion: ids_participaciones.find(
-          (participation) => participation.participante.dni === result.dni
-        )?.id_participacion as number,
       };
     }),
   });

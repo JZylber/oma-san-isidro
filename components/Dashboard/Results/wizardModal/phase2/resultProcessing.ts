@@ -38,19 +38,19 @@ const processResults = (
       if (oldResultJSON === newResultJSON) return;
       results2Modify.push([
         {
-          id_participacion: currentResult.id_participacion,
+          id_rinde: currentResult.id_rinde,
           puntaje: oldResult.puntaje,
           aprobado: oldResult.aprobado,
           presente: oldResult.presente,
           aclaracion: oldResult.aclaracion,
         },
-        { ...newResult, id_participacion: currentResult.id_participacion },
+        { ...newResult, id_rinde: currentResult.id_rinde },
         true,
       ]);
     }
     if (!oldResult) {
       results2Add.push({
-        dni: result.dni,
+        id_participacion: currentResult.id_participacion,
         puntaje: [...result.problems, result.total].map((r) =>
           r !== undefined ? r.toString() : ""
         ),

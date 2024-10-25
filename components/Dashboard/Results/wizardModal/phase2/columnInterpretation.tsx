@@ -9,7 +9,6 @@ import {
 import { FormEventHandler, useEffect, useReducer, useState } from "react";
 import Results2Update from "./results2Update";
 import processResults from "./resultProcessing";
-import Results2Add from "./results2Add";
 import Results2AddTable from "./results2Add";
 import ParticipantsNotFoundTable, {
   ParticipantNotFound,
@@ -126,7 +125,7 @@ const resultReducer = (state: Result[], action: UpdateResultAction) => {
 interface OverwriteResultAction {
   type: "OVERWRITE_RESULT";
   payload: {
-    id_participacion: number;
+    id_rinde: number;
     value: boolean;
   };
 }
@@ -151,7 +150,7 @@ const result2ModifyReducer = (
   switch (action.type) {
     case "OVERWRITE_RESULT":
       return state.map((result) => {
-        if (result[0].id_participacion === action.payload.id_participacion) {
+        if (result[0].id_rinde === action.payload.id_rinde) {
           return [result[0], result[1], action.payload.value] as [
             Result2Modify,
             Result2Modify,

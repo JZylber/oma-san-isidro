@@ -9,7 +9,7 @@ import useWizard from "hooks/useWizard";
 import { EditableResult } from "server/routers/dashboard";
 
 export interface Result2Modify {
-  id_participacion: number;
+  id_rinde: number;
   puntaje: string[];
   aprobado: boolean;
   presente: boolean;
@@ -17,7 +17,7 @@ export interface Result2Modify {
 }
 
 export interface Result2Add {
-  dni: number;
+  id_participacion: number;
   puntaje: string[];
   aprobado: boolean;
   presente: boolean;

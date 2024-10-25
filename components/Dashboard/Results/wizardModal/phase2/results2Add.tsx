@@ -9,7 +9,7 @@ const displayResult = ({
   data: EditableResult[];
 }) => {
   const participant = data.find(
-    (d) => d.participante.dni === result.dni
+    (d) => d.id_participacion === result.id_participacion
   ) as EditableResult;
   const level = participant.nivel;
   const name = participant.participante.nombre;
