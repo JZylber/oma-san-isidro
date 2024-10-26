@@ -7,20 +7,18 @@ import DashboardResultsTableRow from "./row";
 import { trpc } from "../../../utils/trpc";
 import { Testdata } from "../../../server/app-router-db-calls";
 import Loader from "../../Loader/Loader";
-import { Result, TestInfo } from "../../ResultsPage/resultsTypes";
-import Select from "../../common/Select";
+import { TestInfo } from "../../ResultsPage/resultsTypes";
+import Select from "../../common/form/Select";
 import { INSTANCIA } from "@prisma/client";
 import ResultModal from "../../Popups/ResultModal/ResultModal";
 import ConfirmModal from "../../Popups/ConfirmModal/ConfirmModal";
 import useFilter from "hooks/useFilter";
-import {
-  FilterableObject,
-  ObjectWithFilterables,
-  Participant,
-  School,
-} from "hooks/types";
+import { ObjectWithFilterables, Participant, School } from "hooks/types";
 import ResultFilterForm from "components/ResultsPage/resultFilterForm";
 import Table from "components/Table/Table";
+import ActionTab from "./actionTab";
+import { useRouter } from "next/navigation";
+import { TestProvider } from "contexts/TestContext";
 
 const reducer = (state: Partial<TestInfo>, action: Partial<TestInfo>) => {
   return { ...state, ...action };
@@ -128,6 +126,7 @@ interface DashboardResultsTableProps {
 }
 
 const DashboardResultsTable = ({ testData }: DashboardResultsTableProps) => {
+  const router = useRouter();
   const results = trpc.dashboard.getResults.useQuery(
     {
       año: testData.año,
@@ -136,6 +135,9 @@ const DashboardResultsTable = ({ testData }: DashboardResultsTableProps) => {
     },
     { notifyOnChangeProps: "all", refetchInterval: 0 }
   );
+  if (results.isError && results.error.data?.httpStatus === 401) {
+    router.push("/login");
+  }
   return (
     <div className="grow flex flex-col">
       {results.isLoading && (
@@ -259,7 +261,8 @@ const DashboardResultsTableDisplay = ({
     setConfirmDelete(true);
   };
   return (
-    <>
+    <TestProvider data={testData}>
+      <ActionTab testData={testData} results={results} />
       <div className="mb-8">
         <ResultFilterForm
           filters={resultFilter}
@@ -367,7 +370,7 @@ const DashboardResultsTableDisplay = ({
         </div>
       </ConfirmModal>
       <ModalLoader isOpen={loading} />
-    </>
+    </TestProvider>
   );
 };
 

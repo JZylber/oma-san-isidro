@@ -1,21 +1,13 @@
 import ActionButton from "../../buttons/ActionButton/ActionButton";
 import Modal from "../Modal";
 
-interface ConfirmModalProps {
+interface WarningModalProps {
   open: boolean;
   close: () => void;
-  onConfirm: () => void;
-  onCancel: () => void;
   children: React.ReactNode;
 }
 
-const ConfirmModal = ({
-  open,
-  close,
-  onCancel,
-  onConfirm,
-  children,
-}: ConfirmModalProps) => {
+const WarningModal = ({ open, close, children }: WarningModalProps) => {
   return (
     <Modal
       openModal={open}
@@ -24,15 +16,14 @@ const ConfirmModal = ({
     >
       <div className="flex flex-col gap-y-2 py-4">
         {children}
-        <div className="flex justify-around border-t pt-4">
-          <ActionButton important onClick={onConfirm}>
-            Confirmar
+        <div className="flex justify-center border-t pt-4">
+          <ActionButton important onClick={close}>
+            OK
           </ActionButton>
-          <ActionButton onClick={onCancel}>Cancelar</ActionButton>
         </div>
       </div>
     </Modal>
   );
 };
 
-export default ConfirmModal;
+export default WarningModal;

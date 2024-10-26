@@ -7,7 +7,7 @@ const displayBoolean = (value: boolean) => {
   return value ? "Sí" : "No";
 };
 
-const displayResult = (
+export const displayResult = (
   result: {
     puntaje: string[];
     aprobado: boolean;
