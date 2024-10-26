@@ -16,7 +16,13 @@ const Preview = ({
   currentStepIndex,
 }: WizardStateProps) => {
   const { cantidad_problemas, id } = useTestData();
-  const updateResults = trpc.dashboard.updateResults.useMutation();
+  const utils = trpc.useContext();
+  const updateResults = trpc.dashboard.updateResults.useMutation({
+    onSuccess: async (res) => {
+      await utils.dashboard.getResults.refetch();
+      nextStep(data);
+    },
+  });
   const [confirmEnd, setConfirmEnd] = useState(false);
   const previewData = data.currentResults.map((r) => {
     const result2Add = data.results2Add.find(
@@ -123,7 +129,6 @@ const Preview = ({
         close={() => setConfirmEnd(false)}
         onCancel={() => setConfirmEnd(false)}
         onConfirm={() => {
-          console.log(data.results2Add);
           updateResults.mutate({
             id_prueba: id,
             Results2Add: data.results2Add.map((r) => ({
@@ -135,7 +140,6 @@ const Preview = ({
               resultados: r.puntaje,
             })),
           });
-          nextStep(data);
           setConfirmEnd(false);
         }}
       >

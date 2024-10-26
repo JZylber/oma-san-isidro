@@ -159,6 +159,7 @@ export const dashboardRouter = router({
       const { id_prueba, Results2Update, Results2Add } = input;
       const updatePromise = updateResults(Results2Update);
       const addPromise = createResults(Results2Add, id_prueba);
-      await Promise.all([updatePromise, addPromise]);
+      const [update, add] = await Promise.all([updatePromise, addPromise]);
+      return { update, add };
     }),
 });

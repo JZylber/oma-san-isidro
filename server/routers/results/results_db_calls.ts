@@ -406,14 +406,17 @@ export const updateResults = async (
     aclaracion: string | null;
   }[]
 ) => {
-  prisma.rinde.updateMany({
-    where: {
-      id_rinde: {
-        in: results.map((result) => result.id_rinde),
-      },
-    },
-    data: results,
+  if (results.length === 0) return [];
+  const updatedResults = results.map((result) => {
+    return modifyResult(
+      result.id_rinde,
+      result.resultados,
+      result.aprobado,
+      result.presente,
+      result.aclaracion
+    );
   });
+  return await Promise.all(updatedResults);
 };
 
 export const createResults = async (
@@ -426,7 +429,8 @@ export const createResults = async (
   }[],
   id_prueba: number
 ) => {
-  prisma.rinde.createMany({
+  if (results.length === 0) return [];
+  return await prisma.rinde.createMany({
     data: results.map((result) => {
       return {
         ...result,
