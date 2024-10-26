@@ -146,7 +146,7 @@ const NationalInfo = ({
           </li>
           <li>
             <span className={styles.bold}>
-              Vianda almuerzo {isOma ? 17 : 23}:
+              Vianda almuerzo {isOma ? 15 : 23}:
             </span>{" "}
             Usar el siguiente código: S si se retiran con vianda luego de la
             premiación de olimpíadas; N si almuerzan.
@@ -214,7 +214,7 @@ const NationalInfo = ({
           </span>{" "}
           se realizará en la ciudad de La Falda, Córdoba los días{" "}
           {isOma
-            ? "13 al 17 de noviembre en el Hotel Edén (Av. Edén 1400)"
+            ? "11 al 15 de noviembre en el Hotel Edén (Av. Edén 1400)"
             : "20 al 23 de octubre en el Hotel Edén (Av. Edén 1400)"}
           . Cada delegación se trasladará por su cuenta y riesgo, con sus
           profesores acompañantes según las pautas establecidas{" "}
@@ -226,8 +226,9 @@ const NationalInfo = ({
         </p>
         <p className={styles.text}>
           El alojamiento de las delegaciones que lo soliciten será en{" "}
-          {isOma ? "el Hotel FATSA" : "el Hotel FATSA"} de la ciudad de la falda
-          en habitaciones compartidas con otros participantes del encuentro
+          {isOma ? "diferentes hoteles" : "el Hotel FATSA"} de la ciudad de la
+          falda en habitaciones compartidas con otros participantes del
+          encuentro
           {!isOma &&
             ", hasta completar su capacidad, luego serán derivados a otros hoteles de la ciudad"}
           . La reserva del alojamiento se hace contra entrega de las planillas
@@ -239,7 +240,7 @@ const NationalInfo = ({
             <span className={styles.bold}>Acreditación:</span>{" "}
             {isOma ? (
               <>
-                Lunes 13 de noviembre de 16:00 a 20:00 horas en el{" "}
+                Lunes 11 de noviembre de 16:00 a 20:00 horas en el{" "}
                 <span className={styles.bold}>
                   hotel donde se aloje la delegación de la región
                 </span>
@@ -257,7 +258,7 @@ const NationalInfo = ({
             <span className={styles.bold}>Prueba escrita:</span>{" "}
             {isOma ? (
               <>
-                Martes 14 y Miércoles 15 de noviembre a las 9:30hs en el{" "}
+                Martes 12 y Miércoles 13 de noviembre a las 9:30hs en el{" "}
                 <span className={styles.bold}>Hotel Edén</span>
               </>
             ) : (
@@ -271,7 +272,7 @@ const NationalInfo = ({
             <span className={styles.bold}>Exposición Oral y Premiación:</span>{" "}
             {isOma ? (
               <>
-                Viernes 17 de noviembre a las 9:30hs horas en el{" "}
+                Viernes 15 de noviembre a las 9:30hs horas en el{" "}
                 <span className={styles.bold}>Hotel Edén</span>
               </>
             ) : (
@@ -290,9 +291,9 @@ const NationalInfo = ({
               Participantes y/o acompañantes que se alojen en el hotel propuesto
               por la olimpíada:
             </span>{" "}
-            {isOma ? "$120.000" : "$290.000"}. Incluye desde la cena del día{" "}
-            {isOma ? "lunes 13" : "domingo 20"} al almuerzo del{" "}
-            {isOma ? "viernes 17" : "miércoles 23"} (incluye una bebida por
+            {isOma ? "$410.000" : "$290.000"}. Incluye desde la cena del día{" "}
+            {isOma ? "lunes 11" : "domingo 20"} al almuerzo del{" "}
+            {isOma ? "viernes 15" : "miércoles 23"} (incluye una bebida por
             comida).
           </li>
           <li>
@@ -300,12 +301,12 @@ const NationalInfo = ({
               Participantes que NO se alojen en el hotel propuesto por la
               olimpíada:
             </span>{" "}
-            {isOma ? "$39.000" : "$120.000"}.{" "}
+            {isOma ? "$120.000" : "$120.000"}.{" "}
             <span className={styles.bold}>
-              Incluye los almuerzos y meriendas de los días de las pruebas
-              escritas (
+              Incluye los almuerzos {!isOma && "y meriendas"} de los días de las
+              pruebas escritas (
               {isOma ? (
-                <>martes 14 y miércoles 15</>
+                <>martes 12 y miércoles 13</>
               ) : (
                 <>lunes 21 y martes 23</>
               )}
@@ -317,12 +318,12 @@ const NationalInfo = ({
               Acompañantes que NO se alojen en el hotel propuesto por la
               olimpíada:
             </span>{" "}
-            {isOma ? "$32.000" : "$110.000"}.{" "}
+            {isOma ? "$110.000" : "$110.000"}.{" "}
             <span className={styles.bold}>
-              Incluye los almuerzos y meriendas de los días de las pruebas
-              escritas (
+              Incluye los almuerzos {!isOma && "y meriendas"} de los días de las
+              pruebas escritas (
               {isOma ? (
-                <>martes 14 y miércoles 15</>
+                <>martes 12 y miércoles 13</>
               ) : (
                 <>lunes 21 y martes 22</>
               )}
@@ -352,6 +353,9 @@ const NationalInfo = ({
           </li>
           <li>
             <span className={styles.bold}>N° Cuenta: </span>6093228419
+          </li>
+          <li>
+            <span className={styles.bold}>ALIAS: </span>FOMAHSBCCC
           </li>
           <li>
             <span className={styles.bold}>CBU: </span>1500609900060932284196
@@ -532,7 +536,7 @@ const NationalInfo = ({
             Solo podrá asistir a las actividades programadas dentro de los
             espacios establecidos (esto incluye el ingresar, permanecer y
             circular por el mismo) quien se acredite debidamente el día{" "}
-            {isOma ? "27 de septiembre" : "20 de octubre"}.
+            {isOma ? "11 de noviembre" : "20 de octubre"}.
           </li>
           <li>
             Se recuerda a los responsables de las delegaciones, se alojen o no

@@ -143,34 +143,19 @@ const ResultTable = ({
             </p>
           </Warning>
         )}
-      {/*instancia === "REGIONAL" && competencia === "OMA" && (
-        <Warning title="Pedidos de Revisión" className={styles.revision}>
-          <p className={styles.text}>
-            Se aceptan revisiones hasta el viernes <span>27/10</span>. Recordar
-            enviar:
-          </p>
-          <ul className={`${styles.text} ${styles.list}`}>
-            <li>Número de región (OMA San Isidro es 53)</li>
-            <li>Nivel</li>
-            <li>Apellido y Nombre</li>
-            <li>
-              Especificar el problema que creen tener bien y que el jurado no lo
-              consideró
-            </li>
-            <li>
-              Justificación (que es lo que el alumno cree haber hecho bien o que
-              el Jurado no tuvo en cuenta)
-            </li>
-          </ul>
-          <p className={styles.text}>
-            <span className={styles.bold}>
-              No se revisarán pedidos sin justificación.
-            </span>{" "}
-            Se reciben únicamente por mail a{" "}
-            <a href="mailto:omapruebas@gmail.com">omapruebas@gmail.com</a>
-          </p>
-        </Warning>
-      )*/}
+      {instancia === "REGIONAL" &&
+        competencia === "OMA" &&
+        testInfo.año === new Date().getUTCFullYear() && (
+          <Warning title="Pedidos de Revisión" className={styles.revision}>
+            <p className={styles.text}>
+              Para hacer un pedido de revisión completar el siguiente formulario{" "}
+              <span className={styles.bold}>antes del 25/10</span>:{" "}
+              <a href="https://forms.gle/m4TnmuA2fWEkDyvTA">
+                https://forms.gle/m4TnmuA2fWEkDyvTA
+              </a>
+            </p>
+          </Warning>
+        )}
       <ResultFilterForm
         filters={resultFilter}
         updateFilter={updateFilter}
