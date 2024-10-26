@@ -18,7 +18,7 @@ const Preview = ({
   const { cantidad_problemas, id } = useTestData();
   const utils = trpc.useContext();
   const updateResults = trpc.dashboard.updateResults.useMutation({
-    onSuccess: async (res) => {
+    onSuccess: async () => {
       await utils.dashboard.getResults.refetch();
       nextStep(data);
     },
