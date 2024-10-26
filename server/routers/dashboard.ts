@@ -15,6 +15,7 @@ import {
   updateResults,
 } from "./results/results_db_calls";
 import { INSTANCIA } from "@prisma/client";
+import { revalidateTag } from "next/cache";
 
 const getEditableResults = async (
   competencia: string,
@@ -161,5 +162,14 @@ export const dashboardRouter = router({
       const addPromise = createResults(Results2Add, id_prueba);
       const [update, add] = await Promise.all([updatePromise, addPromise]);
       return { update, add };
+    }),
+  revalidate: protectedProcedure
+    .input(
+      z.object({
+        type: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      revalidateTag(input.type);
     }),
 });
