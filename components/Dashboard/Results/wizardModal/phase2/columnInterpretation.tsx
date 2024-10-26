@@ -245,8 +245,8 @@ const ColumnInterpretation = ({
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     nextStep({
-      currentResults: data!.currentResults,
-      newResults: data!.newResults,
+      currentResults: data.currentResults,
+      newResults: data.newResults,
       results2Modify: results2Modify
         .map((result) => {
           if (result[2]) {
@@ -254,7 +254,7 @@ const ColumnInterpretation = ({
           }
           return null;
         })
-        .filter((result) => result !== null),
+        .filter((result) => result !== null) as Result2Modify[],
       results2Add: results2Add,
     });
   };
