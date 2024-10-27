@@ -167,7 +167,8 @@ export const dashboardRouter = router({
   showResults: protectedProcedure
     .input(z.object({ show: z.boolean(), id_prueba: z.number() }))
     .mutation(async ({ ctx, input }) => {
-      const setResults = setShowResults(input.show, input.id_prueba);
+      const setResults = await setShowResults(input.show, input.id_prueba);
+      revalidateTag("results");
       return setResults;
     }),
   revalidate: protectedProcedure
