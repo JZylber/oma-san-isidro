@@ -1,3 +1,4 @@
+import { log } from "console";
 import Cookies from "js-cookie";
 import { ReactNode, createContext, useState } from "react";
 import { loginAPI } from "utils/apiCalls";
@@ -44,6 +45,7 @@ const AuthContext = createContext<UserContextType>({
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
+  const loginEndPoint = trpc.users.loginUser.useMutation();
   const [user, setUser] = useState<User>({
     id: -1,
     nombre: "",
@@ -61,13 +63,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const login = async (email: string, password: string) => {
-    const apiCall = await loginAPI(email, password);
-    if (apiCall instanceof Error) return apiCall as Error;
-    const { response, status } = apiCall;
-    if (status !== 200) throw new Error("Error al iniciar sesión");
-    setUser(response!.usuario);
-    setToken(response!.token);
-    return response!.usuario;
+    const response = await loginEndPoint.mutateAsync({ email, password });
+    setUser(response.user!);
+    setToken(response.token!);
+    return response.user!;
   };
 
   const logout = () => {
