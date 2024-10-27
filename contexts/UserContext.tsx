@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { ReactNode, createContext, useState } from "react";
+import { ReactNode, createContext, useEffect, useState } from "react";
 import { trpc } from "utils/trpc";
 
 export type User = {
@@ -50,20 +50,23 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     apellido: "",
     rol: "",
   });
-  const userData = trpc.users.getUserCredentials.useQuery(undefined, {
-    enabled: user.id === -1 && Cookies.get("accessToken") !== undefined,
-  });
-  if (userData.isSuccess && userData.data && user.id === -1) {
-    setUser(userData.data as User);
-  }
   const setToken = (token: string) => {
     Cookies.set("accessToken", token, { sameSite: "strict" });
   };
-
+  useEffect(
+    () =>
+      loginEndPoint.mutate(undefined, {
+        onSuccess: (response) => {
+          setUser(response.user);
+          if (response.token) setToken(response.token);
+        },
+      }),
+    []
+  );
   const login = async (email: string, password: string) => {
     const response = await loginEndPoint.mutateAsync({ email, password });
-    setUser(response.user!);
-    setToken(response.token!);
+    setUser(response.user);
+    if (response.token) setToken(response.token);
     return response.user!;
   };
 

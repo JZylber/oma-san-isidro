@@ -34,7 +34,7 @@ const login = async (
       userId,
       nombre: user.nombre,
       apellido: user.apellido,
-      role: "admin",
+      role: user.rol,
     });
     /* Send token */
     return {
@@ -44,7 +44,7 @@ const login = async (
         id: user.id_usuario,
         nombre: user.nombre,
         apellido: user.apellido,
-        rol: "admin",
+        rol: user.rol,
       } as User,
     };
   } else {

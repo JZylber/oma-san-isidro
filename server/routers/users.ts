@@ -3,11 +3,27 @@ import { prisma } from "../db";
 import { protectedProcedure, publicProcedure, router } from "../trpc";
 import login from "utils/login";
 import { TRPCError } from "@trpc/server";
+import { User } from "contexts/UserContext";
 
 export const userRouter = router({
   loginUser: publicProcedure
-    .input(z.object({ email: z.string().min(1), password: z.string().min(1) }))
-    .mutation(async ({ input }) => {
+    .input(
+      z
+        .object({
+          email: z.string(),
+          password: z.string(),
+        })
+        .optional()
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { user } = ctx;
+      if (user) return { token: "", user: user as User };
+      if (!input) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Email y contraseña son requeridos",
+        });
+      }
       const { email, password } = input;
       const status = await login(email, password);
       if (!status.success) {
@@ -16,7 +32,7 @@ export const userRouter = router({
           message: status.statusText,
         });
       }
-      return { token: status.token, user: status.usuario };
+      return { token: status.token, user: status.usuario! };
     }),
   getUsers: protectedProcedure.query(async () => {
     return prisma.usuario.findMany({

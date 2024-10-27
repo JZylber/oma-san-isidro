@@ -20,7 +20,7 @@ const LoginPage: React.FC = () => {
   } = useForm<LoginFormData>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const { login, user } = useAuth();
+  const { login } = useAuth();
   const router = useRouter();
   const handleLogin = async ({ email, password }: LoginFormData) => {
     setLoading(true);
