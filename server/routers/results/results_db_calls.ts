@@ -440,4 +440,15 @@ export const createResults = async (
   });
 };
 
+export const setShowResults = async (show: boolean, id_prueba: number) => {
+  return await prisma.prueba.update({
+    where: {
+      id_prueba: id_prueba,
+    },
+    data: {
+      resultados_disponibles: show,
+    },
+  });
+};
+
 export type Participant = Awaited<ReturnType<typeof getParticipants>>[0];

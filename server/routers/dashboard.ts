@@ -12,6 +12,7 @@ import {
   modifyResult,
   newResult,
   Participant,
+  setShowResults,
   updateResults,
 } from "./results/results_db_calls";
 import { INSTANCIA } from "@prisma/client";
@@ -162,6 +163,12 @@ export const dashboardRouter = router({
       const addPromise = createResults(Results2Add, id_prueba);
       const [update, add] = await Promise.all([updatePromise, addPromise]);
       return { update, add };
+    }),
+  showResults: protectedProcedure
+    .input(z.object({ show: z.boolean(), id_prueba: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      const setResults = setShowResults(input.show, input.id_prueba);
+      return setResults;
     }),
   revalidate: protectedProcedure
     .input(
