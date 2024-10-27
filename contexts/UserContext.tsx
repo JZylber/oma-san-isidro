@@ -43,7 +43,12 @@ const AuthContext = createContext<UserContextType>({
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const loginEndPoint = trpc.users.loginUser.useMutation();
+  const loginEndPoint = trpc.users.loginUser.useMutation({
+    onSuccess: (response) => {
+      setUser(response.user);
+      if (response.token) setToken(response.token);
+    },
+  });
   const [user, setUser] = useState<User>({
     id: -1,
     nombre: "",
@@ -53,21 +58,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const setToken = (token: string) => {
     Cookies.set("accessToken", token, { sameSite: "strict" });
   };
-  useEffect(
-    () =>
-      loginEndPoint.mutate(undefined, {
-        onSuccess: (response) => {
-          setUser(response.user);
-          if (response.token) setToken(response.token);
-        },
-      }),
-    []
-  );
+  useEffect(() => loginEndPoint.mutate(), []);
   const login = async (email: string, password: string) => {
     const response = await loginEndPoint.mutateAsync({ email, password });
-    setUser(response.user);
-    if (response.token) setToken(response.token);
-    return response.user!;
+    return response.user;
   };
 
   const logout = () => {
