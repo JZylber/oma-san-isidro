@@ -7,7 +7,7 @@ const UserChip = () => {
   const router = useRouter();
   const handleLogout = () => {
     logout();
-    router.push("/login");
+    router.refresh();
   };
   if (user.id === -1) return null;
   return (

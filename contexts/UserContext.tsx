@@ -1,7 +1,5 @@
-import { log } from "console";
 import Cookies from "js-cookie";
 import { ReactNode, createContext, useState } from "react";
-import { loginAPI } from "utils/apiCalls";
 import { trpc } from "utils/trpc";
 
 export type User = {
