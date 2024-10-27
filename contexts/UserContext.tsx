@@ -51,13 +51,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     rol: "",
   });
   const userData = trpc.users.getUserCredentials.useQuery(undefined, {
-    enabled: user.id === -1 && Cookies.get("currentUser") !== undefined,
+    enabled: user.id === -1 && Cookies.get("accessToken") !== undefined,
   });
   if (userData.isSuccess && userData.data && user.id === -1) {
     setUser(userData.data as User);
   }
   const setToken = (token: string) => {
-    Cookies.set("currentUser", token, { sameSite: "strict" });
+    Cookies.set("accessToken", token, { sameSite: "strict" });
   };
 
   const login = async (email: string, password: string) => {
@@ -74,7 +74,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       apellido: "",
       rol: "",
     });
-    Cookies.remove("currentUser");
+    Cookies.remove("accessToken");
   };
 
   const register = async (
