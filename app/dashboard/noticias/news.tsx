@@ -135,6 +135,19 @@ const DashboardNews = () => {
   if (news.isSuccess)
     return (
       <div>
+        <div className="flex py-4">
+          <ActionButton
+            onClick={() => {
+              setCurrentNews(undefined);
+              setOpenModal(true);
+            }}
+            important
+            className="!w-[120px] flex justify-around items-center"
+          >
+            <span className="font-unbounded">NUEVA</span>
+            <Image src="/icons/add.svg" alt="sumar" width={24} height={24} />
+          </ActionButton>
+        </div>
         <Table
           values={news.data.filter(
             (publication) =>
