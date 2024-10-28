@@ -1,8 +1,6 @@
+import DashboardNews from "./news";
+
 const DashboardNewsPage = () => {
-  return (
-    <div>
-      <h1>Noticias</h1>
-    </div>
-  );
+  return <DashboardNews />;
 };
 export default DashboardNewsPage;

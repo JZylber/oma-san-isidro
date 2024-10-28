@@ -1,5 +1,5 @@
-import { protectedProcedure, router } from "../trpc";
-import { z } from "zod";
+import { protectedProcedure, publicProcedure, router } from "../trpc";
+import { set, z } from "zod";
 import { INSTANCE } from "../types";
 import {
   createResults,
@@ -17,6 +17,7 @@ import {
 } from "./results/results_db_calls";
 import { INSTANCIA } from "@prisma/client";
 import { revalidateTag } from "next/cache";
+import { prisma } from "server/db";
 
 const getEditableResults = async (
   competencia: string,
@@ -170,6 +171,38 @@ export const dashboardRouter = router({
       const setResults = await setShowResults(input.show, input.id_prueba);
       revalidateTag("results");
       return setResults;
+    }),
+  getNews: publicProcedure.query(async ({ ctx }) => {
+    const query = await prisma.noticias.findMany({
+      orderBy: [{ agregado: "desc" }],
+      select: {
+        id_noticia: true,
+        titulo: true,
+        link: true,
+        visible: true,
+        agregado: true,
+      },
+    });
+    return query;
+  }),
+  setNews: protectedProcedure
+    .input(
+      z.object({
+        id_noticia: z.number(),
+        titulo: z.string(),
+        link: z.string(),
+        visible: z.boolean(),
+        agregado: z.date(),
+      })
+    )
+    .mutation(async ({ input }) => {
+      const { id_noticia, titulo, link, visible, agregado } = input;
+      const query = await prisma.noticias.upsert({
+        where: { id_noticia },
+        update: { titulo, link, visible, agregado },
+        create: { titulo, link, visible, agregado },
+      });
+      return query;
     }),
   revalidate: protectedProcedure
     .input(

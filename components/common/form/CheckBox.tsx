@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useState } from "react";
 
 interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   width?: number;
@@ -7,27 +7,28 @@ interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Checkbox = ({ width, height, ...props }: CheckboxProps) => {
-  const ref = useRef<HTMLInputElement>(null);
+  const [checked, setChecked] = useState(props.defaultChecked);
+  useEffect(() => {
+    if (props.checked !== undefined) {
+      setChecked(props.checked);
+    }
+  }, [props.checked, setChecked]);
   return (
     <div
       className={`relative border-2 border-black w-fit p rounded-xl flex justify-center items-center`}
     >
       <input
-        ref={ref}
         type="checkbox"
         {...props}
+        onChange={(e) => {
+          setChecked(e.target.checked);
+          if (props.onChange) props.onChange(e);
+        }}
+        checked={checked}
         className="absolute cursor-pointer w-full h-full opacity-0"
       />
       <Image
-        src={`/icons/${
-          ref.current
-            ? ref.current.checked
-              ? "check"
-              : "close"
-            : props.defaultChecked
-            ? "check"
-            : "close"
-        }.svg`}
+        src={`/icons/${checked ? "check" : "close"}.svg`}
         width={width}
         height={height}
         alt="check"
