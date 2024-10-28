@@ -39,13 +39,6 @@ const NavUserChip = () => {
             openUserMenu ? "border-2" : "h-0 w-0 opacity-0"
           } absolute bottom-0 -right-[2px] overflow-hidden translate-y-full bg-primary-white  border-primary-black rounded-b-xl rounded-tl-xl box-border min-w-[200%] transition-all divide-y-2 divide-primary-black`}
         >
-          <div
-            onClick={logout}
-            className="flex justify-between items-center px-4 py-4"
-          >
-            <span className="font-montserrat text-2xl">Logout</span>
-            <Image src="/icons/logout.svg" width="24" height="24" alt="" />
-          </div>
           <div>
             <Link href="/dashboard">
               <div className="flex justify-between items-center px-4 py-4">
@@ -58,6 +51,13 @@ const NavUserChip = () => {
                 />
               </div>
             </Link>
+          </div>
+          <div
+            onClick={logout}
+            className="flex justify-between items-center px-4 py-4"
+          >
+            <span className="font-montserrat text-2xl">Logout</span>
+            <Image src="/icons/logout.svg" width="24" height="24" alt="" />
           </div>
         </div>
       </div>
