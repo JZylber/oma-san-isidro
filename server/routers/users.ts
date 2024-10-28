@@ -48,7 +48,6 @@ export const userRouter = router({
         message: "No hay usuario logueado",
       });
     }
-    console.log("Logging out user", user);
     setHTTPOnlyCookie("refreshToken", "");
     await prisma.usuario.update({
       where: { id_usuario: user.id },

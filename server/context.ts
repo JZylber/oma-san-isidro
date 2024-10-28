@@ -36,8 +36,6 @@ export async function createTRPCContext({
   const refreshToken = req.cookies.get("refreshToken")?.value;
   let user = null;
   if (accessToken && refreshToken) {
-    console.log("url", req.nextUrl.origin + "/api/auth/jwt");
-
     const credentials = await fetch(req.nextUrl.origin + "/api/auth/jwt", {
       method: "POST",
       headers: {
