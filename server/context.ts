@@ -1,6 +1,5 @@
 import { NextRequest } from "next/server";
-import { TokenPayload, verifyRefreshToken } from "../utils/token";
-import { handleTokenLogin } from "utils/login";
+import { verifyRefreshToken } from "../utils/token";
 import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 import { User } from "contexts/UserContext";
 export async function createTRPCContext({
@@ -37,11 +36,16 @@ export async function createTRPCContext({
   const refreshToken = req.cookies.get("refreshToken")?.value;
   let user = null;
   if (accessToken && refreshToken) {
-    const { success, newAccessToken } = await handleTokenLogin(
-      accessToken,
-      refreshToken
-    );
-    if (success) {
+    console.log("url", req.nextUrl.origin + "/api/auth/jwt");
+
+    const credentials = await fetch(req.nextUrl.origin + "/api/auth/jwt", {
+      method: "POST",
+      headers: {
+        cookie: `accessToken=${accessToken}; refreshToken=${refreshToken}`,
+      },
+    });
+    if (credentials.status === 200) {
+      const { accessToken: newAccessToken } = await credentials.json();
       user = await getUserFromHeader(refreshToken);
       if (newAccessToken) {
         cookies.set("accessToken", newAccessToken, {
