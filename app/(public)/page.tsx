@@ -11,19 +11,23 @@ export const metadata: Metadata = {
     "Página principal de la Secretaría Regional Buenos Aires Norte de la Olimpíadas Matemáticas Argentinas",
 };
 
-const getNews = unstable_cache(async () => {
-  const query = await prisma.noticias.findMany({
-    orderBy: [{ agregado: "desc" }],
-    select: {
-      titulo: true,
-      link: true,
-      visible: true,
-      agregado: true,
-    },
-  });
-  const results = query;
-  return JSON.stringify(results);
-}, ["news"]);
+const getNews = unstable_cache(
+  async () => {
+    const query = await prisma.noticias.findMany({
+      orderBy: [{ agregado: "desc" }],
+      select: {
+        titulo: true,
+        link: true,
+        visible: true,
+        agregado: true,
+      },
+    });
+    const results = query;
+    return JSON.stringify(results);
+  },
+  ["news"],
+  { tags: ["news"] }
+);
 
 export default async function Page() {
   const newsData = getNews();

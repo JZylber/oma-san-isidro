@@ -4,6 +4,7 @@ import { inferRouterOutputs } from "@trpc/server";
 import ActionButton from "components/buttons/ActionButton/ActionButton";
 import Checkbox from "components/common/form/CheckBox";
 import Loader from "components/Loader/Loader";
+import ConfirmModal from "components/Popups/ConfirmModal/ConfirmModal";
 import Modal from "components/Popups/Modal";
 import Table from "components/Table/Table";
 import Image from "next/image";
@@ -125,17 +126,19 @@ type News = Unpacked<inferRouterOutputs<AppRouter>["dashboard"]["getNews"]>;
 
 const DashboardNews = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const news = trpc.dashboard.getNews.useQuery(undefined, {
     refetchInterval: 0,
   });
   const updateNews = trpc.dashboard.setNews.useMutation();
+  const deleteNews = trpc.dashboard.deleteNews.useMutation();
   const [currentNews, setCurrentNews] = useState<News | undefined>(undefined);
   if (news.isLoading || news.isRefetching) return <Loader />;
   if (news.isError) return <div>Error: {news.error.message}</div>;
   if (news.isSuccess)
     return (
       <div>
-        <div className="flex py-4">
+        <div className="flex py-2">
           <ActionButton
             onClick={() => {
               setCurrentNews(undefined);
@@ -194,6 +197,10 @@ const DashboardNews = () => {
                       width={24}
                       height={24}
                       className="cursor-pointer"
+                      onClick={() => {
+                        setCurrentNews(publication);
+                        setConfirmDelete(true);
+                      }}
                     />
                   </div>
                 </div>
@@ -213,6 +220,25 @@ const DashboardNews = () => {
           }}
           result={currentNews}
         />
+        <ConfirmModal
+          open={confirmDelete}
+          close={() => setConfirmDelete(false)}
+          onCancel={() => setConfirmDelete(false)}
+          onConfirm={async () => {
+            if (currentNews) {
+              await deleteNews.mutateAsync(currentNews.id_noticia);
+              news.refetch();
+              setConfirmDelete(false);
+            }
+          }}
+        >
+          <div className="px-4 text-2xl font-montserrat">
+            <p className="font-semibold">
+              ¿Estás seguro/a que deseas eliminar esta noticia?
+            </p>
+            <p>Esta acción no se puede deshacer.</p>
+          </div>
+        </ConfirmModal>
       </div>
     );
   return null;

@@ -202,6 +202,16 @@ export const dashboardRouter = router({
         update: { titulo, link, visible, agregado },
         create: { titulo, link, visible, agregado },
       });
+      revalidateTag("news");
+      return query;
+    }),
+  deleteNews: protectedProcedure
+    .input(z.number())
+    .mutation(async ({ input }) => {
+      const query = await prisma.noticias.delete({
+        where: { id_noticia: input },
+      });
+      revalidateTag("news");
       return query;
     }),
   revalidate: protectedProcedure
