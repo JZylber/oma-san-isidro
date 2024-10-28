@@ -57,7 +57,7 @@
         border-bottom: 2px solid;
         position: relative;
         display: flex;
-        justify-content: center;
+        justify-content: flex-end;
       }
       @include shared.tablet-only {
         padding-top: 0.8rem;
