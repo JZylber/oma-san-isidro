@@ -19,7 +19,7 @@ export async function middleware(request: NextRequest, response: NextResponse) {
       headers: {
         "Set-Cookie": `accessToken=${newAccessToken}; SameSite=Strict; ${
           process.env.NODE_ENV === "production" ? "Secure" : ""
-        }`,
+        }; Path=/`,
       },
     });
   }
