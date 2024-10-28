@@ -1,8 +1,7 @@
 import { prisma } from "server/db";
 import bcrypt from "bcryptjs";
-import { createToken, verifyAccessToken, verifyRefreshToken } from "./token";
+import { createToken } from "./token";
 import { User } from "contexts/UserContext";
-import { errors } from "jose";
 
 interface LoginResponse {
   success: boolean;
