@@ -16,8 +16,8 @@ export const userRouter = router({
         .optional()
     )
     .mutation(async ({ ctx, input }) => {
-      const { user } = ctx;
-      if (user) return { token: "", user: user as User };
+      const { user, setHTTPOnlyCookie } = ctx;
+      if (user) return { token: "", user: user };
       if (!input) {
         throw new TRPCError({
           code: "BAD_REQUEST",
@@ -25,15 +25,38 @@ export const userRouter = router({
         });
       }
       const { email, password } = input;
-      const status = await login(email, password);
-      if (!status.success) {
+      const response = await login(email, password);
+      if (!response.success) {
         throw new TRPCError({
           code: "UNAUTHORIZED",
-          message: status.statusText,
+          message: response.statusText,
         });
       }
-      return { token: status.token, user: status.usuario! };
+      const refreshToken = response.refreshToken!;
+      setHTTPOnlyCookie("refreshToken", refreshToken);
+      await prisma.usuario.update({
+        where: { id_usuario: response.usuario!.id },
+        data: { token: refreshToken },
+      });
+      return { token: response.accessToken, user: response.usuario! };
     }),
+  logoutUser: protectedProcedure.mutation(async ({ ctx }) => {
+    const { user, setHTTPOnlyCookie } = ctx;
+    if (!user) {
+      throw new TRPCError({
+        code: "UNAUTHORIZED",
+        message: "No hay usuario logueado",
+      });
+    }
+    console.log("Logging out user", user);
+    setHTTPOnlyCookie("refreshToken", "");
+    await prisma.usuario.update({
+      where: { id_usuario: user.id },
+      data: { token: "" },
+    });
+    return true;
+  }),
+
   getUsers: protectedProcedure.query(async () => {
     return prisma.usuario.findMany({
       select: {

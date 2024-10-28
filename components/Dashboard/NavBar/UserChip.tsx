@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 const UserChip = () => {
   const { user, logout } = useAuth();
   const router = useRouter();
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logout();
     router.refresh();
   };
   if (user.id === -1) return null;

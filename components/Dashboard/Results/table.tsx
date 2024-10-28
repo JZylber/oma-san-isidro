@@ -136,7 +136,7 @@ const DashboardResultsTable = ({ testData }: DashboardResultsTableProps) => {
     { notifyOnChangeProps: "all", refetchInterval: 0 }
   );
   if (results.isError && results.error.data?.httpStatus === 401) {
-    router.push("/login");
+    router.refresh();
   }
   return (
     <div className="grow flex flex-col">

@@ -12,7 +12,7 @@ export type User = {
 export type UserContextType = {
   user: User;
   login: (email: string, password: string) => Promise<User | Error>;
-  logout: () => void;
+  logout: () => Promise<boolean>;
   register: (
     nombre: string,
     apellido: string,
@@ -36,7 +36,9 @@ const AuthContext = createContext<UserContextType>({
       rol: "",
     };
   },
-  logout: () => {},
+  logout: async () => {
+    return false;
+  },
   register: async () => {
     return false;
   },
@@ -49,6 +51,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       if (response.token) setToken(response.token);
     },
   });
+  const logoutEndPoint = trpc.users.logoutUser.useMutation({
+    onSuccess: () => {
+      setUser({
+        id: -1,
+        nombre: "",
+        apellido: "",
+        rol: "",
+      });
+      Cookies.remove("accessToken");
+    },
+  });
   const [user, setUser] = useState<User>({
     id: -1,
     nombre: "",
@@ -56,22 +69,32 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     rol: "",
   });
   const setToken = (token: string) => {
-    Cookies.set("accessToken", token, { sameSite: "strict" });
+    Cookies.set("accessToken", token, {
+      sameSite: "strict",
+      secure: process.env.NODE_ENV === "production",
+    });
   };
-  useEffect(() => loginEndPoint.mutate(), []);
+  useEffect(
+    () =>
+      loginEndPoint.mutate(undefined, {
+        onError: () => {
+          setUser({
+            id: -1,
+            nombre: "",
+            apellido: "",
+            rol: "",
+          });
+        },
+      }),
+    []
+  );
   const login = async (email: string, password: string) => {
     const response = await loginEndPoint.mutateAsync({ email, password });
     return response.user;
   };
 
-  const logout = () => {
-    setUser({
-      id: -1,
-      nombre: "",
-      apellido: "",
-      rol: "",
-    });
-    Cookies.remove("accessToken");
+  const logout = async () => {
+    return await logoutEndPoint.mutateAsync();
   };
 
   const register = async (

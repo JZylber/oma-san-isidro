@@ -26,7 +26,9 @@ const LoginPage: React.FC = () => {
     setLoading(true);
     try {
       const loggedUser = await login(email, password);
-      router.refresh();
+      if (loggedUser) {
+        router.push("/");
+      }
     } catch (error) {
       setError("Email o contraseña incorrecto");
     } finally {
