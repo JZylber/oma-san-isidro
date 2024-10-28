@@ -1,6 +1,5 @@
 import Cookies from "js-cookie";
-import { ReactNode, createContext, useState } from "react";
-import { loginAPI } from "utils/apiCalls";
+import { ReactNode, createContext, useEffect, useState } from "react";
 import { trpc } from "utils/trpc";
 
 export type User = {
@@ -13,7 +12,7 @@ export type User = {
 export type UserContextType = {
   user: User;
   login: (email: string, password: string) => Promise<User | Error>;
-  logout: () => void;
+  logout: () => Promise<boolean>;
   register: (
     nombre: string,
     apellido: string,
@@ -37,47 +36,65 @@ const AuthContext = createContext<UserContextType>({
       rol: "",
     };
   },
-  logout: () => {},
+  logout: async () => {
+    return false;
+  },
   register: async () => {
     return false;
   },
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
+  const loginEndPoint = trpc.users.loginUser.useMutation({
+    onSuccess: (response) => {
+      setUser(response.user);
+      if (response.token) setToken(response.token);
+    },
+  });
+  const logoutEndPoint = trpc.users.logoutUser.useMutation({
+    onSuccess: () => {
+      setUser({
+        id: -1,
+        nombre: "",
+        apellido: "",
+        rol: "",
+      });
+      Cookies.remove("accessToken");
+    },
+  });
   const [user, setUser] = useState<User>({
     id: -1,
     nombre: "",
     apellido: "",
     rol: "",
   });
-  const userData = trpc.users.getUserCredentials.useQuery(undefined, {
-    enabled: user.id === -1 && Cookies.get("currentUser") !== undefined,
-  });
-  if (userData.isSuccess && userData.data && user.id === -1) {
-    setUser(userData.data as User);
-  }
   const setToken = (token: string) => {
-    Cookies.set("currentUser", token, { sameSite: "strict" });
-  };
-
-  const login = async (email: string, password: string) => {
-    const apiCall = await loginAPI(email, password);
-    if (apiCall instanceof Error) return apiCall as Error;
-    const { response, status } = apiCall;
-    if (status !== 200) throw new Error("Error al iniciar sesión");
-    setUser(response!.usuario);
-    setToken(response!.token);
-    return response!.usuario;
-  };
-
-  const logout = () => {
-    setUser({
-      id: -1,
-      nombre: "",
-      apellido: "",
-      rol: "",
+    Cookies.set("accessToken", token, {
+      sameSite: "strict",
+      secure: process.env.NODE_ENV === "production",
     });
-    Cookies.remove("currentUser");
+  };
+  useEffect(
+    () =>
+      loginEndPoint.mutate(undefined, {
+        onError: () => {
+          setUser({
+            id: -1,
+            nombre: "",
+            apellido: "",
+            rol: "",
+          });
+        },
+      }),
+    []
+  );
+  const login = async (email: string, password: string) => {
+    const response = await loginEndPoint.mutateAsync({ email, password });
+    return response.user;
+  };
+
+  const logout = async () => {
+    return await logoutEndPoint.mutateAsync();
   };
 
   const register = async (

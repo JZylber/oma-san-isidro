@@ -25,9 +25,9 @@ const LoginPage: React.FC = () => {
   const handleLogin = async ({ email, password }: LoginFormData) => {
     setLoading(true);
     try {
-      const user = await login(email, password);
-      if (user) {
-        router.push("/dashboard");
+      const loggedUser = await login(email, password);
+      if (loggedUser) {
+        router.push("/");
       }
     } catch (error) {
       setError("Email o contraseña incorrecto");
@@ -35,7 +35,6 @@ const LoginPage: React.FC = () => {
       setLoading(false);
     }
   };
-
   return (
     <div className="min-h-screen min-w-screen flex items-center justify-center bg-primary-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-lg w-full space-y-32">
@@ -86,5 +85,4 @@ const LoginPage: React.FC = () => {
     </div>
   );
 };
-
 export default LoginPage;
