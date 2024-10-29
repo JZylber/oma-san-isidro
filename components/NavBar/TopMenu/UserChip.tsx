@@ -6,58 +6,80 @@ import { useRef, useState } from "react";
 
 const NavUserChip = () => {
   const [openUserMenu, setOpenUserMenu] = useState(false);
-  const { user, login, logout } = useAuth();
+  const { user, logout } = useAuth();
   const ref = useOutsideClick(() => setOpenUserMenu(false));
   const logged = user.id !== -1;
   return (
-    <div
-      ref={ref}
-      className="w-[7.5%] desktop:w-[10%] flex justify-center items-center cursor-pointer"
-    >
+    <div className="w-[7.5%] desktop:w-[10%] flex justify-center items-center">
       <div
-        className={`flex w-4/5 bg-primary-white justify-center rounded-t-xl border-2 border-primary-black relative ${
-          openUserMenu ? "border-b-primary-white" : "rounded-b-xl "
-        }`}
-        onClick={() => {
-          if (logged) setOpenUserMenu(!openUserMenu);
-        }}
+        ref={ref}
+        className="flex w-[48px] h-[48px] bg-primary-white rounded-full border-2 border-primary-black "
       >
         {logged ? (
-          <span className="text-primary-black text-2xl font-unbounded py-4">
-            {user.nombre[0].toUpperCase() + user.apellido[0].toUpperCase()}
-          </span>
+          <div
+            className="flex justify-center items-center w-full h-full cursor-pointer"
+            onClick={() => {
+              if (logged) setOpenUserMenu(!openUserMenu);
+            }}
+          >
+            <Image
+              src="/icons/person.svg"
+              width="32"
+              height="32"
+              alt="account"
+            />
+          </div>
         ) : (
-          <Link href="/login">
-            <span className="text-primary-black text-2xl py-4 font-unbounded block">
-              Ingresar
-            </span>
+          <Link
+            href="/login"
+            className="flex justify-center items-center w-full h-full"
+          >
+            <Image src="/icons/login.svg" width="32" height="32" alt="login" />
           </Link>
         )}
         <div
           onClick={() => setOpenUserMenu(false)}
           className={`${
-            openUserMenu ? "border-2" : "h-0 w-0 opacity-0"
-          } absolute bottom-0 -right-[2px] overflow-hidden translate-y-full bg-primary-white  border-primary-black rounded-b-xl rounded-tl-xl box-border min-w-[200%] transition-all divide-y-2 divide-primary-black`}
+            !openUserMenu ? "translate-x-full" : ""
+          } absolute bottom-0 right-0 overflow-hidden translate-y-full bg-primary-white border-l-2 border-y-2 border-primary-black rounded-l-xl box-border min-w-[300px] transition-all divide-y-2 divide-primary-black`}
         >
+          <div className="flex justify-around items-center py-6">
+            <div className="flex w-[56px] h-[56px] bg-primary-white rounded-full border-2 border-primary-black items-center justify-center">
+              <Image
+                src="/icons/person.svg"
+                width="40"
+                height="40"
+                alt="user icon"
+              />
+            </div>
+            <div className="flex flex-col gap-y-4 items-center">
+              <span className="font-montserrat text-3xl font-semibold">
+                ¡Hola {user.nombre}!
+              </span>
+              <span className="font-unbounded text-2xl">
+                {user.rol.toLocaleUpperCase()}
+              </span>
+            </div>
+          </div>
           <div>
             <Link href="/dashboard">
-              <div className="flex justify-between items-center px-4 py-4">
-                <span className="font-montserrat text-2xl">Dashboard</span>
+              <div className="flex justify-between items-center px-8 py-4">
                 <Image
                   src="/icons/dashboard.svg"
                   width="24"
                   height="24"
                   alt=""
                 />
+                <span className="font-montserrat text-2xl">Dashboard</span>
               </div>
             </Link>
           </div>
           <div
             onClick={logout}
-            className="flex justify-between items-center px-4 py-4"
+            className="flex justify-between items-center px-8 py-4 cursor-pointer"
           >
-            <span className="font-montserrat text-2xl">Logout</span>
             <Image src="/icons/logout.svg" width="24" height="24" alt="" />
+            <span className="font-montserrat text-2xl">Logout</span>
           </div>
         </div>
       </div>
