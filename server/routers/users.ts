@@ -3,7 +3,7 @@ import { prisma } from "../db";
 import { protectedProcedure, publicProcedure, router } from "../trpc";
 import login from "utils/login";
 import { TRPCError } from "@trpc/server";
-import { User } from "contexts/UserContext";
+import { ROLE } from "server/types";
 
 export const userRouter = router({
   loginUser: publicProcedure
@@ -84,6 +84,25 @@ export const userRouter = router({
           email: input.email,
           password: input.password,
         },
+      });
+      return user;
+    }),
+  updateUser: protectedProcedure
+    .input(
+      z.object({
+        id_usuario: z.number(),
+        nombre: z.string(),
+        apellido: z.string(),
+        email: z.string(),
+        password: z.string(),
+        rol: ROLE,
+      })
+    )
+    .mutation(async ({ input }) => {
+      const { id_usuario, nombre, apellido, email, password, rol } = input;
+      const user = await prisma.usuario.update({
+        where: { id_usuario },
+        data: { nombre, apellido, email, password, rol },
       });
       return user;
     }),
