@@ -328,7 +328,10 @@ const NationalInfo = ({
             <span className={styles.bold}>Tarjeta de premiación:</span> $12.000.
             Solo es necesaria la tarjeta para aquellos que no están acreditados
             como acompañantes y que participarán únicamente de la premiación.
-            Deben inscribirse junto con los otros participantes en la planilla.
+            Deben inscribirse junto con los otros participantes en la planilla.{" "}
+            <span className={styles.bold}>
+              Acompañantes de 3 años o menos no necesitan pagar tarjeta.
+            </span>
           </li>
         </ul>
         {/*<Warning>
