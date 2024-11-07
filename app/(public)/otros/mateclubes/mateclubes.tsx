@@ -1,30 +1,53 @@
-'use client'
-import {CalendarEvent} from "../../../../components/CalendarComponents/CalendarTypes";
+"use client";
+import { CalendarEvent } from "../../../../components/CalendarComponents/CalendarTypes";
 import styles from "./Mateclubes.module.scss";
 import AllDatesBanner from "../../../../components/CalendarComponents/DateBanner/NextDatesBanner";
 import { Button } from "../../../../components/buttons/Button";
 import Image from "next/image";
 
 interface MateclubesProps {
-    events : Array<CalendarEvent>,
+  events: Array<CalendarEvent>;
 }
 
-const MathClubs = ({events}:MateclubesProps) => {
-    const downloadForm = (filename:string) => {
-        const downloadFunction = () => {
-        const link = document.createElement("a");
-        link.href = `/files/${filename}`;
-        link.target = `_blank`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);}
-        return downloadFunction;
-      };
-    return(
-        <>
-            <h1 className={styles.title}>Mateclubes</h1>
-            <AllDatesBanner dates={events} category="Mateclubes"/>
-            {/*<section className={styles.section}>
+const MathClubs = ({ events }: MateclubesProps) => {
+  const downloadForm = (filename: string) => {
+    const downloadFunction = () => {
+      const link = document.createElement("a");
+      link.href = `/files/${filename}`;
+      link.target = `_blank`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    };
+    return downloadFunction;
+  };
+  return (
+    <>
+      <h1 className={styles.title}>Mateclubes</h1>
+      <AllDatesBanner dates={events} category="Mateclubes" />
+      <section className={`${styles.section} mt-20`}>
+        <p className={styles.text}>
+          Para toda información sobre mateclubes como la instancia nacional y
+          autorizaciones, dirigirse a la página de mateclubes.
+        </p>
+      </section>
+      <section className={`${styles.section} flex justify-center`}>
+        <a
+          href="https://www.oma.org.ar/mateclubes/index.php"
+          className="max-w-2xl lg:max-w-4xl grow"
+        >
+          <Button content="Página de Mateclubes">
+            <Image
+              className="hidden lg:block"
+              width={42}
+              height={42}
+              src="/images/newsArrow.svg"
+              alt=""
+            />
+          </Button>
+        </a>
+      </section>
+      {/*<section className={styles.section}>
                 <h2 className={styles.section_title}>Mateclubes 3era Ronda</h2>
                 <p className={styles.text}>Para la competencia necesitamos:</p>
                 <ul className={styles.dropPoints}>
@@ -47,8 +70,8 @@ const MathClubs = ({events}:MateclubesProps) => {
             <section className={styles.section}>
                 <p className={styles.text}>Para más información mandar un mail a Gloria Sampablo: <a href="mailto:gloriasampablo@gmail.com">gloriasampablo@gmail.com</a></p>
             </section>*/}
-        </>
-    )
-}
+    </>
+  );
+};
 
-export default MathClubs
+export default MathClubs;
