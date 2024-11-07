@@ -34,11 +34,11 @@ const MathClubs = ({ events }: MateclubesProps) => {
       <section className={`${styles.section} flex justify-center`}>
         <a
           href="https://www.oma.org.ar/mateclubes/index.php"
-          className="max-w-2xl lg:max-w-4xl grow"
+          className="max-w-2xl desktop:max-w-4xl grow"
         >
           <Button content="Página de Mateclubes">
             <Image
-              className="hidden lg:block"
+              className="hidden desktop:block"
               width={42}
               height={42}
               src="/images/newsArrow.svg"
