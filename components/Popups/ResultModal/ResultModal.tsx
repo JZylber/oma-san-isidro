@@ -10,9 +10,10 @@ const initialState = (
 ) => {
   if (!resultados) {
     return {
-      puntaje: Array(cantidadProblemas + 1).fill("0"),
-      aprobado: false,
-      presente: false,
+      puntaje:
+        cantidadProblemas > 0 ? Array(cantidadProblemas + 1).fill("0") : [""],
+      aprobado: !(cantidadProblemas > 0),
+      presente: !(cantidadProblemas > 0),
       aclaracion: null,
     };
   } else {
