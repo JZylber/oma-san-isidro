@@ -193,6 +193,11 @@
       "https://pvqbkogjtilwnziibxsx.supabase.co/storage/v1/object/public/Problemas/2024/Oma/Provincial_OMA_2024_1.pdf",
       "https://pvqbkogjtilwnziibxsx.supabase.co/storage/v1/object/public/Problemas/2024/Oma/Provincial_OMA_2024_2.pdf",
       "https://pvqbkogjtilwnziibxsx.supabase.co/storage/v1/object/public/Problemas/2024/Oma/Provincial_OMA_2024_3.pdf"
+    ],
+    "Nacional": [
+      "https://pvqbkogjtilwnziibxsx.supabase.co/storage/v1/object/public/Problemas/2024/Oma/Nacional_OMA_2024_1.pdf",
+      "https://pvqbkogjtilwnziibxsx.supabase.co/storage/v1/object/public/Problemas/2024/Oma/Nacional_OMA_2024_2.pdf",
+      "https://pvqbkogjtilwnziibxsx.supabase.co/storage/v1/object/public/Problemas/2024/Oma/Nacional_OMA_2024_3.pdf"
     ]
   }
 }
