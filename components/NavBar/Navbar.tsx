@@ -2,6 +2,7 @@
 import { useEffect, useReducer, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
+import NavUserChip from "./UserChip";
 
 interface MenuItem {
   text: string;
@@ -325,6 +326,7 @@ export default function NavBar() {
             );
           })}
         </div>
+        <NavUserChip />
         <div
           className="absolute transition-all w-[85%] desktop:w-4/5 max-w-[1200px] grid grid-cols-[var(--left)_1fr_var(--right)] desktop:grid-cols-[var(--desktop-left)_1fr_var(--desktop-right)] h-[inherit] pt-[inherit] border-box top-0 "
           style={
