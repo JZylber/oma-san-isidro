@@ -1,11 +1,7 @@
 "use client";
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import NavUserChip from "./TopMenu/UserChip";
-
-type NavProps = {
-  togglePageContent: () => void;
-};
+import Image from "next/image";
 
 interface MenuItem {
   text: string;
@@ -117,13 +113,14 @@ const defaultMenuHierarchy: MenuHierarchy = [
   },
 ];
 
-interface ClickMainItemAction {
+interface SelectMainItemAction {
   type: "selectMainItem";
   item: MainItem;
   index: number;
+  selectDefaultSubitem: boolean;
 }
 
-interface ClickSubItemAction {
+interface SelectSubItemAction {
   type: "selectSubItem";
   item: SubItem;
   index: number;
@@ -134,10 +131,15 @@ interface UpdateOnCurrentPageAction {
   page: string;
 }
 
+interface DeselectMainItemAction {
+  type: "deselectMainItem";
+}
+
 type MenuAction =
-  | ClickMainItemAction
-  | ClickSubItemAction
-  | UpdateOnCurrentPageAction;
+  | SelectMainItemAction
+  | SelectSubItemAction
+  | UpdateOnCurrentPageAction
+  | DeselectMainItemAction;
 
 interface MenuStatus {
   currentPage: string;
@@ -151,7 +153,9 @@ const reduce = (status: MenuStatus, action: MenuAction) => {
       return {
         currentPage: action.item.link?.toString() || status.currentPage,
         mainItem: action.index,
-        subItem: action.item.defaultSubItem,
+        subItem: action.selectDefaultSubitem
+          ? action.item.defaultSubItem
+          : undefined,
       };
     case "selectSubItem":
       return {
@@ -187,9 +191,81 @@ const reduce = (status: MenuStatus, action: MenuAction) => {
         ),
         subItem: subItemIndex,
       };
+    case "deselectMainItem":
+      return {
+        currentPage: status.currentPage,
+        mainItem: undefined,
+        subItem: undefined,
+      };
     default:
       return status;
   }
+};
+
+const capitalizeFirstLetter = (word: string) => {
+  return word[0].toLocaleUpperCase() + word.slice(1);
+};
+
+const MobileNavItem = ({
+  item,
+  isSelected,
+  selectedSubIndex,
+  clickItem,
+  clickSubitem,
+}: {
+  item: MainItem;
+  isSelected: boolean;
+  selectedSubIndex?: number;
+  clickItem: () => void;
+  clickSubitem: (item: SubItem, index: number) => void;
+}) => {
+  return (
+    <div
+      className={`px-[10%] transition-all ${isSelected && "bg-primary-white"}`}
+    >
+      <div
+        className="flex justify-between items-center py-[1.6rem]"
+        onClick={clickItem}
+      >
+        <span className="font-unbounded text-[3.6rem]">{item.text}</span>
+        <Image
+          src={"/images/menuArrow.svg"}
+          alt="go to link"
+          width={14}
+          height={24}
+          className={`transition-transform ${isSelected && "rotate-90"}`}
+        />
+      </div>
+      <div
+        className={`transition-all overflow-hidden font-unbounded ${
+          isSelected ? "h-[var(--height)]" : "h-0"
+        }`}
+        style={
+          {
+            "--height": `calc(${item.subItems.length}*48px)`,
+          } as React.CSSProperties
+        }
+      >
+        {item.subItems.map((subItem, index) => {
+          return (
+            <div
+              className="flex items-center h-[48px] text-desktop-reading"
+              key={index}
+            >
+              <span
+                className={`${
+                  selectedSubIndex === index ? "font-medium" : "font-light"
+                }`}
+                onClick={() => clickSubitem(subItem, index)}
+              >
+                {capitalizeFirstLetter(subItem.text)}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
 };
 
 export default function NavBar() {
@@ -199,20 +275,31 @@ export default function NavBar() {
     currentPage: "/",
     mainItem: 0,
   });
+  const [sideMenuOpen, setSideMenuOpen] = useState(false);
   useEffect(() => {
-    setNavStatus({ type: "currentPage", page: pathname });
-  }, [pathname]);
-  const clickMainItem = (item: MainItem, index: number) => {
-    setNavStatus({ type: "selectMainItem", item, index });
+    if (!sideMenuOpen) setNavStatus({ type: "currentPage", page: pathname });
+  }, [pathname, setNavStatus, sideMenuOpen]);
+  const clickMainItem = (
+    item: MainItem,
+    index: number,
+    selectDefaultSubitem: boolean = true
+  ) => {
+    setNavStatus({ type: "selectMainItem", item, index, selectDefaultSubitem });
     if (item.link) {
-      router.push(item.link);
+      if (!sideMenuOpen || item.subItems.length == 0) {
+        setSideMenuOpen(false);
+        router.push(item.link);
+      }
     }
   };
   const clickSubItem = (item: SubItem, index: number) => {
     setNavStatus({ type: "selectSubItem", item, index });
+    setSideMenuOpen(false);
     router.push(item.link);
   };
-
+  const deselectMainItem = () => {
+    setNavStatus({ type: "deselectMainItem" });
+  };
   return (
     <nav className="w-full flex flex-col">
       <div className="hidden tablet:flex justify-center border-b-2 border-primary-black h-[5.6rem] desktop:h-[8.8rem] tablet:bg-primary-light-blue pt-[.8rem] desktop:pt-[1.6rem] relative">
@@ -267,7 +354,7 @@ export default function NavBar() {
           ></div>
         </div>
       </div>
-      <div className="flex justify-center w-full">
+      <div className="hidden tablet:flex justify-center w-full">
         <div
           className={`flex w-[85%] h-[5.6rem] pt-[1.6rem] pb-[2.4rem] desktop:w-4/5 desktop:h-[12.8rem] max-w-[1200px] desktop:py-[4.8rem] transition-all divide-x-2 ${
             navStatus.mainItem === undefined ||
@@ -298,6 +385,69 @@ export default function NavBar() {
                 );
               }
             )}
+        </div>
+      </div>
+      <div className="flex tablet:hidden px-[10%] pt-[2.4rem]">
+        <Image
+          width={48}
+          height={32}
+          src={"/images/menuIcon.svg"}
+          alt="menu"
+          className="cursor-pointer"
+          onClick={() => {
+            setSideMenuOpen(true);
+          }}
+        />
+      </div>
+      <div
+        className={`absolute top-0 left-0 overflow-y-scroll tablet:hidden min-h-screen w-screen bg-primary-light-blue z-10 flex flex-col transition-transform ${
+          !sideMenuOpen && "-translate-x-full"
+        }`}
+      >
+        <div className="pt-[2.4rem] px-[10%]">
+          <Image
+            src={"/images/x.svg"}
+            alt="close menu"
+            width={32}
+            height={32}
+            onClick={() => setSideMenuOpen(false)}
+            className="cursor-pointer"
+          />
+        </div>
+        <div className="px-[10%] py-[5.6rem]">
+          <h1 className="font-unbounded text-[29.85vmin] leading-[30vmin] text-center">
+            oma
+          </h1>
+          <h2 className="font-montserrat text-[17.3vmin] leading-[17.3vmin] tracking-tighter text-center -translate-y-6">
+            San Isidro
+          </h2>
+        </div>
+        <div className="flex flex-col border-y-2 border-primary-black divide-y-2 divide-primary-black">
+          {defaultMenuHierarchy.map((item, index) => {
+            return (
+              <MobileNavItem
+                key={index}
+                item={item}
+                isSelected={
+                  index === navStatus.mainItem && item.subItems.length > 0
+                }
+                selectedSubIndex={
+                  index === navStatus.mainItem ? navStatus.subItem : undefined
+                }
+                clickItem={() => {
+                  if (
+                    index === navStatus.mainItem &&
+                    item.subItems.length > 0
+                  ) {
+                    deselectMainItem();
+                  } else {
+                    clickMainItem(item, index, false);
+                  }
+                }}
+                clickSubitem={clickSubItem}
+              />
+            );
+          })}
         </div>
       </div>
     </nav>
