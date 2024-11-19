@@ -2,7 +2,7 @@ import useAuth from "hooks/useAuth";
 import useOutsideClick from "hooks/useOutsideClick";
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 const NavUserChip = () => {
   const [openUserMenu, setOpenUserMenu] = useState(false);
@@ -10,7 +10,7 @@ const NavUserChip = () => {
   const ref = useOutsideClick(() => setOpenUserMenu(false));
   const logged = user.id !== -1;
   return (
-    <div className="w-[7.5%] desktop:w-[10%] flex justify-center items-center">
+    <div className="absolute right-0 h-[inherit] pt-[inherit] top-0 border-box w-[7.5%] desktop:w-[10%] flex justify-center items-center">
       <div
         ref={ref}
         className="flex w-[48px] h-[48px] bg-primary-white rounded-full border-2 border-primary-black "
@@ -41,7 +41,7 @@ const NavUserChip = () => {
           onClick={() => setOpenUserMenu(false)}
           className={`${
             !openUserMenu ? "translate-x-full" : ""
-          } absolute bottom-0 right-0 overflow-hidden translate-y-full bg-primary-white border-l-2 border-y-2 border-primary-black rounded-l-xl box-border min-w-[300px] transition-all divide-y-2 divide-primary-black`}
+          } absolute bottom-0 right-0 overflow-hidden translate-y-[calc(100%+1.6rem)] shadow-lg bg-primary-white border-l-2 border-y-2 border-primary-black rounded-l-xl box-border min-w-[300px] transition-all divide-y-2 divide-primary-black`}
         >
           <div className="flex justify-around items-center py-6">
             <div className="flex w-[56px] h-[56px] bg-primary-white rounded-full border-2 border-primary-black items-center justify-center">
