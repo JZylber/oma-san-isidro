@@ -1,405 +1,305 @@
 "use client";
-import styles from "./Navbar.module.scss";
-import MenuIcon from "../../public/images/menuIcon.svg";
-import X from "../../public/images/x.svg";
-import { useEffect, useReducer, useState } from "react";
-import MobileMenu from "./MobileMenu/mobile-menu";
-import TopMenu from "./TopMenu/TopMenu";
-import SubMenu from "./TopMenu/SubMenu";
-import { usePathname } from "next/navigation";
+import { useEffect, useReducer } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import NavUserChip from "./TopMenu/UserChip";
 
 type NavProps = {
   togglePageContent: () => void;
 };
 
-export type menuItem = {
+interface MenuItem {
   text: string;
-  link?: string;
-  selected: boolean;
-  subItems: Array<menuItem>;
-};
+}
 
-export type MenuHierarchy = Array<menuItem>;
+interface SubItem extends MenuItem {
+  link: string;
+}
+
+interface MainItem extends MenuItem {
+  link?: string;
+  defaultSubItem?: number;
+  subItems: Array<SubItem>;
+}
+
+export type MenuHierarchy = Array<MainItem>;
 
 const defaultMenuHierarchy: MenuHierarchy = [
-  { text: "Inicio", link: "/", selected: false, subItems: [] },
+  { text: "Inicio", link: "/", subItems: [] },
   {
     text: "Oma",
     link: "/oma",
-    selected: false,
+    defaultSubItem: 0,
     subItems: [
-      { text: "General", link: "/oma", selected: false, subItems: [] },
+      { text: "general", link: "/oma" },
       {
-        text: "Inscripción",
+        text: "inscripción",
         link: "/oma/inscripcion",
-        selected: false,
-        subItems: [],
       },
       {
-        text: "Autorización",
+        text: "autorización",
         link: "/oma/autorizacion",
-        selected: false,
-        subItems: [],
       },
       {
-        text: "Instancias",
+        text: "instancias",
         link: "/oma/instancias",
-        selected: false,
-        subItems: [],
       },
       {
-        text: "Reglamento",
+        text: "reglamento",
         link: "/oma/reglamento",
-        selected: false,
-        subItems: [],
       },
       {
-        text: "Resultados",
+        text: "resultados",
         link: "/oma/resultados",
-        selected: false,
-        subItems: [],
       },
       {
-        text: "Problemas",
+        text: "problemas",
         link: "/oma/problemas",
-        selected: false,
-        subItems: [],
       },
     ],
   },
   {
     text: "Ñandú",
     link: "/nandu",
-    selected: false,
+    defaultSubItem: 0,
     subItems: [
-      { text: "General", link: "/nandu", selected: false, subItems: [] },
+      { text: "general", link: "/nandu" },
       {
-        text: "Inscripción",
+        text: "inscripción",
         link: "/nandu/inscripcion",
-        selected: false,
-        subItems: [],
       },
       {
-        text: "Autorización",
+        text: "autorización",
         link: "/nandu/autorizacion",
-        selected: false,
-        subItems: [],
       },
       {
-        text: "Instancias",
+        text: "instancias",
         link: "/nandu/instancias",
-        selected: false,
-        subItems: [],
       },
       {
-        text: "Reglamento",
+        text: "reglamento",
         link: "/nandu/reglamento",
-        selected: false,
-        subItems: [],
       },
       {
-        text: "Resultados",
+        text: "resultados",
         link: "/nandu/resultados",
-        selected: false,
-        subItems: [],
       },
       {
-        text: "Problemas",
+        text: "problemas",
         link: "/nandu/problemas",
-        selected: false,
-        subItems: [],
       },
     ],
   },
   {
     text: "Otros",
-    link: undefined,
-    selected: false,
     subItems: [
       {
-        text: "Internacional",
+        text: "internacional",
         link: "/otros/internacional",
-        selected: false,
-        subItems: [],
       },
       {
-        text: "Mateclubes",
+        text: "mateclubes",
         link: "/otros/mateclubes",
-        selected: false,
-        subItems: [],
       },
       {
-        text: "Geometría",
+        text: "geometría",
         link: "/otros/geometria",
-        selected: false,
-        subItems: [],
       },
       {
-        text: "Canguro",
+        text: "canguro",
         link: "/otros/canguro",
-        selected: false,
-        subItems: [],
       },
       {
-        text: "Calendario",
+        text: "calendario",
         link: "/otros/calendario",
-        selected: false,
-        subItems: [],
       },
-      { text: "Libros", link: "/otros/libros", selected: false, subItems: [] },
+      { text: "libros", link: "/otros/libros" },
     ],
   },
 ];
 
-interface MenuAction {
-  type: string;
-  mainItem?: number;
-  subItem?: number;
-  route?: string;
+interface ClickMainItemAction {
+  type: "selectMainItem";
+  item: MainItem;
+  index: number;
 }
 
-const selectedMainItem = (menuHierarchy: MenuHierarchy) => {
-  const item = menuHierarchy.find((element) => element.selected);
-  if (item) {
-    return item.text;
-  } else {
-    return "";
-  }
-};
+interface ClickSubItemAction {
+  type: "selectSubItem";
+  item: SubItem;
+  index: number;
+}
 
-const selectedRoute = (menuHierarchy: MenuHierarchy) => {
-  const item = menuHierarchy.find((element) => element.selected);
-  if (item) {
-    const subItem = item.subItems.find((subItem) => subItem.selected);
-    if (subItem) {
-      return subItem.link;
-    } else {
-      return item.link;
-    }
-  } else {
-    return undefined;
-  }
-};
+interface UpdateOnCurrentPageAction {
+  type: "currentPage";
+  page: string;
+}
 
-const noItemsSelected = (menuHierarchy: MenuHierarchy) => {
-  return menuHierarchy.every(
-    (element) =>
-      !element.selected &&
-      element.subItems.every((subItem) => !subItem.selected)
-  );
-};
+type MenuAction =
+  | ClickMainItemAction
+  | ClickSubItemAction
+  | UpdateOnCurrentPageAction;
 
-const getSubitems = (menuHierarchy: MenuHierarchy) => {
-  let item = menuHierarchy.find((element) => element.selected);
-  if (item) {
-    return item.subItems;
-  } else {
-    return [];
-  }
-};
+interface MenuStatus {
+  currentPage: string;
+  mainItem?: number;
+  subItem?: number;
+}
 
-const unselectItems = (element: menuItem) => {
-  return { ...element, selected: false };
-};
-
-const selectItem = (
-  element: menuItem,
-  index: number,
-  item: number,
-  applyToSelectedSubitems?: (item: menuItem, index: number) => menuItem,
-  applyToUnselectedSubitems?: (item: menuItem, index: number) => menuItem
-) => {
-  if (index == item) {
-    return {
-      ...element,
-      selected: true,
-      subItems: applyToSelectedSubitems
-        ? element.subItems.map(applyToSelectedSubitems)
-        : element.subItems,
-    };
-  } else {
-    return {
-      ...element,
-      selected: false,
-      subItems: applyToUnselectedSubitems
-        ? element.subItems.map(applyToUnselectedSubitems)
-        : element.subItems,
-    };
-  }
-};
-
-const selectMainItem = (hierarchy: MenuHierarchy, mainCategory: number) => {
-  return hierarchy.map((element, index) =>
-    selectItem(
-      element,
-      index,
-      mainCategory,
-      (item: menuItem, index: number) =>
-        selectItem(item, index, element.link ? 0 : -1),
-      (item) => unselectItems(item)
-    )
-  );
-};
-
-const selectSubItem = (
-  hierarchy: MenuHierarchy,
-  mainCategory: number,
-  subCategory: number
-) => {
-  return hierarchy.map((element, index) =>
-    selectItem(
-      element,
-      index,
-      mainCategory,
-      (item: menuItem, index: number) => selectItem(item, index, subCategory),
-      (item) => unselectItems(item)
-    )
-  );
-};
-
-const unselectItemsInHierarchy = (hierarchy: MenuHierarchy) => {
-  return hierarchy.map((element) => {
-    return {
-      ...element,
-      selected: false,
-      subItems: element.subItems.map(unselectItems),
-    };
-  });
-};
-
-const showCurrentPageSelected = (
-  menuComponents: Array<menuItem>,
-  currentRoute: string
-) => {
-  if (selectedRoute(menuComponents) !== currentRoute) {
-    let mainCategoryIndex = -1;
-    let subCategoryIndex = -1;
-    menuComponents.forEach((mainCategory, mainIndex) => {
-      if (mainCategory.link === currentRoute) {
-        mainCategoryIndex = mainIndex;
-        subCategoryIndex = 0;
-      } else {
-        mainCategory.subItems.forEach((subCategory, subIndex) => {
-          if (subCategory.link === currentRoute) {
-            mainCategoryIndex = mainIndex;
-            subCategoryIndex = subIndex;
-          }
-        });
-      }
-    });
-    if (subCategoryIndex >= 0) {
-      return selectSubItem(menuComponents, mainCategoryIndex, subCategoryIndex);
-    } else if (mainCategoryIndex >= 0) {
-      return selectMainItem(menuComponents, mainCategoryIndex);
-    } else {
-      return unselectItemsInHierarchy(menuComponents);
-    }
-  } else {
-    return menuComponents;
-  }
-};
-
-const reduce = (menuHierarchy: MenuHierarchy, action: MenuAction) => {
-  const mainItem = action.mainItem ? action.mainItem : 0;
-  const subItem = action.subItem ? action.subItem : 0;
-  const route = action.route ? action.route : "/";
+const reduce = (status: MenuStatus, action: MenuAction) => {
   switch (action.type) {
     case "selectMainItem":
-      return selectMainItem(menuHierarchy, mainItem);
-    case "currentPage":
-      return showCurrentPageSelected(menuHierarchy, route);
+      return {
+        currentPage: action.item.link?.toString() || status.currentPage,
+        mainItem: action.index,
+        subItem: action.item.defaultSubItem,
+      };
     case "selectSubItem":
-      return selectSubItem(menuHierarchy, mainItem, subItem);
+      return {
+        currentPage: action.item.link,
+        mainItem: status.mainItem,
+        subItem: action.index,
+      };
+    case "currentPage":
+      if (status.currentPage === action.page) return status;
+      /* Find index in menu hierarchy */
+      const mainItemIndex = defaultMenuHierarchy.findIndex(
+        (item) => item.link === action.page
+      );
+      if (mainItemIndex >= 0) {
+        return {
+          currentPage: action.page,
+          mainItem: mainItemIndex,
+          subItem: defaultMenuHierarchy[mainItemIndex].defaultSubItem,
+        };
+      }
+      /* Find index in subitems */
+      const subItemIndex = defaultMenuHierarchy.reduce((acc, mainItem) => {
+        if (acc !== -1) return acc;
+        return mainItem.subItems.findIndex(
+          (subItem) => subItem.link === action.page
+        );
+      }, -1);
+      if (subItemIndex === -1) return status;
+      return {
+        currentPage: action.page,
+        mainItem: defaultMenuHierarchy.findIndex((item) =>
+          item.subItems.find((subItem) => subItem.link === action.page)
+        ),
+        subItem: subItemIndex,
+      };
     default:
-      return menuHierarchy;
+      return status;
   }
 };
 
-export default function NavBar({ togglePageContent }: NavProps) {
-  let [openFullMenu, setOpenFullMenu] = useState(false);
+export default function NavBar() {
   const pathname = usePathname();
-  const [menuHierarchy, setMenuHierarchy] = useReducer(
-    reduce,
-    defaultMenuHierarchy
-  );
+  const router = useRouter();
+  const [navStatus, setNavStatus] = useReducer(reduce, {
+    currentPage: "/",
+    mainItem: 0,
+  });
   useEffect(() => {
-    setMenuHierarchy({ type: "currentPage", route: pathname });
+    setNavStatus({ type: "currentPage", page: pathname });
   }, [pathname]);
-  const clickMainItem = (itemName: string) => {
-    const itemIndex = menuHierarchy.findIndex((item) => item.text == itemName);
-    if (itemIndex >= 0) {
-      setMenuHierarchy({ type: "selectMainItem", mainItem: itemIndex });
+  const clickMainItem = (item: MainItem, index: number) => {
+    setNavStatus({ type: "selectMainItem", item, index });
+    if (item.link) {
+      router.push(item.link);
     }
   };
-  const clickSubItem = (mainItemName: string, subItemName: string) => {
-    const mainItemIndex = menuHierarchy.findIndex(
-      (item) => item.text === mainItemName
-    );
-    const item = menuHierarchy[mainItemIndex];
-    const subItemIndex = item.subItems.findIndex(
-      (subitem) => subitem.text === subItemName
-    );
-    if (mainItemIndex >= 0 && subItemIndex >= 0) {
-      setMenuHierarchy({
-        type: "selectSubItem",
-        mainItem: mainItemIndex,
-        subItem: subItemIndex,
-      });
-    }
-  };
-
-  const openCloseMenu = () => {
-    setOpenFullMenu(!openFullMenu);
-    togglePageContent();
-  };
-
-  const isNotAtHome = () => {
-    const homeIndex: number = menuHierarchy.findIndex(
-      (item) => item.text === "Inicio"
-    );
-    const home: menuItem = menuHierarchy[homeIndex];
-    const isAtHome: boolean = home.selected;
-    return !isAtHome;
+  const clickSubItem = (item: SubItem, index: number) => {
+    setNavStatus({ type: "selectSubItem", item, index });
+    router.push(item.link);
   };
 
   return (
-    <nav className={styles.navbar}>
-      <div
-        className={
-          styles[["navbar_main", openFullMenu ? "_full" : ""].join("")]
-        }
-      >
-        <div className={styles.iconWrapper}>
-          <div className={styles.iconWrapper_icon}>
-            {openFullMenu ? (
-              <X className={styles.icon} onClick={() => openCloseMenu()} />
-            ) : (
-              <MenuIcon
-                className={styles.icon}
-                onClick={() => openCloseMenu()}
-              />
-            )}
-          </div>
+    <nav className="w-full flex flex-col">
+      <div className="hidden tablet:flex justify-center border-b-2 border-primary-black h-[5.6rem] desktop:h-[8.8rem] tablet:bg-primary-light-blue pt-[.8rem] desktop:pt-[1.6rem] relative">
+        <div className="w-[85%] grid grid-cols-4 desktop:w-4/5 desktop:grid-cols-5 max-w-[1200px] z-10">
+          {defaultMenuHierarchy.map((item, index) => {
+            return (
+              <div
+                key={index}
+                className={`rounded-t-[9px] flex justify-center items-center desktop:col-start-[var(--col)] cursor-pointer`}
+                style={
+                  { "--col": index == 0 ? 1 : index + 2 } as React.CSSProperties
+                }
+                onClick={() => clickMainItem(item, index)}
+              >
+                <span
+                  className={`font-unbounded text-tablet-actionable desktop:text-desktop-actionable hover:font-semibold transition-[font-weight] ${
+                    navStatus.mainItem == index ? "font-semibold" : ""
+                  }`}
+                >
+                  {item.text}
+                </span>
+              </div>
+            );
+          })}
         </div>
-        {openFullMenu ? (
-          <MobileMenu closeMenu={openCloseMenu} menuHierarchy={menuHierarchy} />
-        ) : (
-          <TopMenu
-            menuHierarchy={menuHierarchy}
-            onMainItemClick={clickMainItem}
-          />
-        )}
-        <NavUserChip />
-      </div>
-      {isNotAtHome() && (
-        <SubMenu
-          items={getSubitems(menuHierarchy)}
-          onSubItemClick={(subItemName: string) =>
-            clickSubItem(selectedMainItem(menuHierarchy), subItemName)
+        <div
+          className="absolute transition-all w-[85%] desktop:w-4/5 max-w-[1200px] grid grid-cols-[var(--left)_1fr_var(--right)] desktop:grid-cols-[var(--desktop-left)_1fr_var(--desktop-right)] h-[inherit] pt-[inherit] border-box top-0 "
+          style={
+            {
+              "--left": `${navStatus.mainItem}fr`,
+              "--desktop-left": `${
+                navStatus.mainItem == 0
+                  ? navStatus.mainItem
+                  : navStatus.mainItem !== undefined && navStatus.mainItem + 1
+              }fr`,
+              "--desktop-right": `${
+                navStatus.mainItem == 0
+                  ? 5 - navStatus.mainItem - 1
+                  : navStatus.mainItem !== undefined &&
+                    4 - navStatus.mainItem - 1
+              }fr`,
+              "--right": `${
+                navStatus.mainItem !== undefined && 4 - navStatus.mainItem - 1
+              }fr`,
+            } as React.CSSProperties
           }
-        />
-      )}
+        >
+          <div
+            className={`bg-primary-white col-start-2 rounded-t-[9px] border-primary-black border-x-2 border-t-2 ${
+              navStatus.mainItem !== undefined ? "" : "hidden"
+            }`}
+          ></div>
+        </div>
+      </div>
+      <div className="flex justify-center w-full">
+        <div
+          className={`flex w-[85%] h-[5.6rem] pt-[1.6rem] pb-[2.4rem] desktop:w-4/5 desktop:h-[12.8rem] max-w-[1200px] desktop:py-[4.8rem] transition-all divide-x-2 ${
+            navStatus.mainItem === undefined ||
+            defaultMenuHierarchy[navStatus.mainItem].subItems.length == 0
+              ? "!h-0 !p-0"
+              : ""
+          }`}
+        >
+          {navStatus.mainItem !== undefined &&
+            defaultMenuHierarchy[navStatus.mainItem].subItems.map(
+              (subItem, index) => {
+                return (
+                  <div
+                    key={index}
+                    onClick={() => {
+                      clickSubItem(subItem, index);
+                    }}
+                    className="flex grow justify-center items-center"
+                  >
+                    <span
+                      className={`cursor-pointer font-montserrat text-tablet-actionable desktop:text-desktop-reading hover:font-semibold desktop:hover:text-desktop-actionable transition-all duration-500 ${
+                        navStatus.subItem == index ? "font-semibold" : ""
+                      }`}
+                    >
+                      {subItem.text}
+                    </span>
+                  </div>
+                );
+              }
+            )}
+        </div>
+      </div>
     </nav>
   );
 }
