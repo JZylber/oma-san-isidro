@@ -3,6 +3,7 @@ import { useEffect, useReducer, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 import NavUserChip from "./UserChip";
+import useSticky from "hooks/useSticky";
 
 interface MenuItem {
   text: string;
@@ -277,6 +278,7 @@ export default function NavBar() {
     mainItem: 0,
   });
   const [sideMenuOpen, setSideMenuOpen] = useState(false);
+  const [stickyRef, isSticky] = useSticky();
   useEffect(() => {
     if (!sideMenuOpen) setNavStatus({ type: "currentPage", page: pathname });
   }, [pathname, setNavStatus, sideMenuOpen]);
@@ -303,7 +305,10 @@ export default function NavBar() {
   };
   return (
     <>
-      <nav className="sticky top-0 tablet:static w-full flex flex-col">
+      <nav
+        ref={stickyRef}
+        className="sticky top-0 tablet:static w-full flex flex-col z-100"
+      >
         <div className="hidden tablet:flex justify-center border-b-2 border-primary-black h-[5.6rem] desktop:h-[8.8rem] tablet:bg-primary-light-blue pt-[.8rem] desktop:pt-[1.6rem] relative">
           <div className="w-[85%] grid grid-cols-4 desktop:w-4/5 desktop:grid-cols-5 max-w-[1200px] z-10">
             {defaultMenuHierarchy.map((item, index) => {
@@ -392,7 +397,11 @@ export default function NavBar() {
               )}
           </div>
         </div>
-        <div className="flex tablet:hidden px-[10%] py-[2.4rem] bg-primary-white z-100">
+        <div
+          className={`flex tablet:hidden px-[10%] py-[2.4rem] bg-primary-white z-100 ${
+            isSticky ? "shadow-md" : ""
+          }`}
+        >
           <Image
             width={48}
             height={32}
