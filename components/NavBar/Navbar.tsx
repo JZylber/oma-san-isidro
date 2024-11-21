@@ -302,105 +302,109 @@ export default function NavBar() {
     setNavStatus({ type: "deselectMainItem" });
   };
   return (
-    <nav className="w-full flex flex-col">
-      <div className="hidden tablet:flex justify-center border-b-2 border-primary-black h-[5.6rem] desktop:h-[8.8rem] tablet:bg-primary-light-blue pt-[.8rem] desktop:pt-[1.6rem] relative">
-        <div className="w-[85%] grid grid-cols-4 desktop:w-4/5 desktop:grid-cols-5 max-w-[1200px] z-10">
-          {defaultMenuHierarchy.map((item, index) => {
-            return (
-              <div
-                key={index}
-                className={`rounded-t-[9px] flex justify-center items-center desktop:col-start-[var(--col)] cursor-pointer`}
-                style={
-                  { "--col": index == 0 ? 1 : index + 2 } as React.CSSProperties
-                }
-                onClick={() => clickMainItem(item, index)}
-              >
-                <span
-                  className={`font-unbounded text-tablet-actionable desktop:text-desktop-actionable hover:font-semibold transition-[font-weight] ${
-                    navStatus.mainItem == index ? "font-semibold" : ""
-                  }`}
+    <>
+      <nav className="sticky top-0 tablet:static w-full flex flex-col">
+        <div className="hidden tablet:flex justify-center border-b-2 border-primary-black h-[5.6rem] desktop:h-[8.8rem] tablet:bg-primary-light-blue pt-[.8rem] desktop:pt-[1.6rem] relative">
+          <div className="w-[85%] grid grid-cols-4 desktop:w-4/5 desktop:grid-cols-5 max-w-[1200px] z-10">
+            {defaultMenuHierarchy.map((item, index) => {
+              return (
+                <div
+                  key={index}
+                  className={`rounded-t-[9px] flex justify-center items-center desktop:col-start-[var(--col)] cursor-pointer`}
+                  style={
+                    {
+                      "--col": index == 0 ? 1 : index + 2,
+                    } as React.CSSProperties
+                  }
+                  onClick={() => clickMainItem(item, index)}
                 >
-                  {item.text}
-                </span>
-              </div>
-            );
-          })}
-        </div>
-        <NavUserChip />
-        <div
-          className="absolute transition-all w-[85%] desktop:w-4/5 max-w-[1200px] grid grid-cols-[var(--left)_1fr_var(--right)] desktop:grid-cols-[var(--desktop-left)_1fr_var(--desktop-right)] h-[inherit] pt-[inherit] border-box top-0 "
-          style={
-            {
-              "--left": `${navStatus.mainItem}fr`,
-              "--desktop-left": `${
-                navStatus.mainItem == 0
-                  ? navStatus.mainItem
-                  : navStatus.mainItem !== undefined && navStatus.mainItem + 1
-              }fr`,
-              "--desktop-right": `${
-                navStatus.mainItem == 0
-                  ? 5 - navStatus.mainItem - 1
-                  : navStatus.mainItem !== undefined &&
-                    4 - navStatus.mainItem - 1
-              }fr`,
-              "--right": `${
-                navStatus.mainItem !== undefined && 4 - navStatus.mainItem - 1
-              }fr`,
-            } as React.CSSProperties
-          }
-        >
-          <div
-            className={`bg-primary-white col-start-2 rounded-t-[9px] border-primary-black border-x-2 border-t-2 ${
-              navStatus.mainItem !== undefined ? "" : "hidden"
-            }`}
-          ></div>
-        </div>
-      </div>
-      <div className="hidden tablet:flex justify-center w-full">
-        <div
-          className={`flex w-[85%] h-[5.6rem] pt-[1.6rem] pb-[2.4rem] desktop:w-4/5 desktop:h-[12.8rem] max-w-[1200px] desktop:py-[4.8rem] transition-all divide-x-2 ${
-            navStatus.mainItem === undefined ||
-            defaultMenuHierarchy[navStatus.mainItem].subItems.length == 0
-              ? "!h-0 !p-0"
-              : ""
-          }`}
-        >
-          {navStatus.mainItem !== undefined &&
-            defaultMenuHierarchy[navStatus.mainItem].subItems.map(
-              (subItem, index) => {
-                return (
-                  <div
-                    key={index}
-                    onClick={() => {
-                      clickSubItem(subItem, index);
-                    }}
-                    className="flex grow justify-center items-center"
+                  <span
+                    className={`font-unbounded text-tablet-actionable desktop:text-desktop-actionable hover:font-semibold transition-[font-weight] ${
+                      navStatus.mainItem == index ? "font-semibold" : ""
+                    }`}
                   >
-                    <span
-                      className={`cursor-pointer font-montserrat text-tablet-actionable desktop:text-desktop-reading hover:font-semibold desktop:hover:text-desktop-actionable transition-all duration-500 ${
-                        navStatus.subItem == index ? "font-semibold" : ""
-                      }`}
-                    >
-                      {subItem.text}
-                    </span>
-                  </div>
-                );
-              }
-            )}
+                    {item.text}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+          <NavUserChip />
+          <div
+            className="absolute transition-all w-[85%] desktop:w-4/5 max-w-[1200px] grid grid-cols-[var(--left)_1fr_var(--right)] desktop:grid-cols-[var(--desktop-left)_1fr_var(--desktop-right)] h-[inherit] pt-[inherit] border-box top-0 "
+            style={
+              {
+                "--left": `${navStatus.mainItem}fr`,
+                "--desktop-left": `${
+                  navStatus.mainItem == 0
+                    ? navStatus.mainItem
+                    : navStatus.mainItem !== undefined && navStatus.mainItem + 1
+                }fr`,
+                "--desktop-right": `${
+                  navStatus.mainItem == 0
+                    ? 5 - navStatus.mainItem - 1
+                    : navStatus.mainItem !== undefined &&
+                      4 - navStatus.mainItem - 1
+                }fr`,
+                "--right": `${
+                  navStatus.mainItem !== undefined && 4 - navStatus.mainItem - 1
+                }fr`,
+              } as React.CSSProperties
+            }
+          >
+            <div
+              className={`bg-primary-white col-start-2 rounded-t-[9px] border-primary-black border-x-2 border-t-2 ${
+                navStatus.mainItem !== undefined ? "" : "hidden"
+              }`}
+            ></div>
+          </div>
         </div>
-      </div>
-      <div className="flex tablet:hidden px-[10%] pt-[2.4rem]">
-        <Image
-          width={48}
-          height={32}
-          src={"/images/menuIcon.svg"}
-          alt="menu"
-          className="cursor-pointer"
-          onClick={() => {
-            setSideMenuOpen(true);
-          }}
-        />
-      </div>
+        <div className="hidden tablet:flex justify-center w-full">
+          <div
+            className={`flex w-[85%] h-[5.6rem] pt-[1.6rem] pb-[2.4rem] desktop:w-4/5 desktop:h-[12.8rem] max-w-[1200px] desktop:py-[4.8rem] transition-all divide-x-2 ${
+              navStatus.mainItem === undefined ||
+              defaultMenuHierarchy[navStatus.mainItem].subItems.length == 0
+                ? "!h-0 !p-0"
+                : ""
+            }`}
+          >
+            {navStatus.mainItem !== undefined &&
+              defaultMenuHierarchy[navStatus.mainItem].subItems.map(
+                (subItem, index) => {
+                  return (
+                    <div
+                      key={index}
+                      onClick={() => {
+                        clickSubItem(subItem, index);
+                      }}
+                      className="flex grow justify-center items-center"
+                    >
+                      <span
+                        className={`cursor-pointer font-montserrat text-tablet-actionable desktop:text-desktop-reading hover:font-semibold desktop:hover:text-desktop-actionable transition-all duration-500 ${
+                          navStatus.subItem == index ? "font-semibold" : ""
+                        }`}
+                      >
+                        {subItem.text}
+                      </span>
+                    </div>
+                  );
+                }
+              )}
+          </div>
+        </div>
+        <div className="flex tablet:hidden px-[10%] py-[2.4rem] bg-primary-white z-100">
+          <Image
+            width={48}
+            height={32}
+            src={"/images/menuIcon.svg"}
+            alt="menu"
+            className="cursor-pointer"
+            onClick={() => {
+              setSideMenuOpen(true);
+            }}
+          />
+        </div>
+      </nav>
       <div
         className={`absolute top-0 left-0 overflow-y-scroll tablet:hidden min-h-screen w-screen bg-primary-light-blue z-10 flex flex-col transition-transform ${
           !sideMenuOpen && "-translate-x-full"
@@ -452,6 +456,6 @@ export default function NavBar() {
           })}
         </div>
       </div>
-    </nav>
+    </>
   );
 }
