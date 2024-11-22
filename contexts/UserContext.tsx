@@ -19,6 +19,8 @@ export type UserContextType = {
     email: string,
     password: string
   ) => Promise<boolean | Error>;
+  isLoggingIn: boolean;
+  isLoggingOut: boolean;
 };
 
 const AuthContext = createContext<UserContextType>({
@@ -42,6 +44,8 @@ const AuthContext = createContext<UserContextType>({
   register: async () => {
     return false;
   },
+  isLoggingIn: false,
+  isLoggingOut: false,
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
@@ -105,9 +109,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   ) => {
     return Error("Not implemented");
   };
-
+  const isLoggingIn = loginEndPoint.isLoading;
+  const isLoggingOut = logoutEndPoint.isLoading;
   return (
-    <AuthContext.Provider value={{ user, login, logout, register }}>
+    <AuthContext.Provider
+      value={{ user, login, logout, register, isLoggingIn, isLoggingOut }}
+    >
       {children}
     </AuthContext.Provider>
   );

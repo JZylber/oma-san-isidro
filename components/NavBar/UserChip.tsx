@@ -1,4 +1,5 @@
 import ActionButton from "components/buttons/ActionButton/ActionButton";
+import BasicLoader from "components/Loader/BasicLoader";
 import useAuth from "hooks/useAuth";
 import useOutsideClick from "hooks/useOutsideClick";
 import Image from "next/image";
@@ -7,7 +8,7 @@ import { useState } from "react";
 
 const NavUserChip = () => {
   const [openUserMenu, setOpenUserMenu] = useState(false);
-  const { user, logout } = useAuth();
+  const { user, logout, isLoggingIn, isLoggingOut } = useAuth();
   const ref = useOutsideClick(() => setOpenUserMenu(false));
   const logged = user.id !== -1;
   return (
@@ -19,15 +20,20 @@ const NavUserChip = () => {
         <div
           className="flex justify-center items-center w-full h-full cursor-pointer"
           onClick={() => {
+            if (isLoggingIn || isLoggingOut) return;
             setOpenUserMenu(!openUserMenu);
           }}
         >
-          <Image
-            src={`/icons/${logged ? "person" : "login"}.svg`}
-            width="32"
-            height="32"
-            alt="account menu"
-          />
+          {isLoggingIn || isLoggingOut ? (
+            <BasicLoader className="w-12 h-12" />
+          ) : (
+            <Image
+              src={`/icons/${logged ? "person" : "login"}.svg`}
+              width="32"
+              height="32"
+              alt="account menu"
+            />
+          )}
         </div>
         <div
           onClick={() => setOpenUserMenu(false)}
