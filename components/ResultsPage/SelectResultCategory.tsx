@@ -2,6 +2,7 @@ import { RefObject, useCallback, useEffect, useRef, useState } from "react";
 import SelectIcon from "../../public/images/menuSelectIcon.svg";
 import styles from "./SelectResultCategory.module.scss";
 import { Filterables } from "../../hooks/types";
+import useOutsideClick from "hooks/useOutsideClick";
 
 interface SelectResultProps<T> {
   category: string;
@@ -84,22 +85,11 @@ const SelectResultCategory = <T extends Filterables>({
       normalizeString(tempValue)
     );
   });
-  const useOutsideAlerter = (ref: RefObject<HTMLDivElement>) => {
-    useEffect(() => {
-      const handleClickOutside = (event: MouseEvent) => {
-        const target = event.target && (event.target as Node);
-        if (ref.current && !ref.current.contains(target)) {
-          setCanOpen(false);
-        }
-      };
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }, [ref]);
-  };
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  useOutsideAlerter(wrapperRef);
+
+  const wrapperRef = useOutsideClick(() => {
+    setCanOpen(false);
+  });
+
   const toggleValue = (option: T) => {
     if (value === option) {
       setValue(undefined);

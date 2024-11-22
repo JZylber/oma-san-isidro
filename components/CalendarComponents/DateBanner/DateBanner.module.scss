@@ -148,7 +148,6 @@
         font-size: shared.$desktop-reading-font-size;
     }
     &_image{
-        position: relative;
         @include shared.mobile-only{
             width: 19px;
             height: 19px;

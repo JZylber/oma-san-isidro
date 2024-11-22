@@ -59,12 +59,6 @@ const ProvincialResultTable = ({
         if (a.resultado === b.resultado) {
           return a.participante.surname.localeCompare(b.participante.surname);
         } else {
-          console.log(
-            a.resultado,
-            resultHierarchy.indexOf(a.resultado),
-            resultHierarchy.indexOf(b.resultado),
-            b.resultado
-          );
           return (
             resultHierarchy.indexOf(a.resultado) -
             resultHierarchy.indexOf(b.resultado)
