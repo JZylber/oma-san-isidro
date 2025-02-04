@@ -19,6 +19,13 @@ const DashboardNavBar = () => {
       <NavBarLink href="/dashboard" selected={pathname === "/dashboard"}>
         Inicio
       </NavBarLink>
+
+      <NavBarLink
+        href="/dashboard/pruebas"
+        selected={pathname === "/dashboard/pruebas"}
+      >
+        Pruebas
+      </NavBarLink>
       <NavBarLink
         href="/dashboard/resultados"
         selected={pathname === "/dashboard/resultados"}
