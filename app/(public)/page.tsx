@@ -29,9 +29,15 @@ const getNews = unstable_cache(
   { tags: ["news"] }
 );
 
+const getEvents = unstable_cache(
+  async () => getCalendarEvents(new Date().getFullYear()),
+  ["dates"],
+  { tags: ["dates"] }
+);
+
 export default async function Page() {
   const newsData = getNews();
-  const eventsData = getCalendarEvents(new Date().getFullYear());
+  const eventsData = getEvents();
   let [cachedNews, events] = await Promise.all([newsData, eventsData]);
   const env = process.env.NODE_ENV;
   const vercel_env = process.env.VERCEL_ENV;

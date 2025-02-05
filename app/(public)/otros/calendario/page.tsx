@@ -1,17 +1,30 @@
-import { Metadata } from "next"
-import CalendarPage from "./calendario"
-import { getCalendarEvents } from "../../../../server/app-router-db-calls"
+import { Metadata } from "next";
+import CalendarPage from "./calendario";
+import { getCalendarEvents } from "../../../../server/app-router-db-calls";
+import { unstable_cache } from "next/cache";
 
 export const metadata: Metadata = {
-    title: 'Calendario',
-    description: 'Calendario anual de todas las competencias matemáticas del país',
-  }
+  title: "Calendario",
+  description:
+    "Calendario anual de todas las competencias matemáticas del país",
+};
+
+const getEvents = unstable_cache(
+  async (year) => getCalendarEvents(year),
+  ["dates"],
+  { tags: ["dates"] }
+);
 
 const Calendar = async () => {
-    const year = new Date().getFullYear()
-    const available = await getCalendarEvents(year)
-    const events = available.map((event) => {return{...event,fecha_fin:event.fecha_fin?event.fecha_fin:undefined}})
-    return <CalendarPage events={events} year={year}/>
-}
+  const year = new Date().getFullYear();
+  const available = await getEvents(year);
+  const events = available.map((event) => {
+    return {
+      ...event,
+      fecha_fin: event.fecha_fin ? event.fecha_fin : undefined,
+    };
+  });
+  return <CalendarPage events={events} year={year} />;
+};
 
-export default Calendar
+export default Calendar;
