@@ -2,29 +2,41 @@
 
 import { inferRouterOutputs } from "@trpc/server";
 import ActionButton from "components/buttons/ActionButton/ActionButton";
-import Checkbox from "components/common/form/CheckBox";
+import Select from "components/common/form/Select";
 import Loader from "components/Loader/Loader";
 import ConfirmModal from "components/Popups/ConfirmModal/ConfirmModal";
 import Modal from "components/Popups/Modal";
 import Table from "components/Table/Table";
 import Image from "next/image";
-import { Fragment, use, useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { AppRouter } from "server/routers/_app";
 import { trpc } from "utils/trpc";
 
 const displayDate = (date: Date) => {
-  return `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getFullYear()}`;
+  return `${date.getUTCDate()} de ${date.toLocaleString("es-AR", {
+    month: "long",
+  })}`;
 };
 
-const blankNews = {
-  agregado: new Date(),
-  link: "",
-  titulo: "",
-  visible: false,
-  id_noticia: -1,
+enum types {
+  nandu = "Nandú",
+  oma = "OMA",
+  internacional = "Internacional",
+  selectivo = "Selectivo",
+  geometria = "Geometría",
+  mateclubes = "Mateclubes",
+  literatura = "Literatura y Matemática",
+}
+
+const blankDate = {
+  id_fecha: -1,
+  fecha_inicio: new Date(),
+  fecha_fin: null,
+  texto: "",
+  tipo: "",
 };
 
-const NewsModal = ({
+const CalendarModal = ({
   openModal,
   closeModal,
   onConfirm,
@@ -32,14 +44,14 @@ const NewsModal = ({
 }: {
   openModal: boolean;
   closeModal: () => void;
-  onConfirm: (news: News) => void;
-  result?: News;
+  onConfirm: (news: OMADate) => void;
+  result?: OMADate;
 }) => {
-  const [newNews, setNewNews] = useState<News>(
-    result ? result : { ...blankNews }
+  const [newDate, setNewDate] = useState<OMADate>(
+    result ? result : { ...blankDate }
   );
   useEffect(() => {
-    setNewNews(result ? result : { ...blankNews });
+    setNewDate(result ? result : { ...blankDate });
   }, [result]);
   return (
     <Modal
@@ -48,59 +60,72 @@ const NewsModal = ({
       className="bg-primary-white border-2 border-primary-black rounded-xl m-auto w-1/2"
     >
       <div className="flex flex-col items-center">
-        <h1 className="font-unbounded text-4xl py-8">Noticia</h1>
+        <h1 className="font-unbounded text-4xl py-8">Fecha</h1>
 
         <form className="flex flex-col gap-y-4 w-2/3 px-8 py-4">
           <div className="flex flex-col gap-y-2">
             <label className="font-montserrat text-2xl font-semibold">
-              Título
+              Texto
             </label>
             <input
               type="text"
-              value={newNews.titulo}
+              value={newDate.texto}
               onChange={(e) =>
-                setNewNews({ ...newNews, titulo: e.target.value })
+                setNewDate({ ...newDate, texto: e.target.value })
               }
               className="bg-primary-white border-2 border-primary-black rounded-md p-2 font-montserrat text-2xl"
             />
           </div>
           <div className="flex flex-col gap-y-2">
-            <label className="font-montserrat text-2xl font-semibold">
-              Link
-            </label>
-            <input
-              type="text"
-              value={newNews.link}
-              onChange={(e) => setNewNews({ ...newNews, link: e.target.value })}
-              className="bg-primary-white border-2 border-primary-black rounded-md p-2 font-montserrat text-2xl"
-            />
-          </div>
-          <div className="flex items-center justify-between py-2">
-            <label className="font-montserrat text-2xl font-semibold">
-              Visible
-            </label>
-            <Checkbox
-              checked={newNews.visible}
-              onChange={(e) => {
-                setNewNews({ ...newNews, visible: e.target.checked });
-              }}
-              width={24}
-              height={24}
+            <Select
+              label="Tipo"
+              options={Object.values(types)}
+              value={newDate.tipo ? newDate.tipo : ""}
+              onChange={(selected) =>
+                setNewDate({ ...newDate, tipo: selected })
+              }
             />
           </div>
           <div className="flex flex-col gap-y-2">
             <label className="font-montserrat text-2xl font-semibold">
-              Fecha
+              Fecha Inicio
             </label>
             <input
-              value={newNews.agregado.toISOString().split("T")[0]}
+              value={newDate.fecha_inicio.toISOString().split("T")[0]}
               type="date"
               className="bg-primary-white border-2 border-primary-black rounded-md p-2 font-montserrat text-2xl"
               onChange={(e) => {
-                setNewNews({
-                  ...newNews,
-                  agregado: new Date(e.target.value + " GMT-0300"),
+                setNewDate({
+                  ...newDate,
+                  fecha_inicio: new Date(e.target.value + " GMT-0300"),
                 });
+              }}
+            />
+          </div>
+          <div className="flex flex-col gap-y-2">
+            <label className="font-montserrat text-2xl font-semibold">
+              Fecha Fin
+            </label>
+            <input
+              value={
+                newDate.fecha_fin
+                  ? newDate.fecha_fin.toISOString().split("T")[0]
+                  : ""
+              }
+              type="date"
+              className="bg-primary-white border-2 border-primary-black rounded-md p-2 font-montserrat text-2xl"
+              onChange={(e) => {
+                if (!e.target.value) {
+                  setNewDate({
+                    ...newDate,
+                    fecha_fin: null,
+                  });
+                } else {
+                  setNewDate({
+                    ...newDate,
+                    fecha_fin: new Date(e.target.value + " GMT-0300"),
+                  });
+                }
               }}
             />
           </div>
@@ -109,7 +134,7 @@ const NewsModal = ({
           <ActionButton onClick={closeModal}>Cancelar</ActionButton>
           <ActionButton
             onClick={() => {
-              onConfirm(newNews);
+              onConfirm(newDate);
             }}
             important
           >
@@ -122,26 +147,28 @@ const NewsModal = ({
 };
 
 type Unpacked<T> = T extends (infer U)[] ? U : T;
-type News = Unpacked<inferRouterOutputs<AppRouter>["dashboard"]["getNews"]>;
+type OMADate = Unpacked<inferRouterOutputs<AppRouter>["dashboard"]["getDates"]>;
 
-const DashboardNews = () => {
+const DashboardDates = () => {
   const [openModal, setOpenModal] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
-  const news = trpc.dashboard.getNews.useQuery(undefined, {
+  const dates = trpc.dashboard.getDates.useQuery(new Date().getFullYear(), {
     refetchInterval: 0,
   });
-  const updateNews = trpc.dashboard.setNews.useMutation();
-  const deleteNews = trpc.dashboard.deleteNews.useMutation();
-  const [currentNews, setCurrentNews] = useState<News | undefined>(undefined);
-  if (news.isLoading || news.isRefetching) return <Loader />;
-  if (news.isError) return <div>Error: {news.error.message}</div>;
-  if (news.isSuccess)
+  const updateDate = trpc.dashboard.setDate.useMutation();
+  const deleteDate = trpc.dashboard.deleteDate.useMutation();
+  const [currentDate, setCurrentDate] = useState<OMADate | undefined>(
+    undefined
+  );
+  if (dates.isLoading || dates.isRefetching) return <Loader />;
+  if (dates.isError) return <div>Error: {dates.error.message}</div>;
+  if (dates.isSuccess)
     return (
       <div>
         <div className="flex py-2">
           <ActionButton
             onClick={() => {
-              setCurrentNews(undefined);
+              setCurrentDate(undefined);
               setOpenModal(true);
             }}
             important
@@ -152,32 +179,20 @@ const DashboardNews = () => {
           </ActionButton>
         </div>
         <Table
-          values={news.data.filter(
-            (publication) =>
-              publication.agregado.getFullYear() === new Date().getFullYear()
-          )}
-          allValues={news.data}
-          headers={["Título", "Link", "Visible", "Fecha", "Acciones"]}
-          make_element={(publication, index) => {
+          values={dates.data}
+          allValues={dates.data}
+          headers={["Fecha Inicio", "Fecha Fin", "Tipo", "Texto", "Acciones"]}
+          make_element={(date, index) => {
             return (
               <Fragment key={index}>
-                <div className="py-4 px-2 truncate">{publication.titulo}</div>
-                <div className="py-4 px-2 truncate">{publication.link}</div>
-                <div className="py-4 px-2 flex justify-center">
-                  <Image
-                    src={
-                      publication.visible
-                        ? "/icons/check.svg"
-                        : "/icons/close.svg"
-                    }
-                    width={24}
-                    height={24}
-                    alt={publication.visible ? "visible" : "no visible"}
-                  />
+                <div className="py-4 px-2 truncate">
+                  {displayDate(date.fecha_inicio)}
                 </div>
-                <div className="py-4 px-2">
-                  {displayDate(publication.agregado)}
+                <div className="py-4 px-2 truncate">
+                  {date.fecha_fin ? displayDate(date.fecha_fin) : "-"}
                 </div>
+                <div className="py-4 px-2 truncate">{date.tipo}</div>
+                <div className="py-4 px-2 truncate">{date.texto}</div>
                 <div className="py-4 px-2">
                   <div className="flex justify-center items-center gap-x-4 w-full h-full">
                     <Image
@@ -187,7 +202,7 @@ const DashboardNews = () => {
                       height={24}
                       className="cursor-pointer"
                       onClick={() => {
-                        setCurrentNews(publication);
+                        setCurrentDate(date);
                         setOpenModal(true);
                       }}
                     />
@@ -198,7 +213,7 @@ const DashboardNews = () => {
                       height={24}
                       className="cursor-pointer"
                       onClick={() => {
-                        setCurrentNews(publication);
+                        setCurrentDate(date);
                         setConfirmDelete(true);
                       }}
                     />
@@ -208,33 +223,33 @@ const DashboardNews = () => {
             );
           }}
           grid
-          tableClassName="grid-cols-[4fr_4fr_1fr_1fr_2fr]"
+          tableClassName="grid-cols-[2fr_2fr_1fr_3fr_2fr]"
         />
-        <NewsModal
+        <CalendarModal
           openModal={openModal}
           closeModal={() => setOpenModal(false)}
-          onConfirm={async (newNews: News) => {
-            await updateNews.mutateAsync(newNews);
-            news.refetch();
+          onConfirm={async (newDate: OMADate) => {
+            await updateDate.mutateAsync(newDate);
+            dates.refetch();
             setOpenModal(false);
           }}
-          result={currentNews}
+          result={currentDate}
         />
         <ConfirmModal
           open={confirmDelete}
           close={() => setConfirmDelete(false)}
           onCancel={() => setConfirmDelete(false)}
           onConfirm={async () => {
-            if (currentNews) {
-              await deleteNews.mutateAsync(currentNews.id_noticia);
-              news.refetch();
+            if (currentDate) {
+              await deleteDate.mutateAsync(currentDate.id_fecha);
+              dates.refetch();
               setConfirmDelete(false);
             }
           }}
         >
           <div className="px-4 text-2xl font-montserrat">
             <p className="font-semibold">
-              ¿Estás seguro/a que deseas eliminar esta noticia?
+              ¿Estás seguro/a que deseas eliminar esta fecha?
             </p>
             <p>Esta acción no se puede deshacer.</p>
           </div>
@@ -244,4 +259,4 @@ const DashboardNews = () => {
   return null;
 };
 
-export default DashboardNews;
+export default DashboardDates;
