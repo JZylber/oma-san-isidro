@@ -2,7 +2,6 @@
 
 import { inferRouterOutputs } from "@trpc/server";
 import ActionButton from "components/buttons/ActionButton/ActionButton";
-import Checkbox from "components/common/form/CheckBox";
 import Select from "components/common/form/Select";
 import Loader from "components/Loader/Loader";
 import ConfirmModal from "components/Popups/ConfirmModal/ConfirmModal";
@@ -23,6 +22,7 @@ enum types {
   nandu = "Nandú",
   oma = "OMA",
   internacional = "Internacional",
+  selectivo = "Selectivo",
   geometria = "Geometría",
   mateclubes = "Mateclubes",
   literatura = "Literatura y Matemática",
