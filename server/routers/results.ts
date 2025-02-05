@@ -1,9 +1,7 @@
 import { router, publicProcedure } from '../trpc';
 import { z } from 'zod';
-import { INSTANCIA } from "@prisma/client";
 import { prisma } from '../db';
-
-const INSTANCE = z.nativeEnum(INSTANCIA);
+import { INSTANCE } from '../types';
 
 export const resultRouter = router({
     getResults: publicProcedure

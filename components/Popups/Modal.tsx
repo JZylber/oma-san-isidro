@@ -1,32 +1,31 @@
-import React, {ReactNode, useEffect, useState } from 'react';
-import ReactDOM from "react-dom";
-import styles from './Modal.module.scss';
+import { useEffect, useRef } from "react";
 
-interface ModalProps {
-    open : boolean,
-    children : ReactNode,
-  }
-  
-const Modal = ({open,children}:ModalProps) => {
-      const [isBrowser, setIsBrowser] = useState(false);
-    
-      useEffect(() => {
-        setIsBrowser(true);
-      }, []);
-  
-      const ModalComponent = open ?
-        <div className={styles.modal_overlay}>
-          {children}
-        </div> : null;
-  
-      if (isBrowser) {
-        return ReactDOM.createPortal(
-            ModalComponent,
-            document.getElementById("modal-root") as HTMLElement
-        );
-      } else {
-        return null;
-      }
-  };
-  
-  export default Modal
+function Modal({
+  openModal,
+  closeModal,
+  children,
+  className = "",
+}: {
+  openModal: boolean;
+  closeModal: () => void;
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const ref = useRef<HTMLDialogElement | null>(null);
+
+  useEffect(() => {
+    if (openModal) {
+      ref.current?.showModal();
+    } else {
+      ref.current?.close();
+    }
+  }, [openModal]);
+
+  return (
+    <dialog ref={ref} onCancel={closeModal} className={className}>
+      {children}
+    </dialog>
+  );
+}
+
+export default Modal;

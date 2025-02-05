@@ -12,7 +12,7 @@ interface HomeModalProps {
 
 const HomeModal = ({ open, setOpen }: HomeModalProps) => {
   return (
-    <Modal open={open}>
+    <Modal openModal={open} closeModal={() => setOpen(false)}>
       <div className={styles.modal_content}>
         <div className="flex items-center">
           <Image

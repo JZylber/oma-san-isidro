@@ -7,10 +7,16 @@ import Warning from "../Warning/Warning";
 import { Button } from "../buttons/Button";
 import Image from "next/image";
 import useFilter from "../../hooks/useFilter";
-import { Filterables, Participant, School } from "../../hooks/types";
+import {
+  Filterables,
+  FilterObject,
+  Participant,
+  School,
+} from "../../hooks/types";
 import { INSTANCIA } from "@prisma/client";
 import { trpc } from "../../utils/trpc";
 import Loader from "../Loader/Loader";
+import React from "react";
 
 interface NationalProps {
   competition: string;
@@ -18,7 +24,7 @@ interface NationalProps {
   auth_max_date?: Date;
 }
 
-export interface NationalParticipant extends Record<string, Filterables> {
+export interface NationalParticipant extends FilterObject {
   participante: Participant;
   nivel: number;
   colegio: School;
@@ -508,7 +514,7 @@ const NationalInfo = ({
           />
         </form>
         <Table
-          values={filteredValues}
+          values={filteredValues as NationalParticipant[]}
           allValues={participants}
           headers={participant_headers}
           Card={ProvincialParticipantCard}
@@ -590,7 +596,11 @@ const National = ({ competition }: { competition: string }) => {
         };
       }),
     };
-    return <NationalInfo {...data} />;
+    return data.participants.length > 0 && data.auth_max_date ? (
+      <NationalInfo {...data} />
+    ) : (
+      <p className="font-montserrat text-5xl py-6">Proximamente...</p>
+    );
   } else {
     return <div>Error</div>;
   }

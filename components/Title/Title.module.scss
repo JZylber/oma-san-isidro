@@ -4,7 +4,7 @@
     position: relative;
     width: auto;
     word-wrap: break-word;
-
+    z-index: -1;
     @include shared.mobile-only{
         margin-top: 6.4rem;
         height: shared.$mobileXspacing * 20;

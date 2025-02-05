@@ -1,67 +1,72 @@
 import { INSTANCIA } from "@prisma/client";
 import { prisma } from "./db";
 
-export type Competition = "OMA" | "ÑANDÚ"
+export type Competition = "OMA" | "ÑANDÚ";
 
-export const getCalendarEvents = async (year:number,type?: string) => {
-    let query = []; 
-    if(type){
-      query = await prisma.fechas.findMany({
-        where: {
-          fecha_inicio: {
-            gte: new Date(year,0,1),
-            lt:  new Date(year,11,31)
-          },
-          tipo: type
-        },
-        orderBy: [{
-          fecha_inicio : 'asc'
-        }],
-        select: {
-          fecha_inicio: true,
-          fecha_fin: true,
-          tipo: true,
-          texto: true
-        }
-      })
-      const results = query
-      return (results);
-    } else {
-     query = await prisma.fechas.findMany({
+export const getCalendarEvents = async (year: number, type?: string) => {
+  let query = [];
+  if (type) {
+    query = await prisma.fechas.findMany({
       where: {
         fecha_inicio: {
-          gte: new Date(year,0,1),
-          lt:  new Date(year,11,31)
-        }
+          gte: new Date(year, 0, 1),
+          lt: new Date(year, 11, 31),
+        },
+        tipo: type,
       },
-      orderBy: [{
-        fecha_inicio : 'asc'
-      }],
+      orderBy: [
+        {
+          fecha_inicio: "asc",
+        },
+      ],
       select: {
         fecha_inicio: true,
         fecha_fin: true,
         tipo: true,
-        texto: true
-      }
-    })}
-    const results = query
-    return (results);
-    };
+        texto: true,
+      },
+    });
+    const results = query;
+    return results;
+  } else {
+    query = await prisma.fechas.findMany({
+      where: {
+        fecha_inicio: {
+          gte: new Date(year, 0, 1),
+          lt: new Date(year, 11, 31),
+        },
+      },
+      orderBy: [
+        {
+          fecha_inicio: "asc",
+        },
+      ],
+      select: {
+        fecha_inicio: true,
+        fecha_fin: true,
+        tipo: true,
+        texto: true,
+      },
+    });
+  }
+  const results = query;
+  return results;
+};
 
 export const getInscriptionData = async (type: string, year: number) => {
-    const query = await prisma.competencia.findFirst({
+  const query = await prisma.competencia.findFirst({
     where: {
       tipo: type,
-      ano: year
+      ano: year,
     },
     select: {
       fecha_inscripcion_nacional: true,
       fecha_inscripcion_regional: true,
-      link_inscripcion: true
-    }
-    });
-    const results = query
-    return (results);
+      link_inscripcion: true,
+    },
+  });
+  const results = query;
+  return results;
 };
 
 export const getInstances = async (type: string, year: number) => {
@@ -69,63 +74,126 @@ export const getInstances = async (type: string, year: number) => {
     where: {
       competencia: {
         tipo: type,
-        ano: year
-      }
+        ano: year,
+      },
     },
-    orderBy: [{
-      fecha : 'asc'
-    }],
+    orderBy: [
+      {
+        fecha: "asc",
+      },
+    ],
     select: {
       instancia: true,
       fecha: true,
-    }
+    },
   });
-  return (query);
+  return query;
 };
 
 export const getAvailableResults = async (type: string) => {
   const query = await prisma.prueba.findMany({
     where: {
       AND: [
-      {competencia: {
-        tipo: type
-      }},
-      {fecha: {
-        gte: new Date(2022,0,1),
-        lt: new Date()}
-      },
-      {NOT: {
-        rinden: {
-          none: {}
-        }
-      }}
-    ]},
+        {
+          competencia: {
+            tipo: type,
+          },
+        },
+        {
+          fecha: {
+            gte: new Date(2022, 0, 1),
+            lt: new Date(),
+          },
+        },
+        {
+          NOT: {
+            rinden: {
+              none: {},
+            },
+          },
+        },
+      ],
+    },
     select: {
       instancia: true,
       competencia: {
         select: {
-          ano: true
-       },
+          ano: true,
+        },
       },
-      resultados_disponibles: true
-    }});
-  let years = Array.from(new Set(query.map((prueba) => prueba.competencia.ano))).map((ano : number): {ano:number,pruebas:{nombre: string, disponible: boolean}[]} => {return({ano:ano,pruebas:[]})});
-  query.forEach((prueba) => {years.find((year) => year.ano === prueba.competencia.ano)!.pruebas.push({nombre: prueba.instancia,disponible: prueba.resultados_disponibles})});
-  return (years);
+      resultados_disponibles: true,
+    },
+  });
+  let years = Array.from(
+    new Set(query.map((prueba) => prueba.competencia.ano))
+  ).map(
+    (
+      ano: number
+    ): { ano: number; pruebas: { nombre: string; disponible: boolean }[] } => {
+      return { ano: ano, pruebas: [] };
+    }
+  );
+  query.forEach((prueba) => {
+    years
+      .find((year) => year.ano === prueba.competencia.ano)!
+      .pruebas.push({
+        nombre: prueba.instancia,
+        disponible: prueba.resultados_disponibles,
+      });
+  });
+  return years;
 };
 
-export const getAuthMaxDate = async (type: string, year: number, instance: INSTANCIA) => {
+export const getAuthMaxDate = async (
+  type: string,
+  year: number,
+  instance: INSTANCIA
+) => {
   const query = await prisma.prueba.findFirst({
     where: {
       competencia: {
         tipo: type,
-        ano: year
+        ano: year,
       },
-      instancia: instance
+      instancia: instance,
     },
     select: {
-      fecha_limite_autorizacion: true
-    }
+      fecha_limite_autorizacion: true,
+    },
   });
-  return (query);
-}
+  return query;
+};
+
+export const getAllTests = async () => {
+  const query = await prisma.prueba.findMany({
+    select: {
+      id_prueba: true,
+      instancia: true,
+      resultados_disponibles: true,
+      cantidad_problemas: true,
+      competencia: {
+        select: {
+          tipo: true,
+          ano: true,
+        },
+      },
+    },
+    orderBy: [
+      {
+        fecha: "asc",
+      },
+    ],
+  });
+  return query.map((prueba) => {
+    return {
+      id: prueba.id_prueba,
+      instancia: prueba.instancia,
+      año: prueba.competencia.ano,
+      resultados_disponibles: prueba.resultados_disponibles,
+      cantidad_problemas: prueba.cantidad_problemas,
+      competencia: prueba.competencia.tipo,
+    };
+  });
+};
+
+export type Testdata = Awaited<ReturnType<typeof getAllTests>>[0];

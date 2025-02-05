@@ -1,68 +1,95 @@
 import { Fragment, useEffect, useState } from "react";
 import styles from "./InstanceMenu.module.scss";
 import InstanceData from "./Instance";
-import {useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { Competition } from "../../server/app-router-db-calls";
 import Pending from "../Pending/pending";
+import React from "react";
 
 export interface Instance {
-    instancia: string,
-    fecha: Date
+  instancia: string;
+  fecha: Date;
 }
 
 interface InstanceMenuProps {
-    competition:Competition, 
-    instances: Instance[]
+  competition: Competition;
+  instances: Instance[];
 }
 
-const getInitialInstance = (instances: Instance[],query: string | undefined) => {
-    if(query){
-        const index = instances.findIndex((instance) => instance.instancia === query);
-        if(index !== -1){
-            return index;
-        }
+const getInitialInstance = (
+  instances: Instance[],
+  query: string | undefined
+) => {
+  if (query) {
+    const index = instances.findIndex(
+      (instance) => instance.instancia === query
+    );
+    if (index !== -1) {
+      return index;
     }
-    const index = instances.findIndex((instance) => 
-    {
-        let date = new Date(instance.fecha);
-        date.setDate(date.getDate() + 1);
-        return date > new Date();
-    });
-    if(index !== -1){
-        return index;
-    }
-    return 0;
-}
+  }
+  const index = instances.findIndex((instance) => {
+    let date = new Date(instance.fecha);
+    date.setDate(date.getDate() + 1);
+    return date > new Date();
+  });
+  if (index !== -1) {
+    return index;
+  }
+  return 0;
+};
 
-const Instances = ({competition,instances}: InstanceMenuProps) => {
-    const query = useSearchParams()
-    const [currentInstance,setCurrentInstance] = useState<number>(getInitialInstance(instances,query?query.get("instancia") as string:undefined));
-    useEffect(() => {
-        if(query && query.get("instancia")){
-            setCurrentInstance(getInitialInstance(instances,query.get("instancia") as string));
-        }
-    },[query,instances])
-    const instancesAvailable : boolean = instances.length > 0;
-    if(!instancesAvailable){
-        return(
-            <Pending text="Todavía no hay información de las instancias para este año"/>
-        )
-    } else {
-    return(
-        <>
+const Instances = ({ competition, instances }: InstanceMenuProps) => {
+  const query = useSearchParams();
+  const [currentInstance, setCurrentInstance] = useState<number>(
+    getInitialInstance(
+      instances,
+      query ? (query.get("instancia") as string) : undefined
+    )
+  );
+  useEffect(() => {
+    if (query && query.get("instancia")) {
+      setCurrentInstance(
+        getInitialInstance(instances, query.get("instancia") as string)
+      );
+    }
+  }, [query, instances]);
+  const instancesAvailable: boolean = instances.length > 0;
+  if (!instancesAvailable) {
+    return (
+      <Pending text="Todavía no hay información de las instancias para este año" />
+    );
+  } else {
+    return (
+      <>
         <h1 className={styles.title}>Instancias</h1>
         <ul className={styles.menu_bar}>
-            {instances.map((instance,index) => 
+          {instances.map((instance, index) => (
             <Fragment key={index}>
-                <li onClick={() => setCurrentInstance(index)} className={[styles.menu_bar_item,(index === currentInstance) && styles.menu_bar_item_selected].join(" ")}>{instance.instancia}</li>
-                {index < (instances.length - 1) && <li><div className={styles.menu_bar_separator}></div></li>}
+              <li
+                onClick={() => setCurrentInstance(index)}
+                className={[
+                  styles.menu_bar_item,
+                  index === currentInstance && styles.menu_bar_item_selected,
+                ].join(" ")}
+              >
+                {instance.instancia}
+              </li>
+              {index < instances.length - 1 && (
+                <li>
+                  <div className={styles.menu_bar_separator}></div>
+                </li>
+              )}
             </Fragment>
-            )}
+          ))}
         </ul>
-        <InstanceData competition={competition} instance={instances[currentInstance]}/>
-        </>
-    )
-    }
-}
+        <InstanceData
+          competition={competition}
+          instance={instances[currentInstance]}
+        />
+      </>
+    );
+  }
+};
 
-export default Instances
+export default Instances;

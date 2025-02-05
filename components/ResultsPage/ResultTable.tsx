@@ -7,6 +7,7 @@ import useFilter from "../../hooks/useFilter";
 import Table from "../Table/Table";
 import ResultCard from "./Mobile/ResultCard";
 import Warning from "../Warning/Warning";
+import React from "react";
 
 const make_element = (result: Result, index: number) => {
   const participant = result.participante.toString();
@@ -165,7 +166,7 @@ const ResultTable = ({
       />
       {filtered_results.length > 0 ? (
         <Table
-          values={filtered_results}
+          values={filtered_results as Result[]}
           allValues={filterableResults}
           headers={headers}
           Card={ResultCard}
