@@ -1,5 +1,5 @@
 import { protectedProcedure, publicProcedure, router } from "../trpc";
-import { set, z } from "zod";
+import { z } from "zod";
 import { INSTANCE } from "../types";
 import {
   createResults,
@@ -212,6 +212,47 @@ export const dashboardRouter = router({
         where: { id_noticia: input },
       });
       revalidateTag("news");
+      return query;
+    }),
+  getDates: publicProcedure.input(z.number()).query(async ({ input }) => {
+    const year = input;
+    const query = await prisma.fechas.findMany({
+      orderBy: [{ fecha_inicio: "asc" }],
+      where: {
+        fecha_inicio: {
+          gte: new Date(year, 0, 1),
+        },
+      },
+    });
+    return query;
+  }),
+  setDate: protectedProcedure
+    .input(
+      z.object({
+        id_fecha: z.number(),
+        fecha_inicio: z.date(),
+        fecha_fin: z.date().nullable(),
+        texto: z.string(),
+        tipo: z.string(),
+      })
+    )
+    .mutation(async ({ input }) => {
+      const { id_fecha, fecha_inicio, fecha_fin, texto, tipo } = input;
+      const query = await prisma.fechas.upsert({
+        where: { id_fecha },
+        update: { fecha_inicio, fecha_fin, texto, tipo },
+        create: { fecha_inicio, fecha_fin, texto, tipo },
+      });
+      revalidateTag("dates");
+      return query;
+    }),
+  deleteDate: protectedProcedure
+    .input(z.number())
+    .mutation(async ({ input }) => {
+      const query = await prisma.fechas.delete({
+        where: { id_fecha: input },
+      });
+      revalidateTag("dates");
       return query;
     }),
   revalidate: protectedProcedure

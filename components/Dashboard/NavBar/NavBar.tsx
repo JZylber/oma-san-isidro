@@ -37,6 +37,12 @@ const DashboardNavBar = () => {
       >
         Usuarios
       </NavBarLink>
+      <NavBarLink
+        href="/dashboard/calendario"
+        selected={pathname === "/dashboard/calendario"}
+      >
+        Calendario
+      </NavBarLink>
       <UserChip />
     </nav>
   );
