@@ -3,6 +3,7 @@
 import { inferRouterOutputs } from "@trpc/server";
 import ActionButton from "components/buttons/ActionButton/ActionButton";
 import Checkbox from "components/common/form/CheckBox";
+import Select from "components/common/form/Select";
 import Loader from "components/Loader/Loader";
 import ConfirmModal from "components/Popups/ConfirmModal/ConfirmModal";
 import Modal from "components/Popups/Modal";
@@ -76,14 +77,13 @@ const CalendarModal = ({
             />
           </div>
           <div className="flex flex-col gap-y-2">
-            <label className="font-montserrat text-2xl font-semibold">
-              Tipo
-            </label>
-            <input
-              type="text"
-              value={newDate.tipo}
-              onChange={(e) => setNewDate({ ...newDate, tipo: e.target.value })}
-              className="bg-primary-white border-2 border-primary-black rounded-md p-2 font-montserrat text-2xl"
+            <Select
+              label="Tipo"
+              options={Object.values(types)}
+              value={newDate.tipo ? newDate.tipo : ""}
+              onChange={(selected) =>
+                setNewDate({ ...newDate, tipo: selected })
+              }
             />
           </div>
           <div className="flex flex-col gap-y-2">
