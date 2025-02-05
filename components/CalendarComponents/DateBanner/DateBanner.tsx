@@ -93,12 +93,7 @@ const DateBanner = ({
     >
       {displayAmount === 1 && (
         <div className={styles.calendar_icon}>
-          <Image
-            src={"/images/calendarIcon.svg"}
-            alt="calendar"
-            width={25}
-            height={25}
-          />
+          <Image src={"/images/calendarIcon.svg"} alt="calendar" fill={true} />
         </div>
       )}
       <div className={styles.entries}>
