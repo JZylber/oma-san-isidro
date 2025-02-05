@@ -115,10 +115,17 @@ const CalendarModal = ({
               type="date"
               className="bg-primary-white border-2 border-primary-black rounded-md p-2 font-montserrat text-2xl"
               onChange={(e) => {
-                setNewDate({
-                  ...newDate,
-                  fecha_fin: new Date(e.target.value + " GMT-0300"),
-                });
+                if (!e.target.value) {
+                  setNewDate({
+                    ...newDate,
+                    fecha_fin: null,
+                  });
+                } else {
+                  setNewDate({
+                    ...newDate,
+                    fecha_fin: new Date(e.target.value + " GMT-0300"),
+                  });
+                }
               }}
             />
           </div>
