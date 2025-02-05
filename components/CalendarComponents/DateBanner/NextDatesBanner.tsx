@@ -38,7 +38,12 @@ const NextDatesBanner = ({ dates, category }: DateBannerProps) => {
         >
           <div className={banner_styles.small_link}>
             <div className={banner_styles.small_link_image}>
-              <Image src="/images/pageLinkIcon.svg" fill={true} alt="" />
+              <Image
+                src="/images/pageLinkIcon.svg"
+                width={25}
+                height={25}
+                alt=""
+              />
             </div>
             <span>Ver calendario {category}</span>
           </div>

@@ -12,7 +12,6 @@ export default function useSticky() {
 
     const observer = new IntersectionObserver(
       ([event]) => {
-        console.log(event.intersectionRatio);
         setIsSticky(event.intersectionRatio < 1);
       },
       { threshold: [1], rootMargin: "-1px 0px 0px 0px" }
