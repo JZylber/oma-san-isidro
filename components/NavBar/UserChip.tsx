@@ -93,7 +93,7 @@ const NavUserChip = () => {
                 </span>
                 <span className="font-montserrat text-xl text-center">
                   Ingresá con tu cuenta. Por este año, está función es solo para
-                  administradores y representates de colegios.
+                  administradores.
                 </span>
                 <Link href="/login">
                   <ActionButton onClick={() => {}} important>
