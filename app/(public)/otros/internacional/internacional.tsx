@@ -149,9 +149,9 @@ const InternationalPage = () => {
                 </th>
                 <th className={styles.table_column_name}>Nombre</th>
                 <th className={styles.table_column_tournament}>Aprobado</th>
+                <th className={styles.table_column_tournament}>Cono Sur</th>
                 <th className={styles.table_column_tournament}>IMO</th>
                 <th className={styles.table_column_tournament}>Ibero</th>
-                <th className={styles.table_column_tournament}>Cono Sur</th>
                 <th className={styles.table_column_level}>Nivel Mayo</th>
               </tr>
             </thead>
