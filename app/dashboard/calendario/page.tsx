@@ -19,7 +19,7 @@ const displayDate = (date: Date) => {
 };
 
 enum types {
-  nandu = "Nandú",
+  nandu = "Ñandú",
   oma = "OMA",
   internacional = "Internacional",
   selectivo = "Selectivo",
