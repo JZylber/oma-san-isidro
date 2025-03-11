@@ -77,7 +77,8 @@ const InternationalPage = () => {
             <h3 className={styles.tournament_name}>Selección Cono Sur</h3>
             <p className={styles.tournament_requirements}>
               Haber llegado a la instancia Nacional de OMA y haber nacido
-              después del 01/01/2009.
+              después del 01/01/2009. En el caso de nivel 1, se tiene que haber{" "}
+              <strong>APROBADO</strong> la instancia Nacional.
             </p>
           </li>
           <li className={styles.tournament}>
@@ -124,7 +125,8 @@ const InternationalPage = () => {
               Olimpíada Panamericana Femenil de Matemática
             </h3>
             <p className={styles.tournament_requirements}>
-              Alumnas de OMA seleccionadas por el Comité Olímpico.
+              Alumnas que llegaron al Certamen Nacional de la OMA de 2024
+              nacidas a partir del 01/01/2009.
             </p>
           </li>
           <li className={styles.tournament}>
