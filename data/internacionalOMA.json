@@ -52,7 +52,5 @@
   ["2", "Malet", "Mateo", true, false, true, true, null],
   ["2", "Philipps", "Marco", true, false, true, true, null],
   ["2", "Restelli", "Delfina", true, true, true, true, null],
-  ["2", "Torviso Moreira", "Ignacio", true, false, true, true, null],
-  ["3", "Bottelli Chaher", "Eduardo", true, false, true, false, null],
-  ["3", "Marchioni Giovanelli", "Luca", true, false, true, false, null]
+  ["2", "Torviso Moreira", "Ignacio", true, false, true, true, null]
 ]
