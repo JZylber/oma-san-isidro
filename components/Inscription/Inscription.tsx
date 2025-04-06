@@ -87,7 +87,7 @@ export const Inscripcion = ({
             <p>
               La inscripción a la competencia de Mateclubes es gratuita y se
               hace desde la página de OMA. Recién se paga en la tercera ronda
-              (que es presencial) y el costo de la competencia es de $24.000 por
+              (que es presencial) y el costo de la competencia es de $40.000 por
               club. No se exime de pago por haber participado en otro torneo.
             </p>
             <p>
