@@ -52,7 +52,7 @@ export const Inscripcion = ({
   } = data;
   const downloadForm = () => {
     const link = document.createElement("a");
-    link.href = `/files/planilla_datos_${type.toLowerCase()}.xls`;
+    link.href = `/files/planilla_datos_${type.toLowerCase()}.xlsx`;
     link.target = `_blank`;
     document.body.appendChild(link);
     link.click();
