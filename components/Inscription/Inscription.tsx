@@ -121,6 +121,21 @@ export const Inscripcion = ({
               la responsable de su zona.
             </p>
             <p>
+              Aquellos que precisen factura electrónica deben completar el
+              siguiente link:{" "}
+              <a
+                className="text-blue-700 cursor-pointer"
+                href="https://forms.gle/zRK3sBoV6h62bmva6"
+              >
+                https://forms.gle/zRK3sBoV6h62bmva6
+              </a>
+              .{" "}
+              <span className={styles.step_information_bold}>IMPORTANTE: </span>{" "}
+              Como en el mismo deben cargar el archivo de pago, para abrirlo,
+              necesitarán tener iniciada la sesión de Gmail, de lo contrario no
+              podrán abrir el formulario para completarlo.
+            </p>
+            {/*<p>
               Aquellos que precisen factura C deberán también enviar los
               siguiente datos:
             </p>
@@ -135,7 +150,7 @@ export const Inscripcion = ({
                 <li>Concepto a facturar</li>
                 <li>Importe de la transferencia</li>
               </ul>
-            </div>
+            </div>*/}
             <div className={styles.contact_information}>
               <div className={styles.zone}>
                 <h4>San Fernando, San Isidro y Vicente López</h4>
