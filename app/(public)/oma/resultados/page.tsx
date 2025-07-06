@@ -14,7 +14,7 @@ const availableResults = unstable_cache(
     const available = await getAvailableResults("OMA");
     return available;
   },
-  ["results"],
+  ["OMAResults"],
   { tags: ["results"] }
 );
 

@@ -14,7 +14,7 @@ const availableResults = unstable_cache(
     const available = await getAvailableResults("ÑANDÚ");
     return available;
   },
-  ["results"],
+  ["NanduResults"],
   { tags: ["results"] }
 );
 
