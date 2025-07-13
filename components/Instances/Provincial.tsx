@@ -143,16 +143,18 @@ const Provincial = ({
           </span>{" "}
           se realizará en la ciudad de{" "}
           {isOma ? "Mar del Plata" : "Mar del Plata"} los días{" "}
-          {isOma ? "25, 26 y 27 de septiembre" : "14, 15 y 16 de agosto"}. Cada
-          delegación se trasladará por su cuenta y riesgo, con sus profesores
-          acompañantes según las pautas establecidas{" "}
+          {isOma ? "25, 26 y 27 de septiembre" : "12, 13 y 14 de agosto"}{" "}
+          {!isOma &&
+            "(OJO:este año por el feriado del viernes 15 el encuentro será de martes a jueves)"}
+          . Cada delegación se trasladará por su cuenta y riesgo, con sus
+          profesores acompañantes según las pautas establecidas{" "}
           <span className={styles.bold}>
             (máximo 8 alumnos por cada docente)
           </span>
           . También, como en años anteriores, nos ocuparemos del alojamiento y
           concentración de aquellas delegaciones que lo soliciten.
         </p>
-        {isOma ? (
+        {true ? (
           <p className={styles.text}>
             El alojamiento de las delegaciones que lo soliciten será en Hoteles
             de la mencionada ciudad en habitaciones compartidas con otros
@@ -182,20 +184,20 @@ const Provincial = ({
         <ul className={styles.text}>
           <li>
             <span className={styles.bold}>Acreditación:</span>{" "}
-            {isOma ? "Miércoles 25 de septiembre" : "Miércoles 14 de agosto"} de
+            {isOma ? "Miércoles 25 de septiembre" : "Martes 12 de agosto"} de
             15:00 a 20:00 horas en el hotel asignado a su delegación
           </li>
           <li>
             <span className={styles.bold}>Prueba escrita:</span>{" "}
             {isOma
               ? "Jueves 26 de septiembre a las 9:00 horas, Salones Sheraton Hotel - Mar del Plata"
-              : "Jueves 15 de agosto a las 9:00 horas, Salones Sheraton Hotel - Mar del Plata"}
+              : "Miércoles 13 de agosto a las 9:00 horas, Salones Sheraton Hotel - Mar del Plata"}
           </li>
           <li>
             <span className={styles.bold}>Exposición Oral y Premiación:</span>{" "}
             {isOma
               ? "Viernes 27 de septiembre a las 9:00 horas, Salones Sheraton Hotel - Mar del Plata"
-              : "Viernes 16 de agosto a las 9:00 horas, Salones Sheraton Hotel - Mar del Plata"}
+              : "Jueves 14 de agosto a las 9:00 horas, Sala Astor Piazzolla  -Teatro Auditorium - Mar del Plata"}
           </li>
         </ul>
       </Collapsable>
@@ -206,27 +208,27 @@ const Provincial = ({
               Participantes y/o acompañantes que se alojen en el hotel propuesto
               por la olimpíada:
             </span>{" "}
-            {isOma ? "$240.000" : "$235.000"}. Incluye desde la cena del día
-            miércoles {isOma ? 25 : 14} al almuerzo del viernes{" "}
-            {isOma ? 27 : 16} (incluye una bebida por comida).
+            {isOma ? "$240.000" : "$398.000"}. Incluye desde la cena del día
+            miércoles {isOma ? 25 : 12} al almuerzo del viernes{" "}
+            {isOma ? 27 : 14} (incluye una bebida por comida).
           </li>
           <li>
             <span className={styles.bold}>
               Participantes que NO se alojen en el hotel propuesto por la
               olimpíada:
             </span>{" "}
-            {isOma ? "$85.000" : "$80.000"}.
+            {isOma ? "$85.000" : "$150.000"}.
           </li>
           <li>
             <span className={styles.bold}>
               Acompañantes que NO se alojen en el hotel propuesto por la
               olimpíada:
             </span>{" "}
-            {isOma ? "$65.000" : "$60.000"}. (menores de 3 años no pagan)
+            {isOma ? "$65.000" : "$110.000"}. (menores de 3 años no pagan)
           </li>
           <li>
             <span className={styles.bold}>Tarjeta de premiación:</span>{" "}
-            {isOma ? "$25000" : "$20.000"}. Solo es necesaria la tarjeta para
+            {isOma ? "$25000" : "$36.000"}. Solo es necesaria la tarjeta para
             aquellos que no están acreditados como acompañantes y que
             participarán únicamente de la premiación. Deben inscribirse junto
             con los otros participantes en la planilla. Menores de 3 años no
@@ -252,14 +254,14 @@ const Provincial = ({
         </p>
         <ul className={styles.text}>
           <li>
-            <span className={styles.bold}>BANCO HSBC</span> (Cuenta Corriente)
-            Sucursal Los Arcos (ex Salguero).
+            <span className={styles.bold}>BANCO GALICIA</span> (Cuenta
+            Corriente)
           </li>
           <li>
-            <span className={styles.bold}>N° Cuenta: </span>6093228419
+            <span className={styles.bold}>N° Cuenta: </span>000267656656
           </li>
           <li>
-            <span className={styles.bold}>CBU: </span>1500609900060932284196
+            <span className={styles.bold}>CBU: </span>0070665620000002676566
           </li>
           <li>
             <span className={styles.bold}>ALIAS: </span>FOMAHSBCCC
@@ -273,11 +275,14 @@ const Provincial = ({
           <span className={styles.bold}>ORIGINAL</span> de dicho depósito.
         </p>
         <p className={styles.text}>
-          Si necesitan factura electrónica o factura C, por favor completar la
-          planilla y enviar a{" "}
-          <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a> junto con el
-          comprobante de pago. También se puede hacer en el momento de la
-          acreditación llevando la planilla completa y el comprobante de pago.
+          Para solicitar factura electrónica por el pago deben completar el
+          siguiente formulario:
+          <a
+            className="text-blue-600 underline"
+            href="https://forms.gle/pe3i1TWV1bgv6Rv39"
+          >
+            https://forms.gle/pe3i1TWV1bgv6Rv39
+          </a>
         </p>
         <p className={styles.text}>
           Los recibos son entregados en el momento de la acreditación a la
@@ -287,7 +292,7 @@ const Provincial = ({
           presentación del original. Para todo tipo de reclamo hay un plazo de
           30 días
         </p>
-        <div className={styles.documentation}>
+        {/*<div className={styles.documentation}>
           <div className={styles.button}>
             <Button
               content="Planilla Facturación"
@@ -307,7 +312,7 @@ const Provincial = ({
               </div>
             </Button>
           </div>
-        </div>
+        </div>*/}
       </Collapsable>
       <Collapsable title="Documentación">
         <p className={styles.text}>La documentación exigida incluye:</p>
@@ -381,7 +386,7 @@ const Provincial = ({
         </p>
         <p className={styles.text}>
           {" "}
-          Costo de la tarjeta {isOma ? "$25000" : "$20.000"}.- CUPOS LIMITADOS
+          Costo de la tarjeta {isOma ? "$25.000" : "$36.000"}.- CUPOS LIMITADOS
           (menores de 3 años no pagan){" "}
         </p>
       </Collapsable>
@@ -449,29 +454,29 @@ const Provincial = ({
           <li>
             Los que solicitaron alojamiento en las secretarías regionales,
             podrán hacerlo a partir de las 15:00 horas del día{" "}
-            {isOma ? "25 de septiembre" : "14 de agosto"}.
+            {isOma ? "25 de septiembre" : "12 de agosto"}.
           </li>
           <li>
             Solo podrá asistir a las actividades programadas dentro de los
             espacios establecidos (esto incluye el ingresar, permanecer y
             circular por el mismo) quien se acredite debidamente el día{" "}
-            {isOma ? "25 de septiembre" : "14 de agosto"}.
+            {isOma ? "25 de septiembre" : "12 de agosto"}.
           </li>
           <li>
             Se recuerda a los responsables de las delegaciones, se alojen o no
             en el hotel propuesto por la olimpíada, que durante todo el tiempo
             estarán a cargo de los alumnos y deberán participar de las
-            actividades programadas con sus alumnos
+            actividades programadas con sus alumnos.
           </li>
           <li>
             Bajo ningún concepto los participantes podrán circular o permanecer
-            fuera de su lugar de alojamiento después de las 00:00 hs
+            fuera de su lugar de alojamiento después de las 00:00 hs.
           </li>
           <li>
             Todos deberán abstenerse de: transportar, ingerir o consumir
             alcohol, bebidas energizantes u otros estimulantes, fumar en los
             lugares cerrados, como habitaciones, el comedor, o donde se
-            desarrollen las actividades de la competencia
+            desarrollen las actividades de la competencia.
           </li>
         </ul>
         <p className={styles.text}>
