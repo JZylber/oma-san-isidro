@@ -209,8 +209,9 @@ const Provincial = ({
               por la olimpíada:
             </span>{" "}
             {isOma ? "$240.000" : "$398.000"}. Incluye desde la cena del día
-            miércoles {isOma ? 25 : 12} al almuerzo del viernes{" "}
-            {isOma ? 27 : 14} (incluye una bebida por comida).
+            miércoles {isOma ? 25 : 12} al almuerzo del{" "}
+            {isOma ? "viernes 27" : "jueves 14"} (incluye una bebida por
+            comida).
           </li>
           <li>
             <span className={styles.bold}>
