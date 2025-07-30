@@ -284,7 +284,7 @@ const Venues = ({
           ) : (
             venueElement
           )}
-          {instance === "REGIONAL" && (
+          {false && instance === "REGIONAL" && (
             <Collapsable title="Mapa">
               <p className={styles.text}>
                 Para organizarnos mejor, ponemos público el mapa. El día de la
