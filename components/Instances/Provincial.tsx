@@ -122,7 +122,7 @@ const Provincial = ({
             </ul>
           </>
         )}
-        {isOma! && (
+        {isOma && (
           <>
             <p className={styles.text}>
               Los colegios deberán completar el siguiente formulario antes del{" "}
@@ -184,7 +184,11 @@ const Provincial = ({
             El alojamiento de las delegaciones que lo soliciten será en Hoteles
             de la mencionada ciudad en habitaciones compartidas con otros
             participantes del encuentro. La reserva del alojamiento se hace
-            contra entrega de las planillas debidamente cumplimentadas.
+            contra{" "}
+            {isOma
+              ? "el correcto completado del formulario "
+              : "entrega de las planillas debidamente cumplimentadas"}
+            .
           </p>
         ) : (
           <>
@@ -257,7 +261,8 @@ const Provincial = ({
             {isOma ? "$40.000" : "$36.000"}. Solo es necesaria la tarjeta para
             aquellos que no están acreditados como acompañantes y que
             participarán únicamente de la premiación. Deben inscribirse junto
-            con los otros participantes en la planilla. Menores de 3 años no
+            con los otros participantes en
+            {isOma ? " el formulario" : " la planilla"}. Menores de 3 años no
             pagan. <span className={styles.bold}>CUPOS LIMITADOS</span>
           </li>
         </ul>
@@ -267,7 +272,16 @@ const Provincial = ({
             situación económica financiera del país, que puede hacer variar
             nuestros costos. Quienes quieran asegurarse estos aranceles pueden
             hacer su depósito o trasferencia en los próximos días, enviando el
-            comprobante a <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a>
+            comprobante a{" "}
+            <a
+              href={
+                isOma
+                  ? "mailto:silviachillo@gmail.com"
+                  : "mailto:elena@oma.org.ar"
+              }
+            >
+              {isOma ? "silviachillo@gmail.com" : "elena@oma.org.ar"}
+            </a>
             . En caso de tener que variar los aranceles lo avisaremos
             oportunamente.
           </p>
@@ -414,7 +428,8 @@ const Provincial = ({
           credencial o “tarjeta de invitación individual”. Se aclara que,
           indefectiblemente, todas aquellas personas que deseen adquirir las
           tarjetas de invitación individual para el Acto de premiación deben
-          estar inscriptas con nombre, apellido y documento en la planilla.
+          estar inscriptas con nombre, apellido y documento en
+          {isOma ? " el formulario" : " la planilla"}.
         </p>
         <p className={styles.text}>
           {" "}
