@@ -89,32 +89,57 @@ const Provincial = ({
         </p>
       )}
       <Collapsable title="Inscripción">
-        <p className={styles.text}>
-          Los colegios deberán comunicar antes del{" "}
-          <span className={styles.bold}>{`${auth_max_date.getUTCDate()} de ${
-            months[auth_max_date.getUTCMonth()]
-          }`}</span>{" "}
-          la nómina de personas que viajan, por correo electrónico a:{" "}
-          <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a>
-        </p>
-        <h4 className={styles.section_title}>
-          Datos que deben enviar para la inscripción:
-        </h4>
-        <ul className={styles.text}>
-          <li>Nombre y apellido de los alumnos que participan.</li>
-          <li>
-            Nombre, apellido y número de documento del o los acompañantes,
-            indicando si es docente o familiar.
-          </li>
-          <li>
-            Indicar si se hospedan por medio de la olimpíada o por su cuenta.
-          </li>
-          <li>
-            En caso de solicitar sólo tarjeta para la premiación, indicar nombre
-            y apellido y número de documento de la persona para la cual se
-            solicita.
-          </li>
-        </ul>
+        {!isOma && (
+          <>
+            <p className={styles.text}>
+              Los colegios deberán comunicar antes del{" "}
+              <span
+                className={styles.bold}
+              >{`${auth_max_date.getUTCDate()} de ${
+                months[auth_max_date.getUTCMonth()]
+              }`}</span>{" "}
+              la nómina de personas que viajan, por correo electrónico a:{" "}
+              <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a>
+            </p>
+            <h4 className={styles.section_title}>
+              Datos que deben enviar para la inscripción:
+            </h4>
+            <ul className={styles.text}>
+              <li>Nombre y apellido de los alumnos que participan.</li>
+              <li>
+                Nombre, apellido y número de documento del o los acompañantes,
+                indicando si es docente o familiar.
+              </li>
+              <li>
+                Indicar si se hospedan por medio de la olimpíada o por su
+                cuenta.
+              </li>
+              <li>
+                En caso de solicitar sólo tarjeta para la premiación, indicar
+                nombre y apellido y número de documento de la persona para la
+                cual se solicita.
+              </li>
+            </ul>
+          </>
+        )}
+        {isOma! && (
+          <>
+            <p className={styles.text}>
+              Los colegios deberán completar el siguiente formulario antes del{" "}
+              <span
+                className={styles.bold}
+              >{`${auth_max_date.getUTCDate()} de ${
+                months[auth_max_date.getUTCMonth()]
+              }`}</span>
+            </p>
+            <div className={styles.button}>
+              <Button
+                content="Formulario de Inscripción"
+                onClick={() => (window.location.href = "")}
+              ></Button>
+            </div>
+          </>
+        )}
         <p className={styles.text}>
           <span className={styles.bold}>
             Cuando tengamos el Hotel asignado para nuestra delegación, se
@@ -139,11 +164,11 @@ const Provincial = ({
         <p className={styles.text}>
           El encuentro de la{" "}
           <span className={styles.bold}>
-            Olimpíada Regional {isOma ? "Urbana" : "Ñandú"} Metropolitana
+            Olimpíada Regional {isOma ? "OMA" : " Ñandú"} Metropolitana
           </span>{" "}
           se realizará en la ciudad de{" "}
           {isOma ? "Mar del Plata" : "Mar del Plata"} los días{" "}
-          {isOma ? "25, 26 y 27 de septiembre" : "12, 13 y 14 de agosto"}{" "}
+          {isOma ? "17, 18 y 19 de septiembre" : "12, 13 y 14 de agosto"}{" "}
           {!isOma &&
             "(OJO:este año por el feriado del viernes 15 el encuentro será de martes a jueves)"}
           . Cada delegación se trasladará por su cuenta y riesgo, con sus
@@ -184,20 +209,20 @@ const Provincial = ({
         <ul className={styles.text}>
           <li>
             <span className={styles.bold}>Acreditación:</span>{" "}
-            {isOma ? "Miércoles 25 de septiembre" : "Martes 12 de agosto"} de
+            {isOma ? "Miércoles 17 de septiembre" : "Martes 12 de agosto"} de
             15:00 a 20:00 horas en el hotel asignado a su delegación
           </li>
           <li>
             <span className={styles.bold}>Prueba escrita:</span>{" "}
             {isOma
-              ? "Jueves 26 de septiembre a las 9:00 horas, Salones Sheraton Hotel - Mar del Plata"
+              ? "Jueves 18 de septiembre a las 9:00 horas, Salones Sheraton Hotel - Mar del Plata"
               : "Miércoles 13 de agosto a las 9:00 horas, Salones Sheraton Hotel - Mar del Plata"}
           </li>
           <li>
             <span className={styles.bold}>Exposición Oral y Premiación:</span>{" "}
             {isOma
-              ? "Viernes 27 de septiembre a las 9:00 horas, Salones Sheraton Hotel - Mar del Plata"
-              : "Jueves 14 de agosto a las 9:00 horas, Sala Astor Piazzolla  -Teatro Auditorium - Mar del Plata"}
+              ? "Viernes 19 de septiembre a las 9:00 horas, Salones Sheraton Hotel - Mar del Plata"
+              : "Jueves 14 de agosto a las 9:00 horas, Sala Astor Piazzolla - Teatro Auditorium - Mar del Plata"}
           </li>
         </ul>
       </Collapsable>
@@ -208,9 +233,9 @@ const Provincial = ({
               Participantes y/o acompañantes que se alojen en el hotel propuesto
               por la olimpíada:
             </span>{" "}
-            {isOma ? "$240.000" : "$398.000"}. Incluye desde la cena del día
-            miércoles {isOma ? 25 : 12} al almuerzo del{" "}
-            {isOma ? "viernes 27" : "jueves 14"} (incluye una bebida por
+            {isOma ? "$420.000" : "$398.000"}. Incluye desde la cena del día{" "}
+            {isOma ? "miércoles 17" : "martes 12"} al almuerzo del{" "}
+            {isOma ? "viernes 19" : "jueves 14"} (incluye una bebida por
             comida).
           </li>
           <li>
@@ -218,18 +243,18 @@ const Provincial = ({
               Participantes que NO se alojen en el hotel propuesto por la
               olimpíada:
             </span>{" "}
-            {isOma ? "$85.000" : "$150.000"}.
+            {isOma ? "$200.000" : "$150.000"}.
           </li>
           <li>
             <span className={styles.bold}>
               Acompañantes que NO se alojen en el hotel propuesto por la
               olimpíada:
             </span>{" "}
-            {isOma ? "$65.000" : "$110.000"}. (menores de 3 años no pagan)
+            {isOma ? "$160.000" : "$110.000"}. (menores de 3 años no pagan)
           </li>
           <li>
             <span className={styles.bold}>Tarjeta de premiación:</span>{" "}
-            {isOma ? "$25000" : "$36.000"}. Solo es necesaria la tarjeta para
+            {isOma ? "$40.000" : "$36.000"}. Solo es necesaria la tarjeta para
             aquellos que no están acreditados como acompañantes y que
             participarán únicamente de la premiación. Deben inscribirse junto
             con los otros participantes en la planilla. Menores de 3 años no
@@ -280,9 +305,15 @@ const Provincial = ({
           siguiente formulario:
           <a
             className="text-blue-600 underline"
-            href="https://forms.gle/pe3i1TWV1bgv6Rv39"
+            href={
+              isOma
+                ? "https://forms.gle/zaRDFJoFCmH6dt6L7"
+                : "https://forms.gle/pe3i1TWV1bgv6Rv39"
+            }
           >
-            https://forms.gle/pe3i1TWV1bgv6Rv39
+            {isOma
+              ? "https://forms.gle/zaRDFJoFCmH6dt6L7"
+              : "https://forms.gle/pe3i1TWV1bgv6Rv39"}
           </a>
         </p>
         <p className={styles.text}>
@@ -387,7 +418,7 @@ const Provincial = ({
         </p>
         <p className={styles.text}>
           {" "}
-          Costo de la tarjeta {isOma ? "$25.000" : "$36.000"}.- CUPOS LIMITADOS
+          Costo de la tarjeta {isOma ? "$40.000" : "$36.000"}.- CUPOS LIMITADOS
           (menores de 3 años no pagan){" "}
         </p>
       </Collapsable>
@@ -455,13 +486,13 @@ const Provincial = ({
           <li>
             Los que solicitaron alojamiento en las secretarías regionales,
             podrán hacerlo a partir de las 15:00 horas del día{" "}
-            {isOma ? "25 de septiembre" : "12 de agosto"}.
+            {isOma ? "17 de septiembre" : "12 de agosto"}.
           </li>
           <li>
             Solo podrá asistir a las actividades programadas dentro de los
             espacios establecidos (esto incluye el ingresar, permanecer y
             circular por el mismo) quien se acredite debidamente el día{" "}
-            {isOma ? "25 de septiembre" : "12 de agosto"}.
+            {isOma ? "17 de septiembre" : "12 de agosto"}.
           </li>
           <li>
             Se recuerda a los responsables de las delegaciones, se alojen o no
