@@ -135,7 +135,9 @@ const Provincial = ({
             <div className={styles.button}>
               <Button
                 content="Formulario de Inscripción"
-                onClick={() => (window.location.href = "")}
+                onClick={() =>
+                  (window.location.href = "https://forms.gle/CYNVAWptEeHaSFqC8")
+                }
               ></Button>
             </div>
           </>
