@@ -133,14 +133,22 @@ const ResultTable = ({
       {instancia === "REGIONAL" &&
         competencia === "ÑANDÚ" &&
         testInfo.año === new Date().getUTCFullYear() && (
-          <Warning title="Pedidos de Revisión" className={styles.revision}>
+          <Warning title="Criterio de Aprobación" className={styles.revision}>
             <p className={styles.text}>
-              Para hacer un pedido de revisión completar el siguiente
-              formulario:{" "}
-              <a href="https://forms.gle/j3iPSo6sR4fGbU8Z8">
-                https://forms.gle/j3iPSo6sR4fGbU8Z8
-              </a>
+              Aprueban la instancia regional y clasifican a nacional:
             </p>
+            <ul>
+              <li>
+                Si son de <strong>Nivel 1</strong>, aquellos participantes que
+                obtuvieron <strong>1 y 1/2 o más puntos</strong> (con todos los
+                menos)
+              </li>
+              <li>
+                Si son de <strong>Nivel 2 o 3</strong>, aquellos participantes
+                que obtuvieron <strong>2 o más puntos</strong> (con todos los
+                menos)
+              </li>
+            </ul>
           </Warning>
         )}
       {instancia === "REGIONAL" &&
