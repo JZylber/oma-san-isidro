@@ -138,12 +138,12 @@ const ResultTable = ({
               Aprueban la instancia regional y clasifican a nacional:
             </p>
             <ul>
-              <li>
+              <li className={styles.text}>
                 Si son de <strong>Nivel 1</strong>, aquellos participantes que
                 obtuvieron <strong>1 y 1/2 o más puntos</strong> (con todos los
                 menos)
               </li>
-              <li>
+              <li className={styles.text}>
                 Si son de <strong>Nivel 2 o 3</strong>, aquellos participantes
                 que obtuvieron <strong>2 o más puntos</strong> (con todos los
                 menos)
