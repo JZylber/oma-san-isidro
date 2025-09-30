@@ -92,108 +92,22 @@ const NationalInfo = ({
     <>
       <Collapsable title="Inscripción">
         <p className={styles.text}>
-          Los colegios deberán comunicar antes del{" "}
+          Los colegios deberán completar el siguiente formulario antes del{" "}
           <span className={styles.bold}>{`${auth_max_date.getUTCDate()} de ${
             months[auth_max_date.getUTCMonth()]
-          }`}</span>{" "}
-          la nómina de personas que viajan,
-          <span className={styles.bold}>
-            {" "}
-            completando la planilla de inscripción
-          </span>{" "}
-          y enviándola por correo electrónico a:{" "}
-          <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a>
+          }`}</span>
         </p>
-
-        <h4 className={styles.section_title}>
-          Instructivo para llenar la planilla:
-        </h4>
-        <ul className={`${styles.text} ${styles.list}`}>
-          <li>
-            <span className={styles.bold}>Región:</span> San Isidro o 53
-          </li>
-          <li>
-            <span className={styles.bold}>Colegio:</span> Nombre del
-            Establecimiento del alumno
-          </li>
-          <li>
-            <span className={styles.bold}>Localidad:</span> Lugar donde se
-            encuentra el colegio
-          </li>
-          <li>
-            <span className={styles.bold}>Nivel:</span> Nivel de Olimpíada del
-            participante (1, 2 ó 3). Para los acompañantes el nivel es 0 (cero).
-          </li>
-          <li>
-            <span className={styles.bold}>Sexo:</span> Completar con F
-            (femenino) o M (masculino) (no usar mujer y varón)
-          </li>
-          <li>
-            <span className={styles.bold}>Tipo:</span> Usar el siguiente código:
-            A para los alumnos; D para los docentes acompañantes, P para el
-            acompañante familiar y T para los que asistan a la premiación
-            únicamente. En el caso de los familiares, indicar en la columna
-            observaciones el grado de parentesco y de quién.
-          </li>
-          <li>
-            <span className={styles.bold}>Alojamiento:</span> Usar el siguiente
-            código: S si se alojan en el hotel propuesto por olimpíadas; N si se
-            alojan por su cuenta.
-          </li>
-          <li>
-            <span className={styles.bold}>Dieta:</span> Notificar los celiacos,
-            vegetarianos, veganos, etc.
-          </li>
-          <li>
-            <span className={styles.bold}>
-              Vianda almuerzo {isOma ? 15 : 23}:
-            </span>{" "}
-            Usar el siguiente código: S si se retiran con vianda luego de la
-            premiación de olimpíadas; N si almuerzan.
-          </li>
-          <li>
-            <span className={styles.bold}>Observaciones:</span> Espacio para
-            aclaraciones como por ejemplo parentesco con el alumno.{" "}
-          </li>
-          <li>
-            <span className={styles.bold}>Celular del responsable:</span> Número
-            de teléfono celular de contacto del responsable.{" "}
-          </li>
-          <li>
-            <span className={styles.bold}>Mail:</span> Por favor agregar mail
-            del responsable por cualquier consulta.
-          </li>
-        </ul>
-        <div className={styles.documentation}>
-          <div className={styles.button}>
-            <Button
-              content="Planilla Inscripción"
-              onClick={() =>
-                downloadFile(
-                  `/nacional/${isOma ? "oma" : "nandu"}/PlanillaNacional.xlsx`
-                )
-              }
-            >
-              <div className={styles.arrow}>
-                <Image
-                  src="/images/newsArrow.svg"
-                  width={30}
-                  height={40}
-                  alt="Descargar"
-                />
-              </div>
-            </Button>
-          </div>
+        <div className={styles.button}>
+          <Button
+            content="Formulario de Inscripción"
+            onClick={() =>
+              (window.location.href = isOma
+                ? ""
+                : "https://forms.gle/QaRy7A7MJV1pSni27")
+            }
+          ></Button>
         </div>
-
         <Warning>
-          <p className={styles.text}>
-            <span className={styles.bold}>
-              Se ruega enviar toda la documentación junta:
-            </span>{" "}
-            los datos pedidos anteriormente, el comprobante de pago, y el pedido
-            de la factura electrónica (si fuese necesaria).
-          </p>
           <p className={styles.text}>
             Recordamos a los colegios que son ellos los responsables de enviar
             la inscripción de sus alumnos, informando a los padres sobre el
@@ -215,7 +129,7 @@ const NationalInfo = ({
           se realizará en la ciudad de La Falda, Córdoba los días{" "}
           {isOma
             ? "11 al 15 de noviembre en el Hotel Edén (Av. Edén 1400)"
-            : "20 al 23 de octubre en el Hotel Edén (Av. Edén 1400)"}
+            : "21 al 24 de octubre en el Hotel Edén (Av. Edén 1400)"}
           . Cada delegación se trasladará por su cuenta y riesgo, con sus
           profesores acompañantes según las pautas establecidas{" "}
           <span className={styles.bold}>
@@ -247,7 +161,7 @@ const NationalInfo = ({
               </>
             ) : (
               <>
-                Domingo 20 de octubre de 16:00 a 20:00 horas en el{" "}
+                Martes 21 de octubre de 16:00 a 20:00 horas en el{" "}
                 <span className={styles.bold}>
                   en el Hotel donde se aloje la delegación de la región
                 </span>
@@ -263,8 +177,8 @@ const NationalInfo = ({
               </>
             ) : (
               <>
-                Lunes 21 y Martes 22 de octubre a las 9:30 horas, en salones del{" "}
-                <span className={styles.bold}>Hotel Edén</span>
+                Miércoles 22 y Jueves 23 de octubre a las 9:30 horas, en salones
+                del <span className={styles.bold}>Hotel Edén</span>
               </>
             )}
           </li>
@@ -277,7 +191,7 @@ const NationalInfo = ({
               </>
             ) : (
               <>
-                Miércoles 23 de octubre a de 9:00 a 12:00 horas en el{" "}
+                Viernes 24 de octubre a de 9:00 a 12:00 horas en el{" "}
                 <span className={styles.bold}>Hotel Edén</span>
               </>
             )}
@@ -291,9 +205,9 @@ const NationalInfo = ({
               Participantes y/o acompañantes que se alojen en el hotel propuesto
               por la olimpíada:
             </span>{" "}
-            {isOma ? "$410.000" : "$290.000"}. Incluye desde la cena del día{" "}
-            {isOma ? "lunes 11" : "domingo 20"} al almuerzo del{" "}
-            {isOma ? "viernes 15" : "miércoles 23"} (incluye una bebida por
+            {isOma ? "$410.000" : "$460.000"}. Incluye desde la cena del día{" "}
+            {isOma ? "lunes 11" : "martes 21"} al almuerzo del{" "}
+            {isOma ? "viernes 15" : "viernes 24"} (incluye una bebida por
             comida).
           </li>
           <li>
@@ -301,14 +215,14 @@ const NationalInfo = ({
               Participantes que NO se alojen en el hotel propuesto por la
               olimpíada:
             </span>{" "}
-            {isOma ? "$120.000" : "$120.000"}.{" "}
+            {isOma ? "$120.000" : "$250.000"}.{" "}
             <span className={styles.bold}>
               Incluye los almuerzos {!isOma && "y meriendas"} de los días de las
               pruebas escritas (
               {isOma ? (
                 <>martes 12 y miércoles 13</>
               ) : (
-                <>lunes 21 y martes 23</>
+                <>miércoles 22 y jueves 23</>
               )}
               ).
             </span>
@@ -318,20 +232,20 @@ const NationalInfo = ({
               Acompañantes que NO se alojen en el hotel propuesto por la
               olimpíada:
             </span>{" "}
-            {isOma ? "$110.000" : "$110.000"}.{" "}
+            {isOma ? "$110.000" : "$220.000"}.{" "}
             <span className={styles.bold}>
               Incluye los almuerzos {!isOma && "y meriendas"} de los días de las
               pruebas escritas (
               {isOma ? (
                 <>martes 12 y miércoles 13</>
               ) : (
-                <>lunes 21 y martes 22</>
+                <>miércoles 22 y jueves 23</>
               )}
               ).
             </span>{" "}
           </li>
           <li>
-            <span className={styles.bold}>Tarjeta de premiación:</span> $12.000.
+            <span className={styles.bold}>Tarjeta de premiación:</span> $20.000.
             Solo es necesaria la tarjeta para aquellos que no están acreditados
             como acompañantes y que participarán únicamente de la premiación.
             Deben inscribirse junto con los otros participantes en la planilla.{" "}
@@ -349,19 +263,19 @@ const NationalInfo = ({
           El pago se hace depositando o transfieriendo a la siguiente cuenta de
           la Fundación Olimpíada Matemática Argentina:
         </p>
-        <ul className={`${styles.text} ${styles.list}`}>
+        <ul className={styles.text}>
           <li>
-            <span className={styles.bold}>BANCO HSBC</span> (Cuenta Corriente)
-            Sucursal Los Arcos (ex Salguero).
+            <span className={styles.bold}>BANCO GALICIA</span> (Cuenta
+            Corriente)
           </li>
           <li>
-            <span className={styles.bold}>N° Cuenta: </span>6093228419
+            <span className={styles.bold}>N° Cuenta: </span>000267656656
+          </li>
+          <li>
+            <span className={styles.bold}>CBU: </span>0070665620000002676566
           </li>
           <li>
             <span className={styles.bold}>ALIAS: </span>FOMAHSBCCC
-          </li>
-          <li>
-            <span className={styles.bold}>CBU: </span>1500609900060932284196
           </li>
           <li>
             <span className={styles.bold}>CUIT: </span>30-67928383-5
@@ -372,49 +286,38 @@ const NationalInfo = ({
           <span className={styles.bold}>ORIGINAL</span> de dicho depósito.
         </p>
         <p className={styles.text}>
-          Si necesitan factura electrónica o factura C, por favor completar la
-          planilla y enviar a{" "}
-          <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a> junto con el
-          comprobante de pago.
+          Para solicitar factura electrónica por el pago deben completar el
+          siguiente formulario:
+          <a
+            className="text-blue-600 underline"
+            href={
+              isOma
+                ? "https://forms.gle/zaRDFJoFCmH6dt6L7"
+                : "https://forms.gle/9x3x62Ah3BtEPnZw7"
+            }
+          >
+            {isOma
+              ? "https://forms.gle/zaRDFJoFCmH6dt6L7"
+              : "https://forms.gle/9x3x62Ah3BtEPnZw7"}
+          </a>
         </p>
-        <div className={styles.documentation}>
-          <div className={styles.button}>
-            <Button
-              content="Planilla Facturación"
-              onClick={() =>
-                downloadFile(
-                  `/nacional/${isOma ? "oma" : "nandu"}/PedidoFactura.xlsx`
-                )
-              }
-            >
-              <div className={styles.arrow}>
-                <Image
-                  src="/images/newsArrow.svg"
-                  width={30}
-                  height={40}
-                  alt="Descargar"
-                />
-              </div>
-            </Button>
-          </div>
-        </div>
-        <Warning>
-          <p className={styles.text}>
-            <span className={styles.bold}>
-              Se ruega enviar toda la documentación junta:
-            </span>{" "}
-            el comprobante de pago, el pedido de la factura electrónica (si
-            fuese necesaria) y los datos necesarios para la inscripción.
-          </p>
-          {!isOma && (
+        {!isOma && (
+          <Warning>
+            {/*<p className={styles.text}>
+              <span className={styles.bold}>
+                Se ruega enviar toda la documentación junta:
+              </span>{" "}
+              el comprobante de pago, el pedido de la factura electrónica (si
+              fuese necesaria) y los datos necesarios para la inscripción.
+            </p>*/}
             <p className={styles.text}>
               En el hotel contratado, luego de confirmar el{" "}
               {auth_max_date.getUTCDate()} de{" "}
               {months[auth_max_date.getUTCMonth()]} las plazas reservadas,
               deberán abonarse aunque no se ocupen.
             </p>
-          )}
-        </Warning>
+          </Warning>
+        )}
       </Collapsable>
       <Collapsable title="Documentación">
         <p className={styles.text}>La documentación exigida incluye:</p>
@@ -539,7 +442,7 @@ const NationalInfo = ({
             Solo podrá asistir a las actividades programadas dentro de los
             espacios establecidos (esto incluye el ingresar, permanecer y
             circular por el mismo) quien se acredite debidamente el día{" "}
-            {isOma ? "11 de noviembre" : "20 de octubre"}.
+            {isOma ? "11 de noviembre" : "21 de octubre"}.
           </li>
           <li>
             Se recuerda a los responsables de las delegaciones, se alojen o no
