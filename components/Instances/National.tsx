@@ -91,22 +91,126 @@ const NationalInfo = ({
   return participants.length > 0 && auth_max_date ? (
     <>
       <Collapsable title="Inscripción">
-        <p className={styles.text}>
-          Los colegios deberán completar el siguiente formulario antes del{" "}
-          <span className={styles.bold}>{`${auth_max_date.getUTCDate()} de ${
-            months[auth_max_date.getUTCMonth()]
-          }`}</span>
-        </p>
-        <div className={styles.button}>
-          <Button
-            content="Formulario de Inscripción"
-            onClick={() =>
-              (window.location.href = isOma
-                ? ""
-                : "https://forms.gle/QaRy7A7MJV1pSni27")
-            }
-          ></Button>
-        </div>
+        {!isOma ? (
+          <>
+            <p className={styles.text}>
+              Los colegios deberán completar el siguiente formulario antes del{" "}
+              <span
+                className={styles.bold}
+              >{`${auth_max_date.getUTCDate()} de ${
+                months[auth_max_date.getUTCMonth()]
+              }`}</span>
+            </p>
+            <div className={styles.button}>
+              <Button
+                content="Formulario de Inscripción"
+                onClick={() =>
+                  (window.location.href = isOma
+                    ? ""
+                    : "https://forms.gle/QaRy7A7MJV1pSni27")
+                }
+              ></Button>
+            </div>
+          </>
+        ) : (
+          <>
+            <p className={styles.text}>
+              Los colegios deberán comunicar antes del{" "}
+              <span
+                className={styles.bold}
+              >{`${auth_max_date.getUTCDate()} de ${
+                months[auth_max_date.getUTCMonth()]
+              }`}</span>{" "}
+              la nómina de personas que viajan, por correo electrónico a:{" "}
+              <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a>
+            </p>
+
+            <h4 className={styles.section_title}>
+              Instructivo para llenar la planilla:
+            </h4>
+            <ul className={`${styles.text} ${styles.list}`}>
+              <li>
+                <span className={styles.bold}>Región:</span> San Isidro o 53
+              </li>
+              <li>
+                <span className={styles.bold}>Colegio:</span> Nombre del
+                Establecimiento del alumno
+              </li>
+              <li>
+                <span className={styles.bold}>Localidad:</span> Lugar donde se
+                encuentra el colegio
+              </li>
+              <li>
+                <span className={styles.bold}>Nivel:</span> Nivel de Olimpíada
+                del participante (1, 2 ó 3). Para los acompañantes el nivel es 0
+                (cero).
+              </li>
+              <li>
+                <span className={styles.bold}>Sexo:</span> Completar con F
+                (femenino) o M (masculino) (no usar mujer y varón)
+              </li>
+              <li>
+                <span className={styles.bold}>Tipo:</span> Usar el siguiente
+                código: A para los alumnos; D para los docentes acompañantes, P
+                para el acompañante familiar y T para los que asistan a la
+                premiación <strong>únicamente</strong>. En el caso de los
+                familiares, indicar en la columna observaciones el grado de
+                parentesco y de quién.
+              </li>
+              <li>
+                <span className={styles.bold}>Alojamiento:</span> Usar el
+                siguiente código: S si se alojan en el hotel propuesto por
+                olimpíadas; N si se alojan por su cuenta.
+              </li>
+              <li>
+                <span className={styles.bold}>Dieta:</span> Notificar los
+                celiacos, vegetarianos, veganos, etc.
+              </li>
+              <li>
+                <span className={styles.bold}>
+                  Vianda almuerzo {isOma ? 15 : 23}:
+                </span>{" "}
+                Usar el siguiente código: S si se retiran con vianda luego de la
+                premiación de olimpíadas; N si almuerzan.
+              </li>
+              <li>
+                <span className={styles.bold}>Observaciones:</span> Espacio para
+                aclaraciones como por ejemplo parentesco con el alumno.{" "}
+              </li>
+              <li>
+                <span className={styles.bold}>Celular del responsable:</span>{" "}
+                Número de teléfono celular de contacto del responsable.{" "}
+              </li>
+              <li>
+                <span className={styles.bold}>Mail:</span> Por favor agregar
+                mail del responsable por cualquier consulta.
+              </li>
+            </ul>
+            <div className={styles.documentation}>
+              <div className={styles.button}>
+                <Button
+                  content="Planilla Inscripción"
+                  onClick={() =>
+                    downloadFile(
+                      `/nacional/${
+                        isOma ? "oma" : "nandu"
+                      }/PlanillaNacional.xlsx`
+                    )
+                  }
+                >
+                  <div className={styles.arrow}>
+                    <Image
+                      src="/images/newsArrow.svg"
+                      width={30}
+                      height={40}
+                      alt="Descargar"
+                    />
+                  </div>
+                </Button>
+              </div>
+            </div>
+          </>
+        )}
         <Warning>
           <p className={styles.text}>
             Recordamos a los colegios que son ellos los responsables de enviar
@@ -128,7 +232,7 @@ const NationalInfo = ({
           </span>{" "}
           se realizará en la ciudad de La Falda, Córdoba los días{" "}
           {isOma
-            ? "11 al 15 de noviembre en el Hotel Edén (Av. Edén 1400)"
+            ? "10 al 14 de noviembre en el Hotel Edén (Av. Edén 1400)"
             : "21 al 24 de octubre en el Hotel Edén (Av. Edén 1400)"}
           . Cada delegación se trasladará por su cuenta y riesgo, con sus
           profesores acompañantes según las pautas establecidas{" "}
@@ -154,7 +258,7 @@ const NationalInfo = ({
             <span className={styles.bold}>Acreditación:</span>{" "}
             {isOma ? (
               <>
-                Lunes 11 de noviembre de 16:00 a 20:00 horas en el{" "}
+                Lunes 10 de noviembre de 16:00 a 20:00 horas en el{" "}
                 <span className={styles.bold}>
                   hotel donde se aloje la delegación de la región
                 </span>
@@ -172,7 +276,7 @@ const NationalInfo = ({
             <span className={styles.bold}>Prueba escrita:</span>{" "}
             {isOma ? (
               <>
-                Martes 12 y Miércoles 13 de noviembre a las 9:30hs en el{" "}
+                Martes 11 y Miércoles 12 de noviembre a las 9:30hs en el{" "}
                 <span className={styles.bold}>Hotel Edén</span>
               </>
             ) : (
@@ -186,7 +290,7 @@ const NationalInfo = ({
             <span className={styles.bold}>Exposición Oral y Premiación:</span>{" "}
             {isOma ? (
               <>
-                Viernes 15 de noviembre a las 9:30hs horas en el{" "}
+                Viernes 14 de noviembre a las 9:30hs horas en el{" "}
                 <span className={styles.bold}>Hotel Edén</span>
               </>
             ) : (
@@ -205,9 +309,9 @@ const NationalInfo = ({
               Participantes y/o acompañantes que se alojen en el hotel propuesto
               por la olimpíada:
             </span>{" "}
-            {isOma ? "$410.000" : "$460.000"}. Incluye desde la cena del día{" "}
-            {isOma ? "lunes 11" : "martes 21"} al almuerzo del{" "}
-            {isOma ? "viernes 15" : "viernes 24"} (incluye una bebida por
+            {isOma ? "$590.000" : "$460.000"}. Incluye desde la cena del día{" "}
+            {isOma ? "lunes 10" : "martes 21"} al almuerzo del{" "}
+            {isOma ? "viernes 14" : "viernes 24"} (incluye una bebida por
             comida).
           </li>
           <li>
@@ -215,12 +319,12 @@ const NationalInfo = ({
               Participantes que NO se alojen en el hotel propuesto por la
               olimpíada:
             </span>{" "}
-            {isOma ? "$120.000" : "$250.000"}.{" "}
+            {isOma ? "$260.000" : "$250.000"}.{" "}
             <span className={styles.bold}>
-              Incluye los almuerzos {!isOma && "y meriendas"} de los días de las
-              pruebas escritas (
+              Incluye los almuerzos y meriendas de los días de las pruebas
+              escritas (
               {isOma ? (
-                <>martes 12 y miércoles 13</>
+                <>martes 11 y miércoles 12</>
               ) : (
                 <>miércoles 22 y jueves 23</>
               )}
@@ -232,12 +336,12 @@ const NationalInfo = ({
               Acompañantes que NO se alojen en el hotel propuesto por la
               olimpíada:
             </span>{" "}
-            {isOma ? "$110.000" : "$220.000"}.{" "}
+            {isOma ? "$230.000" : "$220.000"}.{" "}
             <span className={styles.bold}>
-              Incluye los almuerzos {!isOma && "y meriendas"} de los días de las
-              pruebas escritas (
+              Incluye los almuerzos y meriendas de los días de las pruebas
+              escritas (
               {isOma ? (
-                <>martes 12 y miércoles 13</>
+                <>martes 11 y miércoles 12</>
               ) : (
                 <>miércoles 22 y jueves 23</>
               )}
@@ -292,29 +396,31 @@ const NationalInfo = ({
             className="text-blue-600 underline"
             href={
               isOma
-                ? "https://forms.gle/zaRDFJoFCmH6dt6L7"
+                ? "https://forms.gle/8mZ7rjzkCuYxBSM98"
                 : "https://forms.gle/9x3x62Ah3BtEPnZw7"
             }
           >
             {isOma
-              ? "https://forms.gle/zaRDFJoFCmH6dt6L7"
+              ? "https://forms.gle/8mZ7rjzkCuYxBSM98"
               : "https://forms.gle/9x3x62Ah3BtEPnZw7"}
           </a>
         </p>
-        {!isOma && (
+        {!isOma ? (
           <Warning>
-            {/*<p className={styles.text}>
-              <span className={styles.bold}>
-                Se ruega enviar toda la documentación junta:
-              </span>{" "}
-              el comprobante de pago, el pedido de la factura electrónica (si
-              fuese necesaria) y los datos necesarios para la inscripción.
-            </p>*/}
             <p className={styles.text}>
               En el hotel contratado, luego de confirmar el{" "}
               {auth_max_date.getUTCDate()} de{" "}
               {months[auth_max_date.getUTCMonth()]} las plazas reservadas,
               deberán abonarse aunque no se ocupen.
+            </p>
+          </Warning>
+        ) : (
+          <Warning>
+            <p className={styles.text}>
+              <span className={styles.bold}>
+                Se ruega enviar toda la documentación junta:
+              </span>{" "}
+              el comprobante de pago y los datos necesarios para la inscripción.
             </p>
           </Warning>
         )}
@@ -442,7 +548,7 @@ const NationalInfo = ({
             Solo podrá asistir a las actividades programadas dentro de los
             espacios establecidos (esto incluye el ingresar, permanecer y
             circular por el mismo) quien se acredite debidamente el día{" "}
-            {isOma ? "11 de noviembre" : "21 de octubre"}.
+            {isOma ? "10 de noviembre" : "21 de octubre"}.
           </li>
           <li>
             Se recuerda a los responsables de las delegaciones, se alojen o no
