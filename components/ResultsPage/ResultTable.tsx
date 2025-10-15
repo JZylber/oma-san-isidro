@@ -153,7 +153,7 @@ const ResultTable = ({
         )}
       {instancia === "REGIONAL" &&
         competencia === "OMA" &&
-        testInfo.año === 2024 && (
+        testInfo.año === new Date().getUTCFullYear() && (
           <Warning title="Pedidos de Revisión" className={styles.revision}>
             <p className={styles.text}>
               Para hacer un pedido de revisión completar el siguiente formulario{" "}
