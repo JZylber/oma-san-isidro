@@ -12,32 +12,40 @@ interface HomeModalProps {
 
 const HomeModal = ({ open, setOpen }: HomeModalProps) => {
   return (
-    <Modal openModal={open} closeModal={() => setOpen(false)}>
-      <div className={styles.modal_content}>
-        <div className="flex items-center">
-          <Image
-            src="/images/warning.svg"
-            alt="Warning icon"
-            height={64}
-            width={64}
-            className="shrink-0 hidden lg:block"
-          />
-          <h1 className="w-fit">IMPORTANTE</h1>
+    <Modal
+      openModal={open}
+      closeModal={() => setOpen(false)}
+      className={styles.modal_content}
+    >
+      <div className="flex items-center gap-x-4">
+        <Image
+          src="/images/warning.svg"
+          alt="Warning icon"
+          height={96}
+          width={96}
+          className="shrink-0 hidden lg:block"
+        />
+        <div className="flex flex-col">
+          <h1 className="w-fit">CONCURSO</h1>
+          <h2>
+            <em>Un problema para canguro</em>
+          </h2>
         </div>
-        <p>
-          Estamos al tanto de que hay faltantes en los resultados del regional
-          ñandú, especialmente en el nivel 3.
-        </p>
-        <p>
-          A diferencia de las instancias anteriores, la corrección de la
-          instancia regional la hace el jurado nacional. Desde la secretaría
-          regional ya elevamos el reclamo y actualizaremos en cuanto recibamos
-          novedades.
-        </p>
-        <p>Para reclamos sobre correcciones, ver la página de resultados.</p>
-        <p>Agradecemos su paciencia.</p>
-        <Button onClick={() => setOpen(false)} content="OK" />
       </div>
+      <p>
+        La Olimpíada de Matemática Argentina invita a docentes (profesores y
+        maestros) y a estudiantes de Ciencias Exactas, de Ingeniería y de
+        profesorados a proponer problemas para el{" "}
+        <strong>concurso internacional Canguro Matemático</strong>.
+      </p>
+      <p>
+        <strong>Fecha de presentación de problemas:</strong> 1 de abril al 15 de
+        mayo de 2026.
+      </p>
+      <p>
+        Para más información ver <a href="oma.org.ar">oma.org.ar</a>
+      </p>
+      <Button onClick={() => setOpen(false)} content="OK" />
     </Modal>
   );
 };

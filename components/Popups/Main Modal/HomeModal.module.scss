@@ -1,10 +1,10 @@
 @use "../../../styles/shared.scss" as shared;
 
 .modal_content{
-  background-color: shared.$white;
   border: 2px solid #000000;
   border-radius: 9px;
   padding: 2.4rem;
+  margin: auto;
   @include shared.mobile-only{
       width: 80%;
   }
@@ -25,6 +25,16 @@
 
       @include shared.not-mobile {
         font-size: 2 * shared.$desktop-actionable-font-size;
+      }
+  }
+  h2 {
+      @include shared.font-unbounded(600);
+      @include shared.mobile-only {
+        font-size: shared.$mobile-actionable-font-size;
+      }
+
+      @include shared.not-mobile {
+        font-size: shared.$desktop-actionable-font-size;
       }
   }
   p {
