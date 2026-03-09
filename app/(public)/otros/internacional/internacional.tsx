@@ -5,7 +5,7 @@ import dataNandu from "../../../../data/internacionalNandu.json";
 
 const orderByLevelAndSurname = (
   a: Array<string | boolean | number | null>,
-  b: Array<string | boolean | number | null>
+  b: Array<string | boolean | number | null>,
 ) => {
   let a0 = a[0] as number;
   let b0 = b[0] as number;
@@ -22,7 +22,7 @@ const InternationalPage = () => {
   sortedDataNandu.sort(orderByLevelAndSurname);
   const renderOMAparticipant = (
     omaParticipant: Array<string | boolean | number | null>,
-    idx: number
+    idx: number,
   ) => {
     const [level, surname, name, t1, t2, t3, t4, may_level] = omaParticipant;
     return (
@@ -40,7 +40,7 @@ const InternationalPage = () => {
   };
   const renderNanduparticipant = (
     omaParticipant: Array<string | boolean | number>,
-    idx: number
+    idx: number,
   ) => {
     const [level, surname, name, may_level] = omaParticipant;
     return (
@@ -59,48 +59,50 @@ const InternationalPage = () => {
       <p className={styles.description_text}>
         {" "}
         Alumnos que pueden participar en las selecciones para olimpíadas
-        internacionales 2025
+        internacionales 2026
       </p>
       <div className={[styles.rounded_box, styles.middle_columns].join(" ")}>
         <h3>Pretorneo de las Ciudades</h3>
         <p>
-          Participan los alumnos de OMA que en el 2024 llegaron por lo menos al
+          Participan los alumnos de OMA que en el 2025 llegaron por lo menos al
           Regional y los alumnos de 3° Nivel de Ñandú invitados por la OMA
         </p>
       </div>
       <div className={styles.category}>
         <h2 className={styles.category_title}>
-          Alumnos que participaron en OMA en 2024
+          Alumnos que participaron en OMA en 2025
         </h2>
         <ul>
           <li className={styles.tournament}>
             <h3 className={styles.tournament_name}>Selección Cono Sur</h3>
             <p className={styles.tournament_requirements}>
               Haber llegado a la instancia Nacional de OMA y haber nacido
-              después del 01/01/2009. En el caso de nivel 1, se tiene que haber{" "}
-              <strong>APROBADO</strong> la instancia Nacional.
+              después del 01/01/2010.{" "}
+              {/*En el caso de nivel 1, se tiene que haber{" "}
+              <strong>APROBADO</strong> la instancia Nacional*/}
+              .
             </p>
           </li>
           <li className={styles.tournament}>
             <h3 className={styles.tournament_name}>Olimpíada de Mayo</h3>
             <p className={styles.tournament_requirements}>
               Haber aprobado la instancia Regional de OMA y haber nacido después
-              del 01/01/2010. Nivel 1 nacidos a partir del 1/1/2012 y nivel 2
-              nacidos entre 1/1/2010 y 31/12/2011
+              del 01/01/2011. Nivel 1 nacidos a partir del 1/1/2013 y nivel 2
+              nacidos entre 1/1/2011 y 31/12/2012.
             </p>
           </li>
           <li className={styles.tournament}>
             <h3 className={styles.tournament_name}>Selección IMO</h3>
             <p className={styles.tournament_requirements}>
               Haber aprobado la instancia Nacional de OMA, haber nacido después
-              del 01/07/2005 y ser alumno regular de enseñanza media en el 2025.
+              del 01/07/2006 y ser alumno regular de enseñanza media en el 2026.
             </p>
           </li>
           <li className={styles.tournament}>
             <h3 className={styles.tournament_name}>Selección Iberoamericana</h3>
             <p className={styles.tournament_requirements}>
               Haber aprobado la instancia Nacional de OMA, haber nacido después
-              del 01/01/2007 y no haber participado en dos Olimpíadas
+              del 01/01/2008 y no haber participado en dos Olimpíadas
               Iberoamericanas anteriores.
             </p>
           </li>
@@ -125,14 +127,14 @@ const InternationalPage = () => {
               Olimpíada Panamericana Femenil de Matemática
             </h3>
             <p className={styles.tournament_requirements}>
-              Alumnas que llegaron al Certamen Nacional de la OMA de 2024
-              nacidas a partir del 01/01/2009.
+              Alumnas que llegaron al Certamen Nacional de la OMA de 2025
+              nacidas a partir del 01/01/2010.
             </p>
           </li>
           <li className={styles.tournament}>
             <h3 className={styles.tournament_name}>OlimPri</h3>
             <p className={styles.tournament_requirements}>
-              Campeones y subcampeones de 1° y 2° Nivel de Ñandú 2025.
+              Campeones y subcampeones de 1° y 2° Nivel de Ñandú 2026.
             </p>
           </li>
         </ul>
@@ -140,7 +142,7 @@ const InternationalPage = () => {
           <table className={styles.table}>
             <thead className={styles.table_header}>
               <tr>
-                <th className={styles.table_column_level}>Nivel (2024)</th>
+                <th className={styles.table_column_level}>Nivel (2025)</th>
                 <th
                   className={[
                     styles.table_column_name,
@@ -165,11 +167,11 @@ const InternationalPage = () => {
       </div>
       <div className={styles.category}>
         <h2 className={styles.category_title}>
-          Alumnos que participaron en Ñandú en 2024
+          Alumnos que participaron en Ñandú en 2025
         </h2>
         <p className={styles.description_text}>
           Pueden Participar en la Olimpíada de Mayo aquellos alumnos que
-          aprobaron el Regional y nacieron después del 01/01/2010
+          aprobaron el Regional y nacieron después del 01/01/2011
         </p>
         <div
           className={[styles.table_container, styles.middle_columns].join(" ")}

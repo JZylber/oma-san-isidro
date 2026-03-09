@@ -43,7 +43,10 @@ const HomeModal = ({ open, setOpen }: HomeModalProps) => {
         mayo de 2026.
       </p>
       <p>
-        Para más información ver <a href="oma.org.ar">oma.org.ar</a>
+        Para más información ver{" "}
+        <a className="text-blue-600" href="oma.org.ar">
+          oma.org.ar
+        </a>
       </p>
       <Button onClick={() => setOpen(false)} content="OK" />
     </Modal>
