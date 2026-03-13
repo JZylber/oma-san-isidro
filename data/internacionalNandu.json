@@ -1,302 +1,33 @@
 [
-    [
-        "1",
-        "Abramzon",
-        "Tomas Andres",
-        1
-    ],
-    [
-        "1",
-        "Caneva",
-        "Bautista",
-        1
-    ],
-    [
-        "1",
-        "Carro Niedenthal",
-        "Tobias",
-        1
-    ],
-    [
-        "1",
-        "Colloca",
-        "Nicol\u00e1s",
-        1
-    ],
-    [
-        "1",
-        "Exposito Ancillotti",
-        "Emilia",
-        1
-    ],
-    [
-        "1",
-        "Grigolatto",
-        "Sof\u00eda",
-        1
-    ],
-    [
-        "1",
-        "Gutter Alfonso",
-        "Ivan",
-        1
-    ],
-    [
-        "1",
-        "G\u00f3mez Vanin",
-        "Aitor",
-        1
-    ],
-    [
-        "1",
-        "Lin",
-        "Cindy",
-        1
-    ],
-    [
-        "1",
-        "Moller",
-        "Facundo",
-        1
-    ],
-    [
-        "1",
-        "O'reilly",
-        "Pedro",
-        1
-    ],
-    [
-        "1",
-        "Otero",
-        "Agust\u00edn",
-        1
-    ],
-    [
-        "1",
-        "Popovsky",
-        "Rafael Hernan",
-        1
-    ],
-    [
-        "1",
-        "Sanfilippo S.",
-        "Santiago",
-        1
-    ],
-    [
-        "1",
-        "Trueba",
-        "Jacinta Mar\u00eda",
-        1
-    ],
-    [
-        "1",
-        "Otero Perez",
-        "Victoria",
-        1
-    ],
-    [
-        "2",
-        "Bacchiani",
-        "Marcos",
-        1
-    ],
-    [
-        "2",
-        "Cai",
-        "Hanxi",
-        1
-    ],
-    [
-        "2",
-        "Caride",
-        "Vicente",
-        1
-    ],
-    [
-        "2",
-        "Casabal",
-        "Josefina",
-        1
-    ],
-    [
-        "2",
-        "Castro Mendez",
-        "Rafael",
-        1
-    ],
-    [
-        "2",
-        "Cornejo",
-        "Tob\u00edas",
-        1
-    ],
-    [
-        "2",
-        "Fainholc",
-        "Josefina",
-        1
-    ],
-    [
-        "2",
-        "Gamerro",
-        "Tom\u00e1s A.",
-        1
-    ],
-    [
-        "2",
-        "Iriarte Lanusse",
-        "Concepcion",
-        1
-    ],
-    [
-        "2",
-        "Iriarte Zorzi",
-        "Joaqu\u00edn",
-        1
-    ],
-    [
-        "2",
-        "Kaplun",
-        "Crist\u00f3bal",
-        1
-    ],
-    [
-        "2",
-        "Latino",
-        "Conrado",
-        1
-    ],
-    [
-        "2",
-        "Loginova",
-        "Alisa",
-        1
-    ],
-    [
-        "2",
-        "Meyer",
-        "Olivia Catalina",
-        1
-    ],
-    [
-        "2",
-        "Orella",
-        "Santos",
-        1
-    ],
-    [
-        "2",
-        "Repetto",
-        "Mart\u00edn",
-        1
-    ],
-    [
-        "2",
-        "Rossi Pompilio",
-        "Matea",
-        1
-    ],
-    [
-        "2",
-        "Saad",
-        "Severiano",
-        1
-    ],
-    [
-        "2",
-        "Sharma Flatman",
-        "Anamika",
-        1
-    ],
-    [
-        "2",
-        "Vincent",
-        "Tom\u00e1s",
-        1
-    ],
-    [
-        "2",
-        "Viramonte",
-        "Pedro",
-        1
-    ],
-    [
-        "3",
-        "Albrecht",
-        "Andrew",
-        2
-    ],
-    [
-        "3",
-        "Alonso Paulos",
-        "Benjam\u00edn",
-        2
-    ],
-    [
-        "3",
-        "Arce Salazar",
-        "Delfina",
-        2
-    ],
-    [
-        "3",
-        "Costa",
-        "Lucila Denise",
-        1
-    ],
-    [
-        "3",
-        "Dalma",
-        "Matias",
-        1
-    ],
-    [
-        "3",
-        "Dudin",
-        "Lev",
-        2
-    ],
-    [
-        "3",
-        "Fernandez Long",
-        "Hilario",
-        2
-    ],
-    [
-        "3",
-        "Fernandez Tucci",
-        "Paloma",
-        2
-    ],
-    [
-        "3",
-        "Ferreira Lima",
-        "Juana",
-        2
-    ],
-    [
-        "3",
-        "Grand Poncet",
-        "Bautista",
-        2
-    ],
-    [
-        "3",
-        "Grondona",
-        "Salvador",
-        2
-    ],
-    [
-        "3",
-        "Kagoshima",
-        "Ena",
-        2
-    ],
-    [
-        "3",
-        "Kaminsky Bush",
-        "Nicole",
-        2
-    ]
+  ["1", "Bigio ", "Libertad", "1"],
+  ["1", "Bueno", "Benjamin", "1"],
+  ["1", "Cerrato", "Vicente", "1"],
+  ["1", "Dorfman", "Camila", "1"],
+  ["1", "Dos Santos", "Fausto", "1"],
+  ["1", "Gonzalez Luna", "Santiago", "1"],
+  ["1", "Katilius", "Agustin", "1"],
+  ["1", "Latorraca", "Francesca", "1"],
+  ["1", "Lefebvre Jaramillo", "Pedro", "1"],
+  ["1", "Martinez Carricart Antonini", "Alfonso", "1"],
+  ["1", "Pegoraro ", "Clara", "1"],
+  ["1", "Santangelo ", "Joaqu\u00ecn", "1"],
+  ["1", "Steinmann", "Timoteo", "1"],
+  ["1", "Truppia", "Luca", "1"],
+  ["2", "Alvarez", "Tom\u00e1s", "1"],
+  ["2", "Antognini", "Valentino", "1"],
+  ["2", "Cassara", "Mart\u00edn", "1"],
+  ["2", "Cigliutti", "Martina", "1"],
+  ["2", "Gamiz", "Tom\u00e1s", "1"],
+  ["2", "Gomez Vanin", "Aitor", "1"],
+  ["2", "Insausti", "Tom\u00e1s", "1"],
+  ["2", "Mayer Bosch", "Paula", "1"],
+  ["2", "Micheli", "Ignacio", "1"],
+  ["2", "Nu\u00f1ez Losada", "Lucas", "1"],
+  ["2", "O\u00b4reilly", "Pedro", "1"],
+  ["2", "Paz", "Andr\u00e9s", "1"],
+  ["2", "Plaza Sergi", "Valent\u00edn Ariel", "1"],
+  ["2", "Popovfky", "Rafael Hern\u00e1n", "1"],
+  ["2", "Sporleder", "Helena", "1"],
+  ["2", "Villambrosa", "Clara", "1"],
+  ["2", "Zingoni", "Sim\u00f3n", "1"]
 ]
