@@ -137,6 +137,15 @@ const InternationalPage = () => {
               Campeones y subcampeones de 1° y 2° Nivel de Ñandú 2026.
             </p>
           </li>
+          <li className={styles.tournament}>
+            <h3 className={styles.tournament_name}>
+              Olimpíada Riopalatense de Matemática
+            </h3>
+            <p className={styles.tournament_requirements}>
+              Participan campeones y subcampeones de Oma y 3er nivel de Ñandú de
+              2025.
+            </p>
+          </li>
         </ul>
         <div className={styles.table_container}>
           <table className={styles.table}>
