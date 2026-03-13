@@ -143,7 +143,7 @@ const InternationalPage = () => {
             </h3>
             <p className={styles.tournament_requirements}>
               Participan campeones y subcampeones de Oma y 3er nivel de Ñandú de
-              2025.
+              2026.
             </p>
           </li>
         </ul>
