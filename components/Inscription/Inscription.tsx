@@ -72,7 +72,7 @@ export const Inscripcion = ({
             <h1>1. Pago</h1>
             <p>
               El pago por alumno este año es de:{" "}
-              <span className={styles.step_information_bold}>$20.000</span>.
+              <span className={styles.step_information_bold}>$26.000</span>.
             </p>
             <p>
               Se debe realizar un solo depósito por la totalidad de alumnos
@@ -81,14 +81,15 @@ export const Inscripcion = ({
             <p>
               La inscripción incluye la participación al torneo de geometría y
               al torneo de literatura y matemática. El costo de inscripción para
-              participar solamente de estos torneos es también de $20.000.
+              participar solamente de estos torneos es también de $26.000.
             </p>
             <BankInformation />
             <p>
               La inscripción a la competencia de Mateclubes es gratuita y se
               hace desde la página de OMA. Recién se paga en la tercera ronda
-              (que es presencial) y el costo de la competencia es de $40.000 por
-              club. No se exime de pago por haber participado en otro torneo.
+              (que es presencial) y el costo de la competencia es de (a
+              determinar) por club. No se exime de pago por haber participado en
+              otro torneo.
             </p>
             <p>
               El día del certamen se deberá presentar el comprobante{" "}
@@ -156,8 +157,8 @@ export const Inscripcion = ({
                 <h4>San Fernando, San Isidro y Vicente López</h4>
                 <ul>
                   <li className={styles.mail_text}>
-                    <a href="mailto:elena@oma.org.ar?subject=Planila%20de%20inscripcion%20colegio%3A">
-                      elena@oma.org.ar
+                    <a href="mailto:elenaguille2014@gmail.com?subject=Planila%20de%20inscripcion%20colegio%3A">
+                      elenaguille2014@gmail.com
                     </a>
                   </li>
                 </ul>
