@@ -6,12 +6,12 @@ const BankInformation = () => {
       <div className={styles.border_box}>
         <h3>
           El depósito debe realizarse a nombre de: Fundación Olimpíada
-          Matemática Argentina en cualquier sucursal del banco Galicia Más - ex
-          HSBC (Cuenta Corriente)
+          Matemática Argentina en cualquier sucursal del banco Galicia (Cuenta
+          Corriente)
         </h3>
         <ul className={styles.bank_data}>
-          <li className={styles.item}>N° Cuenta: 6093228419</li>
-          <li className={styles.item}>CBU: 15006099 - 00060932284196</li>
+          <li className={styles.item}>N° Cuenta: 0002676-5665-6</li>
+          <li className={styles.item}>CBU: 0070665620000002676566</li>
           <li className={styles.item}>CUIT: 30-67928383-5</li>
         </ul>
       </div>
