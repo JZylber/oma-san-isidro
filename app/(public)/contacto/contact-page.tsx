@@ -74,6 +74,15 @@ const ContactPage = () => {
         </p>
       </div>
       <div className={styles.independent_category}>
+        <h3 className={styles.category_title}>Instagram</h3>
+        <p className={styles.mail_text}>
+          Instagram oficial de Oma San Isidro:{" "}
+          <a href="https://www.instagram.com/oma_sanisidro?igsh=MTh4aXkwbnFyMWJheQ==">
+            https://www.instagram.com/oma_sanisidro
+          </a>
+        </p>
+      </div>
+      <div className={styles.independent_category}>
         <h3 className={styles.category_title}>Desarrolladores</h3>
         <p className={styles.mail_text}>
           Para consultas y feedback sobre la página:{" "}

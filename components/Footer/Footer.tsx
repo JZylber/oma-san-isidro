@@ -1,6 +1,7 @@
 import styles from "./Footer.module.scss";
 import OMALogo from "../../public/images/logoOMA.svg";
 import Link from "next/link";
+import Image from "next/image";
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -19,12 +20,14 @@ const Footer = () => {
           </li>
           <li>
             <div className={styles.footer_links_item}>
-              <a href="http://omasanisidro.flashingsites.com.ar/index_old.htm">Sitio viejo</a>
+              <a href="http://omasanisidro.flashingsites.com.ar/index_old.htm">
+                Sitio viejo
+              </a>
             </div>
           </li>
           <li>
             <div className={styles.footer_links_item}>
-              <Link href={'/contacto'}>Contacto</Link>
+              <Link href={"/contacto"}>Contacto</Link>
             </div>
           </li>
           <li>
@@ -37,12 +40,27 @@ const Footer = () => {
           </li>*/}
         </ul>
         <div className={styles.footer_logo}>
-          <OMALogo/>
+          <OMALogo />
         </div>
       </div>
       <div className={styles.footer_credits}>
-        <p>© {year} Joaquín Aldrey y Julián Zylber.</p>
-        <p>Todos los derechos reservados.</p>
+        <div>
+          <p>© {year} Joaquín Aldrey y Julián Zylber.</p>
+          <p>Todos los derechos reservados.</p>
+        </div>
+        <div>
+          <a
+            href="https://www.instagram.com/oma_sanisidro?igsh=MTh4aXkwbnFyMWJheQ=="
+            title="Instagram"
+          >
+            <Image
+              src={"/icons/instagram.png"}
+              alt={"Instagram"}
+              width={30}
+              height={30}
+            />
+          </a>
+        </div>
       </div>
     </footer>
   );

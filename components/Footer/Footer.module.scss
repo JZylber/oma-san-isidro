@@ -193,7 +193,10 @@
     }
     &_credits {
         @include shared.font-montserrat(400);
-        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        row-gap: 16px;
         border-top: 1px solid shared.$black;
 
         @include shared.mobile-only{
@@ -210,7 +213,8 @@
             line-height: 2.3125 * shared.$tablet-spacing;
 
             padding: 1.6rem 0 1.6rem 0;
-            text-align: left;
+            flex-direction: row;
+            justify-content: space-between;
         }
         @include shared.desktop-only {
             grid-column: 1/-1;
@@ -221,7 +225,8 @@
 
             padding-top: 2.5 * shared.$desktop-spacing;
             padding-bottom: 3 * shared.$desktop-spacing;
-            text-align: left;
+            flex-direction: row;
+            justify-content: space-between;
         }
         p {
             @include shared.not-mobile {
