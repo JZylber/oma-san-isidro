@@ -123,13 +123,12 @@ export const Inscripcion = ({
             <p>
               Aquellos que precisen factura electrónica deben completar el
               siguiente link:{" "}
-              {/*<a
+              <a
                 className="text-blue-700 cursor-pointer"
-                href="https://forms.gle/zRK3sBoV6h62bmva6"
+                href="https://forms.gle/BQKZaVRuMUU7DG3w8"
               >
-                https://forms.gle/zRK3sBoV6h62bmva6
-              </a>*/}
-              <strong>(Proximamente)</strong>.{" "}
+                https://forms.gle/BQKZaVRuMUU7DG3w8
+              </a>
               <span className={styles.step_information_bold}>IMPORTANTE: </span>{" "}
               Como en el mismo deben cargar el archivo de pago, para abrirlo,
               necesitarán tener iniciada la sesión de Gmail, de lo contrario no
