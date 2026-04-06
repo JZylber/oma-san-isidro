@@ -187,11 +187,7 @@ export const Inscripcion = ({
                 Este paso solo se puede realizar habiendo completado el paso 1
               </strong>
             </p>
-            <p>
-              Al completar el paso 1, se les enviará un link en donde deben
-              ingresar los datos de todos los participates.
-            </p>
-            {/*<p>Ingresar los datos de los participantes en el siguiente link:</p>
+            <p>Ingresar los datos de los participantes en el siguiente link:</p>
             <div className={styles.button_container}>
               <Button
                 content={
@@ -205,7 +201,7 @@ export const Inscripcion = ({
               >
                 <>{link_inscripcion && <Arrow className={styles.arrow} />}</>
               </Button>
-            </div>*/}
+            </div>
           </div>
           <div className={styles.step_information}>
             <h1>
