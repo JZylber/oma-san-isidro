@@ -10,6 +10,7 @@ const BankInformation = () => {
           Corriente)
         </h3>
         <ul className={styles.bank_data}>
+          <li className={styles.item}>Alias: FOMA.OLIMPIADA</li>
           <li className={styles.item}>N° Cuenta: 0002676-5665-6</li>
           <li className={styles.item}>CBU: 0070665620000002676566</li>
           <li className={styles.item}>CUIT: 30-67928383-5</li>
