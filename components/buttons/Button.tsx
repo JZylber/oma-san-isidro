@@ -1,5 +1,3 @@
-import styles from "./Button.module.scss";
-
 interface ButtonProps {
   content: string;
   type?: "button" | "submit" | "reset";
@@ -14,8 +12,23 @@ export const Button: React.FC<ButtonProps> = ({
   onClick,
 }) => {
   return (
-    <button className={styles.container} type={type} onClick={onClick}>
-      <span>{content} </span>
+    <button
+      className="
+        box-border bg-primary-light-blue border-2 border-black rounded-[9px]
+        w-full flex flex-row justify-center items-center text-center
+        font-unbounded font-medium cursor-pointer
+        mt-[1.6rem] shadow-[0px_0.6rem_black]
+        h-[7.2rem] max-tablet:mb-[2.4rem] text-mobile-actionable leading-[calc(2.375*var(--mobile-spacing))]
+        tablet:h-[6.4rem] tablet:text-tablet-actionable tablet:leading-[calc(2.5*var(--tablet-max-spacing))]
+        tablet:first:mt-[calc(2*var(--tablet-y-spacing))]
+        desktop:h-[8rem] desktop:first:mt-[calc(2*var(--desktop-spacing))] desktop:text-desktop-actionable desktop:leading-[3rem]
+        desktop:mt-[calc(2*var(--desktop-spacing))] desktop:mb-[calc(3*var(--desktop-spacing))]
+        desktop:shadow-[0px_0.8rem_black]
+      "
+      type={type}
+      onClick={onClick}
+    >
+      <span className="w-full desktop:w-4/5">{content}</span>
       {children}
     </button>
   );

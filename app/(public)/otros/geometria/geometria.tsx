@@ -4,7 +4,7 @@ import styles from "./Geometria.module.scss";
 import BankInformation from "../../../../components/Inscription/BankInformation";
 import AllDatesBanner from "../../../../components/CalendarComponents/DateBanner/NextDatesBanner";
 import Warning from "../../../../components/Warning/Warning";
-import Pending from "../../../../components/Pending/pending";
+import Pending from "../../../../components/Pending/Pending";
 
 interface GeometryPageProps {
   events: Array<CalendarEvent>;

@@ -1,6 +1,6 @@
 "use client";
 import { AuthProvider } from "contexts/UserContext";
-import "../styles/globals.scss";
+import "../styles/globals.css";
 import { trpc } from "../utils/trpc";
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {

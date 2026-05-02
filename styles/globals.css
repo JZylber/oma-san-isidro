@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Unbounded:wght@200..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .section-container {
+    padding: var(--mobile-y-spacing) var(--mobile-x-spacing);
+
+    @screen tablet {
+      padding: var(--tablet-y-spacing) var(--tablet-x-spacing);
+    }
+
+    @screen desktop {
+      padding: var(--desktop-y-spacing) var(--desktop-x-spacing);
+    }
+  }
+}
+
+@layer base {
+  :root {
+    --mobile-x-spacing: calc(100vw / 50);
+    --mobile-y-spacing: calc(100vh / 106);
+    --mobile-spacing: calc(100vmin / 50);
+    --mobile-max-spacing: calc(100vmax / 106);
+    --tablet-x-spacing: calc(100vw / 104.25);
+    --tablet-y-spacing: calc(100vh / 149.25);
+    --tablet-spacing: calc(100vmin / 104.25);
+    --tablet-max-spacing: calc(100vmax / 149.25);
+    --desktop-x-spacing: calc(100vw / 180);
+    --desktop-y-spacing: calc(100vh / 128);
+    --desktop-spacing: calc(100vmin / 128);
+    --desktop-max-spacing: calc(100vmin / 180);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-size: 62.5%;
+  }
+
+  html,
+  body,
+  #__next {
+    min-height: 100vh;
+  }
+
+  body {
+    @apply bg-primary-white;
+  }
+}

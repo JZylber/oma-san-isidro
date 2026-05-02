@@ -10,7 +10,7 @@ import {Button} from "../../../../components/buttons/Button";
 import { useReactToPrint } from "react-to-print";
 import CalendarExport from "../../../../components/CalendarComponents/CalendarExport/CalendarExport";
 import { useSearchParams } from "next/navigation";
-import Pending from "../../../../components/Pending/pending";
+import Pending from "../../../../components/Pending/Pending";
 
 interface CalendarProps {
     events : Array<CalendarEvent>,

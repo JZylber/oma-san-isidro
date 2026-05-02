@@ -3,7 +3,7 @@ import Arrow from "../../public/images/newsArrow.svg";
 import styles from "./Inscription.module.scss";
 import BankInformation from "./BankInformation";
 import Link from "next/link";
-import Pending from "../Pending/pending";
+import Pending from "../Pending/Pending";
 import { DropPoint } from "../Instances/Venues";
 
 export interface InscriptionData {
