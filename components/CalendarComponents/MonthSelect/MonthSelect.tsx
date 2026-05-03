@@ -1,11 +1,10 @@
 import { Dispatch, SetStateAction} from "react";
-import {Swiper,SwiperProps, SwiperSlide} from 'swiper/react';
+import {Swiper, SwiperProps, SwiperSlide} from 'swiper/react';
 import { Navigation } from "swiper";
 import Image from "next/image";
 import 'swiper/scss';
 import 'swiper/scss/navigation';
-import styles from './MonthSelect.module.scss'
-
+import styles from './MonthSelect.module.css'
 
 interface MonthSelectProps {
     displayedMonth : number,
@@ -29,44 +28,49 @@ const MonthSelect = ({displayedMonth,setDisplayedMonth}: MonthSelectProps) => {
             setDisplayedMonth(swiper.realIndex)
         },
         onBeforeTransitionStart: (swiper) => {
-            swiper.slides.forEach((slide,index) => {
+            swiper.slides.forEach((slide) => {
                 let element = slide.firstElementChild;
                 element?.classList.add(styles.sideMonth)
                 element?.classList.remove(styles.selectedMonth)
-            }) 
+            })
         },
         onTransitionStart : (swiper) => {
             let element = swiper.slides[swiper.activeIndex]?.firstElementChild
             element?.classList.remove(styles.sideMonth)
             element?.classList.add(styles.selectedMonth)
         },
-        onTouchMove: (swiper,event) => {
-            swiper.slides.forEach((slide,index) => {
+        onTouchMove: (swiper) => {
+            swiper.slides.forEach((slide) => {
                 let element = slide.firstElementChild;
                 element?.classList.add(styles.sideMonth)
                 element?.classList.remove(styles.selectedMonth)
-            }) 
+            })
         },
-        onTap: (swiper,event) => {
+        onTap: (swiper) => {
             if(swiper.clickedIndex > swiper.activeIndex){
                 swiper.slideNext();
             } else {
                 swiper.slidePrev();
             }
         },
-        className:["mySwiper",styles.swiper].join(" ")
+        className: ["mySwiper", "w-full h-full"].join(" ")
     }
     return(
-        <div className={styles.container}>
-        <div className='previous' style={{transform: 'rotate(180deg)',display:'flex',justifyContent:'center',alignItems:'center',height:'2.5rem',width:'2.5rem'}}><Image src="/images/menuArrow.svg" width={14} height={25} alt="" /></div>
-        <Swiper {...parameters}>    
-            {months.map((month,idx) => 
-                <SwiperSlide className={styles.swiper_slide} key={idx}>
-                    <span className={[styles.sideMonth,styles.swiper_text_transition].join(" ")}>{month}</span>
-                </SwiperSlide>)}
-        </Swiper>
-        <div className='next' style={{display:'flex',justifyContent:'center',alignItems:'center',height:'2.5rem',width:'2.5rem'}}><Image src="/images/menuArrow.svg" width={14} height={25} alt="" /></div>
-        </div>)
+        <div className="my-[3.2rem] max-tablet:flex max-tablet:items-center tablet:hidden">
+            <div className='previous' style={{transform: 'rotate(180deg)',display:'flex',justifyContent:'center',alignItems:'center',height:'2.5rem',width:'2.5rem'}}>
+                <Image src="/images/menuArrow.svg" width={14} height={25} alt="" />
+            </div>
+            <Swiper {...parameters}>
+                {months.map((month,idx) =>
+                    <SwiperSlide className="flex justify-center items-end h-auto" key={idx}>
+                        <span className={[styles.sideMonth, styles.swiper_text_transition].join(" ")}>{month}</span>
+                    </SwiperSlide>)}
+            </Swiper>
+            <div className='next' style={{display:'flex',justifyContent:'center',alignItems:'center',height:'2.5rem',width:'2.5rem'}}>
+                <Image src="/images/menuArrow.svg" width={14} height={25} alt="" />
+            </div>
+        </div>
+    )
 }
 
 export default MonthSelect
