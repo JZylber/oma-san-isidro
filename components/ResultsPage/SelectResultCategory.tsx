@@ -30,7 +30,6 @@ const filterBoxOpenClasses = "z-[2] max-h-fit";
 const filterTextClasses = "flex items-center font-unbounded font-medium text-[1.5rem] max-tablet:text-center max-tablet:p-[1.4rem_2rem] max-tablet:[&_span]:flex-grow tablet:max-desktop:p-[1.4rem_2rem] desktop:p-[1.4rem_1.8rem]";
 const filterTitleClasses = "flex justify-between bg-primary-white";
 const filterTitleOpenClasses = "border-b-2 border-b-primary-black";
-const filterTitleEndClasses = "";
 const filterInputClasses = "flex w-full";
 const cleanInputClasses = "appearance-none border-0 outline-none shadow-none focus:outline-none w-full text-ellipsis";
 const filterClearClasses = "basis-[content] !pl-0";
@@ -141,9 +140,7 @@ const SelectResultCategory = <T extends Filterables>({
                 ].join(" ")}
               >
                 <span>{value !== undefined ? displayOption(value) : `-`}</span>
-                <div className={filterTitleEndClasses}>
-                  <Image src="/images/menuSelectIcon.svg" width={12} height={10} alt="" />
-                </div>
+                <Image src="/images/menuSelectIcon.svg" width={12} height={10} alt="" />
               </div>
             ) : (
               <div
