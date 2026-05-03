@@ -25,7 +25,8 @@ const normalizeString = (str: string) => {
 const categoryContainerClasses = "flex flex-col max-tablet:w-full tablet:mr-[2rem] tablet:max-desktop:flex-[1_1_0] tablet:max-desktop:w-0 desktop:min-w-[180px] desktop:w-[19%]";
 const categoryClasses = "font-montserrat font-normal pb-[.4rem] max-desktop:text-[1.5rem] desktop:text-[1.6rem]";
 const filterBoxContainerClasses = "w-full relative tablet:min-h-[4.8rem]";
-const filterBoxClasses = "border-2 border-primary-black rounded-[9px] overflow-hidden box-border bg-primary-white tablet:absolute tablet:w-full tablet:z-[1] tablet:max-h-full";
+const filterBoxClasses = "border-2 border-primary-black rounded-[9px] overflow-hidden box-border bg-primary-white tablet:absolute tablet:w-full tablet:z-[1]";
+const filterBoxClosedClasses = "tablet:max-h-full";
 const filterBoxOpenClasses = "z-[2] max-h-fit";
 const filterTextClasses = "flex items-center font-unbounded font-medium text-[1.5rem] max-tablet:text-center max-tablet:p-[1.4rem_2rem] max-tablet:[&_span]:flex-grow tablet:max-desktop:p-[1.4rem_2rem] desktop:p-[1.4rem_1.8rem]";
 const filterTitleClasses = "flex justify-between bg-primary-white";
@@ -126,7 +127,7 @@ const SelectResultCategory = <T extends Filterables>({
           <div
             className={[
               filterBoxClasses,
-              isOpen && filterBoxOpenClasses,
+              isOpen ? filterBoxOpenClasses : filterBoxClosedClasses,
             ].join(" ")}
             ref={wrapperRef}
           >
