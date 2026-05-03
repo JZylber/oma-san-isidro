@@ -1,7 +1,6 @@
+import Image from "next/image";
 import styles from "./resultFilterForm.module.scss";
 import SelectResultCategory from "./SelectResultCategory";
-import FilterIcon from "../../public/images/filter.svg";
-import X from "../../public/images/x.svg";
 import Modal from "../Popups/Modal";
 import { useEffect, useState } from "react";
 import { Result } from "./resultsTypes";
@@ -37,7 +36,7 @@ const ResultFilterForm = ({
         className={styles.mobile_filters}
         onClick={() => setOpenFilters(true)}
       >
-        <FilterIcon />
+        <Image src="/images/filter.svg" width={24} height={24} alt="" />
         <span>Más filtros</span>
       </div>
       {!isMobile && (
@@ -82,7 +81,11 @@ const ResultFilterForm = ({
         >
           <form className={styles.filter_modal}>
             <div className={styles.close}>
-              <X
+              <Image
+                src="/images/x.svg"
+                width={34}
+                height={32}
+                alt=""
                 className={styles.icon}
                 onClick={() => setOpenFilters(false)}
               />

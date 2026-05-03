@@ -1,5 +1,5 @@
 import { RefObject, useCallback, useEffect, useRef, useState } from "react";
-import SelectIcon from "../../public/images/menuSelectIcon.svg";
+import Image from "next/image";
 import styles from "./SelectResultCategory.module.scss";
 import { Filterables } from "../../hooks/types";
 import useOutsideClick from "hooks/useOutsideClick";
@@ -124,7 +124,7 @@ const SelectResultCategory = <T extends Filterables>({
               >
                 <span>{value !== undefined ? displayOption(value) : `-`}</span>
                 <div className={styles.filterTitleEnd}>
-                  <SelectIcon />
+                  <Image src="/images/menuSelectIcon.svg" width={12} height={10} alt="" />
                 </div>
               </div>
             ) : (

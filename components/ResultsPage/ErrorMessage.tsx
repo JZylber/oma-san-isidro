@@ -1,5 +1,5 @@
+import Image from "next/image";
 import styles from "./ErrorMessage.module.scss"
-import Warning from "../../public/images/warning.svg"
 
 interface ErrorMessageText{
     title: string,
@@ -21,7 +21,7 @@ const ErrorMessage = ({status = 600}:{status?: number}) => {
     return(
         <div className={styles.container}>
             <div className={styles.icon}>
-                <Warning/>
+                <Image src="/images/warning.svg" width={71} height={71} alt="" />
             </div>
             <div className={styles.message}>
                 <p className={styles.message_title}>{title}</p>

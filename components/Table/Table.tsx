@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import styles from "./Table.module.scss";
-import SelectIcon from "../../public/images/menuSelectIcon.svg";
 import { CardType } from "./types";
 import DownloadPopup from "./ExportResults/DownloadModal";
-import Arrow from "../../public/images/newsArrow.svg";
 
 interface TableProps<S extends object> {
   values: Array<S>;
@@ -92,7 +91,7 @@ const Table = <S extends object>({
         className={[styles.prev, page === 0 && styles.greyed].join(" ")}
         onClick={prevPage}
       >
-        <SelectIcon />
+        <Image src="/images/menuSelectIcon.svg" width={12} height={10} alt="" />
       </div>
       <div
         className={[styles.next, page === max_pages - 1 && styles.greyed].join(
@@ -100,7 +99,7 @@ const Table = <S extends object>({
         )}
         onClick={nextPage}
       >
-        <SelectIcon />
+        <Image src="/images/menuSelectIcon.svg" width={12} height={10} alt="" />
       </div>
     </div>
   );
@@ -114,7 +113,7 @@ const Table = <S extends object>({
           className={[styles.prev, page === 0 && styles.greyed].join(" ")}
           onClick={prevPage}
         >
-          <SelectIcon />
+          <Image src="/images/menuSelectIcon.svg" width={12} height={10} alt="" />
         </div>
         <div className={styles.pages}>
           {page >= 2 && (
@@ -150,7 +149,7 @@ const Table = <S extends object>({
           ].join(" ")}
           onClick={nextPage}
         >
-          <SelectIcon />
+          <Image src="/images/menuSelectIcon.svg" width={12} height={10} alt="" />
         </div>
       </div>
     </div>
@@ -224,7 +223,7 @@ const Table = <S extends object>({
             >
               <span>Descargar</span>
               <div className={styles.arrow}>
-                <Arrow />
+                <Image src="/images/newsArrow.svg" width={34} height={32} alt="" />
               </div>
             </div>
           )}

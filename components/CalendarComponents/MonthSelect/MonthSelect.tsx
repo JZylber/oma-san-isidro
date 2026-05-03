@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction} from "react";
 import {Swiper,SwiperProps, SwiperSlide} from 'swiper/react';
 import { Navigation } from "swiper";
-import NavArrow from "../../../public/images/menuArrow.svg"
+import Image from "next/image";
 import 'swiper/scss';
 import 'swiper/scss/navigation';
 import styles from './MonthSelect.module.scss'
@@ -58,14 +58,14 @@ const MonthSelect = ({displayedMonth,setDisplayedMonth}: MonthSelectProps) => {
     }
     return(
         <div className={styles.container}>
-        <div className='previous' style={{transform: 'rotate(180deg)',display:'flex',justifyContent:'center',alignItems:'center',height:'2.5rem',width:'2.5rem'}}><NavArrow/></div>
+        <div className='previous' style={{transform: 'rotate(180deg)',display:'flex',justifyContent:'center',alignItems:'center',height:'2.5rem',width:'2.5rem'}}><Image src="/images/menuArrow.svg" width={14} height={25} alt="" /></div>
         <Swiper {...parameters}>    
             {months.map((month,idx) => 
                 <SwiperSlide className={styles.swiper_slide} key={idx}>
                     <span className={[styles.sideMonth,styles.swiper_text_transition].join(" ")}>{month}</span>
                 </SwiperSlide>)}
         </Swiper>
-        <div className='next' style={{display:'flex',justifyContent:'center',alignItems:'center',height:'2.5rem',width:'2.5rem'}}><NavArrow/></div>
+        <div className='next' style={{display:'flex',justifyContent:'center',alignItems:'center',height:'2.5rem',width:'2.5rem'}}><Image src="/images/menuArrow.svg" width={14} height={25} alt="" /></div>
         </div>)
 }
 

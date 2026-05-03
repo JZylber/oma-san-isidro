@@ -1,5 +1,5 @@
+import Image from "next/image";
 import styles from "./Levels.module.scss";
-import LongArrow from "../../public/images/LongArrow.svg";
 
 const level_data : {[key: string]:string[]} = {
     nandu: ["5to primario","6to primario","1ero secundario"],
@@ -13,7 +13,7 @@ const Levels = ({category}:{category : string}) => {
             {data.map((level,index) => {return(
                 <li key={index} className={styles.level}>
                     <div className={styles.number}>{index + 1}</div>
-                    <div className={styles.arrow}><LongArrow/></div>
+                    <div className={styles.arrow}><Image src="/images/LongArrow.svg" width={98} height={24} alt="" /></div>
                     <span className={styles.text}>{level}</span>
                 </li>
             )})}

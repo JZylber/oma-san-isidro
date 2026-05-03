@@ -1,6 +1,6 @@
 import { Button } from "../buttons/Button";
+import Image from "next/image";
 import styles from "./Rules.module.scss";
-import Arrow from "../../public/images/newsArrow.svg"
 
 
 
@@ -28,7 +28,7 @@ const Rules : ({type}: {type: string}) => JSX.Element = ({type}) => {
         </ul>
         <div className={styles.button}>
             <Button content="Descargar reglamento completo" onClick={() => downloadRules(type == "OMA"?"oma":"nandu")}>
-                <Arrow className={styles.arrow}/>
+                <Image src="/images/newsArrow.svg" width={34} height={32} alt="" className={styles.arrow}/>
             </Button>
         </div>
     </>

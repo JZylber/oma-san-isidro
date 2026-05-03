@@ -3,7 +3,7 @@ import Faq from "../../components/FAQ/Faq";
 import News from "../../components/News/News";
 import Title from "../../components/Title/Title";
 import styles from "./Home.module.scss";
-import MainNandu from "../../public/images/mainNandu.svg";
+import Image from "next/image";
 import { NewsItemData } from "../../components/News/NewsTypes";
 import DateBanner from "../../components/CalendarComponents/DateBanner/DateBanner";
 import { CalendarEvent } from "../../components/CalendarComponents/CalendarTypes";
@@ -31,7 +31,7 @@ const Home = ({ news, events }: HomeProps) => {
 
       {/* IMAGE */}
       <div className={styles.containerImg}>
-        <MainNandu className={styles.mainImage} />
+        <Image src="/images/mainNandu.svg" width={595} height={842} alt="" className={styles.mainImage} />
       </div>
 
       {/* Contributions */}

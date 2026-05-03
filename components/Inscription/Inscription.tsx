@@ -1,5 +1,5 @@
 import { Button } from "../buttons/Button";
-import Arrow from "../../public/images/newsArrow.svg";
+import Image from "next/image";
 import styles from "./Inscription.module.scss";
 import BankInformation from "./BankInformation";
 import Link from "next/link";
@@ -113,7 +113,7 @@ export const Inscripcion = ({
             <p>Completar la planilla de datos con los datos pedidos:</p>
             <div className={styles.button_container}>
               <Button content="Planilla de Datos" onClick={downloadForm}>
-                <Arrow className={[styles.arrow, styles.download].join(" ")} />
+                <Image src="/images/newsArrow.svg" width={34} height={32} alt="" className={[styles.arrow, styles.download].join(" ")} />
               </Button>
             </div>
             <p>
@@ -199,7 +199,7 @@ export const Inscripcion = ({
                     : null;
                 }}
               >
-                <>{link_inscripcion && <Arrow className={styles.arrow} />}</>
+                <>{link_inscripcion && <Image src="/images/newsArrow.svg" width={34} height={32} alt="" className={styles.arrow} />}</>
               </Button>
             </div>
           </div>

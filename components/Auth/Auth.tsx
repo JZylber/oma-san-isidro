@@ -1,4 +1,3 @@
-import NewsArrow from "../../public/images/newsArrow.svg";
 import { AuthItem } from "./AuthItem";
 import { Button } from "../buttons/Button";
 import Link from "next/link";
@@ -56,7 +55,7 @@ export const Authorization = ({ type }: { type: string }) => {
       </div>
       <div className="max-tablet:w-full max-tablet:text-center tablet:w-[63.5%] tablet:mt-[calc(2*var(--tablet-spacing))] desktop:w-[47.5%] desktop:mt-[calc(4*var(--desktop-spacing))]">
         <Button content="Descargar autorización" onClick={handleClick}>
-          <NewsArrow className="max-desktop:hidden desktop:inline desktop:rotate-90 desktop:pt-[5px] desktop:w-[30px]" />
+          <Image src="/images/newsArrow.svg" width={34} height={32} alt="" className="max-desktop:hidden desktop:inline desktop:rotate-90 desktop:pt-[5px] desktop:w-[30px]" />
         </Button>
         <p className="font-montserrat font-normal text-[1.2rem] tablet:mt-[calc(2*var(--tablet-spacing))]">
           Al presionar este botón, un PDF con la autorización correspondiente

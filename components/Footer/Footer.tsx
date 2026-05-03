@@ -1,5 +1,4 @@
 import styles from "./Footer.module.scss";
-import OMALogo from "../../public/images/logoOMA.svg";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -39,8 +38,8 @@ const Footer = () => {
             <a>Mapa del sitio</a>
           </li>*/}
         </ul>
-        <div className={styles.footer_logo}>
-          <OMALogo />
+        <div className={styles.footer_logo} style={{ position: "relative" }}>
+          <Image src="/images/logoOMA.svg" fill alt="" style={{ objectFit: "contain" }} />
         </div>
       </div>
       <div className={styles.footer_credits}>

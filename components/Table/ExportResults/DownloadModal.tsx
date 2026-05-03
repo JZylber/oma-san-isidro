@@ -1,11 +1,7 @@
 import { Dispatch, MutableRefObject, SetStateAction, useState } from "react";
+import Image from "next/image";
 import Modal from "../../Popups/Modal";
 import styles from "./DownloadModal.module.scss";
-import X from "../../../public/images/x.svg";
-import CSV from "../../../public/images/csv.svg";
-import XLSX from "../../../public/images/xls.svg";
-import PDF from "../../../public/images/pdf.svg";
-import Download from "../../../public/images/newsArrow.svg";
 import { Button } from "../../buttons/Button";
 import BasicLoader from "../../Loader/BasicLoader";
 import { processResults } from "./CreateFiles";
@@ -59,7 +55,7 @@ const DownloadPopup = ({
         <div className={generatingExport ? styles.hide : ""}>
           <div className={styles.container_header}>
             <div className={styles.close_icon} onClick={() => setOpen(false)}>
-              <X />
+              <Image src="/images/x.svg" width={34} height={32} alt="" />
             </div>
           </div>
           <h1 className={styles.title}>Descarga</h1>
@@ -73,7 +69,7 @@ const DownloadPopup = ({
                 ].join(" ")}
                 onClick={() => setFormat("csv")}
               >
-                <CSV />
+                <Image src="/images/csv.svg" width={93} height={93} alt="" />
               </div>
               <p className={styles.format_text}>CSV</p>
             </div>
@@ -85,7 +81,7 @@ const DownloadPopup = ({
                 ].join(" ")}
                 onClick={() => setFormat("xlsx")}
               >
-                <XLSX />
+                <Image src="/images/xls.svg" width={93} height={93} alt="" />
               </div>
               <p className={styles.format_text}>XLSX</p>
             </div>
@@ -98,7 +94,7 @@ const DownloadPopup = ({
                 ].join(" ")}
                 onClick={() => setFormat("pdf")}
               >
-                <PDF />
+                <Image src="/images/pdf.svg" width={100} height={100} alt="" />
               </div>
               <p className={styles.format_text}>PDF</p>
             </div>
@@ -144,7 +140,7 @@ const DownloadPopup = ({
               }}
             >
               <div className={styles.button_arrow}>
-                <Download />
+                <Image src="/images/newsArrow.svg" width={34} height={32} alt="" />
               </div>
             </Button>
           </div>

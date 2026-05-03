@@ -1,5 +1,5 @@
+import Image from "next/image";
 import styles from "./Card.module.scss";
-import ExpandArrow from "../../public/images/menuArrow.svg"
 import { useEffect, useState } from "react";
 import { CardType } from "../Table/types";
 import { VenueParticipant } from "./Venues";
@@ -29,7 +29,7 @@ const ParticipantCard: CardType<VenueParticipant> = ({value}) => {
                     </div>
                 </div>}
             </div>
-            <ExpandArrow className={[styles.arrow,expanded?styles.rotated:""].join(" ")}/>
+            <div className={[styles.arrow,expanded?styles.rotated:""].join(" ")}><Image src="/images/menuArrow.svg" width={14} height={25} alt="" /></div>
         </div>
     )
 }

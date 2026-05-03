@@ -1,6 +1,6 @@
 import { Result, TestQueryResults } from "../resultsTypes";
+import Image from "next/image";
 import styles from "./ResultCard.module.scss";
-import ExpandArrow from "../../../public/images/menuArrow.svg"
 import {useEffect, useState } from "react";
 import { CardType } from "../../Table/types";
 
@@ -44,7 +44,7 @@ const ResultCard : CardType<Result> = ({value}) => {
                     {!hasPoints && <div className={styles.category}><p className={styles.value}>{value.aclaracion?value.aclaracion.toUpperCase():"AUSENTE"}</p></div>}
                 </div>}
             </div>
-            <ExpandArrow className={[styles.arrow,expanded?styles.rotated:""].join(" ")}/>
+            <div className={[styles.arrow,expanded?styles.rotated:""].join(" ")}><Image src="/images/menuArrow.svg" width={14} height={25} alt="" /></div>
         </div>
     )
 }

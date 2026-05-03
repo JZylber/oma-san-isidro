@@ -1,7 +1,6 @@
 import { Dispatch, RefObject, SetStateAction, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import styles from "./DateFilter.module.scss";
-import SelectIcon from "../../../public/images/menuSelectIcon.svg";
-import FilterIcon from "../../../public/images/filter.svg";
 
 interface DateFilterProps{
     availableCategories: string [],
@@ -44,9 +43,9 @@ const DateFilter = ({availableCategories,categories,setCategories}:DateFilterPro
       <div className={styles.filter_box_container}>
         <div className={styles.filter_box} ref={wrapperRef}>
           <div onClick={toggleFilter} className={[styles.filterText,styles.filterTitle,isOpen ? styles.filterTitleOpen : ""].join(" ")}>
-            <div className={styles.filterTitleStart}><FilterIcon/></div>
+            <div className={styles.filterTitleStart}><Image src="/images/filter.svg" width={24} height={24} alt="" /></div>
             <span>Filtrar</span>
-            <div className={styles.filterTitleEnd}><SelectIcon/></div>
+            <div className={styles.filterTitleEnd}><Image src="/images/menuSelectIcon.svg" width={12} height={10} alt="" /></div>
           </div>
           {isOpen && 
               <ul className={styles.dropdownFilter}>
