@@ -1,6 +1,5 @@
 "use client";
 import { CalendarEvent } from "../../../../components/CalendarComponents/CalendarTypes";
-import styles from "./Geometria.module.scss";
 import BankInformation from "../../../../components/Inscription/BankInformation";
 import AllDatesBanner from "../../../../components/CalendarComponents/DateBanner/NextDatesBanner";
 import Warning from "../../../../components/Warning/Warning";
@@ -11,18 +10,22 @@ interface GeometryPageProps {
   year: number;
 }
 
+const sectionTitleClasses = "font-montserrat font-normal text-[2rem] mt-[1.6rem] max-tablet:text-center tablet:text-left";
+const sectionContentClasses = "py-[1.6rem] [&_p]:font-montserrat [&_p]:font-light [&_p]:max-tablet:text-[1.4rem] [&_p]:max-tablet:pb-[16px] [&_p]:tablet:max-desktop:text-tablet-reading [&_p]:tablet:max-desktop:[padding-bottom:calc(200vh/149.25)] [&_p]:desktop:text-[1.7rem] [&_p]:desktop:pb-[20px] [&_li]:font-montserrat [&_li]:font-light [&_li]:max-tablet:text-[1.4rem] [&_li]:max-tablet:pb-[16px] [&_li]:tablet:max-desktop:text-tablet-reading [&_li]:tablet:max-desktop:[padding-bottom:calc(200vh/149.25)] [&_li]:desktop:text-[1.7rem] [&_li]:desktop:pb-[20px] [&_ul_li]:flex";
+const levelBoldClasses = "block min-w-[14rem] font-semibold";
+
 const GeometryPage = ({ events }: GeometryPageProps) => {
   return (
     <>
-      <h1 className={styles.title}>Torneo de Geometría e Imaginación</h1>
+      <h1 className="font-unbounded font-semibold max-tablet:text-[3.6rem] max-tablet:[margin-top:8vmin] max-tablet:[margin-bottom:5vmin] tablet:text-[4.8rem] tablet:leading-[2.5]">Torneo de Geometría e Imaginación</h1>
       <AllDatesBanner dates={events} category="Geometría" />
-      <section className={styles.section}>
-        <h2 className={styles.section_title}>
+      <section>
+        <h2 className={sectionTitleClasses}>
           Festival de Problemas: Primera Ronda TGI
         </h2>
-        <div className={styles.section_content}>
+        <div className={sectionContentClasses}>
           <p>
-            El próximo <span className={styles.bold}>sábado 30 de mayo</span>,
+            El próximo <span className="font-semibold">sábado 30 de mayo</span>,
             se celebra la primera instancia del Torneo de Geometría e
             Imaginación (TGI). Este evento está diseñado como un espacio de
             exploración y creatividad, donde el uso de herramientas como
@@ -31,21 +34,21 @@ const GeometryPage = ({ events }: GeometryPageProps) => {
           <p>
             Es importante destacar que los alumnos pueden participar en las
             distintas rondas de este torneo de forma{" "}
-            <span className={styles.bold}>independiente</span>. No es requisito
+            <span className="font-semibold">independiente</span>. No es requisito
             haber participado en instancias previas ni existe la obligación de
             continuar en las siguientes; cada encuentro es una oportunidad única
             para disfrutar de la matemática.
           </p>
           <ul>
             <li>
-              <span className={[styles.level, styles.bold].join(" ")}>
+              <span className={levelBoldClasses}>
                 Nivel:
               </span>{" "}
               Los participantes podrán elegir libremente los problemas que
               deseen desarrollar, más allá del nivel sugerido.
             </li>
             <li>
-              <span className={[styles.level, styles.bold].join(" ")}>
+              <span className={levelBoldClasses}>
                 Ambiente:
               </span>{" "}
               El festival busca fomentar la sociabilización entre alumnos y
@@ -53,7 +56,7 @@ const GeometryPage = ({ events }: GeometryPageProps) => {
               lúdicas.
             </li>
             <li>
-              <span className={[styles.level, styles.bold].join(" ")}>
+              <span className={levelBoldClasses}>
                 Dinámica:
               </span>{" "}
               Se trabajará durante todo el día en dos bloques (mañana y tarde)
@@ -62,26 +65,26 @@ const GeometryPage = ({ events }: GeometryPageProps) => {
           </ul>
         </div>
       </section>
-      <section className={styles.section}>
-        <h3 className={styles.section_title}>Sede y Logística</h3>
-        <div className={styles.section_content}>
+      <section className="mt-[2rem]">
+        <h3 className={sectionTitleClasses}>Sede y Logística</h3>
+        <div className={sectionContentClasses}>
           <p>
             Para la región de{" "}
-            <span className={styles.bold}>
+            <span className="font-semibold">
               AMBA y Provincia de Buenos Aires
             </span>
             , el festival se centralizará en la siguiente sede:
           </p>
           <ul>
             <li>
-              <span className={[styles.level, styles.bold].join(" ")}>
+              <span className={levelBoldClasses}>
                 Lugar:
               </span>{" "}
               Colegio Belgrano, Localidad de Lomas de Zamora (incluye a las
               zonas de La Plata y Pilar).
             </li>
             <li>
-              <span className={[styles.level, styles.bold].join(" ")}>
+              <span className={levelBoldClasses}>
                 Costo:
               </span>{" "}
               Los participantes de las rondas de TGI tienen cubierta la
@@ -92,12 +95,12 @@ const GeometryPage = ({ events }: GeometryPageProps) => {
           </ul>
         </div>
       </section>
-      <section className={styles.section}>
-        <h3 className={styles.section_title}>Inscripción</h3>
-        <div className={styles.section_content}>
+      <section className="mt-[2rem]">
+        <h3 className={sectionTitleClasses}>Inscripción</h3>
+        <div className={sectionContentClasses}>
           <p>
             Contactarse vía correo electrónico con la organizadora regional{" "}
-            <span className={styles.bold}>Claudia Iravedra</span> a la
+            <span className="font-semibold">Claudia Iravedra</span> a la
             dirección:
             <a href="mailto:omaclaudia@hotmail.com">omaclaudia@hotmail.com</a>.
           </p>
