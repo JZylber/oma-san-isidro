@@ -1,5 +1,4 @@
 import Link from "next/link";
-import styles from "./Venues.module.scss";
 import Image from "next/image";
 import SelectResultCategory from "../ResultsPage/SelectResultCategory";
 import Table from "../Table/Table";
@@ -95,6 +94,12 @@ const makeParticipantElement = (
   );
 };
 
+const textClasses = "font-montserrat font-light max-tablet:text-[1.4rem] tablet:max-desktop:text-tablet-reading desktop:text-desktop-reading";
+const boldClasses = "font-medium";
+const dropPointsClasses = "mt-[.8rem]";
+const formClasses = "flex mt-[1.2rem] max-tablet:flex-col";
+const iconClasses = "relative inline-block ml-[.4rem] w-[17px] h-[17px] desktop:w-[20px] desktop:h-[20px]";
+
 const Venues = ({
   competition,
   instance,
@@ -129,17 +134,17 @@ const Venues = ({
   const hasAuthorizations = dropPoints.length > 0;
   const venueElement = (
     <>
-      <p className={styles.text}>
+      <p className={textClasses}>
         Presentarse{" "}
-        <span className={styles.bold}>
+        <span className={boldClasses}>
           {`${time.getUTCHours()}:${time.getUTCMinutes()}`} hs
         </span>
         .{hasAuthorizations ? " ¡No se olviden de las autorizaciones!" : ""} La
         prueba comienza a las 14:00hs y tiene una duración de{" "}
-        <span className={styles.bold}>{durationStr} hs</span>.
+        <span className={boldClasses}>{durationStr} hs</span>.
       </p>
       <Collapsable title="Colegios por Sede">
-        <form className={styles.form}>
+        <form className={formClasses}>
           <SelectResultCategory
             category="Colegio"
             value={venueFilter.colegio}
@@ -174,7 +179,7 @@ const Venues = ({
       </Collapsable>
       {participants.length > 0 && (
         <Collapsable title="Participantes por Sede">
-          <form className={styles.form}>
+          <form className={formClasses}>
             <SelectResultCategory
               category="Participante"
               value={participantFilter.participante}
@@ -234,7 +239,7 @@ const Venues = ({
     <>
       {hasAuthorizations && (
         <Collapsable title="Autorizaciones">
-          <p className={styles.text}>
+          <p className={textClasses}>
             Las autorizaciones se pueden conseguir{" "}
             <Link
               href={
@@ -244,16 +249,16 @@ const Venues = ({
               }
             >
               aquí
-              <div className={styles.icon}>
+              <div className={iconClasses}>
                 <Image src="/images/pageLinkIcon.svg" fill={true} alt="" />
               </div>
             </Link>{" "}
-            y deben estar <span className={styles.bold}>completas</span> con las{" "}
-            <span className={styles.bold}>
+            y deben estar <span className={boldClasses}>completas</span> con las{" "}
+            <span className={boldClasses}>
               firmas y sellos correspondientes
             </span>
             . Estas se pueden entregar hasta el{" "}
-            <span className={styles.bold}>
+            <span className={boldClasses}>
               {auth_max_date
                 ? `${auth_max_date.getUTCDate()}/${
                     auth_max_date.getUTCMonth() + 1
@@ -262,12 +267,12 @@ const Venues = ({
             </span>{" "}
             en los siguientes puntos:
           </p>
-          <ul className={styles.dropPoints}>
+          <ul className={dropPointsClasses}>
             {dropPoints.map((dropPoint, index) => {
               const { localidad, nombre, direccion, aclaracion } = dropPoint;
               return (
-                <li className={styles.text} key={index}>
-                  <span className={styles.bold}>{localidad}: </span>
+                <li className={textClasses} key={index}>
+                  <span className={boldClasses}>{localidad}: </span>
                   {nombre ? `${nombre} - ` : ""}
                   {direccion}
                   {aclaracion ? ` (${aclaracion})` : ""}
@@ -286,7 +291,7 @@ const Venues = ({
           )}
           {false && instance === "REGIONAL" && (
             <Collapsable title="Mapa">
-              <p className={styles.text}>
+              <p className={textClasses}>
                 Para organizarnos mejor, ponemos público el mapa. El día de la
                 instancia nos pueden ayudar sabiendo los lugares asignados a
                 cada colegio.
@@ -297,7 +302,7 @@ const Venues = ({
         </>
       )}
       {dropPoints.length === 0 && venues.length === 0 && (
-        <p className={styles.text}>Proximamente...</p>
+        <p className={textClasses}>Proximamente...</p>
       )}
     </>
   );
