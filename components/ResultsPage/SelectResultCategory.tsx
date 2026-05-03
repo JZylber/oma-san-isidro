@@ -1,6 +1,5 @@
 import { RefObject, useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import styles from "./SelectResultCategory.module.scss";
 import { Filterables } from "../../hooks/types";
 import useOutsideClick from "hooks/useOutsideClick";
 
@@ -22,6 +21,25 @@ const normalizeString = (str: string) => {
     .replace(/[\u0300-\u036f]/g, "")
     .toLocaleLowerCase();
 };
+
+const categoryContainerClasses = "flex flex-col max-tablet:w-full tablet:mr-[2rem] tablet:max-desktop:flex-[1_1_0] tablet:max-desktop:w-0 desktop:min-w-[180px] desktop:w-[19%]";
+const categoryClasses = "font-montserrat font-normal pb-[.4rem] max-desktop:text-[1.5rem] desktop:text-[1.6rem]";
+const filterBoxContainerClasses = "w-full relative tablet:min-h-[4.8rem]";
+const filterBoxClasses = "border-2 border-primary-black rounded-[9px] overflow-hidden box-border bg-primary-white tablet:absolute tablet:w-full tablet:z-[1] tablet:max-h-full";
+const filterBoxOpenClasses = "z-[2] max-h-fit";
+const filterTextClasses = "flex items-center font-unbounded font-medium text-[1.5rem] max-tablet:text-center max-tablet:p-[1.4rem_2rem] max-tablet:[&_span]:flex-grow tablet:max-desktop:p-[1.4rem_2rem] desktop:p-[1.4rem_1.8rem]";
+const filterTitleClasses = "flex justify-between bg-primary-white";
+const filterTitleOpenClasses = "border-b-2 border-b-primary-black";
+const filterTitleEndClasses = "";
+const filterInputClasses = "flex w-full";
+const cleanInputClasses = "appearance-none border-0 outline-none shadow-none focus:outline-none w-full text-ellipsis";
+const filterClearClasses = "basis-[content] !pl-0";
+const dropdownFilterClasses = "list-none flex-[0_1_auto] overflow-y-scroll max-h-[21.6rem] tablet:[scrollbar-width:none] tablet:[&::-webkit-scrollbar]:hidden";
+const filterOptionClasses = "[&:not(:last-child)]:border-b-2 [&:not(:last-child)]:border-b-primary-black box-border";
+const buttonsContainerClasses = "flex gap-x-[2rem]";
+const buttonClasses = "flex justify-center items-center w-0 flex-[1_1_0] bg-primary-white border-2 border-primary-black rounded-[9px] min-h-[6rem] font-unbounded font-medium text-[2rem]";
+const selectedClasses = "bg-primary-black text-primary-white";
+const unavailableClasses = "opacity-30 pointer-events-none";
 
 const SelectResultCategory = <T extends Filterables>({
   category,
@@ -102,14 +120,14 @@ const SelectResultCategory = <T extends Filterables>({
   const optionsToDisplay = allOptions ? allOptions : options;
   const displayClear = clear && value !== undefined;
   return (
-    <div className={styles.category_container}>
-      <p className={styles.category}>{category}</p>
+    <div className={categoryContainerClasses}>
+      <p className={categoryClasses}>{category}</p>
       {!buttons && (
-        <div className={styles.filter_box_container}>
+        <div className={filterBoxContainerClasses}>
           <div
             className={[
-              styles.filter_box,
-              isOpen && styles.filter_box_open,
+              filterBoxClasses,
+              isOpen && filterBoxOpenClasses,
             ].join(" ")}
             ref={wrapperRef}
           >
@@ -117,28 +135,28 @@ const SelectResultCategory = <T extends Filterables>({
               <div
                 onClick={toggleFilter}
                 className={[
-                  styles.filterText,
-                  styles.filterTitle,
-                  isOpen ? styles.filterTitleOpen : "",
+                  filterTextClasses,
+                  filterTitleClasses,
+                  isOpen ? filterTitleOpenClasses : "",
                 ].join(" ")}
               >
                 <span>{value !== undefined ? displayOption(value) : `-`}</span>
-                <div className={styles.filterTitleEnd}>
+                <div className={filterTitleEndClasses}>
                   <Image src="/images/menuSelectIcon.svg" width={12} height={10} alt="" />
                 </div>
               </div>
             ) : (
               <div
                 className={[
-                  styles.filter_input,
-                  isOpen ? styles.filterTitleOpen : "",
+                  filterInputClasses,
+                  isOpen ? filterTitleOpenClasses : "",
                 ].join(" ")}
               >
                 <input
                   className={[
-                    styles.clean_input,
-                    styles.filterText,
-                    styles.filterTitle,
+                    cleanInputClasses,
+                    filterTextClasses,
+                    filterTitleClasses,
                   ].join(" ")}
                   value={tempValue}
                   onChange={(event) => {
@@ -152,7 +170,7 @@ const SelectResultCategory = <T extends Filterables>({
                 />
                 {value && (
                   <div
-                    className={[styles.filterText, styles.filter_clear].join(
+                    className={[filterTextClasses, filterClearClasses].join(
                       " "
                     )}
                     onClick={cleanFilter}
@@ -163,14 +181,14 @@ const SelectResultCategory = <T extends Filterables>({
               </div>
             )}
             {isOpen && (
-              <ul className={styles.dropdownFilter}>
+              <ul className={dropdownFilterClasses}>
                 {displayClear && (
                   <li
                     onClick={() => {
                       setValue(undefined);
                       toggleFilter();
                     }}
-                    className={[styles.filterText, styles.filterOption].join(
+                    className={[filterTextClasses, filterOptionClasses].join(
                       " "
                     )}
                   >
@@ -184,8 +202,8 @@ const SelectResultCategory = <T extends Filterables>({
                           setInputFilter(option);
                         }}
                         className={[
-                          styles.filterText,
-                          styles.filterOption,
+                          filterTextClasses,
+                          filterOptionClasses,
                         ].join(" ")}
                         key={idx}
                       >
@@ -199,8 +217,8 @@ const SelectResultCategory = <T extends Filterables>({
                           toggleFilter();
                         }}
                         className={[
-                          styles.filterText,
-                          styles.filterOption,
+                          filterTextClasses,
+                          filterOptionClasses,
                         ].join(" ")}
                         key={idx}
                       >
@@ -213,14 +231,14 @@ const SelectResultCategory = <T extends Filterables>({
         </div>
       )}
       {buttons && (
-        <div className={styles.buttons_container}>
+        <div className={buttonsContainerClasses}>
           {optionsToDisplay.map((option, idx) => (
             <div
               onClick={() => toggleValue(option)}
               className={[
-                styles.button,
-                options.includes(option) ? "" : styles.unavailable,
-                value === option ? styles.selected : "",
+                buttonClasses,
+                options.includes(option) ? "" : unavailableClasses,
+                value === option ? selectedClasses : "",
               ].join(" ")}
               key={idx}
             >

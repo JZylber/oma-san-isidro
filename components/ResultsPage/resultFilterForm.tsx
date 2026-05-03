@@ -1,5 +1,4 @@
 import Image from "next/image";
-import styles from "./resultFilterForm.module.scss";
 import SelectResultCategory from "./SelectResultCategory";
 import Modal from "../Popups/Modal";
 import { useEffect, useState } from "react";
@@ -14,6 +13,13 @@ interface ResultFilterProps {
   levels: number[];
   passed: boolean[];
 }
+
+const mobileFiltersClasses = "tablet:hidden bg-primary-white border-2 border-primary-black rounded-[9px] flex items-center p-[1.2rem] text-center [&_span]:flex-1 [&_span]:font-unbounded [&_span]:font-medium [&_span]:text-[1.5rem]";
+const filtersClasses = "max-tablet:hidden tablet:flex";
+const filterModalClasses = "bg-primary-light-blue border-2 border-primary-black rounded-[9px] p-[1.6rem] flex flex-col items-center mx-[2rem] gap-y-[2.4rem] w-full";
+const closeClasses = "flex justify-end w-full";
+const iconClasses = "w-[19px] h-[17px]";
+const titleClasses = "-mt-[2.4rem] font-unbounded font-medium text-[1.8rem]";
 
 const ResultFilterForm = ({
   filters,
@@ -31,16 +37,16 @@ const ResultFilterForm = ({
     }
   }, [openFilters, isMobile]);
   return (
-    <div className={styles.container}>
+    <div>
       <div
-        className={styles.mobile_filters}
+        className={mobileFiltersClasses}
         onClick={() => setOpenFilters(true)}
       >
         <Image src="/images/filter.svg" width={24} height={24} alt="" />
         <span>Más filtros</span>
       </div>
       {!isMobile && (
-        <form className={styles.filters}>
+        <form className={filtersClasses}>
           <SelectResultCategory
             category="Participante"
             value={filters.participante}
@@ -79,18 +85,18 @@ const ResultFilterForm = ({
           closeModal={() => setOpenFilters(false)}
           className="m-auto bg-transparent"
         >
-          <form className={styles.filter_modal}>
-            <div className={styles.close}>
+          <form className={filterModalClasses}>
+            <div className={closeClasses}>
               <Image
                 src="/images/x.svg"
                 width={34}
                 height={32}
                 alt=""
-                className={styles.icon}
+                className={iconClasses}
                 onClick={() => setOpenFilters(false)}
               />
             </div>
-            <p className={styles.title}>Más filtros</p>
+            <p className={titleClasses}>Más filtros</p>
             <SelectResultCategory
               category="Participante"
               value={filters.participante}

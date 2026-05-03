@@ -1,5 +1,4 @@
 import { Result, TestInfo, TestQueryResults } from "./resultsTypes";
-import styles from "./ResultTable.module.scss";
 import ErrorMessage from "./ErrorMessage";
 import ResultFilterForm from "./resultFilterForm";
 import { Participant, Problem, Problems, School } from "../../hooks/types";
@@ -8,6 +7,13 @@ import Table from "../Table/Table";
 import ResultCard from "./Mobile/ResultCard";
 import Warning from "../Warning/Warning";
 import React from "react";
+
+const containerClasses = "border-t-2 border-black/50 max-tablet:mt-[3.2rem] max-tablet:pt-[4rem] max-tablet:mb-[5.2rem] tablet:mt-[3rem] tablet:pt-[4rem] tablet:mb-[7.2rem]";
+const revisionClasses = "!mb-[2rem]";
+const textClasses = "font-montserrat font-medium text-[1.6rem]";
+const boldClasses = "font-bold";
+const centerAlignClasses = "text-center";
+const disclaimerClasses = "pt-[2.4rem] font-montserrat font-medium text-[1.6rem]";
 
 const make_element = (result: Result, index: number) => {
   const participant = result.participante.toString();
@@ -22,27 +28,27 @@ const make_element = (result: Result, index: number) => {
   return (
     <tr key={index}>
       <td>{participant}</td>
-      <td className={styles.center_align}>{level}</td>
+      <td className={centerAlignClasses}>{level}</td>
       <td>{school}</td>
       {result.cantidad_problemas > 0 &&
         (hasPoints ? (
           <>
             {points.map((point, index) => (
-              <td key={index} className={styles.center_align}>
+              <td key={index} className={centerAlignClasses}>
                 {point.toString()}
               </td>
             ))}
-            <td className={styles.center_align}>{total}</td>
+            <td className={centerAlignClasses}>{total}</td>
           </>
         ) : (
           <td
             colSpan={result.cantidad_problemas + 1}
-            className={styles.center_align}
+            className={centerAlignClasses}
           >
             {clarification ? clarification : present ? "" : "Ausente"}
           </td>
         ))}
-      <td className={styles.center_align}>{passed ? "Si" : "No"}</td>
+      <td className={centerAlignClasses}>{passed ? "Si" : "No"}</td>
     </tr>
   );
 };
@@ -129,21 +135,21 @@ const ResultTable = ({
     useFilter(filterableResults);
 
   return (
-    <div className={styles.container}>
+    <div className={containerClasses}>
       {instancia === "REGIONAL" &&
         competencia === "ÑANDÚ" &&
         testInfo.año === new Date().getUTCFullYear() && (
-          <Warning title="Criterio de Aprobación" className={styles.revision}>
-            <p className={styles.text}>
+          <Warning title="Criterio de Aprobación" className={revisionClasses}>
+            <p className={textClasses}>
               Aprueban la instancia regional y clasifican a nacional:
             </p>
             <ul>
-              <li className={styles.text}>
+              <li className={textClasses}>
                 Si son de <strong>Nivel 1</strong>, aquellos participantes que
                 obtuvieron <strong>1 y 1/2 o más puntos</strong> (con todos los
                 menos)
               </li>
-              <li className={styles.text}>
+              <li className={textClasses}>
                 Si son de <strong>Nivel 2 o 3</strong>, aquellos participantes
                 que obtuvieron <strong>2 o más puntos</strong> (con todos los
                 menos)
@@ -154,10 +160,10 @@ const ResultTable = ({
       {instancia === "REGIONAL" &&
         competencia === "OMA" &&
         testInfo.año === 2024 && (
-          <Warning title="Pedidos de Revisión" className={styles.revision}>
-            <p className={styles.text}>
+          <Warning title="Pedidos de Revisión" className={revisionClasses}>
+            <p className={textClasses}>
               Para hacer un pedido de revisión completar el siguiente formulario{" "}
-              <span className={styles.bold}>antes del 25/10</span>:{" "}
+              <span className={boldClasses}>antes del 25/10</span>:{" "}
               <a href="https://forms.gle/m4TnmuA2fWEkDyvTA">
                 https://forms.gle/m4TnmuA2fWEkDyvTA
               </a>
@@ -189,7 +195,7 @@ const ResultTable = ({
       ) : (
         <ErrorMessage status={400} />
       )}
-      <p className={styles.disclaimer}>
+      <p className={disclaimerClasses}>
         Si hay algún error en el nombre/apellido/nivel de algún participante, o
         algún error en el nombre de algún colegio, por favor mandar un mail a:{" "}
         <a href="mailto:omasanisidro.devs@gmail.com">

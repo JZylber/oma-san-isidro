@@ -1,6 +1,5 @@
 import {useReducer} from "react"
 import ResultFinderForm from "./resultFinderForm"
-import styles from "./results.module.scss"
 import {ResultProps,TestInfo} from "./resultsTypes"
 import LoadResults from "./loadResults"
 
@@ -23,16 +22,16 @@ const Results = ({competition,availableResults} : ResultProps) => {
         if(testInfo.año && testInfo.instancia){
             return(<LoadResults {...testInfo as TestInfo}/>)
         } else if(testInfo.año && !testInfo.instancia){
-            return(<span className={styles.infoText}>Selecciona una instancia para ver resultados.</span>)
+            return(<span className="font-montserrat font-normal text-[1.6rem]">Selecciona una instancia para ver resultados.</span>)
         } else {
-            return(<span className={styles.infoText}>Selecciona año e instancia para poder ejecutar una búsqueda.</span>)
+            return(<span className="font-montserrat font-normal text-[1.6rem]">Selecciona año e instancia para poder ejecutar una búsqueda.</span>)
         }
     };
 
     return(
         <>
-        <p className={styles.competition}>{competition.toLocaleLowerCase()}</p>
-        <h1 className={styles.title}>Resultados</h1>
+        <p className="tablet:hidden font-unbounded font-light text-[2rem] mt-[3.6rem]">{competition.toLocaleLowerCase()}</p>
+        <h1 className="font-unbounded font-medium max-tablet:text-[2.9rem] max-tablet:mt-[.8rem] max-tablet:mb-[4rem] tablet:max-desktop:text-[3.7rem] tablet:max-desktop:mb-[3.2rem] desktop:text-[6rem] desktop:mb-[5.6rem] tablet:col-span-full">Resultados</h1>
         <ResultFinderForm availableResults={availableResults} data={testInfo} setData={dispatch}/>
         {displayResults()}
         </>
