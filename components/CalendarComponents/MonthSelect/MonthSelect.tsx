@@ -2,8 +2,8 @@ import { Dispatch, SetStateAction} from "react";
 import {Swiper, SwiperProps, SwiperSlide} from 'swiper/react';
 import { Navigation } from "swiper";
 import Image from "next/image";
-import 'swiper/scss';
-import 'swiper/scss/navigation';
+import 'swiper/css';
+import 'swiper/css/navigation';
 import styles from './MonthSelect.module.css'
 
 interface MonthSelectProps {
