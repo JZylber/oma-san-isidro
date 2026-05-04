@@ -1,6 +1,5 @@
 import NewsItem from "./NewsItem";
 import { NewsItemData } from "./NewsTypes";
-import styles from "./NewsItem.module.scss";
 
 export default function News({ newsData }: { newsData: NewsItemData[] }) {
   const now = new Date();
@@ -20,10 +19,12 @@ export default function News({ newsData }: { newsData: NewsItemData[] }) {
             content={newsItemData.titulo}
             link={newsItemData.link}
             key={index}
-          ></NewsItem>
+          />
         ))
       ) : (
-        <div className={styles.noNews}> No hay novedades </div>
+        <div className="font-unbounded font-medium pt-[2rem] text-mobile-actionable max-tablet:mt-[calc(2.5*var(--mobile-spacing))] max-tablet:mb-[calc(1.5*var(--mobile-spacing))] tablet:text-desktop-actionable tablet:mb-[2.4rem]">
+          No hay novedades
+        </div>
       )}
     </div>
   );

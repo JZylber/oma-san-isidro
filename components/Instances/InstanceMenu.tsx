@@ -1,9 +1,8 @@
 import { Fragment, useEffect, useState } from "react";
-import styles from "./InstanceMenu.module.scss";
 import InstanceData from "./Instance";
 import { useSearchParams } from "next/navigation";
 import { Competition } from "../../server/app-router-db-calls";
-import Pending from "../Pending/pending";
+import Pending from "../Pending/Pending";
 import React from "react";
 
 export interface Instance {
@@ -39,6 +38,11 @@ const getInitialInstance = (
   return 0;
 };
 
+const titleClasses = "font-unbounded font-semibold max-tablet:text-[3.6rem] max-tablet:[margin-top:5vmin] max-tablet:[margin-bottom:5vmin] tablet:text-[4.8rem]";
+const menuBarClasses = "list-none flex bg-white box-border max-tablet:flex-col tablet:justify-between tablet:max-desktop:w-[85%] tablet:max-desktop:py-[1.6rem] desktop:w-[80%] desktop:max-w-[1200px] desktop:py-[1.6rem]";
+const menuBarItemClasses = "font-montserrat font-normal flex items-center lowercase transition-all max-tablet:text-[1.75rem] max-tablet:w-full tablet:max-desktop:text-tablet-reading tablet:max-desktop:leading-[2.4rem] desktop:text-desktop-reading desktop:leading-[2.9rem] hover:font-medium hover:text-[x-large]";
+const menuBarSeparatorClasses = "max-tablet:border-t max-tablet:border-[grey] max-tablet:w-full tablet:border-l tablet:border-[grey] tablet:h-full";
+
 const Instances = ({ competition, instances }: InstanceMenuProps) => {
   const query = useSearchParams();
   const [currentInstance, setCurrentInstance] = useState<number>(
@@ -62,22 +66,19 @@ const Instances = ({ competition, instances }: InstanceMenuProps) => {
   } else {
     return (
       <>
-        <h1 className={styles.title}>Instancias</h1>
-        <ul className={styles.menu_bar}>
+        <h1 className={titleClasses}>Instancias</h1>
+        <ul className={menuBarClasses}>
           {instances.map((instance, index) => (
             <Fragment key={index}>
               <li
                 onClick={() => setCurrentInstance(index)}
-                className={[
-                  styles.menu_bar_item,
-                  index === currentInstance && styles.menu_bar_item_selected,
-                ].join(" ")}
+                className={`${menuBarItemClasses}${index === currentInstance ? " font-bold" : ""}`}
               >
                 {instance.instancia}
               </li>
               {index < instances.length - 1 && (
                 <li>
-                  <div className={styles.menu_bar_separator}></div>
+                  <div className={menuBarSeparatorClasses}></div>
                 </li>
               )}
             </Fragment>

@@ -1,5 +1,3 @@
-import styles from "./BasicLoader.module.scss";
-
 const BasicLoader = ({
   style,
   className = "",
@@ -14,7 +12,7 @@ const BasicLoader = ({
   const externallyStyled = style || className;
   return (
     <div style={!externallyStyled ? defaultStyle : style} className={className}>
-      <span className={styles.loader}></span>
+      <span className="w-full h-full border-[5px] border-solid border-primary-black border-b-transparent rounded-full inline-block box-border animate-spin"></span>
     </div>
   );
 };

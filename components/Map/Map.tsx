@@ -7,7 +7,6 @@ import { FilterObject, School } from "../../hooks/types";
 import useFilter from "../../hooks/useFilter";
 import { Competition } from "../../server/app-router-db-calls";
 import SelectResultCategory from "../ResultsPage/SelectResultCategory";
-import styles from "./Map.module.scss";
 import {
   getMapData,
   getParticipants,
@@ -18,6 +17,13 @@ import {
 import InstanceMap from "./SVGMap/Map/map";
 import Image from "next/image";
 import React, { MouseEventHandler } from "react";
+
+const gridContainerClasses = "relative border-2 border-black rounded-[9px] overflow-hidden my-[2rem]";
+const formClasses = "flex my-[2rem] max-tablet:flex-col max-tablet:items-center";
+const valuesClasses = "border-2 border-black box-border rounded-[9px] overflow-hidden mt-[1.6rem]";
+const valuesTableClasses = "w-full border-collapse [&_tr:not(:last-child)]:border-b-2 [&_tr:not(:last-child)]:border-b-black [&_th:not(:last-child)]:border-r-2 [&_th:not(:last-child)]:border-r-black [&_td:not(:last-child)]:border-r-2 [&_td:not(:last-child)]:border-r-black [&_thead]:bg-primary-light-blue [&_thead]:border-b-2 [&_thead]:border-b-black [&_thead]:font-unbounded [&_thead]:font-medium [&_thead]:text-[2rem] [&_thead_tr]:h-[5rem] tablet:[&_tbody_tr_td]:p-[1.6rem_.8rem_1.6rem_.8rem] desktop:[&_tbody_tr_td]:p-[1.6rem_2rem_1.6rem_2rem] [&_tbody]:font-montserrat [&_tbody]:font-medium [&_tbody]:text-[2rem] [&_tbody_tr:hover]:bg-primary-light-blue";
+const centerAlignClasses = "text-center";
+const rowClasses = "font-unbounded font-medium bg-primary-light-blue";
 
 interface MapProps {
   competition: Competition;
@@ -114,10 +120,7 @@ const Map = ({ competition }: MapProps) => {
   };
   return (
     <>
-      <div
-        style={{ margin: "2rem 0rem 2rem 0rem" }}
-        className={styles.gridContainer}
-      >
+      <div className={gridContainerClasses}>
         <TransformWrapper
           initialScale={0.3}
           initialPositionX={0}
@@ -169,7 +172,7 @@ const Map = ({ competition }: MapProps) => {
         </TransformWrapper>
       </div>
 
-      <form className={styles.form}>
+      <form className={formClasses}>
         <SelectResultCategory
           category="Colegio"
           value={schoolFilter.school}
@@ -185,8 +188,8 @@ const Map = ({ competition }: MapProps) => {
           clear={true}
         />
       </form>
-      <div className={styles.values}>
-        <table className={styles.values_table}>
+      <div className={valuesClasses}>
+        <table className={valuesTableClasses}>
           <thead>
             <tr>
               <th style={{ width: "17.5%" }}>Fila</th>
@@ -208,7 +211,7 @@ const Map = ({ competition }: MapProps) => {
               ) {
                 return (
                   <tr key={column_index}>
-                    <td className={[styles.center_align, styles.row].join(" ")}>
+                    <td className={[centerAlignClasses, rowClasses].join(" ")}>
                       {column_index + 1}
                     </td>
                     {[1, 2, 3].map((level, row_index) => {
@@ -223,7 +226,7 @@ const Map = ({ competition }: MapProps) => {
                         return acc;
                       }, 0);
                       return (
-                        <td className={styles.center_align} key={row_index}>
+                        <td className={centerAlignClasses} key={row_index}>
                           {value !== 0 ? value : ""}
                         </td>
                       );

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import styles from "./Table.module.scss";
-import SelectIcon from "../../public/images/menuSelectIcon.svg";
+import Image from "next/image";
 import { CardType } from "./types";
 import DownloadPopup from "./ExportResults/DownloadModal";
-import Arrow from "../../public/images/newsArrow.svg";
 
 interface TableProps<S extends object> {
   values: Array<S>;
@@ -22,6 +20,28 @@ interface TableProps<S extends object> {
   center_columns?: Array<number>;
 }
 
+const valuesClasses = "max-tablet:hidden border-2 border-black box-border rounded-[9px] overflow-hidden mt-[1.6rem]";
+const valuesTableClasses = "w-full border-collapse [&_tr:not(:last-child)]:border-b-2 [&_tr:not(:last-child)]:border-b-black [&_thead]:bg-primary-light-blue [&_thead]:border-b-2 [&_thead]:border-b-black [&_thead]:font-unbounded [&_thead]:font-medium [&_thead]:text-[1.6rem] tablet:[&_thead_tr_td:first-child]:p-[1.6rem_.8rem_1.6rem_2rem] desktop:[&_thead_tr_td:first-child]:p-[1.6rem_2rem_1.6rem_4.4rem] tablet:[&_thead_tr_td:last-child]:p-[1.6rem_2rem_1.6rem_.8rem] desktop:[&_thead_tr_td:last-child]:p-[1.6rem_4.4rem_1.6rem_2rem] tablet:[&_thead_tr_td:not(:last-child):not(:first-child)]:p-[1.6rem_.8rem] desktop:[&_thead_tr_td:not(:last-child):not(:first-child)]:p-[1.6rem_2rem] [&_tbody]:font-montserrat [&_tbody]:font-medium [&_tbody]:text-[1.6rem] tablet:[&_tbody_tr_td:first-child]:p-[1.6rem_.8rem_1.6rem_2rem] desktop:[&_tbody_tr_td:first-child]:p-[1.6rem_2rem_1.6rem_4.4rem] tablet:[&_tbody_tr_td:last-child]:p-[1.6rem_2rem_1.6rem_.8rem] desktop:[&_tbody_tr_td:last-child]:p-[1.6rem_4.4rem_1.6rem_2rem] tablet:[&_tbody_tr_td:not(:last-child):not(:first-child)]:p-[1.6rem_.8rem] desktop:[&_tbody_tr_td:not(:last-child):not(:first-child)]:p-[1.6rem_2rem] [&_tbody_tr:hover]:bg-primary-light-blue";
+const centerAlignClasses = "text-center";
+const tableHeaderClasses = "max-tablet:hidden tablet:flex tablet:justify-end tablet:items-end";
+const tableHeaderWithDownloadClasses = "mt-[6rem] flex justify-between items-end";
+const tableFooterClasses = "mt-[1.6rem] flex justify-end";
+const paginationClasses = "max-tablet:hidden tablet:flex tablet:font-montserrat tablet:font-normal tablet:text-[1.6rem]";
+const paginationPrevClasses = "rotate-90 px-[.8rem]";
+const paginationNextClasses = "-rotate-90 px-[.8rem]";
+const greyedClasses = "opacity-50";
+const mobilePaginationClasses = "max-tablet:flex max-tablet:flex-col max-tablet:items-center max-tablet:gap-y-[.8rem] tablet:hidden";
+const mobilePaginationTextClasses = "font-montserrat font-normal text-[1.2rem]";
+const pageSelectClasses = "w-full flex justify-between items-center";
+const mobilePrevClasses = "rotate-90 h-[20px] w-[20px] flex justify-center items-center";
+const mobileNextClasses = "-rotate-90 flex justify-center items-center h-[20px] w-[20px]";
+const pagesClasses = "flex overflow-hidden border-2 border-black rounded-[9px]";
+const pageItemClasses = "w-[3.6rem] h-[4rem] flex justify-center items-center font-unbounded font-medium text-[1.5rem] [&:not(:last-child)]:border-r-2 [&:not(:last-child)]:border-r-black";
+const pageSelectedClasses = "bg-primary-light-blue";
+const downloadButtonClasses = "flex items-center justify-center p-[1.2rem] min-w-[180px] bg-primary-light-blue border-2 border-b-4 border-black rounded-[9px] font-unbounded font-medium text-[1.6rem] max-tablet:w-full tablet:w-[19%] cursor-pointer";
+const downloadArrowClasses = "rotate-90 ml-[1.8rem] flex justify-center items-center w-[18px]";
+const mobileValuesClasses = "max-tablet:flex max-tablet:flex-col max-tablet:gap-y-[2.4rem] max-tablet:mt-[5rem] tablet:hidden";
+
 const defaultDataProcessor = <S extends object>(dataPoint: S) => {
   return Object.values(dataPoint);
 };
@@ -36,7 +56,7 @@ const defaultMakeElement = <S extends object>(
       {Object.values(result).map((cell, sub_index) => (
         <td
           key={`${index}-${sub_index}`}
-          className={center_columns.includes(index) ? styles.center_align : ""}
+          className={center_columns.includes(index) ? centerAlignClasses : ""}
         >
           {cell}
         </td>
@@ -84,73 +104,68 @@ const Table = <S extends object>({
     }
   };
   const pagination = (
-    <div className={styles.pagination}>
+    <div className={paginationClasses}>
       <p>
         Mostrando {firstResult + 1}-{lastResult} de {values.length}
       </p>
       <div
-        className={[styles.prev, page === 0 && styles.greyed].join(" ")}
+        className={[paginationPrevClasses, page === 0 ? greyedClasses : ""].join(" ")}
         onClick={prevPage}
       >
-        <SelectIcon />
+        <Image src="/images/menuSelectIcon.svg" width={12} height={10} alt="" />
       </div>
       <div
-        className={[styles.next, page === max_pages - 1 && styles.greyed].join(
-          " "
-        )}
+        className={[paginationNextClasses, page === max_pages - 1 ? greyedClasses : ""].join(" ")}
         onClick={nextPage}
       >
-        <SelectIcon />
+        <Image src="/images/menuSelectIcon.svg" width={12} height={10} alt="" />
       </div>
     </div>
   );
   const mobile_pagination = (
-    <div className={styles.mobile_pagination}>
-      <p>
+    <div className={mobilePaginationClasses}>
+      <p className={mobilePaginationTextClasses}>
         Mostrando {firstResult + 1}-{lastResult} de {values.length}
       </p>
-      <div className={styles.page_select}>
+      <div className={pageSelectClasses}>
         <div
-          className={[styles.prev, page === 0 && styles.greyed].join(" ")}
+          className={[mobilePrevClasses, page === 0 ? greyedClasses : ""].join(" ")}
           onClick={prevPage}
         >
-          <SelectIcon />
+          <Image src="/images/menuSelectIcon.svg" width={12} height={10} alt="" />
         </div>
-        <div className={styles.pages}>
+        <div className={pagesClasses}>
           {page >= 2 && (
-            <div className={styles.item} onClick={() => setPage(0)}>
+            <div className={pageItemClasses} onClick={() => setPage(0)}>
               {1}
             </div>
           )}
-          {page >= 3 && <div className={styles.item}>...</div>}
+          {page >= 3 && <div className={pageItemClasses}>...</div>}
           {page >= 1 && (
-            <div className={styles.item} onClick={() => setPage(page - 1)}>
+            <div className={pageItemClasses} onClick={() => setPage(page - 1)}>
               {page}
             </div>
           )}
-          <div className={[styles.item, styles.selected].join(" ")}>
+          <div className={[pageItemClasses, pageSelectedClasses].join(" ")}>
             {page + 1}
           </div>
           {max_pages - page >= 2 && (
-            <div className={styles.item} onClick={() => setPage(page + 1)}>
+            <div className={pageItemClasses} onClick={() => setPage(page + 1)}>
               {page + 2}
             </div>
           )}
-          {max_pages - page >= 4 && <div className={styles.item}>...</div>}
+          {max_pages - page >= 4 && <div className={pageItemClasses}>...</div>}
           {max_pages - page >= 3 && (
-            <div className={styles.item} onClick={() => setPage(max_pages - 1)}>
+            <div className={pageItemClasses} onClick={() => setPage(max_pages - 1)}>
               {max_pages}
             </div>
           )}
         </div>
         <div
-          className={[
-            styles.next,
-            page === max_pages - 1 && styles.greyed,
-          ].join(" ")}
+          className={[mobileNextClasses, page === max_pages - 1 ? greyedClasses : ""].join(" ")}
           onClick={nextPage}
         >
-          <SelectIcon />
+          <Image src="/images/menuSelectIcon.svg" width={12} height={10} alt="" />
         </div>
       </div>
     </div>
@@ -187,15 +202,13 @@ const Table = <S extends object>({
       );
     }
     return (
-      <table className={`${styles.values_table} ${tableClassName}`}>
+      <table className={`${valuesTableClasses} ${tableClassName}`}>
         <thead>
           <tr>
             {headers.map((header, index) => (
               <td
                 key={index}
-                className={
-                  center_columns.includes(index) ? styles.center_align : ""
-                }
+                className={center_columns.includes(index) ? centerAlignClasses : ""}
               >
                 {header}
               </td>
@@ -212,36 +225,32 @@ const Table = <S extends object>({
     <>
       {elements_per_page && max_pages > 1 && mobile_pagination}
       {elements_per_page && (
-        <div
-          className={
-            styles["table_header" + (download ? "_with_download" : "")]
-          }
-        >
+        <div className={download ? tableHeaderWithDownloadClasses : tableHeaderClasses}>
           {download && (
             <div
-              className={styles.downloadButton}
+              className={downloadButtonClasses}
               onClick={() => setOpenDownloadPopup(true)}
             >
               <span>Descargar</span>
-              <div className={styles.arrow}>
-                <Arrow />
+              <div className={downloadArrowClasses}>
+                <Image src="/images/newsArrow.svg" width={34} height={32} alt="" />
               </div>
             </div>
           )}
           {max_pages > 1 && pagination}
         </div>
       )}
-      <div className={styles.values} style={style}>
+      <div className={valuesClasses} style={style}>
         {make_table(values_in_page, headers)}
       </div>
-      <div className={styles.mobile_values} style={style}>
+      <div className={mobileValuesClasses} style={style}>
         {Card &&
           values_in_page.map((result, idx) => (
             <Card key={idx} value={result} />
           ))}
       </div>
       {elements_per_page && max_pages > 1 && (
-        <div className={styles.table_footer}>{pagination}</div>
+        <div className={tableFooterClasses}>{pagination}</div>
       )}
       <DownloadPopup
         open={openDownloadPopup}

@@ -1,5 +1,4 @@
 import { TestInfo, TestQueryResults } from "./resultsTypes";
-import styles from "./ResultTable.module.scss";
 import ErrorMessage from "./ErrorMessage";
 import { FilterObject, Participant, School } from "../../hooks/types";
 import useFilter from "../../hooks/useFilter";
@@ -23,6 +22,11 @@ const resultHierarchy = [
   "Mención Especial",
   "Mención",
 ];
+
+const containerClasses = "border-t-2 border-black/50 max-tablet:mt-[3.2rem] max-tablet:pt-[4rem] max-tablet:mb-[5.2rem] tablet:mt-[3rem] tablet:pt-[4rem] tablet:mb-[7.2rem]";
+const formClasses = "flex mt-[1.2rem] max-tablet:flex-col";
+const centerAlignClasses = "text-center";
+const disclaimerClasses = "pt-[2.4rem] font-montserrat font-medium text-[1.6rem]";
 
 const ProvincialResultTable = ({
   results,
@@ -76,11 +80,11 @@ const ProvincialResultTable = ({
     return (
       <tr key={index}>
         <td>{participant}</td>
-        <td className={styles.center_align}>{level}</td>
+        <td className={centerAlignClasses}>{level}</td>
         <td>{school}</td>
         <td>{price}</td>
         {passed ? (
-          <td className={styles.center_align}>
+          <td className={centerAlignClasses}>
             {result.aprobado ? "Sí" : "No"}
           </td>
         ) : null}
@@ -114,8 +118,8 @@ const ProvincialResultTable = ({
     useFilter(filterableResults);
 
   return (
-    <div className={styles.container}>
-      <form className={styles.form}>
+    <div className={containerClasses}>
+      <form className={formClasses}>
         <SelectResultCategory
           category="Participante"
           value={resultFilter.participante}
@@ -173,7 +177,7 @@ const ProvincialResultTable = ({
       ) : (
         <ErrorMessage status={400} />
       )}
-      <p className={styles.disclaimer}>
+      <p className={disclaimerClasses}>
         Si hay algún error en el nombre/apellido de algún participante, o algún
         error en el nombre de algún colegio, por favor mandar un mail a:{" "}
         <a href="mailto:omasanisidro.devs@gmail.com">
