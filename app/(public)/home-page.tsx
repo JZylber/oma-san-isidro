@@ -20,7 +20,7 @@ const Home = ({ news, events }: HomeProps) => {
   const [openModal, setOpenModal] = useState(true);
   return (
     <div className={styles.grid}>
-      <HomeModal open={openModal} setOpen={setOpenModal} />
+      {/*<HomeModal open={openModal} setOpen={setOpenModal} />*/}
       <Title />
 
       {/* NEWS */}
