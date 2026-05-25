@@ -25,27 +25,37 @@ const HomeModal = ({ open, setOpen }: HomeModalProps) => {
           width={96}
           className="shrink-0 hidden lg:block"
         />
-        <div className="flex flex-col">
-          <h1 className="w-fit">CONCURSO</h1>
-          <h2>
-            <em>Un problema para canguro</em>
-          </h2>
-        </div>
+        <h1 className="w-fit">UN PROBLEMA PARA CANGURO</h1>
       </div>
       <p>
-        La Olimpíada de Matemática Argentina invita a docentes (profesores y
-        maestros) y a estudiantes de Ciencias Exactas, de Ingeniería y de
-        profesorados a proponer problemas para el{" "}
-        <strong>concurso internacional Canguro Matemático</strong>.
+        Ya está abierto el concurso <strong>UN PROBLEMA PARA CANGURO</strong>{" "}
+        destinado a docentes (profesores y maestros) y a estudiantes de Ciencias
+        Exactas, de Ingeniería y de Profesorados.
       </p>
       <p>
-        <strong>Fecha de presentación de problemas:</strong> 1 de abril al 15 de
-        mayo de 2026.
+        La invitación es a proponer problemas para el{" "}
+        <strong>Concurso Internacional Canguro Matemático</strong>.
       </p>
       <p>
-        Para más información ver{" "}
-        <a className="text-blue-600" href="oma.org.ar">
-          oma.org.ar
+        En el siguiente formulario pueden presentar los problemas:{" "}
+        <a
+          className="text-blue-600"
+          href="https://forms.gle/xaSDSdbdm6DhzFEA9"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          https://forms.gle/xaSDSdbdm6DhzFEA9
+        </a>
+      </p>
+      <p>Hay tiempo hasta el <strong>15 de junio</strong>.</p>
+      <p>
+        <a
+          className="text-blue-600"
+          href="https://oma.org.ar/contents/paginas/un_problema_canguro.html"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Bases del concurso
         </a>
       </p>
       <Button onClick={() => setOpen(false)} content="OK" />

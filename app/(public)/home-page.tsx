@@ -17,10 +17,16 @@ interface HomeProps {
 }
 
 const Home = ({ news, events }: HomeProps) => {
-  const [openModal, setOpenModal] = useState(true);
+  const [openModal, setOpenModal] = useState(() => {
+    if (typeof window === "undefined") return false;
+    const seen = sessionStorage.getItem("homeModalSeen");
+    if (seen) return false;
+    sessionStorage.setItem("homeModalSeen", "1");
+    return true;
+  });
   return (
     <div className={styles.grid}>
-      {/*<HomeModal open={openModal} setOpen={setOpenModal} />*/}
+      <HomeModal open={openModal} setOpen={setOpenModal} />
       <Title />
 
       {/* NEWS */}
