@@ -9,6 +9,7 @@ module.exports = {
     screens: {
       tablet: "768px",
       desktop: "1024px",
+      largest: "1518px",
     },
     extend: {
       colors: {
@@ -23,6 +24,7 @@ module.exports = {
         unbounded: ["Unbounded", "sans-serif"],
       },
       fontSize: {
+        "section-title": "2rem",
         "mobile-actionable": "1.5rem",
         "mobile-reading": "1.4rem",
         "tablet-actionable": "1.5rem",

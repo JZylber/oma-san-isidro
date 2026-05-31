@@ -1,5 +1,4 @@
 import Table from "../Table/Table";
-import styles from "./Provincial.module.scss";
 import ProvincialParticipantCard from "./ProvincialCard";
 import SelectResultCategory from "../ResultsPage/SelectResultCategory";
 import Collapsable from "../Collapsable/Collapsable";
@@ -70,6 +69,15 @@ const downloadFile = (filename: string) => {
   document.body.removeChild(link);
 };
 
+const textClasses = "font-montserrat font-light max-tablet:text-[1.4rem] tablet:max-desktop:text-tablet-reading desktop:text-desktop-reading";
+const boldClasses = "font-medium";
+const listClasses = "ml-[1.6rem] list-inside [&_li+li]:mt-[.8rem]";
+const sectionTitleClasses = "font-unbounded font-medium my-[1rem] max-tablet:text-center max-tablet:text-[1.8rem] tablet:text-left tablet:max-desktop:text-[1.5rem] desktop:text-[2.3rem]";
+const documentationClasses = "flex justify-start gap-x-[2.4rem] max-tablet:flex-col";
+const buttonClasses = "max-tablet:[flex-grow:1] tablet:max-desktop:[flex-grow:0.5] desktop:[flex-grow:0.3]";
+const arrowClasses = "hidden desktop:block desktop:rotate-90";
+const formClasses = "flex mt-[1.2rem] max-tablet:flex-col";
+
 const Provincial = ({
   competition,
   participants,
@@ -83,7 +91,7 @@ const Provincial = ({
   return participants.length > 0 && auth_max_date ? (
     <>
       {!isOma && (
-        <p className={styles.text}>
+        <p className={textClasses}>
           Los alumnos que aprobaron el zonal pasan al regional participen o no
           del provincial.
         </p>
@@ -91,20 +99,20 @@ const Provincial = ({
       <Collapsable title="Inscripción">
         {!isOma && (
           <>
-            <p className={styles.text}>
+            <p className={textClasses}>
               Los colegios deberán comunicar antes del{" "}
               <span
-                className={styles.bold}
+                className={boldClasses}
               >{`${auth_max_date.getUTCDate()} de ${
                 months[auth_max_date.getUTCMonth()]
               }`}</span>{" "}
               la nómina de personas que viajan, por correo electrónico a:{" "}
               <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a>
             </p>
-            <h4 className={styles.section_title}>
+            <h4 className={sectionTitleClasses}>
               Datos que deben enviar para la inscripción:
             </h4>
-            <ul className={styles.text}>
+            <ul className={textClasses}>
               <li>Nombre y apellido de los alumnos que participan.</li>
               <li>
                 Nombre, apellido y número de documento del o los acompañantes,
@@ -124,15 +132,15 @@ const Provincial = ({
         )}
         {isOma && (
           <>
-            <p className={styles.text}>
+            <p className={textClasses}>
               Los colegios deberán completar el siguiente formulario antes del{" "}
               <span
-                className={styles.bold}
+                className={boldClasses}
               >{`${auth_max_date.getUTCDate()} de ${
                 months[auth_max_date.getUTCMonth()]
               }`}</span>
             </p>
-            <div className={styles.button}>
+            <div className={buttonClasses}>
               <Button
                 content="Formulario de Inscripción"
                 onClick={() =>
@@ -142,30 +150,30 @@ const Provincial = ({
             </div>
           </>
         )}
-        <p className={styles.text}>
-          <span className={styles.bold}>
+        <p className={textClasses}>
+          <span className={boldClasses}>
             Cuando tengamos el Hotel asignado para nuestra delegación, se
             informará por acá y esto no se puede hacer hasta no tener todas las
             inscripciones.
           </span>
         </p>
         <Warning>
-          <p className={styles.text}>
+          <p className={textClasses}>
             Recordamos a los colegios que son ellos los responsables de enviar
             la inscripción de sus alumnos, informando a los padres sobre el
             desarrollo de las actividades del Torneo, ya que los alumnos
             participan representando a la escuela.
           </p>
-          <p className={styles.text}>
+          <p className={textClasses}>
             La Secretaría Regional no puede atender a los padres, ni corresponde
             que lo haga.
           </p>
         </Warning>
       </Collapsable>
       <Collapsable title="Información general y programa">
-        <p className={styles.text}>
+        <p className={textClasses}>
           El encuentro de la{" "}
-          <span className={styles.bold}>
+          <span className={boldClasses}>
             Olimpíada Regional {isOma ? "OMA" : " Ñandú"} Metropolitana
           </span>{" "}
           se realizará en la ciudad de{" "}
@@ -175,14 +183,14 @@ const Provincial = ({
             "(OJO:este año por el feriado del viernes 15 el encuentro será de martes a jueves)"}
           . Cada delegación se trasladará por su cuenta y riesgo, con sus
           profesores acompañantes según las pautas establecidas{" "}
-          <span className={styles.bold}>
+          <span className={boldClasses}>
             (máximo 8 alumnos por cada docente)
           </span>
           . También, como en años anteriores, nos ocuparemos del alojamiento y
           concentración de aquellas delegaciones que lo soliciten.
         </p>
         {true ? (
-          <p className={styles.text}>
+          <p className={textClasses}>
             El alojamiento de las delegaciones que lo soliciten será en Hoteles
             de la mencionada ciudad en habitaciones compartidas con otros
             participantes del encuentro. La reserva del alojamiento se hace
@@ -194,38 +202,38 @@ const Provincial = ({
           </p>
         ) : (
           <>
-            <p className={styles.text}>
+            <p className={textClasses}>
               El alojamiento en la ciudad de Mar del Plata será en los hoteles:
             </p>
-            <ul className={styles.text}>
+            <ul className={textClasses}>
               <li>Estocolmo (Santa Fe 2070)</li>
               <li>Garden (Moreno 2393)</li>
               <li>Novi (H. Yrigoyen 1311)</li>
               <li>ATILRA o 10 de Septiembre (3 de Febrero 2975)</li>
               <li>Nuevo Ostende (H. Yrigoyen 1737)</li>
             </ul>
-            <p className={styles.text}>
+            <p className={textClasses}>
               Actividades en salones del Hotel Sheraton.{" "}
               {!isOma &&
-                "La organización <span className={styles.bold}>NO CONTEMPLA</span> alojamiento en el Hotel Sheraton, allí sólo se desarrollarán las actividades académicas."}
+                "La organización <span className={boldClasses}>NO CONTEMPLA</span> alojamiento en el Hotel Sheraton, allí sólo se desarrollarán las actividades académicas."}
             </p>
           </>
         )}
-        <h4 className={styles.section_title}>Programa</h4>
-        <ul className={styles.text}>
+        <h4 className={sectionTitleClasses}>Programa</h4>
+        <ul className={textClasses}>
           <li>
-            <span className={styles.bold}>Acreditación:</span>{" "}
+            <span className={boldClasses}>Acreditación:</span>{" "}
             {isOma ? "Miércoles 17 de septiembre" : "Martes 12 de agosto"} de
             15:00 a 20:00 horas en el hotel asignado a su delegación
           </li>
           <li>
-            <span className={styles.bold}>Prueba escrita:</span>{" "}
+            <span className={boldClasses}>Prueba escrita:</span>{" "}
             {isOma
               ? "Jueves 18 de septiembre a las 9:00 horas, Salones Sheraton Hotel - Mar del Plata"
               : "Miércoles 13 de agosto a las 9:00 horas, Salones Sheraton Hotel - Mar del Plata"}
           </li>
           <li>
-            <span className={styles.bold}>Exposición Oral y Premiación:</span>{" "}
+            <span className={boldClasses}>Exposición Oral y Premiación:</span>{" "}
             {isOma
               ? "Viernes 19 de septiembre a las 9:00 horas, Salones Sheraton Hotel - Mar del Plata"
               : "Jueves 14 de agosto a las 9:00 horas, Sala Astor Piazzolla - Teatro Auditorium - Mar del Plata"}
@@ -233,9 +241,9 @@ const Provincial = ({
         </ul>
       </Collapsable>
       <Collapsable title="Aranceles">
-        <ul className={styles.text}>
+        <ul className={textClasses}>
           <li>
-            <span className={styles.bold}>
+            <span className={boldClasses}>
               Participantes y/o acompañantes que se alojen en el hotel propuesto
               por la olimpíada:
             </span>{" "}
@@ -245,31 +253,31 @@ const Provincial = ({
             comida).
           </li>
           <li>
-            <span className={styles.bold}>
+            <span className={boldClasses}>
               Participantes que NO se alojen en el hotel propuesto por la
               olimpíada:
             </span>{" "}
             {isOma ? "$200.000" : "$150.000"}.
           </li>
           <li>
-            <span className={styles.bold}>
+            <span className={boldClasses}>
               Acompañantes que NO se alojen en el hotel propuesto por la
               olimpíada:
             </span>{" "}
             {isOma ? "$160.000" : "$110.000"}. (menores de 3 años no pagan)
           </li>
           <li>
-            <span className={styles.bold}>Tarjeta de premiación:</span>{" "}
+            <span className={boldClasses}>Tarjeta de premiación:</span>{" "}
             {isOma ? "$40.000" : "$36.000"}. Solo es necesaria la tarjeta para
             aquellos que no están acreditados como acompañantes y que
             participarán únicamente de la premiación. Deben inscribirse junto
             con los otros participantes en
             {isOma ? " el formulario" : " la planilla"}. Menores de 3 años no
-            pagan. <span className={styles.bold}>CUPOS LIMITADOS</span>
+            pagan. <span className={boldClasses}>CUPOS LIMITADOS</span>
           </li>
         </ul>
         <Warning>
-          <p className={styles.text}>
+          <p className={textClasses}>
             Los aranceles antes mencionados, pueden ser ajustados debido a la
             situación económica financiera del país, que puede hacer variar
             nuestros costos. Quienes quieran asegurarse estos aranceles pueden
@@ -290,33 +298,33 @@ const Provincial = ({
         </Warning>
       </Collapsable>
       <Collapsable title="Pago">
-        <p className={styles.text}>
+        <p className={textClasses}>
           El pago se hace depositando o transfieriendo a la siguiente cuenta de
           la Fundación Olimpíada Matemática Argentina:
         </p>
-        <ul className={styles.text}>
+        <ul className={textClasses}>
           <li>
-            <span className={styles.bold}>BANCO GALICIA</span> (Cuenta
+            <span className={boldClasses}>BANCO GALICIA</span> (Cuenta
             Corriente)
           </li>
           <li>
-            <span className={styles.bold}>N° Cuenta: </span>000267656656
+            <span className={boldClasses}>N° Cuenta: </span>000267656656
           </li>
           <li>
-            <span className={styles.bold}>CBU: </span>0070665620000002676566
+            <span className={boldClasses}>CBU: </span>0070665620000002676566
           </li>
           <li>
-            <span className={styles.bold}>ALIAS: </span>FOMAHSBCCC
+            <span className={boldClasses}>ALIAS: </span>FOMAHSBCCC
           </li>
           <li>
-            <span className={styles.bold}>CUIT: </span>30-67928383-5
+            <span className={boldClasses}>CUIT: </span>30-67928383-5
           </li>
         </ul>
-        <p className={styles.text}>
+        <p className={textClasses}>
           Recordamos que para la acreditación deben presentar el{" "}
-          <span className={styles.bold}>ORIGINAL</span> de dicho depósito.
+          <span className={boldClasses}>ORIGINAL</span> de dicho depósito.
         </p>
-        <p className={styles.text}>
+        <p className={textClasses}>
           Para solicitar factura electrónica por el pago deben completar el
           siguiente formulario:
           <a
@@ -332,7 +340,7 @@ const Provincial = ({
               : "https://forms.gle/pe3i1TWV1bgv6Rv39"}
           </a>
         </p>
-        <p className={styles.text}>
+        <p className={textClasses}>
           Los recibos son entregados en el momento de la acreditación a la
           persona que la efectúa (docente, pariente, etc.). Por eso, se
           recomienda no perder el recibo y entregarlo a quien corresponda a su
@@ -340,8 +348,8 @@ const Provincial = ({
           presentación del original. Para todo tipo de reclamo hay un plazo de
           30 días
         </p>
-        {/*<div className={styles.documentation}>
-          <div className={styles.button}>
+        {/*<div className={documentationClasses}>
+          <div className={buttonClasses}>
             <Button
               content="Planilla Facturación"
               onClick={() =>
@@ -350,7 +358,7 @@ const Provincial = ({
                 )
               }
             >
-              <div className={styles.arrow}>
+              <div className={arrowClasses}>
                 <Image
                   src="/images/newsArrow.svg"
                   width={30}
@@ -363,8 +371,8 @@ const Provincial = ({
         </div>*/}
       </Collapsable>
       <Collapsable title="Documentación">
-        <p className={styles.text}>La documentación exigida incluye:</p>
-        <ul className={styles.text}>
+        <p className={textClasses}>La documentación exigida incluye:</p>
+        <ul className={textClasses}>
           <li>
             AUTORIZACIÓN de cada alumno (se utilizará la autorización que se
             descarga debajo)
@@ -375,11 +383,11 @@ const Provincial = ({
             el compromiso que se descarga debajo)
           </li>
         </ul>
-        <p className={styles.text}>
+        <p className={textClasses}>
           La documentación debe ser entregada en la acreditación.
         </p>
-        <div className={styles.documentation}>
-          <div className={styles.button}>
+        <div className={documentationClasses}>
+          <div className={buttonClasses}>
             <Button
               content="Autorización"
               onClick={() =>
@@ -390,7 +398,7 @@ const Provincial = ({
                 )
               }
             >
-              <div className={styles.arrow}>
+              <div className={arrowClasses}>
                 <Image
                   src="/images/newsArrow.svg"
                   width={30}
@@ -400,7 +408,7 @@ const Provincial = ({
               </div>
             </Button>
           </div>
-          <div className={styles.button}>
+          <div className={buttonClasses}>
             <Button
               content="Compromiso"
               onClick={() =>
@@ -411,7 +419,7 @@ const Provincial = ({
                 )
               }
             >
-              <div className={styles.arrow}>
+              <div className={arrowClasses}>
                 <Image
                   src="/images/newsArrow.svg"
                   width={30}
@@ -424,7 +432,7 @@ const Provincial = ({
         </div>
       </Collapsable>
       <Collapsable title="Premiación">
-        <p className={styles.text}>
+        <p className={textClasses}>
           Para evitar inconvenientes y malos entendidos, podrán participar en el
           acto de premiación solo las personas debidamente acreditadas portando
           credencial o “tarjeta de invitación individual”. Se aclara que,
@@ -433,7 +441,7 @@ const Provincial = ({
           estar inscriptas con nombre, apellido y documento en
           {isOma ? " el formulario" : " la planilla"}.
         </p>
-        <p className={styles.text}>
+        <p className={textClasses}>
           {" "}
           Costo de la tarjeta {isOma ? "$40.000" : "$36.000"}.- CUPOS LIMITADOS
           (menores de 3 años no pagan){" "}
@@ -441,19 +449,19 @@ const Provincial = ({
       </Collapsable>
       <Collapsable title="Participantes Clasificados">
         {isOma ? (
-          <p className={styles.text}>
+          <p className={textClasses}>
             Los participantes que clasifican a la instancia provincial son
             aquellos que sumen 5 puntos entre las instancias Zonal e
             Interescolar.
           </p>
         ) : (
-          <p className={styles.text}>
+          <p className={textClasses}>
             Los participantes que clasifican a la instancia provincial son
             aquellos que sumen 5 puntos entre las instancias Zonal e
             Interescolar.
           </p>
         )}
-        <form className={styles.form}>
+        <form className={formClasses}>
           <SelectResultCategory
             category="Participante"
             value={state.participante}
@@ -494,7 +502,7 @@ const Provincial = ({
         />
       </Collapsable>
       <Collapsable title="Reglamento">
-        <ul className={styles.text}>
+        <ul className={textClasses}>
           <li>
             Toda otra persona (padre, tutor, etc.) que desee integrar la
             delegación debe comprometerse a cumplir todas las normas
@@ -528,7 +536,7 @@ const Provincial = ({
             desarrollen las actividades de la competencia.
           </li>
         </ul>
-        <p className={styles.text}>
+        <p className={textClasses}>
           Ante cualquier irregularidad o muestra de inconducta las personas
           involucradas serán sancionadas debiendo regresar de inmediato a su
           lugar de origen.
@@ -536,7 +544,7 @@ const Provincial = ({
       </Collapsable>
     </>
   ) : (
-    <p className={styles.text}>Proximamente...</p>
+    <p className={textClasses}>Proximamente...</p>
   );
 };
 

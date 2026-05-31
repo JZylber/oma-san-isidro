@@ -1,7 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { Button } from "../../buttons/Button";
 
-import styles from "./HomeModal.module.scss";
 import Modal from "../Modal";
 import Image from "next/image";
 
@@ -15,7 +14,7 @@ const HomeModal = ({ open, setOpen }: HomeModalProps) => {
     <Modal
       openModal={open}
       closeModal={() => setOpen(false)}
-      className={styles.modal_content}
+      className="border-2 border-black rounded-[9px] p-[2.4rem] m-auto max-tablet:w-[80%] tablet:max-desktop:w-[65%] desktop:w-[50%]"
     >
       <div className="flex items-center gap-x-4">
         <Image
@@ -25,18 +24,20 @@ const HomeModal = ({ open, setOpen }: HomeModalProps) => {
           width={96}
           className="shrink-0 hidden lg:block"
         />
-        <h1 className="w-fit">UN PROBLEMA PARA CANGURO</h1>
+        <h1 className="w-fit font-unbounded font-semibold max-tablet:text-[3.6rem] max-tablet:mt-[calc(100vmin/50)] max-tablet:mb-[calc(2.5*100vmin/50)] tablet:text-[4.8rem]">
+          UN PROBLEMA PARA CANGURO
+        </h1>
       </div>
-      <p>
+      <p className="font-montserrat font-light max-tablet:text-[1.4rem] tablet:max-desktop:text-[1.5rem] desktop:text-[1.7rem] mt-[1.6rem]">
         Ya está abierto el concurso <strong>UN PROBLEMA PARA CANGURO</strong>{" "}
         destinado a docentes (profesores y maestros) y a estudiantes de Ciencias
         Exactas, de Ingeniería y de Profesorados.
       </p>
-      <p>
+      <p className="font-montserrat font-light max-tablet:text-[1.4rem] tablet:max-desktop:text-[1.5rem] desktop:text-[1.7rem] mt-[1.6rem]">
         La invitación es a proponer problemas para el{" "}
         <strong>Concurso Internacional Canguro Matemático</strong>.
       </p>
-      <p>
+      <p className="font-montserrat font-light max-tablet:text-[1.4rem] tablet:max-desktop:text-[1.5rem] desktop:text-[1.7rem] mt-[1.6rem]">
         En el siguiente formulario pueden presentar los problemas:{" "}
         <a
           className="text-blue-600"
@@ -47,8 +48,10 @@ const HomeModal = ({ open, setOpen }: HomeModalProps) => {
           https://forms.gle/xaSDSdbdm6DhzFEA9
         </a>
       </p>
-      <p>Hay tiempo hasta el <strong>15 de junio</strong>.</p>
-      <p>
+      <p className="font-montserrat font-light max-tablet:text-[1.4rem] tablet:max-desktop:text-[1.5rem] desktop:text-[1.7rem] mt-[1.6rem]">
+        Hay tiempo hasta el <strong>15 de junio</strong>.
+      </p>
+      <p className="font-montserrat font-light max-tablet:text-[1.4rem] tablet:max-desktop:text-[1.5rem] desktop:text-[1.7rem] mt-[1.6rem]">
         <a
           className="text-blue-600"
           href="https://oma.org.ar/contents/paginas/un_problema_canguro.html"

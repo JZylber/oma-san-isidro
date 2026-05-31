@@ -10,14 +10,16 @@ export const metadata: Metadata = {
     "Calendario anual de todas las competencias matemáticas del país",
 };
 
-const getEvents = unstable_cache(
-  async (year: number, type?: string) => {
-    const query = await getCalendarEvents(year, type);
-    return JSON.stringify(query);
-  },
-  ["dates"],
-  { tags: ["dates"] }
-);
+const isDev = process.env.NODE_ENV === "development";
+
+const fetchEvents = async (year: number, type?: string) => {
+  const query = await getCalendarEvents(year, type);
+  return JSON.stringify(query);
+};
+
+const getEvents = isDev
+  ? fetchEvents
+  : unstable_cache(fetchEvents, ["dates"], { tags: ["dates"] });
 
 const Calendar = async () => {
   const year = new Date().getFullYear();

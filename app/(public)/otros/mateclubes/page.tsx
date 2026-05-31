@@ -9,14 +9,16 @@ export const metadata: Metadata = {
   description: "Información general de los mateclubes",
 };
 
-const getEvents = unstable_cache(
-  async (year: number, type?: string) => {
-    const query = await getCalendarEvents(year, type);
-    return JSON.stringify(query);
-  },
-  ["dates"],
-  { tags: ["dates"] }
-);
+const isDev = process.env.NODE_ENV === "development";
+
+const fetchEvents = async (year: number, type?: string) => {
+  const query = await getCalendarEvents(year, type);
+  return JSON.stringify(query);
+};
+
+const getEvents = isDev
+  ? fetchEvents
+  : unstable_cache(fetchEvents, ["dates"], { tags: ["dates"] });
 
 export default async function Mateclubes() {
   const year = new Date().getFullYear();

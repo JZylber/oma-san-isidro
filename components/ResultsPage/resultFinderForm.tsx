@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import styles from "./resultFinderForm.module.scss";
 import { TestInfo, yearTests } from "./resultsTypes";
 import SelectResultCategory from "./SelectResultCategory";
 import { useSearchParams } from "next/navigation";
@@ -73,7 +72,7 @@ const ResultFinderForm = ({ availableResults, data, setData }: FormProps) => {
   };
 
   return (
-    <form className={styles.form}>
+    <form className="flex max-tablet:flex-col max-tablet:gap-y-[2.4rem] max-tablet:mb-[2.4rem] tablet:pb-[2rem] tablet:items-end">
       <SelectResultCategory
         category="Año"
         value={data.año}
