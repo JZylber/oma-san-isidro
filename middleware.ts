@@ -1,6 +1,6 @@
 import { NextResponse, NextRequest } from "next/server";
 
-export async function middleware(request: NextRequest, response: NextResponse) {
+export async function middleware(request: NextRequest) {
   const accessToken = request.cookies.get("accessToken")?.value;
   const refreshToken = request.cookies.get("refreshToken")?.value;
   if (!accessToken || !refreshToken) {
@@ -15,14 +15,17 @@ export async function middleware(request: NextRequest, response: NextResponse) {
   }
   const { accessToken: newAccessToken } = await credentials.json();
   if (newAccessToken) {
-    return NextResponse.redirect(request.nextUrl, {
-      headers: {
-        "Set-Cookie": `accessToken=${newAccessToken}; SameSite=Strict; ${
-          process.env.NODE_ENV === "production" ? "Secure" : ""
-        }; Path=/`,
-      },
+    const res = NextResponse.next();
+    res.cookies.set("accessToken", newAccessToken, {
+      sameSite: "strict",
+      httpOnly: true,
+      maxAge: 60,
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
     });
+    return res;
   }
+  return NextResponse.next();
 }
 
 export const config = {
