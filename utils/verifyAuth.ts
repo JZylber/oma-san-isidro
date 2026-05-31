@@ -9,7 +9,7 @@ export interface VerifyAuthResult {
 }
 
 export async function verifyAuthTokens(
-  accessToken: string,
+  accessToken: string | undefined,
   refreshToken: string
 ): Promise<VerifyAuthResult> {
   let refreshVerification: Awaited<ReturnType<typeof verifyRefreshToken>>;
@@ -19,14 +19,16 @@ export async function verifyAuthTokens(
     return { authorized: false };
   }
 
-  let accessTokenExpired = false;
-  try {
-    await verifyAccessToken(accessToken);
-  } catch (e) {
-    if (e instanceof errors.JWTExpired) {
-      accessTokenExpired = true;
-    } else {
-      return { authorized: false };
+  let accessTokenExpired = accessToken === undefined;
+  if (!accessTokenExpired) {
+    try {
+      await verifyAccessToken(accessToken!);
+    } catch (e) {
+      if (e instanceof errors.JWTExpired) {
+        accessTokenExpired = true;
+      } else {
+        return { authorized: false };
+      }
     }
   }
 

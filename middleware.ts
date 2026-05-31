@@ -1,9 +1,8 @@
 import { NextResponse, NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
-  const accessToken = request.cookies.get("accessToken")?.value;
   const refreshToken = request.cookies.get("refreshToken")?.value;
-  if (!accessToken || !refreshToken) {
+  if (!refreshToken) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
   const credentials = await fetch(request.nextUrl.origin + "/api/auth/jwt", {

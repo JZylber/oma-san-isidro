@@ -4,7 +4,7 @@ import { verifyAuthTokens } from "utils/verifyAuth";
 const handler = async (req: NextRequest) => {
   const accessToken = req.cookies.get("accessToken")?.value;
   const refreshToken = req.cookies.get("refreshToken")?.value;
-  if (!accessToken || !refreshToken) {
+  if (!refreshToken) {
     return new Response("Unauthorized", { status: 401 });
   }
   const result = await verifyAuthTokens(accessToken, refreshToken);

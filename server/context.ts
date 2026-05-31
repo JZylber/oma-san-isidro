@@ -23,7 +23,7 @@ export async function createTRPCContext({
   const refreshToken = req.cookies.get("refreshToken")?.value;
   let user: User | null = null;
 
-  if (accessToken && refreshToken) {
+  if (refreshToken) {
     const result = await verifyAuthTokens(accessToken, refreshToken);
     if (result.authorized && result.user) {
       user = {
