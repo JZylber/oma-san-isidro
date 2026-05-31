@@ -12,32 +12,33 @@ export const metadata: Metadata = {
     "Página principal de la Secretaría Regional Buenos Aires Norte de la Olimpíadas Matemáticas Argentinas",
 };
 
-const getNews = unstable_cache(
-  async () => {
-    const query = await prisma.noticias.findMany({
-      orderBy: [{ agregado: "desc" }],
-      select: {
-        titulo: true,
-        link: true,
-        visible: true,
-        agregado: true,
-      },
-    });
-    const results = query;
-    return JSON.stringify(results);
-  },
-  ["news"],
-  { tags: ["news"] }
-);
+const isDev = process.env.NODE_ENV === "development";
 
-const getEvents = unstable_cache(
-  async (year: number, type?: string) => {
-    const query = await getCalendarEvents(year, type);
-    return JSON.stringify(query);
-  },
-  ["dates"],
-  { tags: ["dates"] }
-);
+const fetchNews = async () => {
+  const query = await prisma.noticias.findMany({
+    orderBy: [{ agregado: "desc" }],
+    select: {
+      titulo: true,
+      link: true,
+      visible: true,
+      agregado: true,
+    },
+  });
+  return JSON.stringify(query);
+};
+
+const getNews = isDev
+  ? fetchNews
+  : unstable_cache(fetchNews, ["news"], { tags: ["news"] });
+
+const fetchEvents = async (year: number, type?: string) => {
+  const query = await getCalendarEvents(year, type);
+  return JSON.stringify(query);
+};
+
+const getEvents = isDev
+  ? fetchEvents
+  : unstable_cache(fetchEvents, ["dates"], { tags: ["dates"] });
 
 export default async function Page() {
   const newsData = getNews();

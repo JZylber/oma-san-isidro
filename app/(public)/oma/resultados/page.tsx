@@ -9,14 +9,16 @@ export const metadata: Metadata = {
   description: "Resultados de las participaciones en pruebas de OMA",
 };
 
-const availableResults = unstable_cache(
-  async () => {
-    const available = await getAvailableResults("OMA");
-    return available;
-  },
-  ["OMAResults"],
-  { tags: ["results"] }
-);
+const isDev = process.env.NODE_ENV === "development";
+
+const fetchAvailableResults = async () => {
+  const available = await getAvailableResults("OMA");
+  return available;
+};
+
+const availableResults = isDev
+  ? fetchAvailableResults
+  : unstable_cache(fetchAvailableResults, ["OMAResults"], { tags: ["results"] });
 
 export default async function NanduResults() {
   let available = await availableResults();
