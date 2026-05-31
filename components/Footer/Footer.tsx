@@ -44,7 +44,7 @@ const Footer = () => {
           </li>
         </ul>
         <div className={footerLogoClasses} style={{ position: "relative" }}>
-          <Image src="/images/logoOMA.svg" fill alt="" style={{ objectFit: "contain" }} />
+          <Image src="/images/logoOMA.png" fill alt="" style={{ objectFit: "contain" }} />
         </div>
       </div>
       <div className={footerCreditsClasses}>
