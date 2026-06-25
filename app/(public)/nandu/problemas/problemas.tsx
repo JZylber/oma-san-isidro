@@ -1,8 +1,8 @@
 'use client'
 import Problems from "../../../../components/Problems/Problems";
 
-const NanduProblemsPage = ({problems} : {problems: Record<string,Record<string,string | string []>>}) => {
-    return(<Problems type="Nandu" problems={problems}/>)
+const NanduProblemsPage = () => {
+    return(<Problems competition="ÑANDÚ"/>)
 }
 
 export default NanduProblemsPage
