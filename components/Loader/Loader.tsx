@@ -1,12 +1,11 @@
 import BasicLoader from "./BasicLoader";
-import styles from "./Loader.module.scss";
 
 const Loader = () => {
-    return(
-        <div className={styles.loader_container}>
-            <BasicLoader/>
-        </div>
-    )
-}
+  return (
+    <div className="flex-auto flex flex-col justify-center items-center">
+      <BasicLoader />
+    </div>
+  );
+};
 
-export default Loader
+export default Loader;

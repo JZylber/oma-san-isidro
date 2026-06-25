@@ -1,6 +1,5 @@
 "use client";
 import { CalendarEvent } from "../../../../components/CalendarComponents/CalendarTypes";
-import styles from "./Mateclubes.module.scss";
 import AllDatesBanner from "../../../../components/CalendarComponents/DateBanner/NextDatesBanner";
 import { Button } from "../../../../components/buttons/Button";
 import Image from "next/image";
@@ -23,15 +22,15 @@ const MathClubs = ({ events }: MateclubesProps) => {
   };
   return (
     <>
-      <h1 className={styles.title}>Mateclubes</h1>
+      <h1 className="font-unbounded font-semibold max-tablet:text-[3.6rem] max-tablet:[margin-top:8vmin] max-tablet:[margin-bottom:5vmin] tablet:text-[4.8rem] tablet:leading-[2.5]">Mateclubes</h1>
       <AllDatesBanner dates={events} category="Mateclubes" />
-      <section className={`${styles.section} mt-20`}>
-        <p className={styles.text}>
+      <section className="mt-20">
+        <p className="font-montserrat font-light max-tablet:text-[1.4rem] tablet:max-desktop:text-tablet-reading desktop:text-desktop-reading">
           Para toda información sobre mateclubes como la instancia nacional y
           autorizaciones, dirigirse a la página de mateclubes.
         </p>
       </section>
-      <section className={`${styles.section} flex justify-center`}>
+      <section className="mt-[2rem] flex justify-center">
         <a
           href="https://www.oma.org.ar/mateclubes/index.php"
           className="max-w-2xl desktop:max-w-4xl grow"

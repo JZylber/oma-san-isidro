@@ -1,4 +1,3 @@
-import Cookies from "js-cookie";
 import { ReactNode, createContext, useEffect, useState } from "react";
 import { trpc } from "utils/trpc";
 
@@ -23,75 +22,45 @@ export type UserContextType = {
   isLoggingOut: boolean;
 };
 
+const emptyUser: User = { id: -1, nombre: "", apellido: "", rol: "" };
+
 const AuthContext = createContext<UserContextType>({
-  user: {
-    id: -1,
-    nombre: "",
-    apellido: "",
-    rol: "",
-  },
-  login: async () => {
-    return {
-      id: -1,
-      nombre: "",
-      apellido: "",
-      rol: "",
-    };
-  },
-  logout: async () => {
-    return false;
-  },
-  register: async () => {
-    return false;
-  },
+  user: emptyUser,
+  login: async () => emptyUser,
+  logout: async () => false,
+  register: async () => false,
   isLoggingIn: false,
   isLoggingOut: false,
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
+  const [user, setUser] = useState<User>(emptyUser);
+
+  const sessionQuery = trpc.users.getSession.useQuery(undefined, {
+    retry: false,
+    refetchOnWindowFocus: false,
+  });
+
+  useEffect(() => {
+    if (sessionQuery.data) {
+      setUser(sessionQuery.data);
+    } else if (!sessionQuery.isLoading) {
+      setUser(emptyUser);
+    }
+  }, [sessionQuery.data, sessionQuery.isLoading]);
+
   const loginEndPoint = trpc.users.loginUser.useMutation({
     onSuccess: (response) => {
       setUser(response.user);
-      if (response.token) setToken(response.token);
     },
   });
+
   const logoutEndPoint = trpc.users.logoutUser.useMutation({
     onSuccess: () => {
-      setUser({
-        id: -1,
-        nombre: "",
-        apellido: "",
-        rol: "",
-      });
-      Cookies.remove("accessToken");
+      setUser(emptyUser);
     },
   });
-  const [user, setUser] = useState<User>({
-    id: -1,
-    nombre: "",
-    apellido: "",
-    rol: "",
-  });
-  const setToken = (token: string) => {
-    Cookies.set("accessToken", token, {
-      sameSite: "strict",
-      secure: process.env.NODE_ENV === "production",
-    });
-  };
-  useEffect(
-    () =>
-      loginEndPoint.mutate(undefined, {
-        onError: () => {
-          setUser({
-            id: -1,
-            nombre: "",
-            apellido: "",
-            rol: "",
-          });
-        },
-      }),
-    []
-  );
+
   const login = async (email: string, password: string) => {
     const response = await loginEndPoint.mutateAsync({ email, password });
     return response.user;
@@ -109,8 +78,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   ) => {
     return Error("Not implemented");
   };
+
   const isLoggingIn = loginEndPoint.isLoading;
   const isLoggingOut = logoutEndPoint.isLoading;
+
   return (
     <AuthContext.Provider
       value={{ user, login, logout, register, isLoggingIn, isLoggingOut }}

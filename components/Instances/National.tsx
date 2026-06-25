@@ -1,5 +1,4 @@
 import Table from "../Table/Table";
-import styles from "./Provincial.module.scss";
 import ProvincialParticipantCard from "./ProvincialCard";
 import SelectResultCategory from "../ResultsPage/SelectResultCategory";
 import Collapsable from "../Collapsable/Collapsable";
@@ -78,6 +77,15 @@ const downloadFile = (filename: string) => {
   document.body.removeChild(link);
 };
 
+const textClasses = "font-montserrat font-light max-tablet:text-[1.4rem] tablet:max-desktop:text-tablet-reading desktop:text-desktop-reading";
+const boldClasses = "font-medium";
+const listClasses = "ml-[1.6rem] list-inside [&_li+li]:mt-[.8rem]";
+const sectionTitleClasses = "font-unbounded font-medium my-[1rem] max-tablet:text-center max-tablet:text-[1.8rem] tablet:text-left tablet:max-desktop:text-[1.5rem] desktop:text-[2.3rem]";
+const documentationClasses = "flex justify-start gap-x-[2.4rem] max-tablet:flex-col";
+const buttonClasses = "max-tablet:[flex-grow:1] tablet:max-desktop:[flex-grow:0.5] desktop:[flex-grow:0.3]";
+const arrowClasses = "hidden desktop:block desktop:rotate-90";
+const formClasses = "flex mt-[1.2rem] max-tablet:flex-col";
+
 const NationalInfo = ({
   competition,
   participants,
@@ -91,140 +99,158 @@ const NationalInfo = ({
   return participants.length > 0 && auth_max_date ? (
     <>
       <Collapsable title="Inscripción">
-        <p className={styles.text}>
-          Los colegios deberán comunicar antes del{" "}
-          <span className={styles.bold}>{`${auth_max_date.getUTCDate()} de ${
-            months[auth_max_date.getUTCMonth()]
-          }`}</span>{" "}
-          la nómina de personas que viajan,
-          <span className={styles.bold}>
-            {" "}
-            completando la planilla de inscripción
-          </span>{" "}
-          y enviándola por correo electrónico a:{" "}
-          <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a>
-        </p>
+        {!isOma ? (
+          <>
+            <p className={textClasses}>
+              Los colegios deberán completar el siguiente formulario antes del{" "}
+              <span
+                className={boldClasses}
+              >{`${auth_max_date.getUTCDate()} de ${
+                months[auth_max_date.getUTCMonth()]
+              }`}</span>
+            </p>
+            <div className={buttonClasses}>
+              <Button
+                content="Formulario de Inscripción"
+                onClick={() =>
+                  (window.location.href = isOma
+                    ? ""
+                    : "https://forms.gle/QaRy7A7MJV1pSni27")
+                }
+              ></Button>
+            </div>
+          </>
+        ) : (
+          <>
+            <p className={textClasses}>
+              Los colegios deberán comunicar antes del{" "}
+              <span
+                className={boldClasses}
+              >{`${auth_max_date.getUTCDate()} de ${
+                months[auth_max_date.getUTCMonth()]
+              }`}</span>{" "}
+              la nómina de personas que viajan, por correo electrónico a:{" "}
+              <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a>
+            </p>
 
-        <h4 className={styles.section_title}>
-          Instructivo para llenar la planilla:
-        </h4>
-        <ul className={`${styles.text} ${styles.list}`}>
-          <li>
-            <span className={styles.bold}>Región:</span> San Isidro o 53
-          </li>
-          <li>
-            <span className={styles.bold}>Colegio:</span> Nombre del
-            Establecimiento del alumno
-          </li>
-          <li>
-            <span className={styles.bold}>Localidad:</span> Lugar donde se
-            encuentra el colegio
-          </li>
-          <li>
-            <span className={styles.bold}>Nivel:</span> Nivel de Olimpíada del
-            participante (1, 2 ó 3). Para los acompañantes el nivel es 0 (cero).
-          </li>
-          <li>
-            <span className={styles.bold}>Sexo:</span> Completar con F
-            (femenino) o M (masculino) (no usar mujer y varón)
-          </li>
-          <li>
-            <span className={styles.bold}>Tipo:</span> Usar el siguiente código:
-            A para los alumnos; D para los docentes acompañantes, P para el
-            acompañante familiar y T para los que asistan a la premiación
-            únicamente. En el caso de los familiares, indicar en la columna
-            observaciones el grado de parentesco y de quién.
-          </li>
-          <li>
-            <span className={styles.bold}>Alojamiento:</span> Usar el siguiente
-            código: S si se alojan en el hotel propuesto por olimpíadas; N si se
-            alojan por su cuenta.
-          </li>
-          <li>
-            <span className={styles.bold}>Dieta:</span> Notificar los celiacos,
-            vegetarianos, veganos, etc.
-          </li>
-          <li>
-            <span className={styles.bold}>
-              Vianda almuerzo {isOma ? 15 : 23}:
-            </span>{" "}
-            Usar el siguiente código: S si se retiran con vianda luego de la
-            premiación de olimpíadas; N si almuerzan.
-          </li>
-          <li>
-            <span className={styles.bold}>Observaciones:</span> Espacio para
-            aclaraciones como por ejemplo parentesco con el alumno.{" "}
-          </li>
-          <li>
-            <span className={styles.bold}>Celular del responsable:</span> Número
-            de teléfono celular de contacto del responsable.{" "}
-          </li>
-          <li>
-            <span className={styles.bold}>Mail:</span> Por favor agregar mail
-            del responsable por cualquier consulta.
-          </li>
-        </ul>
-        <div className={styles.documentation}>
-          <div className={styles.button}>
-            <Button
-              content="Planilla Inscripción"
-              onClick={() =>
-                downloadFile(
-                  `/nacional/${isOma ? "oma" : "nandu"}/PlanillaNacional.xlsx`
-                )
-              }
-            >
-              <div className={styles.arrow}>
-                <Image
-                  src="/images/newsArrow.svg"
-                  width={30}
-                  height={40}
-                  alt="Descargar"
-                />
+            <h4 className={sectionTitleClasses}>
+              Instructivo para llenar la planilla:
+            </h4>
+            <ul className={`${textClasses} ${listClasses}`}>
+              <li>
+                <span className={boldClasses}>Región:</span> San Isidro o 53
+              </li>
+              <li>
+                <span className={boldClasses}>Colegio:</span> Nombre del
+                Establecimiento del alumno
+              </li>
+              <li>
+                <span className={boldClasses}>Localidad:</span> Lugar donde se
+                encuentra el colegio
+              </li>
+              <li>
+                <span className={boldClasses}>Nivel:</span> Nivel de Olimpíada
+                del participante (1, 2 ó 3). Para los acompañantes el nivel es 0
+                (cero).
+              </li>
+              <li>
+                <span className={boldClasses}>Sexo:</span> Completar con F
+                (femenino) o M (masculino) (no usar mujer y varón)
+              </li>
+              <li>
+                <span className={boldClasses}>Tipo:</span> Usar el siguiente
+                código: A para los alumnos; D para los docentes acompañantes, P
+                para el acompañante familiar y T para los que asistan a la
+                premiación <strong>únicamente</strong>. En el caso de los
+                familiares, indicar en la columna observaciones el grado de
+                parentesco y de quién.
+              </li>
+              <li>
+                <span className={boldClasses}>Alojamiento:</span> Usar el
+                siguiente código: S si se alojan en el hotel propuesto por
+                olimpíadas; N si se alojan por su cuenta.
+              </li>
+              <li>
+                <span className={boldClasses}>Dieta:</span> Notificar los
+                celiacos, vegetarianos, veganos, etc.
+              </li>
+              <li>
+                <span className={boldClasses}>
+                  Vianda almuerzo {isOma ? 15 : 23}:
+                </span>{" "}
+                Usar el siguiente código: S si se retiran con vianda luego de la
+                premiación de olimpíadas; N si almuerzan.
+              </li>
+              <li>
+                <span className={boldClasses}>Observaciones:</span> Espacio para
+                aclaraciones como por ejemplo parentesco con el alumno.{" "}
+              </li>
+              <li>
+                <span className={boldClasses}>Celular del responsable:</span>{" "}
+                Número de teléfono celular de contacto del responsable.{" "}
+              </li>
+              <li>
+                <span className={boldClasses}>Mail:</span> Por favor agregar
+                mail del responsable por cualquier consulta.
+              </li>
+            </ul>
+            <div className={documentationClasses}>
+              <div className={buttonClasses}>
+                <Button
+                  content="Planilla Inscripción"
+                  onClick={() =>
+                    downloadFile(
+                      `/nacional/${
+                        isOma ? "oma" : "nandu"
+                      }/PlanillaNacional.xlsx`
+                    )
+                  }
+                >
+                  <div className={arrowClasses}>
+                    <Image
+                      src="/images/newsArrow.svg"
+                      width={30}
+                      height={40}
+                      alt="Descargar"
+                    />
+                  </div>
+                </Button>
               </div>
-            </Button>
-          </div>
-        </div>
-
+            </div>
+          </>
+        )}
         <Warning>
-          <p className={styles.text}>
-            <span className={styles.bold}>
-              Se ruega enviar toda la documentación junta:
-            </span>{" "}
-            los datos pedidos anteriormente, el comprobante de pago, y el pedido
-            de la factura electrónica (si fuese necesaria).
-          </p>
-          <p className={styles.text}>
+          <p className={textClasses}>
             Recordamos a los colegios que son ellos los responsables de enviar
             la inscripción de sus alumnos, informando a los padres sobre el
             desarrollo de las actividades del Torneo, ya que los alumnos
             participan representando a la escuela.
           </p>
-          <p className={styles.text}>
+          <p className={textClasses}>
             La Secretaría Regional no puede atender a los padres, ni corresponde
             que lo haga.
           </p>
         </Warning>
       </Collapsable>
       <Collapsable title="Información general y programa">
-        <p className={styles.text}>
+        <p className={textClasses}>
           El encuentro de la{" "}
-          <span className={styles.bold}>
+          <span className={boldClasses}>
             Olimpíada Nacional {isOma ? "Oma" : "Ñandú"}
           </span>{" "}
           se realizará en la ciudad de La Falda, Córdoba los días{" "}
           {isOma
-            ? "11 al 15 de noviembre en el Hotel Edén (Av. Edén 1400)"
-            : "20 al 23 de octubre en el Hotel Edén (Av. Edén 1400)"}
+            ? "10 al 14 de noviembre en el Hotel Edén (Av. Edén 1400)"
+            : "21 al 24 de octubre en el Hotel Edén (Av. Edén 1400)"}
           . Cada delegación se trasladará por su cuenta y riesgo, con sus
           profesores acompañantes según las pautas establecidas{" "}
-          <span className={styles.bold}>
+          <span className={boldClasses}>
             (máximo 8 alumnos por cada docente)
           </span>
           . También, como en años anteriores, nos ocuparemos del alojamiento y
           concentración de aquellas delegaciones que lo soliciten.
         </p>
-        <p className={styles.text}>
+        <p className={textClasses}>
           El alojamiento de las delegaciones que lo soliciten será en{" "}
           {isOma ? "diferentes hoteles" : "el Hotel FATSA"} de la ciudad de la
           falda en habitaciones compartidas con otros participantes del
@@ -234,191 +260,182 @@ const NationalInfo = ({
           . La reserva del alojamiento se hace contra entrega de las planillas
           debidamente cumplimentadas.
         </p>
-        <h4 className={styles.section_title}>Programa</h4>
-        <ul className={`${styles.text} ${styles.list}`}>
+        <h4 className={sectionTitleClasses}>Programa</h4>
+        <ul className={`${textClasses} ${listClasses}`}>
           <li>
-            <span className={styles.bold}>Acreditación:</span>{" "}
+            <span className={boldClasses}>Acreditación:</span>{" "}
             {isOma ? (
               <>
-                Lunes 11 de noviembre de 16:00 a 20:00 horas en el{" "}
-                <span className={styles.bold}>
+                Lunes 10 de noviembre de 16:00 a 20:00 horas en el{" "}
+                <span className={boldClasses}>
                   hotel donde se aloje la delegación de la región
                 </span>
               </>
             ) : (
               <>
-                Domingo 20 de octubre de 16:00 a 20:00 horas en el{" "}
-                <span className={styles.bold}>
+                Martes 21 de octubre de 16:00 a 20:00 horas en el{" "}
+                <span className={boldClasses}>
                   en el Hotel donde se aloje la delegación de la región
                 </span>
               </>
             )}{" "}
           </li>
           <li>
-            <span className={styles.bold}>Prueba escrita:</span>{" "}
+            <span className={boldClasses}>Prueba escrita:</span>{" "}
             {isOma ? (
               <>
-                Martes 12 y Miércoles 13 de noviembre a las 9:30hs en el{" "}
-                <span className={styles.bold}>Hotel Edén</span>
+                Martes 11 y Miércoles 12 de noviembre a las 9:30hs en el{" "}
+                <span className={boldClasses}>Hotel Edén</span>
               </>
             ) : (
               <>
-                Lunes 21 y Martes 22 de octubre a las 9:30 horas, en salones del{" "}
-                <span className={styles.bold}>Hotel Edén</span>
+                Miércoles 22 y Jueves 23 de octubre a las 9:30 horas, en salones
+                del <span className={boldClasses}>Hotel Edén</span>
               </>
             )}
           </li>
           <li>
-            <span className={styles.bold}>Exposición Oral y Premiación:</span>{" "}
+            <span className={boldClasses}>Exposición Oral y Premiación:</span>{" "}
             {isOma ? (
               <>
-                Viernes 15 de noviembre a las 9:30hs horas en el{" "}
-                <span className={styles.bold}>Hotel Edén</span>
+                Viernes 14 de noviembre a las 9:30hs horas en el{" "}
+                <span className={boldClasses}>Hotel Edén</span>
               </>
             ) : (
               <>
-                Miércoles 23 de octubre a de 9:00 a 12:00 horas en el{" "}
-                <span className={styles.bold}>Hotel Edén</span>
+                Viernes 24 de octubre a de 9:00 a 12:00 horas en el{" "}
+                <span className={boldClasses}>Hotel Edén</span>
               </>
             )}
           </li>
         </ul>
       </Collapsable>
       <Collapsable title="Aranceles">
-        <ul className={`${styles.text} ${styles.list}`}>
+        <ul className={`${textClasses} ${listClasses}`}>
           <li>
-            <span className={styles.bold}>
+            <span className={boldClasses}>
               Participantes y/o acompañantes que se alojen en el hotel propuesto
               por la olimpíada:
             </span>{" "}
-            {isOma ? "$410.000" : "$290.000"}. Incluye desde la cena del día{" "}
-            {isOma ? "lunes 11" : "domingo 20"} al almuerzo del{" "}
-            {isOma ? "viernes 15" : "miércoles 23"} (incluye una bebida por
+            {isOma ? "$590.000" : "$460.000"}. Incluye desde la cena del día{" "}
+            {isOma ? "lunes 10" : "martes 21"} al almuerzo del{" "}
+            {isOma ? "viernes 14" : "viernes 24"} (incluye una bebida por
             comida).
           </li>
           <li>
-            <span className={styles.bold}>
+            <span className={boldClasses}>
               Participantes que NO se alojen en el hotel propuesto por la
               olimpíada:
             </span>{" "}
-            {isOma ? "$120.000" : "$120.000"}.{" "}
-            <span className={styles.bold}>
-              Incluye los almuerzos {!isOma && "y meriendas"} de los días de las
-              pruebas escritas (
+            {isOma ? "$260.000" : "$250.000"}.{" "}
+            <span className={boldClasses}>
+              Incluye los almuerzos y meriendas de los días de las pruebas
+              escritas (
               {isOma ? (
-                <>martes 12 y miércoles 13</>
+                <>martes 11 y miércoles 12</>
               ) : (
-                <>lunes 21 y martes 23</>
+                <>miércoles 22 y jueves 23</>
               )}
               ).
             </span>
           </li>
           <li>
-            <span className={styles.bold}>
+            <span className={boldClasses}>
               Acompañantes que NO se alojen en el hotel propuesto por la
               olimpíada:
             </span>{" "}
-            {isOma ? "$110.000" : "$110.000"}.{" "}
-            <span className={styles.bold}>
-              Incluye los almuerzos {!isOma && "y meriendas"} de los días de las
-              pruebas escritas (
+            {isOma ? "$230.000" : "$220.000"}.{" "}
+            <span className={boldClasses}>
+              Incluye los almuerzos y meriendas de los días de las pruebas
+              escritas (
               {isOma ? (
-                <>martes 12 y miércoles 13</>
+                <>martes 11 y miércoles 12</>
               ) : (
-                <>lunes 21 y martes 22</>
+                <>miércoles 22 y jueves 23</>
               )}
               ).
             </span>{" "}
           </li>
           <li>
-            <span className={styles.bold}>Tarjeta de premiación:</span> $12.000.
+            <span className={boldClasses}>Tarjeta de premiación:</span> $20.000.
             Solo es necesaria la tarjeta para aquellos que no están acreditados
             como acompañantes y que participarán únicamente de la premiación.
             Deben inscribirse junto con los otros participantes en la planilla.{" "}
-            <span className={styles.bold}>
+            <span className={boldClasses}>
               Acompañantes de 3 años o menos no necesitan pagar tarjeta.
             </span>
           </li>
         </ul>
         {/*<Warning>
-            <p className={styles.text}>Los aranceles antes mencionados, pueden ser ajustados debido a la situación económica financiera del país, que puede hacer variar nuestros costos. Quienes quieran asegurarse estos aranceles pueden hacer su depósito o trasferencia en los próximos días, enviando el comprobante a <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a>. En caso de tener que variar los aranceles lo avisaremos oportunamente.</p>
+            <p className={textClasses}>Los aranceles antes mencionados, pueden ser ajustados debido a la situación económica financiera del país, que puede hacer variar nuestros costos. Quienes quieran asegurarse estos aranceles pueden hacer su depósito o trasferencia en los próximos días, enviando el comprobante a <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a>. En caso de tener que variar los aranceles lo avisaremos oportunamente.</p>
         </Warning>*/}
       </Collapsable>
       <Collapsable title="Pago">
-        <p className={styles.text}>
+        <p className={textClasses}>
           El pago se hace depositando o transfieriendo a la siguiente cuenta de
           la Fundación Olimpíada Matemática Argentina:
         </p>
-        <ul className={`${styles.text} ${styles.list}`}>
+        <ul className={textClasses}>
           <li>
-            <span className={styles.bold}>BANCO HSBC</span> (Cuenta Corriente)
-            Sucursal Los Arcos (ex Salguero).
+            <span className={boldClasses}>BANCO GALICIA</span> (Cuenta
+            Corriente)
           </li>
           <li>
-            <span className={styles.bold}>N° Cuenta: </span>6093228419
+            <span className={boldClasses}>N° Cuenta: </span>000267656656
           </li>
           <li>
-            <span className={styles.bold}>ALIAS: </span>FOMAHSBCCC
+            <span className={boldClasses}>CBU: </span>0070665620000002676566
           </li>
           <li>
-            <span className={styles.bold}>CBU: </span>1500609900060932284196
+            <span className={boldClasses}>ALIAS: </span>FOMAHSBCCC
           </li>
           <li>
-            <span className={styles.bold}>CUIT: </span>30-67928383-5
+            <span className={boldClasses}>CUIT: </span>30-67928383-5
           </li>
         </ul>
-        <p className={styles.text}>
+        <p className={textClasses}>
           Recordamos que para la acreditación deben presentar el{" "}
-          <span className={styles.bold}>ORIGINAL</span> de dicho depósito.
+          <span className={boldClasses}>ORIGINAL</span> de dicho depósito.
         </p>
-        <p className={styles.text}>
-          Si necesitan factura electrónica o factura C, por favor completar la
-          planilla y enviar a{" "}
-          <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a> junto con el
-          comprobante de pago.
+        <p className={textClasses}>
+          Para solicitar factura electrónica por el pago deben completar el
+          siguiente formulario:
+          <a
+            className="text-blue-600 underline"
+            href={
+              isOma
+                ? "https://forms.gle/8mZ7rjzkCuYxBSM98"
+                : "https://forms.gle/9x3x62Ah3BtEPnZw7"
+            }
+          >
+            {isOma
+              ? "https://forms.gle/8mZ7rjzkCuYxBSM98"
+              : "https://forms.gle/9x3x62Ah3BtEPnZw7"}
+          </a>
         </p>
-        <div className={styles.documentation}>
-          <div className={styles.button}>
-            <Button
-              content="Planilla Facturación"
-              onClick={() =>
-                downloadFile(
-                  `/nacional/${isOma ? "oma" : "nandu"}/PedidoFactura.xlsx`
-                )
-              }
-            >
-              <div className={styles.arrow}>
-                <Image
-                  src="/images/newsArrow.svg"
-                  width={30}
-                  height={40}
-                  alt="Descargar"
-                />
-              </div>
-            </Button>
-          </div>
-        </div>
-        <Warning>
-          <p className={styles.text}>
-            <span className={styles.bold}>
-              Se ruega enviar toda la documentación junta:
-            </span>{" "}
-            el comprobante de pago, el pedido de la factura electrónica (si
-            fuese necesaria) y los datos necesarios para la inscripción.
-          </p>
-          {!isOma && (
-            <p className={styles.text}>
+        {!isOma ? (
+          <Warning>
+            <p className={textClasses}>
               En el hotel contratado, luego de confirmar el{" "}
               {auth_max_date.getUTCDate()} de{" "}
               {months[auth_max_date.getUTCMonth()]} las plazas reservadas,
               deberán abonarse aunque no se ocupen.
             </p>
-          )}
-        </Warning>
+          </Warning>
+        ) : (
+          <Warning>
+            <p className={textClasses}>
+              <span className={boldClasses}>
+                Se ruega enviar toda la documentación junta:
+              </span>{" "}
+              el comprobante de pago y los datos necesarios para la inscripción.
+            </p>
+          </Warning>
+        )}
       </Collapsable>
       <Collapsable title="Documentación">
-        <p className={styles.text}>La documentación exigida incluye:</p>
-        <ul className={`${styles.text} ${styles.list}`}>
+        <p className={textClasses}>La documentación exigida incluye:</p>
+        <ul className={`${textClasses} ${listClasses}`}>
           <li>
             AUTORIZACIÓN de cada alumno (se utilizará la autorización que se
             descarga debajo)
@@ -429,11 +446,11 @@ const NationalInfo = ({
             el compromiso que se descarga debajo)
           </li>
         </ul>
-        <p className={styles.text}>
+        <p className={textClasses}>
           La documentación debe ser entregada en la acreditación.
         </p>
-        <div className={styles.documentation}>
-          <div className={styles.button}>
+        <div className={documentationClasses}>
+          <div className={buttonClasses}>
             <Button
               content="Autorización"
               onClick={() =>
@@ -442,7 +459,7 @@ const NationalInfo = ({
                 )
               }
             >
-              <div className={styles.arrow}>
+              <div className={arrowClasses}>
                 <Image
                   src="/images/newsArrow.svg"
                   width={30}
@@ -452,7 +469,7 @@ const NationalInfo = ({
               </div>
             </Button>
           </div>
-          <div className={styles.button}>
+          <div className={buttonClasses}>
             <Button
               content="Compromiso"
               onClick={() =>
@@ -461,7 +478,7 @@ const NationalInfo = ({
                 )
               }
             >
-              <div className={styles.arrow}>
+              <div className={arrowClasses}>
                 <Image
                   src="/images/newsArrow.svg"
                   width={30}
@@ -474,7 +491,7 @@ const NationalInfo = ({
         </div>
       </Collapsable>
       <Collapsable title="Premiación">
-        <p className={styles.text}>
+        <p className={textClasses}>
           Para evitar inconvenientes y malos entendidos, podrán participar en el
           acto de premiación solo las personas debidamente acreditadas portando
           credencial o “tarjeta de invitación individual”. Se aclara que,
@@ -484,11 +501,11 @@ const NationalInfo = ({
         </p>
       </Collapsable>
       <Collapsable title="Participantes Clasificados">
-        <p className={styles.text}>
+        <p className={textClasses}>
           Los participantes que clasifican a la instancia nacional son aquellos
           que hayan aprobado la instancia regional.
         </p>
-        <form className={styles.form}>
+        <form className={formClasses}>
           <SelectResultCategory
             category="Participante"
             value={state.participante}
@@ -529,7 +546,7 @@ const NationalInfo = ({
         />
       </Collapsable>
       <Collapsable title="Reglamento">
-        <ul className={`${styles.text} ${styles.list}`}>
+        <ul className={`${textClasses} ${listClasses}`}>
           <li>
             Toda otra persona (padre, tutor, etc.) que desee integrar la
             delegación debe comprometerse a cumplir todas las normas
@@ -539,7 +556,7 @@ const NationalInfo = ({
             Solo podrá asistir a las actividades programadas dentro de los
             espacios establecidos (esto incluye el ingresar, permanecer y
             circular por el mismo) quien se acredite debidamente el día{" "}
-            {isOma ? "11 de noviembre" : "20 de octubre"}.
+            {isOma ? "10 de noviembre" : "21 de octubre"}.
           </li>
           <li>
             Se recuerda a los responsables de las delegaciones, se alojen o no
@@ -558,7 +575,7 @@ const NationalInfo = ({
             desarrollen las actividades de la competencia
           </li>
         </ul>
-        <p className={styles.text}>
+        <p className={textClasses}>
           Ante cualquier irregularidad o muestra de inconducta las personas
           involucradas serán sancionadas debiendo regresar de inmediato a su
           lugar de origen.
@@ -566,7 +583,7 @@ const NationalInfo = ({
       </Collapsable>
     </>
   ) : (
-    <p className={styles.text}>Proximamente...</p>
+    <p className={textClasses}>Proximamente...</p>
   );
 };
 

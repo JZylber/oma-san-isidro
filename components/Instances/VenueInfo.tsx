@@ -47,7 +47,7 @@ const VenueInfo = ({
       competition: competition,
       instance: instance,
     };
-    return data.participants.length > 0 ? (
+    return data.participants.length > 0 && data.venues.length > 0 ? (
       <Venues {...data} />
     ) : (
       <p className="font-montserrat text-5xl py-6">Proximamente...</p>

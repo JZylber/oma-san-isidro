@@ -8,12 +8,12 @@ import ConfirmModal from "components/Popups/ConfirmModal/ConfirmModal";
 import Modal from "components/Popups/Modal";
 import Table from "components/Table/Table";
 import Image from "next/image";
-import { Fragment, use, useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { AppRouter } from "server/routers/_app";
 import { trpc } from "utils/trpc";
 
 const displayDate = (date: Date) => {
-  return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+  return `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getFullYear()}`;
 };
 
 const blankNews = {

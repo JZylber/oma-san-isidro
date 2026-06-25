@@ -1,4 +1,3 @@
-import styles from "./Instance.module.scss";
 import { INSTANCIA } from "@prisma/client";
 import VenueInfo from "./VenueInfo";
 import ProvincialInfo from "./ProvincialInfo";
@@ -47,10 +46,10 @@ const InstanceData = ({ competition, instance }: InstanceProps) => {
   const { instancia, fecha } = instance;
   return (
     <>
-      <h2 className={styles.title}>
+      <h2 className="font-unbounded font-semibold pt-[1.6rem] max-tablet:text-[3.6rem] max-tablet:leading-[2.8rem] tablet:max-desktop:text-[2.25rem] desktop:text-[3.6rem]">
         {instancia[0] + instancia.slice(1).toLocaleLowerCase()}
       </h2>
-      <h3 className={styles.subtitle}>{`${fecha.getUTCDate()} de ${
+      <h3 className="font-montserrat font-normal max-tablet:text-[1.5rem] max-tablet:py-[.8rem] tablet:py-[1.6rem] tablet:max-desktop:text-tablet-reading desktop:text-desktop-reading">{`${fecha.getUTCDate()} de ${
         months[fecha.getMonth()]
       }`}</h3>
       {instancia === "PROVINCIAL" && (

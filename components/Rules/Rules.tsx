@@ -1,8 +1,11 @@
 import { Button } from "../buttons/Button";
-import styles from "./Rules.module.scss";
-import Arrow from "../../public/images/newsArrow.svg"
+import Image from "next/image";
 
-
+const typeClasses = "max-tablet:block max-tablet:font-unbounded max-tablet:font-normal max-tablet:text-[2.1rem] max-tablet:mt-[1.6rem] tablet:hidden";
+const titleClasses = "font-unbounded font-semibold max-tablet:text-[3.6rem] max-tablet:mt-[calc(4*100vmin/50)] max-tablet:mb-[calc(2.5*100vmin/50)] tablet:text-[4.8rem] tablet:leading-[2.5]";
+const rulesClasses = "[&_li]:font-montserrat [&_li]:font-light max-tablet:[&_li]:text-[1.4rem] tablet:max-desktop:[&_li]:text-[1.5rem] desktop:[&_li]:text-[1.7rem]";
+const buttonClasses = "max-tablet:w-full tablet:w-[63.5%]";
+const arrowClasses = "desktop:rotate-90 desktop:pt-[5px] desktop:w-[30px] max-desktop:hidden";
 
 const Rules : ({type}: {type: string}) => JSX.Element = ({type}) => {
     const rules = [
@@ -21,14 +24,14 @@ const Rules : ({type}: {type: string}) => JSX.Element = ({type}) => {
     }
     return(
     <>
-        <div className={styles.type}>{type == "OMA"?"Oma":"Ñandú"}</div>
-        <h1 className={styles.title}>Reglamento</h1>
-        <ul className={styles.rules}>
+        <div className={typeClasses}>{type == "OMA"?"Oma":"Ñandú"}</div>
+        <h1 className={titleClasses}>Reglamento</h1>
+        <ul className={rulesClasses}>
             {rules.map((rule:string,idx:number) => {return(<li key={idx}>{rule}</li>)})}
         </ul>
-        <div className={styles.button}>
+        <div className={buttonClasses}>
             <Button content="Descargar reglamento completo" onClick={() => downloadRules(type == "OMA"?"oma":"nandu")}>
-                <Arrow className={styles.arrow}/>
+                <Image src="/images/newsArrow.svg" width={34} height={32} alt="" className={arrowClasses}/>
             </Button>
         </div>
     </>

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import bcrypt from "bcryptjs";
 import { prisma } from "../db";
 import { protectedProcedure, publicProcedure, router } from "../trpc";
 import login from "utils/login";
@@ -17,7 +18,7 @@ export const userRouter = router({
     )
     .mutation(async ({ ctx, input }) => {
       const { user, setHTTPOnlyCookie } = ctx;
-      if (user) return { token: "", user: user };
+      if (user) return { user };
       if (!input) {
         throw new TRPCError({
           code: "BAD_REQUEST",
@@ -34,27 +35,26 @@ export const userRouter = router({
       }
       const refreshToken = response.refreshToken!;
       setHTTPOnlyCookie("refreshToken", refreshToken);
+      setHTTPOnlyCookie("accessToken", response.accessToken!, 60);
       await prisma.usuario.update({
         where: { id_usuario: response.usuario!.id },
         data: { token: refreshToken },
       });
-      return { token: response.accessToken, user: response.usuario! };
+      return { user: response.usuario! };
     }),
+
   logoutUser: protectedProcedure.mutation(async ({ ctx }) => {
     const { user, setHTTPOnlyCookie } = ctx;
-    if (!user) {
-      throw new TRPCError({
-        code: "UNAUTHORIZED",
-        message: "No hay usuario logueado",
-      });
-    }
-    setHTTPOnlyCookie("refreshToken", "");
+    setHTTPOnlyCookie("refreshToken", "", 0);
+    setHTTPOnlyCookie("accessToken", "", 0);
     await prisma.usuario.update({
       where: { id_usuario: user.id },
       data: { token: "" },
     });
     return true;
   }),
+
+  getSession: publicProcedure.query(({ ctx }) => ctx.user ?? null),
 
   getUsers: protectedProcedure.query(async () => {
     return prisma.usuario.findMany({
@@ -67,6 +67,7 @@ export const userRouter = router({
       },
     });
   }),
+
   registerUser: protectedProcedure
     .input(
       z.object({
@@ -76,17 +77,19 @@ export const userRouter = router({
         password: z.string(),
       })
     )
-    .mutation(async ({ ctx, input }) => {
+    .mutation(async ({ input }) => {
+      const hashedPassword = await bcrypt.hash(input.password, 10);
       const user = await prisma.usuario.create({
         data: {
           nombre: input.nombre,
           apellido: input.apellido,
           email: input.email,
-          password: input.password,
+          password: hashedPassword,
         },
       });
       return user;
     }),
+
   updateUser: protectedProcedure
     .input(
       z.object({
@@ -100,12 +103,20 @@ export const userRouter = router({
     )
     .mutation(async ({ input }) => {
       const { id_usuario, nombre, apellido, email, password, rol } = input;
+      const hashedPassword = password ? await bcrypt.hash(password, 10) : undefined;
       const user = await prisma.usuario.update({
         where: { id_usuario },
-        data: { nombre, apellido, email, password, rol },
+        data: {
+          nombre,
+          apellido,
+          email,
+          rol,
+          ...(hashedPassword && { password: hashedPassword }),
+        },
       });
       return user;
     }),
+
   getUserCredentials: protectedProcedure.query(async ({ ctx }) => {
     return ctx.user;
   }),

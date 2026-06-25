@@ -1,4 +1,3 @@
-import { error } from "console";
 import { jwtVerify, SignJWT } from "jose";
 
 const ACCESS_TOKEN_KEY = process.env.JWT_ACCESS_KEY as string;
