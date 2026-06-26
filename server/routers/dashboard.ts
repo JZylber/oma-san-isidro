@@ -264,4 +264,22 @@ export const dashboardRouter = router({
     .mutation(async ({ ctx, input }) => {
       revalidateTag(input.type);
     }),
+  getTests: protectedProcedure.query(async ({ ctx }) => {
+    const query = await prisma.prueba.findMany({
+      select: {
+        id_prueba: true,
+        fecha: true,
+        competencia: {
+          select: { ano: true, tipo: true },
+        },
+        cantidad_problemas: true,
+        fecha_limite_autorizacion: true,
+        resultados_disponibles: true,
+        hora_ingreso: true,
+        duracion: true,
+        criterio_habilitacion: true,
+      },
+    });
+    return query;
+  }),
 });
