@@ -6,24 +6,31 @@ import SelectResultCategory from "../ResultsPage/SelectResultCategory";
 import ProblemCard from "./Mobile/ProblemCard";
 import { ProblemRow, capitalize, sortInstances, displayLevel } from "./problemsTypes";
 
-const headers = ["Instancia", "Año", "Nivel", "Enlace"];
+const headers = ["Instancia", "Año", "Nivel", ""];
+const downloadHeaders = ["Instancia", "Año", "Nivel", "Enlace"];
+
+const openPdf = (link: string) => window.open(link, "_blank", "noopener,noreferrer");
 
 const make_element = (row: ProblemRow, index: number) => {
   return (
-    <tr key={index}>
+    <tr
+      key={index}
+      onClick={() => openPdf(row.link)}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openPdf(row.link);
+        }
+      }}
+      role="link"
+      tabIndex={0}
+      className="cursor-pointer"
+    >
       <td>{capitalize(row.instancia)}</td>
       <td>{row.año}</td>
       <td className="text-center">{displayLevel(row.nivel)}</td>
       <td className="text-center">
-        <a href={row.link} target="_blank" rel="noreferrer">
-          <Image
-            src="/images/article.svg"
-            width={20}
-            height={20}
-            alt="Ver problema"
-            className="inline-block cursor-pointer"
-          />
-        </a>
+        <Image src="/images/menuArrow.svg" width={10} height={16} alt="" className="inline-block" />
       </td>
     </tr>
   );
@@ -86,6 +93,7 @@ const ProblemsTable = ({ rows }: { rows: ProblemRow[] }) => {
         elements_per_page={50}
         make_element={make_element}
         process_data={process_data}
+        downloadHeaders={downloadHeaders}
         Card={ProblemCard}
       />
     </>
