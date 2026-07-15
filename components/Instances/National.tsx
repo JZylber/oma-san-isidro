@@ -79,7 +79,7 @@ const downloadFile = (filename: string) => {
 
 const textClasses = "font-montserrat font-light max-tablet:text-[1.4rem] tablet:max-desktop:text-tablet-reading desktop:text-desktop-reading";
 const boldClasses = "font-medium";
-const listClasses = "ml-[1.6rem] list-inside [&_li+li]:mt-[.8rem]";
+const listClasses = "ml-[1.6rem] list-disc list-inside [&_li+li]:mt-[.8rem]";
 const sectionTitleClasses = "font-unbounded font-medium my-[1rem] max-tablet:text-center max-tablet:text-[1.8rem] tablet:text-left tablet:max-desktop:text-[1.5rem] desktop:text-[2.3rem]";
 const documentationClasses = "flex justify-start gap-x-[2.4rem] max-tablet:flex-col";
 const buttonClasses = "max-tablet:[flex-grow:1] tablet:max-desktop:[flex-grow:0.5] desktop:[flex-grow:0.3]";
