@@ -112,7 +112,7 @@ const Provincial = ({
             <h4 className={sectionTitleClasses}>
               Datos que deben enviar para la inscripción:
             </h4>
-            <ul className={textClasses}>
+            <ul className={`${textClasses} ${listClasses}`}>
               <li>Nombre y apellido de los alumnos que participan.</li>
               <li>
                 Nombre, apellido y número de documento del o los acompañantes,
@@ -203,7 +203,7 @@ const Provincial = ({
               confirmará contra entrega de las planillas debidamente
               cumplimentadas.
             </p>
-            <ul className={textClasses}>
+            <ul className={`${textClasses} ${listClasses}`}>
               <li>10 de Septiembre (3 de Febrero 2975)</li>
               <li>Presidente (Corrientes 1516)</li>
               <li>Riviera (Belgrano 2118)</li>
@@ -211,7 +211,7 @@ const Provincial = ({
           </>
         )}
         <h4 className={sectionTitleClasses}>Programa</h4>
-        <ul className={textClasses}>
+        <ul className={`${textClasses} ${listClasses}`}>
           <li>
             <span className={boldClasses}>Acreditación:</span>{" "}
             {isOma
@@ -234,7 +234,7 @@ const Provincial = ({
         </ul>
       </Collapsable>
       <Collapsable title="Aranceles">
-        <ul className={textClasses}>
+        <ul className={`${textClasses} ${listClasses}`}>
           <li>
             <span className={boldClasses}>
               Participantes y/o acompañantes que se alojen en el hotel propuesto
@@ -299,7 +299,7 @@ const Provincial = ({
           El pago se hace depositando o transfieriendo a la siguiente cuenta de
           la Fundación Olimpíada Matemática Argentina:
         </p>
-        <ul className={textClasses}>
+        <ul className={`${textClasses} ${listClasses}`}>
           <li>
             <span className={boldClasses}>BANCO GALICIA</span> (Cuenta
             Corriente)
@@ -369,7 +369,7 @@ const Provincial = ({
       </Collapsable>
       <Collapsable title="Documentación">
         <p className={textClasses}>La documentación exigida incluye:</p>
-        <ul className={textClasses}>
+        <ul className={`${textClasses} ${listClasses}`}>
           <li>
             AUTORIZACIÓN de cada alumno (se utilizará la autorización que se
             descarga debajo)
@@ -499,7 +499,7 @@ const Provincial = ({
         />
       </Collapsable>
       <Collapsable title="Reglamento">
-        <ul className={textClasses}>
+        <ul className={`${textClasses} ${listClasses}`}>
           <li>
             Toda otra persona (padre, tutor, etc.) que desee integrar la
             delegación debe comprometerse a cumplir todas las normas
