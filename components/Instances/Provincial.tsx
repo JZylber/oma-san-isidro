@@ -178,10 +178,8 @@ const Provincial = ({
           </span>{" "}
           se realizará en la ciudad de{" "}
           {isOma ? "Mar del Plata" : "Mar del Plata"} los días{" "}
-          {isOma ? "17, 18 y 19 de septiembre" : "12, 13 y 14 de agosto"}{" "}
-          {!isOma &&
-            "(OJO:este año por el feriado del viernes 15 el encuentro será de martes a jueves)"}
-          . Cada delegación se trasladará por su cuenta y riesgo, con sus
+          {isOma ? "17, 18 y 19 de septiembre" : "19, 20 y 21 de agosto"}. Cada
+          delegación se trasladará por su cuenta y riesgo, con sus
           profesores acompañantes según las pautas establecidas{" "}
           <span className={boldClasses}>
             (máximo 8 alumnos por cada docente)
@@ -189,54 +187,49 @@ const Provincial = ({
           . También, como en años anteriores, nos ocuparemos del alojamiento y
           concentración de aquellas delegaciones que lo soliciten.
         </p>
-        {true ? (
+        {isOma ? (
           <p className={textClasses}>
             El alojamiento de las delegaciones que lo soliciten será en Hoteles
             de la mencionada ciudad en habitaciones compartidas con otros
             participantes del encuentro. La reserva del alojamiento se hace
-            contra{" "}
-            {isOma
-              ? "el correcto completado del formulario "
-              : "entrega de las planillas debidamente cumplimentadas"}
-            .
+            contra el correcto completado del formulario.
           </p>
         ) : (
           <>
             <p className={textClasses}>
-              El alojamiento en la ciudad de Mar del Plata será en los hoteles:
+              El alojamiento de las delegaciones que lo soliciten será en
+              diferentes hoteles de la ciudad de Mar del Plata, en habitaciones
+              compartidas con otros participantes del encuentro. La reserva se
+              confirmará contra entrega de las planillas debidamente
+              cumplimentadas.
             </p>
             <ul className={textClasses}>
-              <li>Estocolmo (Santa Fe 2070)</li>
-              <li>Garden (Moreno 2393)</li>
-              <li>Novi (H. Yrigoyen 1311)</li>
-              <li>ATILRA o 10 de Septiembre (3 de Febrero 2975)</li>
-              <li>Nuevo Ostende (H. Yrigoyen 1737)</li>
+              <li>10 de Septiembre (3 de Febrero 2975)</li>
+              <li>Presidente (Corrientes 1516)</li>
+              <li>Riviera (Belgrano 2118)</li>
             </ul>
-            <p className={textClasses}>
-              Actividades en salones del Hotel Sheraton.{" "}
-              {!isOma &&
-                "La organización <span className={boldClasses}>NO CONTEMPLA</span> alojamiento en el Hotel Sheraton, allí sólo se desarrollarán las actividades académicas."}
-            </p>
           </>
         )}
         <h4 className={sectionTitleClasses}>Programa</h4>
         <ul className={textClasses}>
           <li>
             <span className={boldClasses}>Acreditación:</span>{" "}
-            {isOma ? "Miércoles 17 de septiembre" : "Martes 12 de agosto"} de
-            15:00 a 20:00 horas en el hotel asignado a su delegación
+            {isOma
+              ? "Miércoles 17 de septiembre de 15:00 a 20:00 horas"
+              : "Miércoles 19 de agosto de 16:00 a 20:00 horas"}{" "}
+            en el hotel asignado a su delegación
           </li>
           <li>
             <span className={boldClasses}>Prueba escrita:</span>{" "}
             {isOma
               ? "Jueves 18 de septiembre a las 9:00 horas, Salones Sheraton Hotel - Mar del Plata"
-              : "Miércoles 13 de agosto a las 9:00 horas, Salones Sheraton Hotel - Mar del Plata"}
+              : "Jueves 20 de agosto a las 9:30 horas, Hotel Costa Galana - Mar del Plata"}
           </li>
           <li>
             <span className={boldClasses}>Exposición Oral y Premiación:</span>{" "}
             {isOma
               ? "Viernes 19 de septiembre a las 9:00 horas, Salones Sheraton Hotel - Mar del Plata"
-              : "Jueves 14 de agosto a las 9:00 horas, Sala Astor Piazzolla - Teatro Auditorium - Mar del Plata"}
+              : "Viernes 21 de agosto de 9:00 a 12:00 horas, Centro de Arte Radio City - Mar del Plata"}
           </li>
         </ul>
       </Collapsable>
@@ -247,9 +240,9 @@ const Provincial = ({
               Participantes y/o acompañantes que se alojen en el hotel propuesto
               por la olimpíada:
             </span>{" "}
-            {isOma ? "$420.000" : "$398.000"}. Incluye desde la cena del día{" "}
-            {isOma ? "miércoles 17" : "martes 12"} al almuerzo del{" "}
-            {isOma ? "viernes 19" : "jueves 14"} (incluye una bebida por
+            {isOma ? "$420.000" : "$510.000"}. Incluye desde la cena del día{" "}
+            {isOma ? "miércoles 17" : "miércoles 19"} al almuerzo del{" "}
+            {isOma ? "viernes 19" : "viernes 21"} (incluye una bebida por
             comida).
           </li>
           <li>
@@ -257,18 +250,22 @@ const Provincial = ({
               Participantes que NO se alojen en el hotel propuesto por la
               olimpíada:
             </span>{" "}
-            {isOma ? "$200.000" : "$150.000"}.
+            {isOma
+              ? "$200.000."
+              : "$200.000 (incluye ingreso al acto de premiación y gastos de organización)."}
           </li>
           <li>
             <span className={boldClasses}>
               Acompañantes que NO se alojen en el hotel propuesto por la
               olimpíada:
             </span>{" "}
-            {isOma ? "$160.000" : "$110.000"}. (menores de 3 años no pagan)
+            {isOma
+              ? "$160.000. (menores de 3 años no pagan)"
+              : "$160.000 (incluye ingreso al acto de premiación y gastos de organización). (menores de 3 años no pagan)"}
           </li>
           <li>
             <span className={boldClasses}>Tarjeta de premiación:</span>{" "}
-            {isOma ? "$40.000" : "$36.000"}. Solo es necesaria la tarjeta para
+            {isOma ? "$40.000" : "$50.000"}. Solo es necesaria la tarjeta para
             aquellos que no están acreditados como acompañantes y que
             participarán únicamente de la premiación. Deben inscribirse junto
             con los otros participantes en
@@ -314,7 +311,7 @@ const Provincial = ({
             <span className={boldClasses}>CBU: </span>0070665620000002676566
           </li>
           <li>
-            <span className={boldClasses}>ALIAS: </span>FOMAHSBCCC
+            <span className={boldClasses}>ALIAS: </span>FOMA.OLIMPIADA
           </li>
           <li>
             <span className={boldClasses}>CUIT: </span>30-67928383-5
@@ -332,12 +329,12 @@ const Provincial = ({
             href={
               isOma
                 ? "https://forms.gle/zaRDFJoFCmH6dt6L7"
-                : "https://forms.gle/pe3i1TWV1bgv6Rv39"
+                : "https://forms.gle/eqeHj8YMZBCfaFLu5"
             }
           >
             {isOma
               ? "https://forms.gle/zaRDFJoFCmH6dt6L7"
-              : "https://forms.gle/pe3i1TWV1bgv6Rv39"}
+              : "https://forms.gle/eqeHj8YMZBCfaFLu5"}
           </a>
         </p>
         <p className={textClasses}>
@@ -393,7 +390,7 @@ const Provincial = ({
               onClick={() =>
                 downloadFile(
                   `/provincial/${
-                    isOma ? "oma/Autorización.docx" : "nandu/Autorización.pdf"
+                    isOma ? "oma/Autorización.docx" : "nandu/Autorización.docx"
                   }`
                 )
               }
@@ -414,7 +411,7 @@ const Provincial = ({
               onClick={() =>
                 downloadFile(
                   `/provincial/${
-                    isOma ? "oma/Compromiso.docx" : "nandu/Compromiso.pdf"
+                    isOma ? "oma/Compromiso.docx" : "nandu/Compromiso.docx"
                   }`
                 )
               }
@@ -511,13 +508,13 @@ const Provincial = ({
           <li>
             Los que solicitaron alojamiento en las secretarías regionales,
             podrán hacerlo a partir de las 15:00 horas del día{" "}
-            {isOma ? "17 de septiembre" : "12 de agosto"}.
+            {isOma ? "17 de septiembre" : "19 de agosto"}.
           </li>
           <li>
             Solo podrá asistir a las actividades programadas dentro de los
             espacios establecidos (esto incluye el ingresar, permanecer y
             circular por el mismo) quien se acredite debidamente el día{" "}
-            {isOma ? "17 de septiembre" : "12 de agosto"}.
+            {isOma ? "17 de septiembre" : "19 de agosto"}.
           </li>
           <li>
             Se recuerda a los responsables de las delegaciones, se alojen o no
