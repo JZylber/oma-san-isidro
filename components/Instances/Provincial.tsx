@@ -23,7 +23,7 @@ export interface ProvincialParticipant extends Record<string, Filterables> {
 
 const makeParticipantElement = (
   participant: ProvincialParticipant,
-  index: number
+  index: number,
 ) => {
   return (
     <tr key={index}>
@@ -35,7 +35,7 @@ const makeParticipantElement = (
 };
 
 const downloadParticipantData = (
-  participant: ProvincialParticipant
+  participant: ProvincialParticipant,
 ): Array<string> => {
   return [
     participant.nivel.toString(),
@@ -69,12 +69,16 @@ const downloadFile = (filename: string) => {
   document.body.removeChild(link);
 };
 
-const textClasses = "font-montserrat font-light max-tablet:text-[1.4rem] tablet:max-desktop:text-tablet-reading desktop:text-desktop-reading";
+const textClasses =
+  "font-montserrat font-light max-tablet:text-[1.4rem] tablet:max-desktop:text-tablet-reading desktop:text-desktop-reading";
 const boldClasses = "font-medium";
 const listClasses = "ml-[1.6rem] list-disc list-inside [&_li+li]:mt-[.8rem]";
-const sectionTitleClasses = "font-unbounded font-medium my-[1rem] max-tablet:text-center max-tablet:text-[1.8rem] tablet:text-left tablet:max-desktop:text-[1.5rem] desktop:text-[2.3rem]";
-const documentationClasses = "flex justify-start gap-x-[2.4rem] max-tablet:flex-col";
-const buttonClasses = "max-tablet:[flex-grow:1] tablet:max-desktop:[flex-grow:0.5] desktop:[flex-grow:0.3]";
+const sectionTitleClasses =
+  "font-unbounded font-medium my-[1rem] max-tablet:text-center max-tablet:text-[1.8rem] tablet:text-left tablet:max-desktop:text-[1.5rem] desktop:text-[2.3rem]";
+const documentationClasses =
+  "flex justify-start gap-x-[2.4rem] max-tablet:flex-col";
+const buttonClasses =
+  "max-tablet:[flex-grow:1] tablet:max-desktop:[flex-grow:0.5] desktop:[flex-grow:0.3]";
 const arrowClasses = "hidden desktop:block desktop:rotate-90";
 const formClasses = "flex mt-[1.2rem] max-tablet:flex-col";
 
@@ -107,7 +111,9 @@ const Provincial = ({
                 months[auth_max_date.getUTCMonth()]
               }`}</span>{" "}
               la nómina de personas que viajan, por correo electrónico a:{" "}
-              <a href="mailto:elena@oma.org.ar">elena@oma.org.ar</a>
+              <a href="mailto:elenaguille2014@gmail.com">
+                elenaguille2014@gmail.com
+              </a>
             </p>
             <h4 className={sectionTitleClasses}>
               Datos que deben enviar para la inscripción:
@@ -179,8 +185,8 @@ const Provincial = ({
           se realizará en la ciudad de{" "}
           {isOma ? "Mar del Plata" : "Mar del Plata"} los días{" "}
           {isOma ? "17, 18 y 19 de septiembre" : "19, 20 y 21 de agosto"}. Cada
-          delegación se trasladará por su cuenta y riesgo, con sus
-          profesores acompañantes según las pautas establecidas{" "}
+          delegación se trasladará por su cuenta y riesgo, con sus profesores
+          acompañantes según las pautas establecidas{" "}
           <span className={boldClasses}>
             (máximo 8 alumnos por cada docente)
           </span>
@@ -284,10 +290,10 @@ const Provincial = ({
               href={
                 isOma
                   ? "mailto:silviachillo@gmail.com"
-                  : "mailto:elena@oma.org.ar"
+                  : "mailto:elenaguille2014@gmail.com"
               }
             >
-              {isOma ? "silviachillo@gmail.com" : "elena@oma.org.ar"}
+              {isOma ? "silviachillo@gmail.com" : "elenaguille2014@gmail.com"}
             </a>
             . En caso de tener que variar los aranceles lo avisaremos
             oportunamente.
@@ -391,7 +397,7 @@ const Provincial = ({
                 downloadFile(
                   `/provincial/${
                     isOma ? "oma/Autorización.docx" : "nandu/Autorización.docx"
-                  }`
+                  }`,
                 )
               }
             >
@@ -412,7 +418,7 @@ const Provincial = ({
                 downloadFile(
                   `/provincial/${
                     isOma ? "oma/Compromiso.docx" : "nandu/Compromiso.docx"
-                  }`
+                  }`,
                 )
               }
             >
