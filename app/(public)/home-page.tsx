@@ -15,8 +15,12 @@ interface HomeProps {
   events: CalendarEvent[];
 }
 
+// Popup temporarily disabled; flip to true to re-enable.
+const POPUP_ENABLED = false;
+
 const Home = ({ news, events }: HomeProps) => {
   const [openModal, setOpenModal] = useState(() => {
+    if (!POPUP_ENABLED) return false;
     if (typeof window === "undefined") return false;
     const seen = sessionStorage.getItem("homeModalSeen");
     if (seen) return false;
