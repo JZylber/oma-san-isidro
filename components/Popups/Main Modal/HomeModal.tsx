@@ -16,49 +16,36 @@ const HomeModal = ({ open, setOpen }: HomeModalProps) => {
       closeModal={() => setOpen(false)}
       className="border-2 border-black rounded-[9px] p-[2.4rem] m-auto max-tablet:w-[80%] tablet:max-desktop:w-[65%] desktop:w-[50%]"
     >
-      <div className="flex items-center gap-x-4">
-        <Image
-          src="/images/warning.svg"
-          alt="Warning icon"
-          height={96}
-          width={96}
-          className="shrink-0 hidden lg:block"
-        />
-        <h1 className="w-fit font-unbounded font-semibold max-tablet:text-[3.6rem] max-tablet:mt-[calc(100vmin/50)] max-tablet:mb-[calc(2.5*100vmin/50)] tablet:text-[4.8rem]">
-          UN PROBLEMA PARA CANGURO
-        </h1>
-      </div>
+      <Image
+        src="/images/ibero2026.png"
+        alt="XLI Olimpiada Iberoamericana Matemática - Argentina 2026"
+        height={332}
+        width={512}
+        className="mx-auto h-auto max-tablet:w-[16rem] tablet:w-[20rem]"
+      />
       <p className="font-montserrat font-light max-tablet:text-[1.4rem] tablet:max-desktop:text-[1.5rem] desktop:text-[1.7rem] mt-[1.6rem]">
-        Ya está abierto el concurso <strong>UN PROBLEMA PARA CANGURO</strong>{" "}
-        destinado a docentes (profesores y maestros) y a estudiantes de Ciencias
-        Exactas, de Ingeniería y de Profesorados.
+        Este año la <strong>Olimpiada Iberoamericana de Matemática</strong>{" "}
+        estuvo en riesgo de no realizarse.
       </p>
       <p className="font-montserrat font-light max-tablet:text-[1.4rem] tablet:max-desktop:text-[1.5rem] desktop:text-[1.7rem] mt-[1.6rem]">
-        La invitación es a proponer problemas para el{" "}
-        <strong>Concurso Internacional Canguro Matemático</strong>.
+        En sucesivas ocasiones, varios países desistieron de organizarla. Por
+        eso la Argentina, llegado el mes de julio, tomó el compromiso de
+        realizarla en el mes de septiembre para evitar una disolución de este
+        encuentro tan importante para la comunidad matemática Iberoamericana.
       </p>
       <p className="font-montserrat font-light max-tablet:text-[1.4rem] tablet:max-desktop:text-[1.5rem] desktop:text-[1.7rem] mt-[1.6rem]">
-        En el siguiente formulario pueden presentar los problemas:{" "}
-        <a
-          className="text-blue-600"
-          href="https://forms.gle/xaSDSdbdm6DhzFEA9"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          https://forms.gle/xaSDSdbdm6DhzFEA9
-        </a>
+        Queremos invitar a todos los que aprecian a nuestra olimpiada a
+        colaborar para que la Ibero 2026 en Argentina sea una realidad.{" "}
+        <strong>¡Muchas gracias!</strong>
       </p>
       <p className="font-montserrat font-light max-tablet:text-[1.4rem] tablet:max-desktop:text-[1.5rem] desktop:text-[1.7rem] mt-[1.6rem]">
-        Hay tiempo hasta el <strong>15 de junio</strong>.
+        Alias desde Argentina: <strong>FOMA.OLIMPIADA</strong> del Banco
+        Galicia.
       </p>
       <p className="font-montserrat font-light max-tablet:text-[1.4rem] tablet:max-desktop:text-[1.5rem] desktop:text-[1.7rem] mt-[1.6rem]">
-        <a
-          className="text-blue-600"
-          href="https://oma.org.ar/contents/paginas/un_problema_canguro.html"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Bases del concurso
+        Desde el exterior, consultar por mail a:{" "}
+        <a className="text-blue-600" href="mailto:fomaveronica@gmail.com">
+          fomaveronica@gmail.com
         </a>
       </p>
       <Button onClick={() => setOpen(false)} content="OK" />
