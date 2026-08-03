@@ -446,7 +446,7 @@ const Provincial = ({
         </p>
         <p className={textClasses}>
           {" "}
-          Costo de la tarjeta {isOma ? "$40.000" : "$36.000"}.- CUPOS LIMITADOS
+          Costo de la tarjeta {isOma ? "$40.000" : "$50.000"}.- CUPOS LIMITADOS
           (menores de 3 años no pagan){" "}
         </p>
       </Collapsable>
