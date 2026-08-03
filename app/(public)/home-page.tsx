@@ -19,14 +19,16 @@ interface HomeProps {
 const POPUP_ENABLED = true;
 
 const Home = ({ news, events }: HomeProps) => {
-  const [openModal, setOpenModal] = useState(() => {
-    if (!POPUP_ENABLED) return false;
-    if (typeof window === "undefined") return false;
-    const seen = sessionStorage.getItem("homeModalSeen");
-    if (seen) return false;
-    sessionStorage.setItem("homeModalSeen", "1");
-    return true;
-  });
+  // Session-persistence temporarily disabled: popup reopens on every page load.
+  // const [openModal, setOpenModal] = useState(() => {
+  //   if (!POPUP_ENABLED) return false;
+  //   if (typeof window === "undefined") return false;
+  //   const seen = sessionStorage.getItem("homeModalSeen");
+  //   if (seen) return false;
+  //   sessionStorage.setItem("homeModalSeen", "1");
+  //   return true;
+  // });
+  const [openModal, setOpenModal] = useState(POPUP_ENABLED);
   return (
     <div className="tablet:grid tablet:grid-rows-[max-content_max-content_max-content_max-content] tablet:max-desktop:grid-cols-8 tablet:max-desktop:[column-gap:calc(2.5*var(--tablet-x-spacing))] desktop:grid-cols-10 desktop:gap-y-0 desktop:[column-gap:calc(2.5*var(--desktop-x-spacing))]">
       <HomeModal open={openModal} setOpen={setOpenModal} />
