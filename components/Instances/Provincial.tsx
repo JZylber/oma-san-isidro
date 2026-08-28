@@ -150,7 +150,8 @@ const Provincial = ({
               <Button
                 content="Formulario de Inscripción"
                 onClick={() =>
-                  (window.location.href = "https://forms.gle/CYNVAWptEeHaSFqC8")
+                  (window.location.href =
+                    "https://script.google.com/macros/s/AKfycbxWDoKNVuUc9ABPFnKW6P6IS8-Z0mm56e2JXxABY0rnzT1Kd0SBbiTrEfj-kbDoxwMn/exec")
                 }
               ></Button>
             </div>
