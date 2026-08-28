@@ -372,6 +372,10 @@ const Provincial = ({
           </a>
         </p>
         <p className={textClasses}>
+          Los que no piden factura electrónica pueden solicitar un recibo físico
+          en la acreditación.
+        </p>
+        <p className={textClasses}>
           Los recibos son entregados en el momento de la acreditación a la
           persona que la efectúa (docente, pariente, etc.). Por eso, se
           recomienda no perder el recibo y entregarlo a quien corresponda a su
