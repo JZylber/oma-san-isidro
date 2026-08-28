@@ -154,6 +154,10 @@ const Provincial = ({
                 }
               ></Button>
             </div>
+            <p className={textClasses}>
+              Una vez confirmadas las plazas reservadas en el hotel contratado,
+              deberán abonarse aunque no se ocupen.
+            </p>
           </>
         )}
         <p className={textClasses}>
@@ -184,7 +188,7 @@ const Provincial = ({
           </span>{" "}
           se realizará en la ciudad de{" "}
           {isOma ? "Mar del Plata" : "Mar del Plata"} los días{" "}
-          {isOma ? "17, 18 y 19 de septiembre" : "19, 20 y 21 de agosto"}. Cada
+          {isOma ? "28, 29 y 30 de septiembre" : "19, 20 y 21 de agosto"}. Cada
           delegación se trasladará por su cuenta y riesgo, con sus profesores
           acompañantes según las pautas establecidas{" "}
           <span className={boldClasses}>
@@ -193,13 +197,26 @@ const Provincial = ({
           . También, como en años anteriores, nos ocuparemos del alojamiento y
           concentración de aquellas delegaciones que lo soliciten.
         </p>
-        {isOma ? (
+        {isOma && (
           <p className={textClasses}>
-            El alojamiento de las delegaciones que lo soliciten será en Hoteles
-            de la mencionada ciudad en habitaciones compartidas con otros
-            participantes del encuentro. La reserva del alojamiento se hace
-            contra el correcto completado del formulario.
+            En caso de viajar en micros tipo chárter, estos deberán estar
+            habilitados y contar con la póliza de seguro vigente.
           </p>
+        )}
+        {isOma ? (
+          <>
+            <p className={textClasses}>
+              El alojamiento de las delegaciones que lo soliciten será en
+              Hoteles de la mencionada ciudad en habitaciones compartidas con
+              otros participantes del encuentro. La reserva del alojamiento se
+              hace contra el correcto completado del formulario.
+            </p>
+            <ul className={`${textClasses} ${listClasses}`}>
+              <li>10 de Septiembre (3 de Febrero 2975)</li>
+              <li>Presidente (Corrientes 1516)</li>
+              <li>Riviera (Belgrano 2118)</li>
+            </ul>
+          </>
         ) : (
           <>
             <p className={textClasses}>
@@ -221,20 +238,20 @@ const Provincial = ({
           <li>
             <span className={boldClasses}>Acreditación:</span>{" "}
             {isOma
-              ? "Miércoles 17 de septiembre de 15:00 a 20:00 horas"
+              ? "Lunes 28 de septiembre de 16:00 a 20:00 horas"
               : "Miércoles 19 de agosto de 16:00 a 20:00 horas"}{" "}
             en el hotel asignado a su delegación
           </li>
           <li>
             <span className={boldClasses}>Prueba escrita:</span>{" "}
             {isOma
-              ? "Jueves 18 de septiembre a las 9:00 horas, Salones Sheraton Hotel - Mar del Plata"
+              ? "Martes 29 de septiembre a las 9:30 horas, Salones del Hotel Costa Galana - Mar del Plata"
               : "Jueves 20 de agosto a las 9:30 horas, Hotel Costa Galana - Mar del Plata"}
           </li>
           <li>
             <span className={boldClasses}>Exposición Oral y Premiación:</span>{" "}
             {isOma
-              ? "Viernes 19 de septiembre a las 9:00 horas, Salones Sheraton Hotel - Mar del Plata"
+              ? "Miércoles 30 de septiembre de 9:00 a 12:00 horas, Centro de Arte Radio City - San Luis 1750, Mar del Plata"
               : "Viernes 21 de agosto de 9:00 a 12:00 horas, Centro de Arte Radio City - Mar del Plata"}
           </li>
         </ul>
@@ -246,9 +263,9 @@ const Provincial = ({
               Participantes y/o acompañantes que se alojen en el hotel propuesto
               por la olimpíada:
             </span>{" "}
-            {isOma ? "$420.000" : "$510.000"}. Incluye desde la cena del día{" "}
-            {isOma ? "miércoles 17" : "miércoles 19"} al almuerzo del{" "}
-            {isOma ? "viernes 19" : "viernes 21"} (incluye una bebida por
+            {isOma ? "$510.000" : "$510.000"}. Incluye desde la cena del día{" "}
+            {isOma ? "lunes 28" : "miércoles 19"} al almuerzo del{" "}
+            {isOma ? "miércoles 30" : "viernes 21"} (incluye una bebida por
             comida).
           </li>
           <li>
@@ -271,7 +288,7 @@ const Provincial = ({
           </li>
           <li>
             <span className={boldClasses}>Tarjeta de premiación:</span>{" "}
-            {isOma ? "$40.000" : "$50.000"}. Solo es necesaria la tarjeta para
+            {isOma ? "$50.000" : "$50.000"}. Solo es necesaria la tarjeta para
             aquellos que no están acreditados como acompañantes y que
             participarán únicamente de la premiación. Deben inscribirse junto
             con los otros participantes en
@@ -301,6 +318,16 @@ const Provincial = ({
         </Warning>
       </Collapsable>
       <Collapsable title="Pago">
+        {isOma && (
+          <p className={textClasses}>
+            La fecha límite para abonar el total de la inscripción es el{" "}
+            <span className={boldClasses}>jueves 24 de septiembre</span>. Para
+            solicitar la devolución del arancel, la cancelación deberá
+            notificarse a la Secretaría Regional con al menos 72 horas hábiles
+            de anticipación al inicio del evento (hasta el jueves 24 de
+            septiembre).
+          </p>
+        )}
         <p className={textClasses}>
           El pago se hace depositando o transfieriendo a la siguiente cuenta de
           la Fundación Olimpíada Matemática Argentina:
@@ -334,12 +361,12 @@ const Provincial = ({
             className="text-blue-600 underline"
             href={
               isOma
-                ? "https://forms.gle/zaRDFJoFCmH6dt6L7"
+                ? "https://forms.gle/5ouT8RwY1qPJEk1BA"
                 : "https://forms.gle/eqeHj8YMZBCfaFLu5"
             }
           >
             {isOma
-              ? "https://forms.gle/zaRDFJoFCmH6dt6L7"
+              ? "https://forms.gle/5ouT8RwY1qPJEk1BA"
               : "https://forms.gle/eqeHj8YMZBCfaFLu5"}
           </a>
         </p>
@@ -446,7 +473,7 @@ const Provincial = ({
         </p>
         <p className={textClasses}>
           {" "}
-          Costo de la tarjeta {isOma ? "$40.000" : "$50.000"}.- CUPOS LIMITADOS
+          Costo de la tarjeta {isOma ? "$50.000" : "$50.000"}.- CUPOS LIMITADOS
           (menores de 3 años no pagan){" "}
         </p>
       </Collapsable>
@@ -454,17 +481,27 @@ const Provincial = ({
         {isOma ? (
           <>
             <p className={textClasses}>
-              Los participantes que clasifican a la instancia provincial son
-              aquellos que sumen 5 puntos o más entre las instancias Zonal e
-              Intercolegial.
+              Clasifican a la instancia provincial, entre los Certámenes
+              Intercolegial y Zonal:
             </p>
-            <p className={textClasses}>
-              Los de <span className={boldClasses}>Nivel 1 y Nivel 2</span> que
-              sumen exactamente 5 puntos clasifican solo si no tienen ningún
-              menos en los problemas que sumaron puntos. Los de{" "}
-              <span className={boldClasses}>Nivel 3</span> clasifican con 5
-              puntos, tengan o no menos.
-            </p>
+            <ul className={`${textClasses} ${listClasses}`}>
+              <li>
+                Los alumnos de <span className={boldClasses}>Nivel 1 y 2</span>{" "}
+                que hayan acumulado{" "}
+                <span className={boldClasses}>
+                  5 puntos (sin los menos) o más
+                </span>
+                .
+              </li>
+              <li>
+                Los alumnos de <span className={boldClasses}>Nivel 3</span> que
+                hayan acumulado{" "}
+                <span className={boldClasses}>
+                  5 puntos (con todos los menos) o más
+                </span>
+                .
+              </li>
+            </ul>
           </>
         ) : (
           <p className={textClasses}>
@@ -523,13 +560,13 @@ const Provincial = ({
           <li>
             Los que solicitaron alojamiento en las secretarías regionales,
             podrán hacerlo a partir de las 15:00 horas del día{" "}
-            {isOma ? "17 de septiembre" : "19 de agosto"}.
+            {isOma ? "28 de septiembre" : "19 de agosto"}.
           </li>
           <li>
             Solo podrá asistir a las actividades programadas dentro de los
             espacios establecidos (esto incluye el ingresar, permanecer y
             circular por el mismo) quien se acredite debidamente el día{" "}
-            {isOma ? "17 de septiembre" : "19 de agosto"}.
+            {isOma ? "28 de septiembre" : "19 de agosto"}.
           </li>
           <li>
             Se recuerda a los responsables de las delegaciones, se alojen o no
