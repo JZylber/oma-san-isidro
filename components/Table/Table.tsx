@@ -87,7 +87,10 @@ const Table = <S extends object>({
   let max_pages = Math.ceil(values.length / page_size);
   useEffect(() => {
     if (page > max_pages - 1) {
-      setPage(max_pages - 1);
+      // max_pages is 0 when nothing matches the current filter, so clamp to the
+      // first page instead of -1 - a negative page never clears itself once the
+      // filter is relaxed again and leaves the table permanently empty.
+      setPage(Math.max(0, max_pages - 1));
     }
   }, [page, max_pages]);
   let firstResult = page * page_size;
