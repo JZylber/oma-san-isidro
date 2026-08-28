@@ -452,11 +452,20 @@ const Provincial = ({
       </Collapsable>
       <Collapsable title="Participantes Clasificados">
         {isOma ? (
-          <p className={textClasses}>
-            Los participantes que clasifican a la instancia provincial son
-            aquellos que sumen 5 puntos entre las instancias Zonal e
-            Interescolar.
-          </p>
+          <>
+            <p className={textClasses}>
+              Los participantes que clasifican a la instancia provincial son
+              aquellos que sumen 5 puntos o más entre las instancias Zonal e
+              Intercolegial.
+            </p>
+            <p className={textClasses}>
+              Los de <span className={boldClasses}>Nivel 1 y Nivel 2</span> que
+              sumen exactamente 5 puntos clasifican solo si no tienen ningún
+              menos en los problemas que sumaron puntos. Los de{" "}
+              <span className={boldClasses}>Nivel 3</span> clasifican con 5
+              puntos, tengan o no menos.
+            </p>
+          </>
         ) : (
           <p className={textClasses}>
             Los participantes que clasifican a la instancia provincial son

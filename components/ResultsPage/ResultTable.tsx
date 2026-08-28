@@ -7,6 +7,7 @@ import Table from "../Table/Table";
 import ResultCard from "./Mobile/ResultCard";
 import Warning from "../Warning/Warning";
 import React from "react";
+import { parseProblemScore } from "../../utils/scores";
 
 const containerClasses = "border-t-2 border-black/50 max-tablet:mt-[3.2rem] max-tablet:pt-[4rem] max-tablet:mb-[5.2rem] tablet:mt-[3rem] tablet:pt-[4rem] tablet:mb-[7.2rem]";
 const revisionClasses = "!mb-[2rem]";
@@ -101,10 +102,8 @@ const ResultTable = ({
       aprobado: result.aprobado,
       resultados: new Problems(
         result.resultados.slice(0, -1).map((res) => {
-          const cleanValue = res.replace(/-/g, "");
-          const minusCount = (res.match(/-/g) || []).length;
-          const numericValue = cleanValue === "1/2" ? 0.5 : Number(cleanValue);
-          return new Problem(numericValue, minusCount);
+          const { value, minus } = parseProblemScore(res);
+          return new Problem(value, minus);
         }),
         Number(result.resultados.slice(-1))
       ),

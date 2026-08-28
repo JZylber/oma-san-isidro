@@ -1,5 +1,7 @@
-import { INSTANCIA } from "@prisma/client";
+import { INSTANCIA, Prisma } from "@prisma/client";
 import { prisma } from "../../db";
+import { ProblemScore, parseProblemScore } from "../../../utils/scores";
+import { parseQualificationCriteria } from "./qualification";
 
 export const getPreviousInstance = (
   competition: string,
@@ -246,6 +248,24 @@ export const getDisabled = async (
   return query;
 };
 
+/**
+ * Los resultados se guardan como un arreglo de puntajes por problema seguido
+ * del total. Un participante que no rindió la instancia no suma nada.
+ */
+const splitScore = (
+  results: Prisma.JsonValue | undefined
+): { total: number; problems: ProblemScore[] } => {
+  if (!Array.isArray(results) || results.length === 0) {
+    return { total: 0, problems: [] };
+  }
+  const scores = results as string[];
+  const total = Number(scores[scores.length - 1]);
+  return {
+    total: isNaN(total) ? 0 : total,
+    problems: scores.slice(0, -1).map(parseProblemScore),
+  };
+};
+
 export const getProvincialParticipants = async (
   competition: string,
   year: number
@@ -267,20 +287,23 @@ export const getProvincialParticipants = async (
         interescolar_participant.id_participacion ===
         participant.id_participacion
     );
-    let interescolar_points = interescolar_participant?.resultados
-      ? Number((interescolar_participant.resultados as string[])[3])
-      : 0;
+    const interescolar_score = splitScore(interescolar_participant?.resultados);
+    const zonal_score = splitScore(participant.resultados);
     return {
       ...participant,
-      puntos:
-        interescolar_points + Number((participant.resultados as string[])[3]),
+      puntos: interescolar_score.total + zonal_score.total,
+      problemas: interescolar_score.problems.concat(zonal_score.problems),
     };
   });
-  const criteria = data?.criterio_habilitacion
-    ? (data.criterio_habilitacion as number[])
-    : [5, 5, 5];
-  provincialParticipants = provincialParticipants.filter(
-    (participant) => participant.puntos >= criteria[participant.nivel - 1]
+  const strategyForLevel = parseQualificationCriteria(
+    data?.criterio_habilitacion
+  );
+  provincialParticipants = provincialParticipants.filter((participant) =>
+    strategyForLevel(participant.nivel).qualifies({
+      level: participant.nivel,
+      points: participant.puntos,
+      problems: participant.problemas,
+    })
   );
   const disabled = await getDisabled(competition, year, "PROVINCIAL");
   provincialParticipants = provincialParticipants.filter(
