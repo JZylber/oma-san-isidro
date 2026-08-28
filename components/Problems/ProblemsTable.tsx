@@ -1,10 +1,19 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import Table from "../Table/Table";
 import SelectResultCategory from "../ResultsPage/SelectResultCategory";
 import ProblemCard from "./Mobile/ProblemCard";
-import { ProblemRow, capitalize, sortInstances, displayLevel } from "./problemsTypes";
+import {
+  ProblemFilters,
+  ProblemRow,
+  capitalize,
+  displayLevel,
+  parseProblemFilters,
+  problemFiltersToSearch,
+  sortInstances,
+} from "./problemsTypes";
 
 const headers = ["Instancia", "Año", "Nivel", ""];
 const downloadHeaders = ["Instancia", "Año", "Nivel", "Enlace"];
@@ -44,13 +53,31 @@ const process_data = (row: ProblemRow): string[] => [
 ];
 
 const ProblemsTable = ({ rows }: { rows: ProblemRow[] }) => {
-  const [year, setYear] = useState<number | undefined>();
-  const [instance, setInstance] = useState<string | undefined>();
-  const [level, setLevel] = useState<number | undefined>();
-
   const years = Array.from(new Set(rows.map((row) => row.año))).sort((a, b) => b - a);
   const instances = Array.from(new Set(rows.map((row) => capitalize(row.instancia))));
   const levels = [1, 2, 3];
+
+  // During a client-side navigation the pathname is already the new route while
+  // window.location still points at the previous one, so only trust the URL when
+  // the two agree - otherwise the previous page's filters leak into this one.
+  const pathname = usePathname();
+  const [filters, setFilters] = useState<ProblemFilters>(() =>
+    typeof window === "undefined" || window.location.pathname !== pathname
+      ? {}
+      : parseProblemFilters(window.location.search, { years, instances, levels })
+  );
+  const { year, instance, level } = filters;
+
+  useEffect(() => {
+    const search = problemFiltersToSearch(window.location.search, filters);
+    if (search !== window.location.search) {
+      window.history.replaceState(
+        null,
+        "",
+        `${window.location.pathname}${search}${window.location.hash}`
+      );
+    }
+  }, [filters]);
 
   const filtered = rows.filter(
     (row) =>
@@ -65,14 +92,18 @@ const ProblemsTable = ({ rows }: { rows: ProblemRow[] }) => {
         <SelectResultCategory
           category="Año"
           value={year}
-          setValue={(value) => setYear(value)}
+          setValue={(value) =>
+            setFilters((previous) => ({ ...previous, year: value }))
+          }
           options={years}
           clear
         />
         <SelectResultCategory
           category="Instancia"
           value={instance}
-          setValue={(value) => setInstance(value)}
+          setValue={(value) =>
+            setFilters((previous) => ({ ...previous, instance: value }))
+          }
           options={instances}
           sortOptions={sortInstances}
           clear
@@ -80,12 +111,15 @@ const ProblemsTable = ({ rows }: { rows: ProblemRow[] }) => {
         <SelectResultCategory
           category="Nivel"
           value={level}
-          setValue={(value) => setLevel(value)}
+          setValue={(value) =>
+            setFilters((previous) => ({ ...previous, level: value }))
+          }
           options={levels}
           clear
         />
       </form>
       <Table
+        key={`${year ?? ""}|${instance ?? ""}|${level ?? ""}`}
         values={filtered}
         allValues={rows}
         headers={headers}
