@@ -3,6 +3,7 @@
 import { inferRouterOutputs } from "@trpc/server";
 import ActionButton from "components/buttons/ActionButton/ActionButton";
 import Select from "components/common/form/Select";
+import { EVENT_TYPES } from "components/Dashboard/eventTypes";
 import Loader from "components/Loader/Loader";
 import ConfirmModal from "components/Popups/ConfirmModal/ConfirmModal";
 import Modal from "components/Popups/Modal";
@@ -17,16 +18,6 @@ const displayDate = (date: Date) => {
     month: "long",
   })}`;
 };
-
-enum types {
-  nandu = "Ñandú",
-  oma = "OMA",
-  internacional = "Internacional",
-  selectivo = "Selectivo",
-  geometria = "Geometría",
-  mateclubes = "Mateclubes",
-  literatura = "Literatura y Matemática",
-}
 
 const blankDate = {
   id_fecha: -1,
@@ -79,7 +70,7 @@ const CalendarModal = ({
           <div className="flex flex-col gap-y-2">
             <Select
               label="Tipo"
-              options={Object.values(types)}
+              options={EVENT_TYPES}
               value={newDate.tipo ? newDate.tipo : ""}
               onChange={(selected) =>
                 setNewDate({ ...newDate, tipo: selected })

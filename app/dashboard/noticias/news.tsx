@@ -8,9 +8,10 @@ import ConfirmModal from "components/Popups/ConfirmModal/ConfirmModal";
 import Modal from "components/Popups/Modal";
 import Table from "components/Table/Table";
 import Image from "next/image";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import { AppRouter } from "server/routers/_app";
 import { trpc } from "utils/trpc";
+import LinkPicker from "./LinkPicker";
 
 const displayDate = (date: Date) => {
   return `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getFullYear()}`;
@@ -38,9 +39,6 @@ const NewsModal = ({
   const [newNews, setNewNews] = useState<News>(
     result ? result : { ...blankNews }
   );
-  useEffect(() => {
-    setNewNews(result ? result : { ...blankNews });
-  }, [result]);
   return (
     <Modal
       openModal={openModal}
@@ -64,17 +62,10 @@ const NewsModal = ({
               className="bg-primary-white border-2 border-primary-black rounded-md p-2 font-montserrat text-2xl"
             />
           </div>
-          <div className="flex flex-col gap-y-2">
-            <label className="font-montserrat text-2xl font-semibold">
-              Link
-            </label>
-            <input
-              type="text"
-              value={newNews.link}
-              onChange={(e) => setNewNews({ ...newNews, link: e.target.value })}
-              className="bg-primary-white border-2 border-primary-black rounded-md p-2 font-montserrat text-2xl"
-            />
-          </div>
+          <LinkPicker
+            value={newNews.link}
+            onChange={(link) => setNewNews({ ...newNews, link })}
+          />
           <div className="flex items-center justify-between py-2">
             <label className="font-montserrat text-2xl font-semibold">
               Visible
@@ -112,6 +103,7 @@ const NewsModal = ({
               onConfirm(newNews);
             }}
             important
+            invalid={newNews.titulo === "" || newNews.link === ""}
           >
             {!result ? "Agregar" : "Guardar"}
           </ActionButton>
@@ -211,6 +203,7 @@ const DashboardNews = () => {
           tableClassName="grid-cols-[4fr_4fr_1fr_1fr_2fr]"
         />
         <NewsModal
+          key={`${openModal}-${currentNews?.id_noticia ?? "new"}`}
           openModal={openModal}
           closeModal={() => setOpenModal(false)}
           onConfirm={async (newNews: News) => {
