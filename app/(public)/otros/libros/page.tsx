@@ -3,10 +3,10 @@ import BooksPage from "./libros";
 
 export const metadata: Metadata = {
     title: 'Libros',
-    description: 'Precios e información de los libros a la venta por OMA',
+    description: 'Los libros a la venta por OMA se consiguen en la tienda online',
 }
 
 
-export default async function Libros() {
+export default function Libros() {
     return <BooksPage/>
 }
