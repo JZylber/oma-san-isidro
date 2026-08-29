@@ -15,9 +15,12 @@ import {
   setShowResults,
   updateResults,
 } from "./results/results_db_calls";
-import { INSTANCIA } from "@prisma/client";
+import { INSTANCIA, Prisma } from "@prisma/client";
+import { TRPCError } from "@trpc/server";
 import { revalidateTag } from "next/cache";
 import { prisma } from "server/db";
+import { describeTestDependencies } from "utils/testDependencies";
+import { CRITERION_TYPES } from "./results/qualification";
 
 const getEditableResults = async (
   competencia: string,
@@ -66,6 +69,39 @@ const getEditableResults = async (
 };
 
 export type EditableResult = Awaited<ReturnType<typeof getEditableResults>>[0];
+
+// Todo lo que apunta a una Prueba. Se pide junto con la prueba para poder
+// avisar en el dashboard, antes de intentar el borrado, qué lo bloquea.
+const TEST_COUNTS = {
+  rinden: true,
+  problemas: true,
+  sedeinstancia: true,
+  puntoinstancia: true,
+  inhabilitados: true,
+} as const;
+
+const TEST = z.object({
+  // -1 significa "prueba nueva": el where del upsert no matchea y Prisma crea.
+  id_prueba: z.number(),
+  fecha: z.date(),
+  instancia: INSTANCE,
+  id_competencia: z.number(),
+  // Hay pruebas cargadas en cero, para instancias cuyo temario todavía no se
+  // definió; el formulario tiene que poder editarlas sin tocar ese valor.
+  cantidad_problemas: z.number().int().min(0),
+  fecha_limite_autorizacion: z.date().nullable(),
+  resultados_disponibles: z.boolean(),
+  hora_ingreso: z.date(),
+  duracion: z.number().int().min(1),
+  criterio_habilitacion: z
+    .array(
+      z.object({
+        tipo: z.enum(CRITERION_TYPES),
+        puntos: z.number().int().min(0),
+      })
+    )
+    .nullable(),
+});
 
 export const dashboardRouter = router({
   getResults: protectedProcedure
@@ -266,9 +302,12 @@ export const dashboardRouter = router({
     }),
   getTests: protectedProcedure.query(async ({ ctx }) => {
     const query = await prisma.prueba.findMany({
+      orderBy: [{ fecha: "desc" }],
       select: {
         id_prueba: true,
         fecha: true,
+        instancia: true,
+        id_competencia: true,
         competencia: {
           select: { ano: true, tipo: true },
         },
@@ -278,8 +317,82 @@ export const dashboardRouter = router({
         hora_ingreso: true,
         duracion: true,
         criterio_habilitacion: true,
+        _count: { select: TEST_COUNTS },
       },
     });
     return query;
   }),
+  getCompetitions: protectedProcedure.query(async ({ ctx }) => {
+    const query = await prisma.competencia.findMany({
+      orderBy: [{ ano: "desc" }, { tipo: "asc" }],
+      select: {
+        id_competencia: true,
+        numero: true,
+        ano: true,
+        tipo: true,
+      },
+    });
+    return query;
+  }),
+  setTest: protectedProcedure.input(TEST).mutation(async ({ input }) => {
+    const { id_prueba, criterio_habilitacion, ...fields } = input;
+    // No hay unique en (id_competencia, instancia) pero todos los lectores
+    // usan findFirst, así que una prueba repetida taparía a la otra en
+    // silencio.
+    const duplicate = await prisma.prueba.findFirst({
+      where: {
+        id_competencia: fields.id_competencia,
+        instancia: fields.instancia,
+        NOT: { id_prueba },
+      },
+      select: { id_prueba: true },
+    });
+    if (duplicate) {
+      throw new TRPCError({
+        code: "CONFLICT",
+        message: "Ya existe una prueba de esa instancia para esa competencia.",
+      });
+    }
+    const data = {
+      ...fields,
+      // En un campo Json? de Prisma un null pelado significa "no tocar"; para
+      // guardar NULL hay que pasar DbNull.
+      criterio_habilitacion: criterio_habilitacion
+        ? (criterio_habilitacion as Prisma.InputJsonValue)
+        : Prisma.DbNull,
+    };
+    const query = await prisma.prueba.upsert({
+      where: { id_prueba },
+      update: data,
+      create: data,
+    });
+    revalidateTag("results");
+    return query;
+  }),
+  deleteTest: protectedProcedure
+    .input(z.number())
+    .mutation(async ({ input }) => {
+      const prueba = await prisma.prueba.findUnique({
+        where: { id_prueba: input },
+        select: { _count: { select: TEST_COUNTS } },
+      });
+      if (!prueba) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "La prueba no existe.",
+        });
+      }
+      const blockers = describeTestDependencies(prueba._count);
+      if (blockers) {
+        throw new TRPCError({
+          code: "PRECONDITION_FAILED",
+          message: `No se puede eliminar: la prueba tiene ${blockers}.`,
+        });
+      }
+      const query = await prisma.prueba.delete({
+        where: { id_prueba: input },
+      });
+      revalidateTag("results");
+      return query;
+    }),
 });

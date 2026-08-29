@@ -1,17 +1,6 @@
-"use client";
+import DashboardTests from "./tests";
 
-import Loader from "components/Loader/Loader";
-import { trpc } from "utils/trpc";
-
-const TestEditPage = () => {
-  const tests = trpc.dashboard.getTests.useQuery();
-  if (tests.isLoading || tests.isRefetching) return <Loader />;
-  console.log(tests.data);
-  return (
-    <div>
-      <h1>Pruebas</h1>
-    </div>
-  );
+const DashboardTestsPage = () => {
+  return <DashboardTests />;
 };
-
-export default TestEditPage;
+export default DashboardTestsPage;
