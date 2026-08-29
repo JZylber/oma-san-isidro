@@ -24,6 +24,7 @@ import {
   describeParticipationDependencies,
   mergeParticipationDependencies,
 } from "utils/participantDependencies";
+import { describeSchoolDependencies } from "utils/schoolDependencies";
 import { CRITERION_TYPES, LEVELS } from "./results/qualification";
 
 const getEditableResults = async (
@@ -130,6 +131,27 @@ const PARTICIPANT = z.object({
     id_colegio: z.number(),
     nivel: z.number().int().min(1).max(LEVELS),
   }),
+});
+
+// Todo lo que apunta a un Colegio. Mismo criterio que TEST_COUNTS: se pide
+// junto con la fila para poder avisar qué bloquea el borrado.
+const SCHOOL_COUNTS = {
+  participaciones: true,
+  sede_instancia: true,
+} as const;
+
+// Participacion.id_colegio tiene @default(1): el colegio 1 es el destino de
+// cualquier participación que se cree sin colegio explícito, así que borrarlo
+// dejaría esas altas apuntando a una fila inexistente.
+const DEFAULT_SCHOOL_ID = 1;
+
+const SCHOOL = z.object({
+  // -1 significa "colegio nuevo": el where del upsert no matchea y Prisma crea.
+  id_colegio: z.number(),
+  nombre: z.string().trim().min(1),
+  sede: z.string().trim().min(1).nullable(),
+  localidad: z.string().trim().min(1).nullable(),
+  acr_nimo: z.string().trim().min(1),
 });
 
 export const dashboardRouter = router({
@@ -457,10 +479,85 @@ export const dashboardRouter = router({
   getSchools: protectedProcedure.query(async () => {
     const query = await prisma.colegio.findMany({
       orderBy: [{ nombre: "asc" }, { sede: "asc" }],
-      select: { id_colegio: true, nombre: true, sede: true },
+      select: {
+        id_colegio: true,
+        nombre: true,
+        sede: true,
+        localidad: true,
+        acr_nimo: true,
+        _count: { select: SCHOOL_COUNTS },
+      },
     });
     return query;
   }),
+  setSchool: protectedProcedure.input(SCHOOL).mutation(async ({ input }) => {
+    const { id_colegio, ...fields } = input;
+    // acrónimo es @unique en la base; se pre-chequea para devolver un mensaje
+    // en castellano en vez del P2002 pelado de Prisma.
+    const sameAcronym = await prisma.colegio.findFirst({
+      where: { acr_nimo: fields.acr_nimo, NOT: { id_colegio } },
+      select: { id_colegio: true },
+    });
+    if (sameAcronym) {
+      throw new TRPCError({
+        code: "CONFLICT",
+        message: "Ya existe un colegio con ese acrónimo.",
+      });
+    }
+    // No hay unique en (nombre, sede), pero getInstanceVenues cruza
+    // participantes con sedes comparando nombre y sede como texto: dos colegios
+    // con el mismo par harían ambigua esa asignación.
+    const duplicate = await prisma.colegio.findFirst({
+      where: { nombre: fields.nombre, sede: fields.sede, NOT: { id_colegio } },
+      select: { id_colegio: true },
+    });
+    if (duplicate) {
+      throw new TRPCError({
+        code: "CONFLICT",
+        message: "Ya existe un colegio con ese nombre y esa sede.",
+      });
+    }
+    const query = await prisma.colegio.upsert({
+      where: { id_colegio },
+      update: fields,
+      create: fields,
+    });
+    revalidateTag("results");
+    return query;
+  }),
+  deleteSchool: protectedProcedure
+    .input(z.number())
+    .mutation(async ({ input }) => {
+      if (input === DEFAULT_SCHOOL_ID) {
+        throw new TRPCError({
+          code: "PRECONDITION_FAILED",
+          message:
+            "No se puede eliminar: es el colegio por defecto de las participaciones.",
+        });
+      }
+      const colegio = await prisma.colegio.findUnique({
+        where: { id_colegio: input },
+        select: { _count: { select: SCHOOL_COUNTS } },
+      });
+      if (!colegio) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "El colegio no existe.",
+        });
+      }
+      const blockers = describeSchoolDependencies(colegio._count);
+      if (blockers) {
+        throw new TRPCError({
+          code: "PRECONDITION_FAILED",
+          message: `No se puede eliminar: el colegio tiene ${blockers}.`,
+        });
+      }
+      const query = await prisma.colegio.delete({
+        where: { id_colegio: input },
+      });
+      revalidateTag("results");
+      return query;
+    }),
   setParticipant: protectedProcedure
     .input(PARTICIPANT)
     .mutation(async ({ input }) => {

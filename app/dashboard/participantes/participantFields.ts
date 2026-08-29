@@ -1,4 +1,9 @@
 import { LEVELS } from "server/routers/results/qualification/criteria";
+import { normalize } from "utils/text";
+
+// El colegio lo define el panel de colegios; acá sólo se lo elige.
+export type { School } from "../colegios/schoolFields";
+export { schoolLabel } from "../colegios/schoolFields";
 
 export type ParticipantDraft = {
   id_participante: number;
@@ -22,12 +27,6 @@ export type Competition = {
   tipo: string;
 };
 
-export type School = {
-  id_colegio: number;
-  nombre: string;
-  sede: string | null;
-};
-
 /**
  * En este panel el año está fijo, así que la competencia se identifica sólo por
  * su tipo: no se reutiliza el competitionLabel de pruebas, que agrega año y
@@ -36,18 +35,8 @@ export type School = {
 export const competitionLabel = (competencia: { tipo: string }) =>
   competencia.tipo;
 
-/** Mismo formato "Colegio - Sede" con el que se muestran los colegios. */
-export const schoolLabel = (colegio: { nombre: string; sede: string | null }) =>
-  colegio.sede ? `${colegio.nombre} - ${colegio.sede}` : colegio.nombre;
-
 export const levelOptions = () =>
   Array.from({ length: LEVELS }, (_, index) => `${index + 1}`);
-
-const normalize = (value: string) =>
-  value
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
 
 /** Busca el texto en apellido, nombre y DNI, sin distinguir acentos ni mayúsculas. */
 export const matchesSearch = (
