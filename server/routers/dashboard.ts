@@ -20,7 +20,11 @@ import { TRPCError } from "@trpc/server";
 import { revalidateTag } from "next/cache";
 import { prisma } from "server/db";
 import { describeTestDependencies } from "utils/testDependencies";
-import { CRITERION_TYPES } from "./results/qualification";
+import {
+  describeParticipationDependencies,
+  mergeParticipationDependencies,
+} from "utils/participantDependencies";
+import { CRITERION_TYPES, LEVELS } from "./results/qualification";
 
 const getEditableResults = async (
   competencia: string,
@@ -101,6 +105,31 @@ const TEST = z.object({
       })
     )
     .nullable(),
+});
+
+// Todo lo que apunta a una Participacion. Mismo criterio que TEST_COUNTS: se
+// pide junto con la fila para poder avisar qué bloquea el borrado.
+const PARTICIPATION_COUNTS = {
+  rinde: true,
+  inhabilitaciones: true,
+  ParticipacionSedeInstancia: true,
+} as const;
+
+const PARTICIPANT = z.object({
+  // -1 significa "participante nuevo": el where del upsert no matchea y Prisma
+  // crea. Lo mismo para id_participacion.
+  id_participante: z.number(),
+  dni: z.number().int().positive(),
+  nombre: z.string().trim().min(1),
+  apellido: z.string().trim().min(1),
+  email: z.string().trim().email().nullable(),
+  ano: z.number().int(),
+  participacion: z.object({
+    id_participacion: z.number(),
+    id_competencia: z.number(),
+    id_colegio: z.number(),
+    nivel: z.number().int().min(1).max(LEVELS),
+  }),
 });
 
 export const dashboardRouter = router({
@@ -391,6 +420,200 @@ export const dashboardRouter = router({
       }
       const query = await prisma.prueba.delete({
         where: { id_prueba: input },
+      });
+      revalidateTag("results");
+      return query;
+    }),
+  getParticipations: protectedProcedure
+    .input(z.number())
+    .query(async ({ input }) => {
+      const query = await prisma.participacion.findMany({
+        where: { competencia: { ano: input } },
+        orderBy: [
+          { participante: { apellido: "asc" } },
+          { participante: { nombre: "asc" } },
+        ],
+        select: {
+          id_participacion: true,
+          nivel: true,
+          id_colegio: true,
+          id_competencia: true,
+          participante: {
+            select: {
+              id_participante: true,
+              dni: true,
+              nombre: true,
+              apellido: true,
+              email: true,
+            },
+          },
+          colegio: { select: { nombre: true, sede: true } },
+          competencia: { select: { tipo: true, ano: true } },
+          _count: { select: PARTICIPATION_COUNTS },
+        },
+      });
+      return query;
+    }),
+  getSchools: protectedProcedure.query(async () => {
+    const query = await prisma.colegio.findMany({
+      orderBy: [{ nombre: "asc" }, { sede: "asc" }],
+      select: { id_colegio: true, nombre: true, sede: true },
+    });
+    return query;
+  }),
+  setParticipant: protectedProcedure
+    .input(PARTICIPANT)
+    .mutation(async ({ input }) => {
+      const { id_participante, dni, nombre, apellido, email, ano } = input;
+      const { id_participacion, id_competencia, id_colegio, nivel } =
+        input.participacion;
+
+      // El mismo chico vuelve todos los años, así que un DNI ya cargado no es
+      // un error en un alta: se reutiliza la ficha y se le agrega la
+      // participación del año. En una edición sí es un choque real.
+      const sameDni = await prisma.participante.findUnique({
+        where: { dni },
+        select: { id_participante: true },
+      });
+      if (
+        sameDni &&
+        id_participante !== -1 &&
+        sameDni.id_participante !== id_participante
+      ) {
+        throw new TRPCError({
+          code: "CONFLICT",
+          message: "Ya existe otro participante con ese DNI.",
+        });
+      }
+      const participantId = sameDni
+        ? sameDni.id_participante
+        : id_participante;
+
+      // El panel edita sólo el año en curso; una competencia de otro año acá
+      // sólo puede venir de un select desincronizado.
+      const competencia = await prisma.competencia.findUnique({
+        where: { id_competencia },
+        select: { ano: true, tipo: true },
+      });
+      if (!competencia) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "La competencia no existe.",
+        });
+      }
+      if (competencia.ano !== ano) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: `La competencia elegida no es de ${ano}.`,
+        });
+      }
+
+      // No hay unique en (id_participante, id_competencia), así que la
+      // invariante se sostiene acá. Es por competencia y no por año a
+      // propósito: hay chicos anotados en OMA y en ÑANDÚ el mismo año, y eso
+      // es válido; lo que no puede haber son dos filas de la misma competencia.
+      if (participantId !== -1) {
+        const duplicate = await prisma.participacion.findFirst({
+          where: {
+            id_participante: participantId,
+            id_competencia,
+            NOT: { id_participacion },
+          },
+          select: { id_participacion: true },
+        });
+        if (duplicate) {
+          throw new TRPCError({
+            code: "CONFLICT",
+            message: `El participante ya tiene una participación cargada en ${competencia.tipo} ${ano}.`,
+          });
+        }
+      }
+
+      const query = await prisma.$transaction(async (tx) => {
+        const participante = await tx.participante.upsert({
+          where: { id_participante: participantId },
+          update: { dni, nombre, apellido, email },
+          create: { dni, nombre, apellido, email },
+        });
+        const participacion = await tx.participacion.upsert({
+          where: { id_participacion },
+          update: {
+            id_participante: participante.id_participante,
+            id_competencia,
+            id_colegio,
+            nivel,
+          },
+          create: {
+            id_participante: participante.id_participante,
+            id_competencia,
+            id_colegio,
+            nivel,
+          },
+        });
+        return { participante, participacion };
+      });
+      revalidateTag("results");
+      return query;
+    }),
+  deleteParticipant: protectedProcedure
+    .input(z.number())
+    .mutation(async ({ input }) => {
+      const participante = await prisma.participante.findUnique({
+        where: { id_participante: input },
+        select: {
+          participaciones: {
+            select: { _count: { select: PARTICIPATION_COUNTS } },
+          },
+        },
+      });
+      if (!participante) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "El participante no existe.",
+        });
+      }
+      const blockers = describeParticipationDependencies(
+        mergeParticipationDependencies(
+          participante.participaciones.map(({ _count }) => _count)
+        )
+      );
+      if (blockers) {
+        throw new TRPCError({
+          code: "PRECONDITION_FAILED",
+          message: `No se puede eliminar: el participante tiene ${blockers}.`,
+        });
+      }
+      const query = await prisma.$transaction(async (tx) => {
+        await tx.participacion.deleteMany({
+          where: { id_participante: input },
+        });
+        return tx.participante.delete({ where: { id_participante: input } });
+      });
+      revalidateTag("results");
+      return query;
+    }),
+  deleteParticipation: protectedProcedure
+    .input(z.number())
+    .mutation(async ({ input }) => {
+      const participacion = await prisma.participacion.findUnique({
+        where: { id_participacion: input },
+        select: { _count: { select: PARTICIPATION_COUNTS } },
+      });
+      if (!participacion) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "La participación no existe.",
+        });
+      }
+      const blockers = describeParticipationDependencies(participacion._count);
+      if (blockers) {
+        throw new TRPCError({
+          code: "PRECONDITION_FAILED",
+          message: `No se puede quitar: la participación tiene ${blockers}.`,
+        });
+      }
+      const query = await prisma.participacion.delete({
+        where: { id_participacion: input },
       });
       revalidateTag("results");
       return query;
