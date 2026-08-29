@@ -13,4 +13,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default trpc.withTRPC(RootLayout);
+// withTRPC viene del integrador de Pages Router y devuelve un NextComponentType,
+// que no satisface el LayoutConfig<"/"> que Next 15 genera para el layout raíz.
+// El componente sí recibe y renderiza children, así que sólo hace falta el tipo.
+export default trpc.withTRPC(RootLayout) as (props: {
+  children: React.ReactNode;
+}) => React.ReactNode;
