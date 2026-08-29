@@ -15,8 +15,8 @@ const createContext = async (
   });
 };
 
-const handler = (req: NextRequest) => {
-  const cookieStore = cookies();
+const handler = async (req: NextRequest) => {
+  const cookieStore = await cookies();
   return fetchRequestHandler({
     endpoint: "/api/trpc",
     req,
