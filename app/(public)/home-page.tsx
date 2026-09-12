@@ -16,7 +16,7 @@ interface HomeProps {
 }
 
 // Popup temporarily disabled; flip to true to re-enable.
-const POPUP_ENABLED = true;
+const POPUP_ENABLED = false;
 
 const Home = ({ news, events }: HomeProps) => {
   // Session-persistence temporarily disabled: popup reopens on every page load.
