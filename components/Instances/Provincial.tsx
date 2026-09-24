@@ -207,16 +207,12 @@ const Provincial = ({
         {isOma ? (
           <>
             <p className={textClasses}>
-              El alojamiento de las delegaciones que lo soliciten será en
-              Hoteles de la mencionada ciudad en habitaciones compartidas con
-              otros participantes del encuentro. La reserva del alojamiento se
-              hace contra el correcto completado del formulario.
+              El alojamiento de las delegaciones que lo soliciten será en el
+              Hotel 10 de Septiembre (3 de Febrero 2975), en habitaciones
+              compartidas con otros participantes del encuentro. La reserva
+              del alojamiento se hace contra el correcto completado del
+              formulario.
             </p>
-            <ul className={`${textClasses} ${listClasses}`}>
-              <li>10 de Septiembre (3 de Febrero 2975)</li>
-              <li>Presidente (Corrientes 1516)</li>
-              <li>Riviera (Belgrano 2118)</li>
-            </ul>
           </>
         ) : (
           <>
