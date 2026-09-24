@@ -241,7 +241,7 @@ const Provincial = ({
             {isOma
               ? "Lunes 28 de septiembre de 16:00 a 20:00 horas"
               : "Miércoles 19 de agosto de 16:00 a 20:00 horas"}{" "}
-            en el hotel asignado a su delegación
+            en el Hotel {isOma ? "10 de Septiembre" : "asignado a su delegación"}
           </li>
           <li>
             <span className={boldClasses}>Prueba escrita:</span>{" "}
