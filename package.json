@@ -20,7 +20,6 @@
     "@trpc/server": "^10.45.4",
     "@vercel/analytics": "^0.1.11",
     "bcryptjs": "^2.4.3",
-    "csv-parse": "^5.3.6",
     "csv-stringify": "^6.3.0",
     "html2canvas": "^1.4.1",
     "jose": "^5.2.2",
