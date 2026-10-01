@@ -144,14 +144,13 @@ const ResultTable = ({
             </p>
             <ul>
               <li className={textClasses}>
-                Si son de <strong>Nivel 1</strong>, aquellos participantes que
-                obtuvieron <strong>1 y 1/2 o más puntos</strong> (con todos los
-                menos)
+                En los <strong>niveles 1 y 2</strong>, quienes suman{" "}
+                <strong>2 puntos</strong>.
               </li>
               <li className={textClasses}>
-                Si son de <strong>Nivel 2 o 3</strong>, aquellos participantes
-                que obtuvieron <strong>2 o más puntos</strong> (con todos los
-                menos)
+                En el <strong>nivel 3</strong>, quienes tienen{" "}
+                <strong>2 problemas completos</strong> (en particular, en el
+                nivel 3 no vale sumar 1 + 1/2 + 1/2 para aprobar).
               </li>
             </ul>
           </Warning>
