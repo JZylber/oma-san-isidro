@@ -42,7 +42,7 @@ const problem2Number = (problem?: string) => {
   const fractionRegex = /(\d+)\/(\d+)/;
   const fraction = problem.match(fractionRegex);
   if (fraction) {
-    const numerator = parseFloat(fraction[0]);
+    const numerator = parseFloat(fraction[1]);
     const denominator = parseFloat(fraction[2]);
     return numerator / denominator;
   }
@@ -161,7 +161,7 @@ const FileUpload = ({
     const data = fileData.map((d: any, index: number) => {
       try {
         const newResults = {
-          dni: d[keys.dni!],
+          dni: Number(d[keys.dni!]),
           problems: keys.p!.map((p) => d[p]),
           result: d[keys.result!],
           total: keys.total
@@ -194,7 +194,7 @@ const FileUpload = ({
 
   useEffect(() => {
     if (file && file.type !== ".csv") {
-      const workbook = read(file.file, { type: "array" });
+      const workbook = read(file.file, { type: "array", raw: true });
       const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
       const data = utils.sheet_to_json(firstSheet, {
         header: 1,
