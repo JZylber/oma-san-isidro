@@ -37,8 +37,8 @@ const displayValidKey = (key: string, valid: boolean) => {
 
 const problem2Number = (problem?: string) => {
   if (problem === undefined) return 0;
-  let number = parseFloat(problem);
-  if (!isNaN(number)) return number;
+  problem = String(problem);
+  // Fractions first: parseFloat("1/2") would return 1
   const fractionRegex = /(\d+)\/(\d+)/;
   const fraction = problem.match(fractionRegex);
   if (fraction) {
@@ -46,6 +46,8 @@ const problem2Number = (problem?: string) => {
     const denominator = parseFloat(fraction[2]);
     return numerator / denominator;
   }
+  let number = parseFloat(problem);
+  if (!isNaN(number)) return number;
   const minusRegex = /(\d+)(-)+/;
   const minus = problem.match(minusRegex);
   if (minus) {
