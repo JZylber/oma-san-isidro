@@ -101,7 +101,7 @@ const NationalInfo = ({
   return participants.length > 0 && auth_max_date ? (
     <>
       <Collapsable title="Inscripción">
-        {(
+        {isOma ? (
           <>
             <p className={textClasses}>
               Los colegios deberán comunicar antes del{" "}
@@ -205,6 +205,26 @@ const NationalInfo = ({
               </div>
             </div>
           </>
+        ) : (
+          <>
+            <p className={textClasses}>
+              Los colegios deberán completar el siguiente formulario antes del{" "}
+              <span
+                className={boldClasses}
+              >{`${auth_max_date.getUTCDate()} de ${
+                months[auth_max_date.getUTCMonth()]
+              }`}</span>
+            </p>
+            <div className={buttonClasses}>
+              <Button
+                content="Formulario de Inscripción"
+                onClick={() =>
+                  (window.location.href =
+                    "https://script.google.com/macros/s/AKfycbyzUtub27Iupmqy9Nf5YRTY2H2iSG-PMykH8oK1ydb8ib0KlGCE6o_rwC2XQPlh420O/exec")
+                }
+              ></Button>
+            </div>
+          </>
         )}
         <Warning>
           <p className={textClasses}>
@@ -243,8 +263,8 @@ const NationalInfo = ({
           con otros participantes del encuentro
           {!isOma &&
             " (pueden ingresar al hotel a partir de las 15:00 horas del martes 20 de octubre)"}
-          . La reserva del alojamiento se hace contra entrega de las planillas
-          debidamente cumplimentadas.
+          . La reserva del alojamiento se hace contra entrega de {isOma ? "las planillas" : "el formulario"}
+          debidamente cumplimentad{isOma ? "as" : "o"}.
         </p>
         <h4 className={sectionTitleClasses}>Programa</h4>
         <ul className={`${textClasses} ${listClasses}`}>
@@ -364,7 +384,7 @@ const NationalInfo = ({
             {isOma ? "$20.000" : "$30.000"}. Solo es necesaria la tarjeta para
             aquellos que no están acreditados como acompañantes y que
             participarán únicamente de la premiación. Deben inscribirse junto
-            con los otros participantes en la planilla.{" "}
+            con los otros participantes en {isOma ? "la planilla" : "el formulario"}.{" "}
             {isOma ? (
               <span className={boldClasses}>
                 Acompañantes de 3 años o menos no necesitan pagar tarjeta.
@@ -561,7 +581,7 @@ const NationalInfo = ({
           credencial o “tarjeta de invitación individual”. Se aclara que,
           indefectiblemente, todas aquellas personas que deseen adquirir las
           tarjetas de invitación individual para el Acto de premiación deben
-          estar inscriptas con nombre, apellido y documento en la planilla.
+          estar inscriptas con nombre, apellido y documento en {isOma ? "la planilla" : "el formulario"}.
         </p>
         {!isOma && (
           <Warning title="Tarjeta de premiación: documentación obligatoria">
