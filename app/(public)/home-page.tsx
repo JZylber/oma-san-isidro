@@ -16,7 +16,7 @@ interface HomeProps {
 }
 
 // Popup temporarily disabled; flip to true to re-enable.
-const POPUP_ENABLED = true;
+const POPUP_ENABLED = false;
 
 const Home = ({ news, events }: HomeProps) => {
   // Session-persistence temporarily disabled: popup reopens on every page load.
@@ -36,13 +36,21 @@ const Home = ({ news, events }: HomeProps) => {
 
       {/* NEWS */}
       <section className="max-tablet:mt-[4.8rem] tablet:max-desktop:mt-[2.5rem] tablet:max-desktop:row-start-2 tablet:max-desktop:row-end-3 tablet:max-desktop:col-start-1 tablet:max-desktop:col-end-5 desktop:mt-[2.4rem] desktop:row-start-2 desktop:row-end-3 desktop:col-start-1 desktop:col-end-6">
-        <h3 className="text-section-title font-montserrat font-normal max-tablet:text-center max-tablet:[line-height:calc(3*var(--mobile-spacing))] tablet:max-desktop:text-left tablet:max-desktop:[line-height:calc(2.25*var(--tablet-max-spacing))] desktop:text-left desktop:[line-height:calc(3*var(--desktop-spacing))]">Novedades</h3>
+        <h3 className="text-section-title font-montserrat font-normal max-tablet:text-center max-tablet:[line-height:calc(3*var(--mobile-spacing))] tablet:max-desktop:text-left tablet:max-desktop:[line-height:calc(2.25*var(--tablet-max-spacing))] desktop:text-left desktop:[line-height:calc(3*var(--desktop-spacing))]">
+          Novedades
+        </h3>
         <News newsData={news} />
       </section>
 
       {/* IMAGE */}
       <div className="flex justify-end content-center max-tablet:hidden tablet:overflow-visible tablet:max-desktop:mt-[2.7rem] tablet:max-desktop:row-start-1 tablet:max-desktop:row-end-3 tablet:max-desktop:col-start-5 tablet:max-desktop:col-end-[-1] tablet:max-desktop:max-h-[55rem] desktop:row-start-1 desktop:row-end-3 desktop:col-start-6 desktop:col-end-[-1] desktop:[padding-top:calc(8*var(--desktop-spacing))]">
-        <Image src="/images/mainNandu.svg" width={595} height={842} alt="" className="max-w-full max-h-full" />
+        <Image
+          src="/images/mainNandu.svg"
+          width={595}
+          height={842}
+          alt=""
+          className="max-w-full max-h-full"
+        />
       </div>
 
       {/* Contributions */}
@@ -52,13 +60,17 @@ const Home = ({ news, events }: HomeProps) => {
 
       {/* Next Events */}
       <section className="max-tablet:mt-[4.8rem] tablet:row-start-4 tablet:row-end-5 tablet:col-span-full tablet:mt-[4.8rem]">
-        <h3 className="text-section-title font-montserrat font-normal max-tablet:text-center max-tablet:[line-height:calc(3*var(--mobile-spacing))] tablet:max-desktop:text-left tablet:max-desktop:[line-height:calc(2.25*var(--tablet-max-spacing))] desktop:text-left desktop:[line-height:calc(3*var(--desktop-spacing))]">Próxima fecha</h3>
+        <h3 className="text-section-title font-montserrat font-normal max-tablet:text-center max-tablet:[line-height:calc(3*var(--mobile-spacing))] tablet:max-desktop:text-left tablet:max-desktop:[line-height:calc(2.25*var(--tablet-max-spacing))] desktop:text-left desktop:[line-height:calc(3*var(--desktop-spacing))]">
+          Próxima fecha
+        </h3>
         <DateBanner dates={events} displayAmount={1} />
       </section>
 
       {/* FAQ */}
       <section className="max-tablet:mt-[4.8rem] tablet:row-start-5 tablet:row-end-6 tablet:col-span-full tablet:mt-[4.8rem]">
-        <h3 className="text-section-title font-montserrat font-normal max-tablet:text-center max-tablet:[line-height:calc(3*var(--mobile-spacing))] tablet:max-desktop:text-left tablet:max-desktop:[line-height:calc(2.25*var(--tablet-max-spacing))] desktop:text-left desktop:[line-height:calc(3*var(--desktop-spacing))]">Preguntas Frecuentes</h3>
+        <h3 className="text-section-title font-montserrat font-normal max-tablet:text-center max-tablet:[line-height:calc(3*var(--mobile-spacing))] tablet:max-desktop:text-left tablet:max-desktop:[line-height:calc(2.25*var(--tablet-max-spacing))] desktop:text-left desktop:[line-height:calc(3*var(--desktop-spacing))]">
+          Preguntas Frecuentes
+        </h3>
         <Faq />
       </section>
     </div>
