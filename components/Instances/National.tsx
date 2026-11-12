@@ -155,9 +155,16 @@ const NationalInfo = ({
           concentración de aquellas delegaciones que lo soliciten.
         </p>
         <p className={textClasses}>
-          El alojamiento de las delegaciones que lo soliciten será en diferentes
-          hoteles de la ciudad de la falda en habitaciones compartidas con otros
-          participantes del encuentro
+          El alojamiento de las delegaciones que lo soliciten será{" "}
+          {isOma ? (
+            <>
+              en el <span className={boldClasses}>Hotel La Falda</span> (mutual
+              del banco provincia de Córdoba, Santa Fe esq. Av. Patria)
+            </>
+          ) : (
+            "en diferentes hoteles de la ciudad de la falda"
+          )}{" "}
+          en habitaciones compartidas con otros participantes del encuentro
           {isOma
             ? " (pueden ingresar al hotel a partir de las 15:00 horas del domingo 15 de noviembre)"
             : " (pueden ingresar al hotel a partir de las 15:00 horas del martes 20 de octubre)"}
@@ -169,7 +176,14 @@ const NationalInfo = ({
           <li>
             <span className={boldClasses}>Acreditación:</span>{" "}
             {isOma ? "Domingo 15 de noviembre" : "Martes 20 de octubre"} de
-            16:00 a 20:00 horas (en breve informaremos dónde se realizará)
+            16:00 a 20:00 horas{" "}
+            {isOma ? (
+              <>
+                en el <span className={boldClasses}>Hotel La Falda</span>
+              </>
+            ) : (
+              "(en breve informaremos dónde se realizará)"
+            )}
           </li>
           <li>
             <span className={boldClasses}>Prueba escrita:</span>{" "}
@@ -185,43 +199,28 @@ const NationalInfo = ({
             a 12:00 horas en el <span className={boldClasses}>Hotel Edén</span>
           </li>
         </ul>
-        <h4 className={sectionTitleClasses}>Hoteles</h4>
-        <ul className={`${textClasses} ${listClasses}`}>
-          <li>
-            <span className={boldClasses}>Hotel 1° de Mayo</span> (sindicato de
-            camioneros): Av. Argentina 88
-          </li>
-          <li>
-            <span className={boldClasses}>Hotel L&apos;Hirondelle</span>: Av.
-            Edén 861
-          </li>
-          <li>
-            <span className={boldClasses}>Hotel Tomaso di Savoia</span>{" "}
-            (sindicato de camioneros de Santa Fe): Av. Edén 732
-          </li>
-          <li>
-            <span className={boldClasses}>Hotel La Falda</span> (mutual del
-            banco provincia de Córdoba): Santa Fe esq. Av. Patria
-          </li>
-          {isOma && (
-            <>
+        {!isOma && (
+          <>
+            <h4 className={sectionTitleClasses}>Hoteles</h4>
+            <ul className={`${textClasses} ${listClasses}`}>
               <li>
-                <span className={boldClasses}>Hotel Brigadier</span>: Av. Buenos
-                Aires 293
+                <span className={boldClasses}>Hotel 1° de Mayo</span> (sindicato
+                de camioneros): Av. Argentina 88
               </li>
               <li>
-                <span className={boldClasses}>
-                  Hotel Reconstrucción Nacional
-                </span>{" "}
-                (sindicato del seguro): Chubut 48
+                <span className={boldClasses}>Hotel L&apos;Hirondelle</span>:
+                Av. Edén 861
               </li>
-            </>
-          )}
-        </ul>
-        {isOma && (
-          <p className={textClasses}>
-            Si se completara la capacidad de dichos hoteles, se asignarán otros.
-          </p>
+              <li>
+                <span className={boldClasses}>Hotel Tomaso di Savoia</span>{" "}
+                (sindicato de camioneros de Santa Fe): Av. Edén 732
+              </li>
+              <li>
+                <span className={boldClasses}>Hotel La Falda</span> (mutual del
+                banco provincia de Córdoba): Santa Fe esq. Av. Patria
+              </li>
+            </ul>
+          </>
         )}
       </Collapsable>
       <Collapsable title="Aranceles">
