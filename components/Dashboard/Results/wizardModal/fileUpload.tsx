@@ -57,6 +57,15 @@ const problem2Number = (problem?: string) => {
   return null;
 };
 
+// UTF-8, falling back to Windows-1252 (Excel's plain "CSV" export)
+const decodeCsv = (buffer: ArrayBuffer) => {
+  try {
+    return new TextDecoder("utf-8", { fatal: true }).decode(buffer);
+  } catch {
+    return new TextDecoder("windows-1252").decode(buffer);
+  }
+};
+
 const FileUpload = ({
   data,
   nextStep,
@@ -201,8 +210,12 @@ const FileUpload = ({
   };
 
   useEffect(() => {
-    if (file && file.type !== ".csv") {
-      const workbook = read(file.file, { type: "array", raw: true });
+    if (file) {
+      // CSVs carry no encoding info: SheetJS reads them as Latin-1 ("MenciÃ³n"), so decode ourselves
+      const workbook =
+        file.type === "csv"
+          ? read(decodeCsv(file.file), { type: "string", raw: true })
+          : read(file.file, { type: "array", raw: true });
       const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
       const data = utils.sheet_to_json(firstSheet, {
         header: 1,
