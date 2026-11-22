@@ -69,6 +69,7 @@ const ActionTab = ({
         open={openFileUploadModal}
         close={() => setFileUploadModal(false)}
         initialData={results}
+        numberOfProblems={testData.cantidad_problemas}
       />
     </div>
   );

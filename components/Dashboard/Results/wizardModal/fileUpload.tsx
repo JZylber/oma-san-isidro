@@ -63,8 +63,8 @@ const FileUpload = ({
   previousStep,
   numberOfStates,
   currentStepIndex,
+  numberOfProblems,
 }: WizardStateProps) => {
-  const numberOfProblems = 3;
   const [file, setFile] = useState<{ file: ArrayBuffer; type: string } | null>(
     null
   );
@@ -77,14 +77,20 @@ const FileUpload = ({
           header.find(
             (h) => typeof h === "string" && h.toLowerCase() === "dni"
           ) || undefined,
-        p: header.filter(
-          (h) =>
-            typeof h === "string" &&
-            h
-              .toLowerCase()
-              .match(new RegExp(String.raw`p[1-${numberOfProblems}]+`, "g")) !==
-              null
-        ),
+        // Tests with 0 problems (e.g. NACIONAL) store only the Total column,
+        // which holds the award ("Mención", etc.)
+        p:
+          numberOfProblems > 0
+            ? header.filter(
+                (h) =>
+                  typeof h === "string" &&
+                  h
+                    .toLowerCase()
+                    .match(
+                      new RegExp(String.raw`p[1-${numberOfProblems}]+`, "g")
+                    ) !== null
+              )
+            : [],
         result:
           header.find(
             (h) =>

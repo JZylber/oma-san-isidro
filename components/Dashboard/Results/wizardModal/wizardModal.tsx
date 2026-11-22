@@ -50,16 +50,19 @@ export interface WizardStateProps {
   previousStep: (step?: number) => void;
   numberOfStates: number;
   currentStepIndex: number;
+  numberOfProblems: number;
 }
 
 const WizardModal = ({
   open,
   close,
   initialData,
+  numberOfProblems,
 }: {
   open: boolean;
   close: () => void;
   initialData: EditableResult[];
+  numberOfProblems: number;
 }) => {
   const [confirmClose, setConfirmClose] = useState(false);
   const states = [
@@ -116,6 +119,7 @@ const WizardModal = ({
                     }
                     previousStep={previousStep}
                     currentStepIndex={currentState}
+                    numberOfProblems={numberOfProblems}
                   />
                 );
               } else {
